@@ -22,7 +22,9 @@ Requirements
 ------------
 
 * ruby >= 2.0
-* postgresql
+* postgresql database
+* postgresql development files (i.e. fedora: package postgresql-devel) for 
+compiling ruby pg gem
 
 System dependencies
 -------------------
