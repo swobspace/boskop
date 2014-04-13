@@ -15,6 +15,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring',        	group: :development
 gem 'thin'
 
+group :test, :development do
+  gem 'rspec-rails'
+  gem 'spring-commands-rspec'
+  gem 'guard-rspec'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
