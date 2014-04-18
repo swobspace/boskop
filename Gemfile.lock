@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/plataformatec/simple_form.git
+  revision: 3805d187a11a0919e7ba9880bf57e8d0fb866a5f
+  branch: master
+  specs:
+    simple_form (3.1.0.rc1)
+      actionpack (~> 4.0)
+      activemodel (~> 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -28,6 +37,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.0)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
     builder (3.2.2)
     celluloid (0.15.2)
       timers (~> 1.1.0)
@@ -63,9 +74,13 @@ GEM
     jbuilder (2.0.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jquery-datatables-rails (1.12.2)
+      jquery-rails
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.2.1)
+      railties (>= 3.2.16)
     json (1.8.1)
     libv8 (3.16.14.3)
     listen (2.7.1)
@@ -177,15 +192,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-sass (~> 3.1.1)
   coffee-rails (~> 4.0.0)
   guard-rspec
   jbuilder (~> 2.0)
+  jquery-datatables-rails
   jquery-rails
+  jquery-ui-rails
   pg
   rails (~> 4.1.0)
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  simple_form!
   spring
   spring-commands-rspec
   therubyracer

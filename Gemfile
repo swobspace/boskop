@@ -15,6 +15,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'spring',        	group: :development
 gem 'thin'
 
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'jquery-ui-rails'
+gem 'jquery-datatables-rails'
+
+gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git',
+                   branch: 'master'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
