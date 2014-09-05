@@ -19,7 +19,7 @@ gem 'jquery-datatables-rails'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git',
                    branch: 'master'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+# gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
                      branch: "master"
 gem 'cancancan', '~> 1.9.0'
