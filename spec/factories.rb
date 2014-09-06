@@ -6,7 +6,7 @@ FactoryGirl.define do
 
   factory :merkmalklasse do
     name
-    format ''
+    format 'string'
   end
 
 end
