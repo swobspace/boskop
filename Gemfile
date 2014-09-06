@@ -23,6 +23,7 @@ gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
                      branch: "master"
 gem 'cancancan', '~> 1.9.0'
+gem 'acts_as_list'
 
 group :development do
   gem 'thin'
