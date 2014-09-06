@@ -24,7 +24,8 @@
        %>
       <%= f.input :unique
        %>
-      <%= f.input :visible, collection: Merkmalklasse::VISIBLES
+      <%= f.input :visible, collection: Merkmalklasse::VISIBLES, 
+            input_html: { multiple: true }
        %>
       <%= f.input :position, default: 0
        %>
