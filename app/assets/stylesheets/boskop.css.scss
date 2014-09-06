@@ -1,8 +1,32 @@
+@import 'bootstrap-sprockets';
 @import "bootstrap";
 @import "bootstrap/theme";
 @import "wobapphelpers/breadcrumbs";
+@import "common";
 
 body {
   padding-top: 50px;
+}
+
+// --- FOOTER
+#footer{
+  padding-left:20px;
+  font-size: small;
+  color: #999;
+  hr { margin: 24px 0 0 0; }
+}
+
+// --- cell states
+
+tr td {
+  &.CRITICAL {background-color: #FAA !important;}
+  &.WARNING  {background-color: #FF9 !important;}
+  &.OK       {background-color: #FF9 !important;}
+}
+
+// --- dataTable
+
+table.dataTable.no-footer {
+  border-bottom: 1px solid #ddd;
 }
 
