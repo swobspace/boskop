@@ -11,20 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906084816) do
+ActiveRecord::Schema.define(version: 20140906153541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "merkmalklassen", force: true do |t|
-    t.string   "name",            default: "", null: false
+    t.string   "name",            default: "",    null: false
     t.text     "description",     default: ""
-    t.string   "format",          default: "", null: false
+    t.string   "format",          default: "",    null: false
     t.text     "possible_values"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "mandantory",      default: false
+    t.integer  "position",        default: 0
+    t.string   "for_object",      default: "",    null: false
   end
 
+  add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
   add_index "merkmalklassen", ["name"], name: "index_merkmalklassen_on_name", using: :btree
 
   create_table "wobauth_authorities", force: true do |t|
