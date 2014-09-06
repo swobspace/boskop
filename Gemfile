@@ -43,7 +43,6 @@ end
 
 group :test do
   gem "shoulda", require: false
-  gem "shoulda-matchers"
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem "capybara"
