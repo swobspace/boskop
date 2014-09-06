@@ -1,16 +1,32 @@
 de:
   activerecord:
     models:
+      address: Adresse
+      group: Gruppe
+      location: Lokation
+      merkmal: Merkmal
+      merkmalklasse: Merkmalklasse
+      org_unit: Organisationseinheit
       user: User
 
   attributes:
+    address: Adresse
     description: Beschreibung
     displayname: Anzeigename
     givenname: Vorname
+    location: Lokation
+    merkmal: Merkmal
+    merkmalklasse: Merkmalklasse
     name: Name
+    org_unit: Organisationseinheit
     sn: Nachname
     username: Username
 
   controller:
+    addresses: Adressen
+    locations: Lokationen
+    merkmale: Merkmale
+    merkmalklassen: Merkmalklassen
+    org_units: Organisationseinheiten
     users: Benutzer
 
