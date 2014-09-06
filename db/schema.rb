@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140906153541) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "mandantory",      default: false
+    t.boolean  "unique",          default: false
     t.integer  "position",        default: 0
     t.string   "for_object",      default: "",    null: false
   end
