@@ -1,0 +1,34 @@
+<h1><%= t('controller.merkmalklassen') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.format') %></th>
+    <th><%= t('attributes.possible_values') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @merkmalklassen.each do |merkmalklasse| %>
+  <%= content_tag_for(:tr, merkmalklasse) do %>
+    <td><%= merkmalklasse.name %></td>
+    <td><%= merkmalklasse.description %></td>
+    <td><%= merkmalklasse.format %></td>
+    <td><%= merkmalklasse.possible_values %></td>
+    <td class="nowrap">
+      <%= show_link merkmalklasse %>
+      <%= edit_link merkmalklasse %>
+      <%= delete_link merkmalklasse %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Merkmalklasse %>

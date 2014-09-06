@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @merkmalklasse.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @merkmalklasse.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.format')%>:</th>
+    <td><%= @merkmalklasse.format %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.possible_values')%>:</th>
+    <td><%= @merkmalklasse.possible_values %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@merkmalklasse) %>
+  <%= delete_link(@merkmalklasse) %>
+  <%= new_link Merkmalklasse %>
+</div>
