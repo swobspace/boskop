@@ -19,6 +19,7 @@ de:
     merkmalklasse: Merkmalklasse
     name: Name
     org_unit: Organisationseinheit
+    possible_values: Mögliche Werte
     sn: Nachname
     username: Username
 
