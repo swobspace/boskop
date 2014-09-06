@@ -1,4 +1,10 @@
 de:
+  # mostly used in navigation
+  boskop:
+    orgunits: Organisationseinheiten
+    locations: Lokationen
+    configuration: Konfiguration
+  
   activerecord:
     models:
       address: Adresse
