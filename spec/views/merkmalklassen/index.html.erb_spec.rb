@@ -13,12 +13,16 @@ RSpec.describe "merkmalklassen/index", :type => :view do
         :name => "Name01",
         :description => "MyText",
         :format => "string",
+        :visible => ['index'],
+        :for_object => 'OrgUnit',
         :possible_values => "MyValues"
       ),
       Merkmalklasse.create!(
         :name => "Name02",
         :description => "MyText",
         :format => "string",
+        :visible => ['index'],
+        :for_object => 'OrgUnit',
         :possible_values => "MyValues"
       )
     ])

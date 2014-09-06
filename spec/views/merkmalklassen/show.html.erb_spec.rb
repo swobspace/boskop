@@ -12,6 +12,8 @@ RSpec.describe "merkmalklassen/show", :type => :view do
       :name => "Name",
       :description => "MyText",
       :format => "string",
+      :visible => ['index'],
+      :for_object => 'OrgUnit',
       :possible_values => "MyValue"
     ))
   end
@@ -21,6 +23,8 @@ RSpec.describe "merkmalklassen/show", :type => :view do
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/string/)
+    expect(rendered).to match(/index/)
+    expect(rendered).to match(/OrgUnit/)
     expect(rendered).to match(/MyValue/)
   end
 end

@@ -12,6 +12,8 @@ RSpec.describe "merkmalklassen/new", :type => :view do
       :name => "MyString",
       :description => "MyText",
       :format => "string",
+      :visible => ['index'],
+      :for_object => 'OrgUnit',
       :possible_values => "MyText"
     ))
   end
@@ -26,7 +28,11 @@ RSpec.describe "merkmalklassen/new", :type => :view do
       assert_select "textarea#merkmalklasse_description[name=?]", "merkmalklasse[description]"
 
       assert_select "select#merkmalklasse_format[name=?]", "merkmalklasse[format]"
-
+      assert_select "select#merkmalklasse_for_object[name=?]", "merkmalklasse[for_object]"
+      assert_select "input#merkmalklasse_mandantory[name=?]", "merkmalklasse[mandantory]"
+      assert_select "input#merkmalklasse_unique[name=?]", "merkmalklasse[unique]"
+      assert_select "input#merkmalklasse_position[name=?]", "merkmalklasse[position]"
+      assert_select "select#merkmalklasse_visible[name=?]", "merkmalklasse[visible][]"
       assert_select "textarea#merkmalklasse_possible_values[name=?]", "merkmalklasse[possible_values]"
     end
   end
