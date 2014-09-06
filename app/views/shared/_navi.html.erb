@@ -1,0 +1,25 @@
+<ul class="nav navbar-nav">
+  <% if can? :navigate, :org_units %>
+    <li class="dropdown <%= orgunits_active_class %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('boskop.org_units') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to t('boskop.org_units'), main_app.root_path %></li>
+        <li> <%=link_to t('boskop.locations'), main_app.root_path %></li>
+      </ul>
+    </li>
+  <% end %>
+  <% if can? :navigate, :configuration %>
+    <li class="dropdown <%= configuration_active_class %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('boskop.configuration') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <% Boskop::CONFIGURATION_CONTROLLER.each do |ctrlr| %>
+          <li>
+            <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path")%>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ul>
