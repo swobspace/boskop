@@ -2,10 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "merkmalklassen/edit", :type => :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "sites" }
+    allow(controller).to receive(:action_name) { "edit" }
+
     @merkmalklasse = assign(:merkmalklasse, Merkmalklasse.create!(
       :name => "MyString",
       :description => "MyText",
-      :format => "MyString",
+      :format => "string",
       :possible_values => "MyText"
     ))
   end
@@ -19,7 +25,7 @@ RSpec.describe "merkmalklassen/edit", :type => :view do
 
       assert_select "textarea#merkmalklasse_description[name=?]", "merkmalklasse[description]"
 
-      assert_select "input#merkmalklasse_format[name=?]", "merkmalklasse[format]"
+      assert_select "select#merkmalklasse_format[name=?]", "merkmalklasse[format]"
 
       assert_select "textarea#merkmalklasse_possible_values[name=?]", "merkmalklasse[possible_values]"
     end

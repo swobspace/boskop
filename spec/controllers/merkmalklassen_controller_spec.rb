@@ -24,11 +24,11 @@ RSpec.describe MerkmalklassenController, :type => :controller do
   # Merkmalklasse. As you add validations to Merkmalklasse, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:merkmalklasse)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { format: 'invalid format' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,14 @@ RSpec.describe MerkmalklassenController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { format: 'number' }
       }
 
       it "updates the requested merkmalklasse" do
         merkmalklasse = Merkmalklasse.create! valid_attributes
         put :update, {:id => merkmalklasse.to_param, :merkmalklasse => new_attributes}, valid_session
         merkmalklasse.reload
-        skip("Add assertions for updated state")
+        expect(merkmalklasse.format).to be == "number"
       end
 
       it "assigns the requested merkmalklasse as @merkmalklasse" do
