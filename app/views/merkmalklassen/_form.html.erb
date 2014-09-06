@@ -18,6 +18,16 @@
        %>
       <%= f.input :format, collection: Merkmalklasse::FORMATE
        %>
+      <%= f.input :for_object, collection: Merkmalklasse::OBJECTS
+       %>
+      <%= f.input :mandantory
+       %>
+      <%= f.input :unique
+       %>
+      <%= f.input :visible, collection: Merkmalklasse::VISIBLES
+       %>
+      <%= f.input :position, default: 0
+       %>
       <%= f.input :possible_values
        %>
     </div>

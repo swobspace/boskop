@@ -40,6 +40,8 @@ class MerkmalklassenController < ApplicationController
     end
 
     def merkmalklasse_params
-      params.require(:merkmalklasse).permit(:name, :description, :format, :possible_values)
+      params.require(:merkmalklasse).
+        permit(:name, :description, :format, :possible_values, 
+               :for_object, :position, :mandantory, :unique, :visible)
     end
 end
