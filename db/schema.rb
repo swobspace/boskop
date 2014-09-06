@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906153541) do
+ActiveRecord::Schema.define(version: 20140906160349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140906153541) do
     t.boolean  "unique",          default: false
     t.integer  "position",        default: 0
     t.string   "for_object",      default: "",    null: false
+    t.string   "visible"
   end
 
   add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
