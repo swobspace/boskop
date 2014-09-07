@@ -48,7 +48,7 @@ class LocationsController < ApplicationController
     end
 
     def merkmale(location)
-      @merkmale = location.merkmale
+      @merkmale = location.merkmale.to_a
       exists    = @merkmale.map {|m| m.merkmalklasse.id}
       klassen = Merkmalklasse.where(for_object: Location.to_s)
       klassen.each do |kl|
@@ -56,5 +56,6 @@ class LocationsController < ApplicationController
           @merkmale << Merkmal.new(merkmalfor: location, merkmalklasse: kl)
         end
       end
+      @merkmale.sort! {|a,b| a.merkmalklasse.position <=> b.merkmalklasse.position }
     end
 end

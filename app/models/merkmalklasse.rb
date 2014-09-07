@@ -1,4 +1,5 @@
 class Merkmalklasse < ActiveRecord::Base
+  default_scope { order 'position ASC' }
   # -- associations
   has_many :merkmale
 
