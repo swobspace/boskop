@@ -12,10 +12,12 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    merkmale(@location)
     respond_with(@location)
   end
 
   def edit
+    merkmale(@location)
   end
 
   def create
@@ -40,6 +42,19 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:name, :description, :ancestry, :ancestry_depth, :position)
+      params.require(:location).
+             permit(:name, :description, :position, 
+               [ merkmale_attributes: [ :id, :value ] ])
+    end
+
+    def merkmale(location)
+      @merkmale = location.merkmale
+      exists    = @merkmale.map {|m| m.merkmalklasse.id}
+      klassen = Merkmalklasse.where(for_object: Location.to_s)
+      klassen.each do |kl|
+        unless exists.include?(kl.id)
+          @merkmale << Merkmal.new(merkmalfor: location, merkmalklasse: kl)
+        end
+      end
     end
 end

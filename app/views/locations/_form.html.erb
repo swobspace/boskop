@@ -16,12 +16,13 @@
        %>
       <%= f.input :description
        %>
-      <%= f.input :ancestry
-       %>
-      <%= f.input :ancestry_depth
-       %>
       <%= f.input :position
        %>
+    </div>
+    <div class="form-inputs">
+     <%= f.simple_fields_for :merkmale, @merkmale do |merkmal| %>
+       <% merkmal.input :value, label: merkmal.object.merkmalklasse %>
+     <% end %>
     </div>
 
     <div class="form-actions col-sm-9 col-sm-offset-3">
