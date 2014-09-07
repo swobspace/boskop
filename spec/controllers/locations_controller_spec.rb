@@ -24,11 +24,11 @@ RSpec.describe LocationsController, :type => :controller do
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:location)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +103,14 @@ RSpec.describe LocationsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "i have a dream" }
       }
 
       it "updates the requested location" do
         location = Location.create! valid_attributes
         put :update, {:id => location.to_param, :location => new_attributes}, valid_session
         location.reload
-        skip("Add assertions for updated state")
+        expect(location.description).to be == "i have a dream"
       end
 
       it "assigns the requested location as @location" do
