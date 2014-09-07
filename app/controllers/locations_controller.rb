@@ -28,6 +28,7 @@ class LocationsController < ApplicationController
 
   def update
     @location.update(location_params)
+    merkmale(@location)
     respond_with(@location)
   end
 
@@ -53,7 +54,7 @@ class LocationsController < ApplicationController
       klassen = Merkmalklasse.where(for_object: Location.to_s)
       klassen.each do |kl|
         unless exists.include?(kl.id)
-          @merkmale << Merkmal.new(merkmalfor: location, merkmalklasse: kl)
+          @merkmale << Merkmal.create(merkmalfor: location, merkmalklasse: kl)
         end
       end
       @merkmale.sort! {|a,b| a.merkmalklasse.position <=> b.merkmalklasse.position }

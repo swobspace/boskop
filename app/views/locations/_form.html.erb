@@ -18,11 +18,19 @@
        %>
       <%= f.input :position
        %>
-    </div>
-    <div class="form-inputs">
-     <%= f.simple_fields_for :merkmale, @merkmale do |merkmal| %>
-       <% merkmal.input :value, label: merkmal.object.merkmalklasse %>
-     <% end %>
+      <% unless f.object.new_record? %>
+        <div class="well bs-merkmale">
+          <%= f.simple_fields_for :merkmale, @merkmale do |merkmal| %>
+            <% if merkmal.object.merkmalklasse.format == 'dropdown' %>
+              <% merkmal.input :value, label: merkmal.object.merkmalklasse,
+                               collection: merkmal.object.merkmalklasse.possible_values
+              %>
+            <% else %>
+              <% merkmal.input :value, label: merkmal.object.merkmalklasse %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="form-actions col-sm-9 col-sm-offset-3">

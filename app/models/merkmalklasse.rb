@@ -11,7 +11,7 @@ class Merkmalklasse < ActiveRecord::Base
   VISIBLES = ['index']
 
   serialize :visible, Array
-  serialize :possible_values
+  serialize :possible_values, Array
 
   # -- validations and callbacks
   validates :name, presence: true, uniqueness: true
@@ -27,5 +27,15 @@ class Merkmalklasse < ActiveRecord::Base
   def self.visibles(obj, action)
     Merkmalklasse.where(["for_object = ?", obj.to_s.camelize]).
       reject {|mk| !mk.visible.include?(action) }
+  end
+
+  def pvalues
+    return "" if possible_values.nil?
+    possible_values.join("; ")
+  end
+
+  def pvalues=(values)
+    self[:possible_values] = values.gsub(/\r\n/,';').gsub(/\n/,';').
+                               gsub(/; */,';').strip.split(/;/)
   end
 end
