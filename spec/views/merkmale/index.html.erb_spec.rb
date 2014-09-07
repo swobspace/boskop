@@ -2,15 +2,23 @@ require 'rails_helper'
 
 RSpec.describe "merkmale/index", :type => :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "merkmale" }
+    allow(controller).to receive(:action_name) { "index" }
+
+    @merkmalklasse = FactoryGirl.create(:merkmalklasse)
+    @location      = FactoryGirl.create(:location)
     assign(:merkmale, [
       Merkmal.create!(
-        :merkmalfor => nil,
-        :merkmalklasse => nil,
+        :merkmalfor => @location,
+        :merkmalklasse => @merkmalklasse,
         :value => "Value"
       ),
       Merkmal.create!(
-        :merkmalfor => nil,
-        :merkmalklasse => nil,
+        :merkmalfor => @location,
+        :merkmalklasse => @merkmalklasse,
         :value => "Value"
       )
     ])
@@ -18,8 +26,8 @@ RSpec.describe "merkmale/index", :type => :view do
 
   it "renders a list of merkmale" do
     render
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => @merkmalklasse.to_s, :count => 2
+    assert_select "tr>td", :text => @location.to_s, :count => 2
     assert_select "tr>td", :text => "Value".to_s, :count => 2
   end
 end
