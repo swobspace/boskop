@@ -60,6 +60,8 @@ GEM
       tzinfo (~> 1.1)
     acts_as_list (0.3.0)
       activerecord (>= 3.0)
+    ancestry (2.1.0)
+      activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
     bootstrap-sass (3.2.0.2)
@@ -296,6 +298,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  ancestry
   bootstrap-sass (~> 3.2.0)
   cancancan (~> 1.9.0)
   capistrano-rails (~> 1.1.1)

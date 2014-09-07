@@ -24,6 +24,7 @@ gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
                      branch: "master"
 gem 'cancancan', '~> 1.9.0'
 gem 'acts_as_list'
+gem 'ancestry'
 
 group :development do
   gem 'thin'
