@@ -30,3 +30,14 @@ table.dataTable.no-footer {
   border-bottom: 1px solid #ddd;
 }
 
+.bs-merkmale:before {
+  // position: relative;
+  // top: 15px;
+  // left: 15px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  content: "Merkmale";
+}
