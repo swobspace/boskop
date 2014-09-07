@@ -1,16 +1,16 @@
 FactoryGirl.define do
 
-  sequence :name do |n|
-    "name_#{n}"
+  sequence :aname do |n|
+    "aname_#{n}"
   end
 
   factory :location do
-    name
+    name { generate(:aname) }
     position 0
   end
 
   factory :merkmalklasse do
-    name
+    name { generate(:aname) }
     format 'string'
     position 0
     for_object Merkmalklasse::OBJECTS.first
@@ -18,9 +18,9 @@ FactoryGirl.define do
   end
 
   factory :merkmal do
-    association :merkmalfor, factory: location
     value 'test'
     merkmalklasse
+    merkmalfor {|a| a.association(:location) }
   end
 
 end
