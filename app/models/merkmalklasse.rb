@@ -22,4 +22,9 @@ class Merkmalklasse < ActiveRecord::Base
   def to_s
     "#{name}"
   end
+
+  def self.visibles(obj, action)
+    Merkmalklasse.where(["for_object = ?", obj.to_s.camelize]).
+      reject {|mk| !mk.visible.include?(action) }
+  end
 end
