@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Merkmalklasse, :type => :model do
-  # it { is_expected.to have_many(:merkmale) }
+  it { is_expected.to have_many(:merkmale) }
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:format) }
   it { is_expected.to validate_inclusion_of(:format).in_array(Merkmalklasse::FORMATE) }

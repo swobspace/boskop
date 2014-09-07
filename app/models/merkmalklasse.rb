@@ -1,6 +1,6 @@
 class Merkmalklasse < ActiveRecord::Base
   # -- associations
-  # has_many :merkmale
+  has_many :merkmale
 
   acts_as_list scope: [:for_object]
 
