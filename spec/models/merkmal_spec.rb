@@ -12,11 +12,9 @@ RSpec.describe Merkmal, :type => :model do
     g = FactoryGirl.create(:merkmal)
     expect(f).to be_valid
     expect(g).to be_valid
-
-    is_expected.to validate_uniqueness_of :name
   end
 
-  it "to_s returns name" do
+  it "to_s returns value" do
     f = FactoryGirl.create(:merkmal, value: "MyName")
     expect("#{f}").to be == "MyName"
   end
