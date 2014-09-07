@@ -10,10 +10,20 @@
 
   <fieldset>
     <%= form_legend %>
+   
+    <%= f.input :merkmalfor_id, as: :hidden %>
+    <%= f.input :merkmalfor_type, as: :hidden %>
 
     <div class="form-inputs">
-      <%= f.association :merkmalfor
-       %>
+      <div class="form-group">
+        <%= label_tag :merkmalfor, "Merkmal für", :class => "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= text_field_tag "info_merkmalfor", 
+              "#{@merkmal.merkmalfor_type}: #{@merkmal.merkmalfor.to_s}",
+              { :class => 'input form-control', disabled: true } %>
+        </div>
+      </div>
+
       <%= f.association :merkmalklasse
        %>
       <%= f.input :value
