@@ -1,0 +1,36 @@
+<h1><%= t('controller.locations') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.ancestry') %></th>
+    <th><%= t('attributes.ancestry_depth') %></th>
+    <th><%= t('attributes.position') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @locations.each do |location| %>
+  <%= content_tag_for(:tr, location) do %>
+    <td><%= location.name %></td>
+    <td><%= location.description %></td>
+    <td><%= location.ancestry %></td>
+    <td><%= location.ancestry_depth %></td>
+    <td><%= location.position %></td>
+    <td class="nowrap">
+      <%= show_link location %>
+      <%= edit_link location %>
+      <%= delete_link location %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Location %>

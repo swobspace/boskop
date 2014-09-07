@@ -11,10 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906160349) do
+ActiveRecord::Schema.define(version: 20140907090202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "locations", force: true do |t|
+    t.string   "name",           default: "", null: false
+    t.string   "description",    default: ""
+    t.string   "ancestry"
+    t.integer  "ancestry_depth", default: 0,  null: false
+    t.integer  "position",       default: 0,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
+  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
+
+  create_table "merkmale", force: true do |t|
+    t.integer  "merkmalfor_id"
+    t.string   "merkmalfor_type"
+    t.integer  "merkmalklasse_id"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "merkmale", ["merkmalfor_id", "merkmalfor_type"], name: "index_merkmale_on_merkmalfor_id_and_merkmalfor_type", using: :btree
+  add_index "merkmale", ["merkmalklasse_id"], name: "index_merkmale_on_merkmalklasse_id", using: :btree
 
   create_table "merkmalklassen", force: true do |t|
     t.string   "name",            default: "",    null: false

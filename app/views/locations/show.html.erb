@@ -1,0 +1,29 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @location.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @location.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ancestry')%>:</th>
+    <td><%= @location.ancestry %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ancestry_depth')%>:</th>
+    <td><%= @location.ancestry_depth %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.position')%>:</th>
+    <td><%= @location.position %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@location) %>
+  <%= delete_link(@location) %>
+  <%= new_link Location %>
+</div>
