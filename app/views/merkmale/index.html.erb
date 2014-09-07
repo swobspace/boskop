@@ -1,0 +1,32 @@
+<h1><%= t('controller.merkmale') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.merkmalfor') %></th>
+    <th><%= t('attributes.merkmalklasse') %></th>
+    <th><%= t('attributes.value') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @merkmale.each do |merkmal| %>
+  <%= content_tag_for(:tr, merkmal) do %>
+    <td><%= merkmal.merkmalfor %></td>
+    <td><%= merkmal.merkmalklasse %></td>
+    <td><%= merkmal.value %></td>
+    <td class="nowrap">
+      <%= show_link merkmal %>
+      <%= edit_link merkmal %>
+      <%= delete_link merkmal %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Merkmal %>

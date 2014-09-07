@@ -1,0 +1,21 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.merkmalfor')%>:</th>
+    <td><%= @merkmal.merkmalfor %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.merkmalklasse')%>:</th>
+    <td><%= @merkmal.merkmalklasse %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.value')%>:</th>
+    <td><%= @merkmal.value %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@merkmal) %>
+  <%= delete_link(@merkmal) %>
+  <%= new_link Merkmal %>
+</div>

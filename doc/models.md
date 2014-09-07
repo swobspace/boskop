@@ -13,3 +13,16 @@ Merkmalklasse:
     #           mandantory:boolean position:integer for_object:string:index
     # bin/rails g migration AddVisibleToMerkmalklasse \
     #           visible:string
+
+Merkmal:
+--------
+
+    bin/rails g scaffold Merkmal 'merkmalfor:references{polymorphic}' \
+              merkmalklasse:references value:string
+
+Location:
+---------
+
+    bin/rails g scaffold Location name:string:index description:string \
+              ancestry:string:index ancestry_depth:integer \
+              position:integer

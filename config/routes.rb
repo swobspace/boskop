@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :merkmale
+
   resources :merkmalklassen
 
   mount Wobauth::Engine, at: '/auth'
