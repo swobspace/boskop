@@ -1,0 +1,14 @@
+{    
+  "sLengthMenu": "Einträge pro Seite _MENU_",
+  "sZeroRecords": "Nichts gefunden - sorry",
+  "sInfo": "_START_ bis _END_ von _TOTAL_ Einträgen",
+  "sInfoEmpty": "keine Einträge vorhanden",
+  "sInfoFiltered": "(gefiltert, insgesamt _MAX_ Einträge)",
+  "oPaginate": {
+    "sFirst": "Anfang",
+    "sLast": "Ende",
+    "sNext": "Weiter",
+    "sPrevious": "Zurück" 
+  },
+  "sSearch": "Suche"
+}
