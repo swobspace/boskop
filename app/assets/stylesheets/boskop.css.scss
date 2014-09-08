@@ -29,6 +29,12 @@ tr td {
 table.dataTable.no-footer {
   border-bottom: 1px solid #ddd;
 }
+div#dataTable_paginate>ul {
+  li.paginate_button {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
 
 .bs-merkmale:before {
   // position: relative;
