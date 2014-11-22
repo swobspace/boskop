@@ -1,5 +1,6 @@
 class MerkmaleController < ApplicationController
   before_action :set_merkmal, only: [:show, :edit, :update, :destroy]
+  before_action :add_breadcrumb_show, only: [:show]
 
   def index
     @merkmale = Merkmal.all

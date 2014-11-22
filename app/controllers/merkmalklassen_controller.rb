@@ -1,5 +1,6 @@
 class MerkmalklassenController < ApplicationController
   before_action :set_merkmalklasse, only: [:show, :edit, :update, :destroy]
+  before_action :add_breadcrumb_show, only: [:show]
 
   def index
     @merkmalklassen = Merkmalklasse.all
