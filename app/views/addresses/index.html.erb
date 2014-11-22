@@ -1,0 +1,40 @@
+<h1><%= t('controller.addresses') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.addressfor') %></th>
+    <th><%= t('attributes.streetaddress') %></th>
+    <th><%= t('attributes.plz') %></th>
+    <th><%= t('attributes.ort') %></th>
+    <th><%= t('attributes.care_of') %></th>
+    <th><%= t('attributes.postfach') %></th>
+    <th><%= t('attributes.postfachplz') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @addresses.each do |address| %>
+  <%= content_tag_for(:tr, address) do %>
+    <td><%= address.addressfor %></td>
+    <td><%= address.streetaddress %></td>
+    <td><%= address.plz %></td>
+    <td><%= address.ort %></td>
+    <td><%= address.care_of %></td>
+    <td><%= address.postfach %></td>
+    <td><%= address.postfachplz %></td>
+    <td class="nowrap">
+      <%= show_link address %>
+      <%= edit_link address %>
+      <%= delete_link address %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Address %>

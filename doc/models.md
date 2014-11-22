@@ -20,9 +20,17 @@ Merkmal:
     bin/rails g scaffold Merkmal 'merkmalfor:references{polymorphic}' \
               merkmalklasse:references value:string
 
+Address:
+--------
+
+    bin/rails g scaffold Address 'addressfor:references{polymorphic}' \
+              streetaddress:string plz:string ort:string care_of:string \
+              postfach:string postfachplz:string
+
 Location:
 ---------
 
     bin/rails g scaffold Location name:string:index description:string \
               ancestry:string:index ancestry_depth:integer \
               position:integer
+
