@@ -24,6 +24,8 @@ tr td {
   &.OK       {background-color: #FF9 !important;}
 }
 
+.autowidth { width: auto; min-width: 50%; }
+
 // --- dataTable
 
 table.dataTable.no-footer {
