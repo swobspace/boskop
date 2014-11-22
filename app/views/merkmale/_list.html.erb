@@ -1,0 +1,6 @@
+<% merkmale.each do |merkmal| %>
+  <%= content_tag_for(:tr, merkmal) do %>
+    <th><%= merkmal.merkmalklasse %></th>
+    <td><%= merkmal.value %></td>
+  <% end %>
+<% end %>
