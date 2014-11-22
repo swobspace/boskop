@@ -36,6 +36,9 @@ group :development do
   gem "guard-rspec", require: false
   gem "capistrano-rails", '~> 1.1.1'
   gem "railroady"
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem "meta_request"
 end
 
 group :test, :development do
