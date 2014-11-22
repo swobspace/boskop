@@ -14,7 +14,7 @@ RSpec.describe "merkmalklassen/show", :type => :view do
       :format => "string",
       :visible => ['index'],
       :for_object => 'OrgUnit',
-      :possible_values => "MyValue"
+      :possible_values => ["MyValue"]
     ))
   end
 

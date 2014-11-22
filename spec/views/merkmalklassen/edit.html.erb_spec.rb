@@ -14,7 +14,7 @@ RSpec.describe "merkmalklassen/edit", :type => :view do
       :format => "string",
       :visible => ['index'],
       :for_object => 'OrgUnit',
-      :possible_values => "MyText"
+      :possible_values => ["MyText"]
     ))
   end
 
@@ -34,7 +34,7 @@ RSpec.describe "merkmalklassen/edit", :type => :view do
       assert_select "input#merkmalklasse_position[name=?]", "merkmalklasse[position]"
       assert_select "select#merkmalklasse_visible[name=?]", "merkmalklasse[visible][]"
 
-      assert_select "textarea#merkmalklasse_possible_values[name=?]", "merkmalklasse[possible_values]"
+      assert_select "input#merkmalklasse_pvalues[name=?]", "merkmalklasse[pvalues]"
     end
   end
 end
