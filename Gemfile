@@ -35,6 +35,7 @@ group :development do
   gem 'guard-bundler'
   gem "guard-rspec", require: false
   gem "capistrano-rails", '~> 1.1.1'
+  gem "railroady"
 end
 
 group :test, :development do
