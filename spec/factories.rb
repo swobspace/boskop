@@ -4,6 +4,10 @@ FactoryGirl.define do
     "aname_#{n}"
   end
 
+  factory :address do
+    addressfor {|a| a.association(:location) }
+  end
+
   factory :location do
     name { generate(:aname) }
     position 0
