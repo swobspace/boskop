@@ -18,6 +18,7 @@
        %>
       <%= f.input :position
        %>
+
       <div class="well bs-merkmale">
 	<%= f.simple_fields_for :merkmale, @location.merkmale do |m| %>
           <%= m.hidden_field(:merkmalklasse_id) %>
@@ -28,6 +29,23 @@
 	  <% else %>
 	    <%= m.input :value, label: m.object.merkmalklasse.to_s %>
 	  <% end %>
+	<% end %>
+      </div>
+
+      <div class="well bs-addresses">
+	<%= f.simple_fields_for :addresses, @location.addresses do |addr| %>
+	  <%= addr.input :streetaddress
+	   %>
+	  <%= addr.input :plz
+	   %>
+	  <%= addr.input :ort
+	   %>
+	  <%= addr.input :care_of
+	   %>
+	  <%= addr.input :postfach
+	   %>
+	  <%= addr.input :postfachplz
+	   %>
 	<% end %>
       </div>
     </div>

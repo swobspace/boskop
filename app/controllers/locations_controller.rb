@@ -13,11 +13,13 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    @location.addresses.build
     merkmale
     respond_with(@location)
   end
 
   def edit
+    @location.addresses.build
     merkmale
   end
 
@@ -45,7 +47,12 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).
              permit(:name, :description, :position, 
-               [ merkmale_attributes: [ :id, :value, :merkmalklasse_id ] ])
+               [ merkmale_attributes: 
+                   [ :id, :value, :merkmalklasse_id ],
+                 addresses_attributes: 
+                   [ :id, :ort, :plz, :streetaddress, 
+                     :postfach, :postfachplz, :care_of ]
+               ])
     end
 
     def merkmale
