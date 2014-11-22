@@ -9,6 +9,7 @@ RSpec.describe "merkmale/index", :type => :view do
     allow(controller).to receive(:action_name) { "index" }
 
     @merkmalklasse = FactoryGirl.create(:merkmalklasse)
+    @merkmalklass2 = FactoryGirl.create(:merkmalklasse)
     @location      = FactoryGirl.create(:location)
     assign(:merkmale, [
       Merkmal.create!(
@@ -18,7 +19,7 @@ RSpec.describe "merkmale/index", :type => :view do
       ),
       Merkmal.create!(
         :merkmalfor => @location,
-        :merkmalklasse => @merkmalklasse,
+        :merkmalklasse => @merkmalklass2,
         :value => "Value"
       )
     ])
@@ -26,7 +27,8 @@ RSpec.describe "merkmale/index", :type => :view do
 
   it "renders a list of merkmale" do
     render
-    assert_select "tr>td", :text => @merkmalklasse.to_s, :count => 2
+    assert_select "tr>td", :text => @merkmalklasse.to_s, :count => 1
+    assert_select "tr>td", :text => @merkmalklass2.to_s, :count => 1
     assert_select "tr>td", :text => @location.to_s, :count => 2
     assert_select "tr>td", :text => "Value".to_s, :count => 2
   end
