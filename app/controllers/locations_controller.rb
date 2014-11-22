@@ -1,5 +1,6 @@
 class LocationsController < ApplicationController
   before_action :set_location, only: [:show, :edit, :update, :destroy]
+  before_action :add_breadcrumb_show, only: [:show]
 
   def index
     @locations = Location.all
@@ -12,12 +13,12 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
-    merkmale(@location)
+    merkmale
     respond_with(@location)
   end
 
   def edit
-    merkmale(@location)
+    merkmale
   end
 
   def create
@@ -28,7 +29,6 @@ class LocationsController < ApplicationController
 
   def update
     @location.update(location_params)
-    merkmale(@location)
     respond_with(@location)
   end
 
@@ -45,18 +45,17 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).
              permit(:name, :description, :position, 
-               [ merkmale_attributes: [ :id, :value ] ])
+               [ merkmale_attributes: [ :id, :value, :merkmalklasse_id ] ])
     end
 
-    def merkmale(location)
-      @merkmale = location.merkmale.to_a
-      exists    = @merkmale.map {|m| m.merkmalklasse.id}
-      klassen = Merkmalklasse.where(for_object: Location.to_s)
+    def merkmale
+      merkmale = @location.merkmale.to_a
+      exists    = merkmale.map {|m| m.merkmalklasse.id}
+      klassen   = Merkmalklasse.where(for_object: Location.to_s)
       klassen.each do |kl|
         unless exists.include?(kl.id)
-          @merkmale << Merkmal.create(merkmalfor: location, merkmalklasse: kl)
+          @location.merkmale.build(merkmalklasse_id: kl.id)
         end
       end
-      @merkmale.sort! {|a,b| a.merkmalklasse.position <=> b.merkmalklasse.position }
     end
 end
