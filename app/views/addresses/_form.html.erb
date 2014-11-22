@@ -11,9 +11,19 @@
   <fieldset>
     <%= form_legend %>
 
+    <%= f.input :addressfor_id, as: :hidden %>
+    <%= f.input :addressfor_type, as: :hidden %>
+
     <div class="form-inputs">
-      <%= f.association :addressfor
-       %>
+      <div class="form-group">
+        <%= label_tag :addressfor, "Merkmal für", :class => "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= text_field_tag "info_addressfor",
+              "#{@address.addressfor_type}: #{@address.addressfor.to_s}",
+              { :class => 'input form-control', disabled: true } %>
+        </div>
+      </div>
+
       <%= f.input :streetaddress
        %>
       <%= f.input :plz
