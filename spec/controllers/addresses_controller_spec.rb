@@ -19,16 +19,20 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe AddressesController, :type => :controller do
+  login_admin
+
+  let(:location) { FactoryGirl.create(:location) }
 
   # This should return the minimal set of attributes required to create a valid
   # Address. As you add validations to Address, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:address, addressfor_id: location.id, 
+                                         addressfor_type:  "#{location.class}")
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { plz: "test" }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +107,14 @@ RSpec.describe AddressesController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { plz: "99999" }
       }
 
       it "updates the requested address" do
         address = Address.create! valid_attributes
         put :update, {:id => address.to_param, :address => new_attributes}, valid_session
         address.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:address).plz).to eq("99999")
       end
 
       it "assigns the requested address as @address" do
