@@ -14,7 +14,8 @@ class Merkmalklasse < ActiveRecord::Base
   serialize :possible_values, Array
 
   # -- validations and callbacks
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates_uniqueness_of :name, scope: [ :for_object ]
   validates :position, presence: true
   validates :format, presence: true, inclusion: { in: FORMATE }
   validates :for_object, presence: true, inclusion: { in: OBJECTS }
