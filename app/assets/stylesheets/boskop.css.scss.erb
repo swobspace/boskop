@@ -38,20 +38,28 @@ div#dataTable_paginate>ul {
   }
 }
 
-.bs-merkmale:before {
+.bs-subform:before {
   font-size: 12px;
   font-weight: 700;
   color: #959595;
   text-transform: uppercase;
   letter-spacing: 1px;
-  content: "<%= I18n.t('controller.merkmale') %>" ;
 }
 
+.bs-subform {
+  background-color: #f8f8f8;
+  background-image: none;
+}
+
+.bs-merkmale:before {
+  content: "<%= I18n.t('controller.merkmale') %>" ;
+}
 .bs-addresses:before {
-  font-size: 12px;
-  font-weight: 700;
-  color: #959595;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   content: "<%= I18n.t('controller.addresses') %>" ;
+}
+.bs-optional:before {
+  content: "<%= I18n.t('actions.optional') %>" ;
+}
+.bs-mandantory:before {
+  content: "<%= I18n.t('actions.mandantory') %>" ;
 }
