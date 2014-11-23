@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   mount Wobauth::Engine, at: '/auth'
 
-  root 'merkmalklassen#index'
+  root 'locations#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
