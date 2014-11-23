@@ -9,7 +9,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers.git
-  revision: 36a4f9b55afdb41c37bc59dd5ea16cf1c9e74ac4
+  revision: 69a1e20ddda67f2acae90066f4d99e63aa84c8ff
   branch: master
   specs:
     wobapphelpers (0.0.1)
@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 116e9ac2a92ce884c038920694200bf2b7acdba9
+  revision: 7432b2cea485bad3cfd21ea7cc613f815cf9da2d
   branch: master
   specs:
     wobauth (0.0.1)
