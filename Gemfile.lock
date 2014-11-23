@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: f66fb17626e98c0979f6ca0168c7a45ff2af953d
+  revision: 116e9ac2a92ce884c038920694200bf2b7acdba9
   branch: master
   specs:
     wobauth (0.0.1)
