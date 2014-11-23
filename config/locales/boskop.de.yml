@@ -5,6 +5,9 @@ de:
     locations: Lokationen
     configuration: Konfiguration
   
+  actions:
+    destroy: Datensatz löschen
+
   activerecord:
     models:
       address: Adresse

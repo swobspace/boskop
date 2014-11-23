@@ -40,12 +40,7 @@
 	   %>
 	  <%= addr.input :ort
 	   %>
-	  <%= addr.input :care_of
-	   %>
-	  <%= addr.input :postfach
-	   %>
-	  <%= addr.input :postfachplz
-	   %>
+          <%= addr.input :_destroy, as: :boolean, label: t('actions.destroy') %>
 	<% end %>
       </div>
     </div>
