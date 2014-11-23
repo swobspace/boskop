@@ -39,13 +39,19 @@ div#dataTable_paginate>ul {
 }
 
 .bs-merkmale:before {
-  // position: relative;
-  // top: 15px;
-  // left: 15px;
   font-size: 12px;
   font-weight: 700;
   color: #959595;
   text-transform: uppercase;
   letter-spacing: 1px;
-  content: "Merkmale";
+  content: "<%= I18n.t('controller.merkmale') %>" ;
+}
+
+.bs-addresses:before {
+  font-size: 12px;
+  font-weight: 700;
+  color: #959595;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  content: "<%= I18n.t('controller.addresses') %>" ;
 }
