@@ -3,8 +3,14 @@ class Ability
 
   def initialize(user)
     @user = user
-    return if @user.nil?
-    can :manage, :all
+    if @user.nil?
+      can :read, Location
+    elsif @user.is_admin?
+      can :manage, :all
+      cannot [:update, :destroy], :roles, :ro => :true
+    else
+      can :read, :all
+    end
   end
 
 end
