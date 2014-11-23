@@ -25,8 +25,13 @@ de:
     merkmalklasse: Merkmalklasse
     name: Name
     org_unit: Organisationseinheit
+    ort: Ort
+    plz: PLZ
     possible_values: Mögliche Werte
+    postfach: Postfach
+    postfachplz: Postfach-PLZ
     sn: Nachname
+    streetaddress: Straße, Nr.
     username: Username
 
   controller:
