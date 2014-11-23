@@ -12,6 +12,13 @@ class Merkmal < ActiveRecord::Base
 
   before_create :merkmalklasse_unique?
 
+  scope :mandantory, -> {
+    joins(:merkmalklasse).where("merkmalklassen.mandantory = ?", true)
+  }
+  scope :optional, -> {
+    joins(:merkmalklasse).where("merkmalklassen.mandantory = ?", false)
+  }
+
   def to_s
     "#{value.to_s}"
   end
