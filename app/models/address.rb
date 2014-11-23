@@ -5,6 +5,8 @@ class Address < ActiveRecord::Base
   # -- configuration
   # -- validations and callbacks
 
+  validates :plz, format: { with:/\A[0-9]+\z/ }, allow_blank: true
+
 
   def to_s
     "#{streetaddress}, #{plz} #{ort}"
