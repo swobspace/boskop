@@ -40,7 +40,7 @@ RSpec.configure do |config|
   # -- devise stuff
   config.include Devise::TestHelpers, type: :controller
   config.extend ControllerMacros, type: :controller
-  # config.include RequestMacros, type: :feature
+  config.include RequestMacros, type: :feature
 
   config.before(:suite) do
     DatabaseRewinder.clean_all
