@@ -19,20 +19,11 @@
       <%= f.input :position
        %>
 
-      <div class="well bs-merkmale">
-	<%= f.simple_fields_for :merkmale, @location.merkmale do |m| %>
-          <%= m.hidden_field(:merkmalklasse_id) %>
-	  <% if m.object.merkmalklasse.format == 'dropdown' %>
-	    <%= m.input :value, label: m.object.merkmalklasse.to_s,
-			     collection: m.object.merkmalklasse.possible_values
-	    %>
-	  <% else %>
-	    <%= m.input :value, label: m.object.merkmalklasse.to_s %>
-	  <% end %>
-	<% end %>
+      <div class="well bs-subform bs-merkmale">
+	<%= render 'merkmal_form', f: f, merkmale: @location.merkmale %>
       </div>
 
-      <div class="well bs-addresses">
+      <div class="well bs-subform bs-addresses">
 	<%= f.simple_fields_for :addresses, @location.addresses do |addr| %>
 	  <%= addr.input :streetaddress
 	   %>
