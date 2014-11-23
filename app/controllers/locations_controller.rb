@@ -19,7 +19,7 @@ class LocationsController < ApplicationController
   end
 
   def edit
-    @location.addresses.build
+    @location.addresses.build unless @location.addresses.any?
     merkmale
   end
 
@@ -48,10 +48,9 @@ class LocationsController < ApplicationController
       params.require(:location).
              permit(:name, :description, :position, 
                [ merkmale_attributes: 
-                   [ :id, :value, :merkmalklasse_id ],
+                   [ :id, :value, :merkmalklasse_id, :_destroy ],
                  addresses_attributes: 
-                   [ :id, :ort, :plz, :streetaddress, 
-                     :postfach, :postfachplz, :care_of ]
+                   [ :id, :ort, :plz, :streetaddress, :_destroy ]
                ])
     end
 
