@@ -2,14 +2,18 @@ require 'rails_helper'
 
 RSpec.describe "addresses/edit", :type => :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "addresses" }
+    allow(controller).to receive(:action_name) { "edit" }
+
+    location      = FactoryGirl.create(:location)
+
     @address = assign(:address, Address.create!(
-      :addressfor => nil,
+      :addressfor => location,
       :streetaddress => "MyString",
-      :plz => "MyString",
-      :ort => "MyString",
-      :care_of => "MyString",
-      :postfach => "MyString",
-      :postfachplz => "MyString"
+      :plz => "123456",
     ))
   end
 
