@@ -8,6 +8,7 @@ class Location < ActiveRecord::Base
   acts_as_list :scope => [:ancestry]
 
   accepts_nested_attributes_for :merkmale, :addresses,  allow_destroy: true
+  validates_associated :merkmale, :addresses
 
   # -- validations and callbacks
   validates :name, presence: true, uniqueness: true
