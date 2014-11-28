@@ -7,8 +7,9 @@ class Merkmal < ActiveRecord::Base
   # -- validations and callbacks
 
   validates :merkmalklasse_id, presence: true
-  validates :value, uniqueness: { if: :uniqueness_required? },
-                    presence:   { if: :is_mandantory? }
+  validates :value, presence:   { if: :is_mandantory? }
+  validates_uniqueness_of :value, scope: [ :merkmalklasse_id ], 
+                                  if: :uniqueness_required?
 
   before_create :merkmalklasse_unique?
 
