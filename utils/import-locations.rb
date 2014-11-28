@@ -45,12 +45,13 @@ CSV.foreach("#{file}", :col_sep =>";", :headers => true) do |row|
     if location.save
       puts "... saved"
     else
-      puts "# ERROR, #{location.name} not saved"
+      puts "### ERROR, #{location.name} not saved"
+      puts "### #{location.errors.inspect}"
     end
   else 
     puts "- RECORD always exists"
   end
 
-  break
+  # break
 
 end
