@@ -6,7 +6,11 @@ $.extend $.fn.dataTableExt.oStdClasses,
   sWrapper: "dataTables_wrapper form-inline"
 
 ready = ->
-  $(".dataTable").dataTable
+  $('.dataTable tfoot th').each  (idx) ->
+    title = $('.dataTable thead th').eq( $(this).index() ).text()
+    $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
+
+  table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
     sDom: "<'row'<'col-md-3'l><'col-md-5 btn-group'TC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     colVis:
@@ -31,6 +35,19 @@ ready = ->
         link = $(this).find('a').attr('href')
         if link?
           window.location.href = link
+  )
+  table.columns().eq(0).each (colIdx) ->
+    $('input[name=idx'+colIdx+']').on( 'keyup change', ->
+      table.column(colIdx).search(this.value).draw()
+    )
+
+  $('input[type=text]').val("")
+  table.columns().search('').draw()
+  $("#reset_search").on("click",  ->
+    $('input[type=text]').val("")
+    table.columns().search('').draw()
+    $('input[type=search]').val("").trigger('input')
+  )
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
