@@ -1,0 +1,11 @@
+#
+# copy me to deploy-config.yml and edit
+#
+hosts: 
+  web: myserver
+  app: myserver
+  db: myserver
+repo_url: https://github.com/swobspace/boskop.git
+user: deploy
+deploy_to: /var/www/apps/boskop
+relative_url_root: /
