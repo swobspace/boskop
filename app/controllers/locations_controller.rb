@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_action :add_breadcrumb_show, only: [:show]
 
   def index
-    @locations = Location.all
+    @locations = Location.includes(:addresses, merkmale: [:merkmalklasse]).all
     respond_with(@locations)
   end
 
