@@ -4,6 +4,9 @@ de:
     org_units: Organisationseinheiten
     locations: Lokationen
     configuration: Konfiguration
+    change_columns: Spalten ändern
+    show_all: alles anzeigen
+    restore: zurücksetzen
   
   actions:
     destroy: Datensatz löschen

@@ -8,7 +8,10 @@ $.extend $.fn.dataTableExt.oStdClasses,
 ready = ->
   $(".dataTable").dataTable
     pagingType: "full_numbers"
-    sDom: "<'row'<'col-md-4'l><'col-md-4 btn-group'T><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    sDom: "<'row'<'col-md-3'l><'col-md-5 btn-group'TC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    colVis:
+      buttonText: "<%= I18n.t('boskop.change_columns') %>"
+      showAll: "<%= I18n.t('boskop.show_all') %>"
     bJQueryUI: false
     bStateSave: true
     # fnStateLoadCallback: (oSettings,oData) ->
