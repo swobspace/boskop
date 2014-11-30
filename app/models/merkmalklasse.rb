@@ -16,6 +16,8 @@ class Merkmalklasse < ActiveRecord::Base
   serialize :possible_values, Array
 
   # -- validations and callbacks
+  after_commit :flush_cache
+
   validates :name, presence: true
   validates_uniqueness_of :name, scope: [ :for_object ]
   validates :position, presence: true
@@ -43,5 +45,9 @@ class Merkmalklasse < ActiveRecord::Base
   def pvalues=(values)
     self[:possible_values] = values.gsub(/\r\n/,';').gsub(/\n/,';').
                                gsub(/; */,';').strip.split(/;/)
+  end
+
+  def flush_cache
+    Rails.cache.delete_matched(Regexp.new("location/merkmale"))
   end
 end

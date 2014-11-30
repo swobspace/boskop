@@ -4,6 +4,7 @@ class LocationsController < ApplicationController
 
   def index
     @locations = Location.includes(:addresses, merkmale: [:merkmalklasse]).all
+    @merkmalklassen = Merkmalklasse.visibles(:location, 'index')
     respond_with(@locations)
   end
 

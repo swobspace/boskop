@@ -12,6 +12,7 @@ class Merkmal < ActiveRecord::Base
                                   if: :uniqueness_required?
 
   before_create :merkmalklasse_unique?
+  after_commit :flush_cache
 
   scope :mandantory, -> {
     joins(:merkmalklasse).where("merkmalklassen.mandantory = ?", true)
@@ -43,6 +44,10 @@ class Merkmal < ActiveRecord::Base
       errors.add(:base, 'only one attribute of each merkmalklasse allowed')
       false
     end
+  end
+
+  def flush_cache
+    Rails.cache.delete(["location/merkmale", self.merkmalfor_id, self.merkmalklasse_id])
   end
 end
 

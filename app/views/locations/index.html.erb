@@ -7,7 +7,7 @@
     <th><%= t('attributes.plz') %></th>
     <th><%= t('attributes.ort') %></th>
     <th><%= t('attributes.streetaddress') %></th>
-    <%= content_tag_for(:th, Merkmalklasse.visibles(:location, 'index')) do |mklasse| %>
+    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
       <%= mklasse.to_s %>
     <% end %>
     <th><%= t('attributes.actions') %></th>
@@ -19,7 +19,7 @@
     <th></th>
     <th></th>
     <th></th>
-    <%= content_tag_for(:th, Merkmalklasse.visibles(:location, 'index')) do |mklasse| %>
+    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
     <% end %>
     <th></th>
   </tr>
@@ -28,12 +28,12 @@
 
 <% @locations.each do |location| %>
   <%= content_tag_for(:tr, location) do %>
-    <td><%= location.name %></td>
+    <td><%= link_to location.name, location_path(location) %></td>
     <td><%= location.addresses.first.try(:plz) %></td>
     <td><%= location.addresses.first.try(:ort) %></td>
     <td><%= location.addresses.first.try(:streetaddress) %></td>
-    <%= content_tag_for(:td, Merkmalklasse.visibles(:location, 'index')) do |mklasse| %>
-      <%= location.merkmale.where(merkmalklasse_id: mklasse.id).pluck(:value).join("; ").to_s %>
+    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+      <%= get_location_merkmal(location, mklasse) %>
     <% end %>
     <td class="nowrap">
       <%= show_link location %>
