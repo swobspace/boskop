@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe OrgUnitsController, :type => :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # OrgUnit. As you add validations to OrgUnit, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:org_unit)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe OrgUnitsController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "i have a dream" }
       }
 
       it "updates the requested org_unit" do
         org_unit = OrgUnit.create! valid_attributes
         put :update, {:id => org_unit.to_param, :org_unit => new_attributes}, valid_session
         org_unit.reload
-        skip("Add assertions for updated state")
+        expect(org_unit.description).to be == "i have a dream"
       end
 
       it "assigns the requested org_unit as @org_unit" do

@@ -27,5 +27,11 @@ FactoryGirl.define do
     merkmalfor {|a| a.association(:location) }
   end
 
+  factory :org_unit do
+    name { generate(:aname) }
+    position 0
+  end
+
+
 end
 

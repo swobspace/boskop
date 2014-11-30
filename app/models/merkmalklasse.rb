@@ -49,5 +49,6 @@ class Merkmalklasse < ActiveRecord::Base
 
   def flush_cache
     Rails.cache.delete_matched(Regexp.new("location/merkmale"))
+    Rails.cache.delete_matched(Regexp.new("orgunit/merkmale"))
   end
 end

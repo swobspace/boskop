@@ -48,6 +48,7 @@ class Merkmal < ActiveRecord::Base
 
   def flush_cache
     Rails.cache.delete(["location/merkmale", self.merkmalfor_id, self.merkmalklasse_id])
+    Rails.cache.delete(["orgunit/merkmale", self.merkmalfor_id, self.merkmalklasse_id])
   end
 end
 

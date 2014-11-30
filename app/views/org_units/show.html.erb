@@ -19,6 +19,7 @@
     <th><%= t('attributes.position')%>:</th>
     <td><%= @org_unit.position %></td>
   </tr>
+  <%= render partial: 'merkmale/list', locals: { merkmale: @org_unit.merkmale } %>
 </table>
 
 <div class="btn-toolbar" role="toolbar">
