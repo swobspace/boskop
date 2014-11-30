@@ -12,11 +12,13 @@
     <th><%= t('attributes.visible') %></th>
     <th><%= t('attributes.position') %></th>
     <th><%= t('attributes.possible_values') %></th>
+    <th><%= t('attributes.baselink') %></th>
     <th><%= t('attributes.actions') %></th>
   </tr>
 </thead>
 <tfoot>
   <tr>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -42,6 +44,7 @@
     <td><%= merkmalklasse.visible %></td>
     <td><%= merkmalklasse.position %></td>
     <td><%= merkmalklasse.possible_values %></td>
+    <td><%= merkmalklasse.baselink %></td>
     <td class="nowrap">
       <%= show_link merkmalklasse %>
       <%= edit_link merkmalklasse %>

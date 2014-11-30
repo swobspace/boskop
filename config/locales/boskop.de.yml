@@ -8,6 +8,8 @@ de:
     show_all: alles anzeigen
     restore: zurücksetzen
     search: Suche
+    possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
+    baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
   
   actions:
     destroy: Datensatz löschen
@@ -27,6 +29,7 @@ de:
   attributes:
     actions: Aktionen
     address: Adresse
+    baselink: Basislink
     description: Beschreibung
     displayname: Anzeigename
     format: Format
