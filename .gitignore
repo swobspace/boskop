@@ -48,3 +48,4 @@ config/deploy-config.yml
 # Ignore application configuration
 /shared/config/application.yml
 
+/.capistrano
