@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     @user = user
     if @user.nil?
-      can :read, Location
+      can :read, [Location, OrgUnit]
       can :navigate, :org_units
       
     elsif @user.is_admin?
