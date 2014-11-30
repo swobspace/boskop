@@ -1,0 +1,29 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @org_unit.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @org_unit.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ancestry')%>:</th>
+    <td><%= @org_unit.ancestry %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ancestry_depth')%>:</th>
+    <td><%= @org_unit.ancestry_depth %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.position')%>:</th>
+    <td><%= @org_unit.position %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@org_unit) %>
+  <%= delete_link(@org_unit) %>
+  <%= new_link OrgUnit %>
+</div>

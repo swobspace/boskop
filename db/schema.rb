@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130084305) do
+ActiveRecord::Schema.define(version: 20141130152552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,19 @@ ActiveRecord::Schema.define(version: 20141130084305) do
 
   add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
   add_index "merkmalklassen", ["name"], name: "index_merkmalklassen_on_name", using: :btree
+
+  create_table "org_units", force: true do |t|
+    t.string   "name",           default: "", null: false
+    t.string   "description",    default: ""
+    t.string   "ancestry"
+    t.integer  "ancestry_depth", default: 0,  null: false
+    t.integer  "position",       default: 0,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "org_units", ["ancestry"], name: "index_org_units_on_ancestry", using: :btree
+  add_index "org_units", ["name"], name: "index_org_units_on_name", using: :btree
 
   create_table "wobauth_authorities", force: true do |t|
     t.integer  "authorizable_id"

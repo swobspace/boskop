@@ -36,3 +36,10 @@ Location:
               ancestry:string:index ancestry_depth:integer \
               position:integer
 
+OrgUnit:
+---------
+
+    bin/rails g scaffold OrgUnit name:string:index description:string \
+              ancestry:string:index ancestry_depth:integer \
+              position:integer
+

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :org_units
+
   resources :addresses
 
   resources :locations
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
 
   mount Wobauth::Engine, at: '/auth'
 
-  root 'locations#index'
+  root 'org_units#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

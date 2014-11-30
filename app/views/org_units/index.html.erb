@@ -1,0 +1,36 @@
+<h1><%= t('controller.org_units') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.ancestry') %></th>
+    <th><%= t('attributes.ancestry_depth') %></th>
+    <th><%= t('attributes.position') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @org_units.each do |org_unit| %>
+  <%= content_tag_for(:tr, org_unit) do %>
+    <td><%= org_unit.name %></td>
+    <td><%= org_unit.description %></td>
+    <td><%= org_unit.ancestry %></td>
+    <td><%= org_unit.ancestry_depth %></td>
+    <td><%= org_unit.position %></td>
+    <td class="nowrap">
+      <%= show_link org_unit %>
+      <%= edit_link org_unit %>
+      <%= delete_link org_unit %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link OrgUnit %>
