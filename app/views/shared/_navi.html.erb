@@ -2,7 +2,7 @@
   <% if can? :navigate, :org_units %>
     <li class="dropdown <%= orgunits_active_class %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('boskop.org_units') %><b class="caret"></b></a>
+        <%= t('boskop.nodes') %><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li> <%=link_to t('boskop.org_units'), main_app.root_path %></li>
         <li> <%=link_to t('boskop.locations'), main_app.locations_path %></li>
