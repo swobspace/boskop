@@ -7,12 +7,14 @@ Merkmalklasse:
     bin/rails g scaffold Merkmalklasse name:string:index description:text \
               format:string possible_values:text unique:boolean \
               mandantory:boolean position:integer for_object:string:index \
-              visible:string
+              visible:string baselink:string
 
     # bin/rails g migration AddObjectToMerkmalklasse \
     #           mandantory:boolean position:integer for_object:string:index
     # bin/rails g migration AddVisibleToMerkmalklasse \
     #           visible:string
+    # bin/rails g migration AddBaselinkToMerkmalklasse \
+    #           baselink:string
 
 Merkmal:
 --------
