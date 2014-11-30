@@ -14,6 +14,9 @@ RSpec.describe Merkmalklasse, :type => :model do
   it { is_expected.to serialize(:visible).as(Array) }
   it { pending "don't know how to do this"
        is_expected.to validate_inclusion_of(:visible).in_array(Merkmalklasse::VISIBLES) }
+  it { is_expected.to allow_value('http://foo.com', 'https://bar.com/baz').
+       for(:baselink) }
+  it { is_expected.not_to allow_value('foo.com', 'https:baz').for(:baselink) }
 
   it "should get plain factory working" do
     f = FactoryGirl.create(:merkmalklasse)

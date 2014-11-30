@@ -1,3 +1,5 @@
+require 'uri'
+
 class Merkmalklasse < ActiveRecord::Base
   default_scope { order 'position ASC' }
   # -- associations
@@ -6,7 +8,7 @@ class Merkmalklasse < ActiveRecord::Base
   acts_as_list scope: [:for_object]
 
   # -- configuration
-  FORMATE = ['string', 'date', 'number', 'telephone', 'dropdown' ]
+  FORMATE = ['string', 'date', 'number', 'telephone', 'dropdown', 'linkindex' ]
   OBJECTS = ['OrgUnit', 'Location']
   VISIBLES = ['index']
 
@@ -20,6 +22,9 @@ class Merkmalklasse < ActiveRecord::Base
   validates :format, presence: true, inclusion: { in: FORMATE }
   validates :for_object, presence: true, inclusion: { in: OBJECTS }
   validates :visible, presence: true # , inclusion: { in: VISIBLES }
+  # -- 
+  # not perfect, since it allows 'http://', but its a start
+  validates :baselink, format: URI::regexp(%w(http https)), allow_blank: true
 
   def to_s
     "#{name}"
