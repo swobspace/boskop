@@ -25,23 +25,30 @@ de:
       user: User
 
   attributes:
+    actions: Aktionen
     address: Adresse
     description: Beschreibung
     displayname: Anzeigename
+    format: Format
+    for_object: Objektklasse 
     givenname: Vorname
     location: Lokation
+    mandantory: Pflichtfeld
     merkmal: Merkmal
     merkmalklasse: Merkmalklasse
     name: Name
     org_unit: Organisationseinheit
     ort: Ort
     plz: PLZ
+    position: Position
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
     sn: Nachname
     streetaddress: Straße, Nr.
+    unique: Unique
     username: Username
+    visible: Sichtbarkeit
 
   controller:
     addresses: Adressen
