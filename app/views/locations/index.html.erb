@@ -10,7 +10,7 @@
     <%= content_tag_for(:th, Merkmalklasse.visibles(:location, 'index')) do |mklasse| %>
       <%= mklasse.to_s %>
     <% end %>
-    <th></th>
+    <th><%= t('attributes.actions') %></th>
   </tr>
 </thead>
 <tfoot>
