@@ -5,6 +5,8 @@ class Ability
     @user = user
     if @user.nil?
       can :read, Location
+      can :navigate, :org_units
+      
     elsif @user.is_admin?
       can :manage, :all
       cannot [:update, :destroy], :roles, :ro => :true
