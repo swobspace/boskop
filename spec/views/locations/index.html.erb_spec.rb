@@ -26,8 +26,5 @@ RSpec.describe "locations/index", :type => :view do
     render
     assert_select "tr>td", :text => "Name01".to_s, :count => 1
     assert_select "tr>td", :text => "Name02".to_s, :count => 1
-    assert_select "tr>td", :text => "Description".to_s, :count => 2
-    assert_select "tr>td", :text => 1.to_s, :count => 1
-    assert_select "tr>td", :text => 2.to_s, :count => 1
   end
 end
