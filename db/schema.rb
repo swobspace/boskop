@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141130152552) do
+ActiveRecord::Schema.define(version: 20141205151605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,17 @@ ActiveRecord::Schema.define(version: 20141130152552) do
 
   add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
   add_index "merkmalklassen", ["name"], name: "index_merkmalklassen_on_name", using: :btree
+
+  create_table "networks", force: true do |t|
+    t.integer  "location_id"
+    t.cidr     "netzwerk"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "networks", ["location_id"], name: "index_networks_on_location_id", using: :btree
 
   create_table "org_units", force: true do |t|
     t.string   "name",           default: "", null: false
