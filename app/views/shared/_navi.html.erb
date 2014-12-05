@@ -9,6 +9,9 @@
       </ul>
     </li>
   <% end %>
+  <% if can? :read, :networks %>
+    <li> <%=link_to t('controller.networks'), main_app.networks_path %></li>
+  <% end %>
   <% if can? :navigate, :configuration %>
     <li class="dropdown <%= configuration_active_class %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
