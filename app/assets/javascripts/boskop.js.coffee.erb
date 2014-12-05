@@ -56,5 +56,18 @@ ready = ->
     $('input[type=search]').val("").trigger('input')
   )
 
+  unless Modernizr.touch
+    $('.select2').select2
+      width: 'element'
+
+  if Modernizr.touch && Modernizr.inputtypes.date
+    $('.datepicker').each (i, obj) ->
+      myid = $(this).attr('id')
+      if myid
+        document.getElementById(myid).type = 'date'
+  else
+    $(".datepicker").datepicker()
+
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
