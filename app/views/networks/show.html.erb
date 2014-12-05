@@ -1,0 +1,25 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.location')%>:</th>
+    <td><%= @network.location %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.netzwerk')%>:</th>
+    <td><%= @network.netzwerk %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @network.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @network.description %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@network) %>
+  <%= delete_link(@network) %>
+  <%= new_link Network %>
+</div>

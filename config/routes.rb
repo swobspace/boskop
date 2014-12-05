@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :networks
+
   resources :org_units
 
   resources :addresses

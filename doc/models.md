@@ -43,3 +43,9 @@ OrgUnit:
               ancestry:string:index ancestry_depth:integer \
               position:integer
 
+Network:
+--------
+
+    bin/rails g scaffold Network location:references netzwerk:cidr \
+              name:string description:text
+

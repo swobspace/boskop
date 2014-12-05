@@ -1,0 +1,34 @@
+<h1><%= t('controller.networks') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.location') %></th>
+    <th><%= t('attributes.netzwerk') %></th>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @networks.each do |network| %>
+  <%= content_tag_for(:tr, network) do %>
+    <td><%= network.location %></td>
+    <td><%= network.netzwerk %></td>
+    <td><%= network.name %></td>
+    <td><%= network.description %></td>
+    <td class="nowrap">
+      <%= show_link network %>
+      <%= edit_link network %>
+      <%= delete_link network %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Network %>
