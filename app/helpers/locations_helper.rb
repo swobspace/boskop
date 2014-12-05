@@ -1,5 +1,6 @@
 module LocationsHelper
   def get_location_merkmal(location, merkmalklasse)
+    return "" if (location.nil? || merkmalklasse.nil?)
     Rails.cache.fetch(["location/merkmale", location.id, merkmalklasse.id]) {
       values = location.merkmale.where(merkmalklasse_id: merkmalklasse.id).pluck(:value)
       if merkmalklasse.format == 'linkindex'
