@@ -24,6 +24,7 @@ de:
       location: Lokation
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
+      network: Netzwerk
       org_unit: Organisationseinheit
       user: User
 
@@ -41,6 +42,7 @@ de:
     merkmal: Merkmal
     merkmalklasse: Merkmalklasse
     name: Name
+    netzwerk: Netzwerk
     org_unit: Organisationseinheit
     ort: Ort
     plz: PLZ
@@ -59,6 +61,7 @@ de:
     locations: Lokationen
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
+    networks: Netzwerke
     org_units: Organisationseinheiten
     users: Benutzer
 
