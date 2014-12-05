@@ -19,16 +19,18 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe NetworksController, :type => :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # Network. As you add validations to Network, be sure to
   # adjust the attributes here as well.
+  let!(:location) { FactoryGirl.create(:location) }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:network, location_id: location.id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { netzwerk: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +105,14 @@ RSpec.describe NetworksController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "brabbelfasel" }
       }
 
       it "updates the requested network" do
         network = Network.create! valid_attributes
         put :update, {:id => network.to_param, :network => new_attributes}, valid_session
         network.reload
-        skip("Add assertions for updated state")
+        expect(network.name).to be == "brabbelfasel"
       end
 
       it "assigns the requested network as @network" do
