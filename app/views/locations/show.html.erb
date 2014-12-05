@@ -8,6 +8,14 @@
     <td><%= @location.description %></td>
   </tr>
   <tr>
+    <th><%= t('attributes.addresses')%>:</th>
+    <td>
+      <% @location.addresses.each do |addr| %>
+        <%= addr.to_s %> <br />
+      <% end %>
+    </td>
+  </tr>
+  <tr>
     <th><%= t('attributes.ancestry')%>:</th>
     <td><%= @location.ancestry %></td>
   </tr>
