@@ -19,7 +19,7 @@ class Location < ActiveRecord::Base
   end
 
   def ort
-    "#{self.addresses.first.ort}"
+    "#{self.addresses.first.try(:ort)}"
   end
 
 end

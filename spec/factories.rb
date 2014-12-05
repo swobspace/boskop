@@ -27,6 +27,12 @@ FactoryGirl.define do
     merkmalfor {|a| a.association(:location) }
   end
 
+  factory :network do
+    name { generate(:aname) }
+    location
+    netzwerk "192.0.2.0/24"
+  end
+
   factory :org_unit do
     name { generate(:aname) }
     position 0
