@@ -1,11 +1,8 @@
+<h2> <%= @network.to_s %> </h2>
 <table class="table table-bordered table-hover autowidth">
   <tr>
-    <th><%= t('attributes.location')%>:</th>
-    <td><%= @network.location %></td>
-  </tr>
-  <tr>
     <th><%= t('attributes.netzwerk')%>:</th>
-    <td><%= @network.netzwerk %></td>
+    <td><%= @network.netzwerk.try(:to_cidr_s) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.name')%>:</th>
@@ -14,6 +11,14 @@
   <tr>
     <th><%= t('attributes.description')%>:</th>
     <td><%= @network.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.location')%>:</th>
+    <td><%= link_to @network.location, location_path(@network.location) %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ort')%>:</th>
+    <td><%= @network.location.ort %></td>
   </tr>
 </table>
 

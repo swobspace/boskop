@@ -12,13 +12,13 @@
     <%= form_legend %>
 
     <div class="form-inputs">
-      <%= f.association :location
-       %>
-      <%= f.input :netzwerk
+      <%= f.input :netzwerk, as: :string
        %>
       <%= f.input :name
        %>
       <%= f.input :description
+       %>
+      <%= f.association :location, input_html: { class: 'select2' }
        %>
     </div>
 
