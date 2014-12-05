@@ -2,6 +2,7 @@ class Location < ActiveRecord::Base
   # -- associations
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :addresses, as: :addressfor, dependent: :destroy
+  has_many :networks, dependent: :destroy
 
   # -- configuration
   has_ancestry :cache_depth =>true, :orphan_strategy => :adopt
@@ -15,6 +16,10 @@ class Location < ActiveRecord::Base
 
   def to_s
     "#{name.to_s}"
+  end
+
+  def ort
+    "#{self.addresses.first.ort}"
   end
 
 end
