@@ -9,7 +9,7 @@ class Merkmalklasse < ActiveRecord::Base
 
   # -- configuration
   FORMATE = ['string', 'date', 'number', 'telephone', 'dropdown', 'linkindex' ]
-  OBJECTS = ['OrgUnit', 'Location']
+  OBJECTS = ['OrgUnit', 'Location', 'Network']
   VISIBLES = ['index']
 
   serialize :visible, Array

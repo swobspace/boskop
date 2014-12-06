@@ -13,6 +13,10 @@
     <td><%= @network.description %></td>
   </tr>
   <tr>
+    <th><%= t('attributes.lid')%>:</th>
+    <td><%= @network.location.try(:lid) %></td>
+  </tr>
+  <tr>
     <th><%= t('attributes.location')%>:</th>
     <td><%= link_to @network.location, location_path(@network.location) %></td>
   </tr>
@@ -20,6 +24,7 @@
     <th><%= t('attributes.ort')%>:</th>
     <td><%= @network.location.ort %></td>
   </tr>
+  <%= render partial: 'merkmale/list', locals: { merkmale: @network.merkmale } %>
 </table>
 
 <div class="btn-toolbar" role="toolbar">
