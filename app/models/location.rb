@@ -12,7 +12,7 @@ class Location < ActiveRecord::Base
   validates_associated :merkmale, :addresses
 
   # -- validations and callbacks
-  validates :name, presence: true, uniqueness: true
+  validates :name, :lid, presence: true, uniqueness: true
 
   def to_s
     "#{name.to_s}"

@@ -4,6 +4,7 @@
 <thead>
   <tr>
     <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.lid') %></th>
     <th><%= t('attributes.plz') %></th>
     <th><%= t('attributes.ort') %></th>
     <th><%= t('attributes.streetaddress') %></th>
@@ -19,6 +20,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
     <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
     <% end %>
     <th></th>
@@ -29,6 +31,7 @@
 <% @locations.each do |location| %>
   <%= content_tag_for(:tr, location) do %>
     <td><%= link_to location.name, location_path(location) %></td>
+    <td><%= location.lid %></td>
     <td><%= location.addresses.first.try(:plz) %></td>
     <td><%= location.addresses.first.try(:ort) %></td>
     <td><%= location.addresses.first.try(:streetaddress) %></td>

@@ -9,6 +9,7 @@ RSpec.describe "locations/edit", :type => :view do
     allow(controller).to receive(:action_name) { "edit" }
 
     @location = assign(:location, Location.create!(
+      :lid => 'TEST',
       :name => "MyString",
       :description => "MyString",
       :position => 1
@@ -23,6 +24,7 @@ RSpec.describe "locations/edit", :type => :view do
       assert_select "input#location_name[name=?]", "location[name]"
       assert_select "input#location_description[name=?]", "location[description]"
       assert_select "input#location_position[name=?]", "location[position]"
+      assert_select "input#location_lid[name=?]", "location[lid]"
     end
   end
 end

@@ -43,6 +43,7 @@ de:
     format: Format
     for_object: Objektklasse 
     givenname: Vorname
+    lid: StandortID
     location: Lokation
     mandantory: Pflichtfeld
     merkmal: Merkmal

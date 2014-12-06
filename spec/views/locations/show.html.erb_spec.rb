@@ -9,6 +9,7 @@ RSpec.describe "locations/show", :type => :view do
     allow(controller).to receive(:action_name) { "show" }
 
     @location = assign(:location, Location.create!(
+      :lid => 'TEST',
       :name => "Name",
       :description => "Description",
       :position => 2
@@ -17,6 +18,7 @@ RSpec.describe "locations/show", :type => :view do
 
   it "renders attributes in <p>" do
     render
+    expect(rendered).to match(/TEST/)
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Description/)
     expect(rendered).to match(/2/)

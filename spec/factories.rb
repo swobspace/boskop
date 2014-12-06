@@ -1,5 +1,9 @@
 FactoryGirl.define do
 
+  sequence :newlid do |n|
+    "lid_#{n}"
+  end
+
   sequence :aname do |n|
     "aname_#{n}"
   end
@@ -9,6 +13,7 @@ FactoryGirl.define do
   end
 
   factory :location do
+    lid  { generate(:newlid) }
     name { generate(:aname) }
     position 0
   end
