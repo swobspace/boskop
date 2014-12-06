@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :networks do
     collection do
       get :search
-      post :index
+      post :search, to: :index
     end
   end
 
