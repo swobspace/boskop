@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :search, :to => :read
+
     @user = user
     if @user.nil?
       can :read, [Location, OrgUnit]
