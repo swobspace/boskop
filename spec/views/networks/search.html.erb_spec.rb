@@ -13,7 +13,7 @@ RSpec.describe "networks/search", :type => :view do
   it "renders the search network form" do
     render
 
-    assert_select "form[action=?][method=?]", networks_path, "post" do
+    assert_select "form[action=?][method=?]", search_networks_path, "post" do
       assert_select "input#cidr[name=?]", "cidr"
       assert_select "input#ort[name=?]", "ort"
       assert_select "input#is_subset[name=?]", "is_subset"
