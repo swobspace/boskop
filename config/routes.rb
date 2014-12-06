@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :networks
+  resources :networks do
+    collection do
+      get :search
+      post :index
+    end
+  end
 
   resources :org_units
 

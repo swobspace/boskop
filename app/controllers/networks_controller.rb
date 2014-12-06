@@ -1,10 +1,15 @@
 class NetworksController < ApplicationController
   before_action :set_network, only: [:show, :edit, :update, :destroy]
-
+  before_action :add_breadcrumb_show, only: [:show]
   respond_to :html
 
+  include NetworksControllerConcerns
+
+  def search
+  end
+
   def index
-    @networks = Network.all
+    @networks = filter_networks(search_params)
     respond_with(@networks)
   end
 
@@ -44,4 +49,11 @@ class NetworksController < ApplicationController
     def network_params
       params.require(:network).permit(:location_id, :netzwerk, :name, :description)
     end
+
+    def search_params
+      params.permit(:cidr, :ort, :is_subset, :is_superset)
+    end
+
+
+
 end

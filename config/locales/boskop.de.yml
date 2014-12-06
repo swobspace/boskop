@@ -11,11 +11,16 @@ de:
     search: Suche
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
-  
+    cidr_example: z.B. 192.0.2.0/24
+    subset: enthaltene Netzwerke
+    superset: übergeordnete Netzwerke
+
   actions:
     destroy: Datensatz löschen
     mandantory: Pflichtfelder
     optional: Optional
+    search: Suche
+    cancel: abbrechen
 
   activerecord:
     models:

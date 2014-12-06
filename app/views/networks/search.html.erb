@@ -1,0 +1,47 @@
+<%= form_tag networks_path, role: "form",
+    method: :post, class: 'form-horizontal well' do %> 
+
+  <fieldset>
+    <legend>Suche nach Netzwerken</legend>
+    <div class="form-group">
+      <label for="cidr" class="col-sm-2 control-label">
+        <%= t('attributes.netzwerk') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="cidr" name="cidr" 
+               placeholder="<%= t('boskop.cidr_example') %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-9">
+        <label class="checkbox-inline">
+	  <input type="checkbox" id="is_subset" name="is_subset" value="1"> 
+          <%= t('boskop.subset') %>
+        </label>
+        <label class="checkbox-inline">
+	  <input type="checkbox" id="is_superset" name="is_superset" value="1"> 
+          <%= t('boskop.superset') %>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ort" class="col-sm-2 control-label">
+        <%= t('attributes.ort') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="ort" name="ort">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-9">
+        <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
+        <%= cancel_button %>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>
