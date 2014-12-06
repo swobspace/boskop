@@ -1,0 +1,3 @@
+Alle Merkmale vom Typ StandortID für 'Location':
+
+    Merkmal.joins(:merkmalklasse).where(merkmalklassen: {name: 'StandortID', for_object: 'Location'})
