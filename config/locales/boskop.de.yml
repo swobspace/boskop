@@ -12,8 +12,12 @@ de:
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
     cidr_example: z.B. 192.0.2.0/24
+    mask_example: z.B. 21 oder 24 (mögliche Werte 1-32)
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
+    subnet: Teilnetz
+    used_networks: Netzwerke in Benutzung
+    sort_helper: Sortierhilfe
 
   actions:
     destroy: Datensatz löschen
@@ -21,6 +25,7 @@ de:
     optional: Optional
     search: Suche
     cancel: abbrechen
+    reset_table: Tabelle zurücksetzen
 
   activerecord:
     models:

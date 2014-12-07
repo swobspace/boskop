@@ -50,7 +50,7 @@ ready = ->
     $('input[type=text]').val("")
     table.columns().search('').draw()
 
-  $("#reset_search").on("click",  ->
+  $("#reset_table").on("click",  ->
     $('input[type=text]').val("")
     table.columns().search('').draw()
     $('input[type=search]').val("").trigger('input')
