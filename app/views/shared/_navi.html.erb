@@ -10,7 +10,19 @@
     </li>
   <% end %>
   <% if can? :read, :networks %>
-    <li> <%=link_to t('controller.networks'), main_app.networks_path %></li>
+    <li class="dropdown <%= active_class('networks') %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('controller.networks') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.networks')), main_app.networks_path %></li>
+        <% if can? :create, Network %>
+          <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_network')), main_app.new_network_path %></li>
+        <% end %>
+        <li class="divider"></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_networks_path %></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('boskop.usage_map')), main_app.usage_form_networks_path %></li>
+      </ul>
+    </li>
   <% end %>
   <% if can? :navigate, :configuration %>
     <li class="dropdown <%= configuration_active_class %>">

@@ -13,9 +13,11 @@ de:
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
     cidr_example: z.B. 192.0.2.0/24
     mask_example: z.B. 21 oder 24 (mögliche Werte 1-32)
+    new_network: Neues Netzwerk
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
     subnet: Teilnetz
+    usage_map: Nutzungstabelle
     used_networks: Netzwerke in Benutzung
     sort_helper: Sortierhilfe
 

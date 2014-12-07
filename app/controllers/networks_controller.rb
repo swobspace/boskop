@@ -8,6 +8,13 @@ class NetworksController < ApplicationController
   def search
   end
 
+  def usage_form
+  end
+
+  def usage
+    @subnets = generate_usage_map(usage_params)
+  end
+
   def index
     @networks = filter_networks(search_params)
     @merkmalklassen = Merkmalklasse.visibles(:network, 'index')
@@ -59,6 +66,10 @@ class NetworksController < ApplicationController
 
     def search_params
       params.permit(:cidr, :ort, :is_subset, :is_superset)
+    end
+
+    def usage_params
+      params.permit(:cidr, :mask)
     end
 
     def merkmale

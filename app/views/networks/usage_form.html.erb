@@ -1,0 +1,35 @@
+<%= form_tag usage_networks_path, role: "form",
+    method: :post, class: 'form-horizontal well' do %> 
+
+  <fieldset>
+    <legend>Zeige Netzwerk-Nutzungstabelle</legend>
+    <div class="form-group">
+      <label for="cidr" class="col-sm-2 control-label">
+        <%= t('attributes.netzwerk') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="cidr" name="cidr" 
+               placeholder="<%= t('boskop.cidr_example') %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="mask" class="col-sm-2 control-label">
+        <%= t('attributes.mask') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="mask" name="mask"
+               placeholder="<%= t('boskop.mask_example') %>">
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-9">
+        <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
+        <%= cancel_button %>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>

@@ -1,0 +1,41 @@
+<h1><%= t('controller.networks') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('boskop.subnet') %></th>
+    <th><%= t('boskop.used_networks') %></th>
+    <th><%= t('boskop.sort_helper') %></th>
+  </tr>
+</thead>
+<tfoot>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</tfoot>
+
+<tbody>
+
+<% @subnets.each_pair do |subnet,networks| %>
+  <tr>
+    <td><%= subnet %></td>
+    <td>
+      <% networks.each do |used| %>
+        <%= link_to "#{used.netzwerk.to_cidr_s} / #{used.location.try(:lid)}", 
+            network_path(used) %> <br />
+      <% end %>
+    </td>
+    <td><%= sortable_network(subnet) %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Network %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-default" %>
+

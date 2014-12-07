@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     collection do
       get :search
       post :search, to: :index
+      get :usage_form
+      post :usage
     end
   end
 
