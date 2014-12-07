@@ -28,8 +28,8 @@ CSV.foreach("#{file}", :col_sep =>";", :headers => true) do |row|
   merkmal_data = hash.reject {|k,v| !merkmalklassen.keys.include?(k)}
   name = lid + "-" + network_data['netzwerk'].to_s.match(/\A\d+\.\d+\.(\d+)\.\d+/)[1]
 
-  location = Location.joins(merkmale: :merkmalklasse).
-               where(["merkmale.value = ? AND merkmalklassen.name = 'StandortID'", lid]).first
+  location = Location.where(lid: lid).first
+
   network_data.merge!(name: name, location_id: location.try(:id))
 
   puts "---"
