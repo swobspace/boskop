@@ -13,7 +13,9 @@ class Ability
       can :manage, :all
       cannot [:update, :destroy], :roles, :ro => :true
     else
+      can :navigate, [:org_units, :configuration]
       can :read, :all
+      can [:usage, :usage_form], Network
     end
   end
 
