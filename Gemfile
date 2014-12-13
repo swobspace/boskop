@@ -28,6 +28,7 @@ gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
 gem 'cancancan', '~> 1.9.0'
 gem 'acts_as_list'
 gem 'ancestry'
+gem 'settingslogic'
 
 gem 'yaml_db'
 group :development do
