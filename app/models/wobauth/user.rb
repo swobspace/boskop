@@ -2,8 +2,6 @@ class Wobauth::User < ActiveRecord::Base
   # dependencies within wobauth models
   include Wobauth::Concerns::Models::User
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-	 :recoverable, :rememberable, :trackable
+  # make devise modules configurable: see config/initializers/boskop.rb
+  devise *Boskop.devise_modules
 end
