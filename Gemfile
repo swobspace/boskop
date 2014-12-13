@@ -19,6 +19,7 @@ gem 'bootstrap-sass' #, '~> 3.2.0'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 gem 'select2-rails'
+gem 'devise_cas_authenticatable'
 
 gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git',
                    branch: 'master'
