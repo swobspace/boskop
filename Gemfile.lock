@@ -8,6 +8,15 @@ GIT
       activemodel (~> 4.0)
 
 GIT
+  remote: https://github.com/swobspace/devise-remote-user.git
+  revision: 8325c295e3af2d379c1401d16fa2b6bdb4655cac
+  branch: master
+  specs:
+    devise-remote-user (0.4.0)
+      devise
+      rails (>= 3.2, < 5.0)
+
+GIT
   remote: https://github.com/swobspace/wobapphelpers.git
   revision: 69a1e20ddda67f2acae90066f4d99e63aa84c8ff
   branch: master
@@ -331,6 +340,7 @@ DEPENDENCIES
   capybara
   coffee-rails (>= 4.0.0)
   database_rewinder
+  devise-remote-user!
   dotenv
   factory_girl_rails
   guard

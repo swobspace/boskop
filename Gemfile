@@ -29,6 +29,8 @@ gem 'cancancan', '~> 1.9.0'
 gem 'acts_as_list'
 gem 'ancestry'
 gem 'settingslogic'
+gem 'devise-remote-user', git: 'https://github.com/swobspace/devise-remote-user.git',
+     branch: 'master'
 
 gem 'yaml_db'
 group :development do
