@@ -26,18 +26,21 @@ CSV.foreach("#{file}", :col_sep =>";", :headers => true) do |row|
   lid  = hash.extract!('LID')['LID']
   network_data = hash.extract!(*network_attributes)
   merkmal_data = hash.reject {|k,v| !merkmalklassen.keys.include?(k)}
-  name = lid + "-" + network_data['netzwerk'].to_s.match(/\A\d+\.\d+\.(\d+)\.\d+/)[1]
+  nw = network_data.extract!('netzwerk')['netzwerk'].to_s.gsub(/\s*/, '')
+  puts nw
+  name = lid + "-" + nw.match(/\A\d+\.\d+\.(\d+)\.\d+/)[1]
 
   location = Location.where(lid: lid).first
 
-  network_data.merge!(name: name, location_id: location.try(:id))
+  network_data.merge!(name: name)
+  network_data_query = { location_id: location.try(:id), netzwerk: nw }
 
   puts "---"
-  puts "Network: #{network_data}"
+  puts "Network: #{network_data_query} + #{network_data}"
   puts "Location: #{lid} / #{location}"
   puts "Merkmale: #{merkmal_data}"
 
-  network = Network.find_or_initialize_by(network_data)
+  network = Network.create_with(network_data).find_or_initialize_by(network_data_query)
   if network.new_record?
     merkmal_data.each do |k,v|
       network.merkmale.build(
