@@ -20,4 +20,18 @@ RSpec.describe Network, :type => :model do
     expect("#{f}").to match /192.0.2.128\/25/
   end
 
+  it "does not create networks with same location_id and netzwerk" do
+    f = FactoryGirl.create(:network, location_id: 1, netzwerk: '192.0.2.0/24')
+    expect(f).to be_valid
+    expect{ 
+      FactoryGirl.create(:network, location_id: 1, netzwerk: '192.0.2.0/24') 
+    }.to raise_error ActiveRecord::RecordInvalid
+  end
+
+  it "creates networks with different location_ids and identical netzwerke" do
+    f = FactoryGirl.create(:network, location_id: 1, netzwerk: '192.0.2.0/24')
+    g = FactoryGirl.create(:network, location_id: 2, netzwerk: '192.0.2.0/24')
+    expect(f).to be_valid
+    expect(g).to be_valid
+  end
 end

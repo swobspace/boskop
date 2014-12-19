@@ -19,7 +19,7 @@ RSpec.describe "networks/index", :type => :view do
       ),
       Network.create!(
         :location => location,
-        :netzwerk => "192.0.2.0/24",
+        :netzwerk => "192.0.3.0/24",
         :name => "Name",
         :description => "MyText"
       )
@@ -29,7 +29,8 @@ RSpec.describe "networks/index", :type => :view do
   it "renders a list of networks" do
     render
     assert_select "tr>td", :text => "Lokation".to_s, :count => 2
-    assert_select "tr>td", :text => "192.0.2.0/24".to_s, :count => 2
+    assert_select "tr>td", :text => "192.0.2.0/24".to_s, :count => 1
+    assert_select "tr>td", :text => "192.0.3.0/24".to_s, :count => 1
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
   end
