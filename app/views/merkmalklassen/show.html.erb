@@ -44,6 +44,8 @@
 <div class="btn-toolbar" role="toolbar">
   <%= back_link %>
   <%= edit_link(@merkmalklasse) %>
-  <%= delete_link(@merkmalklasse) %>
+  <%= delete_link @merkmalklasse,
+        confirm: t('boskop.this_will_destroy_all_merkmale'),
+        verify: t('boskop.verify_destroy') %>
   <%= new_link Merkmalklasse %>
 </div>

@@ -48,7 +48,9 @@
     <td class="nowrap">
       <%= show_link merkmalklasse %>
       <%= edit_link merkmalklasse %>
-      <%= delete_link merkmalklasse %>
+      <%= delete_link merkmalklasse,
+            confirm: t('boskop.this_will_destroy_all_merkmale'),
+            verify: t('boskop.verify_destroy') %>
     </td>
   <% end %>
 <% end %>
