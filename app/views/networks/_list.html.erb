@@ -4,6 +4,10 @@
     <th><%= t('attributes.netzwerk') %></th>
     <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.description') %></th>
+    <%= content_tag_for(:th, @networkmerkmalklassen) do |mklasse| %>
+      <%= mklasse.to_s %>
+    <% end %>
+    <th></th>
   </tr>
 </thead>
 
@@ -13,6 +17,15 @@
     <td><%= network.netzwerk.try(:to_cidr_s) %></td>
     <td><%= network.name %></td>
     <td><%= network.description %></td>
+    <%= content_tag_for(:td, @networkmerkmalklassen) do |mklasse| %>
+      <%= get_location_merkmal(network, mklasse) %>
+    <% end %>
+
+    <td class="nowrap">
+      <%= show_link network %>
+      <%= edit_link network %>
+      <%= delete_link network %>
+    </td>
   <% end %>
 <% end %>
 </tbody>
