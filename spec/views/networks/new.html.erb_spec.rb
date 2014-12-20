@@ -13,7 +13,6 @@ RSpec.describe "networks/new", :type => :view do
     assign(:network, Network.new(
       :location => location,
       :netzwerk => "192.0.2.0/24",
-      :name => "MyString",
       :description => "MyText"
     ))
   end
@@ -24,7 +23,6 @@ RSpec.describe "networks/new", :type => :view do
     assert_select "form[action=?][method=?]", networks_path, "post" do
       assert_select "select#network_location_id[name=?]", "network[location_id]"
       assert_select "input#network_netzwerk[name=?]", "network[netzwerk]"
-      assert_select "input#network_name[name=?]", "network[name]"
       assert_select "textarea#network_description[name=?]", "network[description]"
     end
   end

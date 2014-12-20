@@ -105,14 +105,14 @@ RSpec.describe NetworksController, :type => :controller do
   describe "PUT update" do
     describe "with valid params" do
       let(:new_attributes) {
-        { name: "brabbelfasel" }
+        { description: "brabbelfasel" }
       }
 
       it "updates the requested network" do
         network = Network.create! valid_attributes
         put :update, {:id => network.to_param, :network => new_attributes}, valid_session
         network.reload
-        expect(network.name).to be == "brabbelfasel"
+        expect(network.description).to be == "brabbelfasel"
       end
 
       it "assigns the requested network as @network" do

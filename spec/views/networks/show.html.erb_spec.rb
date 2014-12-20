@@ -13,7 +13,6 @@ RSpec.describe "networks/show", :type => :view do
     @network = assign(:network, Network.create!(
       :location => location,
       :netzwerk => "192.0.2.0/24",
-      :name => "Name",
       :description => "MyText"
     ))
   end
@@ -22,7 +21,6 @@ RSpec.describe "networks/show", :type => :view do
     render
     expect(rendered).to match(/Lokation/)
     expect(rendered).to match(/192.0.2.0\/24/)
-    expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyText/)
   end
 end

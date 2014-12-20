@@ -4,7 +4,6 @@
 <thead>
   <tr>
     <th><%= t('attributes.netzwerk') %></th>
-    <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.lid') %></th>
     <th><%= t('attributes.location') %></th>
@@ -22,7 +21,6 @@
     <th></th>
     <th></th>
     <th></th>
-    <th></th>
     <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
     <% end %>
     <th></th>
@@ -34,7 +32,6 @@
 <% @networks.each do |network| %>
   <%= content_tag_for(:tr, network) do %>
     <td><%= network.netzwerk.try(:to_cidr_s) %></td>
-    <td><%= network.name %></td>
     <td><%= network.description %></td>
     <td><%= network.location.try(:lid) %></td>
     <td><%= link_to network.location, location_path(network.location) %></td>

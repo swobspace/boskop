@@ -33,7 +33,6 @@ FactoryGirl.define do
   end
 
   factory :network do
-    name { generate(:aname) }
     location
     netzwerk "192.0.2.0/24"
   end

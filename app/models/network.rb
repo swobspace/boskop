@@ -9,7 +9,7 @@ class Network < ActiveRecord::Base
 
   # -- configuration
   # -- validations and callbacks
-  validates :name, :netzwerk, :location_id, presence: true
+  validates :netzwerk, :location_id, presence: true
   validates_uniqueness_of :netzwerk, scope: :location_id
 
   def to_s

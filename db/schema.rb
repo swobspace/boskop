@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206155633) do
+ActiveRecord::Schema.define(version: 20141220111403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20141206155633) do
   add_index "addresses", ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type", using: :btree
 
   create_table "locations", force: true do |t|
-    t.string   "name",           default: "", null: false
     t.string   "description",    default: ""
     t.string   "ancestry"
     t.integer  "ancestry_depth", default: 0,  null: false
@@ -40,11 +39,11 @@ ActiveRecord::Schema.define(version: 20141206155633) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "lid"
+    t.string   "name"
   end
 
   add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
   add_index "locations", ["lid"], name: "index_locations_on_lid", using: :btree
-  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
   create_table "merkmale", force: true do |t|
     t.integer  "merkmalfor_id"
@@ -79,7 +78,6 @@ ActiveRecord::Schema.define(version: 20141206155633) do
   create_table "networks", force: true do |t|
     t.integer  "location_id"
     t.cidr     "netzwerk"
-    t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
