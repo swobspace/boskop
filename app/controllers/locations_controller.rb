@@ -9,6 +9,7 @@ class LocationsController < ApplicationController
   end
 
   def show
+    @merkmalklassen = Merkmalklasse.where(for_object: 'Location')
     @networkmerkmalklassen = Merkmalklasse.visibles(:network, 'index')
     respond_with(@location)
   end

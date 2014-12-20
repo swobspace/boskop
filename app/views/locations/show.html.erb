@@ -37,7 +37,11 @@
     <div class="col-md-6">
       <table class="table table-condensed table-hover ">
         <caption><%= t('controller.merkmale')%></caption>
-	<%= render partial: 'merkmale/list', locals: { merkmale: @location.merkmale } %>
+        <%= content_tag_for(:tr, @merkmalklassen) do |mklasse| %>
+          <td><%= mklasse.name %></td>
+          <td><%= get_location_merkmal(@location, mklasse) %></td>
+        <% end %>
+
       </table>
     </div>
   </div>
