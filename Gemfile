@@ -20,8 +20,7 @@ gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails'
 gem 'select2-rails'
 
-gem 'simple_form', git: 'https://github.com/plataformatec/simple_form.git',
-                   branch: 'master'
+gem 'simple_form'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
                      branch: "master"
