@@ -56,6 +56,7 @@
 
 <br />
 
-<h2><%= t('boskop.assigned_networks') %></h2>
-
-<%= render partial: 'networks/list', locals: { networks: @location.networks } %>
+<% if can? :read, Network %>
+  <h2><%= t('boskop.assigned_networks') %></h2>
+  <%= render partial: 'networks/list', locals: { networks: @location.networks } %>
+<% end %>
