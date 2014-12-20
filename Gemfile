@@ -31,6 +31,7 @@ gem 'ancestry'
 gem 'settingslogic'
 gem 'devise-remote-user', git: 'https://github.com/swobspace/devise-remote-user.git',
      branch: 'master'
+gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
 gem 'yaml_db'
 group :development do

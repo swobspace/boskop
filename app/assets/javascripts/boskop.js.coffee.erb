@@ -5,6 +5,10 @@
 $.extend $.fn.dataTableExt.oStdClasses,
   sWrapper: "dataTables_wrapper form-inline"
 
+dataConfirmModal.setDefaults
+  commit: '<%= I18n.t('actions.destroy')%>',
+  cancel: '<%= I18n.t('actions.cancel')%>'
+
 ready = ->
   $('.dataTable tfoot th').each  (idx) ->
     title = $('.dataTable thead th').eq( $(this).index() ).text()

@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/ifad/data-confirm-modal.git
+  revision: 1c2ffff9b347334a317b08540544e7dce524007b
+  specs:
+    data-confirm-modal (1.0.1)
+      railties (>= 3.0)
+
+GIT
   remote: https://github.com/plataformatec/simple_form.git
   revision: 812f1209bc1d0c264f7e15ad2bdaf98eb1883469
   branch: master
@@ -18,7 +25,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers.git
-  revision: 69a1e20ddda67f2acae90066f4d99e63aa84c8ff
+  revision: e6e18869dbc0e94ba07ff6b5cae12cd35d73a863
   branch: master
   specs:
     wobapphelpers (0.0.1)
@@ -160,7 +167,7 @@ GEM
     hike (1.2.3)
     hitimes (1.2.2)
     http_parser.rb (0.6.0)
-    i18n (0.6.11)
+    i18n (0.7.0)
     jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -190,7 +197,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.1)
-    minitest (5.4.3)
+    minitest (5.5.0)
     multi_json (1.10.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -234,7 +241,7 @@ GEM
       activesupport (= 4.1.8)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.4.0)
+    rake (10.4.2)
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
@@ -339,6 +346,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.1)
   capybara
   coffee-rails (>= 4.0.0)
+  data-confirm-modal!
   database_rewinder
   devise-remote-user!
   dotenv
