@@ -32,4 +32,11 @@ RSpec.describe Merkmalklasse, :type => :model do
     expect("#{f}").to be == "MyName"
   end
 
+  it "returns visible merkmalklasse for :index" do
+    f = FactoryGirl.create(:merkmalklasse, visible: ['index'], for_object: 'Location')
+    g = FactoryGirl.create(:merkmalklasse, visible: [''], for_object: 'Location')
+    expect(Merkmalklasse.visibles(:location, 'index')).to include(f)
+    expect(Merkmalklasse.visibles(:location, 'index')).not_to include(g)
+  end
+
 end
