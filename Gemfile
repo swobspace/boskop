@@ -29,8 +29,9 @@ gem 'cancancan', '~> 1.9.0'
 gem 'acts_as_list'
 gem 'ancestry'
 gem 'settingslogic'
-gem 'devise-remote-user', git: 'https://github.com/swobspace/devise-remote-user.git',
-     branch: 'master'
+gem 'devise-remote-user'
+# gem 'devise-remote-user', git: 'https://github.com/swobspace/devise-remote-user.git',
+#      branch: 'master'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
 gem 'yaml_db'

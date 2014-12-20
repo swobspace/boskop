@@ -15,15 +15,6 @@ GIT
       activemodel (~> 4.0)
 
 GIT
-  remote: https://github.com/swobspace/devise-remote-user.git
-  revision: 8325c295e3af2d379c1401d16fa2b6bdb4655cac
-  branch: master
-  specs:
-    devise-remote-user (0.4.0)
-      devise
-      rails (>= 3.2, < 5.0)
-
-GIT
   remote: https://github.com/swobspace/wobapphelpers.git
   revision: e6e18869dbc0e94ba07ff6b5cae12cd35d73a863
   branch: master
@@ -131,6 +122,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-remote-user (0.4.1)
+      devise
+      rails (>= 3.2, < 5.0)
     diff-lcs (1.2.5)
     dotenv (1.0.2)
     em-websocket (0.5.1)
@@ -297,7 +291,7 @@ GEM
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.0)
+    sprockets-rails (2.2.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -348,7 +342,7 @@ DEPENDENCIES
   coffee-rails (>= 4.0.0)
   data-confirm-modal!
   database_rewinder
-  devise-remote-user!
+  devise-remote-user
   dotenv
   factory_girl_rails
   guard
