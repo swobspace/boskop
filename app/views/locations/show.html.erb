@@ -1,42 +1,57 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @location.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.lid')%>:</th>
-    <td><%= @location.lid %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @location.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.addresses')%>:</th>
-    <td>
-      <% @location.addresses.each do |addr| %>
-        <%= addr.to_s %> <br />
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ancestry')%>:</th>
-    <td><%= @location.ancestry %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ancestry_depth')%>:</th>
-    <td><%= @location.ancestry_depth %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.position')%>:</th>
-    <td><%= @location.position %></td>
-  </tr>
-  <%= render partial: 'merkmale/list', locals: { merkmale: @location.merkmale } %>
-</table>
+<div class="well">
+  <h2><%= @location.name %></h2>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-condensed table-hover">
+        <caption><%= t('boskop.basics')%></caption>
+	<tr>
+	  <th><%= t('attributes.lid')%>:</th>
+	  <td><%= @location.lid %></td>
+	</tr>
+	<tr>
+	  <th><%= t('attributes.description')%>:</th>
+	  <td><%= @location.description %></td>
+	</tr>
+	<tr>
+	  <th><%= t('attributes.addresses')%>:</th>
+	  <td>
+	    <% @location.addresses.each do |addr| %>
+	      <%= addr.to_s %> <br />
+	    <% end %>
+	  </td>
+	</tr>
+	<tr>
+	  <th><%= t('attributes.ancestry')%>:</th>
+	  <td><%= @location.ancestry %></td>
+	</tr>
+	<tr>
+	  <th><%= t('attributes.ancestry_depth')%>:</th>
+	  <td><%= @location.ancestry_depth %></td>
+	</tr>
+	<tr>
+	  <th><%= t('attributes.position')%>:</th>
+	  <td><%= @location.position %></td>
+	</tr>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-condensed table-hover ">
+        <caption><%= t('controller.merkmale')%></caption>
+	<%= render partial: 'merkmale/list', locals: { merkmale: @location.merkmale } %>
+      </table>
+    </div>
+  </div>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@location) %>
-  <%= delete_link(@location) %>
-  <%= new_link Location %>
+  <div class="btn-toolbar" role="toolbar">
+    <%= back_link %>
+    <%= edit_link(@location) %>
+    <%= delete_link(@location) %>
+    <%= new_link Location %>
+  </div>
 </div>
+
+<br />
+
+<h2><%= t('boskop.assigned_networks') %></h2>
+
+<%= render partial: 'networks/list', locals: { networks: @location.networks } %>

@@ -8,4 +8,10 @@
 .nodisp {display:none;}
 .leftspace {padding-left: .5em}
 .grey {color: #999;}
-
+.framed {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 19px;
+  min-height: 20px;
+}

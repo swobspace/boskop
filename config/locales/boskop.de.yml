@@ -20,6 +20,8 @@ de:
     usage_map: Nutzungstabelle
     used_networks: Netzwerke in Benutzung
     sort_helper: Sortierhilfe
+    assigned_networks: Zugeordnete Netzwerke
+    basics: Basics
 
   actions:
     destroy: Datensatz löschen

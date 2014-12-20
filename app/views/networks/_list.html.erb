@@ -1,0 +1,19 @@
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.netzwerk') %></th>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+  </tr>
+</thead>
+
+<tbody>
+<% networks.each do |network| %>
+  <%= content_tag_for(:tr, network) do %>
+    <td><%= network.netzwerk.try(:to_cidr_s) %></td>
+    <td><%= network.name %></td>
+    <td><%= network.description %></td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
