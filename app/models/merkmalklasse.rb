@@ -3,7 +3,7 @@ require 'uri'
 class Merkmalklasse < ActiveRecord::Base
   default_scope { order 'position ASC' }
   # -- associations
-  has_many :merkmale
+  has_many :merkmale, dependent: :destroy
 
   acts_as_list scope: [:for_object]
 

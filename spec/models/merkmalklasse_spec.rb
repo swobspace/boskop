@@ -39,4 +39,10 @@ RSpec.describe Merkmalklasse, :type => :model do
     expect(Merkmalklasse.visibles(:location, 'index')).not_to include(g)
   end
 
+  it "delete merkmalklasse destroys all related merkmale" do
+    mk = FactoryGirl.create(:merkmalklasse, for_object: 'Location')
+    m1 = FactoryGirl.create(:merkmal, merkmalklasse: mk)
+    expect{ mk.destroy }.to change(Merkmal, :count).by(-1)
+  end
+
 end
