@@ -15,10 +15,12 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'bootstrap-sass' #, '~> 3.2.0'
+gem "bower-rails", "~> 0.10.0"
+
+# gem 'bootstrap-sass' #, '~> 3.2.0'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails'
-gem 'select2-rails'
+# gem 'jquery-datatables-rails'
+# gem 'select2-rails'
 
 gem 'simple_form'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
