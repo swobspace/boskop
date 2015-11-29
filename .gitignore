@@ -29,6 +29,7 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 *.swp
+.~lock*
 
 # ignore sensible information
 shared/config/*.yml
