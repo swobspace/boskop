@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers.git
-  revision: e063cae5deaa0d5e28719701ec200bad3cfa43bb
+  revision: c6df6c2c2a54a07d2ea0c5285a703fb0dd87fd88
   branch: master
   specs:
     wobapphelpers (0.0.1)
@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: d4a8ae8a9f3a32ee7b948224658ed0b66d6d0db2
+  revision: 3afe0669ec98ad4906eb6ef8d4ba21ae0afba17f
   branch: master
   specs:
     wobauth (0.0.1)
@@ -315,7 +315,7 @@ GEM
       actionpack (~> 4.0)
       activemodel (~> 4.0)
     slop (3.6.0)
-    spring (1.3.3)
+    spring (1.4.4)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
     sprockets (2.12.3)
@@ -410,3 +410,6 @@ DEPENDENCIES
   wobapphelpers!
   wobauth!
   yaml_db
+
+BUNDLED WITH
+   1.10.5
