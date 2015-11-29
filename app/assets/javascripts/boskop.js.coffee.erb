@@ -31,21 +31,21 @@ ready = ->
         extend: 'copy',
         exportOptions: {
           columns: ':visible',
-          rows: ':visible'
+          search: ':applied'
         }
       },
       {
         extend: 'excel',
         exportOptions: {
           columns: ':visible',
-          rows: ':visible'
+          search: ':applied'
         }
       },
       {
         extend: 'csv',
         exportOptions: {
           columns: ':visible',
-          rows: ':visible'
+          search: ':applied'
         }
       },
       {
@@ -54,7 +54,7 @@ ready = ->
         pageSize: 'A4',
         exportOptions: {
           columns: ':visible',
-          rows: ':visible'
+          search: ':applied'
         }
       },
       'print'
