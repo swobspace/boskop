@@ -16,7 +16,7 @@ ready = ->
 
   table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
-    sDom: "<'row'<'col-md-3'l><'col-md-5 btn-group'TC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     colVis:
       buttonText: "<%= I18n.t('boskop.change_columns') %>"
       showAll: "<%= I18n.t('boskop.show_all') %>"
@@ -24,18 +24,17 @@ ready = ->
       exclude: [ 0 ]
     bJQueryUI: false
     bStateSave: true
-    # fnStateLoadCallback: (oSettings,oData) ->
-    #   oData.sFilter = ""
-    #   return true
-    oLanguage:
-      sUrl: "<%= asset_path('dataTable.german.txt') %>"
-    oTableTools:
-      sSwfPath: "<%= asset_path(Rails.root + '/swf/copy_csv_xls.swf')%>"
-      aButtons: [
-        { sExtends: "xls", sButtonClass: "btn visible-desktop" }
-        { sExtends: "copy", sButtonClass: "btn visible-desktop" }
-        { sExtends: "print", sButtonClass: "btn visible-desktop", "bShowAll": false }
-      ]
+    language:
+      url: "<%= asset_path('dataTable.german.txt') %>"
+    buttons: [
+      'copy', 'excel', 'csv',
+      {
+        extend: 'pdf',
+        orientation: 'landscape',
+        pageSize: 'A4'
+      }
+      'print'
+    ]
     fnDrawCallback: (oSettings) ->
       $("table tbody tr").on "click", "td.td_link_from_a", (event) ->
         link = $(this).find('a').attr('href')

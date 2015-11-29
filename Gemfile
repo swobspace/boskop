@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'postgres_ext'
 
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '>= 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -15,16 +15,18 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'bootstrap-sass' #, '~> 3.2.0'
+gem "bower-rails", "~> 0.10.0"
+
+# gem 'bootstrap-sass' #, '~> 3.2.0'
 gem 'jquery-ui-rails'
-gem 'jquery-datatables-rails'
-gem 'select2-rails'
+# gem 'jquery-datatables-rails'
+# gem 'select2-rails'
 
 gem 'simple_form'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
                      branch: "master"
-gem 'cancancan', '~> 1.9.0'
+gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
 gem 'settingslogic'

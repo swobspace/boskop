@@ -1,11 +1,11 @@
 /*
  *= require wobapphelpers/breadcrumbs
- *= require dataTables/jquery.dataTables
- *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
- *= require dataTables/extras/dataTables.tableTools
- *= require dataTables/extras/dataTables.colVis
+ *= require jquery-ui/datepicker
+ *= require datatables/media/css/dataTables.bootstrap
+ *= require datatables-buttons/css/buttons.bootstrap
+ *= require datatables-colvis/css/dataTables.colVis
  *= require select2
- *= require select2-bootstrap
+ *= require select2-bootstrap-css
  *= require boskop
  *= require_self
  */

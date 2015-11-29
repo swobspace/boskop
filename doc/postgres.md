@@ -14,6 +14,13 @@ To enable postgresql daemon permanently:
 
     systemctl enable postgresql.service
 
+To upgrade postgresql:
+
+    dnf install postgresql-update
+    postgresql-setup --upgrade
+
+Check output and /var/lib/pgsql/upgrade_postgresql.log for details.
+
 Ubuntu
 ------
 Install server package from distribution. Then initialize and start the daemon,

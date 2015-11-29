@@ -52,3 +52,68 @@ Network:
     bin/rails g scaffold Network location:references netzwerk:cidr \
               name:string description:text
 
+
+Line:
+-----
+
+    bin/rails g scaffold Line \
+              name:string description:text \
+              provider_id:string \
+              'location_a_id:integer:index:null{false}' \
+              'location_b_id:integer:index:null{true}' \
+              access_type:references:index \
+              'bw_upstream:decimal{10,1}' \
+              'bw_downstream:decimal{10,1}' \
+              framework_contract:references:index \
+              contract_start:date contract_end:date contract_period:integer \
+              period_of_notice:integer period_of_notice_unit:string \
+              renewal_period:integer renewal_unit:string \
+              'line_state:references:index:null{false}'
+
+AccessType:
+----------- 
+
+    bin/rails g scaffold AccessType \
+              name:string description:text
+
+LineState:
+----------- 
+
+    bin/rails g scaffold LineState \
+              name:string description:text \
+              active:boolean
+
+FrameworkContract:
+-----------------
+
+    bin/rails g scaffold FrameworkContract \
+              name:string "description:text:default{''}" \
+              contract_start:date contract_end:date contract_period:integer \
+              period_of_notice:integer period_of_notice_unit:string \
+              renewal_period:integer renewal_unit:string \
+              active:boolean
+
+Ipaddress:
+----------
+
+    bin/rails g scaffold Ipaddress \
+              name:string description:text \
+              ip:cidr \
+              'network:references:index:null{false}' \
+              host:references:index
+
+Host:
+-----
+
+    bin/rails g scaffold Host \
+              name:string description:text \
+              operating_system:references:index \
+	      location:references:index
+
+OperatingSystem:
+----------------
+
+    bin/rails g scaffold OperatingSystem \
+              name:string description:text
+
+
