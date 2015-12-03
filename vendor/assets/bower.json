@@ -1,0 +1,13 @@
+{
+  "name": "dsl-generated dependencies",
+  "dependencies": {
+    "bootstrap-sass": "3.3.6",
+    "datatables": "1.10.10",
+    "datatables-buttons": "git://github.com/DataTables/Buttons#1.0.3",
+    "datatables-colvis": "git://github.com/DataTables/ColVis#1.1.2",
+    "jszip": "2.5.0",
+    "pdfmake": "latest",
+    "select2": "3.5.4",
+    "select2-bootstrap-css": "1.4.6"
+  }
+}
