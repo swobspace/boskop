@@ -35,8 +35,10 @@ de:
 
   activerecord:
     models:
+      access_type: Zugangsart
       address: Adresse
       group: Gruppe
+      line_state: Status
       location: Lokation
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
@@ -45,7 +47,9 @@ de:
       user: User
 
   attributes:
+    access_type: Zugangsart
     actions: Aktionen
+    active: Aktiv
     address: Adresse
     addresses: Adressen
     baselink: Basislink
@@ -55,6 +59,7 @@ de:
     for_object: Objektklasse 
     givenname: Vorname
     lid: StandortID
+    line_state: Status
     location: Lokation
     mandantory: Pflichtfeld
     merkmal: Merkmal
@@ -75,7 +80,9 @@ de:
     visible: Sichtbarkeit
 
   controller:
+    access_types: Zugangsarten
     addresses: Adressen
+    line_states: Status
     locations: Lokationen
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
