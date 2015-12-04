@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :access_types
   resources :networks do
     collection do
       get :search

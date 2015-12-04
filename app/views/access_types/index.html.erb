@@ -1,0 +1,30 @@
+<h1><%= t('controller.access_types') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @access_types.each do |access_type| %>
+  <%= content_tag_for(:tr, access_type) do %>
+    <td><%= access_type.name %></td>
+    <td><%= access_type.description %></td>
+    <td class="nowrap">
+      <%= show_link access_type %>
+      <%= edit_link access_type %>
+      <%= delete_link access_type %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link AccessType %>
