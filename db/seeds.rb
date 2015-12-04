@@ -24,4 +24,10 @@ Wobauth::User.transaction do
   end
 end
 
+# -- AccessType
+AccessType.create(config['access_types'])
+
+# -- LineState
+LineState.create(config['line_states'])
+
 
