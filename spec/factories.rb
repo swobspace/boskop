@@ -16,6 +16,10 @@ FactoryGirl.define do
     addressfor {|a| a.association(:location) }
   end
 
+  factory :framework_contract do
+    name { generate(:aname) }
+  end
+
   factory :line_state do
     name { generate(:aname) }
     active false
