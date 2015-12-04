@@ -8,8 +8,17 @@ FactoryGirl.define do
     "aname_#{n}"
   end
 
+  factory :access_type do
+    name { generate(:aname) }
+  end
+
   factory :address do
     addressfor {|a| a.association(:location) }
+  end
+
+  factory :line_state do
+    name { generate(:aname) }
+    active false
   end
 
   factory :location do
