@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204100637) do
+ActiveRecord::Schema.define(version: 20151204105639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,21 @@ ActiveRecord::Schema.define(version: 20151204100637) do
   end
 
   add_index "addresses", ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type", using: :btree
+
+  create_table "framework_contracts", force: :cascade do |t|
+    t.string   "name",                                  null: false
+    t.text     "description",           default: ""
+    t.date     "contract_start"
+    t.date     "contract_end"
+    t.integer  "contract_period"
+    t.integer  "period_of_notice"
+    t.string   "period_of_notice_unit"
+    t.integer  "renewal_period"
+    t.string   "renewal_unit"
+    t.boolean  "active",                default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
 
   create_table "line_states", force: :cascade do |t|
     t.string   "name",                        null: false
