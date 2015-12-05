@@ -13,7 +13,7 @@ class Network < ActiveRecord::Base
   validates_uniqueness_of :netzwerk, scope: :location_id
 
   def to_s
-    "#{self.netzwerk.to_cidr_s} / #{self.location.try(:ort)}"
+    "#{self.netzwerk.try(:to_cidr_s)} / #{self.location.try(:ort)}"
   end
 
 
