@@ -17,8 +17,13 @@ class Ability
       can :navigate, [:org_units, :configuration]
       can :read, :all
       can [:usage, :usage_form], Network
+      can :manage, [ Network, Line, Host, Ipaddress ]
 
-    else
+    elsif @user.role?(:reader)
+      can :read, :all
+      can [:usage, :usage_form], Network
+
+    else  # -- logged in, but without role
       can :navigate, [:org_units, :configuration]
       can :read, [Location, OrgUnit, Network]
       can [:usage, :usage_form], Network

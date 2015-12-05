@@ -4,3 +4,6 @@ admin:
 network_manager:
   name: NetworkManager
 
+reader:
+  name: Reader
+
