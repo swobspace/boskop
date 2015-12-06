@@ -37,6 +37,7 @@ de:
     models:
       access_type: Zugangsart
       address: Adresse
+      framework_contract: Rahmenvertrag
       group: Gruppe
       line_state: Status
       location: Lokation
@@ -53,10 +54,14 @@ de:
     address: Adresse
     addresses: Adressen
     baselink: Basislink
+    contract_start: Vertragsbeginn
+    contract_end: Vertragsende
+    contract_period: Vertragslaufzeit
     description: Beschreibung
     displayname: Anzeigename
     format: Format
     for_object: Objektklasse 
+    framework_contract: Rahmenvertrag
     givenname: Vorname
     lid: StandortID
     line_state: Status
@@ -68,11 +73,15 @@ de:
     netzwerk: Netzwerk
     org_unit: Organisationseinheit
     ort: Ort
+    period_of_notice: Kündigungsfrist
+    period_of_notice_unit: Einheit
     plz: PLZ
     position: Position
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
+    renewal_period: Verlängerungszeitraum
+    renewal_unit: Einheit
     sn: Nachname
     streetaddress: Straße, Nr.
     unique: Unique
@@ -82,6 +91,7 @@ de:
   controller:
     access_types: Zugangsarten
     addresses: Adressen
+    framework_contracts: Rahmenverträge
     line_states: Status
     locations: Lokationen
     merkmale: Merkmale
