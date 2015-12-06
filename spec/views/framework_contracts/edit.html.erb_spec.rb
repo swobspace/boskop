@@ -33,13 +33,13 @@ RSpec.describe "framework_contracts/edit", type: :view do
 
       assert_select "input#framework_contract_period_of_notice[name=?]", "framework_contract[period_of_notice]"
 
-      assert_select "input#framework_contract_period_of_notice_unit[name=?]", "framework_contract[period_of_notice_unit]"
+      assert_select "select#framework_contract_period_of_notice_unit[name=?]", "framework_contract[period_of_notice_unit]"
 
       assert_select "input#framework_contract_renewal_period[name=?]", "framework_contract[renewal_period]"
 
-      assert_select "input#framework_contract_renewal_unit[name=?]", "framework_contract[renewal_unit]"
+      assert_select "select#framework_contract_renewal_unit[name=?]", "framework_contract[renewal_unit]"
 
-      assert_select "input#framework_contract_active[name=?]", "framework_contract[active]"
+      assert_select "select#framework_contract_active[name=?]", "framework_contract[active]"
     end
   end
 end

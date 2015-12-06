@@ -24,7 +24,7 @@
        %>
       <div class="row-fluid">
         <%= f.input :period_of_notice do %>
-          <%= f.text_field :period_of_notice_unit, 
+          <%= f.text_field :period_of_notice, 
                            class: "form-control autowidth col-sm-3" %>
           <%= f.select     :period_of_notice_unit, Boskop::PERIOD_UNITS,
                            {}, {class: "form-control autowidth col-sm-3"} %>
