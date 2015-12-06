@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "LineStates", type: :request do
+RSpec.describe "LineStates", type: :feature do
   describe "GET /line_states" do
-    it "works! (now write some real specs)" do
-      get line_states_path
-      expect(response).to have_http_status(200)
+    it "visits line_states#index" do
+      login_user
+      visit line_states_path
+      expect(current_path).to eq(line_states_path)
     end
   end
 end

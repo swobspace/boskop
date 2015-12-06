@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe FrameworkContractsController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # FrameworkContract. As you add validations to FrameworkContract, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:framework_contract)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "small typo fixes" }
       }
 
       it "updates the requested framework_contract" do
         framework_contract = FrameworkContract.create! valid_attributes
         put :update, {:id => framework_contract.to_param, :framework_contract => new_attributes}, valid_session
         framework_contract.reload
-        skip("Add assertions for updated state")
+        expect(framework_contract.description).to eq("small typo fixes")
       end
 
       it "assigns the requested framework_contract as @framework_contract" do
@@ -144,6 +145,7 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested framework_contract" do
       framework_contract = FrameworkContract.create! valid_attributes
+      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => framework_contract.to_param}, valid_session
       }.to change(FrameworkContract, :count).by(-1)
@@ -151,6 +153,7 @@ RSpec.describe FrameworkContractsController, type: :controller do
 
     it "redirects to the framework_contracts list" do
       framework_contract = FrameworkContract.create! valid_attributes
+      pending "line not yet implemented"
       delete :destroy, {:id => framework_contract.to_param}, valid_session
       expect(response).to redirect_to(framework_contracts_url)
     end

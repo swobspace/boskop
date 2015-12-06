@@ -2,14 +2,20 @@ require 'rails_helper'
 
 RSpec.describe "framework_contracts/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "framework_contracts" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:framework_contract, FrameworkContract.new(
       :name => "MyString",
       :description => "MyText",
       :contract_period => 1,
       :period_of_notice => 1,
-      :period_of_notice_unit => "MyString",
+      :period_of_notice_unit => "month",
       :renewal_period => 1,
-      :renewal_unit => "MyString",
+      :renewal_unit => "month",
       :active => false
     ))
   end

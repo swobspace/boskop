@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe AccessType, type: :model do
-  it { is_expected.to have_many(:lines) }
+  it { pending "line not yet implemented"; is_expected.to have_many(:lines) }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_uniqueness_of(:name) }
@@ -21,6 +21,7 @@ RSpec.describe AccessType, type: :model do
   [:line].each do |what|
     it "should not destroyable if dependent #{what} exist" do
       at   = FactoryGirl.create(:access_type)
+      pending "line not yet implemented"
       subj = FactoryGirl.create(what, access_type: at)
       expect {
         at.destroy
@@ -29,6 +30,7 @@ RSpec.describe AccessType, type: :model do
 
     it "should be destroyable if no dependent #{what} exist" do
       at = FactoryGirl.create(:access_type)
+      pending "line not yet implemented"
       expect {
         at.destroy
       }.to change { AccessType.count }.by(-1)

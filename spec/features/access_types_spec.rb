@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "AccessTypes", type: :request do
+RSpec.describe "AccessTypes", type: :feature do
   describe "GET /access_types" do
-    it "works! (now write some real specs)" do
-      get access_types_path
-      expect(response).to have_http_status(200)
+    it "visits access_types#index" do
+      login_user
+      visit access_types_path
+      expect(current_path).to eq(access_types_path)
     end
   end
 end

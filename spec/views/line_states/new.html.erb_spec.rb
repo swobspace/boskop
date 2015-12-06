@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "line_states/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "line_states" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:line_state, LineState.new(
       :name => "MyString",
       :description => "MyText",
@@ -18,7 +24,7 @@ RSpec.describe "line_states/new", type: :view do
 
       assert_select "textarea#line_state_description[name=?]", "line_state[description]"
 
-      assert_select "input#line_state_active[name=?]", "line_state[active]"
+      assert_select "select#line_state_active[name=?]", "line_state[active]"
     end
   end
 end

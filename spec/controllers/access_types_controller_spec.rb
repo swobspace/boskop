@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe AccessTypesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # AccessType. As you add validations to AccessType, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:access_type)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "very long line" }
       }
 
       it "updates the requested access_type" do
         access_type = AccessType.create! valid_attributes
         put :update, {:id => access_type.to_param, :access_type => new_attributes}, valid_session
         access_type.reload
-        skip("Add assertions for updated state")
+        expect(access_type.description).to eq("very long line")
       end
 
       it "assigns the requested access_type as @access_type" do
@@ -144,6 +145,7 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested access_type" do
       access_type = AccessType.create! valid_attributes
+      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => access_type.to_param}, valid_session
       }.to change(AccessType, :count).by(-1)
@@ -151,6 +153,7 @@ RSpec.describe AccessTypesController, type: :controller do
 
     it "redirects to the access_types list" do
       access_type = AccessType.create! valid_attributes
+      pending "line not yet implemented"
       delete :destroy, {:id => access_type.to_param}, valid_session
       expect(response).to redirect_to(access_types_url)
     end

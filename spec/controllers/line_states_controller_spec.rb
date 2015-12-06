@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe LineStatesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # LineState. As you add validations to LineState, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:line_state)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +104,14 @@ RSpec.describe LineStatesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "sonstnochwas" }
       }
 
       it "updates the requested line_state" do
         line_state = LineState.create! valid_attributes
         put :update, {:id => line_state.to_param, :line_state => new_attributes}, valid_session
         line_state.reload
-        skip("Add assertions for updated state")
+        expect(line_state.description).to eq("sonstnochwas")
       end
 
       it "assigns the requested line_state as @line_state" do
@@ -144,6 +145,7 @@ RSpec.describe LineStatesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested line_state" do
       line_state = LineState.create! valid_attributes
+      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => line_state.to_param}, valid_session
       }.to change(LineState, :count).by(-1)
@@ -151,6 +153,7 @@ RSpec.describe LineStatesController, type: :controller do
 
     it "redirects to the line_states list" do
       line_state = LineState.create! valid_attributes
+      pending "line not yet implemented"
       delete :destroy, {:id => line_state.to_param}, valid_session
       expect(response).to redirect_to(line_states_url)
     end

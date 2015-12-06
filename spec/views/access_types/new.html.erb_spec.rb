@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "access_types/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "access_types" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:access_type, AccessType.new(
       :name => "MyString",
       :description => "MyText"
