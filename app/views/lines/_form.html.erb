@@ -1,0 +1,56 @@
+<%= simple_form_for(@line,
+  html: { class: 'form-horizontal well' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
+
+  <fieldset>
+    <%= form_legend %>
+
+    <div class="form-inputs">
+      <%= f.input :name
+       %>
+      <%= f.input :description
+       %>
+      <%= f.input :provider_id
+       %>
+      <%= f.input :location_a_id
+       %>
+      <%= f.input :location_b_id
+       %>
+      <%= f.association :access_type
+       %>
+      <%= f.input :bw_upstream
+       %>
+      <%= f.input :bw_downstream
+       %>
+      <%= f.association :framework_contract
+       %>
+      <%= f.input :contract_start
+       %>
+      <%= f.input :contract_end
+       %>
+      <%= f.input :contract_period
+       %>
+      <%= f.input :period_of_notice
+       %>
+      <%= f.input :period_of_notice_unit
+       %>
+      <%= f.input :renewal_period
+       %>
+      <%= f.input :renewal_unit
+       %>
+      <%= f.association :line_state
+       %>
+    </div>
+
+    <div class="form-actions col-sm-9 col-sm-offset-3">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  </fieldset>
+<% end %>

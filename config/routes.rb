@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lines
   resources :framework_contracts
   resources :line_states
   resources :access_types
