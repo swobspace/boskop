@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204105639) do
+ActiveRecord::Schema.define(version: 20151213113200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,34 @@ ActiveRecord::Schema.define(version: 20151204105639) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
+
+  create_table "lines", force: :cascade do |t|
+    t.string   "name",                                                        null: false
+    t.text     "description",                                    default: ""
+    t.string   "provider_id",                                    default: ""
+    t.integer  "location_a_id"
+    t.integer  "location_b_id"
+    t.integer  "access_type_id"
+    t.decimal  "bw_upstream",           precision: 10, scale: 1
+    t.decimal  "bw_downstream",         precision: 10, scale: 1
+    t.integer  "framework_contract_id"
+    t.date     "contract_start"
+    t.date     "contract_end"
+    t.integer  "contract_period"
+    t.integer  "period_of_notice"
+    t.string   "period_of_notice_unit"
+    t.integer  "renewal_period"
+    t.string   "renewal_unit"
+    t.integer  "line_state_id"
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+  end
+
+  add_index "lines", ["access_type_id"], name: "index_lines_on_access_type_id", using: :btree
+  add_index "lines", ["framework_contract_id"], name: "index_lines_on_framework_contract_id", using: :btree
+  add_index "lines", ["line_state_id"], name: "index_lines_on_line_state_id", using: :btree
+  add_index "lines", ["location_a_id"], name: "index_lines_on_location_a_id", using: :btree
+  add_index "lines", ["location_b_id"], name: "index_lines_on_location_b_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "description",    limit: 255, default: ""
@@ -194,4 +222,7 @@ ActiveRecord::Schema.define(version: 20151204105639) do
   add_index "wobauth_users", ["reset_password_token"], name: "index_wobauth_users_on_reset_password_token", unique: true, using: :btree
   add_index "wobauth_users", ["username"], name: "index_wobauth_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "lines", "access_types"
+  add_foreign_key "lines", "framework_contracts"
+  add_foreign_key "lines", "line_states"
 end

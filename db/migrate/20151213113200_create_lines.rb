@@ -1,9 +1,9 @@
 class CreateLines < ActiveRecord::Migration
   def change
     create_table :lines do |t|
-      t.string :name
-      t.text :description
-      t.string :provider_id
+      t.string :name, null: false
+      t.text :description, default: ""
+      t.string :provider_id, default: ""
       t.integer :location_a_id
       t.integer :location_b_id
       t.references :access_type, index: true, foreign_key: true
