@@ -20,6 +20,14 @@ FactoryGirl.define do
     name { generate(:aname) }
   end
 
+  factory :line do
+    name { generate(:aname) }
+    line_state
+    access_type
+    association :location_a, factory: :location
+    description "internet access just for fun"
+  end
+
   factory :line_state do
     name { generate(:aname) }
     active false
