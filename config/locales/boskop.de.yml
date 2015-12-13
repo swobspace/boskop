@@ -39,6 +39,9 @@ de:
       address: Adresse
       framework_contract: Rahmenvertrag
       group: Gruppe
+      host: Host
+      ipaddress: IP-Adresse
+      line: Leitung/Zugang
       line_state: Status
       location: Lokation
       merkmal: Merkmal
@@ -54,6 +57,8 @@ de:
     address: Adresse
     addresses: Adressen
     baselink: Basislink
+    bw_downstream: Bandbreite Downstream
+    bw_upstream: Bandbreite Upstream
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -63,7 +68,10 @@ de:
     for_object: Objektklasse 
     framework_contract: Rahmenvertrag
     givenname: Vorname
+    host: Host
+    ipaddress: IP-Adresse
     lid: StandortID
+    line: Leitung/Zugang
     line_state: Status
     location: Lokation
     mandantory: Pflichtfeld
@@ -92,6 +100,9 @@ de:
     access_types: Zugangsarten
     addresses: Adressen
     framework_contracts: Rahmenverträge
+    hosts: Hosts
+    ipaddresses: IP-Adressen
+    lines: Leitungen/Zugänge
     line_states: Status
     locations: Lokationen
     merkmale: Merkmale
