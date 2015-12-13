@@ -145,7 +145,6 @@ RSpec.describe LineStatesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested line_state" do
       line_state = LineState.create! valid_attributes
-      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => line_state.to_param}, valid_session
       }.to change(LineState, :count).by(-1)
@@ -153,7 +152,6 @@ RSpec.describe LineStatesController, type: :controller do
 
     it "redirects to the line_states list" do
       line_state = LineState.create! valid_attributes
-      pending "line not yet implemented"
       delete :destroy, {:id => line_state.to_param}, valid_session
       expect(response).to redirect_to(line_states_url)
     end

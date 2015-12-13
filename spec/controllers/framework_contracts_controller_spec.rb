@@ -145,7 +145,6 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested framework_contract" do
       framework_contract = FrameworkContract.create! valid_attributes
-      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => framework_contract.to_param}, valid_session
       }.to change(FrameworkContract, :count).by(-1)
@@ -153,7 +152,6 @@ RSpec.describe FrameworkContractsController, type: :controller do
 
     it "redirects to the framework_contracts list" do
       framework_contract = FrameworkContract.create! valid_attributes
-      pending "line not yet implemented"
       delete :destroy, {:id => framework_contract.to_param}, valid_session
       expect(response).to redirect_to(framework_contracts_url)
     end

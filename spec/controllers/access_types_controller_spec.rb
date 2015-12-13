@@ -145,7 +145,6 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested access_type" do
       access_type = AccessType.create! valid_attributes
-      pending "line not yet implemented"
       expect {
         delete :destroy, {:id => access_type.to_param}, valid_session
       }.to change(AccessType, :count).by(-1)
@@ -153,7 +152,6 @@ RSpec.describe AccessTypesController, type: :controller do
 
     it "redirects to the access_types list" do
       access_type = AccessType.create! valid_attributes
-      pending "line not yet implemented"
       delete :destroy, {:id => access_type.to_param}, valid_session
       expect(response).to redirect_to(access_types_url)
     end
