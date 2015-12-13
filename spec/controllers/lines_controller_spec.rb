@@ -19,16 +19,24 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe LinesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # Line. As you add validations to Line, be sure to
   # adjust the attributes here as well.
+
+  let!(:location) { FactoryGirl.create(:location) }
+  let!(:access_type) { FactoryGirl.create(:access_type) }
+  let!(:line_state) { FactoryGirl.create(:access_type) }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:line, 
+      location_a_id: location.id, 
+      access_type_id: access_type.id,
+      line_state_id: line_state.id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -103,14 +111,15 @@ RSpec.describe LinesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "internet connection for fun with small typo fixes" }
       }
 
       it "updates the requested line" do
         line = Line.create! valid_attributes
         put :update, {:id => line.to_param, :line => new_attributes}, valid_session
         line.reload
-        skip("Add assertions for updated state")
+        expect(line.description).to eq("internet connection for fun with small typo fixes")
+
       end
 
       it "assigns the requested line as @line" do
