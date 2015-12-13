@@ -222,7 +222,4 @@ ActiveRecord::Schema.define(version: 20151213113200) do
   add_index "wobauth_users", ["reset_password_token"], name: "index_wobauth_users_on_reset_password_token", unique: true, using: :btree
   add_index "wobauth_users", ["username"], name: "index_wobauth_users_on_username", unique: true, using: :btree
 
-  add_foreign_key "lines", "access_types"
-  add_foreign_key "lines", "framework_contracts"
-  add_foreign_key "lines", "line_states"
 end
