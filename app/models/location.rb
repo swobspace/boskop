@@ -3,7 +3,10 @@ class Location < ActiveRecord::Base
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :addresses, as: :addressfor, dependent: :destroy
   has_many :networks, dependent: :destroy
-  has_many :lines, dependent: :restrict_with_error
+  has_many :lines_a, class_name: "Line", foreign_key: :location_a_id,
+            dependent: :restrict_with_error, inverse_of: :location_a
+  has_many :lines_b, class_name: "Line", foreign_key: :location_b_id,
+            dependent: :restrict_with_error, inverse_of: :location_b
 
   # -- configuration
   has_ancestry :cache_depth =>true, :orphan_strategy => :adopt

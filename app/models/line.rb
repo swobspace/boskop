@@ -3,8 +3,8 @@ class Line < ActiveRecord::Base
   belongs_to :access_type
   belongs_to :framework_contract
   belongs_to :line_state
-  belongs_to :location_a, class_name: "Location", inverse_of: :lines
-  belongs_to :location_b, class_name: "Location", inverse_of: :lines
+  belongs_to :location_a, class_name: "Location"
+  belongs_to :location_b, class_name: "Location"
 
   # -- configuration
 
