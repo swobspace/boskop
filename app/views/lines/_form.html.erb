@@ -18,32 +18,89 @@
        %>
       <%= f.input :provider_id
        %>
-      <%= f.input :location_a_id
+      <%= f.association :location_a, 
+            collection: Location.order(:lid),
+            prompt: t('boskop.choose_location_a'),
+            input_html: {class: 'select2'}
        %>
-      <%= f.input :location_b_id
+      <%= f.input :location_b_id,
+            collection: Location.order(:lid),
+            prompt: t('boskop.choose_location_b'),
+            input_html: {class: 'select2'}
        %>
       <%= f.association :access_type
        %>
-      <%= f.input :bw_upstream
-       %>
-      <%= f.input :bw_downstream
-       %>
+
+      <div class="form-group">
+        <label for="bw_upstream" class="col-sm-3 control-label">
+          <%= t('attributes.bw_upstream')%>
+        </label>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :bw_upstream, 
+                class: 'numeric decimal optional form-control' %>
+          <div class="input-group-addon">
+            <%= Boskop.bandwith_base_unit %> 
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="bw_downstream" class="col-sm-3 control-label">
+          <%= t('attributes.bw_downstream')%>
+        </label>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :bw_downstream, 
+                class: 'numeric decimal optional form-control' %>
+          <div class="input-group-addon">
+            <%= Boskop.bandwith_base_unit %> 
+          </div>
+         </div>
+        </div>
+      </div>
+
       <%= f.association :framework_contract
        %>
-      <%= f.input :contract_start
+      <%= f.input :contract_start, 
+            as: :string, wrapper: :horizontal_date
        %>
-      <%= f.input :contract_end
+      <%= f.input :contract_end,
+            as: :string, wrapper: :horizontal_date
        %>
       <%= f.input :contract_period
        %>
-      <%= f.input :period_of_notice
-       %>
-      <%= f.input :period_of_notice_unit
-       %>
-      <%= f.input :renewal_period
-       %>
-      <%= f.input :renewal_unit
-       %>
+
+      <div class="form-group">
+        <label for="period_of_notice" class="col-sm-3 control-label">
+          <%= t('attributes.period_of_notice')%>
+        </label>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :period_of_notice, 
+                class: 'numeric decimal optional form-control' %>
+          <div class="input-group-addon">
+            <%= f.select :period_of_notice_unit, Boskop::PERIOD_UNITS 
+             %>
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="renewal_period" class="col-sm-3 control-label">
+          <%= t('attributes.renewal_period')%>
+        </label>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :renewal_period, 
+                class: 'numeric decimal optional form-control' %>
+          <div class="input-group-addon">
+            <%= f.select :renewal_unit, Boskop::PERIOD_UNITS 
+             %>
+          </div>
+         </div>
+        </div>
+      </div>
       <%= f.association :line_state
        %>
     </div>

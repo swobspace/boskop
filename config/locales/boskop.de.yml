@@ -24,6 +24,8 @@ de:
     basics: Basics
     this_will_destroy_all_merkmale: Das Löschen einer Merkmalklasse löscht alle Merkmale dieser Klasse unwiderruflich! Wollen Sie die Merkmalklasse wirklich, wirklich löschen? Geben Sie 'Ja bitte' ein
     verify_destroy: Ja bitte
+    choose_location_a: Wählen Sie einen Standort
+    choose_location_b: Standort B (nur bei Punkt-zu-Punkt-Verbindungen)
 
   actions:
     destroy: Datensatz löschen
@@ -74,6 +76,8 @@ de:
     line: Leitung/Zugang
     line_state: Status
     location: Lokation
+    location_a: Standort A
+    location_b: Standort B
     mandantory: Pflichtfeld
     merkmal: Merkmal
     merkmalklasse: Merkmalklasse

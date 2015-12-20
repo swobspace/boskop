@@ -10,5 +10,13 @@ module Boskop
     end
   end
 
+  def self.bandwith_base_unit
+    if Settings['bandwith_base_unit'].blank?
+      "Mbit"
+    else
+      Settings['bandwith_base_unit']
+    end
+  end
+
 end
 
