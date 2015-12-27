@@ -65,10 +65,12 @@ Line:
               'bw_upstream:decimal{10,1}' \
               'bw_downstream:decimal{10,1}' \
               framework_contract:references:index \
-              contract_start:date contract_end:date contract_period:integer \
+              contract_start:date contract_end:date contract_period:string \
               period_of_notice:integer period_of_notice_unit:string \
               renewal_period:integer renewal_unit:string \
               'line_state:references:index:null{false}'
+
+#  bin/rails g migration ChangeContractPeriod
 
 AccessType:
 ----------- 
@@ -88,7 +90,7 @@ FrameworkContract:
 
     bin/rails g scaffold FrameworkContract \
               name:string "description:text:default{''}" \
-              contract_start:date contract_end:date contract_period:integer \
+              contract_start:date contract_end:date contract_period:string \
               period_of_notice:integer period_of_notice_unit:string \
               renewal_period:integer renewal_unit:string \
               active:boolean

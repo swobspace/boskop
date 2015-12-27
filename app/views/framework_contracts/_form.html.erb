@@ -20,7 +20,8 @@
        %>
       <%= f.input :contract_end, as: :string, wrapper: :horizontal_date
        %>
-      <%= f.input :contract_period
+      <%= f.input :contract_period,
+            placeholder: t('boskop.describe_contract_period')
        %>
       <div class="row-fluid">
         <%= f.input :period_of_notice do %>

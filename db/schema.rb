@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213113200) do
+ActiveRecord::Schema.define(version: 20151227162206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20151213113200) do
     t.text     "description",           default: ""
     t.date     "contract_start"
     t.date     "contract_end"
-    t.integer  "contract_period"
+    t.string   "contract_period",       default: ""
     t.integer  "period_of_notice"
     t.string   "period_of_notice_unit"
     t.integer  "renewal_period"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20151213113200) do
     t.integer  "framework_contract_id"
     t.date     "contract_start"
     t.date     "contract_end"
-    t.integer  "contract_period"
+    t.string   "contract_period",                                default: ""
     t.integer  "period_of_notice"
     t.string   "period_of_notice_unit"
     t.integer  "renewal_period"

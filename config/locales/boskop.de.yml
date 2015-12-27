@@ -26,6 +26,7 @@ de:
     verify_destroy: Ja bitte
     choose_location_a: Wählen Sie einen Standort
     choose_location_b: Standort B (nur bei Punkt-zu-Punkt-Verbindungen)
+    describe_contract_period: Beschreibung der Vertragsdauer in Textform
 
   actions:
     destroy: Datensatz löschen
