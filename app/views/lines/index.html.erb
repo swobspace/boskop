@@ -6,7 +6,9 @@
     <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.provider_id') %></th>
+    <th><%= t('attributes.lid') %> A</th>
     <th><%= t('attributes.location_a') %></th>
+    <th><%= t('attributes.lid') %> B</th>
     <th><%= t('attributes.location_b') %></th>
     <th><%= t('attributes.access_type') %></th>
     <th><%= t('attributes.bw_upstream') %> <%= Boskop.bandwith_base_unit %></th>
@@ -21,6 +23,29 @@
     <th></th>
   </tr>
 </thead>
+<tfoot>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</tfoot>
+
 <tbody>
 
 <% @lines.each do |line| %>
@@ -28,7 +53,9 @@
     <td><%= line.name %></td>
     <td><%= line.description %></td>
     <td><%= line.provider_id %></td>
+    <td><%= line.location_a.try(:lid) %></td>
     <td><%= line.location_a %></td>
+    <td><%= line.location_b.try(:lid) %></td>
     <td><%= line.location_b %></td>
     <td><%= line.access_type %></td>
     <td><%= line.bw_upstream %></td>
