@@ -2,6 +2,9 @@ class LinesController < ApplicationController
   before_action :set_line, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumb_show, only: [:show]
 
+  def search
+  end
+
   # GET /lines
   def index
     @lines = Line.all
