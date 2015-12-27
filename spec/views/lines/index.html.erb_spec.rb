@@ -6,62 +6,66 @@ RSpec.describe "lines/index", type: :view do
     @ability.extend(CanCan::Ability)
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { "lines" }
-    allow(controller).to receive(:action_name) { "edit" }
+    allow(controller).to receive(:action_name) { "index" }
 
     assign(:lines, [
       Line.create!(
-        :name => "Name",
+        :name => "Name1",
         :description => "MyText",
         :provider_id => "Provider",
         :location_a_id => 1,
         :location_b_id => 2,
-        :access_type => nil,
+        :access_type_id => 1,
         :bw_upstream => "9.99",
-        :bw_downstream => "9.99",
+        :bw_downstream => "19.99",
         :framework_contract => nil,
-        :contract_period => 3,
-        :period_of_notice => 4,
-        :period_of_notice_unit => "Period Of Notice Unit",
-        :renewal_period => 5,
-        :renewal_unit => "Renewal Unit",
-        :line_state => nil
+        :contract_period => 7,
+        :period_of_notice => 2,
+        :period_of_notice_unit => "year",
+        :renewal_period => 3,
+        :renewal_unit => "month",
+        :line_state_id => 1
       ),
       Line.create!(
-        :name => "Name",
+        :name => "Name2",
         :description => "MyText",
         :provider_id => "Provider",
         :location_a_id => 1,
         :location_b_id => 2,
-        :access_type => nil,
+        :access_type_id => 1,
         :bw_upstream => "9.99",
-        :bw_downstream => "9.99",
+        :bw_downstream => "19.99",
         :framework_contract => nil,
-        :contract_period => 3,
-        :period_of_notice => 4,
-        :period_of_notice_unit => "Period Of Notice Unit",
-        :renewal_period => 5,
-        :renewal_unit => "Renewal Unit",
-        :line_state => nil
+        :contract_period => 7,
+        :period_of_notice => 2,
+        :period_of_notice_unit => "year",
+        :renewal_period => 3,
+        :renewal_unit => "month",
+        :line_state_id => 1
       )
     ])
+    allow_any_instance_of(Line).to receive(:location_a).and_return("Nirgendwo")
+    allow_any_instance_of(Line).to receive(:location_b).and_return("---")
+    allow_any_instance_of(Line).to receive(:access_type).and_return("VDSL")
+    allow_any_instance_of(Line).to receive(:framework_contract).and_return("myFrameworkContract")
+    allow_any_instance_of(Line).to receive(:line_state).and_return("active")
+
   end
 
   it "renders a list of lines" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "tr>td", :text => "Name1".to_s, :count => 1
+    assert_select "tr>td", :text => "Name2".to_s, :count => 1
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
     assert_select "tr>td", :text => "Provider".to_s, :count => 2
-    assert_select "tr>td", :text => 1.to_s, :count => 2
-    assert_select "tr>td", :text => 2.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => "9.99".to_s, :count => 2
-    assert_select "tr>td", :text => "9.99".to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
-    assert_select "tr>td", :text => 3.to_s, :count => 2
-    assert_select "tr>td", :text => 4.to_s, :count => 2
-    assert_select "tr>td", :text => "Period Of Notice Unit".to_s, :count => 2
-    assert_select "tr>td", :text => 5.to_s, :count => 2
-    assert_select "tr>td", :text => "Renewal Unit".to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => "Nirgendwo".to_s, :count => 2
+    assert_select "tr>td", :text => "---".to_s, :count => 2
+    assert_select "tr>td", :text => "10.0".to_s, :count => 2
+    assert_select "tr>td", :text => "20.0".to_s, :count => 2
+    assert_select "tr>td", :text => "myFrameworkContract".to_s, :count => 2
+    assert_select "tr>td", :text => 7.to_s, :count => 2
+    assert_select "tr>td", :text => "2 year".to_s, :count => 2
+    assert_select "tr>td", :text => "3 month".to_s, :count => 2
+    assert_select "tr>td", :text => "active".to_s, :count => 2
   end
 end

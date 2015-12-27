@@ -12,12 +12,12 @@
     <td><%= @line.provider_id %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.location_a_id')%>:</th>
-    <td><%= @line.location_a_id %></td>
+    <th><%= t('attributes.location_a')%>:</th>
+    <td><%= @line.location_a %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.location_b_id')%>:</th>
-    <td><%= @line.location_b_id %></td>
+    <th><%= t('attributes.location_b')%>:</th>
+    <td><%= @line.location_b %></td>
   </tr>
   <tr>
     <th><%= t('attributes.access_type')%>:</th>
@@ -49,19 +49,11 @@
   </tr>
   <tr>
     <th><%= t('attributes.period_of_notice')%>:</th>
-    <td><%= @line.period_of_notice %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.period_of_notice_unit')%>:</th>
-    <td><%= @line.period_of_notice_unit %></td>
+    <td><%= @line.period_of_notice %> <%= @line.period_of_notice_unit %></td>
   </tr>
   <tr>
     <th><%= t('attributes.renewal_period')%>:</th>
-    <td><%= @line.renewal_period %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.renewal_unit')%>:</th>
-    <td><%= @line.renewal_unit %></td>
+    <td><%= @line.renewal_period %> <%= @line.renewal_unit %></td>
   </tr>
   <tr>
     <th><%= t('attributes.line_state')%>:</th>

@@ -6,19 +6,17 @@
     <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.provider_id') %></th>
-    <th><%= t('attributes.location_a_id') %></th>
-    <th><%= t('attributes.location_b_id') %></th>
+    <th><%= t('attributes.location_a') %></th>
+    <th><%= t('attributes.location_b') %></th>
     <th><%= t('attributes.access_type') %></th>
-    <th><%= t('attributes.bw_upstream') %></th>
-    <th><%= t('attributes.bw_downstream') %></th>
+    <th><%= t('attributes.bw_upstream') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.bw_downstream') %> <%= Boskop.bandwith_base_unit %></th>
     <th><%= t('attributes.framework_contract') %></th>
     <th><%= t('attributes.contract_start') %></th>
     <th><%= t('attributes.contract_end') %></th>
     <th><%= t('attributes.contract_period') %></th>
     <th><%= t('attributes.period_of_notice') %></th>
-    <th><%= t('attributes.period_of_notice_unit') %></th>
     <th><%= t('attributes.renewal_period') %></th>
-    <th><%= t('attributes.renewal_unit') %></th>
     <th><%= t('attributes.line_state') %></th>
     <th></th>
   </tr>
@@ -30,8 +28,8 @@
     <td><%= line.name %></td>
     <td><%= line.description %></td>
     <td><%= line.provider_id %></td>
-    <td><%= line.location_a_id %></td>
-    <td><%= line.location_b_id %></td>
+    <td><%= line.location_a %></td>
+    <td><%= line.location_b %></td>
     <td><%= line.access_type %></td>
     <td><%= line.bw_upstream %></td>
     <td><%= line.bw_downstream %></td>
@@ -39,10 +37,8 @@
     <td><%= line.contract_start %></td>
     <td><%= line.contract_end %></td>
     <td><%= line.contract_period %></td>
-    <td><%= line.period_of_notice %></td>
-    <td><%= line.period_of_notice_unit %></td>
-    <td><%= line.renewal_period %></td>
-    <td><%= line.renewal_unit %></td>
+    <td><%= line.period_of_notice %> <%= line.period_of_notice_unit %></td>
+    <td><%= line.renewal_period %> <%= line.renewal_unit %></td>
     <td><%= line.line_state %></td>
     <td class="nowrap">
       <%= show_link line %>

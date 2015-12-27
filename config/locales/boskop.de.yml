@@ -92,6 +92,7 @@ de:
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
+    provider_id: Identifikation des Providers
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
     sn: Nachname
