@@ -1,0 +1,9 @@
+admin:
+  name: Admin
+
+network_manager:
+  name: NetworkManager
+
+reader:
+  name: Reader
+

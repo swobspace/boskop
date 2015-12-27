@@ -19,7 +19,7 @@ merkmalklassen = Hash[*merkmalklassen.flatten]
 
 network_attributes = Network.attribute_names.reject! {|k,v| ['id', 'created_at', 'updated_at'].include?(k) }
 
-CSV.foreach("#{file}", :col_sep =>";", :headers => true) do |row|
+CSV.foreach("#{file}", :col_sep =>"\t", :headers => true) do |row|
   hash = row.to_hash
   use  = hash.extract!('use')['use']
   next if use.blank?

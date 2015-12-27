@@ -27,12 +27,36 @@ ready = ->
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
     buttons: [
-      'copy', 'excel', 'csv',
+      {
+        extend: 'copy',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      {
+        extend: 'excel',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      {
+        extend: 'csv',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
       {
         extend: 'pdf',
         orientation: 'landscape',
-        pageSize: 'A4'
-      }
+        pageSize: 'A4',
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
       'print'
     ]
     fnDrawCallback: (oSettings) ->
@@ -63,13 +87,13 @@ ready = ->
     $('.select2').select2
       width: 'element'
 
-#   if Modernizr.touch && Modernizr.inputtypes.date
-#     $('.datepicker').each (i, obj) ->
-#       myid = $(this).attr('id')
-#       if myid
-#         document.getElementById(myid).type = 'date'
-#   else
-#     $(".datepicker").datepicker()
+  if Modernizr.touch && Modernizr.inputtypes.date
+    $('.datepicker').each (i, obj) ->
+      myid = $(this).attr('id')
+      if myid
+        document.getElementById(myid).type = 'date'
+  else
+    $(".datepicker").datepicker()
 
 
 $(document).ready(ready)

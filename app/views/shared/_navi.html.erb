@@ -4,7 +4,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <%= t('boskop.nodes') %><b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li> <%=link_to t('boskop.org_units'), main_app.root_path %></li>
+        <li> <%=link_to t('boskop.org_units'), main_app.org_units_path %></li>
         <li> <%=link_to t('boskop.locations'), main_app.locations_path %></li>
       </ul>
     </li>
@@ -21,6 +21,20 @@
         <li class="divider"></li>
         <li> <%=link_to raw('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_networks_path %></li>
         <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('boskop.usage_map')), main_app.usage_form_networks_path %></li>
+      </ul>
+    </li>
+  <% end %>
+  <% if can? :read, :lines %>
+    <li class="dropdown <%= active_class('lines') %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('controller.lines') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.lines')), main_app.lines_path %></li>
+        <% if can? :create, Network %>
+          <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_line')), main_app.new_line_path %></li>
+        <% end %>
+        <li class="divider"></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_lines_path %></li>
       </ul>
     </li>
   <% end %>

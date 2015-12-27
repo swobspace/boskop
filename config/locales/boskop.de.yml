@@ -24,6 +24,9 @@ de:
     basics: Basics
     this_will_destroy_all_merkmale: Das Löschen einer Merkmalklasse löscht alle Merkmale dieser Klasse unwiderruflich! Wollen Sie die Merkmalklasse wirklich, wirklich löschen? Geben Sie 'Ja bitte' ein
     verify_destroy: Ja bitte
+    choose_location_a: Wählen Sie einen Standort
+    choose_location_b: Standort B (nur bei Punkt-zu-Punkt-Verbindungen)
+    describe_contract_period: Beschreibung der Vertragsdauer in Textform
 
   actions:
     destroy: Datensatz löschen
@@ -35,8 +38,14 @@ de:
 
   activerecord:
     models:
+      access_type: Zugangsart
       address: Adresse
+      framework_contract: Rahmenvertrag
       group: Gruppe
+      host: Host
+      ipaddress: IP-Adresse
+      line: Leitung/Zugang
+      line_state: Status
       location: Lokation
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
@@ -45,17 +54,31 @@ de:
       user: User
 
   attributes:
+    access_type: Zugangsart
     actions: Aktionen
+    active: Aktiv
     address: Adresse
     addresses: Adressen
     baselink: Basislink
+    bw_downstream: Bandbreite Downstream
+    bw_upstream: Bandbreite Upstream
+    contract_start: Vertragsbeginn
+    contract_end: Vertragsende
+    contract_period: Vertragslaufzeit
     description: Beschreibung
     displayname: Anzeigename
     format: Format
     for_object: Objektklasse 
+    framework_contract: Rahmenvertrag
     givenname: Vorname
+    host: Host
+    ipaddress: IP-Adresse
     lid: StandortID
+    line: Leitung/Zugang
+    line_state: Status
     location: Lokation
+    location_a: Standort A
+    location_b: Standort B
     mandantory: Pflichtfeld
     merkmal: Merkmal
     merkmalklasse: Merkmalklasse
@@ -63,11 +86,16 @@ de:
     netzwerk: Netzwerk
     org_unit: Organisationseinheit
     ort: Ort
+    period_of_notice: Kündigungsfrist
+    period_of_notice_unit: Einheit
     plz: PLZ
     position: Position
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
+    provider_id: Identifikation des Providers
+    renewal_period: Verlängerungszeitraum
+    renewal_unit: Einheit
     sn: Nachname
     streetaddress: Straße, Nr.
     unique: Unique
@@ -75,7 +103,13 @@ de:
     visible: Sichtbarkeit
 
   controller:
+    access_types: Zugangsarten
     addresses: Adressen
+    framework_contracts: Rahmenverträge
+    hosts: Hosts
+    ipaddresses: IP-Adressen
+    lines: Leitungen/Zugänge
+    line_states: Status
     locations: Lokationen
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen

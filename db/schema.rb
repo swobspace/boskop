@@ -11,46 +11,103 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220111403) do
+ActiveRecord::Schema.define(version: 20151227162206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: true do |t|
+  create_table "access_types", force: :cascade do |t|
+    t.string   "name",                     null: false
+    t.text     "description", default: ""
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "addresses", force: :cascade do |t|
     t.integer  "addressfor_id"
-    t.string   "addressfor_type"
-    t.string   "streetaddress",   default: ""
-    t.string   "plz",             default: ""
-    t.string   "ort",             default: ""
-    t.string   "care_of",         default: ""
-    t.string   "postfach",        default: ""
-    t.string   "postfachplz",     default: ""
+    t.string   "addressfor_type", limit: 255
+    t.string   "streetaddress",   limit: 255, default: ""
+    t.string   "plz",             limit: 255, default: ""
+    t.string   "ort",             limit: 255, default: ""
+    t.string   "care_of",         limit: 255, default: ""
+    t.string   "postfach",        limit: 255, default: ""
+    t.string   "postfachplz",     limit: 255, default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "addresses", ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type", using: :btree
 
-  create_table "locations", force: true do |t|
-    t.string   "name",           default: "", null: false
-    t.string   "description",    default: ""
-    t.string   "ancestry"
-    t.integer  "ancestry_depth", default: 0,  null: false
-    t.integer  "position",       default: 0,  null: false
+  create_table "framework_contracts", force: :cascade do |t|
+    t.string   "name",                                  null: false
+    t.text     "description",           default: ""
+    t.date     "contract_start"
+    t.date     "contract_end"
+    t.string   "contract_period",       default: ""
+    t.integer  "period_of_notice"
+    t.string   "period_of_notice_unit"
+    t.integer  "renewal_period"
+    t.string   "renewal_unit"
+    t.boolean  "active",                default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+  end
+
+  create_table "line_states", force: :cascade do |t|
+    t.string   "name",                        null: false
+    t.text     "description", default: ""
+    t.boolean  "active",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  create_table "lines", force: :cascade do |t|
+    t.string   "name",                                                        null: false
+    t.text     "description",                                    default: ""
+    t.string   "provider_id",                                    default: ""
+    t.integer  "location_a_id"
+    t.integer  "location_b_id"
+    t.integer  "access_type_id"
+    t.decimal  "bw_upstream",           precision: 10, scale: 1
+    t.decimal  "bw_downstream",         precision: 10, scale: 1
+    t.integer  "framework_contract_id"
+    t.date     "contract_start"
+    t.date     "contract_end"
+    t.string   "contract_period",                                default: ""
+    t.integer  "period_of_notice"
+    t.string   "period_of_notice_unit"
+    t.integer  "renewal_period"
+    t.string   "renewal_unit"
+    t.integer  "line_state_id"
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+  end
+
+  add_index "lines", ["access_type_id"], name: "index_lines_on_access_type_id", using: :btree
+  add_index "lines", ["framework_contract_id"], name: "index_lines_on_framework_contract_id", using: :btree
+  add_index "lines", ["line_state_id"], name: "index_lines_on_line_state_id", using: :btree
+  add_index "lines", ["location_a_id"], name: "index_lines_on_location_a_id", using: :btree
+  add_index "lines", ["location_b_id"], name: "index_lines_on_location_b_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "description",    limit: 255, default: ""
+    t.string   "ancestry",       limit: 255
+    t.integer  "ancestry_depth",             default: 0,  null: false
+    t.integer  "position",                   default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "lid"
+    t.string   "lid",            limit: 255
+    t.string   "name",           limit: 255
   end
 
   add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
   add_index "locations", ["lid"], name: "index_locations_on_lid", using: :btree
-  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
-  create_table "merkmale", force: true do |t|
+  create_table "merkmale", force: :cascade do |t|
     t.integer  "merkmalfor_id"
-    t.string   "merkmalfor_type"
+    t.string   "merkmalfor_type",  limit: 255
     t.integer  "merkmalklasse_id"
-    t.string   "value"
+    t.string   "value",            limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,25 +115,25 @@ ActiveRecord::Schema.define(version: 20141220111403) do
   add_index "merkmale", ["merkmalfor_id", "merkmalfor_type"], name: "index_merkmale_on_merkmalfor_id_and_merkmalfor_type", using: :btree
   add_index "merkmale", ["merkmalklasse_id"], name: "index_merkmale_on_merkmalklasse_id", using: :btree
 
-  create_table "merkmalklassen", force: true do |t|
-    t.string   "name",            default: "",    null: false
-    t.text     "description",     default: ""
-    t.string   "format",          default: "",    null: false
+  create_table "merkmalklassen", force: :cascade do |t|
+    t.string   "name",            limit: 255, default: "",    null: false
+    t.text     "description",                 default: ""
+    t.string   "format",          limit: 255, default: "",    null: false
     t.text     "possible_values"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "mandantory",      default: false
-    t.boolean  "unique",          default: false
-    t.integer  "position",        default: 0
-    t.string   "for_object",      default: "",    null: false
-    t.string   "visible"
-    t.string   "baselink",        default: ""
+    t.boolean  "mandantory",                  default: false
+    t.boolean  "unique",                      default: false
+    t.integer  "position",                    default: 0
+    t.string   "for_object",      limit: 255, default: "",    null: false
+    t.string   "visible",         limit: 255
+    t.string   "baselink",        limit: 255, default: ""
   end
 
   add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
   add_index "merkmalklassen", ["name"], name: "index_merkmalklassen_on_name", using: :btree
 
-  create_table "networks", force: true do |t|
+  create_table "networks", force: :cascade do |t|
     t.integer  "location_id"
     t.cidr     "netzwerk"
     t.text     "description"
@@ -86,12 +143,12 @@ ActiveRecord::Schema.define(version: 20141220111403) do
 
   add_index "networks", ["location_id"], name: "index_networks_on_location_id", using: :btree
 
-  create_table "org_units", force: true do |t|
-    t.string   "name",           default: "", null: false
-    t.string   "description",    default: ""
-    t.string   "ancestry"
-    t.integer  "ancestry_depth", default: 0,  null: false
-    t.integer  "position",       default: 0,  null: false
+  create_table "org_units", force: :cascade do |t|
+    t.string   "name",           limit: 255, default: "", null: false
+    t.string   "description",    limit: 255, default: ""
+    t.string   "ancestry",       limit: 255
+    t.integer  "ancestry_depth",             default: 0,  null: false
+    t.integer  "position",                   default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -99,12 +156,12 @@ ActiveRecord::Schema.define(version: 20141220111403) do
   add_index "org_units", ["ancestry"], name: "index_org_units_on_ancestry", using: :btree
   add_index "org_units", ["name"], name: "index_org_units_on_name", using: :btree
 
-  create_table "wobauth_authorities", force: true do |t|
+  create_table "wobauth_authorities", force: :cascade do |t|
     t.integer  "authorizable_id"
-    t.string   "authorizable_type"
+    t.string   "authorizable_type",   limit: 255
     t.integer  "role_id"
     t.integer  "authorized_for_id"
-    t.string   "authorized_for_type"
+    t.string   "authorized_for_type", limit: 255
     t.date     "valid_from"
     t.date     "valid_until"
     t.datetime "created_at"
@@ -115,14 +172,14 @@ ActiveRecord::Schema.define(version: 20141220111403) do
   add_index "wobauth_authorities", ["authorized_for_id"], name: "index_wobauth_authorities_on_authorized_for_id", using: :btree
   add_index "wobauth_authorities", ["role_id"], name: "index_wobauth_authorities_on_role_id", using: :btree
 
-  create_table "wobauth_groups", force: true do |t|
-    t.string   "name"
-    t.string   "description"
+  create_table "wobauth_groups", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "wobauth_memberships", force: true do |t|
+  create_table "wobauth_memberships", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.boolean  "auto",       default: false
@@ -133,31 +190,31 @@ ActiveRecord::Schema.define(version: 20141220111403) do
   add_index "wobauth_memberships", ["group_id"], name: "index_wobauth_memberships_on_group_id", using: :btree
   add_index "wobauth_memberships", ["user_id"], name: "index_wobauth_memberships_on_user_id", using: :btree
 
-  create_table "wobauth_roles", force: true do |t|
-    t.string   "name"
+  create_table "wobauth_roles", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "wobauth_users", force: true do |t|
-    t.string   "username",               default: "", null: false
+  create_table "wobauth_users", force: :cascade do |t|
+    t.string   "username",               limit: 255, default: "", null: false
     t.text     "gruppen"
-    t.string   "sn"
-    t.string   "givenname"
-    t.string   "displayname"
-    t.string   "telephone"
-    t.string   "active_directory_guid"
-    t.string   "userprincipalname"
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "sn",                     limit: 255
+    t.string   "givenname",              limit: 255
+    t.string   "displayname",            limit: 255
+    t.string   "telephone",              limit: 255
+    t.string   "active_directory_guid",  limit: 255
+    t.string   "userprincipalname",      limit: 255
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

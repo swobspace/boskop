@@ -1,3 +1,28 @@
 roles:
   - name: Admin
+  - name: NetworkManager
+  - name: Reader
+
+access_types:
+  - name: MPLS
+    description: Zugang zu TDN und anderen Netzwerken
+  - name: Ethernet
+    description: Symmetrischer Zugang via Ethernet (Internet o.ä.)
+  - name: ADSL
+    description: Asymmetrisches DSL (Internet o.ä.)
+  - name: VDSL
+    description: VDSL (asymmetrisch) (Internet o.ä.)
+  - name: SDSL
+    description: Symmetrisches DSL (Internet o.ä.)
+
+line_states:
+  - name: in Planung
+    description: Geplant, beauftragt oder in Bau, noch nicht aktiv
+    active: false
+  - name: aktiv
+    description: Produktive Nutzung
+    active: true
+  - name: deaktiviert
+    description: Nicht mehr in Verwendung
+    active: false
 

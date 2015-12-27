@@ -1,0 +1,32 @@
+<h1><%= t('controller.line_states') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.active') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @line_states.each do |line_state| %>
+  <%= content_tag_for(:tr, line_state) do %>
+    <td><%= line_state.name %></td>
+    <td><%= line_state.description %></td>
+    <td><%= line_state.active %></td>
+    <td class="nowrap">
+      <%= show_link line_state %>
+      <%= edit_link line_state %>
+      <%= delete_link line_state %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link LineState %>

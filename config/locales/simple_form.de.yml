@@ -1,0 +1,28 @@
+de:
+  simple_form:
+    "yes": 'Ja'
+    "no": 'Nein'
+    required:
+      text: 'erforderlich'
+      mark: '*'
+    error_notification:
+      default_message: "Fehler aufgetreten:"
+    labels:
+      defaults:
+        password: 'Passwort'
+      user:
+        new:
+          email: 'E-mail to sign in.'
+        edit:
+          email: 'E-mail.'
+    hints:
+      defaults:
+        username: 'Username; bitte keine Umlaute oder Sonderzeichen verwenden'
+        password: 'Passwort'
+    include_blanks:
+      defaults:
+        age: 'keine Angabe'
+    prompts:
+      defaults:
+        age: 'Geben Sie Ihr Alter an'
+    options:

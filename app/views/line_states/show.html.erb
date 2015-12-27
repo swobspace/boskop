@@ -1,0 +1,21 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @line_state.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @line_state.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.active')%>:</th>
+    <td><%= @line_state.active %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@line_state) %>
+  <%= delete_link(@line_state) %>
+  <%= new_link LineState %>
+</div>

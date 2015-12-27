@@ -3,8 +3,8 @@
 <table id="dataTable" class="table table-bordered table-striped dataTable">
 <thead>
   <tr>
-    <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.lid') %></th>
+    <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.plz') %></th>
     <th><%= t('attributes.ort') %></th>
     <th><%= t('attributes.streetaddress') %></th>
@@ -30,8 +30,8 @@
 
 <% @locations.each do |location| %>
   <%= content_tag_for(:tr, location) do %>
-    <td><%= link_to location.name, location_path(location) %></td>
     <td><%= location.lid %></td>
+    <td><%= link_to location.name, location_path(location) %></td>
     <td><%= location.addresses.first.try(:plz) %></td>
     <td><%= location.addresses.first.try(:ort) %></td>
     <td><%= location.addresses.first.try(:streetaddress) %></td>
