@@ -17,6 +17,8 @@ RSpec.describe "lines/show", type: :view do
       :access_type_id => 1,
       :bw_upstream => "9.99",
       :bw_downstream => "19.99",
+      :bw2_upstream => "1.99",
+      :bw2_downstream => "4.99",
       :framework_contract => nil,
       :contract_period => "2",
       :period_of_notice => 3,
@@ -42,6 +44,8 @@ RSpec.describe "lines/show", type: :view do
     expect(rendered).to match(/VDSL/)
     expect(rendered).to match(/10.0/)
     expect(rendered).to match(/20.0/)
+    expect(rendered).to match(/2.0/)
+    expect(rendered).to match(/5.0/)
     expect(rendered).to match(/myFrameworkContract/)
     expect(rendered).to match(/2/)
     expect(rendered).to match(/3 month/)

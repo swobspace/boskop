@@ -17,6 +17,8 @@ RSpec.describe "lines/new", type: :view do
       :access_type_id => 1,
       :bw_upstream => "9.99",
       :bw_downstream => "9.99",
+      :bw2_upstream => "9.99",
+      :bw2_downstream => "9.99",
       :framework_contract => nil,
       :contract_period => 1,
       :period_of_notice => 3,
@@ -45,8 +47,9 @@ RSpec.describe "lines/new", type: :view do
       assert_select "select#line_access_type_id[name=?]", "line[access_type_id]"
 
       assert_select "input#line_bw_upstream[name=?]", "line[bw_upstream]"
-
       assert_select "input#line_bw_downstream[name=?]", "line[bw_downstream]"
+      assert_select "input#line_bw2_upstream[name=?]", "line[bw2_upstream]"
+      assert_select "input#line_bw2_downstream[name=?]", "line[bw2_downstream]"
 
       assert_select "select#line_framework_contract_id[name=?]", "line[framework_contract_id]"
 

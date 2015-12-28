@@ -18,6 +18,8 @@ RSpec.describe "lines/index", type: :view do
         :access_type_id => 1,
         :bw_upstream => "9.99",
         :bw_downstream => "19.99",
+        :bw2_upstream => "1.99",
+        :bw2_downstream => "4.99",
         :framework_contract => nil,
         :contract_period => 7,
         :period_of_notice => 2,
@@ -35,6 +37,8 @@ RSpec.describe "lines/index", type: :view do
         :access_type_id => 1,
         :bw_upstream => "9.99",
         :bw_downstream => "19.99",
+        :bw2_upstream => "1.99",
+        :bw2_downstream => "4.99",
         :framework_contract => nil,
         :contract_period => 7,
         :period_of_notice => 2,
@@ -62,6 +66,8 @@ RSpec.describe "lines/index", type: :view do
     assert_select "tr>td", :text => "---".to_s, :count => 2
     assert_select "tr>td", :text => "10.0".to_s, :count => 2
     assert_select "tr>td", :text => "20.0".to_s, :count => 2
+    assert_select "tr>td", :text => "2.0".to_s, :count => 2
+    assert_select "tr>td", :text => "5.0".to_s, :count => 2
     assert_select "tr>td", :text => "myFrameworkContract".to_s, :count => 2
     assert_select "tr>td", :text => 7.to_s, :count => 2
     assert_select "tr>td", :text => "2 year".to_s, :count => 2

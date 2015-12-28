@@ -27,6 +27,8 @@ de:
     choose_location_a: Wählen Sie einen Standort
     choose_location_b: Standort B (nur bei Punkt-zu-Punkt-Verbindungen)
     describe_contract_period: Beschreibung der Vertragsdauer in Textform
+    primary_line: Erstweg
+    secondary_line: Zweitweg
 
   actions:
     destroy: Datensatz löschen
