@@ -22,6 +22,12 @@ line_states:
   - name: aktiv
     description: Produktive Nutzung
     active: true
+  - name: Änderung eingeleitet
+    description: Änderung des Anschlusses eingeleitet/beauftragt; noch in produktiver Nutzung
+    active: true
+  - name: gekündigt
+    description: Anschluss gekündigt; noch in produktiver Nutzung
+    active: true
   - name: deaktiviert
     description: Nicht mehr in Verwendung
     active: false
