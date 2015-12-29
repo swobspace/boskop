@@ -12,10 +12,8 @@
     <th><%= t('attributes.lid') %> B</th>
     <th><%= t('attributes.location_b') %></th>
     <th><%= t('attributes.access_type') %></th>
-    <th><%= t('attributes.bw_upstream') %> <%= Boskop.bandwith_base_unit %></th>
-    <th><%= t('attributes.bw_downstream') %> <%= Boskop.bandwith_base_unit %></th>
-    <th><%= t('attributes.bw2_upstream') %> <%= Boskop.bandwith_base_unit %></th>
-    <th><%= t('attributes.bw2_downstream') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.primary_line') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.secondary_line') %> <%= Boskop.bandwith_base_unit %></th>
     <th><%= t('attributes.framework_contract') %></th>
     <th><%= t('attributes.contract_start') %></th>
     <th><%= t('attributes.contract_end') %></th>
@@ -65,10 +63,8 @@
     <td><%= line.location_b.try(:lid) %></td>
     <td><%= line.location_b %></td>
     <td><%= line.access_type %></td>
-    <td><%= line.bw_upstream %></td>
-    <td><%= line.bw_downstream %></td>
-    <td><%= line.bw2_upstream %></td>
-    <td><%= line.bw2_downstream %></td>
+    <td><%= line.bw_downstream %> / <%= line.bw_upstream %></td>
+    <td><%= line.bw2_downstream %> / <%= line.bw2_upstream %></td>
     <td><%= line.framework_contract %></td>
     <td><%= line.contract_start %></td>
     <td><%= line.contract_end %></td>

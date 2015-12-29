@@ -28,12 +28,12 @@
     <td><%= @line.access_type %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.primary_line')%>:</th>
-    <td><%= @line.bw_upstream %> / <%= @line.bw_downstream %></td>
+    <th><%= t('attributes.primary_line')%> (down/up):</th>
+    <td><%= @line.bw_downstream %> / <%= @line.bw_upstream %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.secondary_line')%>:</th>
-    <td><%= @line.bw2_upstream %> / <%= @line.bw2_downstream %></td>
+    <th><%= t('attributes.secondary_line')%> (down/up):</th>
+    <td><%= @line.bw2_downstream %> / <%= @line.bw2_upstream %></td>
   </tr>
   <tr>
     <th><%= t('attributes.framework_contract')%>:</th>
