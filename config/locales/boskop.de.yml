@@ -27,6 +27,8 @@ de:
     choose_location_a: Wählen Sie einen Standort
     choose_location_b: Standort B (nur bei Punkt-zu-Punkt-Verbindungen)
     describe_contract_period: Beschreibung der Vertragsdauer in Textform
+    primary_line: Erstweg
+    secondary_line: Zweitweg
 
   actions:
     destroy: Datensatz löschen
@@ -62,6 +64,8 @@ de:
     baselink: Basislink
     bw_downstream: Bandbreite Downstream
     bw_upstream: Bandbreite Upstream
+    bw2_downstream: Bandbreite Downstream (Zweitweg)
+    bw2_upstream: Bandbreite Upstream (Zweitweg)
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -84,6 +88,7 @@ de:
     merkmalklasse: Merkmalklasse
     name: Name
     netzwerk: Netzwerk
+    notes: Anmerkungen
     org_unit: Organisationseinheit
     ort: Ort
     period_of_notice: Kündigungsfrist

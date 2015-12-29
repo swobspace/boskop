@@ -64,6 +64,8 @@ Line:
               access_type:references:index \
               'bw_upstream:decimal{10,1}' \
               'bw_downstream:decimal{10,1}' \
+              'bw2_upstream:decimal{10,1}' \
+              'bw2_downstream:decimal{10,1}' \
               framework_contract:references:index \
               contract_start:date contract_end:date contract_period:string \
               period_of_notice:integer period_of_notice_unit:string \
@@ -71,6 +73,12 @@ Line:
               'line_state:references:index:null{false}'
 
 #  bin/rails g migration ChangeContractPeriod
+#  bin/rails g migration AddBw2ToLine \
+#              'bw2_upstream:decimal{10,1}' \
+#              'bw2_downstream:decimal{10,1}'
+#  bin/rails g migration AddCommentToLine \
+             notes:text
+
 
 AccessType:
 ----------- 

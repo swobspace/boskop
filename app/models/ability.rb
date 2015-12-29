@@ -20,6 +20,7 @@ class Ability
       can :manage, [ Network, Line, Host, Ipaddress ]
 
     elsif @user.role?(:reader)
+      can :navigate, [:org_units, :configuration]
       can :read, :all
       can [:usage, :usage_form], Network
 

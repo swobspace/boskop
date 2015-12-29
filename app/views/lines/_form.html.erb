@@ -14,7 +14,11 @@
     <div class="form-inputs">
       <%= f.input :name
        %>
-      <%= f.input :description
+      <%= f.input :description,
+                  input_html: {rows: 5}
+       %>
+      <%= f.input :notes,
+                  input_html: {rows: 5}
        %>
       <%= f.input :provider_id
        %>
@@ -23,13 +27,38 @@
             prompt: t('boskop.choose_location_a'),
             input_html: {class: 'select2'}
        %>
-      <%= f.input :location_b_id,
+      <%= f.association :location_b,
             collection: Location.order(:lid),
             prompt: t('boskop.choose_location_b'),
             input_html: {class: 'select2'}
        %>
       <%= f.association :access_type
        %>
+      <div class="form-group">
+        <label for="bw_downstream" class="col-sm-3 control-label">
+          <%= t('attributes.bw_downstream')%>
+        </label>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :bw_downstream, 
+                class: 'numeric decimal optional form-control',
+                placeholder: t('boskop.primary_line') %>
+          <div class="input-group-addon">
+            <%= Boskop.bandwith_base_unit %> 
+          </div>
+         </div>
+        </div>
+        <div class="col-sm-3">
+         <div class="input-group">
+          <%= f.text_field :bw2_downstream, 
+                class: 'numeric decimal optional form-control',
+                placeholder: t('boskop.secondary_line') %>
+          <div class="input-group-addon">
+            <%= Boskop.bandwith_base_unit %> 
+          </div>
+         </div>
+        </div>
+      </div>
 
       <div class="form-group">
         <label for="bw_upstream" class="col-sm-3 control-label">
@@ -38,21 +67,18 @@
         <div class="col-sm-3">
          <div class="input-group">
           <%= f.text_field :bw_upstream, 
-                class: 'numeric decimal optional form-control' %>
+                class: 'numeric decimal optional form-control',
+                placeholder: t('boskop.primary_line') %>
           <div class="input-group-addon">
             <%= Boskop.bandwith_base_unit %> 
           </div>
          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="bw_downstream" class="col-sm-3 control-label">
-          <%= t('attributes.bw_downstream')%>
-        </label>
         <div class="col-sm-3">
          <div class="input-group">
-          <%= f.text_field :bw_downstream, 
-                class: 'numeric decimal optional form-control' %>
+          <%= f.text_field :bw2_upstream, 
+                class: 'numeric decimal optional form-control',
+                placeholder: t('boskop.secondary_line') %>
           <div class="input-group-addon">
             <%= Boskop.bandwith_base_unit %> 
           </div>
