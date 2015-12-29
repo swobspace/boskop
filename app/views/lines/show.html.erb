@@ -28,12 +28,12 @@
     <td><%= @line.access_type %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.primary_line')%> (down/up):</th>
-    <td><%= @line.bw_downstream %> / <%= @line.bw_upstream %></td>
+    <th><%= t('attributes.bandwith_primary')%>:</th>
+    <td><%= bandwith(@line) %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.secondary_line')%> (down/up):</th>
-    <td><%= @line.bw2_downstream %> / <%= @line.bw2_upstream %></td>
+    <th><%= t('attributes.bandwith_secondary')%>:</th>
+    <td><%= bandwith2(@line) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.framework_contract')%>:</th>
