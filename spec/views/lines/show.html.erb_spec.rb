@@ -11,6 +11,7 @@ RSpec.describe "lines/show", type: :view do
     @line = assign(:line, Line.create!(
       :name => "Name",
       :description => "MyDescription",
+      :notes => "additional information",
       :provider_id => "Provider",
       :location_a_id => 1,
       :location_b_id => nil,
@@ -38,6 +39,7 @@ RSpec.describe "lines/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyDescription/)
+    expect(rendered).to match(/additional information/)
     expect(rendered).to match(/Provider/)
     expect(rendered).to match(/Nirgendwo/)
     expect(rendered).to match(/---/)

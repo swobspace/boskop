@@ -37,6 +37,7 @@ RSpec.describe "lines/new", type: :view do
       assert_select "input#line_name[name=?]", "line[name]"
 
       assert_select "textarea#line_description[name=?]", "line[description]"
+      assert_select "textarea#line_notes[name=?]", "line[notes]"
 
       assert_select "input#line_provider_id[name=?]", "line[provider_id]"
 

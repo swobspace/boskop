@@ -5,6 +5,7 @@
   <tr>
     <th><%= t('attributes.name') %></th>
     <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.notes') %></th>
     <th><%= t('attributes.provider_id') %></th>
     <th><%= t('attributes.lid') %> A</th>
     <th><%= t('attributes.location_a') %></th>
@@ -13,6 +14,8 @@
     <th><%= t('attributes.access_type') %></th>
     <th><%= t('attributes.bw_upstream') %> <%= Boskop.bandwith_base_unit %></th>
     <th><%= t('attributes.bw_downstream') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.bw2_upstream') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.bw2_downstream') %> <%= Boskop.bandwith_base_unit %></th>
     <th><%= t('attributes.framework_contract') %></th>
     <th><%= t('attributes.contract_start') %></th>
     <th><%= t('attributes.contract_end') %></th>
@@ -43,6 +46,9 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 </tfoot>
 
@@ -52,6 +58,7 @@
   <%= content_tag_for(:tr, line) do %>
     <td><%= line.name %></td>
     <td><%= line.description %></td>
+    <td><%= line.notes %></td>
     <td><%= line.provider_id %></td>
     <td><%= line.location_a.try(:lid) %></td>
     <td><%= line.location_a %></td>
@@ -60,6 +67,8 @@
     <td><%= line.access_type %></td>
     <td><%= line.bw_upstream %></td>
     <td><%= line.bw_downstream %></td>
+    <td><%= line.bw2_upstream %></td>
+    <td><%= line.bw2_downstream %></td>
     <td><%= line.framework_contract %></td>
     <td><%= line.contract_start %></td>
     <td><%= line.contract_end %></td>

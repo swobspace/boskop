@@ -64,6 +64,8 @@ de:
     baselink: Basislink
     bw_downstream: Bandbreite Downstream
     bw_upstream: Bandbreite Upstream
+    bw2_downstream: Bandbreite Downstream (Zweitweg)
+    bw2_upstream: Bandbreite Upstream (Zweitweg)
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -86,6 +88,7 @@ de:
     merkmalklasse: Merkmalklasse
     name: Name
     netzwerk: Netzwerk
+    notes: Anmerkungen
     org_unit: Organisationseinheit
     ort: Ort
     period_of_notice: Kündigungsfrist

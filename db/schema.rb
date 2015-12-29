@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228133052) do
+ActiveRecord::Schema.define(version: 20151229071056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 20151228133052) do
     t.datetime "updated_at",                                                  null: false
     t.decimal  "bw2_upstream",          precision: 10, scale: 1
     t.decimal  "bw2_downstream",        precision: 10, scale: 1
+    t.text     "notes",                                          default: ""
   end
 
   add_index "lines", ["access_type_id"], name: "index_lines_on_access_type_id", using: :btree

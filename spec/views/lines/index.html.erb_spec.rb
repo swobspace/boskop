@@ -12,6 +12,7 @@ RSpec.describe "lines/index", type: :view do
       Line.create!(
         :name => "Name1",
         :description => "MyText",
+        :notes => "additional information",
         :provider_id => "Provider",
         :location_a_id => 1,
         :location_b_id => 2,
@@ -31,6 +32,7 @@ RSpec.describe "lines/index", type: :view do
       Line.create!(
         :name => "Name2",
         :description => "MyText",
+        :notes => "additional information",
         :provider_id => "Provider",
         :location_a_id => 1,
         :location_b_id => 2,
@@ -61,6 +63,7 @@ RSpec.describe "lines/index", type: :view do
     assert_select "tr>td", :text => "Name1".to_s, :count => 1
     assert_select "tr>td", :text => "Name2".to_s, :count => 1
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "additional information".to_s, :count => 2
     assert_select "tr>td", :text => "Provider".to_s, :count => 2
     assert_select "tr>td", :text => "Nirgendwo".to_s, :count => 2
     assert_select "tr>td", :text => "---".to_s, :count => 2

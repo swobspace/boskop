@@ -8,6 +8,10 @@
     <td><%= @line.description %></td>
   </tr>
   <tr>
+    <th><%= t('attributes.notes')%>:</th>
+    <td><%= @line.notes %></td>
+  </tr>
+  <tr>
     <th><%= t('attributes.provider_id')%>:</th>
     <td><%= @line.provider_id %></td>
   </tr>
@@ -24,12 +28,12 @@
     <td><%= @line.access_type %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.bw_upstream')%>:</th>
-    <td><%= @line.bw_upstream %></td>
+    <th><%= t('attributes.primary_line')%>:</th>
+    <td><%= @line.bw_upstream %> / <%= @line.bw_downstream %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.bw_downstream')%>:</th>
-    <td><%= @line.bw_downstream %></td>
+    <th><%= t('attributes.secondary_line')%>:</th>
+    <td><%= @line.bw2_upstream %> / <%= @line.bw2_downstream %></td>
   </tr>
   <tr>
     <th><%= t('attributes.framework_contract')%>:</th>
