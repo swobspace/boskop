@@ -62,6 +62,8 @@ de:
     address: Adresse
     addresses: Adressen
     baselink: Basislink
+    bandwith_primary: Bandbreite Erstweg
+    bandwith_secondary: Bandbreite Zweitweg
     bw_downstream: Bandbreite Downstream
     bw_upstream: Bandbreite Upstream
     bw2_downstream: Bandbreite Downstream (Zweitweg)

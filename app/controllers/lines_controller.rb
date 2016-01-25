@@ -54,6 +54,12 @@ class LinesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def line_params
-      params.require(:line).permit(:name, :description, :provider_id, :location_a_id, :location_b_id, :access_type_id, :bw_upstream, :bw_downstream, :framework_contract_id, :contract_start, :contract_end, :contract_period, :period_of_notice, :period_of_notice_unit, :renewal_period, :renewal_unit, :line_state_id)
+      params.require(:line).permit(
+        :name, :description, :notes, :provider_id,
+        :location_a_id, :location_b_id, :access_type_id,
+        :bw_upstream, :bw_downstream, :bw2_upstream, :bw2_downstream,
+        :framework_contract_id, :contract_start, :contract_end, :contract_period,
+        :period_of_notice, :period_of_notice_unit, :renewal_period,
+        :renewal_unit, :line_state_id)
     end
 end
