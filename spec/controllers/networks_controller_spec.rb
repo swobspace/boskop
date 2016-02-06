@@ -59,6 +59,18 @@ RSpec.describe NetworksController, :type => :controller do
       get :new, {}, valid_session
       expect(assigns(:network)).to be_a_new(Network)
     end
+    it "assigns a netzwerk to new network @network" do
+      get :new, {netzwerk: "10.20.30.0/24"}, valid_session
+      expect(assigns(:network).netzwerk.to_cidr_s).to eq("10.20.30.0/24")
+    end
+    it "assigns a description to new network @network" do
+      get :new, {description: "brabbelfasel"}, valid_session
+      expect(assigns(:network).description).to eq("brabbelfasel")
+    end
+    it "assigns location_id to new network @network" do
+      get :new, {location_id: "47110815"}, valid_session
+      expect(assigns(:network).location_id).to eq(47110815)
+    end
   end
 
   describe "GET edit" do
