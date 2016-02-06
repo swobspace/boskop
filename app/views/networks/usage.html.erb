@@ -6,10 +6,12 @@
     <th><%= t('boskop.subnet') %></th>
     <th><%= t('boskop.used_networks') %></th>
     <th><%= t('boskop.sort_helper') %></th>
+    <th></th>
   </tr>
 </thead>
 <tfoot>
   <tr>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -28,6 +30,7 @@
       <% end %>
     </td>
     <td><%= sortable_network(subnet) %></td>
+    <td class="center"><%= new_link Network, netzwerk: subnet  %></td>
   </tr>
 <% end %>
 </tbody>

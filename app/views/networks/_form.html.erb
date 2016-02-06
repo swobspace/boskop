@@ -16,7 +16,9 @@
        %>
       <%= f.input :description
        %>
-      <%= f.association :location, input_html: { class: 'select2' }
+      <%= f.association :location,
+            label_method: :to_str,
+            input_html: { class: 'select2' }
        %>
       <div class="well bs-subform bs-merkmale">
         <%= render 'merkmale/merkmal_form', f: f, merkmale: @network.merkmale %>

@@ -26,7 +26,7 @@ class NetworksController < ApplicationController
   end
 
   def new
-    @network = Network.new
+    @network = Network.new(new_network_params)
     merkmale
     respond_with(@network)
   end
@@ -62,6 +62,13 @@ class NetworksController < ApplicationController
                [ merkmale_attributes:
                    [ :id, :value, :merkmalklasse_id, :_destroy ],
                ])
+    end
+
+    def new_network_params
+      params.permit(:location_id, :netzwerk, :name, :description,
+                    merkmale_attributes:
+                     [ :id, :value, :merkmalklasse_id, :_destroy ],
+                   )
     end
 
     def search_params

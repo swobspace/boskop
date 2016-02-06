@@ -22,6 +22,14 @@ class Location < ActiveRecord::Base
     "#{name.to_s}"
   end
 
+  def to_str
+    "#{lid} / #{name.to_s} / #{plz} #{ort}"
+  end
+
+  def plz
+    "#{self.addresses.first.try(:plz)}"
+  end
+
   def ort
     "#{self.addresses.first.try(:ort)}"
   end
