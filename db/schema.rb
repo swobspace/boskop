@@ -25,18 +25,18 @@ ActiveRecord::Schema.define(version: 20151229071056) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "addressfor_id"
-    t.string   "addressfor_type"
-    t.string   "streetaddress",   default: ""
-    t.string   "plz",             default: ""
-    t.string   "ort",             default: ""
-    t.string   "care_of",         default: ""
-    t.string   "postfach",        default: ""
-    t.string   "postfachplz",     default: ""
+    t.string   "addressfor_type", limit: 255
+    t.string   "streetaddress",   limit: 255, default: ""
+    t.string   "plz",             limit: 255, default: ""
+    t.string   "ort",             limit: 255, default: ""
+    t.string   "care_of",         limit: 255, default: ""
+    t.string   "postfach",        limit: 255, default: ""
+    t.string   "postfachplz",     limit: 255, default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "addresses", ["addressfor_type", "addressfor_id"], name: "index_addresses_on_addressfor_type_and_addressfor_id", using: :btree
+  add_index "addresses", ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type", using: :btree
 
   create_table "framework_contracts", force: :cascade do |t|
     t.string   "name",                                  null: false
@@ -93,19 +93,18 @@ ActiveRecord::Schema.define(version: 20151229071056) do
   add_index "lines", ["location_b_id"], name: "index_lines_on_location_b_id", using: :btree
 
   create_table "locations", force: :cascade do |t|
-    t.string   "name",           limit: 255, default: "", null: false
     t.string   "description",    limit: 255, default: ""
     t.string   "ancestry",       limit: 255
     t.integer  "ancestry_depth",             default: 0,  null: false
     t.integer  "position",                   default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "lid"
+    t.string   "lid",            limit: 255
+    t.string   "name",           limit: 255
   end
 
   add_index "locations", ["ancestry"], name: "index_locations_on_ancestry", using: :btree
   add_index "locations", ["lid"], name: "index_locations_on_lid", using: :btree
-  add_index "locations", ["name"], name: "index_locations_on_name", using: :btree
 
   create_table "merkmale", force: :cascade do |t|
     t.integer  "merkmalfor_id"
@@ -131,7 +130,7 @@ ActiveRecord::Schema.define(version: 20151229071056) do
     t.integer  "position",                    default: 0
     t.string   "for_object",      limit: 255, default: "",    null: false
     t.string   "visible",         limit: 255
-    t.string   "baselink",                    default: ""
+    t.string   "baselink",        limit: 255, default: ""
   end
 
   add_index "merkmalklassen", ["for_object"], name: "index_merkmalklassen_on_for_object", using: :btree
@@ -148,11 +147,11 @@ ActiveRecord::Schema.define(version: 20151229071056) do
   add_index "networks", ["location_id"], name: "index_networks_on_location_id", using: :btree
 
   create_table "org_units", force: :cascade do |t|
-    t.string   "name",           default: "", null: false
-    t.string   "description",    default: ""
-    t.string   "ancestry"
-    t.integer  "ancestry_depth", default: 0,  null: false
-    t.integer  "position",       default: 0,  null: false
+    t.string   "name",           limit: 255, default: "", null: false
+    t.string   "description",    limit: 255, default: ""
+    t.string   "ancestry",       limit: 255
+    t.integer  "ancestry_depth",             default: 0,  null: false
+    t.integer  "position",                   default: 0,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
