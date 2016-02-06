@@ -23,4 +23,14 @@ RSpec.describe Location, :type => :model do
     expect("#{f}").to be == "MyName"
   end
 
+  it "to_str returns full name" do
+    address = instance_double(Address)
+    expect(address).to receive(:ort).and_return("MyOrt")
+    f = FactoryGirl.create(:location, name: "MyName", lid: "MyLID")
+    expect(f).to receive(:addresses).and_return([address])
+
+    expect("#{f.to_str}").to be == "MyLID / MyName / MyOrt"
+  end
+
+
 end
