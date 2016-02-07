@@ -13,6 +13,7 @@ class NetworksController < ApplicationController
 
   def usage
     @subnets = generate_usage_map(usage_params)
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
   end
 
   def index
@@ -76,7 +77,7 @@ class NetworksController < ApplicationController
     end
 
     def usage_params
-      params.permit(:cidr, :mask)
+      params.permit(:cidr, :mask, :exact_match)
     end
 
     def merkmale

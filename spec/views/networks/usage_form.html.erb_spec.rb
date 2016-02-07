@@ -16,6 +16,7 @@ RSpec.describe "networks/usage_form", :type => :view do
     assert_select "form[action=?][method=?]", usage_networks_path, "post" do
       assert_select "input#cidr[name=?]", "cidr"
       assert_select "input#mask[name=?]", "mask"
+      assert_select "input#exact_match[name=?]", "exact_match"
     end
   end
 end
