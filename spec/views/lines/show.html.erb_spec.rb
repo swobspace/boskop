@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "lines/show", type: :view do
-  let(:user) { double }
   let(:location) { FactoryGirl.create(:location, name: 'Nirgendwo') }
   before(:each) do
     @ability = Object.new
@@ -9,8 +8,6 @@ RSpec.describe "lines/show", type: :view do
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "show" }
-    allow(user).to receive(:can?).and_return(true)
-    allow(controller).to receive(:current_user) { user }
 
 
     @line = assign(:line, Line.create!(
