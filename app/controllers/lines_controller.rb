@@ -7,7 +7,9 @@ class LinesController < ApplicationController
 
   # GET /lines
   def index
-    @lines = Line.all
+    @lines = Line.includes(:line_state, :access_type, :framework_contract,
+                           location_a: [:addresses], 
+                           location_b: [:addresses]).all
     respond_with(@lines)
   end
 

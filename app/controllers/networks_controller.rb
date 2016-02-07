@@ -16,8 +16,8 @@ class NetworksController < ApplicationController
   end
 
   def index
-    @networks = filter_networks(search_params)
-    @merkmalklassen = Merkmalklasse.visibles(:network, 'index')
+    @networks = filter_networks(search_params).includes(location: [:addresses])
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
     respond_with(@networks)
   end
 
