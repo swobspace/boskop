@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "lines/show", type: :view do
+  let(:location) { FactoryGirl.create(:location, name: 'Nirgendwo') }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -8,12 +9,13 @@ RSpec.describe "lines/show", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "show" }
 
+
     @line = assign(:line, Line.create!(
       :name => "Name",
       :description => "MyDescription",
       :notes => "additional information",
       :provider_id => "Provider",
-      :location_a_id => 1,
+      :location_a_id => location.id,
       :location_b_id => nil,
       :access_type_id => 1,
       :bw_upstream => "9.99",
@@ -28,10 +30,9 @@ RSpec.describe "lines/show", type: :view do
       :renewal_unit => "year",
       :line_state_id => 1
     ))
-    expect(@line).to receive(:location_a).and_return("Nirgendwo")
-    expect(@line).to receive(:location_b).and_return("---")
+    expect(@line).to receive(:location_b).at_least(:once).and_return("---")
     expect(@line).to receive(:access_type).and_return("VDSL")
-    expect(@line).to receive(:framework_contract).and_return("myFrameworkContract")
+    expect(@line).to receive(:framework_contract).at_least(:once).and_return("myFrameworkContract")
     expect(@line).to receive(:line_state).and_return("active")
   end
 
@@ -41,7 +42,7 @@ RSpec.describe "lines/show", type: :view do
     expect(rendered).to match(/MyDescription/)
     expect(rendered).to match(/additional information/)
     expect(rendered).to match(/Provider/)
-    expect(rendered).to match(/Nirgendwo/)
+    expect(rendered).to match(/#{location.lid} \/ Nirgendwo \/  /)
     expect(rendered).to match(/---/)
     expect(rendered).to match(/VDSL/)
     expect(rendered).to match(/10.0/)

@@ -17,11 +17,11 @@
   </tr>
   <tr>
     <th><%= t('attributes.location_a')%>:</th>
-    <td><%= @line.location_a %></td>
+    <td><%= link_to_attribute(@line, :location_a) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.location_b')%>:</th>
-    <td><%= @line.location_b %></td>
+    <td><%= link_to_attribute(@line, :location_b) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.access_type')%>:</th>
@@ -37,7 +37,7 @@
   </tr>
   <tr>
     <th><%= t('attributes.framework_contract')%>:</th>
-    <td><%= @line.framework_contract %></td>
+    <td><%= link_to_attribute(@line, :framework_contract) %></td>
   </tr>
   <tr>
     <th><%= t('attributes.contract_start')%>:</th>

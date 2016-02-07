@@ -1,0 +1,31 @@
+<table id="linesTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.notes') %></th>
+    <th><%= t('attributes.access_type') %></th>
+    <th><%= t('attributes.bandwith_primary') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.bandwith_secondary') %> <%= Boskop.bandwith_base_unit %></th>
+    <th><%= t('attributes.line_state') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% lines.each do |line| %>
+  <%= content_tag_for(:tr, line) do %>
+    <td><%= line.name %></td>
+    <td><%= line.description %></td>
+    <td><%= line.notes %></td>
+    <td><%= line.access_type %></td>
+    <td><%= bandwith(line) %></td>
+    <td><%= bandwith2(line) %></td>
+    <td><%= line.line_state %></td>
+    <td class="nowrap">
+      <%= show_link line %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>

@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "lines/index", type: :view do
+  let(:loc1) { FactoryGirl.create(:location, lid: "LID1", name: 'Nirgendwo1') }
+  let(:loc2) { FactoryGirl.create(:location, lid: "LID2", name: 'Nirgendwo2') }
+
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -14,8 +17,8 @@ RSpec.describe "lines/index", type: :view do
         :description => "MyText",
         :notes => "additional information",
         :provider_id => "Provider",
-        :location_a_id => 1,
-        :location_b_id => 2,
+        :location_a_id => loc1.id,
+        :location_b_id => loc2.id,
         :access_type_id => 1,
         :bw_upstream => "9.89",
         :bw_downstream => "19.99",
@@ -34,8 +37,8 @@ RSpec.describe "lines/index", type: :view do
         :description => "MyText",
         :notes => "additional information",
         :provider_id => "Provider",
-        :location_a_id => 1,
-        :location_b_id => 2,
+        :location_a_id => loc1.id,
+        :location_b_id => loc2.id,
         :access_type_id => 1,
         :bw_upstream => "9.89",
         :bw_downstream => "19.99",
@@ -50,8 +53,6 @@ RSpec.describe "lines/index", type: :view do
         :line_state_id => 1
       )
     ])
-    allow_any_instance_of(Line).to receive(:location_a).and_return("Nirgendwo")
-    allow_any_instance_of(Line).to receive(:location_b).and_return("---")
     allow_any_instance_of(Line).to receive(:access_type).and_return("VDSL")
     allow_any_instance_of(Line).to receive(:framework_contract).and_return("myFrameworkContract")
     allow_any_instance_of(Line).to receive(:line_state).and_return("active")
@@ -65,14 +66,14 @@ RSpec.describe "lines/index", type: :view do
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
     assert_select "tr>td", :text => "additional information".to_s, :count => 2
     assert_select "tr>td", :text => "Provider".to_s, :count => 2
-    assert_select "tr>td", :text => "Nirgendwo".to_s, :count => 2
-    assert_select "tr>td", :text => "---".to_s, :count => 2
+    expect(rendered).to include("LID1 / Nirgendwo1 /  ")
+    expect(rendered).to include("LID2 / Nirgendwo2 /  ")
     assert_select "tr>td", :text => "20.0/9.9".to_s, :count => 2
     assert_select "tr>td", :text => "5.0/1.5".to_s, :count => 2
     assert_select "tr>td", :text => "myFrameworkContract".to_s, :count => 2
-    assert_select "tr>td", :text => 7.to_s, :count => 2
-    assert_select "tr>td", :text => "2 year".to_s, :count => 2
-    assert_select "tr>td", :text => "3 month".to_s, :count => 2
+    expect(rendered).to include("7 <br />")
+    expect(rendered).to include("2 year <br />")
+    expect(rendered).to include("3 month")
     assert_select "tr>td", :text => "active".to_s, :count => 2
   end
 end

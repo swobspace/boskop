@@ -7,9 +7,7 @@
     <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.notes') %></th>
     <th><%= t('attributes.provider_id') %></th>
-    <th><%= t('attributes.lid') %> A</th>
     <th><%= t('attributes.location_a') %></th>
-    <th><%= t('attributes.lid') %> B</th>
     <th><%= t('attributes.location_b') %></th>
     <th><%= t('attributes.access_type') %></th>
     <th><%= t('attributes.bandwith_primary') %> <%= Boskop.bandwith_base_unit %></th>
@@ -17,19 +15,15 @@
     <th><%= t('attributes.framework_contract') %></th>
     <th><%= t('attributes.contract_start') %></th>
     <th><%= t('attributes.contract_end') %></th>
-    <th><%= t('attributes.contract_period') %></th>
-    <th><%= t('attributes.period_of_notice') %></th>
-    <th><%= t('attributes.renewal_period') %></th>
+    <th><%= t('attributes.contract_period') %><br />
+        <%= t('attributes.period_of_notice') %><br />
+        <%= t('attributes.renewal_period') %></th>
     <th><%= t('attributes.line_state') %></th>
     <th></th>
   </tr>
 </thead>
 <tfoot>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -56,19 +50,17 @@
     <td><%= line.description %></td>
     <td><%= line.notes %></td>
     <td><%= line.provider_id %></td>
-    <td><%= line.location_a.try(:lid) %></td>
-    <td><%= line.location_a %></td>
-    <td><%= line.location_b.try(:lid) %></td>
-    <td><%= line.location_b %></td>
+    <td><%= link_to_attribute(line, :location_a) %></td>
+    <td><%= link_to_attribute(line, :location_b) %></td>
     <td><%= line.access_type %></td>
     <td><%= bandwith(line) %></td>
     <td><%= bandwith2(line) %></td>
-    <td><%= line.framework_contract %></td>
+    <td><%= link_to_attribute(line, :framework_contract) %></td>
     <td><%= line.contract_start %></td>
     <td><%= line.contract_end %></td>
-    <td><%= line.contract_period %></td>
-    <td><%= line.period_of_notice %> <%= line.period_of_notice_unit %></td>
-    <td><%= line.renewal_period %> <%= line.renewal_unit %></td>
+    <td><%= line.contract_period %> <br />
+        <%= line.period_of_notice %> <%= line.period_of_notice_unit %> <br />
+        <%= line.renewal_period %> <%= line.renewal_unit %></td>
     <td><%= line.line_state %></td>
     <td class="nowrap">
       <%= show_link line %>

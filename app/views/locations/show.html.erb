@@ -54,9 +54,15 @@
   </div>
 </div>
 
-<br />
-
 <% if can? :read, Network %>
+  <br />
   <h2><%= t('boskop.assigned_networks') %></h2>
   <%= render partial: 'networks/list', locals: { networks: @location.networks } %>
 <% end %>
+
+<% if can? :read, Line %>
+  <br />
+  <h2><%= t('boskop.assigned_lines') %></h2>
+  <%= render partial: 'lines', locals: { lines: @location.lines_a } %>
+<% end %>
+

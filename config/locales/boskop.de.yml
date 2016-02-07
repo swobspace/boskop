@@ -21,6 +21,7 @@ de:
     used_networks: Netzwerke in Benutzung
     sort_helper: Sortierhilfe
     assigned_networks: Zugeordnete Netzwerke
+    assigned_lines: Zugeordnete Leitungen/Zugänge
     basics: Basics
     this_will_destroy_all_merkmale: Das Löschen einer Merkmalklasse löscht alle Merkmale dieser Klasse unwiderruflich! Wollen Sie die Merkmalklasse wirklich, wirklich löschen? Geben Sie 'Ja bitte' ein
     verify_destroy: Ja bitte
