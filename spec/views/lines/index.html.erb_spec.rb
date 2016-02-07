@@ -71,9 +71,9 @@ RSpec.describe "lines/index", type: :view do
     assert_select "tr>td", :text => "20.0/9.9".to_s, :count => 2
     assert_select "tr>td", :text => "5.0/1.5".to_s, :count => 2
     assert_select "tr>td", :text => "myFrameworkContract".to_s, :count => 2
-    assert_select "tr>td", :text => 7.to_s, :count => 2
-    assert_select "tr>td", :text => "2 year".to_s, :count => 2
-    assert_select "tr>td", :text => "3 month".to_s, :count => 2
+    expect(rendered).to include("7 <br />")
+    expect(rendered).to include("2 year <br />")
+    expect(rendered).to include("3 month")
     assert_select "tr>td", :text => "active".to_s, :count => 2
   end
 end

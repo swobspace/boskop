@@ -15,17 +15,15 @@
     <th><%= t('attributes.framework_contract') %></th>
     <th><%= t('attributes.contract_start') %></th>
     <th><%= t('attributes.contract_end') %></th>
-    <th><%= t('attributes.contract_period') %></th>
-    <th><%= t('attributes.period_of_notice') %></th>
-    <th><%= t('attributes.renewal_period') %></th>
+    <th><%= t('attributes.contract_period') %><br />
+        <%= t('attributes.period_of_notice') %><br />
+        <%= t('attributes.renewal_period') %></th>
     <th><%= t('attributes.line_state') %></th>
     <th></th>
   </tr>
 </thead>
 <tfoot>
   <tr>
-    <th></th>
-    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -60,9 +58,9 @@
     <td><%= link_to_attribute(line, :framework_contract) %></td>
     <td><%= line.contract_start %></td>
     <td><%= line.contract_end %></td>
-    <td><%= line.contract_period %></td>
-    <td><%= line.period_of_notice %> <%= line.period_of_notice_unit %></td>
-    <td><%= line.renewal_period %> <%= line.renewal_unit %></td>
+    <td><%= line.contract_period %> <br />
+        <%= line.period_of_notice %> <%= line.period_of_notice_unit %> <br />
+        <%= line.renewal_period %> <%= line.renewal_unit %></td>
     <td><%= line.line_state %></td>
     <td class="nowrap">
       <%= show_link line %>
