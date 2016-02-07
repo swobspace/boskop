@@ -5,6 +5,12 @@
   <tr>
     <th><%= t('boskop.subnet') %></th>
     <th><%= t('boskop.used_networks') %></th>
+    <th><%= t('boskop.network_mask') %></th>
+    <th><%= t('attributes.lid') %></th>
+    <th><%= t('attributes.location') %></th>
+    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <%= mklasse.to_s %>
+    <% end %>
     <th><%= t('boskop.sort_helper') %></th>
     <th></th>
   </tr>
@@ -15,23 +21,43 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
+    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+    <% end %>
+    <th></th>
+    <th></th>
   </tr>
 </tfoot>
 
 <tbody>
 
 <% @subnets.each_pair do |subnet,networks| %>
+  <% networks.each_with_index do |used,idx| %>
+    <tr>
+      <td><%= subnet %></td>
+      <td><%= link_to "#{used.netzwerk.to_cidr_s}", network_path(used) %></td>
+      <td>/<%= used.netzwerk.to_cidr_mask %> </td>
+      <td><%= used.location.try(:lid) %> </td>
+      <td><%= used.location.try(:name) %> </td>
+      <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+	<%= get_location_merkmal(used, mklasse) %>
+      <% end %>
+      <td><%= sortable_network(subnet) %></td>
+      <td class="center"><%= new_link Network, netzwerk: subnet  %></td>
+    </tr>
+  <% end.empty? and begin %>
   <tr>
     <td><%= subnet %></td>
-    <td>
-      <% networks.each do |used| %>
-        <%= link_to "#{used.netzwerk.to_cidr_s} / #{used.location.try(:lid)}", 
-            network_path(used) %> <br />
-      <% end %>
-    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+    <% end %>
     <td><%= sortable_network(subnet) %></td>
     <td class="center"><%= new_link Network, netzwerk: subnet  %></td>
   </tr>
+  <% end %>
 <% end %>
 </tbody>
 </table>

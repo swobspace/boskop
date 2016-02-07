@@ -33,4 +33,18 @@ RSpec.describe Network, :type => :model do
     expect(f).to be_valid
     expect(g).to be_valid
   end
+
+  describe "#netzwerk" do
+    let(:netzwerk) { FactoryGirl.create(:network, 
+                     location_id: 1, netzwerk: '192.0.2.0/24').netzwerk }
+
+    it "#to_cidr_s shows network in cidr notation" do
+      expect(netzwerk.to_cidr_s).to eq "192.0.2.0/24"
+    end
+
+    it "#to_cidr_mask shows cidr mask" do
+      expect(netzwerk.to_cidr_mask).to eq "24"
+    end
+  end
+
 end

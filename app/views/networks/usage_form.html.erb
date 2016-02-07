@@ -15,7 +15,7 @@
 
     <div class="form-group">
       <label for="mask" class="col-sm-2 control-label">
-        <%= t('attributes.mask') %>
+        <%= t('attributes.cidr_mask') %>
       </label>
       <div class="col-sm-9">
         <input type="text" class="form-control" id="mask" name="mask"
@@ -23,6 +23,16 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-9">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="exact_match" name="exact_match">
+            <%= t('attributes.exact_match') %>
+          </label>
+        </div>
+      </div>
+    </div>
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-9">
