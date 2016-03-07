@@ -33,6 +33,13 @@ Set password for user postgres:
     sudo -u postgres psql postgres
     \password postgres
 
+Create role boskop for development:
+
+    createuser -d -E -S -R -W boskop
+    createdb -O boskop boskop_development
+    createdb -O boskop boskop_test
+
+
 Create database boskop_production:
 
     sudo -u postgres createdb boskop_production
