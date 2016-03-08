@@ -1,0 +1,25 @@
+# config/application.yml
+
+defaults: &defaults
+  devise_modules:
+    - :database_authenticatable 
+    - :registerable 
+    - :recoverable 
+    - :rememberable
+    - :trackable
+#  authentication:
+#    cas_base_url: https://server/cas
+#
+# Logo
+#  logo_image: logo.jpg
+#  logo_width: 45
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
