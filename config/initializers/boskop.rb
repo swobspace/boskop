@@ -18,5 +18,21 @@ module Boskop
     end
   end
 
+  def self.logo_image
+    if Settings['logo_image'].blank?
+      "rails.png"
+    else
+      Settings['logo_image']
+    end
+  end
+
+  def self.logo_width
+    if Settings['logo_width'].blank?
+      45
+    else
+      Settings['logo_width']
+    end
+  end
+
 end
 
