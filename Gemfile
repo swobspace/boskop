@@ -34,6 +34,8 @@ gem 'devise-remote-user'
 # gem 'devise-remote-user', git: 'https://github.com/swobspace/devise-remote-user.git',
 #      branch: 'master'
 gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
+gem 'prawn'
+gem 'prawn-table'
 
 gem 'yaml_db'
 group :development do
@@ -63,5 +65,6 @@ group :test do
   gem 'database_rewinder'
   gem "capybara"
   gem "poltergeist"
+  gem 'pdf-inspector', require: "pdf/inspector"
 end
 
