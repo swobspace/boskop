@@ -20,26 +20,27 @@ module MyPDF
           lid_width     = 90
           address_width = MyPDF.header_width - lid_width
           # location id box
-          context.bounding_box position, width: lid_width, height: height do
+          context.bounding_box [0,position], width: lid_width, height: height do
             context.pad(10) do
               context.span(lid_width - 20, align: :center) do
                 context.text location.lid, align: :center, size: 20, style: :bold
               end
             end
+	    context.stroke_color MyPDF.header_color
+	    context.stroke_bounds
           end
           # name and address box
-          position[0] += lid_width
-          context.bounding_box position, width:  address_width, height: height do
+          context.bounding_box [lid_width, position], width:  address_width, height: height do
             context.pad(10) do
-              context.span(address_width - 20) do
-                context.text location.name, size: 14, style: :bold
+              context.text location.name, size: 14, style: :bold
+              context.move_down 6
+              if addr = location.addresses.first
+                context.text "#{addr.plz} #{addr.ort}, #{addr.streetaddress}"
                 context.move_down 6
-                if addr = location.addresses.first
-                  context.text "#{addr.plz} #{addr.ort}, #{addr.streetaddress}"
-                  context.move_down 6
-                end
               end
             end
+	    context.stroke_color MyPDF.header_color
+	    context.stroke_bounds
           end
         end
 

@@ -10,11 +10,15 @@ module MyPDF
 
     def myheader
       location_header(
-        self, location: @obj.location_a, position: [0,750])
+        self, location: @obj.location_a, position: cursor)
       unless @obj.location_b.blank?
         location_header(
-          self, location: @obj.location_b, position: [0, 750 - Boskop.header_height])
+          self, location: @obj.location_b, position: cursor)
       end
+    end
+   
+    def myheaderheight
+      2 * MyPDF.header_height
     end
 
     def title

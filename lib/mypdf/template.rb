@@ -12,7 +12,6 @@ module MyPDF
       font_size MyPDF.font_size
       watermark
       logo
-      move_cursor_to 750
       header
       body
       page_numbers
@@ -60,14 +59,17 @@ module MyPDF
     end
 
     def header
-      bounding_box [0,cursor], width: MyPDF.header_width, height: MyPDF.header_height do
+      bounding_box [0,750], width: MyPDF.header_width, height: myheaderheight do
         myheader 
       end
       move_down 12
     end
    
+    def myheaderheight
+      MyPDF.header_height
+    end
     def myheader
-      raise RuntimeError, "Calling abstract method body is not allowed"
+      raise RuntimeError, "Calling abstract method myheader is not allowed"
     end
 
     def body
