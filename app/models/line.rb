@@ -1,4 +1,5 @@
 class Line < ActiveRecord::Base
+  include LineConcerns
   # -- associations
   belongs_to :access_type
   belongs_to :framework_contract
@@ -22,6 +23,5 @@ class Line < ActiveRecord::Base
   def to_s
     "#{name}"
   end
-
 
 end
