@@ -51,10 +51,11 @@ module MyPDF
 
     def logo
       logo   = Boskop.logo_image
-      logo_w = Boskop.logo_width
-      bounding_box [MyPDF.header_width, 750], :width => 45.mm, :height => 45.mm do
-	image File.join(Rails.root, "public", "images", logo),
-	  :width => (logo_w).mm, :position => :left, :vposition => :top
+      width  = (Boskop.logo_width).mm
+      height = MyPDF.header_height
+      bounding_box [MyPDF.header_width, 750], width: width, height: height do
+        image File.join(Rails.root, "public", "images", logo),
+          fit: [width, height], position: :right
       end
     end
 
@@ -68,6 +69,7 @@ module MyPDF
     def myheaderheight
       MyPDF.header_height
     end
+
     def myheader
       raise RuntimeError, "Calling abstract method myheader is not allowed"
     end
