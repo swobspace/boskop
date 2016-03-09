@@ -18,20 +18,31 @@ class Location < ActiveRecord::Base
   # -- validations and callbacks
   validates :name, :lid, presence: true, uniqueness: true
 
+  # name of location
   def to_s
     "#{name.to_s}"
   end
 
-  def to_str
-    "#{lid} / #{name.to_s} / #{plz} #{ort}"
+  # location_id, name, plz and ort
+  def to_str(address = 0)
+    "#{lid} / #{name.to_s} / #{plz(address)} #{ort(address)}"
   end
 
-  def plz
-    "#{self.addresses.first.try(:plz)}"
+  # location_id, name, plz and ort and streetaddress, if available
+  def to_string(address = 0)
+    "#{lid} / #{name.to_s} / #{plz(address)} #{ort(address)}, #{streetaddress(address)}"
   end
 
-  def ort
-    "#{self.addresses.first.try(:ort)}"
+  def plz(address = 0)
+    "#{self.addresses[address].try(:plz)}"
+  end
+
+  def ort(address = 0)
+    "#{self.addresses[address].try(:ort)}"
+  end
+
+  def streetaddress(address = 0)
+    "#{self.addresses[address].try(:streetaddress)}"
   end
 
 end
