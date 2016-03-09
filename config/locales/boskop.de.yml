@@ -63,6 +63,7 @@ de:
     address: Adresse
     addresses: Adressen
     baselink: Basislink
+    bandwith: Bandbreite
     bandwith_primary: Bandbreite Erstweg
     bandwith_secondary: Bandbreite Zweitweg
     bw_downstream: Bandbreite Downstream
@@ -104,7 +105,7 @@ de:
     postfach: Postfach
     postfachplz: Postfach-PLZ
     provider_id: Identifikation des Providers
-    renewal_period: Verlängerungszeitraum
+    renewal_period: Verlängerung
     renewal_unit: Einheit
     sn: Nachname
     streetaddress: Straße, Nr.
