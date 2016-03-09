@@ -5,7 +5,7 @@ module MyPDF
       include MyPDF::Formatter::Concerns::LineConcerns
 
       def render_output(context, obj, params = {})
-        subject(context, subject: "#{obj.name}")
+        subject(context, subject: "#{obj.name} / #{obj.product}")
         line_basics(context, params)
       end
     end

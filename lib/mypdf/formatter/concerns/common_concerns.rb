@@ -8,8 +8,8 @@ module MyPDF
 	end
 
         # <tt>location_header(
-        #       context, 
-        #       location: location, 
+        #       context,
+        #       location: location,
         #       position: [x, y],
         # )</tt>
         # set a location header with location id tag and location address
