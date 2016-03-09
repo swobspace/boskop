@@ -10,17 +10,9 @@ module MyPDF
 
     def myheader
       location_header(
-        self, location: @obj.location_a, position: cursor)
-      unless @obj.location_b.blank?
-        location_header(
-          self, location: @obj.location_b, position: cursor)
-      end
+        self, location: @obj.location_a, position: myheaderheight)
     end
    
-    def myheaderheight
-      2 * MyPDF.header_height
-    end
-
     def title
       "#{@obj.name}"
     end
