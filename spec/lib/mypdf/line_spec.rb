@@ -2,11 +2,11 @@ require 'rails_helper'
 require 'mypdf'
 
 describe MyPDF::Line do
-  let(:line)     { FactoryGirl.create(:line, 
-    name: "XYZ-TDN-001", 
+  let(:line)     { FactoryGirl.create(:line,
+    name: "XYZ-TDN-001",
     location_a: location,
   )}
-  let(:location) { FactoryGirl.create(:location, 
+  let(:location) { FactoryGirl.create(:location,
     lid: "XYZ",
     name: "Anywhere GmbH Hollerdei",
   )}
