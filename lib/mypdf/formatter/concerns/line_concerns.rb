@@ -44,7 +44,7 @@ module MyPDF
         def line_basics_attributes
           [
            :description, :notes, :provider_id, :access_type, :bandwith,
-           :line_state,
+           :line_state, :framework_contract,
           ]
         end
 
