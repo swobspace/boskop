@@ -1,3 +1,5 @@
+require 'mypdf'
+
 class LinesController < ApplicationController
   before_action :set_line, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumb_show, only: [:show]
@@ -15,7 +17,16 @@ class LinesController < ApplicationController
 
   # GET /lines/1
   def show
-    respond_with(@line)
+    respond_with(@line) do |format|
+      format.pdf do
+        pdf = MyPDF::Line.new(@line)
+        pdf.render_output
+        send_data pdf.render, filename: "#{@line.name}.pdf",
+                              # :disposition => 'attachment',
+                              :disposition => 'inline',
+                              :type => 'application/pdf; charset=utf-8'
+      end
+    end
   end
 
   # GET /lines/new

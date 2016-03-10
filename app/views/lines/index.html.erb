@@ -62,10 +62,13 @@
         <%= line.period_of_notice %> <%= line.period_of_notice_unit %> <br />
         <%= line.renewal_period %> <%= line.renewal_unit %></td>
     <td><%= line.line_state %></td>
-    <td class="nowrap">
+    <td>
+      <span class="nowrap">
       <%= show_link line %>
       <%= edit_link line %>
       <%= delete_link line %>
+      </span>
+      <%= link_to("PDF", line_path(line, format: :pdf), class: 'btn btn-default') %>
     </td>
   <% end %>
 <% end %>

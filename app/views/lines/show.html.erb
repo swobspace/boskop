@@ -70,4 +70,5 @@
   <%= edit_link(@line) %>
   <%= delete_link(@line) %>
   <%= new_link Line %>
+  <%= link_to("PDF", line_path(@line, format: :pdf), class: 'btn btn-default') %>
 </div>

@@ -60,6 +60,19 @@ RSpec.describe LinesController, type: :controller do
     end
   end
 
+  describe "when format: :pdf" do
+    let(:line) { Line.create! valid_attributes }
+    let(:pdf_string)  { pdf = MyPDF::Line.new(line) ; pdf.render_output ; pdf.render }
+    let(:pdf_options) { {filename: "#{line.name}.pdf", disposition: 'inline', type: 'application/pdf; charset=utf-8'} }
+
+    it "should return a pdf attachment" do
+      expect(@controller).to receive(:send_data).with(pdf_string, pdf_options) {
+        @controller.render nothing: true # to prevent a 'missing template' error
+      }
+      get :show, {:id => line.to_param, format: :pdf}, valid_session
+    end
+  end
+
   describe "GET #new" do
     it "assigns a new line as @line" do
       get :new, {}, valid_session
