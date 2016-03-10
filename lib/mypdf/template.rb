@@ -9,6 +9,15 @@ module MyPDF
     end
 
     def render_output
+      font_families.update(
+        "DejaVuSans" => {
+          :normal => "/usr/share/fonts/dejavu/DejaVuSans.ttf",
+          :italic => "/usr/share/fonts/dejavu/DejaVuSans-Italic.ttf",
+          :bold => "/usr/share/fonts/dejavu/DejaVuSans-Bold.ttf",
+          :bold_italic =>"/usr/share/fonts/dejavu/DejaVuSans-BoldItalic.ttf",
+        }
+      )
+      font "DejaVuSans"
       font_size MyPDF.font_size
       watermark
       logo
