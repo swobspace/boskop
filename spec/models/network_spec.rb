@@ -14,9 +14,17 @@ RSpec.describe Network, :type => :model do
     expect(g).to be_valid
   end
 
-  it "to_s returns value" do
+  it "to_s returns string" do
+    l = instance_double(Location)
     f = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25")
-    expect("#{f}").to match /192.0.2.128\/25/
+    expect(l).to receive(:ort).and_return("Anywhere")
+    expect(f).to receive(:location).and_return(l)
+    expect("#{f}").to match "192.0.2.128/25 / Anywhere"
+  end
+
+  it "to_cidr returns cidr" do
+    f = FactoryGirl.create(:network, netzwerk: "192.0.2.128/26")
+    expect("#{f.to_cidr}").to eq("192.0.2.128/26")
   end
 
   it "does not create networks with same location_id and netzwerk" do
