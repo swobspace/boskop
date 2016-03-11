@@ -6,6 +6,7 @@ require 'prawn/table'
 module MyPDF
   autoload :Template, 'mypdf/template'
   autoload :Line, 'mypdf/line'
+  autoload :Location, 'mypdf/location'
 
   def self.setup
     yield self
