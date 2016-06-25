@@ -28,14 +28,24 @@ i.e. for Ubuntu 14.04:
 
     sudo apt-get install postgresql
 
+Setup user and database
+------------------------
+
 Set password for user postgres:
 
     sudo -u postgres psql postgres
     \password postgres
 
-Create database boskop_production:
+Create role boskop:
 
-    sudo -u postgres createdb boskop_production
+    createuser -D -E -S -R -W boskop
 
-Setup a login role for user boskop with pgadmin3 and change ownership 
-of boskop_production to role boskop.
+Create databases:
+
+    sudo -u postgres createdb -O boskop boskop_production
+
+For boskop development, you may create the following databases:
+
+    sudo -u postgres createdb -O boskop boskop_development
+    sudo -u postgres createdb -O boskop boskop_test
+
