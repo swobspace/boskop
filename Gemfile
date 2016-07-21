@@ -37,7 +37,7 @@ gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
 
 gem 'yaml_db'
 group :development do
-  gem 'thin'
+  gem 'puma'
   gem 'spring'
   gem 'guard'
   gem "guard-livereload", require: false
