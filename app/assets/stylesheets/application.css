@@ -5,7 +5,6 @@
  *= require datatables-buttons/css/buttons.bootstrap
  *= require datatables-colvis/css/dataTables.colVis
  *= require select2
- *= require select2-bootstrap-css
  *= require boskop
  *= require_self
  */

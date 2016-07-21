@@ -1,15 +1,17 @@
 # A sample Bowerfile
 # Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
 
+asset 'jquery', '~> 2'
+
 # asset 'bootstrap'
 # >>> wob template
-asset 'bootstrap-sass', "3.3.6"
-asset 'datatables', "1.10.10" do
+asset 'bootstrap-sass'
+asset 'datatables' do
   main_files [
     "./media/js/dataTables.bootstrap.js"
   ]
 end
-asset 'datatables-buttons', "1.0.3", github: "DataTables/Buttons" do
+asset 'datatables-buttons', github: "DataTables/Buttons" do
   main_files [
     "./js/buttons.bootstrap.js",
     "./js/buttons.colVis.js",
@@ -18,13 +20,13 @@ asset 'datatables-buttons', "1.0.3", github: "DataTables/Buttons" do
     "./js/buttons.print.js"
   ]
 end
-asset 'datatables-colvis', "1.1.2", github: "DataTables/ColVis"
+# asset 'datatables-colvis', github: "DataTables/ColVis"
 
 # -- datatables dependencies
-asset 'jszip', "2.5.0"
+asset 'jszip'
 asset 'pdfmake'
 # <<< wob template end
 
-asset 'select2', "3.5.4"
-asset 'select2-bootstrap-css', "1.4.6"
+asset 'select2', '~> 4'
+asset 'select2-bootstrap-theme'
 
