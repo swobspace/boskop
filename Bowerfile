@@ -6,12 +6,12 @@ asset 'jquery', '~> 2'
 # asset 'bootstrap'
 # >>> wob template
 asset 'bootstrap-sass'
-asset 'datatables' do
+asset 'datatables', '~> 0.10.12' do
   main_files [
     "./media/js/dataTables.bootstrap.js"
   ]
 end
-asset 'datatables-buttons', github: "DataTables/Buttons" do
+asset 'datatables-buttons', '~> 1.2.2', github: "DataTables/Buttons" do
   main_files [
     "./js/buttons.bootstrap.js",
     "./js/buttons.colVis.js",
@@ -20,7 +20,6 @@ asset 'datatables-buttons', github: "DataTables/Buttons" do
     "./js/buttons.print.js"
   ]
 end
-# asset 'datatables-colvis', github: "DataTables/ColVis"
 
 # -- datatables dependencies
 asset 'jszip'

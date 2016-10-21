@@ -18,6 +18,5 @@
 //= require pdfmake/build/vfs_fonts
 //= require datatables-buttons/js/buttons.colVis
 //= require select2
-//= require modernizr.touch.2.8.3
 //= require boskop
 //

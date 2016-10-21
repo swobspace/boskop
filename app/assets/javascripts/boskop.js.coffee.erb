@@ -1,13 +1,22 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
+# --- GLOBALS
 $.extend $.fn.dataTableExt.oStdClasses,
   sWrapper: "dataTables_wrapper form-inline"
 
 dataConfirmModal.setDefaults
   commit: '<%= I18n.t('actions.destroy')%>',
   cancel: '<%= I18n.t('actions.cancel')%>'
+
+$.datepicker.setDefaults($.datepicker.regional['de'])
+$.datepicker.setDefaults({
+      changeYear: true,
+      changeMonth: true,
+      dateFormat: "yy-mm-dd",
+      yearRange: '2000:2099',
+      showOn: "button",
+      buttonImage: "<%= asset_path('calendar.gif')%>",
+      buttonImageOnly: true
+})
+
 
 ready = ->
   $('.dataTable tfoot th').each  (idx) ->
@@ -17,13 +26,7 @@ ready = ->
   table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
-    colVis:
-      buttonText: "<%= I18n.t('boskop.change_columns') %>"
-      showAll: "<%= I18n.t('boskop.show_all') %>"
-      order: 'alpha'
-      exclude: [ 0 ]
-    bJQueryUI: false
-    bStateSave: true
+    stateSave: true
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
     buttons: [
@@ -58,15 +61,13 @@ ready = ->
         }
       },
       'print',
-      'colvis'
+      {
+        extend: 'colvis',
+        text: "<%= I18n.t('boskop.change_columns') %>",
+        columns: ':gt(0)'
+      }
     ]
-    fnDrawCallback: (oSettings) ->
-      $("table tbody tr").on "click", "td.td_link_from_a", (event) ->
-        link = $(this).find('a').attr('href')
-        if link?
-          window.location.href = link
   )
-
 
   if $('.dataTable').length
     table.columns().eq(0).each (colIdx) ->
@@ -74,9 +75,10 @@ ready = ->
         table.column(colIdx).search(this.value).draw()
       )
 
-  if table.length
-    $('input[type=text]').val("")
-    table.columns().search('').draw()
+  # if table.length
+  $('input[type=text]').val("")
+  table.columns().search('').draw()
+  $('input[type=search]').val("").trigger('input')
 
   $("#reset_table").on("click",  ->
     $('input[type=text]').val("")
@@ -84,19 +86,11 @@ ready = ->
     $('input[type=search]').val("").trigger('input')
   )
 
-  unless Modernizr.touch
-    $('.select2').select2
-      width: 'element'
+  $('.select2').select2
+    width: 'element'
 
-  if Modernizr.touch && Modernizr.inputtypes.date
-    $('.datepicker').each (i, obj) ->
-      myid = $(this).attr('id')
-      if myid
-        document.getElementById(myid).type = 'date'
-  else
-    $(".datepicker").datepicker()
+  $(".datepicker").datepicker()
 
 
-# $(document).ready(ready)
-# $(document).on('page:load', ready)
-$(document).on('turbolinks:load', ready)
+$(document).on('ready page:load', ready)
+# $(document).on('turbolinks:load', ready)
