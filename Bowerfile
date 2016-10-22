@@ -20,6 +20,7 @@ asset 'datatables-buttons', '~> 1.2', github: "DataTables/Buttons" do
     "./js/buttons.print.js"
   ]
 end
+asset 'datatables-responsive', '~> 2.1.0'
 
 # -- datatables dependencies
 asset 'jszip'

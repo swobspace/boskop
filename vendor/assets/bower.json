@@ -5,6 +5,7 @@
     "bootstrap-sass": "~> 3.3",
     "datatables": "~> 1.10.12",
     "datatables-buttons": "git://github.com/DataTables/Buttons#~> 1.2",
+    "datatables-responsive": "~> 2.1.0",
     "jszip": "latest",
     "pdfmake": "latest",
     "select2": "~> 4",
