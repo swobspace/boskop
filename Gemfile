@@ -46,6 +46,7 @@ group :development do
   gem "guard-rspec", require: false
   gem "capistrano", '~> 3.6'
   gem "capistrano-rails", '~> 1.1'
+  gem 'capistrano-passenger'
   gem "railroady"
   gem "better_errors"
   gem "binding_of_caller"
