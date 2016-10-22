@@ -32,7 +32,6 @@ RSpec.describe "merkmalklassen/index", :type => :view do
       before(:each) do
         render
       end
-      it {puts rendered}
       it { assert_select "tr>td", :text => "Name01".to_s, :count => 1 }
       it { assert_select "tr>td", :text => "Name02".to_s, :count => 1 }
       it { assert_select "tr>td", :text => "MyText".to_s, :count => 2 }
