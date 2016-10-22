@@ -5,13 +5,13 @@ asset 'jquery', '~> 2'
 
 # asset 'bootstrap'
 # >>> wob template
-asset 'bootstrap-sass'
-asset 'datatables', '~> 0.10.12' do
+asset 'bootstrap-sass', '~> 3.3'
+asset 'datatables', '~> 1.10.12' do
   main_files [
     "./media/js/dataTables.bootstrap.js"
   ]
 end
-asset 'datatables-buttons', '~> 1.2.2', github: "DataTables/Buttons" do
+asset 'datatables-buttons', '~> 1.2', github: "DataTables/Buttons" do
   main_files [
     "./js/buttons.bootstrap.js",
     "./js/buttons.colVis.js",
