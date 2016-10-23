@@ -16,5 +16,8 @@ class Network < ActiveRecord::Base
     "#{self.netzwerk.try(:to_cidr_s)} / #{self.location.try(:ort)}"
   end
 
+  def to_str
+    "#{self.netzwerk.try(:to_cidr_s)}"
+  end
 
 end

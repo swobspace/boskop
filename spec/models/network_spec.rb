@@ -19,6 +19,12 @@ RSpec.describe Network, :type => :model do
     expect("#{f}").to match /192.0.2.128\/25/
   end
 
+  describe "#to_str" do
+    let(:netzwerk) { FactoryGirl.create(:network,
+                     location_id: 1, netzwerk: '192.0.2.0/24') }
+    it { expect(netzwerk.to_str).to eq("192.0.2.0/24") }
+  end
+
   it "does not create networks with same location_id and netzwerk" do
     f = FactoryGirl.create(:network, location_id: 1, netzwerk: '192.0.2.0/24')
     expect(f).to be_valid
@@ -46,5 +52,4 @@ RSpec.describe Network, :type => :model do
       expect(netzwerk.to_cidr_mask).to eq "24"
     end
   end
-
 end
