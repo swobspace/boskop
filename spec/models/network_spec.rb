@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Network, :type => :model do
+  let(:location) { FactoryGirl.create(:location, lid: 'JCST') }
   it { is_expected.to belong_to(:location) }
   it { is_expected.to have_many(:merkmale) }
 
@@ -26,11 +27,13 @@ RSpec.describe Network, :type => :model do
   end
 
   it "allows update on netzwerk" do
-    f = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25")
-    expect(f.to_str).to eq("192.0.2.128/25")
-    f.update(netzwerk: "192.0.2.0/24")
-    f.reload
-    expect(f.to_str).to eq("192.0.2.0/24")
+    n1 = FactoryGirl.create(:network, netzwerk: "192.0.2.0/25", location: location)
+    n2 = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25", location: location)
+    n3 = FactoryGirl.create(:network, netzwerk: "192.0.0.0/21", location: location)
+    expect(n2.to_str).to eq("192.0.2.128/25")
+    n2.update(netzwerk: "192.0.2.0/24")
+    n2.reload
+    expect(n2.to_str).to eq("192.0.2.0/24")
   end
 
   it "does not create networks with same location_id and netzwerk" do
