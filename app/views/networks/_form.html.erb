@@ -12,7 +12,8 @@
     <%= form_legend %>
 
     <div class="form-inputs">
-      <%= f.input :netzwerk, as: :string
+      <%= f.input :netzwerk, as: :string,
+            input_html: {value: @network.to_str}
        %>
       <%= f.input :description
        %>
