@@ -7,7 +7,7 @@ guard :bundler do
   # watch(/^.+\.gemspec/)
 end
 
-guard 'rails', :daemon => true, :force_run => true, :timeout => 10, :server => 'thin' do
+guard 'rails', daemon: true, server: 'puma', host: '0.0.0.0' do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
@@ -21,7 +21,7 @@ end
 #  * zeus: 'zeus rspec' (requires the server to be started separetly)
 #  * 'just' rspec: 'rspec'
 
-guard :rspec, cmd: 'spring rspec' do
+guard :rspec, cmd: 'bin/rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }

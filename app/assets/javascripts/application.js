@@ -10,13 +10,13 @@
 //= require datatables/media/js/dataTables.bootstrap
 //= require datatables-buttons
 //= require datatables-buttons/js/buttons.bootstrap
-//= require datatables-buttons/js/buttons.colVis
 //= require datatables-buttons/js/buttons.flash
 //= require datatables-buttons/js/buttons.html5
 //= require datatables-buttons/js/buttons.print
-//= require datatables-colvis/js/dataTables.colVis.js
+//= require jszip/dist/jszip
+//= require pdfmake/build/pdfmake
+//= require pdfmake/build/vfs_fonts
+//= require datatables-buttons/js/buttons.colVis
 //= require select2
-//= require select2/select2_locale_de
-//= require modernizr.touch.2.8.3
 //= require boskop
 //

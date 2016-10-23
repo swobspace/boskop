@@ -12,7 +12,7 @@ RSpec.describe Merkmalklasse, :type => :model do
 
   it { is_expected.to validate_presence_of(:visible) }
   it { is_expected.to serialize(:visible).as(Array) }
-  it { pending "don't know how to do this"
+  it { pending "shoulda bug: won't work with serialized array"
        is_expected.to validate_inclusion_of(:visible).in_array(Merkmalklasse::VISIBLES) }
   it { is_expected.to allow_value('http://foo.com', 'https://bar.com/baz').
        for(:baselink) }

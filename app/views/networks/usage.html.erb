@@ -8,6 +8,7 @@
     <th><%= t('boskop.network_mask') %></th>
     <th><%= t('attributes.lid') %></th>
     <th><%= t('attributes.location') %></th>
+    <th><%= t('attributes.description') %></th>
     <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
       <%= mklasse.to_s %>
     <% end %>
@@ -17,6 +18,7 @@
 </thead>
 <tfoot>
   <tr>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -39,6 +41,7 @@
       <td>/<%= used.netzwerk.to_cidr_mask %> </td>
       <td><%= used.location.try(:lid) %> </td>
       <td><%= used.location.try(:name) %> </td>
+      <td><%= used.description %> </td>
       <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
 	<%= get_location_merkmal(used, mklasse) %>
       <% end %>
@@ -48,6 +51,7 @@
   <% end.empty? and begin %>
   <tr>
     <td><%= subnet %></td>
+    <td></td>
     <td></td>
     <td></td>
     <td></td>

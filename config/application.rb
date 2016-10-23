@@ -28,5 +28,7 @@ module Boskop
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :de
     config.time_zone = 'Berlin'
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

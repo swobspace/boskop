@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Network, :type => :model do
+  let(:location) { FactoryGirl.create(:location, lid: 'JCST') }
   it { is_expected.to belong_to(:location) }
   it { is_expected.to have_many(:merkmale) }
 
@@ -17,6 +18,22 @@ RSpec.describe Network, :type => :model do
   it "to_s returns value" do
     f = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25")
     expect("#{f}").to match /192.0.2.128\/25/
+  end
+
+  describe "#to_str" do
+    let(:netzwerk) { FactoryGirl.create(:network,
+                     location_id: 1, netzwerk: '192.0.2.0/24') }
+    it { expect(netzwerk.to_str).to eq("192.0.2.0/24") }
+  end
+
+  it "allows update on netzwerk" do
+    n1 = FactoryGirl.create(:network, netzwerk: "192.0.2.0/25", location: location)
+    n2 = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25", location: location)
+    n3 = FactoryGirl.create(:network, netzwerk: "192.0.0.0/21", location: location)
+    expect(n2.to_str).to eq("192.0.2.128/25")
+    n2.update(netzwerk: "192.0.2.0/24")
+    n2.reload
+    expect(n2.to_str).to eq("192.0.2.0/24")
   end
 
   it "does not create networks with same location_id and netzwerk" do
@@ -46,5 +63,4 @@ RSpec.describe Network, :type => :model do
       expect(netzwerk.to_cidr_mask).to eq "24"
     end
   end
-
 end

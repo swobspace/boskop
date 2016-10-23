@@ -1,14 +1,16 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.6.1'
 
 config = YAML.load_file('config/deploy-config.yml') || {}
 
 set :application, 'boskop'
 set :repo_url, config['repo_url']
 set :relative_url_root, config['relative_url_root'] || '/'
+set :ruby_path, config['ruby_path'] + ":$PATH" || "$PATH"
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+ask :branch, :master
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
@@ -36,7 +38,10 @@ set :linked_dirs, %w{bin log files tmp/pids tmp/cache tmp/sockets vendor/bundle 
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
-set :default_env, { rails_relative_url_root: fetch(:relative_url_root) }
+set :default_env, {
+  rails_relative_url_root: fetch(:relative_url_root) ,
+  path: fetch(:ruby_path)
+}
 
 set :shell, "bash -l"
 
@@ -44,25 +49,6 @@ set :shell, "bash -l"
 # set :keep_releases, 5
 
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute :touch, release_path.join('tmp/restart.txt')
-    end
-  end
-
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
   desc "Check that we can access everything"
   task :check_write_permissions do
     on roles(:all) do |host|
@@ -71,6 +57,13 @@ namespace :deploy do
       else
         error "#{fetch(:deploy_to)} is not writable on #{host}"
       end
+    end
+  end
+
+  desc "printenv"
+  task :printenv do
+    on roles(:all) do |host|
+      execute "printenv"
     end
   end
 end

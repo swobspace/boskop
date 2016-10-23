@@ -32,7 +32,24 @@ TBD
 
 Installation
 ------------
-TBD
+### Checkout Source from git
+
+    cd <basedir>
+    git clone https://github.com/swobspace/boskop.git
+    cd boskop
+
+### Install gems
+    cd boskop
+    bundle install
+
+### Setup bower an js stuff
+    sudo npm install -g bower
+    bin/rake bower:install
+
+See ''bin/rake -vT bower'' for more rake bower methods.
+
+### Setup postgres
+See ''doc/postgres.md''
 
 Configuration
 -------------

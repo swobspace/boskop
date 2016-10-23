@@ -39,4 +39,6 @@ Rails.application.configure do
 
   # -- Rails 4.2
   config.active_record.raise_in_transactional_callbacks = true
+
+  config.colorize_logging = false
 end
