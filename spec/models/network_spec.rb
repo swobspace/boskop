@@ -25,6 +25,14 @@ RSpec.describe Network, :type => :model do
     it { expect(netzwerk.to_str).to eq("192.0.2.0/24") }
   end
 
+  it "allows update on netzwerk" do
+    f = FactoryGirl.create(:network, netzwerk: "192.0.2.128/25")
+    expect(f.to_str).to eq("192.0.2.128/25")
+    f.update(netzwerk: "192.0.2.0/24")
+    f.reload
+    expect(f.to_str).to eq("192.0.2.0/24")
+  end
+
   it "does not create networks with same location_id and netzwerk" do
     f = FactoryGirl.create(:network, location_id: 1, netzwerk: '192.0.2.0/24')
     expect(f).to be_valid
