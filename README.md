@@ -15,9 +15,6 @@ boskop makes heavy usage of cidr and inet types of postgresql for searching
 and matching ip addresses and ip networks. It does not work with any other
 database yet.
 
-**THIS APPLICATION IS WORK IN PROGRESS AND NOT FUNCTIONAL YET!**
-You will loose all your hair and teeth if you use this application ;-)
-
 Requirements
 ------------
 
@@ -62,7 +59,7 @@ TBD
 Licence
 -------
 
-boskop Copyright (C) 2014-2016  Wolfgang Barth
+boskop Copyright (C) 2014-2017  Wolfgang Barth
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
