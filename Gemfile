@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 5.0.0'
 gem 'pg'
-gem 'postgres_ext'
+# gem 'postgres_ext'
 
 gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
@@ -23,9 +23,9 @@ gem 'jquery-ui-rails'
 # gem 'select2-rails'
 
 gem 'simple_form'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '1-0-stable'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
-                     branch: '1-0-stable'
+                     branch: 'master'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
@@ -60,10 +60,13 @@ group :test, :development do
 end
 
 group :test do
-  gem "shoulda", require: false
+  # gem "shoulda-matchers", require: false, git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem "shoulda-matchers", require: false
   gem 'factory_girl_rails'
   gem 'database_rewinder'
   gem "capybara"
   gem "poltergeist"
 end
 
+gem 'record_tag_helper', '~> 1.0'
+gem 'rails-controller-testing'

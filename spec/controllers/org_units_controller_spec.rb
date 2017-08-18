@@ -40,7 +40,7 @@ RSpec.describe OrgUnitsController, :type => :controller do
   describe "GET index" do
     it "assigns all org_units as @org_units" do
       org_unit = OrgUnit.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:org_units)).to eq([org_unit])
     end
   end
@@ -48,14 +48,14 @@ RSpec.describe OrgUnitsController, :type => :controller do
   describe "GET show" do
     it "assigns the requested org_unit as @org_unit" do
       org_unit = OrgUnit.create! valid_attributes
-      get :show, {:id => org_unit.to_param}, valid_session
+      get :show, params: {:id => org_unit.to_param}
       expect(assigns(:org_unit)).to eq(org_unit)
     end
   end
 
   describe "GET new" do
     it "assigns a new org_unit as @org_unit" do
-      get :new, {}, valid_session
+      get :new, params: {}
       expect(assigns(:org_unit)).to be_a_new(OrgUnit)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe OrgUnitsController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested org_unit as @org_unit" do
       org_unit = OrgUnit.create! valid_attributes
-      get :edit, {:id => org_unit.to_param}, valid_session
+      get :edit, params: {:id => org_unit.to_param}
       expect(assigns(:org_unit)).to eq(org_unit)
     end
   end
@@ -72,30 +72,30 @@ RSpec.describe OrgUnitsController, :type => :controller do
     describe "with valid params" do
       it "creates a new OrgUnit" do
         expect {
-          post :create, {:org_unit => valid_attributes}, valid_session
+          post :create, params: {:org_unit => valid_attributes}
         }.to change(OrgUnit, :count).by(1)
       end
 
       it "assigns a newly created org_unit as @org_unit" do
-        post :create, {:org_unit => valid_attributes}, valid_session
+        post :create, params: {:org_unit => valid_attributes}
         expect(assigns(:org_unit)).to be_a(OrgUnit)
         expect(assigns(:org_unit)).to be_persisted
       end
 
       it "redirects to the created org_unit" do
-        post :create, {:org_unit => valid_attributes}, valid_session
+        post :create, params: {:org_unit => valid_attributes}
         expect(response).to redirect_to(OrgUnit.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved org_unit as @org_unit" do
-        post :create, {:org_unit => invalid_attributes}, valid_session
+        post :create, params: {:org_unit => invalid_attributes}
         expect(assigns(:org_unit)).to be_a_new(OrgUnit)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:org_unit => invalid_attributes}, valid_session
+        post :create, params: {:org_unit => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -109,20 +109,20 @@ RSpec.describe OrgUnitsController, :type => :controller do
 
       it "updates the requested org_unit" do
         org_unit = OrgUnit.create! valid_attributes
-        put :update, {:id => org_unit.to_param, :org_unit => new_attributes}, valid_session
+        put :update, params: {:id => org_unit.to_param, :org_unit => new_attributes}
         org_unit.reload
         expect(org_unit.description).to be == "i have a dream"
       end
 
       it "assigns the requested org_unit as @org_unit" do
         org_unit = OrgUnit.create! valid_attributes
-        put :update, {:id => org_unit.to_param, :org_unit => valid_attributes}, valid_session
+        put :update, params: {:id => org_unit.to_param, :org_unit => valid_attributes}
         expect(assigns(:org_unit)).to eq(org_unit)
       end
 
       it "redirects to the org_unit" do
         org_unit = OrgUnit.create! valid_attributes
-        put :update, {:id => org_unit.to_param, :org_unit => valid_attributes}, valid_session
+        put :update, params: {:id => org_unit.to_param, :org_unit => valid_attributes}
         expect(response).to redirect_to(org_unit)
       end
     end
@@ -130,13 +130,13 @@ RSpec.describe OrgUnitsController, :type => :controller do
     describe "with invalid params" do
       it "assigns the org_unit as @org_unit" do
         org_unit = OrgUnit.create! valid_attributes
-        put :update, {:id => org_unit.to_param, :org_unit => invalid_attributes}, valid_session
+        put :update, params: {:id => org_unit.to_param, :org_unit => invalid_attributes}
         expect(assigns(:org_unit)).to eq(org_unit)
       end
 
       it "re-renders the 'edit' template" do
         org_unit = OrgUnit.create! valid_attributes
-        put :update, {:id => org_unit.to_param, :org_unit => invalid_attributes}, valid_session
+        put :update, params: {:id => org_unit.to_param, :org_unit => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -146,13 +146,13 @@ RSpec.describe OrgUnitsController, :type => :controller do
     it "destroys the requested org_unit" do
       org_unit = OrgUnit.create! valid_attributes
       expect {
-        delete :destroy, {:id => org_unit.to_param}, valid_session
+        delete :destroy, params: {:id => org_unit.to_param}
       }.to change(OrgUnit, :count).by(-1)
     end
 
     it "redirects to the org_units list" do
       org_unit = OrgUnit.create! valid_attributes
-      delete :destroy, {:id => org_unit.to_param}, valid_session
+      delete :destroy, params: {:id => org_unit.to_param}
       expect(response).to redirect_to(org_units_url)
     end
   end

@@ -41,7 +41,7 @@ RSpec.describe NetworksController, :type => :controller do
   describe "GET index" do
     it "assigns all networks as @networks" do
       network = Network.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:networks)).to eq([network])
     end
   end
@@ -49,26 +49,26 @@ RSpec.describe NetworksController, :type => :controller do
   describe "GET show" do
     it "assigns the requested network as @network" do
       network = Network.create! valid_attributes
-      get :show, {:id => network.to_param}, valid_session
+      get :show, params: {:id => network.to_param}
       expect(assigns(:network)).to eq(network)
     end
   end
 
   describe "GET new" do
     it "assigns a new network as @network" do
-      get :new, {}, valid_session
+      get :new, params: {}
       expect(assigns(:network)).to be_a_new(Network)
     end
     it "assigns a netzwerk to new network @network" do
-      get :new, {netzwerk: "10.20.30.0/24"}, valid_session
+      get :new, params: {netzwerk: "10.20.30.0/24"}
       expect(assigns(:network).netzwerk.to_cidr_s).to eq("10.20.30.0/24")
     end
     it "assigns a description to new network @network" do
-      get :new, {description: "brabbelfasel"}, valid_session
+      get :new, params: {description: "brabbelfasel"}
       expect(assigns(:network).description).to eq("brabbelfasel")
     end
     it "assigns location_id to new network @network" do
-      get :new, {location_id: "47110815"}, valid_session
+      get :new, params: {location_id: "47110815"}
       expect(assigns(:network).location_id).to eq(47110815)
     end
   end
@@ -76,7 +76,7 @@ RSpec.describe NetworksController, :type => :controller do
   describe "GET edit" do
     it "assigns the requested network as @network" do
       network = Network.create! valid_attributes
-      get :edit, {:id => network.to_param}, valid_session
+      get :edit, params: {:id => network.to_param}
       expect(assigns(:network)).to eq(network)
     end
   end
@@ -85,30 +85,30 @@ RSpec.describe NetworksController, :type => :controller do
     describe "with valid params" do
       it "creates a new Network" do
         expect {
-          post :create, {:network => valid_attributes}, valid_session
+          post :create, params: {:network => valid_attributes}
         }.to change(Network, :count).by(1)
       end
 
       it "assigns a newly created network as @network" do
-        post :create, {:network => valid_attributes}, valid_session
+        post :create, params: {:network => valid_attributes}
         expect(assigns(:network)).to be_a(Network)
         expect(assigns(:network)).to be_persisted
       end
 
       it "redirects to the created network" do
-        post :create, {:network => valid_attributes}, valid_session
+        post :create, params: {:network => valid_attributes}
         expect(response).to redirect_to(Network.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved network as @network" do
-        post :create, {:network => invalid_attributes}, valid_session
+        post :create, params: {:network => invalid_attributes}
         expect(assigns(:network)).to be_a_new(Network)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:network => invalid_attributes}, valid_session
+        post :create, params: {:network => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -122,7 +122,7 @@ RSpec.describe NetworksController, :type => :controller do
 
       it "updates the requested network" do
         network = Network.create! valid_attributes
-        put :update, {:id => network.to_param, :network => new_attributes}, valid_session
+        put :update, params: {:id => network.to_param, :network => new_attributes}
         network.reload
         expect(network.description).to eq("brabbelfasel")
         expect(network.to_str).to eq("192.51.81.32/27")
@@ -130,13 +130,13 @@ RSpec.describe NetworksController, :type => :controller do
 
       it "assigns the requested network as @network" do
         network = Network.create! valid_attributes
-        put :update, {:id => network.to_param, :network => valid_attributes}, valid_session
+        put :update, params: {:id => network.to_param, :network => valid_attributes}
         expect(assigns(:network)).to eq(network)
       end
 
       it "redirects to the network" do
         network = Network.create! valid_attributes
-        put :update, {:id => network.to_param, :network => valid_attributes}, valid_session
+        put :update, params: {:id => network.to_param, :network => valid_attributes}
         expect(response).to redirect_to(network)
       end
     end
@@ -144,13 +144,13 @@ RSpec.describe NetworksController, :type => :controller do
     describe "with invalid params" do
       it "assigns the network as @network" do
         network = Network.create! valid_attributes
-        put :update, {:id => network.to_param, :network => invalid_attributes}, valid_session
+        put :update, params: {:id => network.to_param, :network => invalid_attributes}
         expect(assigns(:network)).to eq(network)
       end
 
       it "re-renders the 'edit' template" do
         network = Network.create! valid_attributes
-        put :update, {:id => network.to_param, :network => invalid_attributes}, valid_session
+        put :update, params: {:id => network.to_param, :network => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -160,13 +160,13 @@ RSpec.describe NetworksController, :type => :controller do
     it "destroys the requested network" do
       network = Network.create! valid_attributes
       expect {
-        delete :destroy, {:id => network.to_param}, valid_session
+        delete :destroy, params: {:id => network.to_param}
       }.to change(Network, :count).by(-1)
     end
 
     it "redirects to the networks list" do
       network = Network.create! valid_attributes
-      delete :destroy, {:id => network.to_param}, valid_session
+      delete :destroy, params: {:id => network.to_param}
       expect(response).to redirect_to(networks_url)
     end
   end
