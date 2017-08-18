@@ -1,14 +1,21 @@
-Bower
-=====
+Yarn (internal notes)
+=====================
 
-Bower should be installed using npm. Bower can be installed globally:
+For installation requirements see installation-guide.adoc.
 
-    sudo npm install -g bower
+Add npm packages for boskop
+---------------------------
 
-Install bower stuff:
+[source,bash]
+----
+yarn add bootstrap-sass@3
+yarn add datatables.net
+yarn add datatables.net-bs
+yarn add datatables.net-buttons
+yarn add datatables.net-buttons-bs
+yarn add jszip
+yarn add pdfmake
+yarn add select2@4
+yarn add select2-bootstrap-theme
+----
 
-    bin/rake bower:install
-
-More rake tasks:
-
-    bin/rake -vT bower
