@@ -2,10 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "host_categories/new", type: :view do
   before(:each) do
-    assign(:host_category, HostCategory.new(
-      :name => "MyString",
-      :description => "MyText"
-    ))
+   @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "host_categories" }
+    allow(controller).to receive(:action_name) { "new" }
+
+    @host_category = assign(:host_category, FactoryGirl.build(:host_category))
   end
 
   it "renders new host_category form" do
