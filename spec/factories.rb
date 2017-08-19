@@ -8,6 +8,10 @@ FactoryGirl.define do
     "aname_#{n}"
   end
 
+  sequence :aip do |n|
+    "192.0.2.#{n % 256}"
+  end
+
   factory :access_type do
     name { generate(:aname) }
   end
@@ -17,6 +21,15 @@ FactoryGirl.define do
   end
 
   factory :framework_contract do
+    name { generate(:aname) }
+  end
+
+  factory :host do
+    ip { generate(:aip) }
+    lastseen { Date.today }
+  end
+
+  factory :host_category do
     name { generate(:aname) }
   end
 
