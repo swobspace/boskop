@@ -24,16 +24,17 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe HostCategoriesController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # HostCategory. As you add validations to HostCategory, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:host_category)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -97,14 +98,14 @@ RSpec.describe HostCategoriesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { description: "weisse bescheid" }
       }
 
       it "updates the requested host_category" do
         host_category = HostCategory.create! valid_attributes
         put :update, params: {id: host_category.to_param, host_category: new_attributes}, session: valid_session
         host_category.reload
-        skip("Add assertions for updated state")
+        expect(host_category.description).to eq("weisse bescheid")
       end
 
       it "redirects to the host_category" do
