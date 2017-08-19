@@ -77,7 +77,7 @@ Line:
 #              'bw2_upstream:decimal{10,1}' \
 #              'bw2_downstream:decimal{10,1}'
 #  bin/rails g migration AddCommentToLine \
-             notes:text
+#             notes:text
 
 
 AccessType:
