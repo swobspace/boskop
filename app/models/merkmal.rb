@@ -42,7 +42,7 @@ class Merkmal < ActiveRecord::Base
       true
     else
       errors.add(:base, 'only one attribute of each merkmalklasse allowed')
-      false
+      throw :abort
     end
   end
 
