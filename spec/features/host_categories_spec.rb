@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "HostCategories", type: :request do
+RSpec.describe "HostCategories", type: :feature do
   describe "GET /host_categories" do
-    it "works! (now write some real specs)" do
-      get host_categories_path
-      expect(response).to have_http_status(200)
+    it "visits host_categories#index" do
+      login_user
+      visit host_categories_path
+      expect(current_path).to eq(host_categories_path)
     end
   end
 end
