@@ -118,7 +118,7 @@ RSpec.describe "User", :type => :model do
 
     # -- not writeable
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
       it { is_expected.not_to be_able_to(:destroy, model.new) }
