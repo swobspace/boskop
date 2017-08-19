@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :host_categories
+  resources :hosts
   resources :lines do
     collection do
       get :search

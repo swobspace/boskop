@@ -87,14 +87,14 @@ AccessType:
               name:string description:text
 
 LineState:
------------ 
+---------- 
 
     bin/rails g scaffold LineState \
               name:string description:text \
               active:boolean
 
 FrameworkContract:
------------------
+------------------
 
     bin/rails g scaffold FrameworkContract \
               name:string "description:text:default{''}" \
@@ -103,27 +103,19 @@ FrameworkContract:
               renewal_period:integer renewal_unit:string \
               active:boolean
 
-Ipaddress:
-----------
-
-    bin/rails g scaffold Ipaddress \
-              name:string description:text \
-              ip:cidr \
-              'network:references:index:null{false}' \
-              host:references:index
-
 Host:
 -----
 
     bin/rails g scaffold Host \
               name:string description:text \
+              ip:cidr cpe:string:index lanmanager:string:index \
               operating_system:references:index \
+              lastseen:date mac:string \
+              host_category:references:index \
 	      location:references:index
 
-OperatingSystem:
-----------------
+HostCategory:
+-------------
 
-    bin/rails g scaffold OperatingSystem \
+    bin/rails g scaffold HostCategory \
               name:string description:text
-
-

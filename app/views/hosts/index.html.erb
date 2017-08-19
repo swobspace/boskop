@@ -1,0 +1,46 @@
+<h1><%= t('controller.hosts') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.ip') %></th>
+    <th><%= t('attributes.cpe') %></th>
+    <th><%= t('attributes.lanmanager') %></th>
+    <th><%= t('attributes.operating_system') %></th>
+    <th><%= t('attributes.lastseen') %></th>
+    <th><%= t('attributes.mac') %></th>
+    <th><%= t('attributes.host_category') %></th>
+    <th><%= t('attributes.location') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @hosts.each do |host| %>
+  <%= content_tag_for(:tr, host) do %>
+    <td><%= host.name %></td>
+    <td><%= host.description %></td>
+    <td><%= host.ip %></td>
+    <td><%= host.cpe %></td>
+    <td><%= host.lanmanager %></td>
+    <td><%= host.operating_system %></td>
+    <td><%= host.lastseen %></td>
+    <td><%= host.mac %></td>
+    <td><%= host.host_category %></td>
+    <td><%= host.location %></td>
+    <td class="nowrap">
+      <%= show_link host %>
+      <%= edit_link host %>
+      <%= delete_link host %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Host %>

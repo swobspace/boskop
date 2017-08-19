@@ -17,7 +17,8 @@ class Ability
       can :navigate, [:org_units, :configuration]
       can :read, :all
       can [:usage, :usage_form], Network
-      can :manage, [ Network, Line, Host, Ipaddress ]
+      can :manage, [ Network, Line] 
+      can [:read, :update], [Host, HostCategory]
 
     elsif @user.role?(:reader)
       can :navigate, [:org_units, :configuration]

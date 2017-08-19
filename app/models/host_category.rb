@@ -1,0 +1,2 @@
+class HostCategory < ApplicationRecord
+end
