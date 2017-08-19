@@ -14,6 +14,8 @@ de:
     cidr_example: z.B. 192.0.2.0/24
     mask_example: z.B. 21 oder 24 (mögliche Werte 1-32)
     new_network: Neues Netzwerk
+    new_line: Neue Leitung
+    network_mask: Netzwerkmaske
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
     subnet: Teilnetz
@@ -61,7 +63,10 @@ de:
     actions: Aktionen
     active: Aktiv
     address: Adresse
+    addressfor: Adresse für
     addresses: Adressen
+    ancestry: Abstammung
+    ancestry_depth: Abstammungstiefe
     baselink: Basislink
     bandwith_primary: Bandbreite Erstweg
     bandwith_secondary: Bandbreite Zweitweg
@@ -69,6 +74,7 @@ de:
     bw_upstream: Bandbreite Upstream
     bw2_downstream: Bandbreite Downstream (Zweitweg)
     bw2_upstream: Bandbreite Upstream (Zweitweg)
+    care_of: c/o
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -90,9 +96,12 @@ de:
     mandantory: Pflichtfeld
     cidr_mask: Maske (CIDR)
     merkmal: Merkmal
+    merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
     name: Name
     netzwerk: Netzwerk
+    network: Netzwerk
+    network_mask: Netzwerkmaske
     notes: Anmerkungen
     org_unit: Organisationseinheit
     ort: Ort
@@ -110,6 +119,7 @@ de:
     streetaddress: Straße, Nr.
     unique: Unique
     username: Username
+    value: Wert
     visible: Sichtbarkeit
 
   controller:
