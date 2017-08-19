@@ -1,16 +1,16 @@
 class CreateHosts < ActiveRecord::Migration[5.1]
   def change
     create_table :hosts do |t|
-      t.string :name
-      t.text :description
+      t.string :name, default: "", null: false
+      t.text :description, default: ""
       t.cidr :ip
-      t.string :cpe
-      t.string :lanmanager
-      t.references :operating_system, foreign_key: true
+      t.string :cpe, default: ""
+      t.string :lanmanager, default: ""
+      t.references :operating_system, foreign_key: false
       t.date :lastseen
-      t.string :mac
-      t.references :host_category, foreign_key: true
-      t.references :location, foreign_key: true
+      t.string :mac, default: ""
+      t.references :host_category, foreign_key: false
+      t.references :location, foreign_key: false
 
       t.timestamps
     end
