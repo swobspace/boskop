@@ -1,4 +1,4 @@
-class Line < ActiveRecord::Base
+class Line < ApplicationRecord
   # -- associations
   belongs_to :access_type
   belongs_to :framework_contract

@@ -1,4 +1,4 @@
-class Wobauth::User < ActiveRecord::Base
+class Wobauth::User < ApplicationRecord
   # dependencies within wobauth models
   include Wobauth::Concerns::Models::User
 

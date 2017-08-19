@@ -1,4 +1,4 @@
-class Merkmal < ActiveRecord::Base
+class Merkmal < ApplicationRecord
   # -- associations
   belongs_to :merkmalfor, polymorphic: true
   belongs_to :merkmalklasse
