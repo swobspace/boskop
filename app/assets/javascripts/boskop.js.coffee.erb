@@ -16,7 +16,6 @@ $.datepicker.setDefaults({
       buttonImage: "<%= asset_path('calendar.gif')%>",
       buttonImageOnly: true
 })
-Turbolinks.enableProgressBar()
 
 ready = ->
   $('.dataTable tfoot th').each  (idx) ->
@@ -91,6 +90,4 @@ ready = ->
 
   $(".datepicker").datepicker()
 
-
-$(document).on('ready page:load', ready)
-# $(document).on('turbolinks:load', ready)
+$(document).on('turbolinks:load', ready)
