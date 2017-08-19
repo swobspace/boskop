@@ -73,7 +73,7 @@ class NetworksController < ApplicationController
     end
 
     def search_params
-      params.permit(:cidr, :ort, :is_subset, :is_superset)
+      params.permit(:utf8, :cidr, :ort, :is_subset, :is_superset)
     end
 
     def usage_params
