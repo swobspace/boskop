@@ -40,5 +40,10 @@ Rails.application.configure do
   # -- Rails 4.2
   config.active_record.raise_in_transactional_callbacks = true
 
+ # --- wob
+  config.action_view.raise_on_missing_translations = true
   config.colorize_logging = false
+  # -- strong parameters
+  config.action_controller.action_on_unpermitted_parameters = :raise
+
 end
