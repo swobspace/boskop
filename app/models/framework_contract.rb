@@ -1,4 +1,4 @@
-class FrameworkContract < ActiveRecord::Base
+class FrameworkContract < ApplicationRecord
   # -- associations
   has_many :lines, dependent: :restrict_with_error
 

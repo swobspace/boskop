@@ -4,11 +4,11 @@ RSpec.describe LineState, type: :model do
  it { is_expected.to have_many(:lines) }
 
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_uniqueness_of(:name) }
 
   it "should get plain factory working" do
     f = FactoryGirl.create(:line_state)
     g = FactoryGirl.create(:line_state)
+    expect(f).to validate_uniqueness_of(:name)
     expect(f).to be_valid
     expect(g).to be_valid
   end

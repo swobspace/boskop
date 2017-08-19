@@ -1,5 +1,5 @@
 require 'cidr_addresses'
-class Network < ActiveRecord::Base
+class Network < ApplicationRecord
   # -- associations
   belongs_to :location
   has_many :merkmale, as: :merkmalfor, dependent: :destroy

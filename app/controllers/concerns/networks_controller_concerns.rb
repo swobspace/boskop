@@ -14,10 +14,10 @@ module NetworksControllerConcerns
         sub_ids = []
         super_ids = []
         if is_subset?
-          sub_ids = networks.where.contained_within_or_equals(netzwerk: cidr).pluck(:id)
+          sub_ids = networks.where("netzwerk <<= ?", cidr).pluck(:id)
         end
         if is_superset?
-          super_ids = networks.where.contains_or_equals(netzwerk: cidr).pluck(:id)
+          super_ids = networks.where("netzwerk >>= ?", cidr).pluck(:id)
         end
         networks = networks.where(['networks.id in (?)', sub_ids + super_ids])
       else
@@ -43,8 +43,8 @@ def generate_usage_map(usage_params)
       if exact_match
         nets = Network.includes(:location).where(netzwerk: subnet)
       else
-        nets = Network.includes(:location).where.contains_or_equals(netzwerk: subnet)
-        nets += Network.includes(:location).where.contained_within(netzwerk: subnet)
+        nets = Network.includes(:location).where("netzwerk <<= ?", subnet)
+        nets += Network.includes(:location).where("netzwerk >> ?", subnet)
       end
       hash[subnet.to_cidr_s] = nets
       nextsubnet = subnet.to_i + bitstep

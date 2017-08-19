@@ -1,4 +1,4 @@
-class LineState < ActiveRecord::Base
+class LineState < ApplicationRecord
   # -- associations
   has_many :lines, dependent: :restrict_with_error
 

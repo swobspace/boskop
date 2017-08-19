@@ -40,7 +40,7 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "GET #index" do
     it "assigns all access_types as @access_types" do
       access_type = AccessType.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:access_types)).to eq([access_type])
     end
   end
@@ -48,14 +48,14 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested access_type as @access_type" do
       access_type = AccessType.create! valid_attributes
-      get :show, {:id => access_type.to_param}, valid_session
+      get :show, params: {:id => access_type.to_param}
       expect(assigns(:access_type)).to eq(access_type)
     end
   end
 
   describe "GET #new" do
     it "assigns a new access_type as @access_type" do
-      get :new, {}, valid_session
+      get :new, params: {}
       expect(assigns(:access_type)).to be_a_new(AccessType)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe AccessTypesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested access_type as @access_type" do
       access_type = AccessType.create! valid_attributes
-      get :edit, {:id => access_type.to_param}, valid_session
+      get :edit, params: {:id => access_type.to_param}
       expect(assigns(:access_type)).to eq(access_type)
     end
   end
@@ -72,30 +72,30 @@ RSpec.describe AccessTypesController, type: :controller do
     context "with valid params" do
       it "creates a new AccessType" do
         expect {
-          post :create, {:access_type => valid_attributes}, valid_session
+          post :create, params: {:access_type => valid_attributes}
         }.to change(AccessType, :count).by(1)
       end
 
       it "assigns a newly created access_type as @access_type" do
-        post :create, {:access_type => valid_attributes}, valid_session
+        post :create, params: {:access_type => valid_attributes}
         expect(assigns(:access_type)).to be_a(AccessType)
         expect(assigns(:access_type)).to be_persisted
       end
 
       it "redirects to the created access_type" do
-        post :create, {:access_type => valid_attributes}, valid_session
+        post :create, params: {:access_type => valid_attributes}
         expect(response).to redirect_to(AccessType.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved access_type as @access_type" do
-        post :create, {:access_type => invalid_attributes}, valid_session
+        post :create, params: {:access_type => invalid_attributes}
         expect(assigns(:access_type)).to be_a_new(AccessType)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:access_type => invalid_attributes}, valid_session
+        post :create, params: {:access_type => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -109,20 +109,20 @@ RSpec.describe AccessTypesController, type: :controller do
 
       it "updates the requested access_type" do
         access_type = AccessType.create! valid_attributes
-        put :update, {:id => access_type.to_param, :access_type => new_attributes}, valid_session
+        put :update, params: {:id => access_type.to_param, :access_type => new_attributes}
         access_type.reload
         expect(access_type.description).to eq("very long line")
       end
 
       it "assigns the requested access_type as @access_type" do
         access_type = AccessType.create! valid_attributes
-        put :update, {:id => access_type.to_param, :access_type => valid_attributes}, valid_session
+        put :update, params: {:id => access_type.to_param, :access_type => valid_attributes}
         expect(assigns(:access_type)).to eq(access_type)
       end
 
       it "redirects to the access_type" do
         access_type = AccessType.create! valid_attributes
-        put :update, {:id => access_type.to_param, :access_type => valid_attributes}, valid_session
+        put :update, params: {:id => access_type.to_param, :access_type => valid_attributes}
         expect(response).to redirect_to(access_type)
       end
     end
@@ -130,13 +130,13 @@ RSpec.describe AccessTypesController, type: :controller do
     context "with invalid params" do
       it "assigns the access_type as @access_type" do
         access_type = AccessType.create! valid_attributes
-        put :update, {:id => access_type.to_param, :access_type => invalid_attributes}, valid_session
+        put :update, params: {:id => access_type.to_param, :access_type => invalid_attributes}
         expect(assigns(:access_type)).to eq(access_type)
       end
 
       it "re-renders the 'edit' template" do
         access_type = AccessType.create! valid_attributes
-        put :update, {:id => access_type.to_param, :access_type => invalid_attributes}, valid_session
+        put :update, params: {:id => access_type.to_param, :access_type => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -146,13 +146,13 @@ RSpec.describe AccessTypesController, type: :controller do
     it "destroys the requested access_type" do
       access_type = AccessType.create! valid_attributes
       expect {
-        delete :destroy, {:id => access_type.to_param}, valid_session
+        delete :destroy, params: {:id => access_type.to_param}
       }.to change(AccessType, :count).by(-1)
     end
 
     it "redirects to the access_types list" do
       access_type = AccessType.create! valid_attributes
-      delete :destroy, {:id => access_type.to_param}, valid_session
+      delete :destroy, params: {:id => access_type.to_param}
       expect(response).to redirect_to(access_types_url)
     end
   end

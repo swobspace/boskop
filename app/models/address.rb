@@ -1,4 +1,4 @@
-class Address < ActiveRecord::Base
+class Address < ApplicationRecord
   # -- associations
   belongs_to :addressfor, polymorphic: true
 
