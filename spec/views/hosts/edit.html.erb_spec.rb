@@ -2,17 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "hosts/edit", type: :view do
   before(:each) do
-    @host = assign(:host, Host.create!(
-      :name => "MyString",
-      :description => "MyText",
-      :ip => "",
-      :cpe => "MyString",
-      :lanmanager => "MyString",
-      :operating_system => nil,
-      :mac => "MyString",
-      :host_category => nil,
-      :location => nil
-    ))
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "hosts" }
+    allow(controller).to receive(:action_name) { "edit" }
+
+    @host = assign(:host, FactoryGirl.create(:host))
   end
 
   it "renders the edit host form" do
@@ -30,13 +26,11 @@ RSpec.describe "hosts/edit", type: :view do
 
       assert_select "input[name=?]", "host[lanmanager]"
 
-      assert_select "input[name=?]", "host[operating_system_id]"
-
       assert_select "input[name=?]", "host[mac]"
 
-      assert_select "input[name=?]", "host[host_category_id]"
+      assert_select "select[name=?]", "host[host_category_id]"
 
-      assert_select "input[name=?]", "host[location_id]"
+      assert_select "select[name=?]", "host[location_id]"
     end
   end
 end

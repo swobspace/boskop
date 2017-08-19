@@ -12,25 +12,26 @@
     <%= form_legend %>
 
     <div class="form-inputs">
+      <%= f.input :ip, as: :string
+       %>
       <%= f.input :name
        %>
       <%= f.input :description
-       %>
-      <%= f.input :ip
        %>
       <%= f.input :cpe
        %>
       <%= f.input :lanmanager
        %>
-      <%= f.association :operating_system
-       %>
-      <%= f.input :lastseen
+      <%= f.input :lastseen, as: :string
        %>
       <%= f.input :mac
        %>
-      <%= f.association :host_category
+      <%= f.association :host_category,
+            input_html: { class: 'select2' }
        %>
-      <%= f.association :location
+      <%= f.association :location,
+            label_method: :to_str,
+            input_html: { class: 'select2' }
        %>
     </div>
 

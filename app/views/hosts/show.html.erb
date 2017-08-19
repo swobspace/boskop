@@ -20,10 +20,6 @@
     <td><%= @host.lanmanager %></td>
   </tr>
   <tr>
-    <th><%= t('attributes.operating_system')%>:</th>
-    <td><%= @host.operating_system %></td>
-  </tr>
-  <tr>
     <th><%= t('attributes.lastseen')%>:</th>
     <td><%= @host.lastseen %></td>
   </tr>
@@ -33,11 +29,11 @@
   </tr>
   <tr>
     <th><%= t('attributes.host_category')%>:</th>
-    <td><%= @host.host_category %></td>
+    <td><%= @host.host_category.to_s %></td>
   </tr>
   <tr>
     <th><%= t('attributes.location')%>:</th>
-    <td><%= @host.location %></td>
+    <td><%= @host.location.try(:lid) %></td>
   </tr>
 </table>
 

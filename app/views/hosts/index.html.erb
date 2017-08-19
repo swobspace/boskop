@@ -8,7 +8,6 @@
     <th><%= t('attributes.ip') %></th>
     <th><%= t('attributes.cpe') %></th>
     <th><%= t('attributes.lanmanager') %></th>
-    <th><%= t('attributes.operating_system') %></th>
     <th><%= t('attributes.lastseen') %></th>
     <th><%= t('attributes.mac') %></th>
     <th><%= t('attributes.host_category') %></th>
@@ -25,11 +24,10 @@
     <td><%= host.ip %></td>
     <td><%= host.cpe %></td>
     <td><%= host.lanmanager %></td>
-    <td><%= host.operating_system %></td>
     <td><%= host.lastseen %></td>
     <td><%= host.mac %></td>
-    <td><%= host.host_category %></td>
-    <td><%= host.location %></td>
+    <td><%= host.host_category.to_s %></td>
+    <td><%= host.location.try(:lid) %></td>
     <td class="nowrap">
       <%= show_link host %>
       <%= edit_link host %>
