@@ -48,6 +48,7 @@ de:
       framework_contract: Rahmenvertrag
       group: Gruppe
       host: Host
+      host_category: Host-Kategorie
       ipaddress: IP-Adresse
       line: Leitung/Zugang
       line_state: Status
@@ -78,6 +79,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
+    cpe: CPE
     description: Beschreibung
     displayname: Anzeigename
     exact_match: exakte Treffer
@@ -86,7 +88,10 @@ de:
     framework_contract: Rahmenvertrag
     givenname: Vorname
     host: Host
-    ipaddress: IP-Adresse
+    host_categorie: Host-Kategorie
+    ip: IP-Adresse
+    lastseen: zuletzt gesehen
+    lanmanager: Lanmanager
     lid: StandortID
     line: Leitung/Zugang
     line_state: Status
@@ -95,6 +100,7 @@ de:
     location_b: Standort B
     mandantory: Pflichtfeld
     cidr_mask: Maske (CIDR)
+    mac: MAC
     merkmal: Merkmal
     merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
@@ -103,6 +109,7 @@ de:
     network: Netzwerk
     network_mask: Netzwerkmaske
     notes: Anmerkungen
+    operating_system: Betriebssystem
     org_unit: Organisationseinheit
     ort: Ort
     period_of_notice: Kündigungsfrist
@@ -127,6 +134,7 @@ de:
     addresses: Adressen
     framework_contracts: Rahmenverträge
     hosts: Hosts
+    host_categories: Host-Kategorien
     ipaddresses: IP-Adressen
     lines: Leitungen/Zugänge
     line_states: Status
