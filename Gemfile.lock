@@ -20,10 +20,10 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 9a0b474d306783ca5441163cb8c6bc892ff2ce5f
+  revision: 783c4141d7d28e1de2312fdfdc667b46281a4eff
   branch: master
   specs:
-    wobauth (2.0.0)
+    wobauth (2.0.2)
       cancancan
       coffee-rails
       devise
