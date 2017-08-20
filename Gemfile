@@ -64,3 +64,6 @@ end
 
 gem 'record_tag_helper', '~> 1.0'
 gem 'rails-controller-testing'
+gem 'delayed_job_active_record'
+gem 'daemons'
+
