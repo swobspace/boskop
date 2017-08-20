@@ -8,13 +8,17 @@ RSpec.describe "lines/edit", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "edit" }
 
+   access_type = FactoryGirl.create(:access_type)
+   location    = FactoryGirl.create(:location)
+   line_state  = FactoryGirl.create(:line_state)
+
     @line = assign(:line, Line.create!(
       :name => "MyString",
       :description => "MyText",
       :provider_id => "MyString",
-      :location_a_id => 1,
+      :location_a => location,
       :location_b_id => 1,
-      :access_type_id => 1,
+      :access_type => access_type,
       :bw_upstream => "9.99",
       :bw_downstream => "9.99",
       :bw2_upstream => "9.99",
@@ -25,7 +29,7 @@ RSpec.describe "lines/edit", type: :view do
       :period_of_notice_unit => "month",
       :renewal_period => 1,
       :renewal_unit => "year",
-      :line_state_id => 1
+      :line_state => line_state
     ))
   end
 

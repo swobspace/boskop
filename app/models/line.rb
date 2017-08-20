@@ -1,10 +1,10 @@
 class Line < ApplicationRecord
   # -- associations
   belongs_to :access_type
-  belongs_to :framework_contract
+  belongs_to :framework_contract, optional: true
   belongs_to :line_state
   belongs_to :location_a, class_name: "Location"
-  belongs_to :location_b, class_name: "Location"
+  belongs_to :location_b, class_name: "Location", optional: true
 
   # -- configuration
 

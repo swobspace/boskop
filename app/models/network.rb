@@ -1,7 +1,7 @@
 require 'cidr_addresses'
 class Network < ApplicationRecord
   # -- associations
-  belongs_to :location
+  belongs_to :location, optional: true
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true

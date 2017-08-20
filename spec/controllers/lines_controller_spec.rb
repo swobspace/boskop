@@ -27,7 +27,7 @@ RSpec.describe LinesController, type: :controller do
 
   let!(:location) { FactoryGirl.create(:location) }
   let!(:access_type) { FactoryGirl.create(:access_type) }
-  let!(:line_state) { FactoryGirl.create(:access_type) }
+  let!(:line_state) { FactoryGirl.create(:line_state) }
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:line, 
       location_a_id: location.id, 

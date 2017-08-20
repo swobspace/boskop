@@ -1,8 +1,8 @@
 class Host < ApplicationRecord
   # -- associations
-  belongs_to :operating_system
-  belongs_to :host_category
-  belongs_to :location
+  belongs_to :operating_system, optional: true
+  belongs_to :host_category, optional: true
+  belongs_to :location, optional: true
 
   # -- configuration
   # -- validations and callbacks
