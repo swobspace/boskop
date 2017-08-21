@@ -1,12 +1,13 @@
 # config valid only for current version of Capistrano
-lock '3.6.1'
+lock '~>3.9.0'
 
 config = YAML.load_file('config/deploy-config.yml') || {}
 
 set :application, 'boskop'
 set :repo_url, config['repo_url']
 set :relative_url_root, config['relative_url_root'] || '/'
-set :ruby_path, config['ruby_path'] + ":$PATH" || "$PATH"
+set :ruby_path, config['ruby_path']
+set :passenger_restart_with_touch, true
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -40,7 +41,7 @@ set :linked_dirs, %w{bin log files tmp/pids tmp/cache tmp/sockets vendor/bundle 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :default_env, {
   rails_relative_url_root: fetch(:relative_url_root) ,
-  path: fetch(:ruby_path)
+  path: fetch(:ruby_path) { "$PATH" }
 }
 
 set :shell, "bash -l"
@@ -48,7 +49,7 @@ set :shell, "bash -l"
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-namespace :deploy do
+namespace :check do
   desc "Check that we can access everything"
   task :check_write_permissions do
     on roles(:all) do |host|
@@ -56,6 +57,17 @@ namespace :deploy do
         info "#{fetch(:deploy_to)} is writable on #{host}"
       else
         error "#{fetch(:deploy_to)} is not writable on #{host}"
+      end
+    end
+  end
+
+  desc "check configuration and installation"
+  task :configinstall do
+    on roles(:app, :web) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'installation:all'
+        end
       end
     end
   end
@@ -68,15 +80,6 @@ namespace :deploy do
   end
 end
 
-namespace :bower do
-  desc 'Install bower'
-  task :install do
-    on roles(:web) do
-      within release_path do
-        execute :rake, 'bower:install CI=true'
-      end
-    end
-  end
-end
+# before 'deploy:compile_assets', 'bower:install'
+after 'deploy:symlink:release', 'check:configinstall'
 
-before 'deploy:compile_assets', 'bower:install'
