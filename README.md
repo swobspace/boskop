@@ -39,11 +39,8 @@ Installation
     cd boskop
     bundle install
 
-### Setup bower an js stuff
-    sudo npm install -g bower
-    bin/rake bower:install
-
-See ''bin/rake -vT bower'' for more rake bower methods.
+### Setup yarn
+    yarn install
 
 ### Setup postgres
 See ''doc/postgres.md''

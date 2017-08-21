@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers.git
-  revision: e9b6689344a50a35d851dc995e7f5d19e5855e33
+  revision: 451fe30a9eb1e20a33aa175ab32153dffda4927b
   branch: master
   specs:
-    wobapphelpers (2.0.1)
+    wobapphelpers (2.1.0)
       coffee-rails
       jquery-rails
       rails (~> 5.0)
@@ -20,10 +20,10 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 783c4141d7d28e1de2312fdfdc667b46281a4eff
+  revision: 35526c7271bb1499fd96ac2557e2309fe5a3d6d4
   branch: master
   specs:
-    wobauth (2.0.2)
+    wobauth (2.1.0)
       cancancan
       coffee-rails
       devise
@@ -90,7 +90,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bower-rails (0.11.0)
     builder (3.2.3)
     callsite (0.0.11)
     cancancan (2.0.0)
@@ -385,7 +384,6 @@ DEPENDENCIES
   ancestry
   better_errors
   binding_of_caller
-  bower-rails (~> 0.11.0)
   cancancan
   capistrano (~> 3.6)
   capistrano-passenger

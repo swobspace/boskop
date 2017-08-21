@@ -14,8 +14,6 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem "bower-rails", "~> 0.11.0"
-
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
