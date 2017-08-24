@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170820093009) do
+ActiveRecord::Schema.define(version: 20170824130747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20170820093009) do
     t.text "description", default: ""
     t.cidr "ip"
     t.string "cpe", default: ""
-    t.string "lanmanager", default: ""
+    t.string "raw_os", default: ""
     t.bigint "operating_system_id"
     t.date "lastseen"
     t.string "mac", default: ""
@@ -88,9 +88,9 @@ ActiveRecord::Schema.define(version: 20170820093009) do
     t.datetime "updated_at", null: false
     t.index ["cpe"], name: "index_hosts_on_cpe"
     t.index ["host_category_id"], name: "index_hosts_on_host_category_id"
-    t.index ["lanmanager"], name: "index_hosts_on_lanmanager"
     t.index ["location_id"], name: "index_hosts_on_location_id"
     t.index ["operating_system_id"], name: "index_hosts_on_operating_system_id"
+    t.index ["raw_os"], name: "index_hosts_on_raw_os"
   end
 
   create_table "line_states", id: :serial, force: :cascade do |t|

@@ -108,7 +108,7 @@ Host:
 
     bin/rails g scaffold Host \
               name:string description:text \
-              ip:cidr cpe:string:index lanmanager:string:index \
+              ip:cidr cpe:string:index raw_os:string:index \
               operating_system:references:index \
               lastseen:date mac:string \
               host_category:references:index \
