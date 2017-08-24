@@ -17,7 +17,7 @@ RSpec.describe "hosts/index", type: :view do
         :description => "Runningforever",
         :ip => "192.168.81.82",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
-        :lanmanager => "Windows 7 Professional 6.1",
+        :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
         :host_category => hostcategory,
         :location => location),
@@ -26,7 +26,7 @@ RSpec.describe "hosts/index", type: :view do
         :description => "Runningforever",
         :ip => "192.168.83.84",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
-        :lanmanager => "Windows 7 Professional 6.1",
+        :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
         :host_category => hostcategory,
         :location => location)

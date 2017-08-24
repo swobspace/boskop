@@ -24,7 +24,7 @@ RSpec.describe "hosts/new", type: :view do
 
       assert_select "input[name=?]", "host[cpe]"
 
-      assert_select "input[name=?]", "host[lanmanager]"
+      assert_select "input[name=?]", "host[raw_os]"
 
       assert_select "input[name=?]", "host[mac]"
 

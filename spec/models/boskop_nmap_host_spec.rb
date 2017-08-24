@@ -32,7 +32,7 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.hostname).to eq("wob42") }
     it { expect(subject.status).to eq("up") }
     it { expect(subject.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
-    it { expect(subject.lanmanager).to eq("Windows 10 Pro 6.3") }
+    it { expect(subject.raw_os).to eq("Windows 10 Pro 15063") }
     it { expect(subject.server).to eq("DESKTOP-6GLIL73\\x00") }
     it { expect(subject.fqdn).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.mac).to eq("C8:FF:28:78:29:DB") }
@@ -42,7 +42,7 @@ RSpec.describe Boskop::NMAP::Host do
            name: "wob42",
            status: "up",
            cpe: "cpe:/o:microsoft:windows_10::-",
-           lanmanager: "Windows 10 Pro 6.3",
+           raw_os: "Windows 10 Pro 15063",
            server: "DESKTOP-6GLIL73\\x00",
            fqdn: "DESKTOP-6GLIL73") }
   end
@@ -57,7 +57,7 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.status).to eq("up") }
     it { expect(subject.mac).to eq("C8:FF:28:78:29:DB") }
     it { expect(subject.cpe).to be_nil }
-    it { expect(subject.lanmanager).to be_nil }
+    it { expect(subject.raw_os).to be_nil }
     it { expect(subject.server).to be_nil }
     it { expect(subject.fqdn).to be_nil }
     it { expect(subject.attributes).to include(
@@ -65,7 +65,7 @@ RSpec.describe Boskop::NMAP::Host do
            ip: '192.168.1.42',
            name: "wobntb",
            status: "up") }
-    it { expect(subject.attributes).not_to include( :cpe, :lanmanager, :server, :fqdn )}
+    it { expect(subject.attributes).not_to include( :cpe, :raw_os, :server, :fqdn )}
   end
 
 end

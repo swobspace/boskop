@@ -92,7 +92,7 @@ de:
     host_category: Host-Kategorie
     ip: IP-Adresse
     lastseen: zuletzt gesehen
-    lanmanager: Lanmanager
+    raw_os: OS (raw)
     lid: StandortID
     line: Leitung/Zugang
     line_state: Status

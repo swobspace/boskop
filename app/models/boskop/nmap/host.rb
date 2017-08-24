@@ -10,7 +10,7 @@ module Boskop
       alias_attribute :name, :hostname
 
       ATTRIBUTES = [:lastseen, :ip, :name, :status, :mac,
-                    :lanmanager, :server, :fqdn, :cpe]
+                    :raw_os, :server, :fqdn, :cpe]
 
       # Boskop::NMAP::Host.new(nmaphost: <Nmap::Host>)
       # required option:
@@ -38,8 +38,8 @@ module Boskop
       end
 
       # windows product string
-      def lanmanager
-        smb_os_discovery['lanmanager']
+      def raw_os
+        smb_os_discovery['os']
       end
 
       # netbios name
