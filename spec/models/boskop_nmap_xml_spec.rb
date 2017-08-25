@@ -19,6 +19,12 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject.error_message.present?).to be_truthy }
   end
 
+  describe "with empty input file" do
+    subject { Boskop::NMAP::XML.new(file: "") }
+    it { expect(subject).not_to be_valid }
+    it { expect(subject.error_message.present?).to be_truthy }
+  end
+
   describe "with valid input xml file without script_data" do
     let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-42.xml') }
     subject { Boskop::NMAP::XML.new(file: nmapxml) }
