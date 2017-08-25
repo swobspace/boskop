@@ -5,7 +5,7 @@ require 'nmap/xml'
 module Boskop
   module NMAP
     class XML
-      attr_reader :file, :options
+      attr_reader :file, :options, :error_message
 
       # Boskop::NMAP.new(file: scanme.nmap.org.xml)
       # required option:
@@ -15,11 +15,13 @@ module Boskop
 	@options = options.symbolize_keys!
 	@file    = options.fetch(:file)
 	@xml     = Nmap::XML.new(file)
+        @error_message = nil
 	if xml.scan_info.present?
           @valid = true
 	else
 	  @xml = nil
           @valid = false
+          @error_message = "can't parse #{file}, seems not to be a nmap xml file"
 	end
       end
 

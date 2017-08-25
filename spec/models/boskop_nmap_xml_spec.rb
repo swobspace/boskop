@@ -16,6 +16,7 @@ RSpec.describe Boskop::NMAP::XML do
   describe "with invalid input file" do
     subject { Boskop::NMAP::XML.new(file: testpdf) }
     it { expect(subject).not_to be_valid }
+    it { expect(subject.error_message.present?).to be_truthy }
   end
 
   describe "with valid input xml file without script_data" do
@@ -25,6 +26,7 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject.respond_to? :options).to be_truthy}
     it { expect(subject.respond_to? :file).to be_truthy}
     it { expect(subject.respond_to? :valid?).to be_truthy}
+    it { expect(subject.respond_to? :error_message).to be_truthy}
     it { expect(subject).to be_a_kind_of Boskop::NMAP::XML }
     it { expect(subject).to be_valid }
     it { expect(subject.all_hosts.first).to be_a_kind_of Boskop::NMAP::Host }
