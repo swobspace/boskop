@@ -189,6 +189,7 @@ GEM
       rspec (>= 2.99.0, < 4.0)
     http_parser.rb (0.6.0)
     i18n (0.8.6)
+    immutable-struct (2.2.3)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -404,6 +405,7 @@ DEPENDENCIES
   guard-livereload
   guard-rails
   guard-rspec
+  immutable-struct
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails

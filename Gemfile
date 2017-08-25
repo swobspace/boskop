@@ -67,4 +67,5 @@ gem 'rails-controller-testing'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem "ruby-nmap"
+gem 'immutable-struct'
 
