@@ -8,6 +8,9 @@
     <th><%= t('attributes.ip') %></th>
     <th><%= t('attributes.cpe') %></th>
     <th><%= t('attributes.raw_os') %></th>
+    <th><%= t('attributes.fqdn') %></th>
+    <th><%= t('attributes.domain_dns') %></th>
+    <th><%= t('attributes.workgroup') %></th>
     <th><%= t('attributes.lastseen') %></th>
     <th><%= t('attributes.mac') %></th>
     <th><%= t('attributes.host_category') %></th>
@@ -24,6 +27,9 @@
     <td><%= host.ip %></td>
     <td><%= host.cpe %></td>
     <td><%= host.raw_os %></td>
+    <td><%= host.fqdn %></td>
+    <td><%= host.domain_dns %></td>
+    <td><%= host.workgroup %></td>
     <td><%= host.lastseen %></td>
     <td><%= host.mac %></td>
     <td><%= host.host_category.to_s %></td>

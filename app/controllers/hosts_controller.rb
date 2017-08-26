@@ -51,6 +51,6 @@ class HostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def host_params
-      params.require(:host).permit(:name, :description, :ip, :cpe, :raw_os, :operating_system_id, :lastseen, :mac, :host_category_id, :location_id)
+      params.require(:host).permit(:name, :description, :ip, :cpe, :raw_os, :operating_system_id, :lastseen, :mac, :host_category_id, :location_id, :fqdn, :workgroup, :domain_dns)
     end
 end

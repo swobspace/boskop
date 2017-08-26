@@ -19,6 +19,9 @@ RSpec.describe "hosts/index", type: :view do
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
+        :fqdn => "MyLovelyHost.example.net",
+        :domain_dns => "example.net",
+        :workgroup => "Workgroup3",
         :host_category => hostcategory,
         :location => location),
       FactoryGirl.create(:host,
@@ -28,6 +31,9 @@ RSpec.describe "hosts/index", type: :view do
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
+        :fqdn => "MyLovelyHost.example.net",
+        :domain_dns => "example.net",
+        :workgroup => "Workgroup3",
         :host_category => hostcategory,
         :location => location)
     ])
@@ -42,6 +48,9 @@ RSpec.describe "hosts/index", type: :view do
     assert_select "tr>td", :text => "cpe:/o:microsoft:windows_7::sp1:professional".to_s, :count => 2
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
     assert_select "tr>td", :text => "MAC".to_s, :count => 2
+    assert_select "tr>td", :text => "MyLovelyHost.example.net".to_s, :count => 2
+    assert_select "tr>td", :text => "example.net".to_s, :count => 2
+    assert_select "tr>td", :text => "Workgroup3".to_s, :count => 2
     assert_select "tr>td", :text => "LID".to_s, :count => 2
     assert_select "tr>td", :text => "SecureServer".to_s, :count => 2
   end

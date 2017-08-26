@@ -98,7 +98,8 @@ RSpec.describe HostsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { name: "othertux" }
+        { name: "othertux", fqdn: 'othertux.example.net', 
+          domain_dns: 'example.net', workgroup: 'WORKGROUP2' }
       }
 
       it "updates the requested host" do
@@ -106,6 +107,9 @@ RSpec.describe HostsController, type: :controller do
         put :update, params: {id: host.to_param, host: new_attributes}, session: valid_session
         host.reload
         expect(host.name).to eq("othertux")
+        expect(host.fqdn).to eq("othertux.example.net")
+        expect(host.domain_dns).to eq("example.net")
+        expect(host.workgroup).to eq("WORKGROUP2")
       end
 
       it "redirects to the host" do
