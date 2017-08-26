@@ -114,6 +114,10 @@ Host:
               host_category:references:index \
 	      location:references:index
 
+   bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
+              fqdn:string workgroup:string domain_dns:string
+        
+
 HostCategory:
 -------------
 
