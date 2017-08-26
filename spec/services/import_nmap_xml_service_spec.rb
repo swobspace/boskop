@@ -33,18 +33,27 @@ RSpec.describe ImportNmapXmlService do
 	  subject.call
 	}.to change{Host.count}.by(1)
       end
-      it "testoutput" do
-        result = subject.call
-        puts result.inspect
-      end
 
       describe "#call" do
         let(:result) { subject.call }
         it { expect(result.success?).to be_truthy }
         it { expect(result.error_message.present?).to be_falsey }
         it { expect(result.hosts).to be_a_kind_of Array }
-        it { expect(result.hosts.first).to be_a_kind_of Host }
-        it { expect(result.hosts.first).to be_persisted }
+
+        describe "the first host" do
+          let(:host) { result.hosts.first }
+          it { expect(host).to be_a_kind_of Host }
+          it { expect(host).to be_persisted }
+          it { expect(host.ip.to_s).to eq("192.168.1.42") }
+          it { expect(host.lastseen.to_s).to match(/\A2017-08-20/) }
+          it { expect(host.name).to eq("wob42") }
+          it { expect(host.mac).to eq("C8:FF:28:78:29:DB") }
+          it { expect(host.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
+          it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
+          it { expect(host.fqdn).to eq("DESKTOP-6GLIL73") }
+          it { expect(host.workgroup).to eq("WORKGROUP") }
+          it { expect(host.domain_dns).to eq("DESKTOP-6GLIL73") }
+        end
       end
     end
 
