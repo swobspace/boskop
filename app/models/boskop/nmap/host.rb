@@ -10,6 +10,7 @@ module Boskop
       alias_attribute :name, :hostname
 
       ATTRIBUTES = [:lastseen, :ip, :name, :status, :mac,
+                    :fqdn, :domain_dns, :workgroup,
                     :raw_os, :server, :fqdn, :cpe]
 
       # Boskop::NMAP::Host.new(nmaphost: <Nmap::Host>)
@@ -44,12 +45,22 @@ module Boskop
 
       # netbios name
       def server
-        smb_os_discovery['server']
+        smb_os_discovery['server'].to_s.gsub(/\\x00/,'')
       end
 
       # full qualified domain name
       def fqdn
         smb_os_discovery['fqdn']
+      end
+
+      # windows workgroup
+      def workgroup
+        smb_os_discovery['workgroup'].to_s.gsub(/\\x00/,'')
+      end
+
+      # full qualified domain from smb-os-discovery (windows)
+      def domain_dns
+        smb_os_discovery['domain_dns']
       end
 
       # common plattform enumeration

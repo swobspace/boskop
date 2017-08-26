@@ -22,6 +22,9 @@ RSpec.describe Boskop::NMAP::Host do
   describe "with valid nmaphost and script data" do
     let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'smb-os-discovery-42.xml') }
     subject { Boskop::NMAP::Host.new(nmaphost: nmaphost) }
+    before(:each) do
+      allow(subject).to receive(:domain_dns).and_return('mydomain.example.net')
+    end
 
     it { expect(subject.respond_to? :options).to be_truthy}
     it { expect(subject.respond_to? :valid?).to be_truthy}
@@ -33,7 +36,7 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.status).to eq("up") }
     it { expect(subject.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
     it { expect(subject.raw_os).to eq("Windows 10 Pro 15063") }
-    it { expect(subject.server).to eq("DESKTOP-6GLIL73\\x00") }
+    it { expect(subject.server).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.fqdn).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.mac).to eq("C8:FF:28:78:29:DB") }
     it { expect(subject.attributes).to include(
@@ -43,7 +46,9 @@ RSpec.describe Boskop::NMAP::Host do
            status: "up",
            cpe: "cpe:/o:microsoft:windows_10::-",
            raw_os: "Windows 10 Pro 15063",
-           server: "DESKTOP-6GLIL73\\x00",
+           server: "DESKTOP-6GLIL73",
+           workgroup: "WORKGROUP",
+           domain_dns: "mydomain.example.net",
            fqdn: "DESKTOP-6GLIL73") }
   end
 
@@ -58,7 +63,7 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.mac).to eq("C8:FF:28:78:29:DB") }
     it { expect(subject.cpe).to be_nil }
     it { expect(subject.raw_os).to be_nil }
-    it { expect(subject.server).to be_nil }
+    it { expect(subject.server.blank?).to be_truthy }
     it { expect(subject.fqdn).to be_nil }
     it { expect(subject.attributes).to include(
            mac: "C8:FF:28:78:29:DB",
