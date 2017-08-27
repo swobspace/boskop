@@ -30,6 +30,7 @@ RSpec.describe "hosts/edit", type: :view do
       assert_select "input[name=?]", "host[fqdn]"
       assert_select "input[name=?]", "host[domain_dns]"
       assert_select "input[name=?]", "host[workgroup]"
+      assert_select "input[name=?]", "host[vendor]"
 
       assert_select "select[name=?]", "host[host_category_id]"
 

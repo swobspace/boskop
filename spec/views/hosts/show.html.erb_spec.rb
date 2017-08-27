@@ -18,6 +18,7 @@ RSpec.describe "hosts/show", type: :view do
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
       :raw_os => "Windows 7 Professional 6.1",
       :mac => "MAC",
+      :vendor => "Tuxolino",
       :fqdn => "MyLovelyHost.example.net",
       :domain_dns => "example.net",
       :workgroup => "Workgroup3",
@@ -34,6 +35,7 @@ RSpec.describe "hosts/show", type: :view do
     expect(rendered).to match("cpe:/o:microsoft:windows_7::sp1:professional")
     expect(rendered).to match(/Windows 7 Professional 6.1/)
     expect(rendered).to match(/MAC/)
+    expect(rendered).to match(/Tuxolino/)
     expect(rendered).to match(/MyLovelyHost.example.net/)
     expect(rendered).to match(/example.net/)
     expect(rendered).to match(/Workgroup3/)

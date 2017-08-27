@@ -99,6 +99,7 @@ RSpec.describe HostsController, type: :controller do
     context "with valid params" do
       let(:new_attributes) {
         { name: "othertux", fqdn: 'othertux.example.net', 
+          vendor: "Tuxolino",
           domain_dns: 'example.net', workgroup: 'WORKGROUP2' }
       }
 
@@ -108,6 +109,7 @@ RSpec.describe HostsController, type: :controller do
         host.reload
         expect(host.name).to eq("othertux")
         expect(host.fqdn).to eq("othertux.example.net")
+        expect(host.vendor).to eq("Tuxolino")
         expect(host.domain_dns).to eq("example.net")
         expect(host.workgroup).to eq("WORKGROUP2")
       end

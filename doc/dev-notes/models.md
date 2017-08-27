@@ -110,13 +110,15 @@ Host:
               name:string description:text \
               ip:cidr cpe:string:index raw_os:string:index \
               operating_system:references:index \
-              lastseen:date mac:string \
+              lastseen:date mac:string vendor:string \
               fqdn:string workgroup:string domain_dns:string \
               host_category:references:index \
 	      location:references:index
 
 #    bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
 #               fqdn:string workgroup:string domain_dns:string
+
+#    bin/rails g migration AddVendorToHost vendor:string
 
 HostCategory:
 -------------

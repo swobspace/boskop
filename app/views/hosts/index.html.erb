@@ -13,6 +13,7 @@
     <th><%= t('attributes.workgroup') %></th>
     <th><%= t('attributes.lastseen') %></th>
     <th><%= t('attributes.mac') %></th>
+    <th><%= t('attributes.vendor') %></th>
     <th><%= t('attributes.host_category') %></th>
     <th><%= t('attributes.location') %></th>
     <th></th>
@@ -32,6 +33,7 @@
     <td><%= host.workgroup %></td>
     <td><%= host.lastseen %></td>
     <td><%= host.mac %></td>
+    <td><%= host.vendor %></td>
     <td><%= host.host_category.to_s %></td>
     <td><%= host.location.try(:lid) %></td>
     <td class="nowrap">
