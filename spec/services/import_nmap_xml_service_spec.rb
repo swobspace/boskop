@@ -74,5 +74,104 @@ RSpec.describe ImportNmapXmlService do
       end
     end
   end
+  
+  describe "with existing host" do
+    let!(:host) { FactoryGirl.create(:host, 
+      ip: '192.51.100.17',
+      lastseen: 1.day.ago(Date.today),
+      name: 'myhost',
+      cpe: "/o:microsoft:windows:4711",
+      fqdn: 'myhost.example.net'
+    )}
+    before(:each) do
+      allow_any_instance_of(Boskop::NMAP::Host).to receive_messages(
+        ip: '192.51.100.17',
+        name: 'otherhost',
+        cpe: "/o:linux:tux",
+        fqdn: 'otherhost.example.net',
+        domain_dns: 'example.net',
+        workgroup: 'WORKGROUP5'
+      )
+    end
 
+    describe "update: :none" do
+      let(:service) { ImportNmapXmlService.new(file: nmapxml, update: :none) }
+      it "updates only lastseen" do
+        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
+          at_least(:once).and_return(1.week.after(Date.today))
+        service.call
+        host = Host.first
+        expect(host.ip.to_s).to eq("192.51.100.17")
+        expect(host.lastseen.to_s).to eq(1.week.after(Date.today).to_s)
+        expect(host.name).to eq("myhost")
+        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.fqdn).to eq("myhost.example.net")
+        expect(host.domain_dns).to eq("")
+        expect(host.workgroup).to eq("")
+      end
+    end
+
+    describe "update: :newer" do
+      let(:service) { ImportNmapXmlService.new(file: nmapxml, update: :newer) }
+
+      it "doesn't update any attribute from old data" do
+        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
+          at_least(:once).and_return(1.year.ago(Date.today).to_s)
+        service.call
+        host = Host.first
+        expect(host.ip.to_s).to eq("192.51.100.17")
+        expect(host.lastseen.to_s).to eq(1.day.ago(Date.today).to_s)
+        expect(host.name).to eq("myhost")
+        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.fqdn).to eq("myhost.example.net")
+        expect(host.domain_dns).to eq("")
+        expect(host.workgroup).to eq("")
+      end
+
+      it "updates any attribute from current data" do
+        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
+          at_least(:once).and_return(1.week.after(Date.today))
+        service.call
+        host = Host.first
+        expect(host.lastseen.to_s).to eq(1.week.after(Date.today).to_s)
+        expect(host.ip.to_s).to eq("192.51.100.17")
+        expect(host.name).to eq("otherhost")
+        expect(host.cpe).to eq("/o:linux:tux")
+        expect(host.fqdn).to eq("otherhost.example.net")
+        expect(host.domain_dns).to eq("example.net")
+        expect(host.workgroup).to eq("WORKGROUP5")
+      end
+    end
+    describe "update: :missing" do
+      let!(:service) { ImportNmapXmlService.new(file: nmapxml, update: :missing) }
+
+      it "updates only missing attributes if data is not older than 4 weeks" do
+        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
+          at_least(:once).and_return(Date.today)
+        service.call
+        host = Host.first
+        expect(host.ip.to_s).to eq("192.51.100.17")
+        expect(host.lastseen.to_s).to eq(Date.today.to_s)
+        expect(host.name).to eq("myhost")
+        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.fqdn).to eq("myhost.example.net")
+        expect(host.domain_dns).to eq("example.net")
+        expect(host.workgroup).to eq("WORKGROUP5")
+      end
+      it "doesn't update any attribute from old data" do
+        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
+          at_least(:once).and_return(1.year.ago(Date.today).to_s)
+        service.call
+        host = Host.first
+        expect(host.ip.to_s).to eq("192.51.100.17")
+        expect(host.lastseen.to_s).to eq(1.day.ago(Date.today).to_s)
+        expect(host.name).to eq("myhost")
+        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.fqdn).to eq("myhost.example.net")
+        expect(host.domain_dns).to eq("")
+        expect(host.workgroup).to eq("")
+      end
+
+    end
+  end
 end
