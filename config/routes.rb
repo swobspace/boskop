@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :host_categories
+  post "hosts", to: "hosts#index", constraints: lambda {|req| req.format == :json}
   resources :hosts
   resources :lines do
     collection do

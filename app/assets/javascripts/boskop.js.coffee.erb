@@ -22,6 +22,7 @@ ready = ->
     title = $('.dataTable thead th').eq( $(this).index() ).text()
     $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
 
+  # --- classic datatable ---
   table = $(".dataTable").DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
@@ -84,6 +85,67 @@ ready = ->
     table.columns().search('').draw()
     $('input[type=search]').val("").trigger('input')
   )
+  # --- end classic datatable ---
+
+  # --- remote datatable ---
+  remotetable = $(".remoteDataTable").DataTable(
+    processing: true
+    serverSide: true
+    ajax:
+      url: $(this).data('url')
+      type: "POST"
+    pagingType: "full_numbers"
+    dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    stateSave: false
+    responsive: true
+    language:
+      url: "<%= asset_path('dataTable.german.txt') %>"
+    buttons: [
+      {
+        extend: 'excel'
+        title: $('.remoteDataTable').data('title')
+        text: 'Excel'
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      {
+        extend: 'pdf',
+        orientation: 'landscape',
+        pageSize: 'A4',
+        title: $('.remoteDataTable').data('title')
+        text: 'PDF'
+        exportOptions: {
+          columns: ':visible',
+          search: ':applied'
+        }
+      },
+      'print',
+      {
+        extend: 'colvis',
+        text: 'Print'
+        columns: ':gt(0)'
+      }
+    ]
+  )
+
+  if $('.remoteDataTable').length
+    remotetable.columns().eq(0).each (colIdx) ->
+      $('input[name=idx'+colIdx+']').on( 'keyup change', ->
+        remotetable.column(colIdx).search(this.value).draw()
+      )
+
+  # if remotetable.length
+  remotetable.columns().search('').draw()
+  $('input[type=search]').val("").trigger('input')
+
+  $("#reset_table").on("click",  ->
+    $('input[type=text]').val("")
+    remotetable.columns().search('').draw()
+    $('input[type=search]').val("").trigger('input')
+  )
+  # --- end remote datatable ---
 
   $('.select2').select2
     width: 'element'
