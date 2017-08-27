@@ -80,7 +80,13 @@ module Boskop
       end
 
       def smb_os_discovery
-        script_data['smb-os-discovery'] || {}
+        # smb-os-discovery is [] if an script error in case of
+        # ERROR: Script execution failed (use -d to debug)"
+        if script_data['smb-os-discovery'].nil? || script_data['smb-os-discovery'].empty?
+          {}
+        else
+          script_data['smb-os-discovery']
+        end
       end
 
       def is_ipv4?
