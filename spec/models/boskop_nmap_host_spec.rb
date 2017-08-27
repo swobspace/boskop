@@ -39,8 +39,10 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.server).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.fqdn).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.mac).to eq("C8:FF:28:78:29:DB") }
+    it { expect(subject.vendor).to eq("Liteon Technology") }
     it { expect(subject.attributes).to include(
            mac: "C8:FF:28:78:29:DB",
+           vendor: "Liteon Technology",
            ip: '192.168.1.42',
            name: "wob42",
            status: "up",

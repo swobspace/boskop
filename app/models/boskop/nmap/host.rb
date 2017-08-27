@@ -9,7 +9,7 @@ module Boskop
       attr_reader :options
       alias_attribute :name, :hostname
 
-      ATTRIBUTES = [:lastseen, :ip, :name, :status, :mac,
+      ATTRIBUTES = [:lastseen, :ip, :name, :status, :mac, :vendor,
                     :fqdn, :domain_dns, :workgroup,
                     :raw_os, :server, :fqdn, :cpe]
 
@@ -34,7 +34,7 @@ module Boskop
         nmaphost.start_time
       end
 
-      [:ip, :hostname, :status, :mac].each do |attr|
+      [:ip, :hostname, :status, :mac, :vendor].each do |attr|
         define_method(attr) { nmaphost.send(attr).to_s }
       end
 
