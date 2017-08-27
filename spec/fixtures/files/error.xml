@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.50 scan initiated Thu Jul 20 09:40:44 2017 as: nmap -sU -sS -&#45;script smb-os-discovery.nse -p U:137,T:139,T:445 -oA /home/wob/forensic/tools/nmap/smb-os-discovery/smb-os-discovery-172_17_16_0_20 172.17.16.0/20 -->
+<nmaprun scanner="nmap" args="nmap -sU -sS -&#45;script smb-os-discovery.nse -p U:137,T:139,T:445 -oA /home/wob/forensic/tools/nmap/smb-os-discovery/smb-os-discovery-172_17_16_0_20 172.17.16.0/20" start="1500536444" startstr="Thu Jul 20 09:40:44 2017" version="7.50" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<scaninfo type="udp" protocol="udp" numservices="1" services="137"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1500536444" endtime="1500537117"><status state="up" reason="echo-reply" reason_ttl="57"/>
+<address addr="172.17.22.16" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="57"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="closed" reason="reset" reason_ttl="57"/><service name="microsoft-ds" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="57"/><service name="netbios-ns" method="table" conf="3"/></port>
+</ports>
+<hostscript><script id="smb-os-discovery" output="ERROR: Script execution failed (use -d to debug)"/></hostscript><times srtt="9172" rttvar="7132" to="100000"/>
+</host>
+<runstats><finished time="1500537299" timestr="Thu Jul 20 09:54:59 2017" elapsed="855.30" summary="Nmap done at Thu Jul 20 09:54:59 2017; 4096 IP addresses (2316 hosts up) scanned in 855.30 seconds" exit="success"/><hosts up="2316" down="1780" total="4096"/>
+</runstats>
+</nmaprun>
