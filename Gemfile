@@ -69,5 +69,3 @@ gem 'daemons'
 gem "ruby-nmap"
 gem 'immutable-struct'
 gem 'kaminari'
-
-gem 'devise', '< 4.3.0'
