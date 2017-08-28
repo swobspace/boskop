@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Mon Aug 28 08:17:49 2017 as: nmap -v -sP -PE -oX down.xml 198.51.100.1 -->
+<nmaprun scanner="nmap" args="nmap -v -sP -PE -oX down.xml 198.51.100.1" start="1503901069" startstr="Mon Aug 28 08:17:49 2017" version="7.60" xmloutputversion="1.04">
+<verbose level="1"/>
+<debugging level="0"/>
+<taskbegin task="Ping Scan" time="1503901069"/>
+<taskend task="Ping Scan" time="1503901071" extrainfo="1 total hosts"/>
+<host><status state="down" reason="no-response" reason_ttl="0"/>
+<address addr="198.51.100.1" addrtype="ipv4"/>
+</host>
+<runstats><finished time="1503901071" timestr="Mon Aug 28 08:17:51 2017" elapsed="2.05" summary="Nmap done at Mon Aug 28 08:17:51 2017; 1 IP address (0 hosts up) scanned in 2.05 seconds" exit="success"/><hosts up="0" down="1" total="1"/>
+</runstats>
+</nmaprun>
