@@ -18,12 +18,12 @@ $.datepicker.setDefaults({
 })
 
 ready = ->
-  $('.dataTable tfoot th').each  (idx) ->
-    title = $('.dataTable thead th').eq( $(this).index() ).text()
+  $('table tfoot th').each  (idx) ->
+    title = $('table thead th').eq( $(this).index() ).text()
     $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
 
   # --- classic datatable ---
-  table = $(".dataTable").DataTable(
+  table = $('table[role="datatable"]').DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
@@ -69,13 +69,11 @@ ready = ->
       }
     ]
   )
-
-  if $('.dataTable').length
+  if $('table[role="datatable"]').length
     table.columns().eq(0).each (colIdx) ->
       $('input[name=idx'+colIdx+']').on( 'keyup change', ->
         table.column(colIdx).search(this.value).draw()
       )
-
   # if table.length
   table.columns().search('').draw()
   $('input[type=search]').val("").trigger('input')
@@ -88,11 +86,12 @@ ready = ->
   # --- end classic datatable ---
 
   # --- remote datatable ---
-  remotetable = $(".remoteDataTable").DataTable(
+  remotetableurl = $('table[role="remotetable"]').data('url')
+  remotetable = $('table[role="remotetable"]').DataTable(
     processing: true
     serverSide: true
     ajax:
-      url: $(this).data('url')
+      url: remotetableurl
       type: "POST"
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
@@ -103,7 +102,7 @@ ready = ->
     buttons: [
       {
         extend: 'excel'
-        title: $('.remoteDataTable').data('title')
+        title: $('table[role="remotetable"]').data('title')
         text: 'Excel'
         exportOptions: {
           columns: ':visible',
@@ -114,7 +113,7 @@ ready = ->
         extend: 'pdf',
         orientation: 'landscape',
         pageSize: 'A4',
-        title: $('.remoteDataTable').data('title')
+        title: $('table[role="remotetable"]').data('title')
         text: 'PDF'
         exportOptions: {
           columns: ':visible',
@@ -129,8 +128,7 @@ ready = ->
       }
     ]
   )
-
-  if $('.remoteDataTable').length
+  if $('table[role="remotetable"]').length
     remotetable.columns().eq(0).each (colIdx) ->
       $('input[name=idx'+colIdx+']').on( 'keyup change', ->
         remotetable.column(colIdx).search(this.value).draw()

@@ -4,9 +4,9 @@
 
 <h1><%= t('controller.hosts') %></h1>
 
-<%= content_tag :table, role: :datatable,
+<%= content_tag :table, role: :remotetable,
       id: 'hosts_table',
-      class: "table table-bordered table-striped remoteDataTable",
+      class: "table table-bordered table-striped",
       data: {
         url: hosts_path(format: :json),
         order: [[0, 'desc']].to_json
