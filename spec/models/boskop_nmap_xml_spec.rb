@@ -36,6 +36,21 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject).to be_a_kind_of Boskop::NMAP::XML }
     it { expect(subject).to be_valid }
     it { expect(subject.all_hosts.first).to be_a_kind_of Boskop::NMAP::Host }
+
+  end
+
+  context "input data with down host" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'down.xml') }
+
+    describe "#all_hosts(force: true)" do
+      let(:xml) { Boskop::NMAP::XML.new(file: nmapxml) }
+      it { expect(xml.all_hosts(force: true).first.ip.to_s).to eq("198.51.100.1") }
+    end
+
+    describe "#all_hosts(force: false)" do
+      let(:xml) { Boskop::NMAP::XML.new(file: nmapxml) }
+      it { expect(xml.all_hosts(force: false)).to contain_exactly() }
+    end
   end
 
   describe "with valid input xml file and script_data" do
