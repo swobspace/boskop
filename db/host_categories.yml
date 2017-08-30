@@ -1,0 +1,90 @@
+# HostCategory/Example
+# 
+# to import:
+# rails console production
+# irb:1> config = YAML::load_file(File.join(Rails.root, 'db', 'host_categories.yml'))
+# irb:2> HostCategory.create(config['host_categories'])
+#
+
+host_categories:
+  - name: Windows/Terminalserver
+    tag: win_ts
+    description: Terminalserver (Citrix, RDP u.a.)
+  - name: Datenbankserver
+    tag: win_db
+    description: "Datenbankserver: alle Datenbanken (Oracle, MS-SQL, MySQL, PostgreSQL, Firebird, etc.)"
+  - name: Windows/Fileserver
+    tag: win_fs
+    description: Windows-Fileserver, kein NAS
+  - name: NAS
+    tag: nas
+    description: Netzwerkspeicher (NAS)
+  - name: Windows/Printserver
+    tag: win_ps
+    description: Windows-Druckserver, keine Printboxen
+  - name: Windows/Exchange-Server
+    tag: exchange
+    description: Exchange-Server
+  - name: Windows/sonstiger Server
+    tag: win_sons
+    description: sonstiger Windows-Server
+  - name: Linux/Sonstige
+    tag: lin_sons
+    description: allgemeine Linux-Systeme (keine Webserver, kein OSM-Labor)
+  - name: Windows/Webserver
+    tag: win_web
+    description: Webserver auf Windows-Basis
+  - name: Linux/Webserver
+    tag: lin_web
+    description: Linux-Webserver
+  - name: Linux/Nagios
+    tag: nagios
+    description: Nagios-Server
+  - name: Firewall/hspfire
+    tag: hspfire
+    description: Firewall, basierend auf hspfire
+  - name: Firewall/Cisco
+    tag: fw_cisco
+    description: Cisco ASA, PIX und vergleichbare
+  - name: Firewall/Sophos
+    tag: fw_sophos
+    description: Sophos UTM, Astaro etc.
+  - name: Firewall/Sonstige
+    tag: fw_sons
+    description: Sonstiger Firewall
+  - name: Netzwerk/Switch
+    tag: net_sw
+    description: allgemeiner Netzwerkswitch
+  - name: Netzwerk/WLAN
+    tag: net_wlan
+    description: WLAN-Komponente (Controller, Accesspoint)
+  - name: Virtualisierung/Host
+    tag: vhost
+    description: Virtualisierungshost (VMware, XEN, Hyper-V, etc.); keine virtuellen Maschinen
+  - name: Haustechnik/GLT
+    tag: glt
+    description: Gebäude-Leittechnik
+  - name: Haustechnik/Sonstige
+    tag: haustechnik
+    description: "Sonstige Haustechnik: Blockheizkraftwerk, Parkplatz, Aufzug, etc."
+  - name: Drucker
+    tag: printer
+    description: Drucker, Multifunktionsgeräte etc.
+  - name: TK/TK-Anlage
+    tag: tk
+    description: TK-Anlagen, keine Endgeräte
+  - name: TK/Telefon
+    tag: telefon
+    description: Telefone (Endgeräte)
+  - name: Medizintechnik/Radiologie
+    tag: med_rad
+    description: "Medizintechnik aus der Radiologie: Großgeräte, Untersuchungsplätze, Befundungsstationen"
+  - name: Medizintechnik/Labor
+    tag: med_lab
+    description: Medizintechnik/Labor
+  - name: Medizintechnik/Funktionsdiagnostik
+    tag: med_func
+    description: "Medizintechnik: Ultraschall, Endoskopie, etc."
+  - name: Medizintechnik/Sonstige
+    tag: med_sons
+    description: "Medizintechnik: sonstige Geräte"
