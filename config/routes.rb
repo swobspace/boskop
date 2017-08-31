@@ -30,8 +30,8 @@ Rails.application.routes.draw do
 
   resources :merkmalklassen
 
-  mount Wobauth::Engine, at: '/'
-
   root 'locations#index'
+
+  mount Wobauth::Engine, at: '/auth'
 
 end
