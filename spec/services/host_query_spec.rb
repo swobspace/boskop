@@ -265,7 +265,6 @@ RSpec.describe HostQuery do
     subject { HostQuery.new(all_hosts, {lastseen: Date.today.to_s[0,7]}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
-      it { puts subject.all.to_sql }
     end
     describe "#find_each" do
       it "executes matching hosts" do
@@ -289,7 +288,6 @@ RSpec.describe HostQuery do
     subject { HostQuery.new(all_hosts, {host_category: 'Linux'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(vpngw) }
-      it { puts subject.all.to_sql }
     end
     describe "#find_each" do
       it "executes matching hosts" do
@@ -313,7 +311,6 @@ RSpec.describe HostQuery do
     subject { HostQuery.new(all_hosts, {lid: 'paRis'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas) }
-      it { puts subject.all.to_sql }
     end
     describe "#find_each" do
       it "executes matching hosts" do
