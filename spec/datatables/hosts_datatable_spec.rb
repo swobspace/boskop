@@ -23,67 +23,8 @@ end
 
 RSpec.describe HostsDatatable, type: :model do
   include HostsDatatableHelper
-  # order "name asc": MYNAS01, MYPC002, MYPC003, MYPC005, vpngw
-  let!(:nas)  { FactoryGirl.create(:host, 
-    name: "MYNAS01",
-    description: "Backup station",
-    ip: '198.51.100.17',
-    cpe: "cpe:/o:linux:linux_kernel:2.6",
-    raw_os: "storage-misc",
-    fqdn: 'nas01.my.example.net',
-    domain_dns: 'my.example.net',
-    workgroup: 'MY',
-    lastseen: Date.today,
-    mac: '00:84:ed:12:34:56',
-  )}
-  let!(:pc2)  { FactoryGirl.create(:host, 
-    name: "MYPC002",
-    description: "workstation",
-    ip: '198.51.100.65',
-    cpe: "cpe:/o:microsoft:windows_7::sp1:professional",
-    raw_os: "Windows 7 Professional 7601 Service Pack 1",
-    fqdn: 'mypc002.my.example.net',
-    domain_dns: 'my.example.net',
-    workgroup: 'MY',
-    lastseen: Date.today,
-    mac: '00:84:ed:00:12:02',
-  )}
-  let!(:pc3)  { FactoryGirl.create(:host, 
-    name: "MYPC003",
-    description: "workstation",
-    ip: '198.51.100.66',
-    cpe: "cpe:/o:microsoft:windows_7::sp1:professional",
-    raw_os: "Windows 7 Professional 7601 Service Pack 1",
-    fqdn: 'mypc003.my.example.net',
-    domain_dns: 'my.example.net',
-    workgroup: 'MY',
-    lastseen: Date.today,
-    mac: '00:84:ed:00:12:03',
-  )}
-  let!(:vpngw)  { FactoryGirl.create(:host, 
-    name: "vpngw",
-    description: "VPN gateway",
-    ip: '203.0.113.1',
-    cpe: "cpe:/o:linux:linux_kernel:4.4",
-    raw_os: "Linux 4.4",
-    fqdn: 'vpngw.external.net',
-    domain_dns: 'external.net',
-    workgroup: '',
-    lastseen: Date.today,
-    mac: '12:34:56:99:99:98',
-  )}
-  let!(:pc5)  { FactoryGirl.create(:host, 
-    name: "MYPC005",
-    description: "very old workstation",
-    ip: '198.51.100.70',
-    cpe: "cpe:/o:microsoft:windows_xp::-",
-    raw_os: "Windows 5.1",
-    fqdn: 'mypc005.my.example.net',
-    domain_dns: 'my.example.net',
-    workgroup: 'MY',
-    lastseen: Date.today,
-    mac: '00:84:ed:00:12:05',
-  )}
+  include_context "host variables"
+
   let(:view_context) { double("ActionView::Base") }
   let(:hosts)        { Host.left_outer_joins(:location, :host_category) }
   let(:datatable)    { HostsDatatable.new(hosts, view_context) }
