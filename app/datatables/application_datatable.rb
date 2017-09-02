@@ -1,4 +1,5 @@
 class ApplicationDatatable
+  include ApplicationDatatableConcerns
   delegate :params, to: :@view
   delegate :link_to, to: :@view
   delegate :show_link, to: :@view
