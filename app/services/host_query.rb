@@ -74,7 +74,7 @@ private
           search_string << "hosts.#{term} ILIKE :search"
         end
         if search_value =~ /\/\d{1,2}\z/
-          search_string << "ip <<= :search"
+          search_string << "ip <<= '#{search_value}'"
         else
           search_string << "host(ip) ILIKE :search"
         end
