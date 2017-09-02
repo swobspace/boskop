@@ -112,5 +112,13 @@ RSpec.describe ApplicationDatatableConcerns, type: :model do
                                            "lid", "description")}
     end
 
+    describe "#search_params({}, columns)" do
+      subject { search_params({}, host_columns) }
+      it "results in empty hash" do
+        expect(subject).to eq({})
+      end
+    
+    end
+
   end
 end
