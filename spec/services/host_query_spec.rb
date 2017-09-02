@@ -329,4 +329,28 @@ RSpec.describe HostQuery do
       it { expect(subject.include?(vpngw)).to be_falsey }
     end
   end # search :lid
+
+  context "with :search" do
+    subject { HostQuery.new(all_hosts, {search: 'nas'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas) }
+      it { puts subject.all.to_sql }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_falsey }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :search
 end

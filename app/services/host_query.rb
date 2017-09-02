@@ -51,6 +51,8 @@ private
 
   def build_query
     query = relation
+    search_string = [] # for global search_option :search
+    search_value  = search_options.fetch(:search, false) # for global option :search
     search_options.each do |key,value|
       case key 
       when *string_fields
@@ -67,10 +69,25 @@ private
         query = query.where("host_categories.name ILIKE ?", "#{value}%")
       when :lid
         query = query.where("locations.lid ILIKE ?", "#{value}%")
+      when :search
+        string_fields.each do |term|
+          search_string << "hosts.#{term} ILIKE :search"
+        end
+        if search_value =~ /\/\d{1,2}\z/
+          search_string << "ip <<= :search"
+        else
+          search_string << "host(ip) ILIKE :search"
+        end
+        search_string << "to_char(lastseen, 'IYYY-MM-DD') ILIKE :search"
+        search_string << "host_categories.name ILIKE :search"
+        search_string << "locations.lid ILIKE :search"
       else
         raise ArgumentError, "unknown search option #{key}"
       end
     end
+    if search_value
+      query = query.where(search_string.join(' or '), search: "%#{search_value}%")
+     end
     query
   end
 
