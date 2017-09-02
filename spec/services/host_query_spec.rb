@@ -330,27 +330,30 @@ RSpec.describe HostQuery do
     end
   end # search :lid
 
-  context "with :search" do
-    subject { HostQuery.new(all_hosts, {search: 'nas'}) }
-    describe "#all" do
+  describe "#all" do
+    context "with search: 'nas'" do
+      subject { HostQuery.new(all_hosts, {search: 'nas'}) }
       it { expect(subject.all).to contain_exactly(nas) }
-      it { puts subject.all.to_sql }
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id)
-      end
+    context "with search: '198.51.100'" do
+      subject { HostQuery.new(all_hosts, {search: '198.51.100'}) }
+      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
     end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
+    context "with search: '198.51.100.0/26'" do
+      subject { HostQuery.new(all_hosts, {search: '198.51.100.0/26'}) }
+      it { expect(subject.all).to contain_exactly(nas, pc2) }
     end
-  end # search :search
+    context "with search: #{Date.today.to_s[0,7]}" do
+      subject { HostQuery.new(all_hosts, {search: Date.today.to_s[0,7]}) }
+      it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
+    end
+    context "with search: 'linux'" do
+      subject { HostQuery.new(all_hosts, {search: 'firewall'}) }
+      it { expect(subject.all).to contain_exactly(vpngw) }
+    end
+    context "with search: 'PariS'" do
+      subject { HostQuery.new(all_hosts, {search: 'PariS'}) }
+      it { expect(subject.all).to contain_exactly(nas) }
+    end
+  end
 end

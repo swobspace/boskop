@@ -1,5 +1,5 @@
 shared_context "host variables" do
-  let!(:cat_linux) { FactoryGirl.create(:host_category, name: 'linux') }
+  let!(:cat_linux) { FactoryGirl.create(:host_category, name: 'linux firewall') }
   let!(:loc_paris) { FactoryGirl.create(:location, name: 'Paris', lid: 'PARIS') }
   # order "name asc": MYNAS01, MYPC002, MYPC003, MYPC005, vpngw
   let!(:nas)  { FactoryGirl.create(:host, 
