@@ -74,11 +74,10 @@ RSpec.describe HostsDatatable, type: :model do
 
   describe "with search:nas" do
     let(:myparams) {{
-      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
-      search: {value: "nas", regex: "false"}
+      "search"=> {"value"=>"nas", regex: "false"}
     }}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
@@ -92,7 +91,7 @@ RSpec.describe HostsDatatable, type: :model do
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
-      search: {value: "198.51.100", regex: "false"}
+      "search" => {"value" => "198.51.100", regex: "false"}
     }}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
