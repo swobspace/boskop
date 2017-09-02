@@ -1,7 +1,7 @@
 ##
 # Query object mainly for use in activities_controller
 class HostQuery
-  attr_reader :search_options, :display_options, :query
+  attr_reader :search_options, :query
 
   ##
   # possible search options:
@@ -19,17 +19,12 @@ class HostQuery
   # * :host_category - host_categories.name (string)
   # * :lid - location.lid (string)
   #
-  # possible display options:
-  # * :order - sql style like "field asc"
-  # * :per_page - number of returned hosts per page
-  # * :page - search hosts for page :page
+  # please note: 
+  # left_outer_join(:host_category, :location) must exist in relation.
   #
-  # please note: joins
-  #
-  def initialize(relation, search_options = {}, display_options = {})
+  def initialize(relation, search_options = {})
     @relation = relation
     @search_options  = search_options.symbolize_keys!
-    @display_options = display_options.symbolize_keys!
     @query   ||= build_query
   end
 
