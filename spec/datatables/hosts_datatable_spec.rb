@@ -43,6 +43,7 @@ RSpec.describe HostsDatatable, type: :model do
 
   describe "without search params, start:0, length:10" do
     let(:myparams) {{
+      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "desc"}},
       start: "0",
       length: "10",
@@ -58,6 +59,7 @@ RSpec.describe HostsDatatable, type: :model do
 
   describe "without search params, start:2, length:2" do
     let(:myparams) {{
+      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "2",
       length: "2",
@@ -72,6 +74,7 @@ RSpec.describe HostsDatatable, type: :model do
 
   describe "with search:nas" do
     let(:myparams) {{
+      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
@@ -85,6 +88,7 @@ RSpec.describe HostsDatatable, type: :model do
 
   describe "with search:198.51.100" do
     let(:myparams) {{
+      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",

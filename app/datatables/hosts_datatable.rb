@@ -51,20 +51,17 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def fetch_hosts
-    search_string = []
-    columns.each do |term|
-      search_string << "#{term} like :search"
-    end
-
-    # will_paginate
-    # hosts = Host.page(page).per_page(per_page)
     hosts = relation.order("#{sort_column} #{sort_direction}")
     hosts = hosts.page(page).per(per_page)
-    hosts = hosts.where(search_string.join(' or '), search: "%#{params[:search][:value]}%")
+    hosts = HostQuery.new(hosts, search_params(params, search_columns)).all
   end
 
   def columns
-    %w(hosts.name hosts.description host(ip) cpe raw_os fqdn domain_dns workgroup '' mac vendor host_categories.name locations.lid)
+    %w(hosts.name hosts.description host(ip) cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_categories.name locations.lid)
+  end
+
+  def search_columns
+    %w(name description ip cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid)
   end
 
 end
