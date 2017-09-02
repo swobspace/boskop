@@ -8,6 +8,11 @@ module ApplicationDatatableConcerns
         end
       end
     end
+    unless params['search'].nil?
+      unless params['search']['value'].blank?
+        searchparms['search'] = params['search']['value']
+      end
+    end
     searchparms
   end
 end
