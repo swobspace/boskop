@@ -61,6 +61,13 @@ RSpec.describe NetworksController, :type => :controller do
     end
   end
 
+  describe "GET usage_form" do
+    it "displays the usage_form form" do
+      get :usage_form, params: {}
+      expect(response).to render_template('usage_form')
+    end
+  end
+
   describe "GET new" do
     it "assigns a new network as @network" do
       get :new, params: {}
@@ -94,6 +101,17 @@ RSpec.describe NetworksController, :type => :controller do
       it "shows matching networks" do
         network = FactoryGirl.create(:network, netzwerk: '192.168.1.0/24')
         post :search, params: search_attributes
+        expect(assigns(:networks)).to include(network)
+      end
+    end
+  end
+
+  describe "POST usage" do
+    describe "with valid params" do
+      let(:usage_attributes) {{ cidr: '192.168.0.0/16', mask: '24' }}
+      it "shows network usage table" do
+        network = FactoryGirl.create(:network, netzwerk: '192.168.1.0/24')
+        post :usage, params: usage_attributes
         expect(assigns(:networks)).to include(network)
       end
     end
