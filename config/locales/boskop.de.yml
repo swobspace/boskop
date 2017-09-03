@@ -33,6 +33,7 @@ de:
     describe_contract_period: Beschreibung der Vertragsdauer in Textform
     primary_line: Erstweg
     secondary_line: Zweitweg
+    import_host_file: Hosts aus Datei importieren
 
   actions:
     destroy: Datensatz löschen
@@ -41,6 +42,7 @@ de:
     search: Suche
     cancel: abbrechen
     reset_table: Tabelle zurücksetzen
+    upload: Upload
 
   activerecord:
     models:
@@ -85,6 +87,7 @@ de:
     displayname: Anzeigename
     domain_dns: Domain
     exact_match: exakte Treffer
+    file: Datei
     format: Format
     for_object: Objektklasse 
     fqdn: FQDN
@@ -127,7 +130,9 @@ de:
     renewal_unit: Einheit
     sn: Nachname
     streetaddress: Straße, Nr.
+    type: Typ
     unique: Unique
+    update: Update
     username: Username
     value: Wert
     vendor: Vendor
