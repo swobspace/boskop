@@ -1,0 +1,48 @@
+<%= form_tag import_hosts_path, role: "form",
+    multipart: true,
+    method: :post, class: 'form-horizontal well' do %> 
+
+  <fieldset>
+    <legend>Import Hosts from File</legend>
+    <div class="form-group">
+      <label for="file" class="col-sm-2 control-label">
+        <%= t('attributes.file') %>
+      </label>
+      <div class="col-sm-9">
+        <input type="file" class="form-control" id="file" name="file" 
+               placeholder="<%= t('boskop.import_host_file') %>">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="type" class="col-sm-2 control-label">
+        <%= t('attributes.type') %>
+      </label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" id="type" name="type">
+          <%= options_for_select([["CSV", "csv"], ["XML", "xml"]]) %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="update" class="col-sm-2 control-label">
+        <%= t('attributes.update') %>
+      </label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" id="update" name="update">
+          <%= options_for_select([["None", "none"], ["Newer", "newer"], ["Missing", "missing"]]) %>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-9">
+        <button type="submit" class="btn btn-primary"><%= t('actions.upload') %></button>
+
+        <%= cancel_button %>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>
