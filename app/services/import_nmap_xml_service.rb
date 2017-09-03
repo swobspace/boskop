@@ -18,7 +18,7 @@ class ImportNmapXmlService
   #
   def initialize(options = {})
     options.symbolize_keys!
-    @xmlfile = options.fetch(:file).to_s
+    @xmlfile = get_file(options)
     @update  = options.fetch(:update) { :none }
   end
 
@@ -82,4 +82,14 @@ private
     result.merge(recently_seen)
   end
 
+  # file may be ActionDispatch::Http::UploadedFile
+  #
+  def get_file(options)
+    file = options.fetch(:file)
+    if file.respond_to?(:path)
+      file.path
+    else
+      file.to_s
+    end
+  end
 end

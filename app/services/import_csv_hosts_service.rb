@@ -19,7 +19,7 @@ class ImportCsvHostsService
   #
   def initialize(options = {})
     options.symbolize_keys!
-    @csvfile = options.fetch(:file).to_s
+    @csvfile = get_file(options)
     @update  = options.fetch(:update) { :none }
   end
 
@@ -57,19 +57,20 @@ private
   end
 
   def attributes_for_update(csvattributes, host)
-    recently_seen = (csvattributes[:lastseen].to_date > host.lastseen) ? 
-                    { lastseen: csvattributes[:lastseen].to_date } : {}
+    seen = csvattributes[:lastseen].to_date
+    recently_seen = (seen > host.lastseen) ? 
+                    { lastseen: seen.to_s } : {}
     result = case update.to_sym
     when :none
       {}
     when :missing
-      if 4.week.after(csvattributes[:lastseen].to_date) >= host.lastseen
+      if 4.week.after(seen) >= host.lastseen
         csvattributes.select {|k,v| host.send(k).blank?}
       else
         {}
       end
     when :newer
-      if csvattributes[:lastseen].to_s >= host.lastseen.to_s
+      if seen >= host.lastseen
         csvattributes
       else
         {}
@@ -83,6 +84,17 @@ private
   def host_attributes
     Host.attribute_names.map(&:to_sym).reject do |k| 
       [:id, :created_at, :updated_at].include?(k)
+    end
+  end
+
+  # file may be ActionDispatch::Http::UploadedFile
+  #
+  def get_file(options)
+    file = options.fetch(:file) 
+    if file.respond_to?(:path)
+      file.path
+    else
+      file.to_s
     end
   end
 end
