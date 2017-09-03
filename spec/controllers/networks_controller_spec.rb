@@ -54,6 +54,13 @@ RSpec.describe NetworksController, :type => :controller do
     end
   end
 
+  describe "GET search" do
+    it "displays the search form" do
+      get :search, params: {}
+      expect(response).to render_template('search')
+    end
+  end
+
   describe "GET new" do
     it "assigns a new network as @network" do
       get :new, params: {}
@@ -78,6 +85,17 @@ RSpec.describe NetworksController, :type => :controller do
       network = Network.create! valid_attributes
       get :edit, params: {:id => network.to_param}
       expect(assigns(:network)).to eq(network)
+    end
+  end
+
+  describe "POST search" do
+    describe "with valid params" do
+      let(:search_attributes) {{ cidr: '192.168.0.0/16', is_subnet: 1, is_superset: 1 }}
+      it "shows matching networks" do
+        network = FactoryGirl.create(:network, netzwerk: '192.168.1.0/24')
+        post :search, params: search_attributes
+        expect(assigns(:networks)).to include(network)
+      end
     end
   end
 
