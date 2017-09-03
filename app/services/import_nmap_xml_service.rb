@@ -18,7 +18,7 @@ class ImportNmapXmlService
   #
   def initialize(options = {})
     options.symbolize_keys!
-    @xmlfile = options.fetch(:file)
+    @xmlfile = options.fetch(:file).to_s
     @update  = options.fetch(:update) { :none }
   end
 
@@ -61,7 +61,7 @@ private
   def attributes_for_update(nmaphost, host)
     recently_seen = (nmaphost.lastseen.to_date > host.lastseen) ? 
                     { lastseen: nmaphost.lastseen.to_date } : {}
-    result = case update
+    result = case update.to_sym
     when :none
       {}
     when :missing

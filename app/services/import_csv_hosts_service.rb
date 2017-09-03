@@ -19,7 +19,7 @@ class ImportCsvHostsService
   #
   def initialize(options = {})
     options.symbolize_keys!
-    @csvfile = options.fetch(:file)
+    @csvfile = options.fetch(:file).to_s
     @update  = options.fetch(:update) { :none }
   end
 
@@ -59,7 +59,7 @@ private
   def attributes_for_update(csvattributes, host)
     recently_seen = (csvattributes[:lastseen].to_date > host.lastseen) ? 
                     { lastseen: csvattributes[:lastseen].to_date } : {}
-    result = case update
+    result = case update.to_sym
     when :none
       {}
     when :missing
