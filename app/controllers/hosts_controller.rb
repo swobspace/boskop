@@ -55,13 +55,16 @@ class HostsController < ApplicationController
     elsif type == 'xml'
       result = ImportNmapXmlService.new(import_params).call
     else
-      redirect_to import_hosts_path, warning: "Import format #{type} not yet implemented"
+      flash[:notice] = "Import format #{type} not yet implemented"
+      redirect_to import_hosts_path
       return
     end
     if result.success?
-      redirect_to hosts_path, notice: "Import successful"
+      flash[:success] = "Import successful"
+      redirect_to hosts_path
     else
-      redirect_to hosts_path, error: result.error_message
+      flash[:error] = result.error_message.to_s
+      redirect_to hosts_path
     end
   end
 
@@ -74,8 +77,8 @@ class HostsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def host_params
       params.require(:host).permit(
-        :name, :description, :ip, :cpe, :raw_os, :operating_system_id, 
-        :lastseen, :mac, :host_category_id, :location_id, :fqdn, 
+        :name, :description, :ip, :cpe, :raw_os, :operating_system_id,
+        :lastseen, :mac, :host_category_id, :location_id, :fqdn,
         :workgroup, :domain_dns, :vendor
       )
     end
