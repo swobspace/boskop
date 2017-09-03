@@ -26,7 +26,7 @@ require 'rails_helper'
 RSpec.describe HostsController, type: :controller do
   login_admin
 
-  let(:csv_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob-42.csv') }
+  let(:csv_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
 
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:host)

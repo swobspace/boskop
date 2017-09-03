@@ -49,13 +49,14 @@ class HostsController < ApplicationController
   end
 
   def import
-    type = import_params[:type]
+    type = params[:type]
     if type == 'csv'
       result = ImportCsvHostsService.new(import_params).call
     elsif type == 'xml'
       result = ImportNmapXmlService.new(import_params).call
     else
       redirect_to import_hosts_path, warning: "Import format #{type} not yet implemented"
+      return
     end
     if result.success?
       redirect_to hosts_path, notice: "Import successful"
@@ -80,6 +81,6 @@ class HostsController < ApplicationController
     end
 
     def import_params
-      params.permit(:type, :file).to_hash
+      params.permit(:utf8, :authenticity_token, :type, :file, :update).to_hash
     end
 end
