@@ -1,0 +1,15 @@
+= KB0001 NMAP host states and reason
+:tags: NMAP, Scan, Hoststate
+:toc:
+
+== NMAP host state detection
+
+.results from nmap 7.60 and remote hosts
+[role="table table-bordered"]
+|===
+| host discovery | reason(up) | reason(down) |host state | remarks |
+| -PE            | echo-reply | no-response  | down      | ICMP may be filtered |
+| -P0            | user-set   | user-set     | up        | use open ports for up detection |
+| -A             | echo-reply | reset        | up        | use open ports for up detection |
+|===
+

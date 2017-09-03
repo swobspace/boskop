@@ -51,6 +51,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'dotenv'
+  gem 'json_spec'
 end
 
 group :test do
@@ -68,4 +69,4 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem "ruby-nmap"
 gem 'immutable-struct'
-
+gem 'kaminari'

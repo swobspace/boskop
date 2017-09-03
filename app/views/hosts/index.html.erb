@@ -1,68 +1,57 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <h1><%= t('controller.hosts') %></h1>
 
-<table id="dataTable" class="table table-bordered table-striped dataTable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.ip') %></th>
-    <th><%= t('attributes.cpe') %></th>
-    <th><%= t('attributes.raw_os') %></th>
-    <th><%= t('attributes.fqdn') %></th>
-    <th><%= t('attributes.domain_dns') %></th>
-    <th><%= t('attributes.workgroup') %></th>
-    <th><%= t('attributes.lastseen') %></th>
-    <th><%= t('attributes.mac') %></th>
-    <th><%= t('attributes.vendor') %></th>
-    <th><%= t('attributes.host_category') %></th>
-    <th><%= t('attributes.location') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-</tfoot>
-<tbody>
+<%= content_tag :table, role: :remotetable,
+      id: 'hosts_table',
+      class: "table table-bordered table-striped",
+      data: {
+        url: hosts_path(format: :json),
+        order: [[0, 'desc']].to_json
+      } do %>
 
-<% @hosts.each do |host| %>
-  <%= content_tag_for(:tr, host) do %>
-    <td><%= host.name %></td>
-    <td><%= host.description %></td>
-    <td><%= host.ip %></td>
-    <td><%= host.cpe %></td>
-    <td><%= host.raw_os %></td>
-    <td><%= host.fqdn %></td>
-    <td><%= host.domain_dns %></td>
-    <td><%= host.workgroup %></td>
-    <td><%= host.lastseen %></td>
-    <td><%= host.mac %></td>
-    <td><%= host.vendor %></td>
-    <td><%= host.host_category.to_s %></td>
-    <td><%= host.location.try(:lid) %></td>
-    <td class="nowrap">
-      <%= show_link host %>
-      <%= edit_link host %>
-      <%= delete_link host %>
-    </td>
-  <% end %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.ip') %></th>
+      <th><%= t('attributes.cpe') %></th>
+      <th><%= t('attributes.raw_os') %></th>
+      <th><%= t('attributes.fqdn') %></th>
+      <th><%= t('attributes.domain_dns') %></th>
+      <th><%= t('attributes.workgroup') %></th>
+      <th><%= t('attributes.lastseen') %></th>
+      <th><%= t('attributes.mac') %></th>
+      <th><%= t('attributes.vendor') %></th>
+      <th><%= t('attributes.host_category') %></th>
+      <th><%= t('attributes.location') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tfoot>
+  <tbody>
+  </tbody>
 <% end %>
-</tbody>
-</table>
+
 
 <br />
 

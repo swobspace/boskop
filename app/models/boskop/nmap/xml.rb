@@ -8,9 +8,10 @@ module Boskop
       attr_reader :file, :options, :error_message
 
       # Boskop::NMAP.new(file: scanme.nmap.org.xml)
+      #
       # required option:
-      # * +file+: nmap xml output file from scan
-
+      # * :file - nmap xml output file from scan
+      #
       def initialize(options = {})
 	@xml = nil
         @valid = false
@@ -36,8 +37,18 @@ module Boskop
         !!@valid
       end
 
-      def all_hosts
-        xml.hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host)}
+      # all_hosts(force: false)
+      #
+      # optional:
+      # * :force - false: select only host which are 'up'
+      #            true: select all hosts (including 'down' hosts)
+      #
+      def all_hosts(options = {})
+        if options.fetch(:force, false) == false
+          xml.up_hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host)}
+        else
+          xml.hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host)}
+        end
       end
 
     private

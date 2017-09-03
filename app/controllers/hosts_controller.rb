@@ -4,8 +4,10 @@ class HostsController < ApplicationController
 
   # GET /hosts
   def index
-    @hosts = Host.all
-    respond_with(@hosts)
+    @hosts = Host.left_outer_joins(:location, :host_category)
+    respond_with(@hosts) do |format|
+      format.json { render json: HostsDatatable.new(@hosts, view_context) }
+    end
   end
 
   # GET /hosts/1
