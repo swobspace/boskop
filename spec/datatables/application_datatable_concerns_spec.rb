@@ -103,7 +103,7 @@ RSpec.describe ApplicationDatatableConcerns, type: :model do
       let(:searchparms) {{
         "name"=>"mypc", "ip"=>"198.51.100", "cpe"=>"windows_7", "raw_os"=>"Windows 5.1", 
         "fqdn"=>"my.example.net", "domain_dns"=>"example.net", "workgroup"=>"MY", 
-        "lastseen"=>"2017-09-02", "mac"=>"12:34:56:78:90:0a", "search"=>"test"
+        "lastseen"=>Date.today.to_s, "mac"=>"12:34:56:78:90:0a", "search"=>"test"
       }}
       subject { search_params(hosts_datatable_params, host_columns) }
       it { expect(subject).to be_a_kind_of Hash }
