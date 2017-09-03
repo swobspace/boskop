@@ -27,6 +27,7 @@ ready = ->
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
+    lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
     buttons: [
@@ -87,6 +88,7 @@ ready = ->
   # --- remote datatable ---
   remotetableurl = $('table[role="remotetable"]').data('url')
   remotetable = $('table[role="remotetable"]').DataTable(
+    searchDelay: 1000
     processing: true
     serverSide: true
     ajax:
@@ -95,6 +97,7 @@ ready = ->
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
+    lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
     buttons: [
