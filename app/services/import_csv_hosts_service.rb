@@ -51,7 +51,9 @@ private
 
   # extract attributes for Host.new
   def attributes(row)
-    row.to_hash.symbolize_keys.select {|k,v| host_attributes.include?(k)}
+    attributes = row.to_hash.symbolize_keys.select {|k,v| host_attributes.include?(k)}
+    attributes[:cpe].to_s.sub!(/cpe:/, '')
+    attributes
   end
 
   def attributes_for_update(csvattributes, host)
