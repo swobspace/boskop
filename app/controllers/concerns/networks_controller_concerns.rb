@@ -43,8 +43,8 @@ def generate_usage_map(usage_params)
       if exact_match
         nets = Network.includes(:location).where(netzwerk: subnet)
       else
-        nets = Network.includes(:location).where("netzwerk <<= ?", subnet)
-        nets += Network.includes(:location).where("netzwerk >> ?", subnet)
+        nets = Network.includes(:location).where("netzwerk >>= ?", subnet.to_cidr_s)
+        nets += Network.includes(:location).where("netzwerk << ?", subnet.to_cidr_s)
       end
       hash[subnet.to_cidr_s] = nets
       nextsubnet = subnet.to_i + bitstep
