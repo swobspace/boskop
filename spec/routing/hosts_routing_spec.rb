@@ -11,6 +11,14 @@ RSpec.describe HostsController, type: :routing do
       expect(:get => "/hosts/new").to route_to("hosts#new")
     end
 
+    it "routes to #new_import" do
+      expect(:get => "/hosts/new_import").to route_to("hosts#new_import")
+    end
+
+    it "routes to #import" do
+      expect(:post => "/hosts/import").to route_to("hosts#import")
+    end
+
     it "routes to #show" do
       expect(:get => "/hosts/1").to route_to("hosts#show", :id => "1")
     end
