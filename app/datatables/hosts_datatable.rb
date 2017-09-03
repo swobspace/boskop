@@ -41,9 +41,11 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def total_entries
-    hosts.total_count
-    # will_paginate
-    # hosts.total_entries
+    if params[:length] == "-1"
+      Host.count
+    else
+      hosts.total_count
+    end
   end
 
   def hosts
@@ -52,7 +54,9 @@ class HostsDatatable < ApplicationDatatable
 
   def fetch_hosts
     hosts = relation.order("#{sort_column} #{sort_direction}")
-    hosts = hosts.page(page).per(per_page)
+    unless params[:length] == "-1"
+      hosts = hosts.page(page).per(per_page)
+    end
     hosts = HostQuery.new(hosts, search_params(params, search_columns)).all
   end
 
