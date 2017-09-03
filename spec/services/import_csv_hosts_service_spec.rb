@@ -49,7 +49,7 @@ RSpec.describe ImportCsvHostsService do
           it { expect(host.lastseen.to_s).to match(/\A2017-08-20/) }
           it { expect(host.name).to eq("wob42") }
           it { expect(host.mac).to eq("C8:FF:28:78:29:DB") }
-          it { expect(host.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
+          it { expect(host.cpe).to eq("/o:microsoft:windows_10::-") }
           it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
           it { expect(host.fqdn).to eq("wob42.my.example.net") }
           it { expect(host.workgroup).to eq("MY") }
@@ -78,8 +78,8 @@ RSpec.describe ImportCsvHostsService do
   
   describe "with existing host" do
     let!(:host) { FactoryGirl.create(:host, 
-      ip: '192.51.100.17',
-      lastseen: '2017-08-21',
+      ip: '192.168.1.42',
+      lastseen: '2017-08-30',
       name: 'myhost',
       cpe: "/o:microsoft:windows:4711",
       fqdn: 'myhost.example.net'
@@ -90,8 +90,8 @@ RSpec.describe ImportCsvHostsService do
       it "updates only lastseen" do
         service.call
         host = Host.first
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq("2017-08-20")
+        expect(host.ip.to_s).to eq("192.168.1.42")
+        expect(host.lastseen.to_s).to eq("2017-08-30")
         expect(host.name).to eq("myhost")
         expect(host.cpe).to eq("/o:microsoft:windows:4711")
         expect(host.fqdn).to eq("myhost.example.net")
@@ -106,8 +106,8 @@ RSpec.describe ImportCsvHostsService do
       it "doesn't update any attribute from old data" do
         service.call
         host = Host.first
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq("2017-08-21")
+        expect(host.ip.to_s).to eq("192.168.1.42")
+        expect(host.lastseen.to_s).to eq("2017-08-30")
         expect(host.name).to eq("myhost")
         expect(host.cpe).to eq("/o:microsoft:windows:4711")
         expect(host.fqdn).to eq("myhost.example.net")
@@ -116,15 +116,16 @@ RSpec.describe ImportCsvHostsService do
       end
 
       it "updates any attribute from current data" do
+        host.update_attributes!(lastseen: '2017-07-31')
         service.call
         host = Host.first
-        expect(host.lastseen.to_s).to eq("2017-08-21")
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.name).to eq("otherhost")
-        expect(host.cpe).to eq("/o:linux:tux")
-        expect(host.fqdn).to eq("otherhost.example.net")
-        expect(host.domain_dns).to eq("example.net")
-        expect(host.workgroup).to eq("WORKGROUP5")
+        expect(host.lastseen.to_s).to eq("2017-08-20")
+        expect(host.ip.to_s).to eq("192.168.1.42")
+        expect(host.name).to eq("wob42")
+        expect(host.cpe).to eq("/o:microsoft:windows_10::-")
+        expect(host.fqdn).to eq("wob42.my.example.net")
+        expect(host.domain_dns).to eq("my.example.net")
+        expect(host.workgroup).to eq("MY")
       end
     end
     describe "update: :missing" do
@@ -133,19 +134,20 @@ RSpec.describe ImportCsvHostsService do
       it "updates only missing attributes if data is not older than 4 weeks" do
         service.call
         host = Host.first
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq("2017-08-21")
+        expect(host.ip.to_s).to eq("192.168.1.42")
+        expect(host.lastseen.to_s).to eq("2017-08-30")
         expect(host.name).to eq("myhost")
         expect(host.cpe).to eq("/o:microsoft:windows:4711")
         expect(host.fqdn).to eq("myhost.example.net")
-        expect(host.domain_dns).to eq("example.net")
-        expect(host.workgroup).to eq("WORKGROUP5")
+        expect(host.domain_dns).to eq("my.example.net")
+        expect(host.workgroup).to eq("MY")
       end
       it "doesn't update any attribute from old data" do
+        host.update(lastseen: '2017-09-30')
         service.call
         host = Host.first
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq("2017-08-21")
+        expect(host.ip.to_s).to eq("192.168.1.42")
+        expect(host.lastseen.to_s).to eq("2017-09-30")
         expect(host.name).to eq("myhost")
         expect(host.cpe).to eq("/o:microsoft:windows:4711")
         expect(host.fqdn).to eq("myhost.example.net")
