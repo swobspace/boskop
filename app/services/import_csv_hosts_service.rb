@@ -51,7 +51,7 @@ private
 
   # extract attributes for Host.new
   def attributes(row)
-    row.to_hash.symbolize_keys
+    row.to_hash.symbolize_keys.select {|k,v| host_attributes.include?(k)}
   end
 
   def attributes_for_update(csvattributes, host)
@@ -78,4 +78,9 @@ private
     result.merge(recently_seen)
   end
 
+  def host_attributes
+    Host.attribute_names.map(&:to_sym).reject do |k| 
+      [:id, :created_at, :updated_at].include?(k)
+    end
+  end
 end
