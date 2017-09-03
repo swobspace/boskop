@@ -45,6 +45,25 @@ class HostsController < ApplicationController
     respond_with(@host)
   end
 
+  def new_import
+  end
+
+  def import
+    type = import_params[:type]
+    if type == 'csv'
+      result = ImportCsvHostsService.new(import_params).call
+    elsif type == 'xml'
+      result = ImportNmapXmlService.new(import_params).call
+    else
+      redirect_to import_hosts_path, warning: "Import format #{type} not yet implemented"
+    end
+    if result.success?
+      redirect_to hosts_path, notice: "Import successful"
+    else
+      redirect_to hosts_path, error: result.error_message
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
@@ -58,5 +77,9 @@ class HostsController < ApplicationController
         :lastseen, :mac, :host_category_id, :location_id, :fqdn, 
         :workgroup, :domain_dns, :vendor
       )
+    end
+
+    def import_params
+      params.permit(:type, :file).to_hash
     end
 end

@@ -26,20 +26,14 @@ require 'rails_helper'
 RSpec.describe HostsController, type: :controller do
   login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # Host. As you add validations to Host, be sure to
-  # adjust the attributes here as well.
+  let(:csv_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob-42.csv') }
+
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:host)
   }
-
   let(:invalid_attributes) {
     { ip: nil }
   }
-
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # HostsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -65,11 +59,35 @@ RSpec.describe HostsController, type: :controller do
     end
   end
 
+  describe "GET #new_import" do
+    it "returns a success response" do
+      get :new_import, params: {}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
+
   describe "GET #edit" do
     it "returns a success response" do
       host = Host.create! valid_attributes
       get :edit, params: {id: host.to_param}, session: valid_session
       expect(response).to be_success
+    end
+  end
+
+  describe "POST #import" do
+    context "with valid params" do
+      let(:import_form_attributes) {{ type: 'csv', file: csv_file }}
+      it "imports hosts from csv" do
+        expect {
+          post :import, params: import_form_attributes, session: valid_session
+        }.to change(Host, :count).by(1)
+      end
+
+      it "redirects to hosts_path" do
+        post :import, params: import_form_attributes, session: valid_session
+        expect(response).to redirect_to(hosts_path)
+      end
     end
   end
 
