@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827103913) do
+ActiveRecord::Schema.define(version: 20170903091854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170827103913) do
   create_table "hosts", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description", default: ""
-    t.cidr "ip"
+    t.inet "ip"
     t.string "cpe", default: ""
     t.string "raw_os", default: ""
     t.bigint "operating_system_id"

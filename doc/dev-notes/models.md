@@ -108,7 +108,7 @@ Host:
 
     bin/rails g scaffold Host \
               name:string description:text \
-              ip:cidr cpe:string:index raw_os:string:index \
+              ip:inet cpe:string:index raw_os:string:index \
               operating_system:references:index \
               lastseen:date mac:string vendor:string \
               fqdn:string workgroup:string domain_dns:string \
@@ -119,6 +119,7 @@ Host:
 #               fqdn:string workgroup:string domain_dns:string
 
 #    bin/rails g migration AddVendorToHost vendor:string
+#    bin/rails g migration ChangeIpToInet
 
 HostCategory:
 -------------
