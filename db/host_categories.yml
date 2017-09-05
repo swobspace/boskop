@@ -85,6 +85,9 @@ host_categories:
   - name: Medizintechnik/Funktionsdiagnostik
     tag: med_func
     description: "Medizintechnik: Ultraschall, Endoskopie, etc."
+  - name: Medizintechnik/Intensiv
+    tag: med_int
+    description: "Intensivmonitoring und anderes"
   - name: Medizintechnik/Sonstige
     tag: med_sons
     description: "Medizintechnik: sonstige Geräte"
