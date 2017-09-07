@@ -1,6 +1,6 @@
 class Merkmal < ApplicationRecord
   # -- associations
-  belongs_to :merkmalfor, polymorphic: true
+  belongs_to :merkmalfor, polymorphic: true, optional: true
   belongs_to :merkmalklasse
 
   # -- configuration
