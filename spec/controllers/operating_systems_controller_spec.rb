@@ -24,21 +24,16 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe OperatingSystemsController, type: :controller do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # OperatingSystem. As you add validations to OperatingSystem, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+     FactoryGirl.attributes_for(:operating_system)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: nil }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # OperatingSystemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -97,14 +92,14 @@ RSpec.describe OperatingSystemsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { matching_pattern: "cpe:123456" }
       }
 
       it "updates the requested operating_system" do
         operating_system = OperatingSystem.create! valid_attributes
         put :update, params: {id: operating_system.to_param, operating_system: new_attributes}, session: valid_session
         operating_system.reload
-        skip("Add assertions for updated state")
+        expect(operating_system.matching_pattern).to eq("cpe:123456")
       end
 
       it "redirects to the operating_system" do
