@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903091854) do
+ActiveRecord::Schema.define(version: 20170908153354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,13 @@ ActiveRecord::Schema.define(version: 20170903091854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["location_id"], name: "index_networks_on_location_id"
+  end
+
+  create_table "operating_systems", force: :cascade do |t|
+    t.string "name"
+    t.text "matching_pattern"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "org_units", id: :serial, force: :cascade do |t|

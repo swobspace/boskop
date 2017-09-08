@@ -1,0 +1,30 @@
+<h1><%= t('controller.operating_systems') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped dataTable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.matching_pattern') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @operating_systems.each do |operating_system| %>
+  <%= content_tag_for(:tr, operating_system) do %>
+    <td><%= operating_system.name %></td>
+    <td><%= operating_system.matching_pattern %></td>
+    <td class="nowrap">
+      <%= show_link operating_system %>
+      <%= edit_link operating_system %>
+      <%= delete_link operating_system %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link OperatingSystem %>

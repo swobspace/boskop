@@ -126,3 +126,9 @@ HostCategory:
 
     bin/rails g scaffold HostCategory \
               name:string description:text
+
+OperatingSystem:
+-------------
+
+    bin/rails g scaffold OperatingSystem \
+              name:string matching_pattern:text
