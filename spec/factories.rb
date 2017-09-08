@@ -71,6 +71,10 @@ FactoryGirl.define do
     netzwerk "192.0.2.0/24"
   end
 
+  factory :operating_system do
+    name { generate(:aname) }
+  end
+
   factory :org_unit do
     name { generate(:aname) }
     position 0

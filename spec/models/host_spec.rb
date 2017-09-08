@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Host, type: :model do
   it { is_expected.to belong_to(:host_category) }
   it { is_expected.to belong_to(:location) }
+  it { is_expected.to belong_to(:operating_system) }
   it { is_expected.to validate_presence_of(:ip) }
   it { is_expected.to validate_presence_of(:lastseen) }
 
