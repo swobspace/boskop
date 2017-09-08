@@ -9,7 +9,6 @@ RSpec.describe ImportCsvHostsService do
   # check for instance methods
   describe "instance methods" do
     subject { ImportCsvHostsService.new(file: "") }
-    it { puts csvfile }
     it { expect(subject.respond_to? :call).to be_truthy}
     it { expect(subject.call.respond_to? :success?).to be_truthy }
     it { expect(subject.call.respond_to? :error_message).to be_truthy }
