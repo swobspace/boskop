@@ -59,6 +59,7 @@ de:
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
       network: Netzwerk
+      operating_system: Betriebssystem
       org_unit: Organisationseinheit
       user: User
 
@@ -79,6 +80,7 @@ de:
     bw2_downstream: Bandbreite Downstream (Zweitweg)
     bw2_upstream: Bandbreite Upstream (Zweitweg)
     care_of: c/o
+    cidr_mask: Maske (CIDR)
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -104,9 +106,9 @@ de:
     location: Lokation
     location_a: Standort A
     location_b: Standort B
-    mandantory: Pflichtfeld
-    cidr_mask: Maske (CIDR)
     mac: MAC
+    mandantory: Pflichtfeld
+    matching_pattern: Muster für die Zuweisung
     merkmal: Merkmal
     merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
@@ -152,6 +154,7 @@ de:
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
     networks: Netzwerke
+    operating_systems: Betriebssysteme
     org_units: Organisationseinheiten
     users: Benutzer
 
