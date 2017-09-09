@@ -128,7 +128,16 @@ HostCategory:
               name:string description:text
 
 OperatingSystem:
--------------
+----------------
 
     bin/rails g scaffold OperatingSystem \
-              name:string matching_pattern:text
+              name:string matching_pattern:text eol:date
+#    bin/rails g migration AddEolToOperatingSystem eol:date
+
+OperatingSystemMapping:
+-----------------------
+
+    bin/rails g scaffold OperatingSystemMapping \
+              field:string:index value:string:index \
+              operating_system:references
+
