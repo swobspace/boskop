@@ -14,6 +14,9 @@
     <div class="form-inputs">
       <%= f.input :name
        %>
+      <%= f.input :eol, as: :string,
+          input_html: { class: 'datepicker' }
+       %>
       <%= f.input :matching_pattern
        %>
     </div>

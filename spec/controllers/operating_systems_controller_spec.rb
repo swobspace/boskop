@@ -92,7 +92,7 @@ RSpec.describe OperatingSystemsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { matching_pattern: "cpe:123456" }
+        { matching_pattern: "cpe:123456", eol: "2014-04-08" }
       }
 
       it "updates the requested operating_system" do

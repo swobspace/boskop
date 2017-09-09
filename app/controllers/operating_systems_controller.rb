@@ -51,6 +51,6 @@ class OperatingSystemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def operating_system_params
-      params.require(:operating_system).permit(:name, :matching_pattern)
+      params.require(:operating_system).permit(:name, :eol, :matching_pattern)
     end
 end

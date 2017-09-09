@@ -20,6 +20,7 @@ RSpec.describe "operating_systems/new", type: :view do
     assert_select "form[action=?][method=?]", operating_systems_path, "post" do
 
       assert_select "input[name=?]", "operating_system[name]"
+      assert_select "input[name=?]", "operating_system[eol]"
 
       assert_select "textarea[name=?]", "operating_system[matching_pattern]"
     end

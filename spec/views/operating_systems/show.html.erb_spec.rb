@@ -10,6 +10,7 @@ RSpec.describe "operating_systems/show", type: :view do
 
     @operating_system = assign(:operating_system, OperatingSystem.create!(
       :name => "Name",
+      :eol => '2014-04-08',
       :matching_pattern => "MyText"
     ))
   end
@@ -18,5 +19,6 @@ RSpec.describe "operating_systems/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/2014-04-08/)
   end
 end

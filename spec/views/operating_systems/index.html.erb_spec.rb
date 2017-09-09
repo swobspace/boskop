@@ -11,10 +11,12 @@ RSpec.describe "operating_systems/index", type: :view do
     assign(:operating_systems, [
       OperatingSystem.create!(
         :name => "Name1",
+        :eol => "2014-04-08",
         :matching_pattern => "MyText"
       ),
       OperatingSystem.create!(
         :name => "Name2",
+        :eol => "2014-04-08",
         :matching_pattern => "MyText"
       )
     ])
@@ -25,5 +27,6 @@ RSpec.describe "operating_systems/index", type: :view do
     assert_select "tr>td", :text => "Name1".to_s, :count => 1
     assert_select "tr>td", :text => "Name2".to_s, :count => 1
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "2014-04-08".to_s, :count => 2
   end
 end

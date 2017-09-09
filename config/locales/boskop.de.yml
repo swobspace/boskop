@@ -60,6 +60,7 @@ de:
       merkmalklasse: Merkmalklasse
       network: Netzwerk
       operating_system: Betriebssystem
+      operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
       user: User
 
@@ -88,7 +89,9 @@ de:
     description: Beschreibung
     displayname: Anzeigename
     domain_dns: Domain
+    eol: End-of-Life
     exact_match: exakte Treffer
+    field: Feld
     file: Datei
     format: Format
     for_object: Objektklasse 
@@ -155,6 +158,7 @@ de:
     merkmalklassen: Merkmalklassen
     networks: Netzwerke
     operating_systems: Betriebssysteme
+    operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten
     users: Benutzer
 
