@@ -75,6 +75,11 @@ FactoryGirl.define do
     name { generate(:aname) }
   end
 
+  factory :operating_system_mapping do
+    field "cpe"
+    value "cpe:/os:microsoft:embedded::"
+  end
+
   factory :org_unit do
     name { generate(:aname) }
     position 0

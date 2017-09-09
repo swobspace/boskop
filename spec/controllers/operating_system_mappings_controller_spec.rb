@@ -24,21 +24,16 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe OperatingSystemMappingsController, type: :controller do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # OperatingSystemMapping. As you add validations to OperatingSystemMapping, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+         FactoryGirl.attributes_for(:operating_system_mapping)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { field: nil, value: nil }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # OperatingSystemMappingsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -97,14 +92,15 @@ RSpec.describe OperatingSystemMappingsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { field: 'rawos', value: 'otheros' }
       }
 
       it "updates the requested operating_system_mapping" do
         operating_system_mapping = OperatingSystemMapping.create! valid_attributes
         put :update, params: {id: operating_system_mapping.to_param, operating_system_mapping: new_attributes}, session: valid_session
         operating_system_mapping.reload
-        skip("Add assertions for updated state")
+        expect(operating_system_mapping.field).to eq("rawos")
+        expect(operating_system_mapping.value).to eq("otheros")
       end
 
       it "redirects to the operating_system_mapping" do
