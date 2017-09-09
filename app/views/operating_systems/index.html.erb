@@ -13,7 +13,7 @@
 <% @operating_systems.each do |operating_system| %>
   <%= content_tag_for(:tr, operating_system) do %>
     <td><%= operating_system.name %></td>
-    <td><%= operating_system.matching_pattern %></td>
+    <%= simple_format(operating_system.matching_pattern.chomp, {}, wrapper_tag: "td") %>
     <td class="nowrap">
       <%= show_link operating_system %>
       <%= edit_link operating_system %>
