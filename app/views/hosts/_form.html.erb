@@ -22,6 +22,9 @@
        %>
       <%= f.input :raw_os
        %>
+      <%= f.association :operating_system,
+            input_html: { class: 'select2' }
+       %>
       <%= f.input :fqdn
        %>
       <%= f.input :domain_dns

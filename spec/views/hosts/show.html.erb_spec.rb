@@ -10,6 +10,7 @@ RSpec.describe "hosts/show", type: :view do
 
     location = FactoryGirl.create(:location, lid: "LID")
     hostcategory = FactoryGirl.create(:host_category, name: "SecureServer")
+    os = FactoryGirl.create(:operating_system, name: "ZementOS")
 
     @host = assign(:host, FactoryGirl.create(:host,
       :name => "MyLovelyHost",
@@ -23,6 +24,7 @@ RSpec.describe "hosts/show", type: :view do
       :domain_dns => "example.net",
       :workgroup => "Workgroup3",
       :host_category => hostcategory,
+      :operating_system => os,
       :location => location
     ))
   end
@@ -36,6 +38,7 @@ RSpec.describe "hosts/show", type: :view do
     expect(rendered).to match(/Windows 7 Professional 6.1/)
     expect(rendered).to match(/MAC/)
     expect(rendered).to match(/Tuxolino/)
+    expect(rendered).to match(/ZementOS/)
     expect(rendered).to match(/MyLovelyHost.example.net/)
     expect(rendered).to match(/example.net/)
     expect(rendered).to match(/Workgroup3/)

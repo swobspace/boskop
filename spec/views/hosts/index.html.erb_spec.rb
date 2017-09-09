@@ -10,6 +10,7 @@ RSpec.describe "hosts/index", type: :view do
 
     location = FactoryGirl.create(:location, lid: "LID")
     hostcategory = FactoryGirl.create(:host_category, name: "SecureServer")
+    os = FactoryGirl.create(:operating_system, name: 'ZementOS')
 
     assign(:hosts, [
       FactoryGirl.create(:host,
@@ -24,6 +25,7 @@ RSpec.describe "hosts/index", type: :view do
         :domain_dns => "example.net",
         :workgroup => "Workgroup3",
         :host_category => hostcategory,
+        :operating_system => os,
         :location => location),
       FactoryGirl.create(:host,
         :name => "MyLovelyHost",
@@ -37,6 +39,7 @@ RSpec.describe "hosts/index", type: :view do
         :domain_dns => "example.net",
         :workgroup => "Workgroup3",
         :host_category => hostcategory,
+        :operating_system => os,
         :location => location)
     ])
   end
@@ -52,6 +55,7 @@ RSpec.describe "hosts/index", type: :view do
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
     assert_select "tr>td", :text => "MAC".to_s, :count => 2
     assert_select "tr>td", :text => "Tuxolino".to_s, :count => 2
+    assert_select "tr>td", :text => "ZementOS".to_s, :count => 2
     assert_select "tr>td", :text => "MyLovelyHost.example.net".to_s, :count => 2
     assert_select "tr>td", :text => "example.net".to_s, :count => 2
     assert_select "tr>td", :text => "Workgroup3".to_s, :count => 2

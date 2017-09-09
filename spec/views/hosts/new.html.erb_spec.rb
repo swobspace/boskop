@@ -34,6 +34,7 @@ RSpec.describe "hosts/new", type: :view do
       assert_select "select[name=?]", "host[host_category_id]"
 
       assert_select "select[name=?]", "host[location_id]"
+      assert_select "select[name=?]", "host[operating_system_id]"
     end
   end
 end
