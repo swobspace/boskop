@@ -67,6 +67,10 @@ ready = ->
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
+    ],
+    columnDefs: [
+      { "targets": "nosort", "orderable": false },
+      { "targets": "notvisible", "visible": false }
     ]
   )
   if $('table[role="datatable"]').length
@@ -127,6 +131,10 @@ ready = ->
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
+    ],
+    columnDefs: [
+      { "targets": "nosort", "orderable": false },
+      { "targets": "notvisible", "visible": false }
     ]
   )
   if $('table[role="remotetable"]').length
