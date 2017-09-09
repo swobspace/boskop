@@ -1,6 +1,8 @@
 shared_context "host variables" do
   let!(:cat_linux) { FactoryGirl.create(:host_category, name: 'linux firewall') }
   let!(:loc_paris) { FactoryGirl.create(:location, name: 'Paris', lid: 'PARIS') }
+  let(:os1)         { FactoryGirl.create(:operating_system, name: 'DummyOS') }
+  let(:os2)         { FactoryGirl.create(:operating_system, name: 'ShadowOS') }
   # order "name asc": MYNAS01, MYPC002, MYPC003, MYPC005, vpngw
   let!(:nas)  { FactoryGirl.create(:host, 
     name: "MYNAS01",
@@ -14,6 +16,7 @@ shared_context "host variables" do
     lastseen: Date.today,
     mac: '00:84:ed:12:34:56',
     location: loc_paris,
+    operating_system: os1,
   )}
   let!(:pc2)  { FactoryGirl.create(:host, 
     name: "MYPC002",
@@ -26,6 +29,7 @@ shared_context "host variables" do
     workgroup: 'MY',
     lastseen: Date.today,
     mac: '00:84:ed:00:12:02',
+    operating_system: os1,
   )}
   let!(:pc3)  { FactoryGirl.create(:host, 
     name: "MYPC003",
@@ -38,6 +42,7 @@ shared_context "host variables" do
     workgroup: 'MY',
     lastseen: Date.today,
     mac: '00:84:ed:00:12:03',
+    operating_system: os2,
   )}
   let!(:vpngw)  { FactoryGirl.create(:host, 
     name: "vpngw",
@@ -51,6 +56,7 @@ shared_context "host variables" do
     lastseen: 1.month.before(Date.today),
     mac: '12:34:56:99:99:98',
     host_category: cat_linux,
+    operating_system: os2,
   )}
   let!(:pc5)  { FactoryGirl.create(:host, 
     name: "MYPC005",
@@ -63,6 +69,7 @@ shared_context "host variables" do
     workgroup: 'MY',
     lastseen: 1.year.before(Date.today),
     mac: '00:84:ed:00:12:05',
+    operating_system: os2,
   )}
 end
 

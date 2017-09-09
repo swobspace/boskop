@@ -8,6 +8,7 @@ class HostQuery
   # * :name - hostname
   # * :description - string
   # * :ip - May be a substring or a cidr address with /mask
+  # * :operating_system - string
   # * :cpe - string
   # * :raw_os - string
   # * :fqdn - string
@@ -20,7 +21,7 @@ class HostQuery
   # * :lid - location.lid (string)
   #
   # please note: 
-  # left_outer_join(:host_category, :location) must exist in relation.
+  # left_outer_join(:host_category, :location, :operating_system) must exist in relation.
   #
   def initialize(relation, search_options = {})
     @relation = relation
@@ -67,6 +68,8 @@ private
         query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :host_category
         query = query.where("host_categories.name ILIKE ?", "#{value}%")
+      when :operating_system
+        query = query.where("operating_systems.name ILIKE ?", "#{value}%")
       when :lid
         query = query.where("locations.lid ILIKE ?", "#{value}%")
       when :search

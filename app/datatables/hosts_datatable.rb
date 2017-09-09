@@ -16,6 +16,7 @@ class HostsDatatable < ApplicationDatatable
         column << host.name 
         column << host.description 
         column << host.ip.to_s
+        column << host.operating_system.to_s
         column << host.cpe    
         column << host.raw_os 
         column << host.fqdn 
@@ -61,11 +62,11 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(hosts.name hosts.description host(ip) cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_categories.name locations.lid)
+    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_categories.name locations.lid)
   end
 
   def search_columns
-    %w(name description ip cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid)
+    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid)
   end
 
 end

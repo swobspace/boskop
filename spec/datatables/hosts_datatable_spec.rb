@@ -6,6 +6,7 @@ module HostsDatatableHelper
       column << host.name
       column << host.description
       column << host.ip.to_s
+      column << host.operating_system.to_s
       column << host.cpe
       column << host.raw_os
       column << host.fqdn
