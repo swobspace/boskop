@@ -33,7 +33,7 @@ namespace :operating_system do
   desc "assign operating_system to hosts"
   task :assign_to_host => :environment do
     [:cpe, :raw_os].each do |field|
-      Host.where(operating_system_id: nil).each do |host|
+      Host.where(operating_system_id: nil).where("cpe <>'' or raw_os <> ''").each do |host|
         os = OperatingSystemMapping.
                where("field = :field and value = :value", 
                       field: field, value: host.send(field))
