@@ -78,7 +78,7 @@ RSpec.describe HostQuery do
   end # search :description
 
   context "with :operating_system" do
-    subject { HostQuery.new(all_hosts, {operating_system: 'DummyOS'}) }
+    subject { HostQuery.new(all_hosts, {operating_system: 'ummyO'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(pc2, nas) }
     end
@@ -308,7 +308,7 @@ RSpec.describe HostQuery do
   end # search :lastseen
 
   context "with :host_category" do
-    subject { HostQuery.new(all_hosts, {host_category: 'Linux'}) }
+    subject { HostQuery.new(all_hosts, {host_category: 'inu'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(vpngw) }
     end

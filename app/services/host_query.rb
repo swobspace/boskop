@@ -67,9 +67,9 @@ private
       when :lastseen
         query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :host_category
-        query = query.where("host_categories.name ILIKE ?", "#{value}%")
+        query = query.where("host_categories.name ILIKE ?", "%#{value}%")
       when :operating_system
-        query = query.where("operating_systems.name ILIKE ?", "#{value}%")
+        query = query.where("operating_systems.name ILIKE ?", "%#{value}%")
       when :lid
         query = query.where("locations.lid ILIKE ?", "#{value}%")
       when :search
