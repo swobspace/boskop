@@ -34,7 +34,7 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.lastseen.to_s).to match(/\A2017-08-20 /) }
     it { expect(subject.hostname).to eq("wob42") }
     it { expect(subject.status).to eq("up") }
-    it { expect(subject.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
+    it { expect(subject.cpe).to eq("/o:microsoft:windows_10::-") }
     it { expect(subject.raw_os).to eq("Windows 10 Pro 15063") }
     it { expect(subject.server).to eq("DESKTOP-6GLIL73") }
     it { expect(subject.fqdn).to eq("DESKTOP-6GLIL73") }
@@ -46,7 +46,7 @@ RSpec.describe Boskop::NMAP::Host do
            ip: '192.168.1.42',
            name: "wob42",
            status: "up",
-           cpe: "cpe:/o:microsoft:windows_10::-",
+           cpe: "/o:microsoft:windows_10::-",
            raw_os: "Windows 10 Pro 15063",
            server: "DESKTOP-6GLIL73",
            workgroup: "WORKGROUP",

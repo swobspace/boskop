@@ -65,7 +65,7 @@ module Boskop
 
       # common plattform enumeration
       def cpe
-        smb_os_discovery['cpe']
+        smb_os_discovery['cpe']&.sub(/cpe:/, '')
       end
 
     private
