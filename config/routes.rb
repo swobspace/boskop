@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :operating_system_mappings
   resources :operating_systems
   resources :host_categories
   post "hosts", to: "hosts#index", constraints: lambda {|req| req.format == :json}

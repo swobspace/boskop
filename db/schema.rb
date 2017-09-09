@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909134317) do
+ActiveRecord::Schema.define(version: 20170909140951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,6 +184,17 @@ ActiveRecord::Schema.define(version: 20170909134317) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["location_id"], name: "index_networks_on_location_id"
+  end
+
+  create_table "operating_system_mappings", force: :cascade do |t|
+    t.string "field"
+    t.string "value"
+    t.bigint "operating_system_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field"], name: "index_operating_system_mappings_on_field"
+    t.index ["operating_system_id"], name: "index_operating_system_mappings_on_operating_system_id"
+    t.index ["value"], name: "index_operating_system_mappings_on_value"
   end
 
   create_table "operating_systems", force: :cascade do |t|

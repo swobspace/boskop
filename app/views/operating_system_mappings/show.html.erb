@@ -1,0 +1,21 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.field')%>:</th>
+    <td><%= @operating_system_mapping.field %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.value')%>:</th>
+    <td><%= @operating_system_mapping.value %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.operating_system')%>:</th>
+    <td><%= @operating_system_mapping.operating_system %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@operating_system_mapping) %>
+  <%= delete_link(@operating_system_mapping) %>
+  <%= new_link OperatingSystemMapping %>
+</div>
