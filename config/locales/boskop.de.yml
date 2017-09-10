@@ -23,6 +23,7 @@ de:
     usage_map: Nutzungstabelle
     used_networks: Netzwerke in Benutzung
     sort_helper: Sortierhilfe
+    applied_filter: Angewandter Filter
     assigned_networks: Zugeordnete Netzwerke
     assigned_lines: Zugeordnete Leitungen/Zugänge
     basics: Basics
@@ -34,6 +35,7 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
+    hosts_search: Hosts / Suchergebnis
 
   actions:
     destroy: Datensatz löschen
@@ -85,6 +87,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
+    current: Aktuell
     cpe: CPE
     description: Beschreibung
     displayname: Anzeigename
@@ -102,6 +105,9 @@ de:
     host_category: Host-Kategorie
     ip: IP-Adresse
     lastseen: zuletzt gesehen
+    limit: Limit
+    newer: Neuer als
+    older: Älter als
     raw_os: OS (raw)
     lid: StandortID
     line: Leitung/Zugang

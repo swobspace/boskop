@@ -1,0 +1,9 @@
+<% if @filter_info %>
+<div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <span> <%= t('boskop.applied_filter') %>: </span>
+  <% @filter_info.map do |key,value| %>
+    <%= content_tag(:span, "#{t('attributes.' + key.to_s)} = #{value}; ") %>
+  <% end %>
+</div>
+<% end %>

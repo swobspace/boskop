@@ -12,7 +12,9 @@ class HostsController < ApplicationController
 
   def search
     @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
-    @hosts = HostQuery.new(@hosts, search_params).all
+    query = HostQuery.new(@hosts, search_params)
+    @filter_info = query.search_options
+    @hosts = query.all
     respond_with(@hosts) 
   end
 
