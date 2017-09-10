@@ -16,6 +16,9 @@ class HostQuery
   # * :domain_dns - string
   # * :workgroup - string
   # * :lastseen - date
+  # * :newer - lastseen >= :newer(date)
+  # * :older - lastseen <= :older(date)
+  # * :current - shortcut for lastseen >= 1.month.before(Date.today)
   # * :mac - macaddr (string)
   # * :vendor - string
   # * :host_category - host_categories.name (string)
@@ -72,6 +75,12 @@ private
         end
       when :lastseen
         query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+      when :newer
+        query = query.where("lastseen >= ?", "#{value}%")
+      when :current
+        query = query.where("lastseen >= ?", 1.month.before(Date.today))
+      when :older
+        query = query.where("lastseen <= ?", "#{value}%")
       when :host_category
         query = query.where("host_categories.name ILIKE ?", "%#{value}%")
       when :operating_system

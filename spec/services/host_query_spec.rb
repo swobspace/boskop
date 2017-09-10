@@ -353,6 +353,75 @@ RSpec.describe HostQuery do
     end
   end # search :lastseen
 
+  context "with :older" do
+    subject { HostQuery.new(all_hosts, {older: 2.weeks.before(Date.today)}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(vpngw, pc5) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(vpngw.id, pc5.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_falsey }
+      it { expect(subject.include?(pc2)).to be_falsey }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_truthy }
+      it { expect(subject.include?(vpngw)).to be_truthy }
+    end
+  end # search :older
+
+  context "with :newer" do
+    subject { HostQuery.new(all_hosts, {newer: 1.day.before(Date.today)}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_truthy }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :newer
+
+  context "with :current" do
+    subject { HostQuery.new(all_hosts, {current: 1}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(vpngw, nas, pc2, pc3) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(vpngw.id, nas.id, pc2.id, pc3.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_truthy }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_truthy }
+    end
+  end # search :current
+
   context "with :host_category" do
     subject { HostQuery.new(all_hosts, {host_category: 'inu'}) }
     describe "#all" do

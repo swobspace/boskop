@@ -98,8 +98,8 @@ class HostsController < ApplicationController
         # see class HostQuery for possible options
         params.permit(
           :name, :description, :ip, :operating_system, :cpe, :raw_os,
-          :fqdn, :domain_dns, :workgroup, :lastseen, :mac, :vendor,
-          :host_category, :lid, :eol, :limit,
+          :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
+          :mac, :vendor, :host_category, :lid, :eol, :limit,
         ).to_hash.reject{|_, v| v.blank?}
       )
     end
