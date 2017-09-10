@@ -21,14 +21,16 @@ class HostQuery
   # * :host_category - host_categories.name (string)
   # * :lid - location.lid (string)
   # * :eol - operating_systems.eol < today (boolean)
+  # * :limit - limit result (integer)
   #
   # please note: 
   # left_outer_join(:host_category, :location, :operating_system) must exist in relation.
   #
   def initialize(relation, search_options = {})
-    @relation = relation
-    @search_options  = search_options.symbolize_keys!
-    @query   ||= build_query
+    @relation       = relation
+    @search_options = search_options.symbolize_keys!
+    @limit          = false
+    @query          ||= build_query
   end
 
   ##
@@ -50,7 +52,7 @@ class HostQuery
   end
 
 private
-  attr_accessor :relation
+  attr_accessor :relation, :limit
 
   def build_query
     query = relation
@@ -60,6 +62,8 @@ private
       case key 
       when *string_fields
         query = query.where("hosts.#{key} ILIKE ?", "%#{value}%")
+      when :limit
+        @limit = value
       when :ip
         if value =~ /\/\d{1,2}\z/
           query = query.where("ip <<= ?", value)
@@ -95,7 +99,11 @@ private
     if search_value
       query = query.where(search_string.join(' or '), search: "%#{search_value}%")
      end
-    query
+    if limit
+      query.limit(limit)
+    else
+      query
+    end
   end
 
   def string_fields
