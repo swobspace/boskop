@@ -36,6 +36,7 @@ de:
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
     hosts_search: Hosts / Suchergebnis
+    eol_systems: End-of-Life Systeme
 
   actions:
     destroy: Datensatz löschen
@@ -87,7 +88,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
-    current: Aktuell
+    current: Nur aktuelle Daten
     cpe: CPE
     description: Beschreibung
     displayname: Anzeigename

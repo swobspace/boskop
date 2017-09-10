@@ -44,7 +44,9 @@
         <%= t('controller.hosts') %><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.hosts')), main_app.hosts_path %></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-warning-sign aria-hidden="true"></span> '+t('boskop.eol_systems')), main_app.search_hosts_path(eol: 1, limit: 1000, current: 1) %></li>
         <% if can? :create, Host %>
+          <li class="divider"></li>
           <li> <%=link_to raw('<span class="glyphicon glyphicon-file" aria-hidden="true"></span> '+t('boskop.import_host_file')), main_app.new_import_hosts_path %></li>
           <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_host')), main_app.new_host_path %></li>
         <% end %>
