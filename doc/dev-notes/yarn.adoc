@@ -1,0 +1,21 @@
+Yarn (internal notes)
+=====================
+
+For installation requirements see installation-guide.adoc.
+
+Add npm packages for boskop
+---------------------------
+
+[source,bash]
+----
+yarn add bootstrap-sass@3
+yarn add datatables.net
+yarn add datatables.net-bs
+yarn add datatables.net-buttons
+yarn add datatables.net-buttons-bs
+yarn add jszip
+yarn add pdfmake
+yarn add select2@4
+yarn add select2-bootstrap-theme
+----
+

@@ -1,0 +1,1 @@
+json.partial! "operating_system_mappings/operating_system_mapping", operating_system_mapping: @operating_system_mapping

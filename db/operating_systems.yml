@@ -1,0 +1,111 @@
+# OperatingSystems
+# 
+# to import:
+# rails console production
+# irb:1> config = YAML::load_file(File.join(Rails.root, 'db', 'operating_systems.yml'))
+# irb:2> OperatingSystem.create(config['operating_systems'])
+#
+operating_systems:
+#
+  - name: Windows XP
+    eol: 2014-04-08
+    matching_pattern:
+      |
+        cpe:windows_xp
+        raw_os:Windows 5.1
+        raw_os:Windows XP 
+#
+  - name: Windows 2000
+    eol: 2010-07-13
+    matching_pattern:
+      |
+        cpe:windows_2000
+        raw_os:Windows 5.0
+        raw_os:Windows 2000
+#
+  - name: Windows 2003
+    eol: 2015-07-14
+    matching_pattern:
+      |
+        cpe:windows_server_2003
+        raw_os:Windows Server 2003
+#
+  - name: Windows 2008
+    eol: 2020-01-14
+    matching_pattern:
+      |
+        cpe:windows_server_2008
+        raw_os:Windows Server 2008
+        raw_os:Windows Server® 2008
+        raw_os:Windows Server (R) 2008
+#
+  - name: Windows 2011 SBS
+    eol: 2010-07-13
+    matching_pattern:
+      |
+        raw_os:Windows Small Business Server 2011
+#
+  - name: Windows 2012
+    eol: 2023-10-10
+    matching_pattern:
+      |
+        cpe:windows_server_2012
+        raw_os:Windows Server 2012
+        raw_os:Windows Storage Server 2012
+#
+  - name: Windows 2016
+    eol: 2027-01-11
+    matching_pattern:
+      |
+        cpe:windows_server_2016
+        raw_os:Windows Server 2016
+#
+  - name: Windows 7
+    eol: 2020-01-14
+    matching_pattern:
+      |
+        cpe:windows_7
+        raw_os:Windows 7
+        raw_os:Windows 6.1
+#
+  - name: Windows 8.1
+    eol: 2023-01-10
+    matching_pattern:
+      |
+        cpe:windows_8.1
+        raw_os:Windows 8.1
+#
+  - name: Windows 10
+    eol: 2025-10-14
+    matching_pattern:
+      |
+        cpe:windows_10
+        raw_os:Windows 10
+#
+  - name: Windows Vista
+    eol: 2017-04-11
+    matching_pattern:
+      |
+        cpe:windows_vista
+        raw_os:Windows Vista
+#
+  - name: Windows NT 4.0
+    eol: 2004-12-31
+    matching_pattern:
+      |
+        raw_os:Windows NT 4.0
+#
+  - name: Windows Embedded Standard
+    matching_pattern:
+      |
+        raw_os:Windows Embedded Standard
+#
+  - name: VMware ESX
+    matching_pattern:
+      |
+        raw_os:VMware ESX
+#
+  - name: Unix
+    matching_pattern:
+      |
+        raw_os:Unix

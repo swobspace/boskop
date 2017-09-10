@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Sun Aug 20 15:42:08 2017 as: nmap -PE -sU -sS -&#45;max-hostgroup=3 -&#45;script smb-os-discovery.nse -&#45;script-args smbuser=wob,smbpasswd=wIg1pftx -p U:137,T:139,T:445 -oX smb-os-discovery-42.xml 192.168.1.42 -->
+<nmaprun scanner="nmap" args="nmap -PE -sU -sS -&#45;max-hostgroup=3 -&#45;script smb-os-discovery.nse -&#45;script-args smbuser=wob,smbpasswd=wIg1pftx -p U:137,T:139,T:445 -oX smb-os-discovery-42.xml 192.168.1.42" start="1503236528" startstr="Sun Aug 20 15:42:08 2017" version="7.60" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<scaninfo type="udp" protocol="udp" numservices="1" services="137"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1503236528" endtime="1503236528"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.42" addrtype="ipv4"/>
+<address addr="C8:FF:28:78:29:DB" addrtype="mac" vendor="Liteon Technology"/>
+<hostnames>
+<hostname name="wob42" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows 10 Pro 15063 microsoft-ds" method="probed" conf="10"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" method="table" conf="3"/></port>
+</ports>
+<hostscript><script id="smb-os-discovery" output="&#xa;  OS: Windows 10 Pro 15063 (Windows 10 Pro 6.3)&#xa;  OS CPE: cpe:/o:microsoft:windows_10::-&#xa;  Computer name: DESKTOP-6GLIL73&#xa;  NetBIOS computer name: DESKTOP-6GLIL73\x00&#xa;  Workgroup: WORKGROUP\x00&#xa;  System time: 2017-08-20T15:42:07+02:00&#xa;"><elem key="os">Windows 10 Pro 15063</elem>
+<elem key="lanmanager">Windows 10 Pro 6.3</elem>
+<elem key="server">DESKTOP-6GLIL73\x00</elem>
+<elem key="date">2017-08-20T15:42:07+02:00</elem>
+<elem key="fqdn">DESKTOP-6GLIL73</elem>
+<elem key="domain_dns">DESKTOP-6GLIL73</elem>
+<elem key="workgroup">WORKGROUP\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_10::-</elem>
+</script></hostscript><times srtt="2392" rttvar="2584" to="100000"/>
+</host>
+<runstats><finished time="1503236528" timestr="Sun Aug 20 15:42:08 2017" elapsed="0.37" summary="Nmap done at Sun Aug 20 15:42:08 2017; 1 IP address (1 host up) scanned in 0.37 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

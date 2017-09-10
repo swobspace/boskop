@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Sun Aug 20 15:41:30 2017 as: nmap -PE -sU -sS -&#45;max-hostgroup=3 -&#45;script smb-os-discovery.nse -&#45;script-args smbuser=wob,smbpasswd=wIg1pftx -p U:137,T:139,T:445 -oX smb-os-discovery.xml 192.168.1.64/26 -->
+<nmaprun scanner="nmap" args="nmap -PE -sU -sS -&#45;max-hostgroup=3 -&#45;script smb-os-discovery.nse -&#45;script-args smbuser=wob,smbpasswd=wIg1pftx -p U:137,T:139,T:445 -oX smb-os-discovery.xml 192.168.1.64/26" start="1503236490" startstr="Sun Aug 20 15:41:30 2017" version="7.60" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<scaninfo type="udp" protocol="udp" numservices="1" services="137"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1503236490" endtime="1503236491"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.97" addrtype="ipv4"/>
+<address addr="00:09:52:02:13:CA" addrtype="mac" vendor="Auerswald GmbH &amp; KG"/>
+<hostnames>
+<hostname name="wobtk" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="closed" reason="reset" reason_ttl="64"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="closed" reason="reset" reason_ttl="64"/><service name="microsoft-ds" method="table" conf="3"/></port>
+<port protocol="udp" portid="137"><state state="closed" reason="port-unreach" reason_ttl="64"/><service name="netbios-ns" method="table" conf="3"/></port>
+</ports>
+<times srtt="3116" rttvar="3294" to="100000"/>
+</host>
+<runstats><finished time="1503236491" timestr="Sun Aug 20 15:41:31 2017" elapsed="1.27" summary="Nmap done at Sun Aug 20 15:41:31 2017; 64 IP addresses (1 host up) scanned in 1.27 seconds" exit="success"/><hosts up="1" down="63" total="64"/>
+</runstats>
+</nmaprun>

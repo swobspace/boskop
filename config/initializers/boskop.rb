@@ -1,5 +1,5 @@
 module Boskop
-  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts'].freeze
+  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings'].freeze
   PERIOD_UNITS = [ 'day', 'week', 'month', 'quarter', 'year' ].freeze
   
   def self.devise_modules

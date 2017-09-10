@@ -4,7 +4,6 @@ RSpec.describe FrameworkContract, type: :model do
   it { is_expected.to have_many(:lines) }
 
   it { is_expected.to validate_presence_of(:name) }
-  it { is_expected.to validate_uniqueness_of(:name) }
   it { is_expected.to validate_inclusion_of(:period_of_notice_unit).
                         in_array(Boskop::PERIOD_UNITS) }
   it { is_expected.to validate_inclusion_of(:renewal_unit).
@@ -13,6 +12,7 @@ RSpec.describe FrameworkContract, type: :model do
   it "should get plain factory working" do
     f = FactoryGirl.create(:framework_contract)
     g = FactoryGirl.create(:framework_contract)
+    expect(f).to validate_uniqueness_of(:name)
     expect(f).to be_valid
     expect(g).to be_valid
   end

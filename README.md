@@ -15,9 +15,6 @@ boskop makes heavy usage of cidr and inet types of postgresql for searching
 and matching ip addresses and ip networks. It does not work with any other
 database yet.
 
-**THIS APPLICATION IS WORK IN PROGRESS AND NOT FUNCTIONAL YET!**
-You will loose all your hair and teeth if you use this application ;-)
-
 Requirements
 ------------
 
@@ -42,11 +39,8 @@ Installation
     cd boskop
     bundle install
 
-### Setup bower an js stuff
-    sudo npm install -g bower
-    bin/rake bower:install
-
-See ''bin/rake -vT bower'' for more rake bower methods.
+### Setup yarn
+    yarn install
 
 ### Setup postgres
 See ''doc/postgres.md''
@@ -62,7 +56,7 @@ TBD
 Licence
 -------
 
-boskop Copyright (C) 2014-2016  Wolfgang Barth
+boskop Copyright (C) 2014-2017  Wolfgang Barth
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

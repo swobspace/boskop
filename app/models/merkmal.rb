@@ -1,6 +1,6 @@
-class Merkmal < ActiveRecord::Base
+class Merkmal < ApplicationRecord
   # -- associations
-  belongs_to :merkmalfor, polymorphic: true
+  belongs_to :merkmalfor, polymorphic: true, optional: true
   belongs_to :merkmalklasse
 
   # -- configuration
@@ -42,7 +42,7 @@ class Merkmal < ActiveRecord::Base
       true
     else
       errors.add(:base, 'only one attribute of each merkmalklasse allowed')
-      false
+      throw :abort
     end
   end
 

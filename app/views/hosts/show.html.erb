@@ -1,0 +1,65 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @host.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @host.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ip')%>:</th>
+    <td><%= @host.ip %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.operating_system')%>:</th>
+    <td><%= @host.operating_system %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.cpe')%>:</th>
+    <td><%= @host.cpe %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.raw_os')%>:</th>
+    <td><%= @host.raw_os %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.fqdn')%>:</th>
+    <td><%= @host.fqdn %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.domain_dns')%>:</th>
+    <td><%= @host.domain_dns %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.workgroup')%>:</th>
+    <td><%= @host.workgroup %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.lastseen')%>:</th>
+    <td><%= @host.lastseen %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.mac')%>:</th>
+    <td><%= @host.mac %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.vendor')%>:</th>
+    <td><%= @host.vendor %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.host_category')%>:</th>
+    <td><%= @host.host_category.to_s %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.location')%>:</th>
+    <td><%= @host.location.try(:lid) %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@host) %>
+  <%= delete_link(@host) %>
+  <%= new_link Host %>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Sun Aug 20 12:10:59 2017 as: nmap -T4 -A -p 1-1000 -oX nmap-42 192.168.1.42 -->
+<nmaprun scanner="nmap" args="nmap -T4 -A -p 1-1000 -oX nmap-42 192.168.1.42" start="1503223859" startstr="Sun Aug 20 12:10:59 2017" version="7.60" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="1000" services="1-1000"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1503223859" endtime="1503223882"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.42" addrtype="ipv4"/>
+<address addr="C8:FF:28:78:29:DB" addrtype="mac" vendor="Liteon Technology"/>
+<hostnames>
+<hostname name="wobntb" type="PTR"/>
+</hostnames>
+<ports><extraports state="filtered" count="1000">
+<extrareasons reason="no-responses" count="1000"/>
+</extraports>
+</ports>
+<os></os>
+<distance value="1"/>
+<trace>
+<hop ttl="1" ipaddr="192.168.1.42" rtt="1.46" host="wobntb"/>
+</trace>
+<times srtt="1455" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1503223882" timestr="Sun Aug 20 12:11:22 2017" elapsed="24.39" summary="Nmap done at Sun Aug 20 12:11:22 2017; 1 IP address (1 host up) scanned in 24.39 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>

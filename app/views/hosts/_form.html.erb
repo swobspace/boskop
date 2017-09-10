@@ -1,0 +1,54 @@
+<%= simple_form_for(@host,
+  html: { class: 'form-horizontal well' },
+  wrapper: :horizontal_form,
+  wrapper_mappings: {
+    check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  }) do |f| %>
+
+  <fieldset>
+    <%= form_legend %>
+
+    <div class="form-inputs">
+      <%= f.input :ip, as: :string
+       %>
+      <%= f.input :name
+       %>
+      <%= f.input :description
+       %>
+      <%= f.input :cpe
+       %>
+      <%= f.input :raw_os
+       %>
+      <%= f.association :operating_system,
+            input_html: { class: 'select2' }
+       %>
+      <%= f.input :fqdn
+       %>
+      <%= f.input :domain_dns
+       %>
+      <%= f.input :workgroup
+       %>
+      <%= f.input :lastseen, as: :string
+       %>
+      <%= f.input :mac
+       %>
+      <%= f.input :vendor
+       %>
+      <%= f.association :host_category,
+            input_html: { class: 'select2' }
+       %>
+      <%= f.association :location,
+            label_method: :to_str,
+            input_html: { class: 'select2' }
+       %>
+    </div>
+
+    <div class="form-actions col-sm-9 col-sm-offset-3">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  </fieldset>
+<% end %>

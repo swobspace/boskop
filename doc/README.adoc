@@ -1,0 +1,15 @@
+== Documentation for Boskop
+:Author: Wolfgang Barth
+:Email: Wolfgang.Barth@marienhaus.de
+:Date: 2017-08-18
+:Version: 1.0
+
+admin-manual:: 
+  Admin tasks like users, groups, authorities or master data administration.
+dev-notes:: 
+  internal notes for development
+installation-guide:: 
+  Installation and requirements
+user-manual::
+  documentation to work with boskop
+

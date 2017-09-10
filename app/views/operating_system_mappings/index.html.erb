@@ -1,0 +1,32 @@
+<h1><%= t('controller.operating_system_mappings') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.field') %></th>
+    <th><%= t('attributes.value') %></th>
+    <th><%= t('attributes.operating_system') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @operating_system_mappings.each do |operating_system_mapping| %>
+  <%= content_tag_for(:tr, operating_system_mapping) do %>
+    <td><%= operating_system_mapping.field %></td>
+    <td><%= operating_system_mapping.value %></td>
+    <td><%= operating_system_mapping.operating_system %></td>
+    <td class="nowrap">
+      <%= show_link operating_system_mapping %>
+      <%= edit_link operating_system_mapping %>
+      <%= delete_link operating_system_mapping %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link OperatingSystemMapping %>

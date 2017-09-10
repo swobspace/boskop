@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+class Location < ApplicationRecord
   # -- associations
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :addresses, as: :addressfor, dependent: :destroy

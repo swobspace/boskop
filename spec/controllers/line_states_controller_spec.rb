@@ -40,7 +40,7 @@ RSpec.describe LineStatesController, type: :controller do
   describe "GET #index" do
     it "assigns all line_states as @line_states" do
       line_state = LineState.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:line_states)).to eq([line_state])
     end
   end
@@ -48,14 +48,14 @@ RSpec.describe LineStatesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested line_state as @line_state" do
       line_state = LineState.create! valid_attributes
-      get :show, {:id => line_state.to_param}, valid_session
+      get :show, params: {:id => line_state.to_param}
       expect(assigns(:line_state)).to eq(line_state)
     end
   end
 
   describe "GET #new" do
     it "assigns a new line_state as @line_state" do
-      get :new, {}, valid_session
+      get :new, params: {}
       expect(assigns(:line_state)).to be_a_new(LineState)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe LineStatesController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested line_state as @line_state" do
       line_state = LineState.create! valid_attributes
-      get :edit, {:id => line_state.to_param}, valid_session
+      get :edit, params: {:id => line_state.to_param}
       expect(assigns(:line_state)).to eq(line_state)
     end
   end
@@ -72,30 +72,30 @@ RSpec.describe LineStatesController, type: :controller do
     context "with valid params" do
       it "creates a new LineState" do
         expect {
-          post :create, {:line_state => valid_attributes}, valid_session
+          post :create, params: {:line_state => valid_attributes}
         }.to change(LineState, :count).by(1)
       end
 
       it "assigns a newly created line_state as @line_state" do
-        post :create, {:line_state => valid_attributes}, valid_session
+        post :create, params: {:line_state => valid_attributes}
         expect(assigns(:line_state)).to be_a(LineState)
         expect(assigns(:line_state)).to be_persisted
       end
 
       it "redirects to the created line_state" do
-        post :create, {:line_state => valid_attributes}, valid_session
+        post :create, params: {:line_state => valid_attributes}
         expect(response).to redirect_to(LineState.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved line_state as @line_state" do
-        post :create, {:line_state => invalid_attributes}, valid_session
+        post :create, params: {:line_state => invalid_attributes}
         expect(assigns(:line_state)).to be_a_new(LineState)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:line_state => invalid_attributes}, valid_session
+        post :create, params: {:line_state => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -109,20 +109,20 @@ RSpec.describe LineStatesController, type: :controller do
 
       it "updates the requested line_state" do
         line_state = LineState.create! valid_attributes
-        put :update, {:id => line_state.to_param, :line_state => new_attributes}, valid_session
+        put :update, params: {:id => line_state.to_param, :line_state => new_attributes}
         line_state.reload
         expect(line_state.description).to eq("sonstnochwas")
       end
 
       it "assigns the requested line_state as @line_state" do
         line_state = LineState.create! valid_attributes
-        put :update, {:id => line_state.to_param, :line_state => valid_attributes}, valid_session
+        put :update, params: {:id => line_state.to_param, :line_state => valid_attributes}
         expect(assigns(:line_state)).to eq(line_state)
       end
 
       it "redirects to the line_state" do
         line_state = LineState.create! valid_attributes
-        put :update, {:id => line_state.to_param, :line_state => valid_attributes}, valid_session
+        put :update, params: {:id => line_state.to_param, :line_state => valid_attributes}
         expect(response).to redirect_to(line_state)
       end
     end
@@ -130,13 +130,13 @@ RSpec.describe LineStatesController, type: :controller do
     context "with invalid params" do
       it "assigns the line_state as @line_state" do
         line_state = LineState.create! valid_attributes
-        put :update, {:id => line_state.to_param, :line_state => invalid_attributes}, valid_session
+        put :update, params: {:id => line_state.to_param, :line_state => invalid_attributes}
         expect(assigns(:line_state)).to eq(line_state)
       end
 
       it "re-renders the 'edit' template" do
         line_state = LineState.create! valid_attributes
-        put :update, {:id => line_state.to_param, :line_state => invalid_attributes}, valid_session
+        put :update, params: {:id => line_state.to_param, :line_state => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -146,13 +146,13 @@ RSpec.describe LineStatesController, type: :controller do
     it "destroys the requested line_state" do
       line_state = LineState.create! valid_attributes
       expect {
-        delete :destroy, {:id => line_state.to_param}, valid_session
+        delete :destroy, params: {:id => line_state.to_param}
       }.to change(LineState, :count).by(-1)
     end
 
     it "redirects to the line_states list" do
       line_state = LineState.create! valid_attributes
-      delete :destroy, {:id => line_state.to_param}, valid_session
+      delete :destroy, params: {:id => line_state.to_param}
       expect(response).to redirect_to(line_states_url)
     end
   end

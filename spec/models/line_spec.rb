@@ -12,7 +12,6 @@ RSpec.describe Line, type: :model do
   it { is_expected.to validate_presence_of(:access_type_id) }
   it { is_expected.to validate_presence_of(:line_state_id) }
   it { is_expected.to validate_presence_of(:description) }
-  it { is_expected.to validate_uniqueness_of(:name) }
   it { is_expected.to validate_inclusion_of(:period_of_notice_unit).
                         in_array(Boskop::PERIOD_UNITS) }
   it { is_expected.to validate_inclusion_of(:renewal_unit).
@@ -21,6 +20,7 @@ RSpec.describe Line, type: :model do
   it "should get plain factory working" do
     f = FactoryGirl.create(:line)
     g = FactoryGirl.create(:line)
+    expect(f).to validate_uniqueness_of(:name)
     expect(f).to be_valid
     expect(g).to be_valid
   end

@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  resources :operating_system_mappings
+  resources :operating_systems
+  resources :host_categories
+  post "hosts", to: "hosts#index", constraints: lambda {|req| req.format == :json}
+  resources :hosts do
+    collection do
+      get :search
+      get :new_import
+      post :import
+    end
+  end
   resources :lines do
     collection do
       get :search
@@ -27,8 +38,8 @@ Rails.application.routes.draw do
 
   resources :merkmalklassen
 
-  mount Wobauth::Engine, at: '/'
-
   root 'locations#index'
+
+  mount Wobauth::Engine, at: '/auth'
 
 end

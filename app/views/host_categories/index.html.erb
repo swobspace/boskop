@@ -1,0 +1,30 @@
+<h1><%= t('controller.host_categories') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @host_categories.each do |host_category| %>
+  <%= content_tag_for(:tr, host_category) do %>
+    <td><%= host_category.name %></td>
+    <td><%= host_category.description %></td>
+    <td class="nowrap">
+      <%= show_link host_category %>
+      <%= edit_link host_category %>
+      <%= delete_link host_category %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link HostCategory %>

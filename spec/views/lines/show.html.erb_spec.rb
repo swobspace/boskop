@@ -9,6 +9,9 @@ RSpec.describe "lines/show", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "show" }
 
+    access_type = FactoryGirl.create(:access_type)
+    line_state  = FactoryGirl.create(:line_state)
+
 
     @line = assign(:line, Line.create!(
       :name => "Name",
@@ -17,7 +20,7 @@ RSpec.describe "lines/show", type: :view do
       :provider_id => "Provider",
       :location_a_id => location.id,
       :location_b_id => nil,
-      :access_type_id => 1,
+      :access_type_id => access_type.id,
       :bw_upstream => "9.99",
       :bw_downstream => "19.99",
       :bw2_upstream => "1.99",
@@ -28,7 +31,7 @@ RSpec.describe "lines/show", type: :view do
       :period_of_notice_unit => "month",
       :renewal_period => 2,
       :renewal_unit => "year",
-      :line_state_id => 1
+      :line_state_id => line_state.id
     ))
     expect(@line).to receive(:location_b).at_least(:once).and_return("---")
     expect(@line).to receive(:access_type).and_return("VDSL")

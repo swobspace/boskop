@@ -11,6 +11,9 @@ RSpec.describe "lines/index", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "index" }
 
+    access_type = FactoryGirl.create(:access_type)
+    line_state  = FactoryGirl.create(:line_state)
+
     assign(:lines, [
       Line.create!(
         :name => "Name1",
@@ -19,7 +22,6 @@ RSpec.describe "lines/index", type: :view do
         :provider_id => "Provider",
         :location_a_id => loc1.id,
         :location_b_id => loc2.id,
-        :access_type_id => 1,
         :bw_upstream => "9.89",
         :bw_downstream => "19.99",
         :bw2_upstream => "1.54",
@@ -30,7 +32,8 @@ RSpec.describe "lines/index", type: :view do
         :period_of_notice_unit => "year",
         :renewal_period => 3,
         :renewal_unit => "month",
-        :line_state_id => 1
+        :access_type_id => access_type.id,
+        :line_state_id => line_state.id
       ),
       Line.create!(
         :name => "Name2",
@@ -39,7 +42,6 @@ RSpec.describe "lines/index", type: :view do
         :provider_id => "Provider",
         :location_a_id => loc1.id,
         :location_b_id => loc2.id,
-        :access_type_id => 1,
         :bw_upstream => "9.89",
         :bw_downstream => "19.99",
         :bw2_upstream => "1.54",
@@ -50,7 +52,8 @@ RSpec.describe "lines/index", type: :view do
         :period_of_notice_unit => "year",
         :renewal_period => 3,
         :renewal_unit => "month",
-        :line_state_id => 1
+        :access_type_id => access_type.id,
+        :line_state_id => line_state.id
       )
     ])
     allow_any_instance_of(Line).to receive(:access_type).and_return("VDSL")

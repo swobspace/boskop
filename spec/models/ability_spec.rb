@@ -24,7 +24,7 @@ RSpec.describe "User", :type => :model do
 
     # -- nor readable, not writeable
     [ Network, Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      FrameworkContract, Line, Ipaddress, Host, OperatingSystem ].each do |model|
+      FrameworkContract, Line, Host, HostCategory ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
@@ -52,7 +52,7 @@ RSpec.describe "User", :type => :model do
 
     # -- nor readable, not writeable
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      FrameworkContract, Line, Ipaddress, Host, OperatingSystem ].each do |model|
+      FrameworkContract, Line, Host, HostCategory ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
@@ -69,16 +69,16 @@ RSpec.describe "User", :type => :model do
 	role: wobauth_roles(:reader))
     }
     # -- readable, ...
-    [ Network, Line, Ipaddress, Host, 
+    [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
 
     # -- ... but not writeable
-    [ Network, Line, Ipaddress, Host, 
+    [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
       it { is_expected.not_to be_able_to(:destroy, model.new) }
@@ -94,23 +94,31 @@ RSpec.describe "User", :type => :model do
 	role: wobauth_roles(:network_manager))
     }
     # -- readable, ...
-    [ Network, Line, Ipaddress, Host, 
+    [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
 
     # -- writeable
-    [ Network, Line, Ipaddress, Host ].each do |model|
+    [ Network, Line ].each do |model|
       it { is_expected.to be_able_to(:create, model.new) }
       it { is_expected.to be_able_to(:update, model.new) }
       it { is_expected.to be_able_to(:destroy, model.new) }
       it { is_expected.to be_able_to(:manage, model.new) }
     end
+    # -- update
+    [ Host, HostCategory ].each do |model|
+      it { is_expected.not_to be_able_to(:create, model.new) }
+      it { is_expected.to be_able_to(:update, model.new) }
+      it { is_expected.not_to be_able_to(:destroy, model.new) }
+      it { is_expected.not_to be_able_to(:manage, model.new) }
+    end
+
 
     # -- not writeable
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
       it { is_expected.not_to be_able_to(:destroy, model.new) }
@@ -125,9 +133,9 @@ RSpec.describe "User", :type => :model do
 	authorizable: user, 
 	role: wobauth_roles(:admin))
       }
-    [ Network, Line, Ipaddress, Host, 
+    [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, OperatingSystem ].each do |model|
+      Location, OrgUnit, FrameworkContract ].each do |model|
       it { is_expected.to be_able_to(:manage, model.new) }
     end
   end

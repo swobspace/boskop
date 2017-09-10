@@ -1,6 +1,6 @@
 require 'uri'
 
-class Merkmalklasse < ActiveRecord::Base
+class Merkmalklasse < ApplicationRecord
   default_scope { order 'position ASC' }
   # -- associations
   has_many :merkmale, dependent: :destroy

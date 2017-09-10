@@ -40,7 +40,7 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "GET #index" do
     it "assigns all framework_contracts as @framework_contracts" do
       framework_contract = FrameworkContract.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, params: {}
       expect(assigns(:framework_contracts)).to eq([framework_contract])
     end
   end
@@ -48,14 +48,14 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested framework_contract as @framework_contract" do
       framework_contract = FrameworkContract.create! valid_attributes
-      get :show, {:id => framework_contract.to_param}, valid_session
+      get :show, params: {:id => framework_contract.to_param}
       expect(assigns(:framework_contract)).to eq(framework_contract)
     end
   end
 
   describe "GET #new" do
     it "assigns a new framework_contract as @framework_contract" do
-      get :new, {}, valid_session
+      get :new, params: {}
       expect(assigns(:framework_contract)).to be_a_new(FrameworkContract)
     end
   end
@@ -63,7 +63,7 @@ RSpec.describe FrameworkContractsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested framework_contract as @framework_contract" do
       framework_contract = FrameworkContract.create! valid_attributes
-      get :edit, {:id => framework_contract.to_param}, valid_session
+      get :edit, params: {:id => framework_contract.to_param}
       expect(assigns(:framework_contract)).to eq(framework_contract)
     end
   end
@@ -72,30 +72,30 @@ RSpec.describe FrameworkContractsController, type: :controller do
     context "with valid params" do
       it "creates a new FrameworkContract" do
         expect {
-          post :create, {:framework_contract => valid_attributes}, valid_session
+          post :create, params: {:framework_contract => valid_attributes}
         }.to change(FrameworkContract, :count).by(1)
       end
 
       it "assigns a newly created framework_contract as @framework_contract" do
-        post :create, {:framework_contract => valid_attributes}, valid_session
+        post :create, params: {:framework_contract => valid_attributes}
         expect(assigns(:framework_contract)).to be_a(FrameworkContract)
         expect(assigns(:framework_contract)).to be_persisted
       end
 
       it "redirects to the created framework_contract" do
-        post :create, {:framework_contract => valid_attributes}, valid_session
+        post :create, params: {:framework_contract => valid_attributes}
         expect(response).to redirect_to(FrameworkContract.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved framework_contract as @framework_contract" do
-        post :create, {:framework_contract => invalid_attributes}, valid_session
+        post :create, params: {:framework_contract => invalid_attributes}
         expect(assigns(:framework_contract)).to be_a_new(FrameworkContract)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:framework_contract => invalid_attributes}, valid_session
+        post :create, params: {:framework_contract => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -109,20 +109,20 @@ RSpec.describe FrameworkContractsController, type: :controller do
 
       it "updates the requested framework_contract" do
         framework_contract = FrameworkContract.create! valid_attributes
-        put :update, {:id => framework_contract.to_param, :framework_contract => new_attributes}, valid_session
+        put :update, params: {:id => framework_contract.to_param, :framework_contract => new_attributes}
         framework_contract.reload
         expect(framework_contract.description).to eq("small typo fixes")
       end
 
       it "assigns the requested framework_contract as @framework_contract" do
         framework_contract = FrameworkContract.create! valid_attributes
-        put :update, {:id => framework_contract.to_param, :framework_contract => valid_attributes}, valid_session
+        put :update, params: {:id => framework_contract.to_param, :framework_contract => valid_attributes}
         expect(assigns(:framework_contract)).to eq(framework_contract)
       end
 
       it "redirects to the framework_contract" do
         framework_contract = FrameworkContract.create! valid_attributes
-        put :update, {:id => framework_contract.to_param, :framework_contract => valid_attributes}, valid_session
+        put :update, params: {:id => framework_contract.to_param, :framework_contract => valid_attributes}
         expect(response).to redirect_to(framework_contract)
       end
     end
@@ -130,13 +130,13 @@ RSpec.describe FrameworkContractsController, type: :controller do
     context "with invalid params" do
       it "assigns the framework_contract as @framework_contract" do
         framework_contract = FrameworkContract.create! valid_attributes
-        put :update, {:id => framework_contract.to_param, :framework_contract => invalid_attributes}, valid_session
+        put :update, params: {:id => framework_contract.to_param, :framework_contract => invalid_attributes}
         expect(assigns(:framework_contract)).to eq(framework_contract)
       end
 
       it "re-renders the 'edit' template" do
         framework_contract = FrameworkContract.create! valid_attributes
-        put :update, {:id => framework_contract.to_param, :framework_contract => invalid_attributes}, valid_session
+        put :update, params: {:id => framework_contract.to_param, :framework_contract => invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
@@ -146,13 +146,13 @@ RSpec.describe FrameworkContractsController, type: :controller do
     it "destroys the requested framework_contract" do
       framework_contract = FrameworkContract.create! valid_attributes
       expect {
-        delete :destroy, {:id => framework_contract.to_param}, valid_session
+        delete :destroy, params: {:id => framework_contract.to_param}
       }.to change(FrameworkContract, :count).by(-1)
     end
 
     it "redirects to the framework_contracts list" do
       framework_contract = FrameworkContract.create! valid_attributes
-      delete :destroy, {:id => framework_contract.to_param}, valid_session
+      delete :destroy, params: {:id => framework_contract.to_param}
       expect(response).to redirect_to(framework_contracts_url)
     end
   end
