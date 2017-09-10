@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "hosts/index", type: :view do
+RSpec.describe "hosts/search", type: :view do
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { "hosts" }
-    allow(controller).to receive(:action_name) { "index" }
+    allow(controller).to receive(:action_name) { "search" }
 
     location = FactoryGirl.create(:location, lid: "LID")
     hostcategory = FactoryGirl.create(:host_category, name: "SecureServer")
@@ -46,7 +46,6 @@ RSpec.describe "hosts/index", type: :view do
 
   it "renders a list of hosts" do
     render
-    pending "uses javascript now" 
     assert_select "tr>td", :text => "MyLovelyHost".to_s, :count => 2
     assert_select "tr>td", :text => "Runningforever".to_s, :count => 2
     assert_select "tr>td", :text => "192.168.81.82".to_s, :count => 1

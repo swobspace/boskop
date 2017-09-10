@@ -10,6 +10,12 @@ class HostsController < ApplicationController
     end
   end
 
+  def search
+    @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
+    @hosts = HostQuery.new(@hosts, search_params).all
+    respond_with(@hosts) 
+  end
+
   # GET /hosts/1
   def show
     respond_with(@host)
@@ -85,5 +91,16 @@ class HostsController < ApplicationController
 
     def import_params
       params.permit(:utf8, :authenticity_token, :type, :file, :update).to_hash
+    end
+
+    def search_params
+      {limit: 100}.merge(
+        # see class HostQuery for possible options
+        params.permit(
+          :name, :description, :ip, :operating_system, :cpe, :raw_os,
+          :fqdn, :domain_dns, :workgroup, :lastseen, :mac, :vendor,
+          :host_category, :lid, :eol, :limit,
+        ).to_hash.reject{|_, v| v.blank?}
+      )
     end
 end

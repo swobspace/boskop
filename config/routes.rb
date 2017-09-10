@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post "hosts", to: "hosts#index", constraints: lambda {|req| req.format == :json}
   resources :hosts do
     collection do
+      get :search
       get :new_import
       post :import
     end
