@@ -48,7 +48,7 @@ RSpec.describe ImportNmapXmlService do
           it { expect(host.lastseen.to_s).to match(/\A2017-08-20/) }
           it { expect(host.name).to eq("wob42") }
           it { expect(host.mac).to eq("C8:FF:28:78:29:DB") }
-          it { expect(host.cpe).to eq("cpe:/o:microsoft:windows_10::-") }
+          it { expect(host.cpe).to eq("/o:microsoft:windows_10::-") }
           it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
           it { expect(host.fqdn).to eq("DESKTOP-6GLIL73") }
           it { expect(host.workgroup).to eq("WORKGROUP") }
