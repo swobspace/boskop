@@ -1,5 +1,6 @@
 ##
-# Query object mainly for use in activities_controller
+# Query object mainly for use in hosts_controller
+#
 class HostQuery
   attr_reader :search_options, :query
 
@@ -19,6 +20,7 @@ class HostQuery
   # * :vendor - string
   # * :host_category - host_categories.name (string)
   # * :lid - location.lid (string)
+  # * :eol - operating_systems.eol < today (boolean)
   #
   # please note: 
   # left_outer_join(:host_category, :location, :operating_system) must exist in relation.
@@ -70,6 +72,8 @@ private
         query = query.where("host_categories.name ILIKE ?", "%#{value}%")
       when :operating_system
         query = query.where("operating_systems.name ILIKE ?", "%#{value}%")
+      when :eol
+        query = query.where("operating_systems.eol < ?", Date.today)
       when :lid
         query = query.where("locations.lid ILIKE ?", "#{value}%")
       when :search

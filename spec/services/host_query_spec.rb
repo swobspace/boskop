@@ -100,6 +100,29 @@ RSpec.describe HostQuery do
     end
   end # search :operating_system
 
+  context "with eol: true" do
+    subject { HostQuery.new(all_hosts, {eol: true}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(pc2, nas) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(pc2.id, nas.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :operating_system
+
   context "with :cpe" do
     subject { HostQuery.new(all_hosts, {cpe: 'WindowS_7'}) }
     describe "#all" do
