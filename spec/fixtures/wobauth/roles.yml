@@ -7,3 +7,9 @@ network_manager:
 reader:
   name: Reader
 
+host_manager:
+  name: HostManager
+
+host_admin:
+  name: HostAdmin
+

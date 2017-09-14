@@ -13,17 +13,25 @@ class Ability
       can :manage, :all
       cannot [:update, :destroy], :roles, :ro => :true
 
-    elsif @user.role?(:network_manager)
+    # -- with at least one role including :reader
+    elsif @user.roles.any?
+      # -- reader
       can :navigate, [:org_units, :configuration]
       can :read, :all
       can [:usage, :usage_form], Network
-      can :manage, [ Network, Line] 
-      can [:read, :update], [Host, HostCategory]
 
-    elsif @user.role?(:reader)
-      can :navigate, [:org_units, :configuration]
-      can :read, :all
-      can [:usage, :usage_form], Network
+      if @user.role?(:network_manager)
+	can :manage, [ Network, Line] 
+	can [:read, :update], [Host, HostCategory]
+      end
+
+      if @user.role?(:host_manager)
+	can [:create, :update, :destroy], [Host] 
+      end
+
+      if @user.role?(:host_admin)
+	can :manage, [Host, HostCategory, OperatingSystem, OperatingSystemMapping]
+      end
 
     else  # -- logged in, but without role
       can :navigate, [:org_units, :configuration]
@@ -31,5 +39,4 @@ class Ability
       can [:usage, :usage_form], Network
     end
   end
-
 end

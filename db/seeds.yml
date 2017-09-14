@@ -2,6 +2,8 @@ roles:
   - name: Admin
   - name: NetworkManager
   - name: Reader
+  - name: HostManager
+  - name: HostAdmin
 
 access_types:
   - name: MPLS
