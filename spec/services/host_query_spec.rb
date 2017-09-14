@@ -468,6 +468,52 @@ RSpec.describe HostQuery do
     end
   end # search :lid
 
+  context "with :merkmal_responsible" do
+    let(:merkmalklasse) { FactoryGirl.create(:merkmalklasse,
+      name: 'Responsible',
+      format: 'string',
+      for_object: 'Host',
+      visible: ['index', '']
+    )}
+    let!(:merkmal) { FactoryGirl.create(:merkmal, 
+      merkmalfor: nas,
+      merkmalklasse: merkmalklasse,
+      value: 'Gandalf'
+    )}
+    subject { HostQuery.new(all_hosts, {merkmal_responsible: 'gAnDalf'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas) }
+      # it "debug" do
+      #   pp Merkmalklasse.visibles(:host, 'index')
+      # end
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_falsey }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :merkmal_responsible
+
+  context "with :merkmal_doesnotexist" do
+    subject { HostQuery.new(all_hosts, {merkmal_doesnotexist: 'Nonsense'}) }
+    describe "#all" do
+      it "raise an error" do
+        expect { subject.all }.to raise_error(ArgumentError)
+      end
+    end
+  end # search :merkmal_doesnotexist
+
   describe "#all" do
     context "with search: 'nas'" do
       subject { HostQuery.new(all_hosts, {search: 'nas'}) }
