@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe HostQuery do
   include_context "host variables"
-  let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system) }
+  let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale) }
 
 
   # check for class methods

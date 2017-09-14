@@ -66,7 +66,11 @@ private
       when *string_fields
         query = query.where("hosts.#{key} ILIKE ?", "%#{value}%")
       when *merkmalklassen
-        query = query
+        tag = key.to_s.sub(/merkmal_/, '')
+        merkmalklasse = Merkmalklasse.where(for_object: 'Host', tag: tag).first
+        query = query.where(
+                'merkmale.merkmalklasse_id = :mk and merkmale.value ILIKE :value',
+                 mk: merkmalklasse.id, value: "%#{value}%")
       when :limit
         @limit = value
       when :ip
