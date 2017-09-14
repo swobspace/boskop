@@ -65,6 +65,8 @@ private
       case key 
       when *string_fields
         query = query.where("hosts.#{key} ILIKE ?", "%#{value}%")
+      when *merkmalklassen
+        query = query
       when :limit
         @limit = value
       when :ip
@@ -117,6 +119,12 @@ private
 
   def string_fields
     [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :mac, :vendor ]
+  end
+
+  def merkmalklassen
+    Merkmalklasse.visibles(:host, 'index').map do |m|
+      "merkmal_#{m.tag}".to_sym
+    end
   end
 
 end

@@ -71,11 +71,11 @@ class HostsDatatable < ApplicationDatatable
 
   def search_columns
     %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid) + 
-    merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
+    merkmalklassen.map {|m| "merkmal_#{m.tag}" }
   end
 
 
   def merkmalklassen
-    Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
+    Merkmalklasse.visibles(:host, 'index')
   end
 end
