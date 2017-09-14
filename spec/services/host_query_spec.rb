@@ -471,6 +471,7 @@ RSpec.describe HostQuery do
   context "with :merkmal_responsible" do
     let(:merkmalklasse) { FactoryGirl.create(:merkmalklasse,
       name: 'Responsible',
+      tag: 'responsible',
       format: 'string',
       for_object: 'Host',
       visible: ['index', '']
