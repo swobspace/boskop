@@ -8,6 +8,7 @@
 <thead>
   <tr>
     <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.tag') %></th>
     <th><%= t('attributes.description') %></th>
     <th><%= t('attributes.format') %></th>
     <th><%= t('attributes.for_object') %></th>
@@ -40,6 +41,7 @@
 <% @merkmalklassen.each do |merkmalklasse| %>
   <%= content_tag_for(:tr, merkmalklasse) do %>
     <td><%= merkmalklasse.name %></td>
+    <td><%= merkmalklasse.tag %></td>
     <td><%= merkmalklasse.description %></td>
     <td><%= merkmalklasse.format %></td>
     <td><%= merkmalklasse.for_object %></td>

@@ -142,6 +142,7 @@ de:
     renewal_unit: Einheit
     sn: Nachname
     streetaddress: Straße, Nr.
+    tag: Tag
     type: Typ
     unique: Unique
     update: Update

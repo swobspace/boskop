@@ -11,6 +11,7 @@ RSpec.describe "merkmalklassen/index", :type => :view do
     assign(:merkmalklassen, [
       Merkmalklasse.create!(
         :name => "Name01",
+        :tag => "name_eins",
         :description => "MyText",
         :format => "dropdown",
         :visible => ['index'],
@@ -19,6 +20,7 @@ RSpec.describe "merkmalklassen/index", :type => :view do
       ),
       Merkmalklasse.create!(
         :name => "Name02",
+        :tag => "name_zwo",
         :description => "MyText",
         :format => "string",
         :visible => ['index'],
@@ -34,6 +36,8 @@ RSpec.describe "merkmalklassen/index", :type => :view do
       end
       it { assert_select "tr>td", :text => "Name01".to_s, :count => 1 }
       it { assert_select "tr>td", :text => "Name02".to_s, :count => 1 }
+      it { assert_select "tr>td", :text => "name_eins".to_s, :count => 1 }
+      it { assert_select "tr>td", :text => "name_zwo".to_s, :count => 1 }
       it { assert_select "tr>td", :text => "MyText".to_s, :count => 2 }
       it { assert_select "tr>td", :text => "dropdown".to_s, :count => 1 }
       it { assert_select "tr>td", :text => "string".to_s, :count => 1 }
