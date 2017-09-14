@@ -8,6 +8,10 @@ FactoryGirl.define do
     "aname_#{n}"
   end
 
+  sequence :tag do |n|
+    (0...20).map { ('a'..'z').to_a[rand(26)] }.join
+  end
+
   sequence :aip do |n|
     "192.0.2.#{n % 256}"
   end
@@ -58,6 +62,7 @@ FactoryGirl.define do
     position 0
     for_object Merkmalklasse::OBJECTS.first
     visible { Merkmalklasse::VISIBLES }
+    tag { generate(:tag) }
   end
 
   factory :merkmal do

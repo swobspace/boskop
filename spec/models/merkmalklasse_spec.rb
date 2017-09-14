@@ -16,9 +16,14 @@ RSpec.describe Merkmalklasse, :type => :model do
        is_expected.to serialize(:visible).as(Array) }
   it { pending "shoulda bug: won't work with serialized array"
        is_expected.to validate_inclusion_of(:visible).in_array(Merkmalklasse::VISIBLES) }
+  # -- format of :baselink
   it { is_expected.to allow_value('http://foo.com', 'https://bar.com/baz').
        for(:baselink) }
   it { is_expected.not_to allow_value('foo.com', 'tcp:baz').for(:baselink) }
+
+  # -- format of :tag
+  it { is_expected.to allow_value('responsible', 'other_thing').for(:tag) }
+  it { is_expected.not_to allow_value('Responsible', 'my test').for(:tag) }
 
   it "should get plain factory working" do
     f = FactoryGirl.create(:merkmalklasse)
@@ -27,6 +32,7 @@ RSpec.describe Merkmalklasse, :type => :model do
     expect(g).to be_valid
 
     is_expected.to validate_uniqueness_of(:name).scoped_to(:for_object)
+    is_expected.to validate_uniqueness_of(:tag).scoped_to(:for_object)
   end
 
   it "to_s returns name" do

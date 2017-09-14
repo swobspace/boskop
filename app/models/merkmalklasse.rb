@@ -24,6 +24,11 @@ class Merkmalklasse < ApplicationRecord
   validates :format, presence: true, inclusion: { in: FORMATE }
   validates :for_object, presence: true, inclusion: { in: OBJECTS }
   validates :visible, presence: true # , inclusion: { in: VISIBLES }
+  validates :tag, presence: true, uniqueness: { scope: :for_object },
+              format: { 
+                with: /\A[a-z_]+\z/,
+                message: "only allows letters a-z and '_'"
+              }
   # -- 
   # not perfect, since it allows 'http://', but its a start
   validates :baselink, format: URI::regexp(%w(http https)), allow_blank: true
