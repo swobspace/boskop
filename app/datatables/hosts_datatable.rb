@@ -27,6 +27,9 @@ class HostsDatatable < ApplicationDatatable
         column << host.vendor 
         column << host.host_category.to_s 
         column << host.location.try(:lid) 
+        merkmalklassen.each do |mklasse|
+          column << get_merkmal(host, mklasse)
+        end
 
         links = []
         links << show_link(host)
@@ -62,11 +65,17 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_categories.name locations.lid)
+    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_categories.name locations.lid) +
+    merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
   end
 
   def search_columns
-    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid)
+    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen mac vendor host_category lid) + 
+    merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
   end
 
+
+  def merkmalklassen
+    Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
+  end
 end

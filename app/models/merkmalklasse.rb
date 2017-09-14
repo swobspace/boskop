@@ -9,7 +9,7 @@ class Merkmalklasse < ApplicationRecord
 
   # -- configuration
   FORMATE = ['string', 'date', 'number', 'telephone', 'dropdown', 'linkindex' ]
-  OBJECTS = ['OrgUnit', 'Location', 'Network']
+  OBJECTS = ['OrgUnit', 'Location', 'Network', 'Host']
   VISIBLES = ['index']
 
   serialize :visible, Array

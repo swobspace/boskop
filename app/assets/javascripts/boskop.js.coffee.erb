@@ -19,8 +19,9 @@ $.datepicker.setDefaults({
 
 ready = ->
   $('table tfoot th').each  (idx) ->
-    title = $('table thead th').eq( $(this).index() ).text()
-    $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
+    unless $(this).hasClass("nosearch")
+      title = $('table thead th').eq( $(this).index() ).text()
+      $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
 
   # --- classic datatable ---
   table = $('table[role="datatable"], table[role="wobauth_datatable"]' ).DataTable(

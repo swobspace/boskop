@@ -5,6 +5,7 @@ class HostsController < ApplicationController
   # GET /hosts
   def index
     @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     respond_with(@hosts) do |format|
       format.json { render json: HostsDatatable.new(@hosts, view_context) }
     end
@@ -12,6 +13,7 @@ class HostsController < ApplicationController
 
   def search
     @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     query = HostQuery.new(@hosts, search_params)
     @filter_info = query.search_options
     @hosts = query.all

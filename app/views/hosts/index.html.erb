@@ -28,6 +28,9 @@
       <th class="notvisible"><%= t('attributes.vendor') %></th>
       <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.location') %></th>
+      <%= content_tag_for(:th, @merkmalklassen, class: "nosort nosearch") do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
       <th>Aktion</th>
     </tr>
   </thead>
@@ -47,13 +50,14 @@
       <th></th>
       <th></th>
       <th></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <% end %>
       <th></th>
     </tr>
   </tfoot>
   <tbody>
   </tbody>
 <% end %>
-
 
 <br />
 
