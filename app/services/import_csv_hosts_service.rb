@@ -34,9 +34,10 @@ class ImportCsvHostsService
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
     CSV.foreach(csvfile, headers: true, col_sep: ';') do |row|
-      csvattributes = attributes(row)
+      csvattributes     = attributes(host_attributes,row)
       host = Host.create_with(csvattributes).find_or_create_by(ip: csvattributes[:ip])
       if host.persisted? && host.update_attributes(attributes_for_update(csvattributes, host))
+         update_merkmale(host, row)
          hosts << host
       else
          errors << "#{host.errors.full_messages.join(', ')}" if host.errors.any?
@@ -50,8 +51,8 @@ private
   attr_reader :csvfile, :update
 
   # extract attributes for Host.new
-  def attributes(row)
-    attributes = row.to_hash.symbolize_keys.select {|k,v| host_attributes.include?(k)}
+  def attributes(allowed_attributes, row)
+    attributes = row.to_hash.symbolize_keys.select {|k,v| allowed_attributes.include?(k)}
     attributes[:cpe].to_s.sub!(/cpe:/, '')
     attributes
   end
@@ -81,10 +82,20 @@ private
     result.merge(recently_seen)
   end
 
+  def update_merkmale(host, row)
+    attributes(merkmal_attributes, row).each do |key,value|
+      host.send("#{key}=", value) if host.send(key).blank?
+    end
+  end
+
   def host_attributes
     Host.attribute_names.map(&:to_sym).reject do |k| 
       [:id, :created_at, :updated_at].include?(k)
     end
+  end
+
+  def merkmal_attributes
+    Merkmalklasse.where(for_object: 'Host').pluck(:tag).map {|t| "merkmal_#{t}".to_sym }
   end
 
   # file may be ActionDispatch::Http::UploadedFile
