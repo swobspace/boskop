@@ -43,6 +43,14 @@ RSpec.describe Host, type: :model do
                first.value).to eq("Mr.X")
       end
 
+      it "creates merkmal on first call and overwrites existing on second call" do
+        host.merkmal_responsible = "first person"
+        expect(host.merkmal_responsible).to eq("first person")
+        host.merkmal_responsible = "second person"
+        expect(host.merkmal_responsible).to eq("second person")
+        expect(host.merkmale.where(merkmalklasse_id: merkmalklasse.id).count).to eq(1)
+      end
+
       context "with preassigned merkmal value" do
         let!(:merkmal) {FactoryGirl.create(:merkmal, 
           merkmalklasse_id: merkmalklasse.id,
