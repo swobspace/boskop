@@ -126,7 +126,9 @@ HostCategory:
 -------------
 
     bin/rails g scaffold HostCategory \
-              name:string description:text
+              name:string description:text tag:string
+
+#    bin/rails g migration AddTagToHostCategory tag:string
 
 OperatingSystem:
 ----------------
