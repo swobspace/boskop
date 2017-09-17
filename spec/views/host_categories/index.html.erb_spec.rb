@@ -11,10 +11,12 @@ RSpec.describe "host_categories/index", type: :view do
     assign(:host_categories, [
       HostCategory.create!(
         :name => "NewName1",
+        :tag => "any_ts",
         :description => "MyText"
       ),
       HostCategory.create!(
         :name => "NewName2",
+        :tag => "any_ts",
         :description => "MyText"
       )
     ])
@@ -25,5 +27,6 @@ RSpec.describe "host_categories/index", type: :view do
     assert_select "tr>td", :text => "NewName1".to_s, :count => 1
     assert_select "tr>td", :text => "NewName2".to_s, :count => 1
     assert_select "tr>td", :text => "MyText".to_s, :count => 2
+    assert_select "tr>td", :text => "any_ts".to_s, :count => 2
   end
 end
