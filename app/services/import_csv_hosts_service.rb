@@ -65,6 +65,7 @@ private
   # extract attributes for Host.new
   def attributes(allowed_attributes, row)
     attributes = row.to_hash.symbolize_keys.select {|k,v| allowed_attributes.include?(k)}
+    attributes = attributes.reject {|k,v| v.blank?}
     cleanup(attributes)
   end
 
