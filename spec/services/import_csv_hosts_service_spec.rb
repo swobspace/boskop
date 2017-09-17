@@ -86,9 +86,9 @@ RSpec.describe ImportCsvHostsService do
       end
     end
   end
-  
+
   describe "with existing host" do
-    let!(:host) { FactoryGirl.create(:host, 
+    let!(:host) { FactoryGirl.create(:host,
       ip: '192.168.1.42',
       lastseen: '2017-08-30',
       name: 'myhost',
@@ -180,5 +180,39 @@ RSpec.describe ImportCsvHostsService do
       end
 
     end
+  end
+
+  describe "importing relations from *_id fields" do
+    let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'relations.csv') }
+    let!(:operating_system) { FactoryGirl.create(:operating_system,
+      id: 771,
+      name: "Linux",
+    )}
+    let!(:host_category)    { FactoryGirl.create(:host_category,
+      id: 772,
+      name: "Linux/Webserver",
+      tag: "lin_web"
+    )}
+    let!(:location)         { FactoryGirl.create(:location,
+      id: 773,
+      name: "@home",
+      lid: "HOME",
+    )}
+    let(:result) { ImportCsvHostsService.new(file: csvfile).call }
+    let(:hosts)  { result.hosts }
+
+    # it { puts result.inspect }
+    it { expect(hosts[0].ip.to_s).to eq("192.168.1.42") }
+    it { expect(hosts[0].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[0].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[0].location_id).to eq(location.id) }
+    it { expect(hosts[1].ip.to_s).to eq("192.168.1.43") }
+    it { expect(hosts[1].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[1].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[1].location_id).to eq(location.id) }
+    it { expect(hosts[2].ip.to_s).to eq("192.168.1.44") }
+    it { expect(hosts[2].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[2].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[2].location_id).to eq(location.id) }
   end
 end
