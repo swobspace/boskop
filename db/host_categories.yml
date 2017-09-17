@@ -28,6 +28,9 @@ host_categories:
   - name: Windows/Exchange-Server
     tag: exchange
     description: Exchange-Server
+  - name: Windows/Domänencontroller
+    tag: win_dc
+    description: Windows Domänencontroller
   - name: Windows/sonstiger Server
     tag: win_sons
     description: sonstiger Windows-Server
