@@ -469,21 +469,34 @@ RSpec.describe HostQuery do
   end # search :lid
 
   context "with :merkmal_responsible" do
-    let(:merkmalklasse) { FactoryGirl.create(:merkmalklasse,
+    let(:merkmalklasse1) { FactoryGirl.create(:merkmalklasse,
       name: 'Responsible',
       tag: 'responsible',
       format: 'string',
       for_object: 'Host',
       visible: ['index', '']
     )}
-    let!(:merkmal) { FactoryGirl.create(:merkmal, 
+    let(:merkmalklasse2) { FactoryGirl.create(:merkmalklasse,
+      name: 'NextStep',
+      tag: 'next',
+      format: 'string',
+      for_object: 'Host',
+      visible: ['index', '']
+    )}
+    let!(:merkmal1) { FactoryGirl.create(:merkmal, 
       merkmalfor: nas,
-      merkmalklasse: merkmalklasse,
+      merkmalklasse: merkmalklasse1,
       value: 'Gandalf'
+    )}
+    let!(:merkmal2) { FactoryGirl.create(:merkmal, 
+      merkmalfor: nas,
+      merkmalklasse: merkmalklasse2,
+      value: 'Replace it'
     )}
     subject { HostQuery.new(all_hosts, {merkmal_responsible: 'gAnDalf'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas) }
+      it { expect(subject.all.count).to eq(1) }
       # it "debug" do
       #   pp Merkmalklasse.visibles(:host, 'index')
       # end
@@ -503,6 +516,12 @@ RSpec.describe HostQuery do
       it { expect(subject.include?(pc3)).to be_falsey }
       it { expect(subject.include?(pc5)).to be_falsey }
       it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+    describe "deliver exactly one result (clean join)" do
+      # search for one host, but not for merkmal
+      subject { HostQuery.new(all_hosts, {name: 'NAS'}) }
+      it { expect(subject.all).to contain_exactly(nas) }
+      it { expect(subject.all.count).to eq(1) }
     end
   end # search :merkmal_responsible
 
