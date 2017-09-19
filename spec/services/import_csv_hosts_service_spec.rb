@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe ImportCsvHostsService do
-    let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
+  let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
+  let!(:mk_responsible) { FactoryGirl.create(:merkmalklasse,
+    name: "Responsible",
+    tag: "responsible",
+    for_object: "Host",
+  )}
+  let!(:mk_next) { FactoryGirl.create(:merkmalklasse,
+    name: "NextSteps",
+    tag: "next",
+    for_object: "Host",
+  )}
 
   # check for class methods
   it { expect(ImportCsvHostsService.respond_to? :new).to be_truthy}
@@ -53,6 +63,8 @@ RSpec.describe ImportCsvHostsService do
           it { expect(host.fqdn).to eq("wob42.my.example.net") }
           it { expect(host.workgroup).to eq("MY") }
           it { expect(host.domain_dns).to eq("my.example.net") }
+          it { expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler") }
+          it { expect(host.merkmal_next).to eq("My next steps") }
         end
       end
     end
@@ -74,14 +86,17 @@ RSpec.describe ImportCsvHostsService do
       end
     end
   end
-  
+
   describe "with existing host" do
-    let!(:host) { FactoryGirl.create(:host, 
+    let!(:host) { FactoryGirl.create(:host,
       ip: '192.168.1.42',
       lastseen: '2017-08-30',
       name: 'myhost',
       cpe: "/o:microsoft:windows:4711",
-      fqdn: 'myhost.example.net'
+      fqdn: 'myhost.example.net',
+      merkmale_attributes: [
+        { merkmalklasse_id: mk_next.id, value: "old steps" }
+      ]
     )}
 
     describe "update: :none" do
@@ -96,6 +111,8 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("")
         expect(host.workgroup).to eq("")
+        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_next).to eq("old steps")
       end
     end
 
@@ -112,6 +129,8 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("")
         expect(host.workgroup).to eq("")
+        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_next).to eq("old steps")
       end
 
       it "updates any attribute from current data" do
@@ -125,6 +144,8 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("wob42.my.example.net")
         expect(host.domain_dns).to eq("my.example.net")
         expect(host.workgroup).to eq("MY")
+        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_next).to eq("old steps")
       end
     end
     describe "update: :missing" do
@@ -140,6 +161,8 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("my.example.net")
         expect(host.workgroup).to eq("MY")
+        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_next).to eq("old steps")
       end
       it "doesn't update any attribute from old data" do
         host.update(lastseen: '2017-09-30')
@@ -152,8 +175,44 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("")
         expect(host.workgroup).to eq("")
+        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_next).to eq("old steps")
       end
 
     end
+  end
+
+  describe "importing relations from *_id fields" do
+    let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'relations.csv') }
+    let!(:operating_system) { FactoryGirl.create(:operating_system,
+      id: 771,
+      name: "Linux",
+    )}
+    let!(:host_category)    { FactoryGirl.create(:host_category,
+      id: 772,
+      name: "Linux/Webserver",
+      tag: "lin_web"
+    )}
+    let!(:location)         { FactoryGirl.create(:location,
+      id: 773,
+      name: "@home",
+      lid: "HOME",
+    )}
+    let(:result) { ImportCsvHostsService.new(file: csvfile).call }
+    let(:hosts)  { result.hosts }
+
+    # it { puts result.inspect }
+    it { expect(hosts[0].ip.to_s).to eq("192.168.1.42") }
+    it { expect(hosts[0].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[0].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[0].location_id).to eq(location.id) }
+    it { expect(hosts[1].ip.to_s).to eq("192.168.1.43") }
+    it { expect(hosts[1].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[1].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[1].location_id).to eq(location.id) }
+    it { expect(hosts[2].ip.to_s).to eq("192.168.1.44") }
+    it { expect(hosts[2].operating_system_id).to eq(operating_system.id) }
+    it { expect(hosts[2].host_category_id).to eq(host_category.id) }
+    it { expect(hosts[2].location_id).to eq(location.id) }
   end
 end

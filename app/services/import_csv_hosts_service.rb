@@ -1,4 +1,16 @@
 # import csv data
+#
+# column headers may be:
+#
+# * plain attributes setting values direct like :name or :tag
+# * assoziation id like host_category_id
+# * merkmal_<tag>: tag must match exactly one Merkmalklasse
+# 
+# in case of assoziation id there are two possible values:
+#
+# * integer: must match the id of the assoziation
+# * string: must match :name, :tag or :lid (in case of location)
+#
 require 'csv'
 class ImportCsvHostsService
   Result = ImmutableStruct.new( :success?, :error_message, :hosts )
@@ -34,9 +46,10 @@ class ImportCsvHostsService
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
     CSV.foreach(csvfile, headers: true, col_sep: ';') do |row|
-      csvattributes = attributes(row)
+      csvattributes     = attributes(host_attributes,row)
       host = Host.create_with(csvattributes).find_or_create_by(ip: csvattributes[:ip])
       if host.persisted? && host.update_attributes(attributes_for_update(csvattributes, host))
+         update_merkmale(host, row)
          hosts << host
       else
          errors << "#{host.errors.full_messages.join(', ')}" if host.errors.any?
@@ -50,11 +63,15 @@ private
   attr_reader :csvfile, :update
 
   # extract attributes for Host.new
-  def attributes(row)
-    attributes = row.to_hash.symbolize_keys.select {|k,v| host_attributes.include?(k)}
-    attributes[:cpe].to_s.sub!(/cpe:/, '')
-    attributes
+  def attributes(allowed_attributes, row)
+    attributes = row.to_hash.symbolize_keys.select {|k,v| allowed_attributes.include?(k)}
+    attributes = attributes.reject {|k,v| v.blank?}
+    cleanup(attributes)
   end
+
+  # cleanup attributes:
+  # * remove prefix or suffixes
+  # * search for matching objects in relations if attribute =~ /_id\z/
 
   def attributes_for_update(csvattributes, host)
     seen = csvattributes[:lastseen].to_date
@@ -81,9 +98,48 @@ private
     result.merge(recently_seen)
   end
 
+  def update_merkmale(host, row)
+    attributes(merkmal_attributes, row).each do |key,value|
+      host.send("#{key}=", value) if host.send(key).blank?
+    end
+  end
+
   def host_attributes
     Host.attribute_names.map(&:to_sym).reject do |k| 
       [:id, :created_at, :updated_at].include?(k)
+    end
+  end
+
+  def merkmal_attributes
+    Merkmalklasse.where(for_object: 'Host').pluck(:tag).map {|t| "merkmal_#{t}".to_sym }
+  end
+
+  def cleanup(attributes)
+    attributes[:cpe].to_s.sub!(/cpe:/, '')
+    Host.attribute_names.grep(/_id\z/).map(&:to_sym).each do |attr|
+      attributes[attr] = search_for_id(attributes, attr)
+    end
+    attributes
+  end
+
+  def search_for_id(attributes, key)
+    myklass = key.to_s.sub(/_id\z/,'').camelize.constantize
+    value   = attributes.fetch(key, nil)
+    return nil unless value.present?
+    # search for id
+    if value.to_i > 0
+      myklass.where(id: value).first&.id
+    # search for field with exact string value match
+    elsif value.kind_of? String
+      search_string = []
+      ['tag', 'name', 'lid'].each do |attr|
+        if myklass.attribute_names.include?(attr)
+          search_string << "#{attr} ILIKE :search"
+        end
+      end
+      myklass.where(search_string.join(' or '), search: "#{value}").first&.id
+    else
+      nil
     end
   end
 

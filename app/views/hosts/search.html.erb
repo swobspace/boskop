@@ -29,6 +29,9 @@
       <th class="notvisible"><%= t('attributes.vendor') %></th>
       <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.location') %></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
       <th>Aktion</th>
     </tr>
   </thead>
@@ -48,6 +51,8 @@
       <th></th>
       <th></th>
       <th></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <% end %>
       <th></th>
     </tr>
   </tfoot>
@@ -68,6 +73,9 @@
     <td><%= host.vendor %></td>
     <td><%= host.host_category.to_s %></td>
     <td><%= host.location&.lid %></td>
+    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+      <%= get_merkmal(host, mklasse) %>
+    <% end %>
     <td class="nowrap">
       <%= show_link host %>
       <%= edit_link host %>

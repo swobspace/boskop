@@ -10,9 +10,12 @@ host_categories:
   - name: Windows/Terminalserver
     tag: win_ts
     description: Terminalserver (Citrix, RDP u.a.)
-  - name: Datenbankserver
+  - name: Windows/Datenbankserver
     tag: win_db
-    description: "Datenbankserver: alle Datenbanken (Oracle, MS-SQL, MySQL, PostgreSQL, Firebird, etc.)"
+    description: "Datenbankserver: alle Datenbanken (Oracle, MS-SQL, MySQL, PostgreSQL, Firebird, etc.) auf Windows"
+  - name: Linux/Datenbankserver
+    tag: lin_db
+    description: "Datenbankserver: alle Datenbanken (Oracle, MySQL, PostgreSQL, Firebird, etc.) auf Linux"
   - name: Windows/Fileserver
     tag: win_fs
     description: Windows-Fileserver, kein NAS
@@ -25,6 +28,9 @@ host_categories:
   - name: Windows/Exchange-Server
     tag: exchange
     description: Exchange-Server
+  - name: Windows/Domänencontroller
+    tag: win_dc
+    description: Windows Domänencontroller
   - name: Windows/sonstiger Server
     tag: win_sons
     description: sonstiger Windows-Server

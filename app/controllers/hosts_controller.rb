@@ -4,14 +4,16 @@ class HostsController < ApplicationController
 
   # GET /hosts
   def index
-    @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
+    @hosts = Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale)
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     respond_with(@hosts) do |format|
       format.json { render json: HostsDatatable.new(@hosts, view_context) }
     end
   end
 
   def search
-    @hosts = Host.left_outer_joins(:location, :host_category, :operating_system)
+    @hosts = Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale)
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     query = HostQuery.new(@hosts, search_params)
     @filter_info = query.search_options
     @hosts = query.all
@@ -26,11 +28,13 @@ class HostsController < ApplicationController
   # GET /hosts/new
   def new
     @host = Host.new
+    merkmale
     respond_with(@host)
   end
 
   # GET /hosts/1/edit
   def edit
+    merkmale
   end
 
   # POST /hosts
@@ -87,7 +91,10 @@ class HostsController < ApplicationController
       params.require(:host).permit(
         :name, :description, :ip, :cpe, :raw_os, :operating_system_id,
         :lastseen, :mac, :host_category_id, :location_id, :fqdn,
-        :workgroup, :domain_dns, :vendor
+        :workgroup, :domain_dns, :vendor,  
+        [ merkmale_attributes:
+          [ :id, :value, :merkmalklasse_id, :_destroy ],
+        ]
       )
     end
 
@@ -105,4 +112,16 @@ class HostsController < ApplicationController
         ).to_hash.reject{|_, v| v.blank?}
       )
     end
+
+    def merkmale
+      merkmale = @host.merkmale.to_a
+      exists    = merkmale.map {|m| m.merkmalklasse.id}
+      klassen   = Merkmalklasse.where(for_object: Host.to_s)
+      klassen.each do |kl|
+        unless exists.include?(kl.id)
+          @host.merkmale.build(merkmalklasse_id: kl.id)
+        end
+      end
+    end
+
 end

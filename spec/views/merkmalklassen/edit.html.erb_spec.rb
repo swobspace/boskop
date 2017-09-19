@@ -10,6 +10,7 @@ RSpec.describe "merkmalklassen/edit", :type => :view do
 
     @merkmalklasse = assign(:merkmalklasse, Merkmalklasse.create!(
       :name => "MyString",
+      :tag => "a_long_tag",
       :description => "MyText",
       :format => "string",
       :visible => ['index'],
@@ -24,6 +25,7 @@ RSpec.describe "merkmalklassen/edit", :type => :view do
     assert_select "form[action=?][method=?]", merkmalklasse_path(@merkmalklasse), "post" do
 
       assert_select "input#merkmalklasse_name[name=?]", "merkmalklasse[name]"
+      assert_select "input#merkmalklasse_tag[name=?]", "merkmalklasse[tag]"
 
       assert_select "textarea#merkmalklasse_description[name=?]", "merkmalklasse[description]"
 

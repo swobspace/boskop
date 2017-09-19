@@ -4,6 +4,7 @@
 <thead>
   <tr>
     <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.tag') %></th>
     <th><%= t('attributes.description') %></th>
     <th></th>
   </tr>
@@ -13,6 +14,7 @@
 <% @host_categories.each do |host_category| %>
   <%= content_tag_for(:tr, host_category) do %>
     <td><%= host_category.name %></td>
+    <td><%= host_category.tag %></td>
     <td><%= host_category.description %></td>
     <td class="nowrap">
       <%= show_link host_category %>

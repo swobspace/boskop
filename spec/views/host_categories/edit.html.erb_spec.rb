@@ -17,7 +17,7 @@ RSpec.describe "host_categories/edit", type: :view do
     assert_select "form[action=?][method=?]", host_category_path(@host_category), "post" do
 
       assert_select "input[name=?]", "host_category[name]"
-
+      assert_select "input[name=?]", "host_category[tag]"
       assert_select "textarea[name=?]", "host_category[description]"
     end
   end

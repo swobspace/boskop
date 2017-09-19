@@ -10,6 +10,7 @@ RSpec.describe "host_categories/show", type: :view do
 
     @host_category = assign(:host_category, HostCategory.create!(
       :name => "Name",
+      :tag => "any_ts",
       :description => "MyText"
     ))
   end
@@ -18,5 +19,6 @@ RSpec.describe "host_categories/show", type: :view do
     render
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/any_ts/)
   end
 end

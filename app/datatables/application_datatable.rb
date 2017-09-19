@@ -5,6 +5,7 @@ class ApplicationDatatable
   delegate :show_link, to: :@view
   delegate :edit_link, to: :@view
   delegate :delete_link, to: :@view
+  delegate :get_merkmal, to: :@view
 
   def initialize(view)
     @view = view

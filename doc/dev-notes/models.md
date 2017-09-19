@@ -7,7 +7,7 @@ Merkmalklasse:
     bin/rails g scaffold Merkmalklasse name:string:index description:text \
               format:string possible_values:text unique:boolean \
               mandantory:boolean position:integer for_object:string:index \
-              visible:string baselink:string
+              visible:string baselink:string tag:string
 
     # bin/rails g migration AddObjectToMerkmalklasse \
     #           mandantory:boolean position:integer for_object:string:index
@@ -15,6 +15,7 @@ Merkmalklasse:
     #           visible:string
     # bin/rails g migration AddBaselinkToMerkmalklasse \
     #           baselink:string
+    # bin/rails g migration AddTagToMerkmalklasse tag:string
 
 Merkmal:
 --------
@@ -125,7 +126,9 @@ HostCategory:
 -------------
 
     bin/rails g scaffold HostCategory \
-              name:string description:text
+              name:string description:text tag:string
+
+#    bin/rails g migration AddTagToHostCategory tag:string
 
 OperatingSystem:
 ----------------

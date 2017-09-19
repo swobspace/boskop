@@ -24,6 +24,7 @@ RSpec.describe "merkmalklassen/new", :type => :view do
     assert_select "form[action=?][method=?]", merkmalklassen_path, "post" do
 
       assert_select "input#merkmalklasse_name[name=?]", "merkmalklasse[name]"
+      assert_select "input#merkmalklasse_tag[name=?]", "merkmalklasse[tag]"
 
       assert_select "textarea#merkmalklasse_description[name=?]", "merkmalklasse[description]"
 

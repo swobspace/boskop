@@ -6,10 +6,11 @@ RSpec.describe "merkmalklassen/show", :type => :view do
     @ability.extend(CanCan::Ability)
     allow(controller).to receive(:current_ability) { @ability }
     allow(controller).to receive(:controller_name) { "sites" }
-    allow(controller).to receive(:action_name) { "new" }
+    allow(controller).to receive(:action_name) { "show" }
 
     @merkmalklasse = assign(:merkmalklasse, Merkmalklasse.create!(
       :name => "Name",
+      :tag => "a_long_tag_for_you",
       :description => "MyText",
       :format => "string",
       :visible => ['index'],
@@ -21,6 +22,7 @@ RSpec.describe "merkmalklassen/show", :type => :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
+    expect(rendered).to match(/a_long_tag_for_you/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/string/)
     expect(rendered).to match(/index/)

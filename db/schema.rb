@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909140951) do
+ActiveRecord::Schema.define(version: 20170917075025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170909140951) do
     t.text "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag", default: ""
   end
 
   create_table "hosts", force: :cascade do |t|
@@ -173,6 +174,7 @@ ActiveRecord::Schema.define(version: 20170909140951) do
     t.string "for_object", limit: 255, default: "", null: false
     t.string "visible", limit: 255
     t.string "baselink", limit: 255, default: ""
+    t.string "tag", default: ""
     t.index ["for_object"], name: "index_merkmalklassen_on_for_object"
     t.index ["name"], name: "index_merkmalklassen_on_name"
   end

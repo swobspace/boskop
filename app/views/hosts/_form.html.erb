@@ -45,6 +45,9 @@
             input_html: { class: 'select2' }
        %>
     </div>
+    <div class="well bs-subform bs-merkmale">
+      <%= render 'merkmale/merkmal_form', f: f, merkmale: @host.merkmale %>
+    </div>
 
     <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>

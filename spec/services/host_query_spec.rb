@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe HostQuery do
   include_context "host variables"
-  let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system) }
+  let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale) }
 
 
   # check for class methods
@@ -467,6 +467,72 @@ RSpec.describe HostQuery do
       it { expect(subject.include?(vpngw)).to be_falsey }
     end
   end # search :lid
+
+  context "with :merkmal_responsible" do
+    let(:merkmalklasse1) { FactoryGirl.create(:merkmalklasse,
+      name: 'Responsible',
+      tag: 'responsible',
+      format: 'string',
+      for_object: 'Host',
+      visible: ['index', '']
+    )}
+    let(:merkmalklasse2) { FactoryGirl.create(:merkmalklasse,
+      name: 'NextStep',
+      tag: 'next',
+      format: 'string',
+      for_object: 'Host',
+      visible: ['index', '']
+    )}
+    let!(:merkmal1) { FactoryGirl.create(:merkmal, 
+      merkmalfor: nas,
+      merkmalklasse: merkmalklasse1,
+      value: 'Gandalf'
+    )}
+    let!(:merkmal2) { FactoryGirl.create(:merkmal, 
+      merkmalfor: nas,
+      merkmalklasse: merkmalklasse2,
+      value: 'Replace it'
+    )}
+    subject { HostQuery.new(all_hosts, {merkmal_responsible: 'gAnDalf'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas) }
+      it { expect(subject.all.count).to eq(1) }
+      # it "debug" do
+      #   pp Merkmalklasse.visibles(:host, 'index')
+      # end
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_falsey }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+    describe "deliver exactly one result (clean join)" do
+      # search for one host, but not for merkmal
+      subject { HostQuery.new(all_hosts, {name: 'NAS'}) }
+      it { expect(subject.all).to contain_exactly(nas) }
+      it { expect(subject.all.count).to eq(1) }
+    end
+  end # search :merkmal_responsible
+
+  context "with :merkmal_doesnotexist" do
+    subject { HostQuery.new(all_hosts, {merkmal_doesnotexist: 'Nonsense'}) }
+    describe "#all" do
+      it "raise an error" do
+        expect { subject.all }.to raise_error(ArgumentError)
+      end
+    end
+  end # search :merkmal_doesnotexist
 
   describe "#all" do
     context "with search: 'nas'" do

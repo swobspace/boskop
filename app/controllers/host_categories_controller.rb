@@ -51,6 +51,6 @@ class HostCategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def host_category_params
-      params.require(:host_category).permit(:name, :description)
+      params.require(:host_category).permit(:name, :description, :tag)
     end
 end

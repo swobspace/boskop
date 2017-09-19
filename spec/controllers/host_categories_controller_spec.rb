@@ -98,7 +98,7 @@ RSpec.describe HostCategoriesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { description: "weisse bescheid" }
+        { description: "weisse bescheid", tag: 'any_ts' }
       }
 
       it "updates the requested host_category" do

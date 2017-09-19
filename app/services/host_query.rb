@@ -33,7 +33,7 @@ class HostQuery
     @relation       = relation
     @search_options = search_options.symbolize_keys!
     @limit          = false
-    @query          ||= build_query
+    @query          ||= build_query.distinct
   end
 
   ##
@@ -65,6 +65,12 @@ private
       case key 
       when *string_fields
         query = query.where("hosts.#{key} ILIKE ?", "%#{value}%")
+      when *merkmalklassen
+        tag = key.to_s.sub(/merkmal_/, '')
+        merkmalklasse = Merkmalklasse.where(for_object: 'Host', tag: tag).first
+        query = query.where(
+                'merkmale.merkmalklasse_id = :mk and merkmale.value ILIKE :value',
+                 mk: merkmalklasse.id, value: "%#{value}%")
       when :limit
         @limit = value
       when :ip
@@ -117,6 +123,12 @@ private
 
   def string_fields
     [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :mac, :vendor ]
+  end
+
+  def merkmalklassen
+    Merkmalklasse.visibles(:host, 'index').map do |m|
+      "merkmal_#{m.tag}".to_sym
+    end
   end
 
 end

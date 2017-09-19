@@ -27,4 +27,22 @@ module ApplicationHelper
     end
   end
 
+  def get_merkmal(object, merkmalklasse)
+    return "" if (object.nil? || merkmalklasse.nil?)
+    Rails.cache.fetch(
+      ["#{object.class.name.downcase}/merkmale", object.id, merkmalklasse.id]
+    ) {
+      values = object.merkmale.where(merkmalklasse_id: merkmalklasse.id).pluck(:value)
+      if merkmalklasse.format == 'linkindex'
+        val = values.first
+        if val.blank?
+          ""
+        else
+          link_to "#{val}", raw(merkmalklasse.baselink.to_s + val.to_s), target: :blank
+        end
+      else
+        values.join("; ").to_s
+      end
+    }
+  end
 end

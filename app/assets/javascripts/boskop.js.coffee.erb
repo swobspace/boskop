@@ -19,11 +19,12 @@ $.datepicker.setDefaults({
 
 ready = ->
   $('table tfoot th').each  (idx) ->
-    title = $('table thead th').eq( $(this).index() ).text()
-    $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
+    unless $(this).hasClass("nosearch")
+      title = $('table thead th').eq( $(this).index() ).text()
+      $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
 
   # --- classic datatable ---
-  table = $('table[role="datatable"]').DataTable(
+  table = $('table[role="datatable"], table[role="wobauth_datatable"]' ).DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
