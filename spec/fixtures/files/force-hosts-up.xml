@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Wed Sep 20 18:05:40 2017 as: nmap -Pn -A -T4 -p 53 -oA force-hosts-up 192.168.1.13 198.51.100.1 -->
+<nmaprun scanner="nmap" args="nmap -Pn -A -T4 -p 53 -oA force-hosts-up 192.168.1.13 198.51.100.1" start="1505923540" startstr="Wed Sep 20 18:05:40 2017" version="7.60" xmloutputversion="1.04">
+<scaninfo type="connect" protocol="tcp" numservices="1" services="53"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<host starttime="1505923540" endtime="1505923559"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="192.168.1.13" addrtype="ipv4"/>
+<hostnames>
+<hostname name="wobgate" type="PTR"/>
+</hostnames>
+<ports><port protocol="tcp" portid="53"><state state="open" reason="syn-ack" reason_ttl="0"/><service name="domain" method="probed" conf="10"/><script id="dns-nsid" output="&#xa;  bind.version: 9.9.5-9+deb8u13-Debian"><elem key="bind.version">9.9.5-9+deb8u13-Debian</elem>
+</script></port>
+</ports>
+<times srtt="362" rttvar="5000" to="100000"/>
+</host>
+<host starttime="1505923540" endtime="1505923559"><status state="up" reason="user-set" reason_ttl="0"/>
+<address addr="198.51.100.1" addrtype="ipv4"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="53"><state state="filtered" reason="no-response" reason_ttl="0"/><service name="domain" method="table" conf="3"/></port>
+</ports>
+</host>
+<runstats><finished time="1505923559" timestr="Wed Sep 20 18:05:59 2017" elapsed="19.54" summary="Nmap done at Wed Sep 20 18:05:59 2017; 2 IP addresses (2 hosts up) scanned in 19.54 seconds" exit="success"/><hosts up="2" down="0" total="2"/>
+</runstats>
+</nmaprun>
