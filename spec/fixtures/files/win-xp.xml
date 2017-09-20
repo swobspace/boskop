@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Wed Sep 20 16:41:18 2017 as: nmap -PE -sU -sS -p U:137,T:139,T:445 -&#45;script smb-os-discovery.nse,nbstat.nse,vuln -&#45;max-hostgroup=3 -oA win-xp 192.168.1.87 -->
+<nmaprun scanner="nmap" args="nmap -PE -sU -sS -p U:137,T:139,T:445 -&#45;script smb-os-discovery.nse,nbstat.nse,vuln -&#45;max-hostgroup=3 -oA win-xp 192.168.1.87" start="1505918478" startstr="Wed Sep 20 16:41:18 2017" version="7.60" xmloutputversion="1.04">
+<scaninfo type="syn" protocol="tcp" numservices="2" services="139,445"/>
+<scaninfo type="udp" protocol="udp" numservices="1" services="137"/>
+<verbose level="0"/>
+<debugging level="0"/>
+<prescript><script id="broadcast-avahi-dos" output="&#xa;  Discovered hosts:&#xa;    224.0.0.251&#xa;  After NULL UDP avahi packet DoS (CVE-2011-1002).&#xa;  Hosts are all up (not vulnerable).&#xa;"/></prescript><host starttime="1505918512" endtime="1505918517"><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.87" addrtype="ipv4"/>
+<address addr="00:21:85:54:B2:3E" addrtype="mac" vendor="Micro-star Int&apos;l"/>
+<hostnames>
+</hostnames>
+<ports><port protocol="tcp" portid="139"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="netbios-ssn" method="table" conf="3"/></port>
+<port protocol="tcp" portid="445"><state state="open" reason="syn-ack" reason_ttl="128"/><service name="microsoft-ds" product="Windows XP microsoft-ds" method="probed" conf="10"/></port>
+<port protocol="udp" portid="137"><state state="open" reason="udp-response" reason_ttl="128"/><service name="netbios-ns" method="table" conf="3"/></port>
+</ports>
+<hostscript><script id="nbstat" output="NetBIOS name: W-AB8159B407254, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:21:85:54:b2:3e (Micro-star Int&apos;l)"><elem key="server_name">W-AB8159B407254</elem>
+<elem key="user">&lt;unknown&gt;</elem>
+<table key="statistics">
+<elem>00 21 85 54 b2 3e 00 00 00 00 00 00 00 00 00 00 00</elem>
+<elem>00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</elem>
+<elem>00 00 00 00 00 00 00 00 00 00 00 00 00 00</elem>
+</table>
+<table key="mac">
+<elem key="manuf">Micro-star Int&apos;l</elem>
+<elem key="address">00:21:85:54:b2:3e</elem>
+</table>
+<table key="names">
+<table>
+<elem key="suffix">0</elem>
+<elem key="name">W-AB8159B407254</elem>
+<elem key="flags">1024</elem>
+</table>
+<table>
+<elem key="suffix">0</elem>
+<elem key="name">MSHEIMNETZ</elem>
+<elem key="flags">33792</elem>
+</table>
+<table>
+<elem key="suffix">32</elem>
+<elem key="name">W-AB8159B407254</elem>
+<elem key="flags">1024</elem>
+</table>
+<table>
+<elem key="suffix">30</elem>
+<elem key="name">MSHEIMNETZ</elem>
+<elem key="flags">33792</elem>
+</table>
+<table>
+<elem key="suffix">29</elem>
+<elem key="name">MSHEIMNETZ</elem>
+<elem key="flags">1024</elem>
+</table>
+<table>
+<elem key="suffix">1</elem>
+<elem key="name">\x01\x02__MSBROWSE__\x02</elem>
+<elem key="flags">33792</elem>
+</table>
+</table>
+</script><script id="samba-vuln-cve-2012-1182" output="NT_STATUS_ACCESS_DENIED">false</script><script id="smb-os-discovery" output="&#xa;  OS: Windows XP (Windows 2000 LAN Manager)&#xa;  OS CPE: cpe:/o:microsoft:windows_xp::-&#xa;  Computer name: w-ab8159b407254&#xa;  NetBIOS computer name: W-AB8159B407254\x00&#xa;  Workgroup: MSHEIMNETZ\x00&#xa;  System time: 2017-09-20T16:41:52+02:00&#xa;"><elem key="os">Windows 5.1</elem>
+<elem key="lanmanager">Windows 2000 LAN Manager</elem>
+<elem key="server">W-AB8159B407254\x00</elem>
+<elem key="date">2017-09-20T16:41:52+02:00</elem>
+<elem key="fqdn">w-ab8159b407254</elem>
+<elem key="domain_dns">w-ab8159b407254</elem>
+<elem key="workgroup">MSHEIMNETZ\x00</elem>
+<elem key="cpe">cpe:/o:microsoft:windows_xp::-</elem>
+</script><script id="smb-vuln-ms10-054" output="false">false</script><script id="smb-vuln-ms10-061" output="ERROR: Script execution failed (use -d to debug)"/><script id="smb-vuln-ms17-010" output="&#xa;  VULNERABLE:&#xa;  Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)&#xa;    State: VULNERABLE&#xa;    IDs:  CVE:CVE-2017-0143&#xa;    Risk factor: HIGH&#xa;      A critical remote code execution vulnerability exists in Microsoft SMBv1&#xa;       servers (ms17-010).&#xa;          &#xa;    Disclosure date: 2017-03-14&#xa;    References:&#xa;      https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143&#xa;      https://technet.microsoft.com/en-us/library/security/ms17-010.aspx&#xa;      https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/&#xa;"><table key="CVE-2017-0143">
+<elem key="title">Remote Code Execution vulnerability in Microsoft SMBv1 servers (ms17-010)</elem>
+<elem key="state">VULNERABLE</elem>
+<table key="ids">
+<elem>CVE:CVE-2017-0143</elem>
+</table>
+<table key="description">
+<elem>A critical remote code execution vulnerability exists in Microsoft SMBv1&#xa; servers (ms17-010).&#xa;    </elem>
+</table>
+<table key="dates">
+<table key="disclosure">
+<elem key="day">14</elem>
+<elem key="year">2017</elem>
+<elem key="month">03</elem>
+</table>
+</table>
+<elem key="disclosure">2017-03-14</elem>
+<table key="refs">
+<elem>https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0143</elem>
+<elem>https://technet.microsoft.com/en-us/library/security/ms17-010.aspx</elem>
+<elem>https://blogs.technet.microsoft.com/msrc/2017/05/12/customer-guidance-for-wannacrypt-attacks/</elem>
+</table>
+</table>
+</script></hostscript><times srtt="942" rttvar="2161" to="100000"/>
+</host>
+<runstats><finished time="1505918517" timestr="Wed Sep 20 16:41:57 2017" elapsed="39.49" summary="Nmap done at Wed Sep 20 16:41:57 2017; 1 IP address (1 host up) scanned in 39.49 seconds" exit="success"/><hosts up="1" down="0" total="1"/>
+</runstats>
+</nmaprun>
