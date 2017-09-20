@@ -2,6 +2,7 @@ require 'rails_helper'
   
 RSpec.describe Boskop::NMAP::XML do
   let!(:testpdf) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'test.pdf') }
+  let!(:invalidxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-invalid.xml') }
 
   # check for class methods
   it { expect(Boskop::NMAP::XML.respond_to? :new).to be_truthy}
@@ -13,8 +14,14 @@ RSpec.describe Boskop::NMAP::XML do
     end
   end
 
-  describe "with invalid input file" do
+  describe "with wrong file format" do
     subject { Boskop::NMAP::XML.new(file: testpdf) }
+    it { expect(subject).not_to be_valid }
+    it { expect(subject.error_message.present?).to be_truthy }
+  end
+
+  describe "with invalid xml file" do
+    subject { Boskop::NMAP::XML.new(file: invalidxml) }
     it { expect(subject).not_to be_valid }
     it { expect(subject.error_message.present?).to be_truthy }
   end

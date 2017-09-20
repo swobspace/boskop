@@ -24,7 +24,8 @@ module Boskop
           @error_message = "file #{file} is not readable or does not exist"
         else
 	  @xml  = ::Nmap::XML.new(file)
-	  if xml.scan_info.present?
+          if File.open(file, 'rb').grep(/nmaprun/).count >= 3 &&
+             xml.scanner.present?
             @valid = true
 	  else
 	    @xml = nil
