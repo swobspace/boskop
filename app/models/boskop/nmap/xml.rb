@@ -47,7 +47,7 @@ module Boskop
       #
       def all_hosts(options = {})
         if options.fetch(:force, false) == false
-          xml.up_hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host, starttime: starttime)}
+          xml.up_hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host, starttime: starttime)}.select {|host| host.up? }
         else
           xml.hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host, starttime: starttime)}
         end

@@ -82,4 +82,13 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject.starttime.to_s).to match(/\A2017-09-20 /) }
   end
 
+  describe "with forced up hosts" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'force-hosts-up.xml') }
+    subject { Boskop::NMAP::XML.new(file: nmapxml) }
+
+    it { expect(subject).to be_valid }
+    it { expect(subject.all_hosts.count).to eq(1) }
+    it { expect(subject.all_hosts.map(&:ip)).to contain_exactly('192.168.1.13') }
+  end
+
 end

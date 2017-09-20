@@ -93,4 +93,21 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.hostname).to eq("wobgate") }
   end
 
+  describe "with forced up state" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'force-hosts-up.xml') }
+    let(:nmaphosts) { ::Nmap::XML.new(nmapxml).hosts }
+    let(:host1)     { Boskop::NMAP::Host.new(nmaphost: nmaphosts[0]) }
+    let(:host2)     { Boskop::NMAP::Host.new(nmaphost: nmaphosts[1]) }
+
+    it { expect(host1.ip).to eq('192.168.1.13') }
+    it { expect(host1.hostname).to eq("wobgate") }
+    it { expect(host1.status).to eq('up') }
+    it { expect(host1.up?).to be_truthy }
+    it { expect(host2.ip).to eq('198.51.100.1') }
+    it { expect(host2.hostname.nil?).to be_truthy}
+    it { expect(host2.status).to eq('down') }
+    it { expect(host2.up?).to be_falsey }
+  end
+
+
 end

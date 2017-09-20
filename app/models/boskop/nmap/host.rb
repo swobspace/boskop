@@ -13,6 +13,8 @@ module Boskop
                     :fqdn, :domain_dns, :workgroup,
                     :raw_os, :server, :fqdn, :cpe]
 
+      UPREASONS = [ 'arp-response', 'echo-reply', 'timestamp-reply', 'syn-ack' ]
+
       # Boskop::NMAP::Host.new(nmaphost: <Nmap::Host>)
       # required option:
       # * nmaphost: instance of Nmap::Host
@@ -41,12 +43,25 @@ module Boskop
         end
       end
 
-      [:ip, :status, :mac, :vendor].each do |attr|
+      [:ip, :mac, :vendor].each do |attr|
         define_method(attr) { nmaphost.send(attr).to_s }
       end
 
       def hostname
         nmaphost.hostname&.name || fqdn
+      end
+
+      def status
+        return 'down' if (nmaphost.status&.state == :down)
+        if UPREASONS.include?(nmaphost.status&.reason) || nmaphost.open_ports.any?
+          'up'
+        else
+          'down'
+        end
+      end
+
+      def up?
+        status == 'up'
       end
 
       # windows product string
