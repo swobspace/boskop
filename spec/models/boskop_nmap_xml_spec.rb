@@ -43,6 +43,7 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject).to be_a_kind_of Boskop::NMAP::XML }
     it { expect(subject).to be_valid }
     it { expect(subject.all_hosts.first).to be_a_kind_of Boskop::NMAP::Host }
+    it { expect(subject.starttime.to_s).to match(/\A2017-08-20 /) }
 
   end
 
@@ -68,6 +69,17 @@ RSpec.describe Boskop::NMAP::XML do
     it { expect(subject).to be_a_kind_of Boskop::NMAP::XML }
     it { expect(subject).to be_valid }
     it { expect(subject.all_hosts.first).to be_a_kind_of Boskop::NMAP::Host }
+  end
+
+  describe "with ping only nmap scan" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-ping.xml') }
+    subject { Boskop::NMAP::XML.new(file: nmapxml) }
+
+    it { expect(subject.respond_to? :valid?).to be_truthy}
+    it { expect(subject).to be_a_kind_of Boskop::NMAP::XML }
+    it { expect(subject).to be_valid }
+    it { expect(subject.all_hosts.first).to be_a_kind_of Boskop::NMAP::Host }
+    it { expect(subject.starttime.to_s).to match(/\A2017-09-20 /) }
   end
 
 end

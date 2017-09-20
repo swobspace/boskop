@@ -75,4 +75,22 @@ RSpec.describe Boskop::NMAP::Host do
     it { expect(subject.attributes).not_to include( :cpe, :raw_os, :server, :fqdn )}
   end
 
+  describe "with valid nmaphost without dns hostname" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'win-xp.xml') }
+    subject { Boskop::NMAP::Host.new(nmaphost: nmaphost) }
+
+    it "set hostname from script data" do
+      expect(subject.hostname).to eq("w-ab8159b407254")
+    end
+  end
+
+  describe "with ping only scan" do
+    let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-ping.xml') }
+    subject { Boskop::NMAP::Host.new(nmaphost: nmaphost, starttime: '2017-09-20') }
+
+    it { expect(subject.ip).to eq('192.168.1.13') }
+    it { expect(subject.lastseen.to_s).to match(/2017-09-20/) }
+    it { expect(subject.hostname).to eq("wobgate") }
+  end
+
 end

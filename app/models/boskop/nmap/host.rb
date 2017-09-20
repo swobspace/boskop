@@ -15,11 +15,14 @@ module Boskop
 
       # Boskop::NMAP::Host.new(nmaphost: <Nmap::Host>)
       # required option:
-      # * +nmaphost+: instance of Nmap::Host
+      # * nmaphost: instance of Nmap::Host
+      # optional:
+      # * starttime: starttime from nmap scanner start (xml)
 
       def initialize(options = {})
 	@options  = options.symbolize_keys!
 	@nmaphost = options.fetch(:nmaphost)
+	@xmlstart = options.fetch(:starttime, nil)
       end
 
       def valid?
@@ -31,11 +34,19 @@ module Boskop
       end
 
       def lastseen
-        nmaphost.start_time
+        if nmaphost.start_time.to_i == 0
+          xmlstart
+        else
+          nmaphost.start_time
+        end
       end
 
-      [:ip, :hostname, :status, :mac, :vendor].each do |attr|
+      [:ip, :status, :mac, :vendor].each do |attr|
         define_method(attr) { nmaphost.send(attr).to_s }
+      end
+
+      def hostname
+        nmaphost.hostname&.name || fqdn
       end
 
       # windows product string
@@ -69,7 +80,7 @@ module Boskop
       end
 
     private
-      attr_reader :nmaphost
+      attr_reader :nmaphost, :xmlstart
 
       def script_data
         if nmaphost.nil? || nmaphost.host_script.nil?
