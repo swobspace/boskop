@@ -17,7 +17,7 @@
       <th><%= t('attributes.name') %></th>
       <th><%= t('attributes.description') %></th>
       <th><%= t('attributes.ip') %></th>
-      <th><%= t('attributes.operating_system') %></th>
+      <th class="nosort"><%= t('attributes.operating_system') %></th>
       <th class="notvisible"><%= t('attributes.cpe') %></th>
       <th class="notvisible"><%= t('attributes.raw_os') %></th>
       <th><%= t('attributes.fqdn') %></th>
@@ -26,8 +26,8 @@
       <th><%= t('attributes.lastseen') %></th>
       <th class="notvisible"><%= t('attributes.mac') %></th>
       <th class="notvisible"><%= t('attributes.vendor') %></th>
-      <th><%= t('attributes.host_category') %></th>
-      <th><%= t('attributes.location') %></th>
+      <th class="nosort"><%= t('attributes.host_category') %></th>
+      <th class="nosort"><%= t('attributes.location') %></th>
       <%= content_tag_for(:th, @merkmalklassen, class: "nosort nosearch") do |mklasse| %>
         <%= mklasse.to_s %>
       <% end %>

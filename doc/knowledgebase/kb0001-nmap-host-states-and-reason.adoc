@@ -7,9 +7,14 @@
 .results from nmap 7.60 and remote hosts
 [role="table table-bordered"]
 |===
-| host discovery | reason(up) | reason(down) |host state | remarks |
-| -PE            | echo-reply | no-response  | down      | ICMP may be filtered |
-| -P0            | user-set   | user-set     | up        | use open ports for up detection |
-| -A             | echo-reply | reset        | up        | use open ports for up detection |
+| host discovery | state | reason | real state | remarks |
+| all    | up   | arp-response | up      | reliable |
+| -PE    | up   | echo-reply   | up      | reliable |
+| -PE    | down | no-response  | down    | ICMP may be filtered |
+| -P0    | up   | user-set     | up      | use open ports for up detection |
+| -A     | up   | echo-reply   | up      | use open ports for up detection |
+| -A     | up  |timestamp-reply| up      | use open ports for up detection |
+| -A     | up   | syn-ack      | up      | use open ports for up detection |
+| -A     | up   | reset        | down    | use open ports for up detection |
 |===
 

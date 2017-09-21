@@ -33,7 +33,7 @@ class HostQuery
     @relation       = relation
     @search_options = search_options.symbolize_keys!
     @limit          = false
-    @query          ||= build_query.distinct
+    @query          ||= build_query
   end
 
   ##

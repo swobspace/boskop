@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<?xml-stylesheet href="file:///usr/bin/../share/nmap/nmap.xsl" type="text/xsl"?>
+<!-- Nmap 7.60 scan initiated Wed Sep 20 16:02:26 2017 as: nmap -PE -sn -oX nmap-ping.xml 192.168.1.13 192.168.1.42 -->
+<nmaprun scanner="nmap" args="nmap -PE -sn -oX nmap-ping.xml 192.168.1.13 192.168.1.42" start="1505916146" startstr="Wed Sep 20 16:02:26 2017" version="7.60" xmloutputversion="1.04">
+<verbose level="0"/>
+<debugging level="0"/>
+<host><status state="up" reason="arp-response" reason_ttl="0"/>
+<address addr="192.168.1.13" addrtype="ipv4"/>
+<address addr="FC:AA:14:7D:32:2F" addrtype="mac" vendor="Giga-byte Technology"/>
+<hostnames>
+<hostname name="wobgate" type="PTR"/>
+</hostnames>
+<times srtt="268" rttvar="5000" to="100000"/>
+</host>
+<runstats><finished time="1505916147" timestr="Wed Sep 20 16:02:27 2017" elapsed="0.26" summary="Nmap done at Wed Sep 20 16:02:27 2017; 2 IP addresses (1 host up) scanned in 0.26 seconds" exit="success"/><hosts up="1" down="1" total="2"/>
+</runstats>
+</nmaprun>

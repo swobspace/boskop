@@ -5,7 +5,7 @@ require 'nmap/xml'
 module Boskop
   module NMAP
     class XML
-      attr_reader :file, :options, :error_message
+      attr_reader :file, :options, :error_message, :starttime
 
       # Boskop::NMAP.new(file: scanme.nmap.org.xml)
       #
@@ -24,8 +24,10 @@ module Boskop
           @error_message = "file #{file} is not readable or does not exist"
         else
 	  @xml  = ::Nmap::XML.new(file)
-	  if xml.scan_info.present?
+          if File.open(file, 'rb').grep(/nmaprun/).count >= 3 &&
+             xml.scanner.present?
             @valid = true
+            @starttime = xml.scanner.start_time
 	  else
 	    @xml = nil
             @error_message = "can't parse #{file}, seems not to be a nmap xml file"
@@ -45,9 +47,9 @@ module Boskop
       #
       def all_hosts(options = {})
         if options.fetch(:force, false) == false
-          xml.up_hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host)}
+          xml.up_hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host, starttime: starttime)}.select {|host| host.up? }
         else
-          xml.hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host)}
+          xml.hosts.map {|host| Boskop::NMAP::Host.new(nmaphost: host, starttime: starttime)}
         end
       end
 
