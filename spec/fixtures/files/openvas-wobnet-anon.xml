@@ -1,0 +1,569 @@
+<report id="d00417ad-c2f2-42c2-9ace-3ac5d89c69bb" format_id="5057e5cc-b825-11e4-9d0e-28d24461215b" extension="xml" type="scan" content_type="text/xml">
+
+<owner><name>wob</name></owner><name>2017-09-26T15:43:04Z</name><comment></comment><creation_time>2017-09-26T15:43:04Z</creation_time><modification_time>2017-09-26T15:53:07Z</modification_time><writable>0</writable><in_use>0</in_use><task id="dd4c032e-8e60-4df7-bef1-2afc4c914908"></task><report_format id="5057e5cc-b825-11e4-9d0e-28d24461215b"><name>Anonymous XML</name></report_format><report id="d00417ad-c2f2-42c2-9ace-3ac5d89c69bb">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<omp>
+    
+  <version>7.0</version></omp><sort>
+    
+  <field>severity<order>descending</order></field></sort><filters id="0">
+    
+    
+    
+    
+    
+  <term>autofp=0 apply_overrides=1 notes=1 overrides=1 result_hosts_only=1 first=1 rows=100 sort-reverse=severity levels=hml min_qod=70</term><filter>High</filter><filter>Medium</filter><filter>Low</filter><keywords>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <keyword>
+        
+        
+        
+      <column>autofp</column><relation>=</relation><value>0</value></keyword><keyword>
+        
+        
+        
+      <column>apply_overrides</column><relation>=</relation><value>1</value></keyword><keyword>
+        
+        
+        
+      <column>notes</column><relation>=</relation><value>1</value></keyword><keyword>
+        
+        
+        
+      <column>overrides</column><relation>=</relation><value>1</value></keyword><keyword>
+        
+        
+        
+      <column>result_hosts_only</column><relation>=</relation><value>1</value></keyword><keyword>
+        
+        
+        
+      <column>first</column><relation>=</relation><value>1</value></keyword><keyword>
+        
+        
+        
+      <column>rows</column><relation>=</relation><value>100</value></keyword><keyword>
+        
+        
+        
+      <column>sort-reverse</column><relation>=</relation><value>severity</value></keyword><keyword>
+        
+        
+        
+      <column>levels</column><relation>=</relation><value>hml</value></keyword><keyword>
+        
+        
+        
+      <column>min_qod</column><relation>=</relation><value>70</value></keyword></keywords></filters><severity_class id="d4c74cda-89e1-11e3-9c29-406186ea4fc5">
+    
+    
+    
+    
+    
+    
+  <name>nist</name><full_name>NVD Vulnerability Severity Ratings</full_name><severity_range>
+      
+      
+      
+    <name>None</name><min>0.0</min><max>0.0</max></severity_range><severity_range>
+      
+      
+      
+    <name>Low</name><min>0.1</min><max>3.9</max></severity_range><severity_range>
+      
+      
+      
+    <name>Medium</name><min>4.0</min><max>6.9</max></severity_range><severity_range>
+      
+      
+      
+    <name>High</name><min>7.0</min><max>10.0</max></severity_range></severity_class><user_tags>
+    
+  <count>0</count></user_tags><scan_run_status>Done</scan_run_status><hosts>
+    
+  <count>1</count></hosts><closed_cves>
+    
+  <count>2</count></closed_cves><vulns>
+    
+  <count>13</count></vulns><os>
+    
+  <count>1</count></os><apps>
+    
+  <count>0</count></apps><ssl_certs>
+    
+  <count>0</count></ssl_certs><task id="dd4c032e-8e60-4df7-bef1-2afc4c914908">
+    
+    
+    
+    
+  <comment></comment><target id="4951242a-194d-4cd0-8f55-c17d61b4babf">
+      
+    <trash>0</trash></target><progress>-1</progress><user_tags>
+      
+    <count>0</count></user_tags></task><scan>
+    
+  <task>
+      
+      
+    <slave id="">
+        
+        
+      <host></host><port>0</port></slave><preferences>
+        
+      <preference>
+          
+          
+          
+        <name>Network Source Interface</name><scanner_name>source_iface</scanner_name><value></value></preference></preferences></task></scan><timestamp>2017-09-26T15:42:56Z</timestamp><scan_start>2017-09-26T15:43:04Z</scan_start><timezone>Coordinated Universal Time</timezone><timezone_abbrev>UTC</timezone_abbrev><ports max="-1" start="1">
+    
+    
+    
+  <count>3</count><port>445/tcp<host>127.0.0.1</host><severity>9.3</severity><threat>High</threat></port><port>general/tcp<host>127.0.0.1</host><severity>10.0</severity><threat>High</threat></port></ports><results max="-1" start="1">
+    
+    
+  <result id="154faf65-2f4a-40f3-a150-4bb1e7e2bea7">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <name>OS End Of Life Detection</name><comment></comment><creation_time>2017-09-26T15:52:46Z</creation_time><modification_time>2017-09-26T15:52:46Z</modification_time><user_tags>
+        
+      <count>0</count></user_tags><host>127.0.0.1<asset asset_id="1361dc65-e00b-4098-b6fc-3663c662d684"></asset></host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103674">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      <type>nvt</type><name>OS End Of Life Detection</name><family>General</family><cvss_base>10.0</cvss_base><cve>NOCVE</cve><bid>NOBID</bid><xref>NOXREF</xref><tags>cvss_base_vector=AV:N/AC:L/Au:N/C:C/I:C/A:C|summary=OS End Of Life Detection
+
+  The Operating System on the remote host has reached the end of life and should
+  not be used anymore|qod_type=remote_banner</tags><cert></cert></nvt><scan_nvt_version>$Revision: 6494 $</scan_nvt_version><threat>High</threat><severity>10.0</severity><qod>
+        
+        
+      <value>80</value><type>remote_banner</type></qod><original_threat>High</original_threat><original_severity>10.0</original_severity><notes></notes><overrides></overrides></result><result id="185add6e-840a-4293-a683-55791c121a43">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    <name>Microsoft Windows SMB Server Multiple Vulnerabilities-Remote (4013389)</name><comment></comment><creation_time>2017-09-26T15:49:12Z</creation_time><modification_time>2017-09-26T15:49:12Z</modification_time><user_tags>
+        
+      <count>0</count></user_tags><host>127.0.0.1<asset asset_id="1361dc65-e00b-4098-b6fc-3663c662d684"></asset></host><port>445/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.810676">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      <type>nvt</type><name>Microsoft Windows SMB Server Multiple Vulnerabilities-Remote (4013389)</name><family>Windows : Microsoft Bulletins</family><cvss_base>9.3</cvss_base><cve>CVE-2017-0143, CVE-2017-0144, CVE-2017-0145, CVE-2017-0146, CVE-2017-0147, CVE-2017-0148</cve><bid>96703, 96704, 96705, 96707, 96709, 96706</bid><xref>URL:https://support.microsoft.com/en-in/kb/4013078, URL:https://technet.microsoft.com/library/security/MS17-010, URL:https://github.com/rapid7/metasploit-framework/pull/8167/files</xref><tags>cvss_base_vector=AV:N/AC:M/Au:N/C:C/I:C/A:C|summary=This host is missing a critical security
+  update according to Microsoft Bulletin MS17-010.|vuldetect=Send the crafted SMB transaction request
+  with fid = 0 and check the response to confirm the vulnerability.|insight=Multiple flaws exist due to the way that the
+  Microsoft Server Message Block 1.0 (SMBv1) server handles certain requests.|impact=Successful exploitation will allow remote
+  attackers to gain the ability to execute code on the target server, also
+  could lead to information disclosure from the server.
+
+  Impact Level: System|affected=
+  Microsoft Windows 10 x32/x64 Edition
+  Microsoft Windows Server 2012 Edition
+  Microsoft Windows Server 2016
+  Microsoft Windows 8.1 x32/x64 Edition
+  Microsoft Windows Server 2012 R2 Edition
+  Microsoft Windows 7 x32/x64 Edition Service Pack 1
+  Microsoft Windows Vista x32/x64 Edition Service Pack 2
+  Microsoft Windows Server 2008 R2 x64 Edition Service Pack 1
+  Microsoft Windows Server 2008 x32/x64 Edition Service Pack 2|solution=Run Windows Update and update the
+  listed hotfixes or download and update mentioned hotfixes in the advisory
+  from the below link, https://technet.microsoft.com/library/security/MS17-010|solution_type=VendorFix|qod_type=remote_active</tags><cert>
+          
+          
+        <cert_ref id="CB-K17/0435" type="CERT-Bund"></cert_ref><cert_ref id="DFN-CERT-2017-0448" type="DFN-CERT"></cert_ref></cert></nvt><scan_nvt_version>$Revision: 6223 $</scan_nvt_version><threat>High</threat><severity>9.3</severity><qod>
+        
+        
+      <value>95</value><type>remote_active</type></qod><original_threat>High</original_threat><original_severity>9.3</original_severity><notes></notes><overrides></overrides></result></results><result_count>14<full>14</full><filtered>2</filtered><debug><full>0</full><filtered>0</filtered></debug><hole><full>2</full><filtered>2</filtered></hole><info><full>0</full><filtered>0</filtered></info><log><full>12</full><filtered>0</filtered></log><warning><full>0</full><filtered>0</filtered></warning><false_positive><full>0</full><filtered>0</filtered></false_positive></result_count><severity>
+    
+    
+  <full>10.0</full><filtered>10.0</filtered></severity><host>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <ip>127.0.0.1</ip><asset asset_id="1361dc65-e00b-4098-b6fc-3663c662d684"></asset><start>2017-09-26T15:43:10Z</start><end>2017-09-26T15:53:07Z</end><port_count>
+      
+    <page>1</page></port_count><result_count>
+      
+      
+      
+      
+      
+      
+    <page>2</page><hole>
+        
+      <page>2</page></hole><warning>
+        
+      <page>0</page></warning><info>
+        
+      <page>0</page></info><log>
+        
+      <page>0</page></log><false_positive>
+        
+      <page>0</page></false_positive></result_count><detail>
+      
+      
+      
+      
+    <name>Closed CVE</name><value>CVE-2006-3439</value><source>
+        
+        
+        
+      <type>openvasmd</type><name>1.3.6.1.4.1.25623.1.0.902782</name><description>Microsoft Windows Server Service Remote Code Execution Vulnerability (921883)</description></source><extra>10.0</extra></detail><detail>
+      
+      
+      
+      
+    <name>Closed CVE</name><value>CVE-2009-2526, CVE-2009-2532, CVE-2009-3103</value><source>
+        
+        
+        
+      <type>openvasmd</type><name>1.3.6.1.4.1.25623.1.0.900965</name><description>Microsoft Windows SMB2 Negotiation Protocol Remote Code Execution Vulnerability</description></source><extra>10.0</extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.10927</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>cpe:/o:microsoft:windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102002</name><description>ICMP based OS Fingerprinting</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>Microsoft Windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102002</name><description>ICMP based OS Fingerprinting</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>tcp_ports</name><value>445,135,139</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900239</name><description>Check Open TCP Ports</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>ports</name><value>445,135,139</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900239</name><description>Check Open TCP Ports</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>scanned_with_feedtype</name><value>OpenVAS NVT Feed</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>scanned_with_feedversion</name><value>201709250644</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>scanned_with_scanner</name><value>9.0.1</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103739</name><description>Host Scan End</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>cpe:/o:microsoft:windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108021</name><description>Nmap OS Identification (NASL wrapper)</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>Microsoft Windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108021</name><description>Nmap OS Identification (NASL wrapper)</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11913</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.10879</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>cpe:/o:microsoft:windows_xp</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>Windows XP</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>Services</name><value>445,tcp,cifs</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11011</name><description>Service detection (1.3.6.1.4.1.25623.1.0.11011)</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>Services</name><value>139,tcp,smb</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11011</name><description>Service detection (1.3.6.1.4.1.25623.1.0.11011)</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.15571</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11903</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.900965</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>cpe:/o:microsoft:windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>OS</name><value>Microsoft Windows</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>Services</name><value>135,tcp,epmap,A DCE endpoint resolution service seems to be running on this port.</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.108044</name><description>DCE/RPC and MSRPC Services Enumeration</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.103549</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.902782</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>EXIT_CODE</name><value>EXIT_NOTVULN</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.11024</name><description></description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>best_os_cpe</name><value>cpe:/o:microsoft:windows_xp</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011;</name><description>SMB NativeLanMan</description></source><extra></extra></detail><detail>
+      
+      
+      
+      
+    <name>best_os_txt</name><value>Windows XP</value><source>
+        
+        
+        
+      <type>nvt</type><name>1.3.6.1.4.1.25623.1.0.102011</name><description>SMB NativeLanMan</description></source><extra></extra></detail></host><host_start>2017-09-26T15:43:10Z<host>127.0.0.1</host></host_start><host_end>2017-09-26T15:53:07Z<host>127.0.0.1</host></host_end><scan_end>2017-09-26T15:53:07Z</scan_end><errors>
+    
+  <count>0</count></errors><report_format></report_format></report></report>
