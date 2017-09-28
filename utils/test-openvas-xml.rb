@@ -27,7 +27,8 @@ doc.xpath("//report/results/result").each do |result|
   puts "  " +  result.at('nvt/bid').text
   puts "  " +  result.at('nvt/xref').text
   # puts "  " +  result.at('nvt/tags').text
-  puts "  " +  result.at('nvt/cert').text
+  pp (result.at('nvt/tags')&.inner_text&.split('|').map{|t| t.split('=')})
+  puts "  " +  result.at('nvt/cert/cert_ref')&.values.inspect
 end
 doc.xpath("//report/host").each do |host|
   closed_cves = host.xpath('./detail/name[contains(text(), "Closed CVE")]')
