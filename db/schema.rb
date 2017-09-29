@@ -238,8 +238,8 @@ ActiveRecord::Schema.define(version: 20170929080617) do
     t.string "cves", default: [], array: true
     t.string "bids", default: [], array: true
     t.string "xrefs", default: [], array: true
-    t.json "notes", default: {}
-    t.json "certs", default: {}
+    t.jsonb "notes", default: {}
+    t.jsonb "certs", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["family"], name: "index_vulnerability_details_on_family"
