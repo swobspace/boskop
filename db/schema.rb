@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170928163307) do
+ActiveRecord::Schema.define(version: 20170929080617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,16 @@ ActiveRecord::Schema.define(version: 20170928163307) do
     t.datetime "updated_at"
     t.index ["ancestry"], name: "index_org_units_on_ancestry"
     t.index ["name"], name: "index_org_units_on_name"
+  end
+
+  create_table "vulnerabilities", force: :cascade do |t|
+    t.bigint "host_id"
+    t.bigint "vulnerability_detail_id"
+    t.date "lastseen"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_vulnerabilities_on_host_id"
+    t.index ["vulnerability_detail_id"], name: "index_vulnerabilities_on_vulnerability_detail_id"
   end
 
   create_table "vulnerability_details", force: :cascade do |t|
