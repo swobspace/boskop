@@ -1,0 +1,32 @@
+<h1><%= t('controller.vulnerabilities') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.host') %></th>
+    <th><%= t('attributes.vulnerability_detail') %></th>
+    <th><%= t('attributes.lastseen') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @vulnerabilities.each do |vulnerability| %>
+  <%= content_tag_for(:tr, vulnerability) do %>
+    <td><%= vulnerability.host %></td>
+    <td><%= vulnerability.vulnerability_detail %></td>
+    <td><%= vulnerability.lastseen %></td>
+    <td class="nowrap">
+      <%= show_link vulnerability %>
+      <%= edit_link vulnerability %>
+      <%= delete_link vulnerability %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Vulnerability %>

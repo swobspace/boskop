@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :vulnerabilities
   resources :vulnerability_details
   resources :operating_system_mappings
   resources :operating_systems

@@ -1,0 +1,21 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.host')%>:</th>
+    <td><%= @vulnerability.host %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.vulnerability_detail')%>:</th>
+    <td><%= @vulnerability.vulnerability_detail %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.lastseen')%>:</th>
+    <td><%= @vulnerability.lastseen %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@vulnerability) %>
+  <%= delete_link(@vulnerability) %>
+  <%= new_link Vulnerability %>
+</div>
