@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917075025) do
+ActiveRecord::Schema.define(version: 20170928163307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,24 @@ ActiveRecord::Schema.define(version: 20170917075025) do
     t.datetime "updated_at"
     t.index ["ancestry"], name: "index_org_units_on_ancestry"
     t.index ["name"], name: "index_org_units_on_name"
+  end
+
+  create_table "vulnerability_details", force: :cascade do |t|
+    t.string "name", default: ""
+    t.string "nvt", default: ""
+    t.string "family", default: ""
+    t.string "threat", default: ""
+    t.decimal "severity", default: "0.0"
+    t.string "cves", default: [], array: true
+    t.string "bids", default: [], array: true
+    t.string "xrefs", default: [], array: true
+    t.json "notes", default: {}
+    t.json "certs", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["family"], name: "index_vulnerability_details_on_family"
+    t.index ["nvt"], name: "index_vulnerability_details_on_nvt"
+    t.index ["threat"], name: "index_vulnerability_details_on_threat"
   end
 
   create_table "wobauth_authorities", id: :serial, force: :cascade do |t|
