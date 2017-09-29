@@ -94,6 +94,12 @@ FactoryGirl.define do
     position 0
   end
 
+  factory :vulnerability do
+    host
+    vulnerability_detail
+    lastseen { Date.today }
+  end
+
   factory :vulnerability_detail do
     name { generate(:aname) }
     nvt  { generate(:serial).to_s }
