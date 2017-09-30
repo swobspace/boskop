@@ -63,12 +63,11 @@ RSpec.describe Boskop::OpenVAS::Result do
            xrefs: ["URL:https://support.microsoft.com/en-in/kb/4013078", "URL:https://technet.microsoft.com/library/security/MS17-010", "URL:https://github.com/rapid7/metasploit-framework/pull/8167/files"],
            certs: [{:id=>"CB-K17/0435", :type=>"CERT-Bund"}, {:id=>"DFN-CERT-2017-0448", :type=>"DFN-CERT"}],
            ) }
-    it { expect(subject.attributes[:tags]).to include(
+    it { expect(subject.attributes[:notes]).to include(
            "cvss_base_vector"=>"AV:N/AC:M/Au:N/C:C/I:C/A:C",
            "summary"=>"This host is missing a critical security\n  update according to Microsoft Bulletin MS17-010.",
            "solution_type"=>"VendorFix", "qod_type"=>"remote_active"
        )}
-    it { pp subject.attributes.keys }
   end
 
   describe "with valid xml result1" do
@@ -78,6 +77,5 @@ RSpec.describe Boskop::OpenVAS::Result do
     it { expect(subject.cves).to contain_exactly() }
     it { expect(subject.bids).to contain_exactly() }
     it { expect(subject.xrefs).to contain_exactly() }
-    it { pp subject.attributes }
   end
 end
