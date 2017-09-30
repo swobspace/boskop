@@ -47,7 +47,21 @@ class VulnerabilitiesController < ApplicationController
   end
 
   def import
-    render body: "not yet implemented"
+    type = params[:type]
+    if type == 'openvas'
+      result = ImportOpenvasVulnerabilitiesService.new(import_params).call
+    else
+      flash[:notice] = "Import format #{type} not yet implemented"
+      redirect_to import_vulnerabilities_path
+      return
+    end
+    if result.success?
+      flash[:success] = "Import successful"
+      redirect_to vulnerabilities_path
+    else
+      flash[:error] = result.error_message.to_s
+      redirect_to vulnerabilities_path
+    end
   end
 
   private
@@ -60,4 +74,9 @@ class VulnerabilitiesController < ApplicationController
     def vulnerability_params
       params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, :lastseen)
     end
+
+    def import_params
+      params.permit(:utf8, :authenticity_token, :type, :file).to_hash
+    end
+
 end
