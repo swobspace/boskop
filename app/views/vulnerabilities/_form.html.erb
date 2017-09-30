@@ -12,11 +12,14 @@
     <%= form_legend %>
 
     <div class="form-inputs">
-      <%= f.association :host
+      <%= f.association :host,
+            input_html: { class: 'select2'}
        %>
-      <%= f.association :vulnerability_detail
+      <%= f.association :vulnerability_detail,
+            input_html: { class: 'select2'}
        %>
-      <%= f.input :lastseen
+      <%= f.input :lastseen, as: :string,
+            input_html: { class: 'datepicker'}
        %>
     </div>
 
