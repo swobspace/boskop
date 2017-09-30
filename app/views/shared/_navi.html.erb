@@ -55,6 +55,23 @@
       </ul>
     </li>
   <% end %>
+  <% if can? :read, :vulnerabilities %>
+    <li class="dropdown <%= active_class('hosts') %>">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <%= t('controller.vulnerabilities') %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.vulnerabilities')), main_app.vulnerabilities_path %></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.vulnerability_details')), main_app.vulnerability_details_path %></li>
+        <% if can? :create, Vulnerability %>
+          <li class="divider"></li>
+          <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_vulnerability')), main_app.new_vulnerability_path %></li>
+          <% end %>
+          <% if can? :manage, Host %>
+          <li> <%=link_to raw('<span class="glyphicon glyphicon-file" aria-hidden="true"></span> '+t('boskop.import_openvas_file')), main_app.new_import_vulnerabilities_path %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
   <% if can? :navigate, :configuration %>
     <li class="dropdown <%= configuration_active_class %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">

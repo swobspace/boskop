@@ -16,6 +16,7 @@ de:
     new_host: Neuer Host
     new_line: Neue Leitung
     new_network: Neues Netzwerk
+    new_vulnerability: Neue Vulnerability
     network_mask: Netzwerkmaske
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
@@ -35,6 +36,7 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
+    import_openvas_file: Vulnerabilities aus OpenVAS importieren
     hosts_search: Hosts / Suchergebnis
     eol_systems: End-of-Life Systeme
 
