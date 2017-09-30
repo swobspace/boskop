@@ -43,6 +43,13 @@ class VulnerabilitiesController < ApplicationController
     respond_with(@vulnerability)
   end
 
+  def new_import
+  end
+
+  def import
+    render body: "not yet implemented"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vulnerability

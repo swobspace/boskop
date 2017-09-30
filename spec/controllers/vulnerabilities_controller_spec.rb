@@ -26,6 +26,7 @@ require 'rails_helper'
 RSpec.describe VulnerabilitiesController, type: :controller do
   login_admin
  
+  let(:openvas_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'openvas-wobnet-anon.xml') }
   let(:vulndetail) { FactoryGirl.create(:vulnerability_detail, name: "End-of-Life") }
   let(:host)       { FactoryGirl.create(:host, ip: '192.81.51.93', name: 'vxserver') }
 
@@ -65,11 +66,34 @@ RSpec.describe VulnerabilitiesController, type: :controller do
     end
   end
 
+  describe "GET #new_import" do
+    it "returns a success response" do
+      get :new_import, params: {}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
   describe "GET #edit" do
     it "returns a success response" do
       vulnerability = Vulnerability.create! valid_attributes
       get :edit, params: {id: vulnerability.to_param}, session: valid_session
       expect(response).to be_success
+    end
+  end
+
+  describe "POST #import" do
+    context "with valid params" do
+      let(:import_form_attributes) {{ type: 'openvas', file: openvas_file }}
+      it "imports vulnerabilities from openvas xml" do
+        expect {
+          post :import, params: import_form_attributes, session: valid_session
+        }.to change(Vulnerability, :count).by(2)
+      end
+
+      it "redirects to vulnerabilities_path" do
+        post :import, params: import_form_attributes, session: valid_session
+        expect(response).to redirect_to(vulnerabilities_path)
+      end
     end
   end
 
