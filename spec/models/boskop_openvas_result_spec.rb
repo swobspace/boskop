@@ -71,7 +71,7 @@ RSpec.describe Boskop::OpenVAS::Result do
     it { pp subject.attributes.keys }
   end
 
-  describe "with valid xml result2" do
+  describe "with valid xml result1" do
     subject { Boskop::OpenVAS::Result.new(result: result1) }
 
     it { expect(subject.nvt).to eq("1.3.6.1.4.1.25623.1.0.103674") }
