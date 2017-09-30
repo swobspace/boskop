@@ -17,8 +17,20 @@ class Host < ApplicationRecord
     "#{ip} (#{name})"
   end
 
+  #
+  # caching location identifier lid
+  #
+  def lid
+    Rails.cache.fetch("#{cache_key}/lid", expires_in: 7.days) do
+      self.location&.lid
+    end
+  end
+
 private
 
+  # 
+  # define setter and getter for merkmale
+  #
   def method_missing(key, *args)
     case key
     when *merkmal_attributes_getter
