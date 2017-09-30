@@ -67,7 +67,7 @@
           <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_vulnerability')), main_app.new_vulnerability_path %></li>
           <% end %>
           <% if can? :manage, Host %>
-          <li> <%=link_to raw('<span class="glyphicon glyphicon-file" aria-hidden="true"></span> '+t('boskop.import_openvas_file')), main_app.new_import_vulnerabilities_path %></li>
+          <li> <%=link_to raw('<span class="glyphicon glyphicon-file" aria-hidden="true"></span> '+t('boskop.import_vulnerabilities_file')), main_app.new_import_vulnerabilities_path %></li>
         <% end %>
       </ul>
     </li>

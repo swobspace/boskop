@@ -36,7 +36,7 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
-    import_openvas_file: Vulnerabilities aus OpenVAS importieren
+    import_vulnerabilities_file: Vulnerabilities importieren
     hosts_search: Hosts / Suchergebnis
     eol_systems: End-of-Life Systeme
 
