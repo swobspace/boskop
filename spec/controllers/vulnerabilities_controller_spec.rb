@@ -24,16 +24,17 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe VulnerabilitiesController, type: :controller do
+  login_admin
+ 
+  let(:vulndetail) { FactoryGirl.create(:vulnerability_detail, name: "End-of-Life") }
+  let(:host)       { FactoryGirl.create(:host, ip: '192.81.51.93', name: 'vxserver') }
 
-  # This should return the minimal set of attributes required to create a valid
-  # Vulnerability. As you add validations to Vulnerability, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) {{
+    host_id: host.id, vulnerability_detail_id: vulndetail.id, lastseen: Date.today
+  }}
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { host_id: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -96,15 +97,15 @@ RSpec.describe VulnerabilitiesController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        lastseen: 1.day.after(Date.today)
+      }}
 
       it "updates the requested vulnerability" do
         vulnerability = Vulnerability.create! valid_attributes
         put :update, params: {id: vulnerability.to_param, vulnerability: new_attributes}, session: valid_session
         vulnerability.reload
-        skip("Add assertions for updated state")
+        expect(vulnerability.lastseen).to eq(1.day.after(Date.today))
       end
 
       it "redirects to the vulnerability" do
