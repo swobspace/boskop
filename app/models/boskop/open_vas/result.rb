@@ -6,9 +6,11 @@ module Boskop
     class Result
       attr_reader :options
 
+      alias_attribute :notes, :tags
+
       ATTRIBUTES = [:lastseen, :host, :name, :family, 
                     :cvss_base, :threat, :severity,
-                    :nvt, :cves, :bids, :tags, :xrefs, :certs]
+                    :nvt, :cves, :bids, :notes, :xrefs, :certs]
 
       #
       # Creates a Boskop::OpenVAS::Result object
