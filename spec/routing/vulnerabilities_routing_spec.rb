@@ -11,6 +11,15 @@ RSpec.describe VulnerabilitiesController, type: :routing do
       expect(:get => "/vulnerabilities/new").to route_to("vulnerabilities#new")
     end
 
+    it "routes to #new_import" do
+      expect(:get => "/vulnerabilities/new_import").to route_to("vulnerabilities#new_import")
+    end
+
+    it "routes to #import" do
+      expect(:post => "/vulnerabilities/import").to route_to("vulnerabilities#import")
+    end
+
+
     it "routes to #show" do
       expect(:get => "/vulnerabilities/1").to route_to("vulnerabilities#show", :id => "1")
     end
