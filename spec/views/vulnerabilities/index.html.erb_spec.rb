@@ -14,22 +14,35 @@ RSpec.describe "vulnerabilities/index", type: :view do
         :host => host,
         :lastseen => 1.day.before(Date.today),
         :vulnerability_detail => FactoryGirl.create(:vulnerability_detail,
-                                   name: "End-of-Life")
+                                   name: "End-of-Life", 
+                                   severity: "10.0",
+                                   threat: "high",
+                                 )
       ),
       Vulnerability.create!(
         :host => host,
         :lastseen => 1.day.before(Date.today),
         :vulnerability_detail => FactoryGirl.create(:vulnerability_detail,
-                                   name: "Hackable by Kids")
+                                   name: "Hackable by Kids",
+                                   severity: "8.7",
+                                   threat: "high",
+                                 )
       )
     ])
+    allow(host).to receive(:lid).and_return("XYZ")
+    allow(host).to receive(:operating_system).and_return("Nonux")
   end
 
   it "renders a list of vulnerabilities" do
     render
+    assert_select "tr>td", :text => "XYZ".to_s, :count => 2
     assert_select "tr>td", :text => "192.81.51.117 (vxserver)".to_s, :count => 2
     assert_select "tr>td", :text => "End-of-Life".to_s, :count => 1
     assert_select "tr>td", :text => "Hackable by Kids".to_s, :count => 1
     assert_select "tr>td", :text => 1.day.before(Date.today).to_s, :count => 2
+    assert_select "tr>td", :text => "high", :count => 2
+    assert_select "tr>td", :text => "10.0", :count => 1
+    assert_select "tr>td", :text => "8.7", :count => 1
+    assert_select "tr>td", :text => "Nonux", :count => 2
   end
 end

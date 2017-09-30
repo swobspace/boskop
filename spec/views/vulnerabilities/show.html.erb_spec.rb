@@ -13,8 +13,13 @@ RSpec.describe "vulnerabilities/show", type: :view do
       :host => host,
       :lastseen => 1.day.before(Date.today),
       :vulnerability_detail => FactoryGirl.create(:vulnerability_detail,
-                                 name: "Hackable by Kids")
+                                 name: "Hackable by Kids",
+                                 severity: "10.0",
+                                 threat: "high",
+                               )
     ))
+    allow(host).to receive(:lid).and_return("XYZ")
+    allow(host).to receive(:operating_system).and_return("Nonux")
   end
 
   it "renders attributes in <p>" do
@@ -22,5 +27,9 @@ RSpec.describe "vulnerabilities/show", type: :view do
     expect(rendered).to match(/192.81.51.117 \(vxserver\)/)
     expect(rendered).to match(/Hackable by Kids/)
     expect(rendered).to match(/#{1.day.before(Date.today).to_s}/)
+    expect(rendered).to match(/10.0/)
+    expect(rendered).to match(/high/)
+    expect(rendered).to match(/Nonux/)
+    expect(rendered).to match(/XYZ/)
   end
 end

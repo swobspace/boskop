@@ -1,30 +1,60 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <h1><%= t('controller.vulnerabilities') %></h1>
 
-<table id="dataTable" class="table table-bordered table-striped" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.host') %></th>
-    <th><%= t('attributes.vulnerability_detail') %></th>
-    <th><%= t('attributes.lastseen') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<%= content_tag :table, role: :datatable,
+      id: 'vulnerabilities_table',
+      class: "table table-bordered table-striped",
+      data: {
+        order: [[0, 'desc']].to_json
+      } do %>
 
-<% @vulnerabilities.each do |vulnerability| %>
-  <%= content_tag_for(:tr, vulnerability) do %>
-    <td><%= vulnerability.host %></td>
-    <td><%= vulnerability.vulnerability_detail %></td>
-    <td><%= vulnerability.lastseen %></td>
-    <td class="nowrap">
-      <%= show_link vulnerability %>
-      <%= edit_link vulnerability %>
-      <%= delete_link vulnerability %>
-    </td>
-  <% end %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.lid') %></th>
+      <th><%= t('attributes.host') %></th>
+      <th><%= t('attributes.operating_system') %></th>
+      <th><%= t('attributes.vulnerability_detail') %></th>
+      <th><%= t('attributes.threat') %></th>
+      <th><%= t('attributes.severity') %></th>
+      <th><%= t('attributes.lastseen') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tfoot>
+
+  <tbody>
+    <% @vulnerabilities.each do |vulnerability| %>
+      <%= content_tag_for(:tr, vulnerability) do %>
+	<td><%= vulnerability.host.lid %></td>
+	<td><%= vulnerability.host %></td>
+	<td><%= vulnerability.host.operating_system %></td>
+	<td><%= vulnerability.vulnerability_detail %></td>
+	<td><%= vulnerability.vulnerability_detail.threat %></td>
+	<td><%= vulnerability.vulnerability_detail.severity %></td>
+	<td><%= vulnerability.lastseen %></td>
+	<td class="nowrap">
+	  <%= show_link vulnerability %>
+	  <%= edit_link vulnerability %>
+	  <%= delete_link vulnerability %>
+	</td>
+      <% end %>
+    <% end %>
+  </tbody>
 <% end %>
-</tbody>
-</table>
 
 <br />
 
