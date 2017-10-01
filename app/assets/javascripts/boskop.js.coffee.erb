@@ -23,6 +23,13 @@ ready = ->
       title = $('table thead th').eq( $(this).index() ).text()
       $(this).html( '<input type="text" placeholder="<%= I18n.t('boskop.search') %>" name="idx'+idx+'" />' )
 
+  # --- simple datatable ---
+  xtable = $('table[role="xdatatable"]' ).DataTable(
+    pagingType: "full_numbers"
+    language:
+      url: "<%= asset_path('dataTable.german.txt') %>"
+  )
+
   # --- classic datatable ---
   table = $('table[role="datatable"], table[role="wobauth_datatable"]' ).DataTable(
     pagingType: "full_numbers"
