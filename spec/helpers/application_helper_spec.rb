@@ -68,4 +68,13 @@ RSpec.describe ApplicationHelper, :type => :helper do
       end
     end
   end
+  describe "#dl_notes" do
+    let(:myhash) {{
+      "summary" => "a short summary"
+    }}
+    subject { Capybara.string(helper.dl_notes(myhash)) }
+    it { expect(subject.find("dl dt").text).to match("summary") }
+    it { expect(subject.find("dl dd").text).to match("a short summary") }
+
+  end
 end
