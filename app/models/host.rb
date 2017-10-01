@@ -4,6 +4,7 @@ class Host < ApplicationRecord
   belongs_to :host_category, optional: true
   belongs_to :location, optional: true
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
+  has_many :vulnerabilities, dependent: :destroy
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true
   validates_associated :merkmale
