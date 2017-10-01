@@ -1,6 +1,7 @@
 de:
   # mostly used in navigation
   boskop:
+    action: Aktion
     nodes: Knoten
     org_units: Organisationseinheiten
     locations: Lokationen
