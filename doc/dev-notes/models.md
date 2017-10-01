@@ -144,3 +144,18 @@ OperatingSystemMapping:
               field:string:index value:string:index \
               operating_system:references
 
+Vulnerability
+-------------
+
+    bin/rails g scaffold Vulnerability \
+              host:references vulnerability_detail:references lastseen:date
+
+VulnerabilityDetail
+-------------------
+
+    bin/rails g scaffold VulnerabilityDetail \
+              name:string nvt:string:index \
+              family:string:index threat:string:index severity:decimal \
+              cves:string bids:string xrefs:string \
+              notes:json certs:json
+

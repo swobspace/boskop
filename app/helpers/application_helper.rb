@@ -45,4 +45,14 @@ module ApplicationHelper
       end
     }
   end
+
+  def dl_notes(myhash)
+    list = ["<dl>"]
+    myhash.each do |k,v|
+      list << content_tag(:dt, k)
+      list << content_tag(:dd, v)
+    end
+    list << ["</dl>"]
+    msg = list.join.html_safe
+  end
 end

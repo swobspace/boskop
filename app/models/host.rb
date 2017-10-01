@@ -4,6 +4,7 @@ class Host < ApplicationRecord
   belongs_to :host_category, optional: true
   belongs_to :location, optional: true
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
+  has_many :vulnerabilities, dependent: :destroy
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true
   validates_associated :merkmale
@@ -17,8 +18,20 @@ class Host < ApplicationRecord
     "#{ip} (#{name})"
   end
 
+  #
+  # caching location identifier lid
+  #
+  def lid
+    Rails.cache.fetch("#{cache_key}/lid", expires_in: 7.days) do
+      self.location&.lid
+    end
+  end
+
 private
 
+  # 
+  # define setter and getter for merkmale
+  #
   def method_missing(key, *args)
     case key
     when *merkmal_attributes_getter

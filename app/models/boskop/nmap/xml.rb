@@ -7,7 +7,7 @@ module Boskop
     class XML
       attr_reader :file, :options, :error_message, :starttime
 
-      # Boskop::NMAP.new(file: scanme.nmap.org.xml)
+      # Boskop::NMAP::XML.new(file: scanme.nmap.org.xml)
       #
       # required option:
       # * :file - nmap xml output file from scan

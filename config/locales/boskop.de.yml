@@ -1,6 +1,7 @@
 de:
   # mostly used in navigation
   boskop:
+    action: Aktion
     nodes: Knoten
     org_units: Organisationseinheiten
     locations: Lokationen
@@ -16,6 +17,7 @@ de:
     new_host: Neuer Host
     new_line: Neue Leitung
     new_network: Neues Netzwerk
+    new_vulnerability: Neue Vulnerability
     network_mask: Netzwerkmaske
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
@@ -35,6 +37,7 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
+    import_vulnerabilities_file: Vulnerabilities importieren
     hosts_search: Hosts / Suchergebnis
     eol_systems: End-of-Life Systeme
 
@@ -65,6 +68,8 @@ de:
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
+      vulnerability: Vulnerability
+      vulnerability_detail: Vulnerability-Detail
       user: User
 
   attributes:
@@ -79,22 +84,26 @@ de:
     baselink: Basislink
     bandwith_primary: Bandbreite Erstweg
     bandwith_secondary: Bandbreite Zweitweg
+    bids: BIDs
     bw_downstream: Bandbreite Downstream
     bw_upstream: Bandbreite Upstream
     bw2_downstream: Bandbreite Downstream (Zweitweg)
     bw2_upstream: Bandbreite Upstream (Zweitweg)
     care_of: c/o
+    certs: CERTs
     cidr_mask: Maske (CIDR)
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
     current: Nur aktuelle Daten
     cpe: CPE
+    cves: CVEs
     description: Beschreibung
     displayname: Anzeigename
     domain_dns: Domain
     eol: End-of-Life
     exact_match: exakte Treffer
+    family: Familie
     field: Feld
     file: Datei
     format: Format
@@ -127,6 +136,7 @@ de:
     network: Netzwerk
     network_mask: Netzwerkmaske
     notes: Anmerkungen
+    nvt: NVT
     operating_system: Betriebssystem
     org_unit: Organisationseinheit
     ort: Ort
@@ -140,9 +150,11 @@ de:
     provider_id: Identifikation des Providers
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
+    severity: Severity
     sn: Nachname
     streetaddress: Straße, Nr.
     tag: Tag
+    threat: Threat
     type: Typ
     unique: Unique
     update: Update
@@ -150,7 +162,10 @@ de:
     value: Wert
     vendor: Vendor
     visible: Sichtbarkeit
+    vulnerability: Vulnerability
+    vulnerability_detail: Vulnerability-Detail
     workgroup: Workgroup
+    xrefs: Referenzen
 
   controller:
     access_types: Zugangsarten
@@ -168,5 +183,7 @@ de:
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten
+    vulnerabilities: Vulnerabilities
+    vulnerability_details: Vulnerability-Details
     users: Benutzer
 

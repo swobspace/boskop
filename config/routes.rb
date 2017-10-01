@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :vulnerabilities do
+    collection do
+      # get :search
+      get :new_import
+      post :import
+    end
+  end
+  resources :vulnerability_details
   resources :operating_system_mappings
   resources :operating_systems
   resources :host_categories
