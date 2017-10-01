@@ -40,9 +40,13 @@
     <% @vulnerabilities.each do |vulnerability| %>
       <%= content_tag_for(:tr, vulnerability) do %>
 	<td><%= vulnerability.host.lid %></td>
-	<td><%= vulnerability.host %></td>
+	<td><%= link_to vulnerability.host, host_path(vulnerability.host) %></td>
 	<td><%= vulnerability.host.operating_system %></td>
-	<td><%= vulnerability.vulnerability_detail %></td>
+	<td>
+          <%= link_to vulnerability.vulnerability_detail,
+                      vulnerability_detail_path(vulnerability.vulnerability_detail)
+         %>
+        </td>
 	<td><%= vulnerability.vulnerability_detail.threat %></td>
 	<td><%= vulnerability.vulnerability_detail.severity %></td>
 	<td><%= vulnerability.lastseen %></td>
