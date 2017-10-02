@@ -18,6 +18,7 @@ class Ability
       # -- reader
       can :navigate, [:org_units, :configuration]
       can :read, :all
+      cannot :read, Vulnerability
       can [:usage, :usage_form], Network
 
       if @user.role?(:network_manager)
@@ -27,10 +28,13 @@ class Ability
 
       if @user.role?(:host_manager)
 	can [:create, :update, :destroy], [Host] 
+        can :read, [Vulnerability, VulnerabilityDetail]
       end
 
       if @user.role?(:host_admin)
-	can :manage, [Host, HostCategory, OperatingSystem, OperatingSystemMapping]
+	can :manage, [Host, HostCategory, 
+                     Vulnerability, VulnerabilityDetail,
+                     OperatingSystem, OperatingSystemMapping]
       end
 
     else  # -- logged in, but without role
