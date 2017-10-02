@@ -51,7 +51,7 @@ class ImportOpenvasVulnerabilitiesService
                  vulnerability_detail_id: vulndetail.id
                )
 
-      unless vuln.lastseen.to_date == result.lastseen.to_date
+      if vuln.lastseen.to_date < result.lastseen.to_date
         vuln.update(lastseen: result.lastseen)
       end
       vulnerabilities << vuln

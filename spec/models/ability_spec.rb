@@ -25,6 +25,7 @@ RSpec.describe "User", :type => :model do
     # -- nor readable, not writeable
     [ Network, Merkmal, Merkmalklasse, Address, LineState, AccessType,
       FrameworkContract, Line, Host, HostCategory,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }
@@ -54,6 +55,7 @@ RSpec.describe "User", :type => :model do
     # -- nor readable, not writeable
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
       FrameworkContract, Line, Host, HostCategory,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }
@@ -74,14 +76,18 @@ RSpec.describe "User", :type => :model do
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
+
+    it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
 
     # -- ... but not writeable
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
@@ -101,9 +107,12 @@ RSpec.describe "User", :type => :model do
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
+
+    it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
 
     # -- writeable
     [ Network, Line ].each do |model|
@@ -124,6 +133,7 @@ RSpec.describe "User", :type => :model do
     # -- not writeable
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
@@ -143,6 +153,7 @@ RSpec.describe "User", :type => :model do
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
@@ -158,10 +169,13 @@ RSpec.describe "User", :type => :model do
     # -- no import
       it { is_expected.not_to be_able_to(:new_import, Host) }
       it { is_expected.not_to be_able_to(:import, Host) }
+      it { is_expected.not_to be_able_to(:new_import, Vulnerability) }
+      it { is_expected.not_to be_able_to(:import, Vulnerability) }
 
     # -- not writeable
     [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract, HostCategory,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:create, model.new) }
       it { is_expected.not_to be_able_to(:update, model.new) }
@@ -181,12 +195,15 @@ RSpec.describe "User", :type => :model do
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:read, model.new) }
     end
 
     # -- writeable
-    [ Host, HostCategory, OperatingSystem, OperatingSystemMapping ].each do |model|
+    [ Host, HostCategory, 
+      Vulnerability, VulnerabilityDetail,
+      OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:create, model.new) }
       it { is_expected.to be_able_to(:update, model.new) }
       it { is_expected.to be_able_to(:destroy, model.new) }
@@ -215,6 +232,7 @@ RSpec.describe "User", :type => :model do
     [ Network, Line, Host, HostCategory,
       Merkmal, Merkmalklasse, Address, LineState, AccessType,
       Location, OrgUnit, FrameworkContract,
+      Vulnerability, VulnerabilityDetail,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.to be_able_to(:manage, model.new) }
     end
