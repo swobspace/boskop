@@ -113,12 +113,47 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
   end
   
   describe "with existing vulnerability" do
-    let!(:host) { FactoryGirl.create(:host, 
-      ip: '192.51.100.17',
-      lastseen: 1.day.ago(Date.today),
-      name: 'myhost',
-      cpe: "/o:microsoft:windows:4711",
-      fqdn: 'myhost.example.net'
+    let!(:vuln_detail) { FactoryGirl.create(:vulnerability_detail,
+      name: "OS End Of Life Detection",
+      family: "General",
+      severity: "10.0",
+      threat: "High",
+      nvt: "1.3.6.1.4.1.25623.1.0.103674",
     )}
+    let!(:vuln) { FactoryGirl.create(:vulnerability,
+      host: FactoryGirl.create(:host, ip: '127.0.0.1'),
+      vulnerability_detail: vuln_detail
+    )}
+
+    describe "older than import data" do
+      before(:each) do
+        vuln.update(lastseen: '2017-10-01')
+      end
+      it { expect { subject.call }.to change(Host, :count).by(0) }
+      it { expect { subject.call }.to change(Vulnerability, :count).by(1) }
+      it { expect { subject.call }.to change(VulnerabilityDetail, :count).by(1) }
+      context "#call" do
+        before(:each) do
+          subject.call
+        end
+        it { expect(vuln.lastseen.to_s).to match(/\A2017-10-01\z/) }
+      end
+    end
+
+    describe "newer than import data" do
+      before(:each) do
+        vuln.update(lastseen: '2017-01-01')
+      end
+      it { expect { subject.call }.to change(Host, :count).by(0) }
+      it { expect { subject.call }.to change(Vulnerability, :count).by(1) }
+      it { expect { subject.call }.to change(VulnerabilityDetail, :count).by(1) }
+      context "#call" do
+        before(:each) do
+          subject.call
+          vuln.reload
+        end
+        it { expect(vuln.lastseen.to_s).to match(/\A2017-09-26\z/) }
+      end
+    end
   end
 end
