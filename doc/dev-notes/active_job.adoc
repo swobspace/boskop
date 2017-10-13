@@ -1,0 +1,10 @@
+= Active Jobs for Boskop
+
+== CreateOperatingSystemMappings
+
+    bin/rails g job create_operating_system_mappings
+
+== UpdateHostOperatingSystem
+
+    bin/rails g job update_host_operating_system
+
