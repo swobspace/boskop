@@ -9,19 +9,23 @@ class MapOperatingSystemJob < ApplicationJob
   # 
   # options:
   # * :host - new or updated host object
+  # * :fields - [:cpe, :raw_os]
   #
   def perform(options)
     options.symbolize_keys! 
     host = options.fetch(:host)
+    @fields = options.fetch(:fields) { [:cpe, :raw_os] }
     raise(ArgumentError, "not a host object") unless host.is_a? Host
+    new_osm = false
 
-    [:cpe, :raw_os].each do |f|
+    @fields.each do |f|
       value = host.send(f)
       unless value.blank?
         osm = OperatingSystemMapping.find_or_create_by(field: f.to_s, value: value)
+        new_osm = true
       end
     end
-    map_operating_systems
+    map_operating_systems if new_osm
     assign_operating_system(host)
   end
 
@@ -32,6 +36,7 @@ private
   def map_operating_systems
     return unless OperatingSystemMapping.where(operating_system_id: nil).any?
     OperatingSystem.all.each do |os|
+      next if os.matching_pattern.blank?
       os.matching_pattern.chomp.split(/\n/).each do |pattern|
         m = pattern.match(/\A(\w+):(.*)\z/)
         field = m[1]
@@ -52,7 +57,7 @@ private
     if (host.cpe.blank? && host.raw_os.blank?)
       return
     end
-    [:cpe, :raw_os].each do |field|
+    @fields.each do |field|
       os = OperatingSystemMapping.
 	     where("field = :field and value = :value",
 		    field: field, value: host.send(field))
