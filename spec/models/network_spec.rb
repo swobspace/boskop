@@ -63,4 +63,15 @@ RSpec.describe Network, :type => :model do
       expect(netzwerk.to_cidr_mask).to eq "24"
     end
   end
+
+  describe "::best_match(ip)" do
+    let!(:n1) { FactoryGirl.create(:network, netzwerk: '192.0.2.0/24') }
+    let!(:n2) { FactoryGirl.create(:network, netzwerk: '192.0.2.32/27') }
+    let!(:n3) { FactoryGirl.create(:network, netzwerk: '192.168.0.0/24') }
+    let!(:n4) { FactoryGirl.create(:network, netzwerk: '192.168.0.0/24') }
+
+    it { expect(Network.best_match('192.0.2.35')).to contain_exactly(n2) }
+    it { expect(Network.best_match('192.0.2.17')).to contain_exactly(n1) }
+    it { expect(Network.best_match('192.168.0.17')).to contain_exactly(n3, n4) }
+  end
 end
