@@ -63,4 +63,23 @@ RSpec.describe Host, type: :model do
     end
   end
 
+  describe "on save" do
+    describe "without a location" do
+      let(:loc) { FactoryGirl.create(:location, lid: 'JCST') }
+      let!(:n1) { FactoryGirl.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
+
+       it "sets location from ip address and existing networks" do
+         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+         host.reload
+         expect(host.location).to eq(loc)
+       end
+
+       it "doesn't set location if there is no uniq matching network" do
+         n2 = FactoryGirl.create(:network, netzwerk: '192.0.2.0/24')
+         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+         host.reload
+         expect(host.location).to be_nil
+       end
+    end
+  end
 end
