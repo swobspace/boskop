@@ -14,6 +14,8 @@ class Host < ApplicationRecord
   validates :ip, presence: :true, uniqueness: true
   validates :lastseen, presence: :true
 
+  before_save :set_location
+
   def to_s
     "#{ip} (#{name})"
   end
@@ -64,4 +66,15 @@ private
     key = rawkey.to_s.sub(/\Amerkmal_/, '').sub(/=\z/, '')
     Merkmalklasse.where(for_object: 'Host', tag: key).first&.id
   end
+
+  def set_location
+    if self.location.nil?
+      networks = Network.best_match(self.ip)
+      if networks.count == 1
+        self.location = networks.first.location
+      end
+    end
+    true
+  end
+  
 end
