@@ -38,7 +38,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
       before(:each) do
         host.update(raw_hash)
       end
-  
+
       it "creates an operating_system_mapping" do
 	expect { job }.to change(OperatingSystemMapping, :count).by(1)
       end
@@ -58,7 +58,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
       before(:each) do
         host.update(raw_hash)
       end
-  
+
       it "creates an operating_system_mapping" do
 	expect { job }.to change(OperatingSystemMapping, :count).by(1)
       end
@@ -73,13 +73,14 @@ RSpec.describe MapOperatingSystemJob, type: :job do
     end
 
     describe "old host with updated :raw_os" do
+      let!(:host) { FactoryGirl.create(:host,
+        ip: '192.0.2.197', operating_system: xp, cpe: "cpe:/o:microsoft:windows_xp::-"
+      )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:raw_os]) }
       before(:each) do
-        host.update(operating_system: xp, 
-                    cpe: "cpe:/o:microsoft:windows_xp::-")
         host.update(raw_os: 'Windows 7 Professional')
       end
-  
+
       it "creates an operating_system_mapping" do
 	expect { job }.to change(OperatingSystemMapping, :count).by(1)
       end
@@ -94,14 +95,18 @@ RSpec.describe MapOperatingSystemJob, type: :job do
     end
 
     describe "old host with updated :cpe" do
+      let!(:host) { FactoryGirl.create(:host,
+        ip: '192.0.2.197', operating_system: xp, raw_os: "Windows 5.1"
+      )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:cpe]) }
       before(:each) do
-        host.update(operating_system: xp, 
-                    raw_os: "Windows 5.1")
         host.update(cpe: "/o:microsoft:windows_7::sp1:professional")
+        host.reload
       end
-  
+
       it "creates an operating_system_mapping" do
+        expect(host.raw_os).to eq("")
+        expect(host.operating_system_id).to be_nil
 	expect { job }.to change(OperatingSystemMapping, :count).by(1)
       end
       context "executing job" do
