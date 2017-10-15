@@ -26,7 +26,7 @@ class MapOperatingSystemJob < ApplicationJob
       end
     end
     map_operating_systems if new_osm
-    assign_operating_system(host)
+    host.assign_operating_system
   end
 
 private
@@ -48,27 +48,5 @@ private
           update_all(operating_system_id: os.id)
       end
     end
-  end
-
-  #
-  # search for a matching operating system and assign
-  #
-  def assign_operating_system(host)
-    if (host.cpe.blank? && host.raw_os.blank?)
-      return
-    end
-    @fields.each do |field|
-      os = OperatingSystemMapping.
-	     where("field = :field and value = :value",
-		    field: field, value: host.send(field))
-      next if os.empty?
-      if os.count == 1
-	host.update(operating_system_id: os.first.operating_system_id)
-        break
-      else
-	puts "WARNING: more than one mapping found, skipping\n#{os.inspect}"
-      end
-    end
-
   end
 end
