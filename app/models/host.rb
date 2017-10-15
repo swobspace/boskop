@@ -110,15 +110,20 @@ private
   end
 
   def check_raw_os
-    if self.raw_os_changed? && self.cpe_changed?   # both
+    if self.operating_system_id_changed?
+      # let it unchanged pass
+    elsif self.raw_os_changed? && self.cpe_changed?   # both
       # clear existing os
       self.operating_system_id = nil
     elsif raw_os_changed? ^ cpe_changed? # xor
       # clear existing os
       self.operating_system_id = nil
       # clear the unchanged field to avoid inconsistency
-      self.raw_os = "" if self.cpe_changed?
-      self.cpe    = "" if self.raw_os_changed?
+      if self.cpe_changed?
+        self.raw_os = "" 
+      else
+        self.cpe    = ""
+      end
     end
     true
   end
