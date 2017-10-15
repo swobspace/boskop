@@ -15,6 +15,7 @@ class Host < ApplicationRecord
   validates :lastseen, presence: :true
 
   before_save :set_location
+  before_save :check_operating_system
 
   def to_s
     "#{ip} (#{name})"
@@ -29,9 +30,34 @@ class Host < ApplicationRecord
     end
   end
 
+  def assign_operating_system
+    if (cpe.blank? && raw_os.blank?)
+      return
+    end
+    [:cpe, :raw_os].each do |field|
+      os = OperatingSystemMapping.
+             where("field = :field and value = :value",
+                    field: field, value: self.send(field))
+      next if os.empty?
+      if os.count == 1
+        if self.persisted?
+          self.update_column(:operating_system_id, os.first.operating_system_id)
+        else
+          operating_system_id = os.first.operating_system_id
+        end
+        break
+      else
+        puts "WARNING: more than one mapping found, skipping\n#{os.inspect}"
+        return false
+      end
+    end
+    return true
+  end
+
+
 private
 
-  # 
+  #
   # define setter and getter for merkmale
   #
   def method_missing(key, *args)
@@ -76,5 +102,25 @@ private
     end
     true
   end
-  
+
+  def check_operating_system
+    check_raw_os
+    assign_operating_system
+    return true
+  end
+
+  def check_raw_os
+    if self.raw_os_changed? && self.cpe_changed?   # both
+      # clear existing os
+      self.operating_system_id = nil
+    elsif raw_os_changed? ^ cpe_changed? # xor
+      # clear existing os
+      self.operating_system_id = nil
+      # clear the unchanged field to avoid inconsistency
+      self.raw_os = "" if self.cpe_changed?
+      self.cpe    = "" if self.raw_os_changed?
+    end
+    true
+  end
+
 end
