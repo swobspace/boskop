@@ -157,7 +157,8 @@ RSpec.describe ImportCsvHostsService do
         expect(host.ip.to_s).to eq("192.168.1.42")
         expect(host.lastseen.to_s).to eq("2017-08-30")
         expect(host.name).to eq("myhost")
-        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.cpe).to eq("")
+        expect(host.raw_os).to eq("Windows 10 Pro 15063")
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("my.example.net")
         expect(host.workgroup).to eq("MY")
@@ -201,7 +202,6 @@ RSpec.describe ImportCsvHostsService do
     let(:result) { ImportCsvHostsService.new(file: csvfile).call }
     let(:hosts)  { result.hosts }
 
-    # it { puts result.inspect }
     it { expect(hosts[0].ip.to_s).to eq("192.168.1.42") }
     it { expect(hosts[0].operating_system_id).to eq(operating_system.id) }
     it { expect(hosts[0].host_category_id).to eq(host_category.id) }
