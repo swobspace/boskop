@@ -34,15 +34,9 @@ RSpec.describe MapOperatingSystemJob, type: :job do
 
     describe "new host with :raw_os" do
       let(:raw_hash) {{ raw_os: 'Windows 7 Professional' }}
-      #let(:raw_hash) {{ cpe: "/o:microsoft:windows_7::sp1:professional" }}
       let(:job) { MapOperatingSystemJob.perform_now(host: host) }
       before(:each) do
         host.update(raw_hash)
-      #   if preset
-      #     host.update(operating_system: xp, 
-      #                 cpe: "cpe:/o:microsoft:windows_xp::-", 
-      #                 raw_os: "Windows 5.1")
-      #   end
       end
   
       it "creates an operating_system_mapping" do
@@ -63,11 +57,6 @@ RSpec.describe MapOperatingSystemJob, type: :job do
       let(:job) { MapOperatingSystemJob.perform_now(host: host) }
       before(:each) do
         host.update(raw_hash)
-      #   if preset
-      #     host.update(operating_system: xp, 
-      #                 cpe: "cpe:/o:microsoft:windows_xp::-", 
-      #                 raw_os: "Windows 5.1")
-      #   end
       end
   
       it "creates an operating_system_mapping" do
