@@ -73,5 +73,7 @@ RSpec.describe Network, :type => :model do
     it { expect(Network.best_match('192.0.2.35')).to contain_exactly(n2) }
     it { expect(Network.best_match('192.0.2.17')).to contain_exactly(n1) }
     it { expect(Network.best_match('192.168.0.17')).to contain_exactly(n3, n4) }
+    it { expect(Network.best_match('198.51.100.4')).to contain_exactly() }
+    it { expect(Network.best_match(nil)).to contain_exactly() }
   end
 end
