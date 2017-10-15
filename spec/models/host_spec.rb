@@ -100,7 +100,7 @@ RSpec.describe Host, type: :model do
       it "clears raw_os and os" do
         host.update(cpe: 'o/keiner')
         host.reload
-        expect(host.cpe).to eq("")
+        expect(host.raw_os).to eq("")
         expect(host.operating_system_id).to be_nil
       end
     end
