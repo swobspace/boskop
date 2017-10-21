@@ -1,5 +1,6 @@
 require 'cidr_addresses'
 class Network < ApplicationRecord
+  include NetworkConcerns
   # -- associations
   belongs_to :location, optional: true
   has_many :merkmale, as: :merkmalfor, dependent: :destroy

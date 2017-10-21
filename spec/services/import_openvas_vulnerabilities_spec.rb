@@ -98,7 +98,7 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
   context "with invalid import_attributes" do
     subject { ImportOpenvasVulnerabilitiesService.new(file: "") }
 
-    it "doescreates an Host" do
+    it "creates an Host" do
       expect {
 	subject.call
       }.to change{Host.count}.by(0)
@@ -112,7 +112,7 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
     end
   end
   
-  describe "with existing vulnerability" do
+  describe "with existing host and vulnerability" do
     let!(:vuln_detail) { FactoryGirl.create(:vulnerability_detail,
       name: "OS End Of Life Detection",
       family: "General",
@@ -120,29 +120,16 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
       threat: "High",
       nvt: "1.3.6.1.4.1.25623.1.0.103674",
     )}
+    let(:host) { FactoryGirl.create(:host, ip: '127.0.0.1', lastseen: '2017-08-31')}
     let!(:vuln) { FactoryGirl.create(:vulnerability,
-      host: FactoryGirl.create(:host, ip: '127.0.0.1'),
-      vulnerability_detail: vuln_detail
+      vulnerability_detail: vuln_detail,
+      host: host
     )}
-
-    describe "older than import data" do
-      before(:each) do
-        vuln.update(lastseen: '2017-10-01')
-      end
-      it { expect { subject.call }.to change(Host, :count).by(0) }
-      it { expect { subject.call }.to change(Vulnerability, :count).by(1) }
-      it { expect { subject.call }.to change(VulnerabilityDetail, :count).by(1) }
-      context "#call" do
-        before(:each) do
-          subject.call
-        end
-        it { expect(vuln.lastseen.to_s).to match(/\A2017-10-01\z/) }
-      end
-    end
 
     describe "newer than import data" do
       before(:each) do
-        vuln.update(lastseen: '2017-01-01')
+        vuln.update(lastseen: '2017-10-01')
+        host.update(lastseen: '2017-10-01')
       end
       it { expect { subject.call }.to change(Host, :count).by(0) }
       it { expect { subject.call }.to change(Vulnerability, :count).by(1) }
@@ -150,9 +137,28 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
       context "#call" do
         before(:each) do
           subject.call
-          vuln.reload
+          vuln.reload ; host.reload
+        end
+        it { expect(vuln.lastseen.to_s).to match(/\A2017-10-01\z/) }
+        it { expect(host.lastseen.to_s).to match(/\A2017-10-01\z/) }
+      end
+    end
+
+    describe "older than import data" do
+      before(:each) do
+        vuln.update(lastseen: '2017-01-01')
+        host.update(lastseen: '2017-01-01')
+      end
+      it { expect { subject.call }.to change(Host, :count).by(0) }
+      it { expect { subject.call }.to change(Vulnerability, :count).by(1) }
+      it { expect { subject.call }.to change(VulnerabilityDetail, :count).by(1) }
+      context "#call" do
+        before(:each) do
+          subject.call
+          vuln.reload ; host.reload
         end
         it { expect(vuln.lastseen.to_s).to match(/\A2017-09-26\z/) }
+        it { expect(host.lastseen.to_s).to match(/\A2017-09-26\z/) }
       end
     end
   end

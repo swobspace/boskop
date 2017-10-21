@@ -36,6 +36,9 @@ class ImportOpenvasVulnerabilitiesService
       # find or create host
       host = Host.create_with(lastseen: result.lastseen).
                   find_or_create_by!(ip: result.host)
+      if host.lastseen.to_date < result.lastseen.to_date
+        host.update(lastseen: result.lastseen)
+      end
       hosts << host
       # find or create vulnerability_detail
       vulndetail = VulnerabilityDetail.
@@ -50,7 +53,6 @@ class ImportOpenvasVulnerabilitiesService
                  host_id: host.id, 
                  vulnerability_detail_id: vulndetail.id
                )
-
       if vuln.lastseen.to_date < result.lastseen.to_date
         vuln.update(lastseen: result.lastseen)
       end

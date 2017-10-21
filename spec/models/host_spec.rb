@@ -53,7 +53,7 @@ RSpec.describe Host, type: :model do
       end
 
       context "with preassigned merkmal value" do
-        let!(:merkmal) {FactoryGirl.create(:merkmal, 
+        let!(:merkmal) {FactoryGirl.create(:merkmal,
           merkmalklasse_id: merkmalklasse.id,
           merkmalfor: host,
           value: "Hercule Poirot"
@@ -63,4 +63,79 @@ RSpec.describe Host, type: :model do
     end
   end
 
+  describe "on save" do
+    describe "without a location" do
+      let(:loc) { FactoryGirl.create(:location, lid: 'JCST') }
+      let!(:n1) { FactoryGirl.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
+
+       it "sets location from ip address and existing networks" do
+         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+         host.reload
+         expect(host.location).to eq(loc)
+       end
+
+       it "doesn't set location if there is no uniq matching network" do
+         n2 = FactoryGirl.create(:network, netzwerk: '192.0.2.0/24')
+         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+         host.reload
+         expect(host.location).to be_nil
+       end
+    end
+  end
+  describe "changing :cpe or :raw_os" do
+    let(:os) { FactoryGirl.create(:operating_system, name: "DummyOS") }
+    describe "updating :raw_os" do
+      let!(:host) { FactoryGirl.create(:host, ip: '192.0.2.35',
+                      cpe: 'o/brabbel', operating_system: os) }
+      it "clears cpe and os" do
+        host.update(raw_os: 'TrueOS')
+        host.reload
+        expect(host.cpe).to eq("")
+        expect(host.operating_system_id).to be_nil
+      end
+    end
+    describe "updating :cpe" do
+      let!(:host) { FactoryGirl.create(:host, ip: '192.0.2.35',
+                      raw_os: 'DummyOS', operating_system: os) }
+      it "clears raw_os and os" do
+        host.update(cpe: 'o/keiner')
+        host.reload
+        expect(host.raw_os).to eq("")
+        expect(host.operating_system_id).to be_nil
+      end
+    end
+  end
+
+  describe "assign_operating_system" do
+    let(:os) { FactoryGirl.create(:operating_system, name: "DummyOS") }
+    let!(:osm1) { FactoryGirl.create(:operating_system_mapping,
+      field: :cpe,
+      value: '/o:dummy_os',
+      operating_system: os
+    )}
+    let!(:osm2) { FactoryGirl.create(:operating_system_mapping,
+      field: :raw_os,
+      value: 'DummyOS',
+      operating_system: os
+    )}
+
+    describe "with cpe: o:dummy_os" do
+      let(:host) { FactoryGirl.create(:host, ip: '192.0.2.35', cpe: '/o:dummy_os') }
+      it "assigns an operating system" do
+        host.assign_operating_system
+        host.reload
+        expect(host.operating_system).to eq(os)
+      end
+    end
+
+    describe "with raw_os: DummyOS" do
+      let(:host) { FactoryGirl.create(:host, ip: '192.0.2.35', raw_os: 'DummyOS') }
+      it "assigns an operating system" do
+        host.assign_operating_system
+        host.reload
+        expect(host.operating_system).to eq(os)
+      end
+    end
+
+  end
 end
