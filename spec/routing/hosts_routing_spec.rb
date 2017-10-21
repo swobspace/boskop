@@ -11,6 +11,14 @@ RSpec.describe HostsController, type: :routing do
       expect(:get => "/hosts/search").to route_to("hosts#search")
     end
 
+    it "routes to #search" do
+      expect(:post => "/hosts/search").to route_to("hosts#search")
+    end
+
+    it "routes to #search_form" do
+      expect(:get => "/hosts/search_form").to route_to("hosts#search_form")
+    end
+
     it "routes to #new" do
       expect(:get => "/hosts/new").to route_to("hosts#new")
     end

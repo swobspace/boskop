@@ -103,14 +103,16 @@ class HostsController < ApplicationController
     end
 
     def search_params
-      {limit: 100}.merge(
         # see class HostQuery for possible options
-        params.permit(
+        searchparms = params.permit(*submit_parms,
           :name, :description, :ip, :operating_system, :cpe, :raw_os,
           :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
-          :mac, :vendor, :host_category, :lid, :eol, :limit,
-        ).to_hash.reject{|_, v| v.blank?}
-      )
+          :mac, :vendor, :host_category, :lid, :eol, :limit).to_hash
+      {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit" ]
     end
 
     def merkmale

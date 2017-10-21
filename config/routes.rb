@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :hosts do
     collection do
       get :search
+      post :search
+      get :search_form
       get :new_import
       post :import
     end
