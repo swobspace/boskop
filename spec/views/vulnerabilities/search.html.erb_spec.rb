@@ -8,7 +8,9 @@ RSpec.describe "vulnerabilities/search", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "search" }
 
-    host = FactoryGirl.create(:host, ip: '192.81.51.117', name: 'vxserver')
+    hostcat = FactoryGirl.create(:host_category, name: 'Server')
+    host = FactoryGirl.create(:host, ip: '192.81.51.117', name: 'vxserver', 
+                              host_category: hostcat)
     assign(:vulnerabilities, [
       Vulnerability.create!(
         :host => host,
@@ -36,7 +38,9 @@ RSpec.describe "vulnerabilities/search", type: :view do
   it "renders a list of vulnerabilities" do
     render
     assert_select "tr>td", :text => "XYZ".to_s, :count => 2
-    assert_select "tr>td", :text => "192.81.51.117 (vxserver)".to_s, :count => 2
+    assert_select "tr>td", :text => "192.81.51.117".to_s, :count => 2
+    assert_select "tr>td", :text => "vxserver", :count => 2
+    assert_select "tr>td", :text => "Server", :count => 2
     assert_select "tr>td", :text => "End-of-Life".to_s, :count => 1
     assert_select "tr>td", :text => "Hackable by Kids".to_s, :count => 1
     assert_select "tr>td", :text => 1.day.before(Date.today).to_s, :count => 2

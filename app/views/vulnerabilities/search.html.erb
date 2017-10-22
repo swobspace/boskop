@@ -16,7 +16,9 @@
   <thead>
     <tr>
       <th><%= t('attributes.lid') %></th>
-      <th><%= t('attributes.host') %></th>
+      <th><%= t('attributes.ip') %></th>
+      <th><%= t('attributes.hostname') %></th>
+      <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.operating_system') %></th>
       <th><%= t('attributes.vulnerability_detail') %></th>
       <th><%= t('attributes.threat') %></th>
@@ -35,6 +37,8 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </tfoot>
 
@@ -42,7 +46,9 @@
     <% @vulnerabilities.each do |vulnerability| %>
       <%= content_tag_for(:tr, vulnerability) do %>
 	<td><%= vulnerability.host.lid %></td>
-	<td><%= link_to vulnerability.host, host_path(vulnerability.host) %></td>
+	<td><%= link_to vulnerability.host.ip.to_s, host_path(vulnerability.host) %></td>
+	<td><%= link_to vulnerability.host.name, host_path(vulnerability.host) %></td>
+	<td><%= vulnerability.host.host_category %></td>
 	<td><%= vulnerability.host.operating_system %></td>
 	<td>
           <%= link_to vulnerability.vulnerability_detail,

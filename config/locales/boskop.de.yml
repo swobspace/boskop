@@ -116,6 +116,7 @@ de:
     givenname: Vorname
     host: Host
     host_category: Host-Kategorie
+    hostname: Hostname
     ip: IP-Adresse
     lastseen: zuletzt gesehen
     limit: Limit
