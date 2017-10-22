@@ -4,12 +4,14 @@ class VulnerabilitiesController < ApplicationController
 
   # GET /vulnerabilities
   def index
-    @vulnerabilities = Vulnerability.all
-    respond_with(@vulnerabilities)
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+    respond_with(@vulnerabilities) do |format|
+      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
+    end
   end
 
   def search
-    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:location, :operating_system])
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all
