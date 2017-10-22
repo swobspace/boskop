@@ -57,11 +57,13 @@
     </li>
   <% end %>
   <% if can? :read, :vulnerabilities %>
-    <li class="dropdown <%= active_class('hosts') %>">
+    <li class="dropdown <%= active_class('vulnerabilities') %>">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <%= t('controller.vulnerabilities') %><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.vulnerabilities')), main_app.vulnerabilities_path %></li>
+        <li> <%=link_to raw('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_vulnerabilities_path %></li>
+        <li class="divider"></li>
         <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.vulnerability_details')), main_app.vulnerability_details_path %></li>
         <% if can? :create, Vulnerability %>
           <li class="divider"></li>

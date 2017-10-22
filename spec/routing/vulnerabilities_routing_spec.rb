@@ -7,6 +7,19 @@ RSpec.describe VulnerabilitiesController, type: :routing do
       expect(:get => "/vulnerabilities").to route_to("vulnerabilities#index")
     end
 
+    it "routes to #search" do
+      expect(:get => "/vulnerabilities/search").to route_to("vulnerabilities#search")
+    end
+
+    it "routes to #search" do
+      expect(:post => "/vulnerabilities/search").to route_to("vulnerabilities#search")
+    end
+
+    it "routes to #search_form" do
+      expect(:get => "/vulnerabilities/search_form").to route_to("vulnerabilities#search_form")
+    end
+
+
     it "routes to #new" do
       expect(:get => "/vulnerabilities/new").to route_to("vulnerabilities#new")
     end

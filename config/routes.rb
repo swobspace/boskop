@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :vulnerabilities do
     collection do
-      # get :search
+      get :search
+      post :search
+      get :search_form
       get :new_import
       post :import
     end

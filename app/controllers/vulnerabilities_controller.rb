@@ -8,6 +8,14 @@ class VulnerabilitiesController < ApplicationController
     respond_with(@vulnerabilities)
   end
 
+  def search
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:location, :operating_system])
+    query = VulnerabilityQuery.new(@vulnerabilities, search_params)
+    @filter_info = query.search_options
+    @vulnerabilities = query.all
+    respond_with(@vulnerabilities)
+  end
+
   # GET /vulnerabilities/1
   def show
     respond_with(@vulnerability)
@@ -77,6 +85,18 @@ class VulnerabilitiesController < ApplicationController
 
     def import_params
       params.permit(:utf8, :authenticity_token, :type, :file).to_hash
+    end
+
+   def search_params
+        # see VulnerabilityQuery for possible options
+        searchparms = params.permit(*submit_parms,
+          :name, :threat, :severity, :ip, :operating_system, 
+          :lastseen, :newer, :older, :current, :lid, :limit).to_hash
+      {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit" ]
     end
 
 end

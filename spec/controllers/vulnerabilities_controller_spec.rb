@@ -51,6 +51,14 @@ RSpec.describe VulnerabilitiesController, type: :controller do
     end
   end
 
+  describe "GET #search" do
+    it "returns a success response" do
+      vulnerability = Vulnerability.create! valid_attributes
+      get :search, params: {ip: '192.81.51'}, session: valid_session
+      expect(response).to be_success
+    end
+  end
+
   describe "GET #show" do
     it "returns a success response" do
       vulnerability = Vulnerability.create! valid_attributes
