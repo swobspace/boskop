@@ -56,11 +56,11 @@ class VulnerabilitiesDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(locations.lid host(hosts.ip) hosts.name host_categories.name operating_systems.name vulnerability_details.name vulnerabilities.threat vulnerabilities.severity vulnerabilities.lastseen)
+    %w(locations.lid host(hosts.ip) hosts.name host_categories.name operating_systems.name vulnerability_details.name vulnerability_details.threat vulnerability_details.severity vulnerabilities.lastseen)
   end
 
   def search_columns
-    %w(lid ip name hostname host_category operating_system vulnerability_detail threat severity lastseen)
+    %w(lid ip hostname host_category operating_system name threat severity lastseen)
   end
 
 end
