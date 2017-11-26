@@ -136,7 +136,7 @@ RSpec.describe ImportCsvHostsService do
       it "updates any attribute from current data" do
         host.update_attributes!(lastseen: '2017-07-31')
         service.call
-        host = Host.first
+        host.reload
         expect(host.lastseen.to_s).to eq("2017-08-20")
         expect(host.ip.to_s).to eq("192.168.1.42")
         expect(host.name).to eq("wob42")

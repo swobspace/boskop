@@ -5,7 +5,7 @@
 # * plain attributes setting values direct like :name or :tag
 # * assoziation id like host_category_id
 # * merkmal_<tag>: tag must match exactly one Merkmalklasse
-# 
+#
 # in case of assoziation id there are two possible values:
 #
 # * integer: must match the id of the assoziation
@@ -21,7 +21,7 @@ class ImportCsvHostsService
   # * :file   - csv import file
   #
   # optional parameters:
-  # * :update - how to update existing data. Possible values are :none (default), 
+  # * :update - how to update existing data. Possible values are :none (default),
   #             :missing, :always
   #   * :none    - don't update existing records
   #   * :missing - update only missing records if csv data not older than 4 weeks
@@ -32,17 +32,17 @@ class ImportCsvHostsService
   def initialize(options = {})
     options.symbolize_keys!
     @csvfile = get_file(options)
-    @update  = options.fetch(:update) { :none }
+    @update  = options.fetch(:update) { :none }.to_sym
   end
 
   # service.call()
-  # 
+  #
   def call
     hosts = []
     errors = []
     success = true
     unless File.readable?(csvfile)
-      message = "File #{csvfile} is not readable or does not exist" 
+      message = "File #{csvfile} is not readable or does not exist"
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
     CSV.foreach(csvfile, headers: true, col_sep: ';') do |row|
@@ -71,9 +71,9 @@ private
 
   def attributes_for_update(csvattributes, host)
     seen = csvattributes[:lastseen].to_date
-    recently_seen = (seen > host.lastseen) ? 
+    recently_seen = (seen > host.lastseen) ?
                     { lastseen: seen.to_s } : {}
-    result = case update.to_sym
+    result = case update
     when :none
       {}
     when :missing
@@ -96,14 +96,18 @@ private
 
   def update_merkmale(host, row)
     seen = attributes([:lastseen], row)[:lastseen].to_date
-    newer = (seen >= host.lastseen && update == :newer)
+    Rails.logger.debug("DEBUG: #{merkmal_attributes.inspect}")
     attributes(merkmal_attributes, row).each do |key,value|
-      host.send("#{key}=", value) if (host.send(key).blank? || newer)
+      Rails.logger.debug("DEBUG: #{host.ip} #{key}: #{value} #{seen} #{host.lastseen} #{update}")
+      if ((seen >= host.lastseen && update == :newer) || host.send(key).blank? )
+        Rails.logger.debug("DEBUG: update #{host.ip.to_s}: #{key}, #{value}")
+        host.send("#{key}=", value)
+      end
     end
   end
 
   def host_attributes
-    Host.attribute_names.map(&:to_sym).reject do |k| 
+    Host.attribute_names.map(&:to_sym).reject do |k|
       [:id, :created_at, :updated_at].include?(k)
     end
   end
@@ -118,7 +122,7 @@ private
   #
   def cleanup(attributes)
     attributes[:cpe].to_s.sub!(/cpe:/, '')
-    Host.attribute_names.grep(/_id\z/).map(&:to_sym).each do |attr|
+    attributes.keys.grep(/_id\z/).map(&:to_sym).each do |attr|
       attributes[attr] = search_for_id(attributes, attr)
     end
     attributes
@@ -148,7 +152,7 @@ private
   # file may be ActionDispatch::Http::UploadedFile
   #
   def get_file(options)
-    file = options.fetch(:file) 
+    file = options.fetch(:file)
     if file.respond_to?(:path)
       file.path
     else
