@@ -17,9 +17,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
-                     branch: 'master'
+                     branch: '2-0-stable'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'

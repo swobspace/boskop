@@ -7,12 +7,11 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobapphelpers.git
-  revision: a5f15491350195a2aa1b7958b64916239b863a9c
-  branch: master
+  revision: 451fe30a9eb1e20a33aa175ab32153dffda4927b
+  branch: 2-0-stable
   specs:
-    wobapphelpers (3.0.1)
+    wobapphelpers (2.1.0)
       coffee-rails
-      font-awesome-sass
       jquery-rails
       rails (~> 5.0)
       record_tag_helper (~> 1.0)
@@ -21,15 +20,15 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 2ba57ff8fa495144caf81498578fa317dd815095
-  branch: master
+  revision: 933e94afe31a52f3723ccc881da5bfab7518d61b
+  branch: 2-0-stable
   specs:
-    wobauth (3.0.1)
+    wobauth (2.1.6)
       cancancan
       coffee-rails
       devise
       jquery-rails
-      rails (~> 5.0)
+      rails (>= 5.0, < 5.2)
       record_tag_helper (~> 1.0)
       sass-rails
       simple_form
@@ -160,8 +159,6 @@ GEM
       factory_bot (~> 4.8.2)
       railties (>= 3.0.0)
     ffi (1.9.18)
-    font-awesome-sass (4.7.0)
-      sass (>= 3.2)
     formatador (0.2.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
