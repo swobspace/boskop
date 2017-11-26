@@ -95,7 +95,7 @@ RSpec.describe ImportCsvHostsService do
       cpe: "/o:microsoft:windows:4711",
       fqdn: 'myhost.example.net',
       merkmale_attributes: [
-        { merkmalklasse_id: mk_next.id, value: "old steps" }
+        { merkmalklasse_id: mk_next.id, value: "old steps" },
       ]
     )}
 
@@ -145,7 +145,7 @@ RSpec.describe ImportCsvHostsService do
         expect(host.domain_dns).to eq("my.example.net")
         expect(host.workgroup).to eq("MY")
         expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
-        expect(host.merkmal_next).to eq("old steps")
+        expect(host.merkmal_next).to eq("My next steps")
       end
     end
     describe "update: :missing" do

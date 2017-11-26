@@ -46,7 +46,7 @@ class ImportCsvHostsService
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
     CSV.foreach(csvfile, headers: true, col_sep: ';') do |row|
-      csvattributes     = attributes(host_attributes,row)
+      csvattributes = attributes(host_attributes,row)
       host = Host.create_with(csvattributes).find_or_create_by(ip: csvattributes[:ip])
       if host.persisted? && host.update_attributes(attributes_for_update(csvattributes, host))
          update_merkmale(host, row)
@@ -68,10 +68,6 @@ private
     attributes = attributes.reject {|k,v| v.blank?}
     cleanup(attributes)
   end
-
-  # cleanup attributes:
-  # * remove prefix or suffixes
-  # * search for matching objects in relations if attribute =~ /_id\z/
 
   def attributes_for_update(csvattributes, host)
     seen = csvattributes[:lastseen].to_date
@@ -99,8 +95,10 @@ private
   end
 
   def update_merkmale(host, row)
+    seen = attributes([:lastseen], row)[:lastseen].to_date
+    newer = (seen >= host.lastseen && update == :newer)
     attributes(merkmal_attributes, row).each do |key,value|
-      host.send("#{key}=", value) if host.send(key).blank?
+      host.send("#{key}=", value) if (host.send(key).blank? || newer)
     end
   end
 
@@ -114,6 +112,10 @@ private
     Merkmalklasse.where(for_object: 'Host').pluck(:tag).map {|t| "merkmal_#{t}".to_sym }
   end
 
+  # cleanup attributes:
+  # * remove prefix or suffixes
+  # * search for matching objects in relations if attribute =~ /_id\z/
+  #
   def cleanup(attributes)
     attributes[:cpe].to_s.sub!(/cpe:/, '')
     Host.attribute_names.grep(/_id\z/).map(&:to_sym).each do |attr|
