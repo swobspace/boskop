@@ -25,7 +25,7 @@ RSpec.describe LineStatesController, type: :controller do
   # LineState. As you add validations to LineState, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:line_state)
+    FactoryBot.attributes_for(:line_state)
   }
 
   let(:invalid_attributes) {

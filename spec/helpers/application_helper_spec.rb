@@ -8,7 +8,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
 
   describe "#link_to_attribute" do
     describe "with attribute :framework_contract" do
-      let (:fmc) { FactoryGirl.create(:framework_contract, 
+      let (:fmc) { FactoryBot.create(:framework_contract, 
 				       name: "MyFrameworkContract") }
 
       it "raises error if method framework_contract does not exist" do
@@ -39,7 +39,7 @@ RSpec.describe ApplicationHelper, :type => :helper do
     end
 
     describe "with attribute :location" do
-      let (:loc) { FactoryGirl.create(:location, name: "MyLocation") }
+      let (:loc) { FactoryBot.create(:location, name: "MyLocation") }
 
       it "raises error if method location does not exist" do
 	expect {

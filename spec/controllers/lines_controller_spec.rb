@@ -25,11 +25,11 @@ RSpec.describe LinesController, type: :controller do
   # Line. As you add validations to Line, be sure to
   # adjust the attributes here as well.
 
-  let!(:location) { FactoryGirl.create(:location) }
-  let!(:access_type) { FactoryGirl.create(:access_type) }
-  let!(:line_state) { FactoryGirl.create(:line_state) }
+  let!(:location) { FactoryBot.create(:location) }
+  let!(:access_type) { FactoryBot.create(:access_type) }
+  let!(:line_state) { FactoryBot.create(:line_state) }
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:line, 
+    FactoryBot.attributes_for(:line, 
       location_a_id: location.id, 
       access_type_id: access_type.id,
       line_state_id: line_state.id)

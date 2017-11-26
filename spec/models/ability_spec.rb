@@ -37,7 +37,7 @@ RSpec.describe "User", :type => :model do
   end
 
   context "logged in without any role" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
 
     # -- readable, ...
     [ Location, OrgUnit, Network ].each do |model|
@@ -66,9 +66,9 @@ RSpec.describe "User", :type => :model do
   end
 
   context "with role Reader" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
-      FactoryGirl.create(:authority, 
+      FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:reader))
     }
@@ -97,9 +97,9 @@ RSpec.describe "User", :type => :model do
   end
 
   context "with role NetworkManager" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
-      FactoryGirl.create(:authority, 
+      FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:network_manager))
     }
@@ -143,9 +143,9 @@ RSpec.describe "User", :type => :model do
   end
 
   context "with role HostManager" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
-      FactoryGirl.create(:authority, 
+      FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:host_manager))
     }
@@ -185,9 +185,9 @@ RSpec.describe "User", :type => :model do
   end
 
   context "with role HostAdmin" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
-      FactoryGirl.create(:authority, 
+      FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:host_admin))
     }
@@ -223,9 +223,9 @@ RSpec.describe "User", :type => :model do
   end
 
   context "with role Admin" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
-      FactoryGirl.create(:authority, 
+      FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:admin))
       }

@@ -8,8 +8,8 @@ RSpec.describe "merkmale/edit", :type => :view do
     allow(controller).to receive(:controller_name) { "merkmale" }
     allow(controller).to receive(:action_name) { "edit" }
 
-    merkmalklasse = FactoryGirl.create(:merkmalklasse)
-    location      = FactoryGirl.create(:location)
+    merkmalklasse = FactoryBot.create(:merkmalklasse)
+    location      = FactoryBot.create(:location)
     @merkmal = assign(:merkmal, Merkmal.create!(
       :merkmalfor => location,
       :merkmalklasse => merkmalklasse,

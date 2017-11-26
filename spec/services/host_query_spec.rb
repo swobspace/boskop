@@ -469,26 +469,26 @@ RSpec.describe HostQuery do
   end # search :lid
 
   context "with :merkmal_responsible" do
-    let(:merkmalklasse1) { FactoryGirl.create(:merkmalklasse,
+    let(:merkmalklasse1) { FactoryBot.create(:merkmalklasse,
       name: 'Responsible',
       tag: 'responsible',
       format: 'string',
       for_object: 'Host',
       visible: ['index', '']
     )}
-    let(:merkmalklasse2) { FactoryGirl.create(:merkmalklasse,
+    let(:merkmalklasse2) { FactoryBot.create(:merkmalklasse,
       name: 'NextStep',
       tag: 'next',
       format: 'string',
       for_object: 'Host',
       visible: ['index', '']
     )}
-    let!(:merkmal1) { FactoryGirl.create(:merkmal, 
+    let!(:merkmal1) { FactoryBot.create(:merkmal, 
       merkmalfor: nas,
       merkmalklasse: merkmalklasse1,
       value: 'Gandalf'
     )}
-    let!(:merkmal2) { FactoryGirl.create(:merkmal, 
+    let!(:merkmal2) { FactoryBot.create(:merkmal, 
       merkmalfor: nas,
       merkmalklasse: merkmalklasse2,
       value: 'Replace it'

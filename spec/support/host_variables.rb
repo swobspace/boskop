@@ -1,19 +1,19 @@
 shared_context "host variables" do
-  let!(:cat_linux) { FactoryGirl.create(:host_category, name: 'linux firewall') }
-  let!(:loc_paris) { FactoryGirl.create(:location, name: 'Paris', lid: 'PARIS') }
-  let(:os1) { FactoryGirl.create(:operating_system, 
+  let!(:cat_linux) { FactoryBot.create(:host_category, name: 'linux firewall') }
+  let!(:loc_paris) { FactoryBot.create(:location, name: 'Paris', lid: 'PARIS') }
+  let(:os1) { FactoryBot.create(:operating_system, 
     name: 'DummyOS',
     eol: 5.years.before(Date.today)
   )}
-  let(:os2) { FactoryGirl.create(:operating_system, 
+  let(:os2) { FactoryBot.create(:operating_system, 
     name: 'ShadowOS', 
     eol: 3.years.after(Date.today)
   )}
-  let(:os3) { FactoryGirl.create(:operating_system, 
+  let(:os3) { FactoryBot.create(:operating_system, 
     name: 'EverytimeOS'
   )}
   # order "name asc": MYNAS01, MYPC002, MYPC003, MYPC005, vpngw
-  let!(:nas)  { FactoryGirl.create(:host, 
+  let!(:nas)  { FactoryBot.create(:host, 
     name: "MYNAS01",
     description: "Backup station",
     ip: '198.51.100.17',
@@ -27,7 +27,7 @@ shared_context "host variables" do
     location: loc_paris,
     operating_system: os1,
   )}
-  let!(:pc2)  { FactoryGirl.create(:host, 
+  let!(:pc2)  { FactoryBot.create(:host, 
     name: "MYPC002",
     description: "workstation",
     ip: '198.51.100.63',
@@ -40,7 +40,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:02',
     operating_system: os1,
   )}
-  let!(:pc3)  { FactoryGirl.create(:host, 
+  let!(:pc3)  { FactoryBot.create(:host, 
     name: "MYPC003",
     description: "workstation",
     ip: '198.51.100.66',
@@ -53,7 +53,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:03',
     operating_system: os2,
   )}
-  let!(:vpngw)  { FactoryGirl.create(:host, 
+  let!(:vpngw)  { FactoryBot.create(:host, 
     name: "vpngw",
     description: "VPN gateway",
     ip: '203.0.113.1',
@@ -67,7 +67,7 @@ shared_context "host variables" do
     host_category: cat_linux,
     operating_system: os3,
   )}
-  let!(:pc5)  { FactoryGirl.create(:host, 
+  let!(:pc5)  { FactoryBot.create(:host, 
     name: "MYPC005",
     description: "very old workstation",
     ip: '198.51.100.70',

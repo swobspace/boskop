@@ -8,7 +8,7 @@ RSpec.describe "addresses/new", :type => :view do
     allow(controller).to receive(:controller_name) { "addresses" }
     allow(controller).to receive(:action_name) { "new" }
 
-    location      = FactoryGirl.create(:location)
+    location      = FactoryBot.create(:location)
 
     assign(:address, Address.new(
       :addressfor => nil,

@@ -29,7 +29,7 @@ RSpec.describe HostsController, type: :controller do
   let(:csv_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
 
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:host)
+    FactoryBot.attributes_for(:host)
   }
   let(:invalid_attributes) {
     { ip: nil }

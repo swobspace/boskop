@@ -8,7 +8,7 @@ RSpec.describe "operating_system_mappings/index", type: :view do
     allow(controller).to receive(:controller_name) { "operating_system_mappings" }
     allow(controller).to receive(:action_name) { "index" }
 
-    os = FactoryGirl.create(:operating_system, name: 'DummyOS' )
+    os = FactoryBot.create(:operating_system, name: 'DummyOS' )
 
     assign(:operating_system_mappings, [
       OperatingSystemMapping.create!(

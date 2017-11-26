@@ -8,7 +8,7 @@ RSpec.describe "vulnerabilities/edit", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "edit" }
 
-    @vulnerability = assign(:vulnerability, FactoryGirl.create(:vulnerability))
+    @vulnerability = assign(:vulnerability, FactoryBot.create(:vulnerability))
   end
 
   it "renders the edit vulnerability form" do

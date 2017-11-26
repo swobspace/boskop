@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe ImportCsvHostsService do
   let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
-  let!(:mk_responsible) { FactoryGirl.create(:merkmalklasse,
+  let!(:mk_responsible) { FactoryBot.create(:merkmalklasse,
     name: "Responsible",
     tag: "responsible",
     for_object: "Host",
   )}
-  let!(:mk_next) { FactoryGirl.create(:merkmalklasse,
+  let!(:mk_next) { FactoryBot.create(:merkmalklasse,
     name: "NextSteps",
     tag: "next",
     for_object: "Host",
@@ -88,7 +88,7 @@ RSpec.describe ImportCsvHostsService do
   end
 
   describe "with existing host" do
-    let!(:host) { FactoryGirl.create(:host,
+    let!(:host) { FactoryBot.create(:host,
       ip: '192.168.1.42',
       lastseen: '2017-08-30',
       name: 'myhost',
@@ -185,16 +185,16 @@ RSpec.describe ImportCsvHostsService do
 
   describe "importing relations from *_id fields" do
     let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'relations.csv') }
-    let!(:operating_system) { FactoryGirl.create(:operating_system,
+    let!(:operating_system) { FactoryBot.create(:operating_system,
       id: 771,
       name: "Linux",
     )}
-    let!(:host_category)    { FactoryGirl.create(:host_category,
+    let!(:host_category)    { FactoryBot.create(:host_category,
       id: 772,
       name: "Linux/Webserver",
       tag: "lin_web"
     )}
-    let!(:location)         { FactoryGirl.create(:location,
+    let!(:location)         { FactoryBot.create(:location,
       id: 773,
       name: "@home",
       lid: "HOME",

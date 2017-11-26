@@ -8,9 +8,9 @@ RSpec.describe "merkmale/index", :type => :view do
     allow(controller).to receive(:controller_name) { "merkmale" }
     allow(controller).to receive(:action_name) { "index" }
 
-    @merkmalklasse = FactoryGirl.create(:merkmalklasse)
-    @merkmalklass2 = FactoryGirl.create(:merkmalklasse)
-    @location      = FactoryGirl.create(:location)
+    @merkmalklasse = FactoryBot.create(:merkmalklasse)
+    @merkmalklass2 = FactoryBot.create(:merkmalklasse)
+    @location      = FactoryBot.create(:location)
     assign(:merkmale, [
       Merkmal.create!(
         :merkmalfor => @location,

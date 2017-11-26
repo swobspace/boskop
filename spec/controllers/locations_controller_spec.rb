@@ -25,7 +25,7 @@ RSpec.describe LocationsController, :type => :controller do
   # Location. As you add validations to Location, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:location)
+    FactoryBot.attributes_for(:location)
   }
 
   let(:invalid_attributes) {

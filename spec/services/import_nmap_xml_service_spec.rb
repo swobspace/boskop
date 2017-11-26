@@ -76,7 +76,7 @@ RSpec.describe ImportNmapXmlService do
   end
   
   describe "with existing host" do
-    let!(:host) { FactoryGirl.create(:host, 
+    let!(:host) { FactoryBot.create(:host, 
       ip: '192.51.100.17',
       lastseen: 1.day.ago(Date.today),
       name: 'myhost',

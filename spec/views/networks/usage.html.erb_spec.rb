@@ -8,13 +8,13 @@ RSpec.describe "networks/usage", :type => :view do
     allow(controller).to receive(:controller_name) { "networks" }
     allow(controller).to receive(:action_name) { "usage" }
 
-    location = FactoryGirl.create(:location, name: 'Lokation', lid: 'LocID')
-    net2 = FactoryGirl.create(:network,
+    location = FactoryBot.create(:location, name: 'Lokation', lid: 'LocID')
+    net2 = FactoryBot.create(:network,
         :location => location,
         :netzwerk => "192.0.2.0/24",
         :description => "MyDescription"
       )
-    net3 = FactoryGirl.create(:network,
+    net3 = FactoryBot.create(:network,
         :location => location,
         :netzwerk => "192.0.3.0/24",
         :description => "MyDescription"

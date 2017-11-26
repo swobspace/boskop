@@ -18,15 +18,15 @@ RSpec.describe Line, type: :model do
                         in_array(Boskop::PERIOD_UNITS) }
 
   it "should get plain factory working" do
-    f = FactoryGirl.create(:line)
-    g = FactoryGirl.create(:line)
+    f = FactoryBot.create(:line)
+    g = FactoryBot.create(:line)
     expect(f).to validate_uniqueness_of(:name)
     expect(f).to be_valid
     expect(g).to be_valid
   end
 
   it "to_s returns value" do
-    f = FactoryGirl.create(:line, name: 'TDN-NEW-001')
+    f = FactoryBot.create(:line, name: 'TDN-NEW-001')
     expect("#{f}").to match ("TDN-NEW-001")
   end
 

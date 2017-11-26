@@ -5,8 +5,8 @@ RSpec.describe OrgUnit, :type => :model do
   it { is_expected.to validate_presence_of(:name) }
 
   it "should get plain factory working" do
-    f = FactoryGirl.create(:org_unit)
-    g = FactoryGirl.create(:org_unit)
+    f = FactoryBot.create(:org_unit)
+    g = FactoryBot.create(:org_unit)
     expect(f).to be_valid
     expect(g).to be_valid
 
@@ -14,7 +14,7 @@ RSpec.describe OrgUnit, :type => :model do
   end
 
   it "to_s returns value" do
-    f = FactoryGirl.create(:org_unit, name: "MyName")
+    f = FactoryBot.create(:org_unit, name: "MyName")
     expect("#{f}").to be == "MyName"
   end
 

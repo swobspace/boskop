@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Networks", :type => :feature do
-  let!(:net1) {FactoryGirl.create(:network, netzwerk: '192.168.1.64/27')}
-  let!(:net2) {FactoryGirl.create(:network, netzwerk: '192.168.0.0/23')}
-  let!(:net3) {FactoryGirl.create(:network, netzwerk: '192.168.7.0/24')}
+  let!(:net1) {FactoryBot.create(:network, netzwerk: '192.168.1.64/27')}
+  let!(:net2) {FactoryBot.create(:network, netzwerk: '192.168.0.0/23')}
+  let!(:net3) {FactoryBot.create(:network, netzwerk: '192.168.7.0/24')}
 
   describe "GET /networks" do
     it "visits networks#index" do

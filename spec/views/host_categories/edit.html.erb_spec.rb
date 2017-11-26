@@ -8,7 +8,7 @@ RSpec.describe "host_categories/edit", type: :view do
     allow(controller).to receive(:controller_name) { "host_categories" }
     allow(controller).to receive(:action_name) { "edit" }
 
-    @host_category = assign(:host_category, FactoryGirl.create(:host_category))
+    @host_category = assign(:host_category, FactoryBot.create(:host_category))
   end
 
   it "renders the edit host_category form" do

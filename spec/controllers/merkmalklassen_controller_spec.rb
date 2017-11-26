@@ -25,7 +25,7 @@ RSpec.describe MerkmalklassenController, :type => :controller do
   # Merkmalklasse. As you add validations to Merkmalklasse, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:merkmalklasse)
+    FactoryBot.attributes_for(:merkmalklasse)
   }
 
   let(:invalid_attributes) {

@@ -8,14 +8,14 @@ RSpec.describe "vulnerabilities/search", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "search" }
 
-    hostcat = FactoryGirl.create(:host_category, name: 'Server')
-    host = FactoryGirl.create(:host, ip: '192.81.51.117', name: 'vxserver', 
+    hostcat = FactoryBot.create(:host_category, name: 'Server')
+    host = FactoryBot.create(:host, ip: '192.81.51.117', name: 'vxserver', 
                               host_category: hostcat)
     assign(:vulnerabilities, [
       Vulnerability.create!(
         :host => host,
         :lastseen => 1.day.before(Date.today),
-        :vulnerability_detail => FactoryGirl.create(:vulnerability_detail,
+        :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                    name: "End-of-Life", 
                                    severity: "10.0",
                                    threat: "high",
@@ -24,7 +24,7 @@ RSpec.describe "vulnerabilities/search", type: :view do
       Vulnerability.create!(
         :host => host,
         :lastseen => 1.day.before(Date.today),
-        :vulnerability_detail => FactoryGirl.create(:vulnerability_detail,
+        :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                    name: "Hackable by Kids",
                                    severity: "8.7",
                                    threat: "high",
