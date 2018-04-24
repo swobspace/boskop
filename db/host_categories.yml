@@ -97,3 +97,6 @@ host_categories:
   - name: Medizintechnik/Sonstige
     tag: med_sons
     description: "Medizintechnik: sonstige Geräte"
+  - name: USV
+    tag: usv
+    description: "USV-Systeme"
