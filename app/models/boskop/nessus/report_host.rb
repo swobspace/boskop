@@ -1,16 +1,17 @@
 ## 
-# Host entry from Nessus XML aka Vulnerability
+# ReportHost entry from Nessus XML
 #
 module Boskop
   module Nessus
     class ReportHost
+      include Enumerable
       attr_reader :options
 
       ATTRIBUTES = [:lastseen, :ip, :name, :mac,
                     :raw_os, :fqdn ]
 
       #
-      # Creates a Boskop::Nessus::Host object
+      # Creates a Boskop::Nessus::ReportHost object
       # the report_host object contains host info and vulns reports
       #
       def initialize(options = {})
@@ -73,6 +74,23 @@ module Boskop
       def attributes
         ATTRIBUTES.inject({}) {|hash,key| hash[key] = send(key) unless send(key).blank?; hash}
 
+      end
+
+      #
+      # each iterator needed by Enumerable
+      #
+      def each(&block)
+        return enum_for(__method__) unless block_given?
+        @report_host.at("ReportItem").each do |report_item|
+          yield ReportItem.new(report_item: report_item)
+        end
+      end
+
+      #
+      # return all reports
+      #
+      def report_items
+        each.to_a
       end
 
     end

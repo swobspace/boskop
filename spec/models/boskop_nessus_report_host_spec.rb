@@ -45,4 +45,15 @@ RSpec.describe Boskop::Nessus::ReportHost do
            ) }
   end
 
+  describe "within report_host1" do
+    subject { Boskop::Nessus::ReportHost.new(report_host: report_host1) }
+
+    it { expect(subject.respond_to? :options).to be_truthy}
+    it { expect(subject.respond_to? :valid?).to be_truthy}
+    it { expect(subject).to be_a_kind_of Boskop::Nessus::ReportHost }
+    it { expect(subject).to be_valid }
+    it { expect(subject.all? {|o| o.kind_of? Boskop::Nessus::ReportItem}).to be_truthy }
+    it { expect(subject.report_items.first).to be_a_kind_of Boskop::Nessus::ReportItem }
+  end
+
 end
