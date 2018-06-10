@@ -81,7 +81,7 @@ module Boskop
       #
       def each(&block)
         return enum_for(__method__) unless block_given?
-        @report_host.at("ReportItem").each do |report_item|
+        @report_host.xpath("ReportItem").each do |report_item|
           yield ReportItem.new(report_item: report_item)
         end
       end

@@ -54,6 +54,16 @@ RSpec.describe Boskop::Nessus::ReportHost do
     it { expect(subject).to be_valid }
     it { expect(subject.all? {|o| o.kind_of? Boskop::Nessus::ReportItem}).to be_truthy }
     it { expect(subject.report_items.first).to be_a_kind_of Boskop::Nessus::ReportItem }
+
+    describe "with first report_item" do
+      let(:report_item) { (subject.report_items.first) }
+
+      it { expect(report_item.oid).to eq("nessus:19506") }
+      it { expect(report_item.name).to eq("Nessus Scan Information") }
+      it { expect(report_item.threat).to eq("None") }
+      it { expect(report_item.solution).to eq("n/a") }
+      it { expect(report_item.synopsis).to eq("This plugin displays information about the Nessus scan.") }
+    end
   end
 
 end
