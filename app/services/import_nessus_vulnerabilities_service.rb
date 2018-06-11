@@ -40,22 +40,26 @@ class ImportNessusVulnerabilitiesService
       end
       hosts << host
       # find or create vulnerability_detail
-#      vulndetail = VulnerabilityDetail.
-#                     create_with(vd_attributes(result)).
-#                     find_or_create_by(nvt: result.nvt)
-#      vulnerability_details << vulndetail
-#
-#      # create or update vulnerability record
-#      vuln = Vulnerability.
-#               create_with(lastseen: result.lastseen).
-#               find_or_create_by(
-#                 host_id: host.id, 
-#                 vulnerability_detail_id: vulndetail.id
-#               )
-#      if vuln.lastseen.to_date < result.lastseen.to_date
-#        vuln.update(lastseen: result.lastseen)
-#      end
-#      vulnerabilities << vuln
+      report.report_items.each do |item|
+
+        next if item.threat == "None"
+        vulndetail = VulnerabilityDetail.
+                     create_with(vd_attributes(item)).
+                     find_or_create_by(nvt: item.nvt)
+        vulnerability_details << vulndetail
+
+        # create or update vulnerability record
+        vuln = Vulnerability.
+                 create_with(lastseen: report.lastseen).
+                 find_or_create_by(
+                   host_id: host.id, 
+                   vulnerability_detail_id: vulndetail.id
+                 )
+        if vuln.lastseen.to_date < report.lastseen.to_date
+          vuln.update(lastseen: report.lastseen)
+        end
+        vulnerabilities << vuln
+      end
     end
     return_result =  Result.new(
                        success: success, 

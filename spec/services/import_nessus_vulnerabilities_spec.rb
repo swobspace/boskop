@@ -23,12 +23,12 @@ RSpec.describe ImportNessusVulnerabilitiesService do
 	subject.call
       }.to change{Host.count}.by(1)
     end
-    it "creates a vulnerability", broken: true do
+    it "creates 5 vulnerabilities" do
       expect {
 	subject.call
       }.to change{Vulnerability.count}.by(5)
     end
-    it "creates a vulnerability_detail", broken: true do
+    it "creates 5 vulnerability_details" do
       expect {
 	subject.call
       }.to change{VulnerabilityDetail.count}.by(5)
@@ -97,55 +97,61 @@ RSpec.describe ImportNessusVulnerabilitiesService do
   describe "importing data from xml" do
     let(:result) { subject.call }
 
-    describe "the first vulnerability", broken: true do
+    describe "the first vulnerability" do
       let(:vulnerability) { result.vulnerabilities.first }
-      let(:vulndetail)             { result.vulnerability_details.first }
+      let(:vulndetail)    { result.vulnerability_details.first }
 
       it { expect(vulnerability).to be_a_kind_of Vulnerability }
       it { expect(vulndetail).to be_a_kind_of VulnerabilityDetail }
       it { expect(vulnerability).to be_persisted }
       it { expect(vulndetail).to be_persisted }
-      it { expect(vulnerability.host.ip.to_s).to eq("127.0.0.1") }
-      it { expect(vulnerability.lastseen.to_s).to match(/\A2017-09-26\z/) }
-      it { expect(vulndetail.name).to eq("OS End Of Life Detection") }
-      it { expect(vulndetail.family).to eq("General") }
+      it { expect(vulnerability.host.ip.to_s).to eq("192.168.1.87") }
+      it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+      it { expect(vulndetail.name).to eq("Unsupported Windows OS") }
+      it { expect(vulndetail.family).to eq("Windows") }
       it { expect(vulndetail.severity.to_s).to eq("10.0") }
-      it { expect(vulndetail.threat).to eq("High") }
-      it { expect(vulndetail.nvt).to eq("1.3.6.1.4.1.25623.1.0.103674") }
+      it { expect(vulndetail.threat).to eq("Critical") }
+      it { expect(vulndetail.nvt).to eq("nessus:108797") }
       it { expect(vulndetail.cves).to contain_exactly() }
       it { expect(vulndetail.bids).to contain_exactly() }
       it { expect(vulndetail.xrefs).to contain_exactly() }
       it { expect(vulndetail.certs).to contain_exactly() }
     end
 
-    describe "the second vulnerability", broken: true do
-      let(:vulnerability) { result.vulnerabilities.last }
-      let(:vulndetail)             { result.vulnerability_details.last }
+    describe "the second vulnerability" do
+      let(:vulnerability) { result.vulnerabilities[1] }
+      let(:vulndetail)             { result.vulnerability_details[1] }
 
       it { expect(vulnerability).to be_a_kind_of Vulnerability }
       it { expect(vulndetail).to be_a_kind_of VulnerabilityDetail }
       it { expect(vulnerability).to be_persisted }
       it { expect(vulndetail).to be_persisted }
-      it { expect(vulnerability.host.ip.to_s).to eq("127.0.0.1") }
-      it { expect(vulnerability.lastseen.to_s).to match(/\A2017-09-26\z/) }
-      it { expect(vulndetail.nvt).to eq("1.3.6.1.4.1.25623.1.0.810676") }
-      it { expect(vulndetail.name).to eq("Microsoft Windows SMB Server Multiple Vulnerabilities-Remote (4013389)") }
-      it { expect(vulndetail.family).to eq("Windows : Microsoft Bulletins") }
-      it { expect(vulndetail.severity.to_s).to eq("9.3") }
-      it { expect(vulndetail.threat).to eq("High") }
-      it { expect(vulndetail.cves).to contain_exactly("CVE-2017-0143", "CVE-2017-0144", "CVE-2017-0145", "CVE-2017-0146", "CVE-2017-0147", "CVE-2017-0148") }
-      it { expect(vulndetail.nvt).to eq("1.3.6.1.4.1.25623.1.0.810676") }
-      it { expect(vulndetail.bids).to contain_exactly("96703", "96704", "96705", "96707", "96709", "96706") }
+      it { expect(vulnerability.host.ip.to_s).to eq("192.168.1.87") }
+      it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+      it { expect(vulndetail.nvt).to eq("nessus:100464") }
+      it { expect(vulndetail.name).to eq("Microsoft Windows SMBv1 Multiple Vulnerabilities")}
+      it { expect(vulndetail.family).to eq("Windows") }
+      it { expect(vulndetail.severity.to_s).to eq("10.0") }
+      it { expect(vulndetail.threat).to eq("Critical") }
+      it { expect(vulndetail.cves).to contain_exactly( "CVE-2017-0267", "CVE-2017-0268", 
+             "CVE-2017-0269", "CVE-2017-0270", "CVE-2017-0271", "CVE-2017-0272", 
+             "CVE-2017-0273", "CVE-2017-0274", "CVE-2017-0275", "CVE-2017-0276", 
+             "CVE-2017-0277", "CVE-2017-0278", "CVE-2017-0279", "CVE-2017-0280" )}
+      it { expect(vulndetail.nvt).to eq("nessus:100464") }
+      it { expect(vulndetail.bids).to contain_exactly( "98259", "98260", "98261", 
+             "98263", "98264", "98265", "98266", "98267", "98268", "98270", 
+             "98271", "98272", "98273", "98274" ) }
       it { expect(vulndetail.notes).to be_a_kind_of Hash }
-      it { expect(vulndetail.notes).to include(
-	     "cvss_base_vector"=>"AV:N/AC:M/Au:N/C:C/I:C/A:C",
-	     "summary"=>"This host is missing a critical security\n  update according to Microsoft Bulletin MS17-010.",
-	     "solution_type"=>"VendorFix", "qod_type"=>"remote_active"
-	 )}
-      it { expect(vulndetail.xrefs).to contain_exactly("URL:https://support.microsoft.com/en-in/kb/4013078", "URL:https://technet.microsoft.com/library/security/MS17-010", "URL:https://github.com/rapid7/metasploit-framework/pull/8167/files") }
-      it { expect(vulndetail.certs).to contain_exactly(
-				     {"id" => "CB-K17/0435", "type" => "CERT-Bund"},
-				     {"id" => "DFN-CERT-2017-0448", "type" => "DFN-CERT"}) }
+      it { expect(vulndetail.notes.keys).to contain_exactly("description", "synopsis",
+             "see_also", "solution", "vuln_publication_date", "patch_publication_date",
+             "exploit_available", "exploited_by_malware" )}
+      it { expect(vulndetail.xrefs).to contain_exactly( "OSVDB:157230", "OSVDB:157231",
+             "OSVDB:157232", "OSVDB:157233", "OSVDB:157234", "OSVDB:157235",
+             "OSVDB:157236", "OSVDB:157237", "OSVDB:157238", "OSVDB:157239",
+             "OSVDB:157240", "OSVDB:157246", "OSVDB:157247", "OSVDB:157248",
+             "MSKB:4016871", "MSKB:4018466", "MSKB:4019213", "MSKB:4019214",
+             "MSKB:4019215", "MSKB:4019216", "MSKB:4019263", "MSKB:4019264",
+             "MSKB:4019472", "MSKB:4019473", "MSKB:4019474" )}
     end
   end
 
@@ -166,7 +172,7 @@ RSpec.describe ImportNessusVulnerabilitiesService do
     end
   end
   
-  describe "with existing host and vulnerability", broken: true do
+  describe "with existing host and vulnerability" do
     let!(:vuln_detail) { FactoryBot.create(:vulnerability_detail,
       name: "OS End Of Life Detection",
       family: "General",
