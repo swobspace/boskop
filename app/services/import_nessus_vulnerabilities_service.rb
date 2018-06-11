@@ -34,15 +34,9 @@ class ImportNessusVulnerabilitiesService
 
     xml.host_reports.each do |report|
       # find or create host
-      host = Host.find_or_create_by!(ip: report.ip) do |c|
-               c.lastseen = report.lastseen
-               c.name     = report.name
-               c.mac      = report.mac
-               c.raw_os   = report.raw_os
-               c.fqdn     = report.fqdn
-             end
+      host = Host.create_with(host_attributes(report)).find_or_create_by!(ip: report.ip)
       if host.lastseen.to_date < report.lastseen.to_date
-        host.update(lastseen: report.lastseen)
+        host.update(host_attributes(report))
       end
       hosts << host
       # find or create vulnerability_detail
@@ -75,7 +69,18 @@ class ImportNessusVulnerabilitiesService
 private
   attr_reader :xmlfile
 
+  #
+  # extract host attributes
+  #
+  def host_attributes(result)
+    result.attributes.reject do |k,v| 
+      !(Host.attribute_names.include?(k.to_s))
+    end
+  end
+
+  #
   # extract vulnerability detail attributes for Host.new
+  #
   def vd_attributes(result)
     result.attributes.reject do |k,v| 
       !(VulnerabilityDetail.attribute_names.include?(k.to_s))
