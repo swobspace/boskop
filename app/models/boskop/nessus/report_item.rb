@@ -7,7 +7,9 @@ module Boskop
       include Enumerable
       attr_reader :options
 
-      ATTRIBUTES = [:oid, :name, :family, :cvss_base,
+      alias_attribute :nvt, :oid
+
+      ATTRIBUTES = [:nvt, :name, :family, :cvss_base,
                     :threat, :severity, :cves, :bids, :xrefs,
                     :notes, :description, :synopsis, :see_also, :solution,
                     :vuln_publication_date, :patch_publication_date, 
