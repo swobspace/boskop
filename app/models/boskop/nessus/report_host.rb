@@ -7,6 +7,9 @@ module Boskop
       include Enumerable
       attr_reader :options
 
+      #
+      # (host) attributes
+      #
       ATTRIBUTES = [:lastseen, :ip, :name, :mac,
                     :raw_os, :fqdn ]
 
