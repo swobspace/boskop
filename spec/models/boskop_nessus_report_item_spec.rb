@@ -92,7 +92,7 @@ http://www.nessus.org/u?59db5b5b" }
     it { expect(subject.exploited_by_malware).to eq("true") }
     
     it { expect(subject.attributes).to include(
-           oid: "nessus:97833",
+           nvt: "nessus:97833",
            description: host1_item2_description,
            ) }
     it { expect(subject.notes).to include(
@@ -121,7 +121,7 @@ http://www.nessus.org/u?59db5b5b" }
     it { expect(subject.synopsis).to eq("This plugin displays information about the Nessus scan.") }
     it { 
       expect(subject.attributes).to include(
-        oid: "nessus:19506",
+        nvt: "nessus:19506",
         family: "Settings",
         solution: "n/a",
         threat: "None"
