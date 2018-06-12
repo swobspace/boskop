@@ -58,7 +58,9 @@ class VulnerabilitiesController < ApplicationController
 
   def import
     type = params[:type]
-    if type == 'openvas'
+    if type == 'nessus'
+      result = ImportNessusVulnerabilitiesService.new(import_params).call
+    elsif type == 'openvas'
       result = ImportOpenvasVulnerabilitiesService.new(import_params).call
     else
       flash[:notice] = "Import format #{type} not yet implemented"

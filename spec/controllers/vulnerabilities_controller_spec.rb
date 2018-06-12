@@ -27,6 +27,7 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   login_admin
  
   let(:openvas_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'openvas-wobnet-anon.xml') }
+  let(:nessus_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'netxp-nessus.xml') }
   let(:vulndetail) { FactoryBot.create(:vulnerability_detail, name: "End-of-Life") }
   let(:host)       { FactoryBot.create(:host, ip: '192.81.51.93', name: 'vxserver') }
 
@@ -90,12 +91,28 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   end
 
   describe "POST #import" do
-    context "with valid params" do
+    context "with openvas xml" do
       let(:import_form_attributes) {{ type: 'openvas', file: openvas_file }}
       it "imports vulnerabilities from openvas xml" do
         expect {
           post :import, params: import_form_attributes, session: valid_session
         }.to change(Vulnerability, :count).by(2)
+      end
+
+      it "redirects to vulnerabilities_path" do
+        post :import, params: import_form_attributes, session: valid_session
+        expect(response).to redirect_to(vulnerabilities_path)
+      end
+    end
+  end
+
+  describe "POST #import" do
+    context "with nessus xml" do
+      let(:import_form_attributes) {{ type: 'nessus', file: nessus_file }}
+      it "imports vulnerabilities from nessus xml" do
+        expect {
+          post :import, params: import_form_attributes, session: valid_session
+        }.to change(Vulnerability, :count).by(5)
       end
 
       it "redirects to vulnerabilities_path" do
