@@ -115,10 +115,6 @@ operating_systems:
     matching_pattern:
       |
         raw_os:FreeBSD
-  - name: Linux
-    matching_pattern:
-      |
-        raw_os:Linux
   - name: OpenServer
     matching_pattern:
       |
@@ -139,4 +135,85 @@ operating_systems:
     matching_pattern:
       |
         raw_os:IOS
-        raw_os:iOS
+  - name: Debian 4.0
+    eol: 2010-02-15
+    matching_pattern:
+      |
+        raw_os:Debian 4.0
+  - name: Debian 5.0
+    eol: 2012-02-06
+    matching_pattern:
+      |
+        raw_os:Debian 5.0
+  - name: Debian 6.0
+    eol: 2016-02-29
+    matching_pattern:
+      |
+        raw_os:Debian 6.0
+  - name: Debian 7.0
+    eol: 2018-05-01
+    matching_pattern:
+      |
+        raw_os:Debian 7.0
+  - name: Debian 8.0
+    eol: 2020-06-02
+    matching_pattern:
+      |
+        raw_os:Debian 8.0
+  - name: Debian 9.0
+    matching_pattern:
+      |
+        raw_os:Debian 9.0
+  - name: Debian 10.0
+    matching_pattern:
+      |
+        raw_os:Debian 10.0
+  - name: Ubuntu 6.06
+    eol: 2008-06-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 6.06
+  - name: Ubuntu 8.04
+    eol: 2013-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 8.04
+  - name: Ubuntu 10.04
+    eol: 2015-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 10.04
+  - name: Ubuntu 12.04
+    eol: 2017-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 12.04
+  - name: Ubuntu 14.04
+    eol: 2019-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 14.04
+  - name: Ubuntu 16.04
+    eol: 2021-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 16.04
+  - name: Ubuntu 18.04
+    eol: 2023-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 18.04
+  - name: Ubuntu 20.04
+    eol: 2025-04-01
+    matching_pattern:
+      |
+        raw_os:Ubuntu 20.04
+  - name: FortiOS
+    matching_pattern:
+      |
+        raw_os:FortiOS
+  - name: hspfire
+    matching_pattern:
+      |
+        raw_os:Linux Kernel .*-wob
+  - name: Linux (Sonstige)
