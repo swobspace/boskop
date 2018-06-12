@@ -8,12 +8,12 @@ RSpec.describe "hosts/search", type: :view do
     allow(controller).to receive(:controller_name) { "hosts" }
     allow(controller).to receive(:action_name) { "search" }
 
-    location = FactoryGirl.create(:location, lid: "LID")
-    hostcategory = FactoryGirl.create(:host_category, name: "SecureServer")
-    os = FactoryGirl.create(:operating_system, name: 'ZementOS')
+    location = FactoryBot.create(:location, lid: "LID")
+    hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
+    os = FactoryBot.create(:operating_system, name: 'ZementOS')
 
     assign(:hosts, [
-      FactoryGirl.create(:host,
+      FactoryBot.create(:host,
         :name => "MyLovelyHost",
         :description => "Runningforever",
         :ip => "192.168.81.82",
@@ -27,7 +27,7 @@ RSpec.describe "hosts/search", type: :view do
         :host_category => hostcategory,
         :operating_system => os,
         :location => location),
-      FactoryGirl.create(:host,
+      FactoryBot.create(:host,
         :name => "MyLovelyHost",
         :description => "Runningforever",
         :ip => "192.168.83.84",

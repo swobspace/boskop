@@ -24,9 +24,9 @@ RSpec.describe NetworksController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Network. As you add validations to Network, be sure to
   # adjust the attributes here as well.
-  let!(:location) { FactoryGirl.create(:location) }
+  let!(:location) { FactoryBot.create(:location) }
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:network, location_id: location.id)
+    FactoryBot.attributes_for(:network, location_id: location.id)
   }
 
   let(:invalid_attributes) {
@@ -99,7 +99,7 @@ RSpec.describe NetworksController, :type => :controller do
     describe "with valid params" do
       let(:search_attributes) {{ cidr: '192.168.0.0/16', is_subnet: 1, is_superset: 1 }}
       it "shows matching networks" do
-        network = FactoryGirl.create(:network, netzwerk: '192.168.1.0/24')
+        network = FactoryBot.create(:network, netzwerk: '192.168.1.0/24')
         post :search, params: search_attributes
         expect(assigns(:networks)).to include(network)
       end
@@ -110,7 +110,7 @@ RSpec.describe NetworksController, :type => :controller do
     describe "with valid params" do
       let(:usage_attributes) {{ cidr: '192.168.0.0/16', mask: '24' }}
       it "shows network usage table" do
-        network = FactoryGirl.create(:network, netzwerk: '192.168.1.0/24')
+        network = FactoryBot.create(:network, netzwerk: '192.168.1.0/24')
         post :usage, params: usage_attributes
         expect(assigns(:networks)).to include(network)
       end

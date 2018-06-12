@@ -26,8 +26,8 @@ RSpec.describe Merkmalklasse, :type => :model do
   it { is_expected.not_to allow_value('Responsible', 'my test').for(:tag) }
 
   it "should get plain factory working" do
-    f = FactoryGirl.create(:merkmalklasse)
-    g = FactoryGirl.create(:merkmalklasse)
+    f = FactoryBot.create(:merkmalklasse)
+    g = FactoryBot.create(:merkmalklasse)
     expect(f).to be_valid
     expect(g).to be_valid
 
@@ -36,20 +36,20 @@ RSpec.describe Merkmalklasse, :type => :model do
   end
 
   it "to_s returns name" do
-    f = FactoryGirl.create(:merkmalklasse, name: "MyName")
+    f = FactoryBot.create(:merkmalklasse, name: "MyName")
     expect("#{f}").to be == "MyName"
   end
 
   it "returns visible merkmalklasse for :index" do
-    f = FactoryGirl.create(:merkmalklasse, visible: ['index'], for_object: 'Location')
-    g = FactoryGirl.create(:merkmalklasse, visible: [''], for_object: 'Location')
+    f = FactoryBot.create(:merkmalklasse, visible: ['index'], for_object: 'Location')
+    g = FactoryBot.create(:merkmalklasse, visible: [''], for_object: 'Location')
     expect(Merkmalklasse.visibles(:location, 'index')).to include(f)
     expect(Merkmalklasse.visibles(:location, 'index')).not_to include(g)
   end
 
   it "delete merkmalklasse destroys all related merkmale" do
-    mk = FactoryGirl.create(:merkmalklasse, for_object: 'Location')
-    m1 = FactoryGirl.create(:merkmal, merkmalklasse: mk)
+    mk = FactoryBot.create(:merkmalklasse, for_object: 'Location')
+    m1 = FactoryBot.create(:merkmal, merkmalklasse: mk)
     expect { mk.destroy }.to change(Merkmal, :count).by(-1)
   end
 

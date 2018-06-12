@@ -24,10 +24,10 @@ RSpec.describe MerkmaleController, :type => :controller do
   # This should return the minimal set of attributes required to create a valid
   # Merkmal. As you add validations to Merkmal, be sure to
   # adjust the attributes here as well.
-  let!(:location) { FactoryGirl.create(:location) }
-  let!(:merkmalklasse) { FactoryGirl.create(:merkmalklasse) }
+  let!(:location) { FactoryBot.create(:location) }
+  let!(:merkmalklasse) { FactoryBot.create(:merkmalklasse) }
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:merkmal, merkmalfor_id: location.id, 
+    FactoryBot.attributes_for(:merkmal, merkmalfor_id: location.id, 
                                merkmalfor_type: "#{location.class}",
                                merkmalklasse_id: merkmalklasse.id)
   }

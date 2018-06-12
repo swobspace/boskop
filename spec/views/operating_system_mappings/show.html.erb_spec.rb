@@ -8,7 +8,7 @@ RSpec.describe "operating_system_mappings/show", type: :view do
     allow(controller).to receive(:controller_name) { "operating_system_mappings" }
     allow(controller).to receive(:action_name) { "edit" }
 
-    os = FactoryGirl.create(:operating_system, name: "DummyOS")
+    os = FactoryBot.create(:operating_system, name: "DummyOS")
 
     @operating_system_mapping = assign(:operating_system_mapping, OperatingSystemMapping.create!(
       :field => "Field",

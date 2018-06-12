@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  post "vulnerabilities", to: "vulnerabilities#index", constraints: lambda {|req| req.format == :json}
   resources :vulnerabilities do
     collection do
-      # get :search
+      get :search
+      post :search
+      get :search_form
       get :new_import
       post :import
     end

@@ -8,7 +8,7 @@ RSpec.describe "host_categories/new", type: :view do
     allow(controller).to receive(:controller_name) { "host_categories" }
     allow(controller).to receive(:action_name) { "new" }
 
-    @host_category = assign(:host_category, FactoryGirl.build(:host_category))
+    @host_category = assign(:host_category, FactoryBot.build(:host_category))
   end
 
   it "renders new host_category form" do

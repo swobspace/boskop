@@ -54,7 +54,7 @@
 
 <br/>
 
-<h3><%= t('controller.vulnerabilities') %> classified as 'High'</h3>
+<h3><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
 <%= render partial: 'vulnerabilities/list', 
            locals: {vulnerabilities: @host.vulnerabilities.high}

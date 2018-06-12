@@ -8,11 +8,11 @@ RSpec.describe "hosts/show", type: :view do
     allow(controller).to receive(:controller_name) { "hosts" }
     allow(controller).to receive(:action_name) { "show" }
 
-    location = FactoryGirl.create(:location, lid: "LID")
-    hostcategory = FactoryGirl.create(:host_category, name: "SecureServer")
-    os = FactoryGirl.create(:operating_system, name: "ZementOS")
+    location = FactoryBot.create(:location, lid: "LID")
+    hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
+    os = FactoryBot.create(:operating_system, name: "ZementOS")
 
-    @host = assign(:host, FactoryGirl.create(:host,
+    @host = assign(:host, FactoryBot.create(:host,
       :name => "MyLovelyHost",
       :description => "Runningforever",
       :ip => "192.168.77.79",

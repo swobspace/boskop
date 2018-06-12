@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe ImportCsvHostsService do
   let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'wob42.csv') }
-  let!(:mk_responsible) { FactoryGirl.create(:merkmalklasse,
+  let!(:mk_responsible) { FactoryBot.create(:merkmalklasse,
     name: "Responsible",
     tag: "responsible",
     for_object: "Host",
   )}
-  let!(:mk_next) { FactoryGirl.create(:merkmalklasse,
+  let!(:mk_next) { FactoryBot.create(:merkmalklasse,
     name: "NextSteps",
     tag: "next",
     for_object: "Host",
@@ -88,14 +88,14 @@ RSpec.describe ImportCsvHostsService do
   end
 
   describe "with existing host" do
-    let!(:host) { FactoryGirl.create(:host,
+    let!(:host) { FactoryBot.create(:host,
       ip: '192.168.1.42',
       lastseen: '2017-08-30',
       name: 'myhost',
       cpe: "/o:microsoft:windows:4711",
       fqdn: 'myhost.example.net',
       merkmale_attributes: [
-        { merkmalklasse_id: mk_next.id, value: "old steps" }
+        { merkmalklasse_id: mk_next.id, value: "old steps" },
       ]
     )}
 
@@ -136,7 +136,7 @@ RSpec.describe ImportCsvHostsService do
       it "updates any attribute from current data" do
         host.update_attributes!(lastseen: '2017-07-31')
         service.call
-        host = Host.first
+        host.reload
         expect(host.lastseen.to_s).to eq("2017-08-20")
         expect(host.ip.to_s).to eq("192.168.1.42")
         expect(host.name).to eq("wob42")
@@ -145,7 +145,7 @@ RSpec.describe ImportCsvHostsService do
         expect(host.domain_dns).to eq("my.example.net")
         expect(host.workgroup).to eq("MY")
         expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
-        expect(host.merkmal_next).to eq("old steps")
+        expect(host.merkmal_next).to eq("My next steps")
       end
     end
     describe "update: :missing" do
@@ -185,16 +185,16 @@ RSpec.describe ImportCsvHostsService do
 
   describe "importing relations from *_id fields" do
     let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'relations.csv') }
-    let!(:operating_system) { FactoryGirl.create(:operating_system,
+    let!(:operating_system) { FactoryBot.create(:operating_system,
       id: 771,
       name: "Linux",
     )}
-    let!(:host_category)    { FactoryGirl.create(:host_category,
+    let!(:host_category)    { FactoryBot.create(:host_category,
       id: 772,
       name: "Linux/Webserver",
       tag: "lin_web"
     )}
-    let!(:location)         { FactoryGirl.create(:location,
+    let!(:location)         { FactoryBot.create(:location,
       id: 773,
       name: "@home",
       lid: "HOME",

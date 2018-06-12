@@ -4,7 +4,17 @@ class VulnerabilitiesController < ApplicationController
 
   # GET /vulnerabilities
   def index
-    @vulnerabilities = Vulnerability.all
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+    respond_with(@vulnerabilities) do |format|
+      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
+    end
+  end
+
+  def search
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+    query = VulnerabilityQuery.new(@vulnerabilities, search_params)
+    @filter_info = query.search_options
+    @vulnerabilities = query.all
     respond_with(@vulnerabilities)
   end
 
@@ -48,7 +58,9 @@ class VulnerabilitiesController < ApplicationController
 
   def import
     type = params[:type]
-    if type == 'openvas'
+    if type == 'nessus'
+      result = ImportNessusVulnerabilitiesService.new(import_params).call
+    elsif type == 'openvas'
       result = ImportOpenvasVulnerabilitiesService.new(import_params).call
     else
       flash[:notice] = "Import format #{type} not yet implemented"
@@ -77,6 +89,19 @@ class VulnerabilitiesController < ApplicationController
 
     def import_params
       params.permit(:utf8, :authenticity_token, :type, :file).to_hash
+    end
+
+   def search_params
+        # see VulnerabilityQuery for possible options
+        searchparms = params.permit(*submit_parms,
+          :name, :threat, :severity, :ip, :operating_system, 
+          :hostname, :host_category,
+          :lastseen, :newer, :older, :current, :lid, :limit).to_hash
+      {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit" ]
     end
 
 end

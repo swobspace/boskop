@@ -7,7 +7,7 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
 
@@ -38,6 +38,8 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
+
+  config.filter_run_excluding :broken => true
 
   # -- devise stuff
   config.include Devise::Test::ControllerHelpers, type: :controller

@@ -27,7 +27,7 @@ RSpec.describe OperatingSystemsController, type: :controller do
   login_admin
 
   let(:valid_attributes) {
-     FactoryGirl.attributes_for(:operating_system)
+     FactoryBot.attributes_for(:operating_system)
   }
 
   let(:invalid_attributes) {

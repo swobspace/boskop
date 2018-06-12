@@ -10,29 +10,29 @@ RSpec.describe FrameworkContract, type: :model do
                         in_array(Boskop::PERIOD_UNITS) }
 
   it "should get plain factory working" do
-    f = FactoryGirl.create(:framework_contract)
-    g = FactoryGirl.create(:framework_contract)
+    f = FactoryBot.create(:framework_contract)
+    g = FactoryBot.create(:framework_contract)
     expect(f).to validate_uniqueness_of(:name)
     expect(f).to be_valid
     expect(g).to be_valid
   end
 
   it "to_s returns value" do
-    f = FactoryGirl.create(:framework_contract, name: 'myRahmenvertrag')
+    f = FactoryBot.create(:framework_contract, name: 'myRahmenvertrag')
     expect("#{f}").to match ("myRahmenvertrag")
   end
 
   [:line].each do |what|
     it "should not destroyable if dependent #{what} exist" do
-      fc   = FactoryGirl.create(:framework_contract)
-      subj = FactoryGirl.create(what, framework_contract: fc)
+      fc   = FactoryBot.create(:framework_contract)
+      subj = FactoryBot.create(what, framework_contract: fc)
       expect {
         fc.destroy
       }.not_to change { FrameworkContract.count }
     end
 
     it "should be destroyable if no dependent #{what} exist" do
-      fc = FactoryGirl.create(:framework_contract)
+      fc = FactoryBot.create(:framework_contract)
       expect {
         fc.destroy
       }.to change { FrameworkContract.count }.by(-1)

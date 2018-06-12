@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "lines/show", type: :view do
-  let(:location) { FactoryGirl.create(:location, name: 'Nirgendwo') }
+  let(:location) { FactoryBot.create(:location, name: 'Nirgendwo') }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -9,8 +9,8 @@ RSpec.describe "lines/show", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "show" }
 
-    access_type = FactoryGirl.create(:access_type)
-    line_state  = FactoryGirl.create(:line_state)
+    access_type = FactoryBot.create(:access_type)
+    line_state  = FactoryBot.create(:line_state)
 
 
     @line = assign(:line, Line.create!(

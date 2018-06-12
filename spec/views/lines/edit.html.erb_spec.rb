@@ -8,9 +8,9 @@ RSpec.describe "lines/edit", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "edit" }
 
-   access_type = FactoryGirl.create(:access_type)
-   location    = FactoryGirl.create(:location)
-   line_state  = FactoryGirl.create(:line_state)
+   access_type = FactoryBot.create(:access_type)
+   location    = FactoryBot.create(:location)
+   line_state  = FactoryBot.create(:line_state)
 
     @line = assign(:line, Line.create!(
       :name => "MyString",

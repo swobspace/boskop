@@ -30,7 +30,7 @@ RSpec.describe HostCategoriesController, type: :controller do
   # HostCategory. As you add validations to HostCategory, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:host_category)
+    FactoryBot.attributes_for(:host_category)
   }
 
   let(:invalid_attributes) {

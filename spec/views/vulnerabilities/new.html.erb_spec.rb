@@ -8,7 +8,7 @@ RSpec.describe "vulnerabilities/new", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "new" }
 
-    assign(:vulnerability, FactoryGirl.build(:vulnerability))
+    assign(:vulnerability, FactoryBot.build(:vulnerability))
   end
 
   it "renders new vulnerability form" do

@@ -8,7 +8,7 @@ RSpec.describe "hosts/new", type: :view do
     allow(controller).to receive(:controller_name) { "hosts" }
     allow(controller).to receive(:action_name) { "new" }
 
-    assign(:host, FactoryGirl.build(:host))
+    assign(:host, FactoryBot.build(:host))
   end
 
   it "renders new host form" do

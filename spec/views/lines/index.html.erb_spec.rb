@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "lines/index", type: :view do
-  let(:loc1) { FactoryGirl.create(:location, lid: "LID1", name: 'Nirgendwo1') }
-  let(:loc2) { FactoryGirl.create(:location, lid: "LID2", name: 'Nirgendwo2') }
+  let(:loc1) { FactoryBot.create(:location, lid: "LID1", name: 'Nirgendwo1') }
+  let(:loc2) { FactoryBot.create(:location, lid: "LID2", name: 'Nirgendwo2') }
 
   before(:each) do
     @ability = Object.new
@@ -11,8 +11,8 @@ RSpec.describe "lines/index", type: :view do
     allow(controller).to receive(:controller_name) { "lines" }
     allow(controller).to receive(:action_name) { "index" }
 
-    access_type = FactoryGirl.create(:access_type)
-    line_state  = FactoryGirl.create(:line_state)
+    access_type = FactoryBot.create(:access_type)
+    line_state  = FactoryBot.create(:line_state)
 
     assign(:lines, [
       Line.create!(

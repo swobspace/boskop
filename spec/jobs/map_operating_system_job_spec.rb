@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe MapOperatingSystemJob, type: :job do
-  let!(:xp) { FactoryGirl.create(:operating_system,
+  let!(:xp) { FactoryBot.create(:operating_system,
     name: 'Windows XP',
     eol: '2014-04-08',
     matching_pattern: "cpe:windows_xp\nraw_os:Windows 5.1\nraw_os:Windows XP"
   )}
-  let!(:win7) { FactoryGirl.create(:operating_system,
+  let!(:win7) { FactoryBot.create(:operating_system,
     name: "Windows 7",
     eol: "2020-01-14",
     matching_pattern: "cpe:windows_7\nraw_os:Windows 7",
 )}
-  let(:host) { FactoryGirl.create(:host,
+  let(:host) { FactoryBot.create(:host,
     ip: '192.0.2.197',
 )}
 
@@ -73,7 +73,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
     end
 
     describe "old host with updated :raw_os" do
-      let!(:host) { FactoryGirl.create(:host,
+      let!(:host) { FactoryBot.create(:host,
         ip: '192.0.2.197', operating_system: xp, cpe: "cpe:/o:microsoft:windows_xp::-"
       )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:raw_os]) }
@@ -95,7 +95,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
     end
 
     describe "old host with updated :cpe" do
-      let!(:host) { FactoryGirl.create(:host,
+      let!(:host) { FactoryBot.create(:host,
         ip: '192.0.2.197', operating_system: xp, raw_os: "Windows 5.1"
       )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:cpe]) }

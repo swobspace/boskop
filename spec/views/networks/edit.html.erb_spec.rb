@@ -8,7 +8,7 @@ RSpec.describe "networks/edit", :type => :view do
     allow(controller).to receive(:controller_name) { "networks" }
     allow(controller).to receive(:action_name) { "edit" }
 
-    location = FactoryGirl.create(:location)
+    location = FactoryBot.create(:location)
 
     @network = assign(:network, Network.create!(
       :location => location,

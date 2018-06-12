@@ -8,7 +8,7 @@ RSpec.describe "networks/index", :type => :view do
     allow(controller).to receive(:controller_name) { "networks" }
     allow(controller).to receive(:action_name) { "index" }
 
-    location = FactoryGirl.create(:location, name: 'Lokation')
+    location = FactoryBot.create(:location, name: 'Lokation')
 
     assign(:networks, [
       Network.create!(

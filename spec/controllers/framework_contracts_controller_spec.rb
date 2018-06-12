@@ -25,7 +25,7 @@ RSpec.describe FrameworkContractsController, type: :controller do
   # FrameworkContract. As you add validations to FrameworkContract, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:framework_contract)
+    FactoryBot.attributes_for(:framework_contract)
   }
 
   let(:invalid_attributes) {

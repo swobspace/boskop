@@ -25,7 +25,7 @@ RSpec.describe OrgUnitsController, :type => :controller do
   # OrgUnit. As you add validations to OrgUnit, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:org_unit)
+    FactoryBot.attributes_for(:org_unit)
   }
 
   let(:invalid_attributes) {

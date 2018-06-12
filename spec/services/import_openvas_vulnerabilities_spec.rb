@@ -113,15 +113,15 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
   end
   
   describe "with existing host and vulnerability" do
-    let!(:vuln_detail) { FactoryGirl.create(:vulnerability_detail,
+    let!(:vuln_detail) { FactoryBot.create(:vulnerability_detail,
       name: "OS End Of Life Detection",
       family: "General",
       severity: "10.0",
       threat: "High",
       nvt: "1.3.6.1.4.1.25623.1.0.103674",
     )}
-    let(:host) { FactoryGirl.create(:host, ip: '127.0.0.1', lastseen: '2017-08-31')}
-    let!(:vuln) { FactoryGirl.create(:vulnerability,
+    let(:host) { FactoryBot.create(:host, ip: '127.0.0.1', lastseen: '2017-08-31')}
+    let!(:vuln) { FactoryBot.create(:vulnerability,
       vulnerability_detail: vuln_detail,
       host: host
     )}

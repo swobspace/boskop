@@ -21,13 +21,13 @@ require 'rails_helper'
 RSpec.describe AddressesController, :type => :controller do
   login_admin
 
-  let(:location) { FactoryGirl.create(:location) }
+  let(:location) { FactoryBot.create(:location) }
 
   # This should return the minimal set of attributes required to create a valid
   # Address. As you add validations to Address, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:address, addressfor_id: location.id, 
+    FactoryBot.attributes_for(:address, addressfor_id: location.id, 
                                          addressfor_type:  "#{location.class}")
   }
 

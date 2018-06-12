@@ -8,6 +8,9 @@ class Location < ApplicationRecord
   has_many :lines_b, class_name: "Line", foreign_key: :location_b_id,
             dependent: :restrict_with_error, inverse_of: :location_b
 
+  has_many :hosts
+  has_many :vulnerabilities, through: :hosts
+
   # -- configuration
   has_ancestry :cache_depth =>true, :orphan_strategy => :adopt
   acts_as_list :scope => [:ancestry]

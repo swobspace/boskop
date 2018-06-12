@@ -5,15 +5,15 @@ module RequestMacros
 
   # for use in request specs
   def login_user
-    @user = FactoryGirl.create(:user)
+    @user = FactoryBot.create(:user)
     login_as @user
   end
 
   # for use in request specs
   def login_admin
-    @admin      = FactoryGirl.create(:user)
-    @admin_role = FactoryGirl.create(:role, name: 'Admin')
-    FactoryGirl.create(:authority, :authorizable => @admin, :role => @admin_role)
+    @admin      = FactoryBot.create(:user)
+    @admin_role = FactoryBot.create(:role, name: 'Admin')
+    FactoryBot.create(:authority, :authorizable => @admin, :role => @admin_role)
     login_as @admin
   end
 end

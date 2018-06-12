@@ -25,7 +25,7 @@ RSpec.describe AccessTypesController, type: :controller do
   # AccessType. As you add validations to AccessType, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.attributes_for(:access_type)
+    FactoryBot.attributes_for(:access_type)
   }
 
   let(:invalid_attributes) {
