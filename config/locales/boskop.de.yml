@@ -19,7 +19,7 @@ de:
     new_host: Neuer Host
     new_line: Neue Leitung
     new_network: Neues Netzwerk
-    new_vulnerability: Neue Vulnerability
+    new_vulnerability: Neue Schwachstelle
     network_mask: Netzwerkmaske
     subset: enthaltene Netzwerke
     superset: übergeordnete Netzwerke
@@ -39,10 +39,12 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
-    import_vulnerabilities_file: Vulnerabilities importieren
+    import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
-    vulnerabilities_searchresult: Vulnerabilities / Suchergebnis
+    vulnerabilities_searchresult: Schwachstellen / Suchergebnis
     eol_systems: End-of-Life Systeme
+    threats:
+      critical: Kritisch
 
   actions:
     destroy: Datensatz löschen
@@ -71,8 +73,8 @@ de:
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
-      vulnerability: Vulnerability
-      vulnerability_detail: Vulnerability-Detail
+      vulnerability: Schwachstelle
+      vulnerability_detail: Schwachstellen-Detail
       user: User
 
   attributes:
@@ -166,8 +168,8 @@ de:
     value: Wert
     vendor: Vendor
     visible: Sichtbarkeit
-    vulnerability: Vulnerability
-    vulnerability_detail: Vulnerability-Detail
+    vulnerability: Schwachstellen
+    vulnerability_detail: Schwachstellen-Detail
     workgroup: Workgroup
     xrefs: Referenzen
 
@@ -187,7 +189,7 @@ de:
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten
-    vulnerabilities: Vulnerabilities
-    vulnerability_details: Vulnerability-Details
+    vulnerabilities: Schwachstellen
+    vulnerability_details: Schwachstellen-Details
     users: Benutzer
 
