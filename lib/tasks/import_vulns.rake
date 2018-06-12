@@ -10,9 +10,10 @@ namespace :import do
     desc "import nessus xml scan report"
     task :nessus => :environment do
       Dir["#{File.join(Rails.root, 'tmp', 'nessus')}/*.nessus"].each do |file|
+        puts "Importing file #{file}"
         result = ImportNessusVulnerabilitiesService.new(file: file).call
         if result.success?
-          puts "Import ##{file } successful"
+          puts "Import #{file} successful"
           File.unlink file
         else
           puts "ERROR on import ##{file }; file not removed !!!"
