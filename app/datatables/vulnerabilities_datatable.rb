@@ -1,6 +1,8 @@
 class VulnerabilitiesDatatable < ApplicationDatatable
   delegate :edit_vulnerability_path, to: :@view
+  delegate :host_path, to: :@view
   delegate :vulnerability_path, to: :@view
+  delegate :vulnerability_detail_path, to: :@view
 
   def initialize(relation, view)
     @view = view
@@ -14,11 +16,12 @@ class VulnerabilitiesDatatable < ApplicationDatatable
     vulnerabilities.map do |vuln|
       [].tap do |column|
         column << vuln.host.location.try(:lid)
-        column << vuln.host.ip.to_s
-        column << vuln.host.name
+        column << link_to(vuln.host.ip.to_s, host_path(vuln.host))
+        column << link_to(vuln.host.name, host_path(vuln.host))
         column << vuln.host.host_category.to_s
         column << vuln.host.operating_system.to_s
-        column << vuln.vulnerability_detail.to_s
+        column << link_to(vuln.vulnerability_detail.to_s,
+                    vulnerability_detail_path(vuln.vulnerability_detail))
         column << vuln.vulnerability_detail.threat
         column << vuln.vulnerability_detail.severity.to_s
         column << vuln.lastseen.to_s

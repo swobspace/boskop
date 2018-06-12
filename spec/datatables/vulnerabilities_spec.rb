@@ -15,6 +15,10 @@ module VulnerabilitiesDatatableHelper
       column << "" # dummy for action links
     end
   end
+
+  def link_helper(text, url)
+    text
+  end
 end
 
 RSpec.describe VulnerabilitiesDatatable, type: :model do
@@ -31,12 +35,22 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
     allow(view_context).to receive(:params).and_return(myparams)
     allow(view_context).to receive_messages(
       edit_vulnerability_path: "",
+      vulnerability_detail_path: "",
+      vulnerability_path: "",
       host_path: "",
       show_link: "",
       edit_link: "",
       delete_link: "",
-      link_to: ""
     )
+    allow(view_context).to receive(:link_to).with('198.51.100.17', any_args).and_return('198.51.100.17')
+    allow(view_context).to receive(:link_to).with('198.51.100.71', any_args).and_return('198.51.100.71')
+    allow(view_context).to receive(:link_to).with('192.0.2.17', any_args).and_return('192.0.2.17')
+    allow(view_context).to receive(:link_to).with('pc4.my.domain', any_args).and_return('pc4.my.domain')
+    allow(view_context).to receive(:link_to).with('pc5.my.domain', any_args).and_return('pc5.my.domain')
+    allow(view_context).to receive(:link_to).with('abc.other.domain', any_args).and_return('abc.other.domain')
+    allow(view_context).to receive(:link_to).with('4013389', any_args).and_return('4013389')
+    allow(view_context).to receive(:link_to).with('Old MySQL', any_args).and_return('Old MySQL')
+    allow(view_context).to receive(:link_to).with('Old Service', any_args).and_return('Old Service')
   end
 
   describe "without search params, start:0, length:10" do
