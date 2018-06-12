@@ -131,6 +131,10 @@ operating_systems:
     matching_pattern:
       |
         raw_os:embedded
+  - name: XenServer
+    matching_pattern:
+      |
+        raw_os:XenServer
   - name: iOS
     matching_pattern:
       |
