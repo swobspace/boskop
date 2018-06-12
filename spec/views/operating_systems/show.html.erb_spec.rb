@@ -21,4 +21,11 @@ RSpec.describe "operating_systems/show", type: :view do
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/2014-04-08/)
   end
+
+  it "renders os without name and matching pattern" do
+    @operating_system.update_attributes(eol: nil, matching_pattern: nil)
+    render
+    expect(rendered).to match(/#{@operating_system.name}/)
+    
+  end
 end
