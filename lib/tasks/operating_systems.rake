@@ -16,6 +16,7 @@ namespace :operating_system do
   desc "add operating_system to operating system mapping entries"
   task :build_matrix => :environment do
     OperatingSystem.all.each do |os|
+      next if os.matching_pattern.blank?
       os.matching_pattern.chomp.split(/\n/).each do |pattern|
         m = pattern.match(/\A(\w+):(.*)\z/)
         field = m[1]
