@@ -95,7 +95,7 @@ class VulnerabilitiesController < ApplicationController
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
           :name, :threat, :severity, :ip, :operating_system, 
-          :hostname, :host_category,
+          :hostname, :host_category, :critical, :current,
           :lastseen, :newer, :older, :current, :lid, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
