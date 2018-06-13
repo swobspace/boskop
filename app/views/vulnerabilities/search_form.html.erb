@@ -76,9 +76,30 @@
     <div class="form-group">
       <label for="limit" class="col-sm-2 control-label"><%=t('attributes.limit')%></label>
       <div class="col-sm-10">
-        <input class="form-control" name="limit" id="limit" value="100" placeholder="">
+        <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
       </div>
     </div>
+
+<hr />
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label class="col-sm-2">
+            <input type="checkbox" id="current" name="current"><%=t('attributes.current')%>
+          </label>
+          <label class="col-sm-2">
+            <input type="checkbox" id="critical" name="critical"><%=t('attributes.critical')%>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+      </div>
+    </div>
+
+<hr />
 
     <div class="form-group">
       <div class="col-sm-10 col-sm-offset-2">
