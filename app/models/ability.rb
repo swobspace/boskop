@@ -15,7 +15,7 @@ class Ability
       cannot [:update, :destroy], :roles, :ro => :true
 
     # -- with at least one role including :reader
-    elsif @user.roles.any?
+    elsif @user.authorities.any? || @user.group_authorities.any?
       # -- reader
       can :navigate, [:org_units, :configuration]
       can :read, :all

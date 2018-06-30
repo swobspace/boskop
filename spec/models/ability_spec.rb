@@ -1,6 +1,149 @@
 require 'rails_helper'
 require "cancan/matchers"
 
+RSpec.shared_examples "a Reader" do
+  # -- readable, ...
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:read, model.new) }
+  end
+
+  it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
+
+  # -- ... but not writeable
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.not_to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+end
+
+RSpec.shared_examples "a NetworkManager" do
+  # -- readable, ...
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:read, model.new) }
+  end
+
+  it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
+
+  # -- writeable
+  [ Network, Line ].each do |model|
+    it { is_expected.to be_able_to(:create, model.new) }
+    it { is_expected.to be_able_to(:update, model.new) }
+    it { is_expected.to be_able_to(:destroy, model.new) }
+    it { is_expected.to be_able_to(:manage, model.new) }
+  end
+  # -- update
+  [ Host, HostCategory ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+
+
+  # -- not writeable
+  [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.not_to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+end
+
+RSpec.shared_examples "a HostManager" do
+  # -- readable, ...
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:read, model.new) }
+  end
+
+  # -- writeable
+  [ Host ].each do |model|
+    it { is_expected.to be_able_to(:create, model.new) }
+    it { is_expected.to be_able_to(:update, model.new) }
+    it { is_expected.to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+
+  # -- no import
+    it { is_expected.not_to be_able_to(:new_import, Host) }
+    it { is_expected.not_to be_able_to(:import, Host) }
+    it { is_expected.not_to be_able_to(:new_import, Vulnerability) }
+    it { is_expected.not_to be_able_to(:import, Vulnerability) }
+
+  # -- not writeable
+  [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract, HostCategory,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.not_to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+end
+
+RSpec.shared_examples "a HostAdmin" do
+  # -- readable, ...
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:read, model.new) }
+  end
+
+  # -- writeable
+  [ Host, HostCategory, 
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:create, model.new) }
+    it { is_expected.to be_able_to(:update, model.new) }
+    it { is_expected.to be_able_to(:destroy, model.new) }
+    it { is_expected.to be_able_to(:manage, model.new) }
+    it { is_expected.to be_able_to(:import, model.new) }
+    it { is_expected.to be_able_to(:new_import, model.new) }
+  end
+
+  # -- not writeable
+  [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.not_to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+end
+
+RSpec.shared_examples "an Admin" do
+  [ Network, Line, Host, HostCategory,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:manage, model.new) }
+  end
+end
+
 RSpec.describe "User", :type => :model do
   fixtures 'wobauth/roles'
 
@@ -65,176 +208,113 @@ RSpec.describe "User", :type => :model do
     end
   end
 
-  context "with role Reader" do
+  context "with role Reader assigned to user" do
     let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
       FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:reader))
     }
-    # -- readable, ...
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:read, model.new) }
-    end
-
-    it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
-
-    # -- ... but not writeable
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.not_to be_able_to(:create, model.new) }
-      it { is_expected.not_to be_able_to(:update, model.new) }
-      it { is_expected.not_to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
+    it_behaves_like "a Reader"
   end
 
-  context "with role NetworkManager" do
+  context "with role Reader assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:reader))
+    }
+    it_behaves_like "a Reader"
+  end
+
+  context "with role NetworkManager assigned to user" do
     let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
       FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:network_manager))
     }
-    # -- readable, ...
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:read, model.new) }
-    end
-
-    it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
-
-    # -- writeable
-    [ Network, Line ].each do |model|
-      it { is_expected.to be_able_to(:create, model.new) }
-      it { is_expected.to be_able_to(:update, model.new) }
-      it { is_expected.to be_able_to(:destroy, model.new) }
-      it { is_expected.to be_able_to(:manage, model.new) }
-    end
-    # -- update
-    [ Host, HostCategory ].each do |model|
-      it { is_expected.not_to be_able_to(:create, model.new) }
-      it { is_expected.to be_able_to(:update, model.new) }
-      it { is_expected.not_to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
-
-
-    # -- not writeable
-    [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.not_to be_able_to(:create, model.new) }
-      it { is_expected.not_to be_able_to(:update, model.new) }
-      it { is_expected.not_to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
+    it_behaves_like "a NetworkManager"
   end
 
-  context "with role HostManager" do
+  context "with role NetworkManager assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:network_manager))
+    }
+    it_behaves_like "a NetworkManager"
+  end
+
+  context "with role HostManager assigned to user" do
     let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
       FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:host_manager))
     }
-    # -- readable, ...
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:read, model.new) }
-    end
-
-    # -- writeable
-    [ Host ].each do |model|
-      it { is_expected.to be_able_to(:create, model.new) }
-      it { is_expected.to be_able_to(:update, model.new) }
-      it { is_expected.to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
-
-    # -- no import
-      it { is_expected.not_to be_able_to(:new_import, Host) }
-      it { is_expected.not_to be_able_to(:import, Host) }
-      it { is_expected.not_to be_able_to(:new_import, Vulnerability) }
-      it { is_expected.not_to be_able_to(:import, Vulnerability) }
-
-    # -- not writeable
-    [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract, HostCategory,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.not_to be_able_to(:create, model.new) }
-      it { is_expected.not_to be_able_to(:update, model.new) }
-      it { is_expected.not_to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
+    it_behaves_like "a HostManager"
   end
 
-  context "with role HostAdmin" do
+  context "with role HostManager assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:host_manager))
+    }
+    it_behaves_like "a HostManager"
+  end
+
+  context "with role HostAdmin assigned to user" do
     let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
       FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:host_admin))
     }
-    # -- readable, ...
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:read, model.new) }
-    end
-
-    # -- writeable
-    [ Host, HostCategory, 
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:create, model.new) }
-      it { is_expected.to be_able_to(:update, model.new) }
-      it { is_expected.to be_able_to(:destroy, model.new) }
-      it { is_expected.to be_able_to(:manage, model.new) }
-      it { is_expected.to be_able_to(:import, model.new) }
-      it { is_expected.to be_able_to(:new_import, model.new) }
-    end
-
-    # -- not writeable
-    [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract ].each do |model|
-      it { is_expected.not_to be_able_to(:create, model.new) }
-      it { is_expected.not_to be_able_to(:update, model.new) }
-      it { is_expected.not_to be_able_to(:destroy, model.new) }
-      it { is_expected.not_to be_able_to(:manage, model.new) }
-    end
+    it_behaves_like "a HostAdmin"
   end
 
-  context "with role Admin" do
+  context "with role HostAdmin assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:host_admin))
+    }
+    it_behaves_like "a HostAdmin"
+  end
+
+  context "with role Admin assigned to user" do
     let(:user) { FactoryBot.create(:user) }
     let!(:authority) { 
       FactoryBot.create(:authority, 
 	authorizable: user, 
 	role: wobauth_roles(:admin))
       }
-    [ Network, Line, Host, HostCategory,
-      Merkmal, Merkmalklasse, Address, LineState, AccessType,
-      Location, OrgUnit, FrameworkContract,
-      Vulnerability, VulnerabilityDetail,
-      OperatingSystem, OperatingSystemMapping ].each do |model|
-      it { is_expected.to be_able_to(:manage, model.new) }
-    end
+    it_behaves_like "an Admin"
+  end
+
+  context "with role Admin assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:admin))
+      }
+    it_behaves_like "an Admin"
   end
 end

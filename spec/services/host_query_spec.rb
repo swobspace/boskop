@@ -446,7 +446,7 @@ RSpec.describe HostQuery do
   end # search :host_category
 
   context "with :lid" do
-    subject { HostQuery.new(all_hosts, {lid: 'paRis'}) }
+    subject { HostQuery.new(all_hosts, {lid: 'PARIS'}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas) }
     end
@@ -467,6 +467,30 @@ RSpec.describe HostQuery do
       it { expect(subject.include?(vpngw)).to be_falsey }
     end
   end # search :lid
+
+  context "with multiple lid" do
+    subject { HostQuery.new(all_hosts, {lid: 'BER, PARIS'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas, vpngw, pc5) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id, vpngw.id, pc5.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_falsey }
+      it { expect(subject.include?(pc3)).to be_falsey }
+      it { expect(subject.include?(pc5)).to be_truthy }
+      it { expect(subject.include?(vpngw)).to be_truthy }
+    end
+  end # search :lid
+
 
   context "with :merkmal_responsible" do
     let(:merkmalklasse1) { FactoryBot.create(:merkmalklasse,

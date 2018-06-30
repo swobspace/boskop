@@ -35,5 +35,12 @@ RSpec.describe Location, :type => :model do
     expect("#{f.to_str}").to be == "MyLID / MyName / 12345 MyOrt"
   end
 
+  describe "#current" do
+    let!(:enabled) { FactoryBot.create(:location) }
+    let!(:disabled) { FactoryBot.create(:location, disabled: true) }
+
+    it { expect(Location.current).to contain_exactly(enabled) }
+  end
+
 
 end

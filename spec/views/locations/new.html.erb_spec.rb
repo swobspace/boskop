@@ -12,7 +12,8 @@ RSpec.describe "locations/new", :type => :view do
       :lid => 'TEST',
       :name => "MyString",
       :description => "MyString",
-      :position => 1
+      :position => 1,
+      :disabled => false
     ))
   end
 
@@ -22,8 +23,8 @@ RSpec.describe "locations/new", :type => :view do
     assert_select "form[action=?][method=?]", locations_path, "post" do
       assert_select "input#location_name[name=?]", "location[name]"
       assert_select "input#location_description[name=?]", "location[description]"
-      assert_select "input#location_position[name=?]", "location[position]"
       assert_select "input#location_lid[name=?]", "location[lid]"
+      assert_select "input#location_disabled[name=?]", "location[disabled]"
     end
   end
 end
