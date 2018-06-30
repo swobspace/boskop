@@ -20,10 +20,10 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 6f35c609ac0fe47683702a96210557a011054d32
+  revision: 1fc038ce57c36a971626312a65342a4118c9e3e9
   branch: 2-0-stable
   specs:
-    wobauth (2.1.9)
+    wobauth (2.1.10)
       cancancan
       coffee-rails
       devise
@@ -383,7 +383,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.12)
+    uglifier (4.1.13)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
