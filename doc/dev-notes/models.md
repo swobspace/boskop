@@ -35,10 +35,12 @@ Location:
 
     bin/rails g scaffold Location name:string:index description:string \
               ancestry:string:index ancestry_depth:integer \
-              position:integer lid:string:index
+              position:integer lid:string:index disabled:boolean:index
 
     # bin/rails g migration AddLidToLocation \
     #           lid:string:index
+    # bin/rails g migration AddDisabledToLocation \
+    #           disabled:boolean:index
 
 OrgUnit:
 ---------

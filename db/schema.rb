@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929080617) do
+ActiveRecord::Schema.define(version: 20180630095748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,7 +145,9 @@ ActiveRecord::Schema.define(version: 20170929080617) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string "lid", limit: 255
+    t.boolean "disabled", default: false
     t.index ["ancestry"], name: "index_locations_on_ancestry"
+    t.index ["disabled"], name: "index_locations_on_disabled"
     t.index ["lid"], name: "index_locations_on_lid"
     t.index ["name"], name: "index_locations_on_name"
   end
