@@ -18,6 +18,8 @@
        %>
       <%= f.input :description
        %>
+      <%= f.input :disabled
+       %>
 
       <div class="well bs-subform bs-merkmale">
 	<%= render 'merkmale/merkmal_form', f: f, merkmale: @location.merkmale %>

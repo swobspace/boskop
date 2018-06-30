@@ -103,9 +103,11 @@ RSpec.describe LocationsController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) {
-        { description: "i have a dream" }
-      }
+      let(:new_attributes) {{ 
+        description: "i have a dream",
+        position: 99,
+        disabled: false
+      }}
 
       it "updates the requested location" do
         location = Location.create! valid_attributes

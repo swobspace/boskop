@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
 
     def location_params
       params.require(:location).
-             permit(:name, :description, :position, :lid,
+             permit(:name, :description, :position, :lid, :disabled,
                [ merkmale_attributes:
                    [ :id, :value, :merkmalklasse_id, :_destroy ],
                  addresses_attributes:

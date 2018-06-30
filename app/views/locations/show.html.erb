@@ -25,6 +25,11 @@
 	  </td>
 	</tr>
       </table>
+      <% if @location.disabled? %>
+        <div class="alert alert-warning" role="alert">
+        <i class="fas fa-exclamation-triangle"></i> <%= t('boskop.location_disabled')%>
+        </div>
+      <% end %>
     </div>
     <div class="col-md-6">
       <table class="table table-condensed table-hover ">
