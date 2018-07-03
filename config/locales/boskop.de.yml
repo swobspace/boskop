@@ -43,6 +43,7 @@ de:
     hosts_searchresult: Hosts / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
     eol_systems: End-of-Life Systeme
+    location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch
 
@@ -105,6 +106,7 @@ de:
     cpe: CPE
     cves: CVEs
     description: Beschreibung
+    disabled: deaktiviert
     displayname: Anzeigename
     domain_dns: Domain
     eol: End-of-Life

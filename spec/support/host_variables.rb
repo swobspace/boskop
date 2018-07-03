@@ -1,6 +1,9 @@
 shared_context "host variables" do
   let!(:cat_linux) { FactoryBot.create(:host_category, name: 'linux firewall') }
   let!(:loc_paris) { FactoryBot.create(:location, name: 'Paris', lid: 'PARIS') }
+  let!(:loc_london) { FactoryBot.create(:location, name: 'London', lid: 'LONDON') }
+  let!(:loc_berlin) { FactoryBot.create(:location, name: 'Berlin', lid: 'BER') }
+
   let(:os1) { FactoryBot.create(:operating_system, 
     name: 'DummyOS',
     eol: 5.years.before(Date.today)
@@ -39,6 +42,7 @@ shared_context "host variables" do
     lastseen: Date.today,
     mac: '00:84:ed:00:12:02',
     operating_system: os1,
+    location: loc_london,
   )}
   let!(:pc3)  { FactoryBot.create(:host, 
     name: "MYPC003",
@@ -52,6 +56,7 @@ shared_context "host variables" do
     lastseen: Date.today,
     mac: '00:84:ed:00:12:03',
     operating_system: os2,
+    location: loc_london,
   )}
   let!(:vpngw)  { FactoryBot.create(:host, 
     name: "vpngw",
@@ -66,6 +71,7 @@ shared_context "host variables" do
     mac: '12:34:56:99:99:98',
     host_category: cat_linux,
     operating_system: os3,
+    location: loc_berlin,
   )}
   let!(:pc5)  { FactoryBot.create(:host, 
     name: "MYPC005",
@@ -79,6 +85,7 @@ shared_context "host variables" do
     lastseen: 1.year.before(Date.today),
     mac: '00:84:ed:00:12:05',
     operating_system: os2,
+    location: loc_berlin,
   )}
 end
 

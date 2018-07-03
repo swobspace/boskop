@@ -12,7 +12,8 @@ RSpec.describe "locations/show", :type => :view do
       :lid => 'TEST',
       :name => "Name",
       :description => "Description",
-      :position => 2
+      :position => 2,
+      :disabled => true
     ))
   end
 
@@ -21,6 +22,6 @@ RSpec.describe "locations/show", :type => :view do
     expect(rendered).to match(/TEST/)
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Description/)
-    expect(rendered).to match(/2/)
+    expect(rendered).to match(/Dieser Standort ist deaktiviert/)
   end
 end

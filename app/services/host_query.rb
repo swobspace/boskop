@@ -1,4 +1,4 @@
-##
+#d#
 # Query object mainly for use in hosts_controller
 #
 class HostQuery
@@ -94,7 +94,8 @@ private
       when :eol
         query = query.where("operating_systems.eol < ?", Date.today)
       when :lid
-        query = query.where("locations.lid ILIKE ?", "#{value}%")
+        lids = value.split(%r{[,; |]+})
+        query = query.where("locations.lid IN (?)", lids)
       when :search
         string_fields.each do |term|
           search_string << "hosts.#{term} ILIKE :search"

@@ -21,6 +21,8 @@ class Location < ApplicationRecord
   # -- validations and callbacks
   validates :name, :lid, presence: true, uniqueness: true
 
+  scope :current, -> { where(disabled: false) }
+
   def to_s
     "#{name.to_s}"
   end
