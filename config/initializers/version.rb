@@ -1,4 +1,4 @@
 module Boskop
-  VERSION     = "1.5.2".freeze
-  RELEASEDATE = "2018-06-30".freeze
+  VERSION     = "1.5.3".freeze
+  RELEASEDATE = "2018-07-03".freeze
 end

@@ -24,16 +24,16 @@ ActiveRecord::Schema.define(version: 20180630095748) do
 
   create_table "addresses", id: :serial, force: :cascade do |t|
     t.integer "addressfor_id"
-    t.string "addressfor_type", limit: 255
-    t.string "streetaddress", limit: 255, default: ""
-    t.string "plz", limit: 255, default: ""
-    t.string "ort", limit: 255, default: ""
-    t.string "care_of", limit: 255, default: ""
-    t.string "postfach", limit: 255, default: ""
-    t.string "postfachplz", limit: 255, default: ""
+    t.string "addressfor_type"
+    t.string "streetaddress", default: ""
+    t.string "plz", default: ""
+    t.string "ort", default: ""
+    t.string "care_of", default: ""
+    t.string "postfach", default: ""
+    t.string "postfachplz", default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type"
+    t.index ["addressfor_type", "addressfor_id"], name: "index_addresses_on_addressfor_type_and_addressfor_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -144,7 +144,7 @@ ActiveRecord::Schema.define(version: 20180630095748) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string "lid", limit: 255
+    t.string "lid"
     t.boolean "disabled", default: false
     t.index ["ancestry"], name: "index_locations_on_ancestry"
     t.index ["disabled"], name: "index_locations_on_disabled"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20180630095748) do
     t.integer "position", default: 0
     t.string "for_object", limit: 255, default: "", null: false
     t.string "visible", limit: 255
-    t.string "baselink", limit: 255, default: ""
+    t.string "baselink", default: ""
     t.string "tag", default: ""
     t.index ["for_object"], name: "index_merkmalklassen_on_for_object"
     t.index ["name"], name: "index_merkmalklassen_on_name"
@@ -210,9 +210,9 @@ ActiveRecord::Schema.define(version: 20180630095748) do
   end
 
   create_table "org_units", id: :serial, force: :cascade do |t|
-    t.string "name", limit: 255, default: "", null: false
-    t.string "description", limit: 255, default: ""
-    t.string "ancestry", limit: 255
+    t.string "name", default: "", null: false
+    t.string "description", default: ""
+    t.string "ancestry"
     t.integer "ancestry_depth", default: 0, null: false
     t.integer "position", default: 0, null: false
     t.datetime "created_at"
