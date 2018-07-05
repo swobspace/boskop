@@ -1,3 +1,4 @@
+require 'resolv'
 ## 
 # ReportHost entry from Nessus XML
 #
@@ -40,7 +41,32 @@ module Boskop
       # ip address
       #
       def ip
+        host_ip || node_name_ip
+      end
+
+      #
+      # host-ip
+      #
+      def host_ip
         @report_host.at("HostProperties/tag[@name='host-ip']")&.inner_text
+      end
+
+      #
+      # node_name_ip: get ip from node name if possible
+      #
+      def node_name_ip
+        if node_name =~ Regexp.union(Resolv::IPv4::Regex, Resolv::IPv6::Regex)
+          node_name
+        else
+          nil
+        end
+      end
+
+      #
+      # node_name
+      #
+      def node_name
+        @report_host['name']
       end
 
       #
