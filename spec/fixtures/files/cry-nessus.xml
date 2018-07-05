@@ -6043,12 +6043,7 @@ For unsupported Windows operating systems, e.g. Windows XP, Microsoft recommends
 <tag name="LastUnauthenticatedResults">1528110037</tag>
 <tag name="Credentialed_Scan">false</tag>
 <tag name="policy-used">WannaCry Ransomware</tag>
-<tag name="system-type">general-purpose</tag>
-<tag name="operating-system">Microsoft Windows Server 2008 R2 Standard Service Pack 1</tag>
 <tag name="HOST_END">Mon Jun  4 13:00:37 2018</tag>
-<tag name="mac-address">6c:3b:e5:2e:82:72</tag>
-<tag name="netbios-name">OBTV-SERVER</tag>
-<tag name="host-ip">192.0.2.250</tag>
 <tag name="HOST_START">Mon Jun  4 12:57:46 2018</tag>
 </HostProperties>
 <ReportItem port="0" svc_name="general" protocol="tcp" severity="0" pluginID="19506" pluginName="Nessus Scan Information" pluginFamily="Settings">

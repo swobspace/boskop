@@ -5,6 +5,7 @@ RSpec.describe Boskop::Nessus::ReportHost do
   let(:xmldoc)  { File.open(xmlfile) { |f| Nokogiri::XML(f) } }
   let(:report_host1) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[0] }
   let(:report_host2) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[1] }
+  let(:report_host3) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[3] }
 
   # check for class methods
   it { expect(Boskop::Nessus::ReportHost.respond_to? :new).to be_truthy}
@@ -19,6 +20,26 @@ RSpec.describe Boskop::Nessus::ReportHost do
   describe "with invalid report_host" do
     subject { Boskop::Nessus::ReportHost.new(report_host: nil) }
     it { expect(subject).not_to be_valid }
+  end
+
+  describe "with valid xml report_host3" do
+    subject { Boskop::Nessus::ReportHost.new(report_host: report_host3) }
+
+    it { expect(subject.respond_to? :options).to be_truthy}
+    it { expect(subject.respond_to? :valid?).to be_truthy}
+    it { expect(subject).to be_a_kind_of Boskop::Nessus::ReportHost }
+    it { expect(subject).to be_valid }
+    it { expect(subject.lastseen.to_s).to match(/\A2018-06-04T12:57:46+/) }
+    it { expect(subject.ip).to eq('192.0.2.250') }
+    it { expect(subject.name).to eq(nil) }
+    it { expect(subject.mac).to eq(nil) }
+    it { expect(subject.fqdn).to eq(nil) }
+    it { expect(subject.raw_os).to eq(nil) }
+    
+    it { expect(subject.attributes).to include(
+           lastseen: "2018-06-04T12:57:46+00:00",
+           ip: '192.0.2.250',
+           ) }
   end
 
   describe "with valid xml report_host2" do
