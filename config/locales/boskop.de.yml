@@ -42,10 +42,15 @@ de:
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
+    all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
     location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch
+      high: Hoch
+      medium: Mittel
+      low: Niedrig
+      all: Alle
 
   actions:
     destroy: Datensatz löschen
@@ -181,6 +186,7 @@ de:
     addresses: Adressen
     framework_contracts: Rahmenverträge
     hosts: Hosts
+    hosts/vulnerabilities: Schwachstellen
     host_categories: Host-Kategorien
     ipaddresses: IP-Adressen
     lines: Leitungen/Zugänge
