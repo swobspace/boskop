@@ -72,7 +72,6 @@
 	<td><%= @host.vulnerabilities.count %></td>
       </tr>
     </table>
-    <%= link_to t('boskop.all_host_vulns'), host_vulnerabilities_path(@host), class: 'btn btn-default' %>
   </div>
 </div>
 
@@ -81,6 +80,7 @@
   <%= edit_link(@host) %>
   <%= delete_link(@host) %>
   <%= new_link Host %>
+  <%= link_to t('boskop.all_host_vulns'), host_vulnerabilities_path(@host), class: 'btn btn-default' %>
 </div>
 
 <br/>
