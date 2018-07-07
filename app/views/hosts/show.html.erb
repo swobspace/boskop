@@ -1,49 +1,80 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @host.name %></td>
-    <th><%= t('attributes.domain_dns')%>:</th>
-    <td><%= @host.domain_dns %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @host.description %></td>
-    <th><%= t('attributes.workgroup')%>:</th>
-    <td><%= @host.workgroup %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ip')%>:</th>
-    <td><%= @host.ip %></td>
-    <th><%= t('attributes.lastseen')%>:</th>
-    <td><%= @host.lastseen %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.operating_system')%>:</th>
-    <td><%= @host.operating_system %></td>
-    <th><%= t('attributes.mac')%>:</th>
-    <td><%= @host.mac %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.cpe')%>:</th>
-    <td><%= @host.cpe %></td>
-    <th><%= t('attributes.vendor')%>:</th>
-    <td><%= @host.vendor %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.raw_os')%>:</th>
-    <td><%= @host.raw_os %></td>
-    <th><%= t('attributes.host_category')%>:</th>
-    <td><%= @host.host_category.to_s %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.fqdn')%>:</th>
-    <td><%= @host.fqdn %></td>
-    <th><%= t('attributes.location')%>:</th>
-    <td><%= @host.location.try(:lid) %></td>
-  </tr>
+<div class="row">
+  <div class="col-sm-6">
+    <table class="table table-bordered table-hover">
+      <caption> <%= t('activerecord.models.host') %> </caption>
+      <tr>
+	<th><%= t('attributes.name')%>:</th>
+	<td><%= @host.name %></td>
+	<th><%= t('attributes.domain_dns')%>:</th>
+	<td><%= @host.domain_dns %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td><%= @host.description %></td>
+	<th><%= t('attributes.workgroup')%>:</th>
+	<td><%= @host.workgroup %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ip')%>:</th>
+	<td><%= @host.ip %></td>
+	<th><%= t('attributes.lastseen')%>:</th>
+	<td><%= @host.lastseen %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.operating_system')%>:</th>
+	<td><%= @host.operating_system %></td>
+	<th><%= t('attributes.mac')%>:</th>
+	<td><%= @host.mac %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.cpe')%>:</th>
+	<td><%= @host.cpe %></td>
+	<th><%= t('attributes.vendor')%>:</th>
+	<td><%= @host.vendor %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.raw_os')%>:</th>
+	<td><%= @host.raw_os %></td>
+	<th><%= t('attributes.host_category')%>:</th>
+	<td><%= @host.host_category.to_s %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.fqdn')%>:</th>
+	<td><%= @host.fqdn %></td>
+	<th><%= t('attributes.location')%>:</th>
+	<td><%= @host.location.try(:lid) %></td>
+      </tr>
 
-  <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>
-</table>
+      <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>
+    </table>
+  </div>
+  <div class="col-sm-3">
+    <table class="table table-bordered table-hover">
+      <caption> <%= t('controller.vulnerabilities') %> </caption>
+      <tr>
+	<th><%= t('boskop.threats.critical')%>:</th>
+	<td><%= @host.vulnerabilities.critical.count %></td>
+      </tr>
+      <tr>
+	<th><%= t('boskop.threats.high')%>:</th>
+	<td><%= @host.vulnerabilities.high.count %></td>
+      </tr>
+      <tr>
+	<th><%= t('boskop.threats.medium')%>:</th>
+	<td><%= @host.vulnerabilities.medium.count %></td>
+      </tr>
+      <tr>
+	<th><%= t('boskop.threats.low')%>:</th>
+	<td><%= @host.vulnerabilities.low.count %></td>
+      </tr>
+      <tr>
+	<th><%= t('boskop.threats.all')%>:</th>
+	<td><%= @host.vulnerabilities.count %></td>
+      </tr>
+    </table>
+    <%= link_to t('boskop.all_host_vulns'), host_vulnerabilities_path(@host), class: 'btn btn-default' %>
+  </div>
+</div>
 
 <div class="btn-toolbar" role="toolbar">
   <%= back_link %>
@@ -57,5 +88,5 @@
 <h3><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
 <%= render partial: 'vulnerabilities/list', 
-           locals: {vulnerabilities: @host.vulnerabilities.high}
+           locals: {vulnerabilities: @host.vulnerabilities.higher}
  %>
