@@ -18,15 +18,16 @@ gem 'font-awesome-sass', '~> 5.0.13'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '2-0-stable'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser.git', branch: 'master'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
-                     branch: '2-0-stable'
+                     branch: 'master'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
 gem 'settingslogic'
 gem 'devise-remote-user'
-gem 'data-confirm-modal', git: 'https://github.com/ifad/data-confirm-modal.git'
+# gem 'data-confirm-modal'
 
 gem 'yaml_db'
 group :development do
