@@ -8,7 +8,8 @@
       id: 'vulnerabilities_table',
       class: "table table-bordered table-striped",
       data: {
-        url: polymorphic_path([@host, :vulnerabilities], format: :json)
+        url: polymorphic_path([@host, :vulnerabilities], format: :json),
+        order: [[0, 'desc']].to_json
       } do %>
 
   <thead>
