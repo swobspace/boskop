@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   resources :operating_systems
   resources :host_categories
   post "hosts", to: "hosts#index", constraints: lambda {|req| req.format == :json}
+  post "hosts/:host_id/vulnerabilities", to: "hosts/vulnerabilities#index",
+        constraints: lambda {|req| req.format == :json}
   resources :hosts do
+    resources :vulnerabilities, only: [:index], module: :hosts
     collection do
       get :search
       post :search

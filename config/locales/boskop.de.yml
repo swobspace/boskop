@@ -181,6 +181,7 @@ de:
     addresses: Adressen
     framework_contracts: Rahmenverträge
     hosts: Hosts
+    hosts/vulnerabilities: Schwachstellen
     host_categories: Host-Kategorien
     ipaddresses: IP-Adressen
     lines: Leitungen/Zugänge

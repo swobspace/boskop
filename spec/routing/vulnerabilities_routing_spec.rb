@@ -1,10 +1,14 @@
 require "rails_helper"
 
 RSpec.describe VulnerabilitiesController, type: :routing do
-  describe "routing" do
+  describe "routing vulnerabilities" do
 
     it "routes to #index" do
       expect(:get => "/vulnerabilities").to route_to("vulnerabilities#index")
+    end
+
+    it "routes to #index (:post)" do
+      expect(:post => "vulnerabilities.json").to route_to(controller: 'vulnerabilities', action: "index", format: "json")
     end
 
     it "routes to #search" do
@@ -57,5 +61,14 @@ RSpec.describe VulnerabilitiesController, type: :routing do
       expect(:delete => "/vulnerabilities/1").to route_to("vulnerabilities#destroy", :id => "1")
     end
 
+  end
+
+  describe "routing host vulnerabilities" do
+    it "routes to #index" do
+      expect(:get => "/hosts/9/vulnerabilities").to route_to(controller: 'hosts/vulnerabilities', action: "index", host_id: "9")
+    end
+    it "routes to #index (:post)" do
+      expect(:post => "/hosts/9/vulnerabilities.json").to route_to(controller: 'hosts/vulnerabilities', action: "index", host_id: "9", format: "json")
+    end
   end
 end
