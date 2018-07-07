@@ -1,0 +1,15 @@
+<% if can? :read, :networks %>
+  <li class="nav-item dropdown <%= active_class('networks') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarNetworksLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.networks') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarNetworksLink">
+      <%=link_to raw('<i class="fas fa-fw fa-table"></i> '+t('controller.networks')), main_app.networks_path, class: 'dropdown-item' %>
+      <% if can? :create, Network %>
+	<%=link_to raw('<i class="fas fa-fw fa-plus"></i> '+t('boskop.new_network')), main_app.new_network_path, class: 'dropdown-item' %>
+      <% end %>
+      <%=link_to raw('<i class="fas fa-fw fa-search"></i> '+t('boskop.search')), main_app.search_networks_path, class: 'dropdown-item' %>
+      <%=link_to raw('<i class="fas fa-fw fa-table "></i> '+t('boskop.usage_map')), main_app.usage_form_networks_path, class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

@@ -1,5 +1,18 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "v4-shims.min";
+
+// --- colors
+$mh-blue: #0063ad;
+$colors: (
+  "blue": $mh-blue
+);
+$theme-colors: (
+  "primary": $mh-blue,
+  "custom": $mh-blue
+);
+
+@import "custom-colors";
 
 //$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap/scss/bootstrap";

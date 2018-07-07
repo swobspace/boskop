@@ -16,6 +16,8 @@
 //= require datatables.net-buttons/js/buttons.print.js
 //= require datatables.net-buttons/js/buttons.colVis.js
 //= require select2/dist/js/select2
+//= require popper.js/dist/umd/popper
+//= require bootstrap/dist/js/bootstrap
 //= require jquery.dirtyforms/jquery.dirtyforms
 //= require boskop
 //
