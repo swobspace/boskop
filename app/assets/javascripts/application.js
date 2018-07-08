@@ -7,7 +7,6 @@
 //= require jszip/dist/jszip
 //= require pdfmake/build/pdfmake
 //= require pdfmake/build/vfs_fonts
-/// require data-confirm-modal
 //= require datatables.net/js/jquery.dataTables.js
 //= require datatables.net-bs4/js/dataTables.bootstrap4.js
 //= require datatables.net-buttons/js/dataTables.buttons.js

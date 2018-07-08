@@ -16,22 +16,42 @@ $theme-colors: (
 
 @import "custom-colors";
 
-//$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
 @import "bootstrap/scss/bootstrap";
 @import "wobapphelpers/breadcrumbs";
 @import "common";
 
 body {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 
 // --- FOOTER
 div#footer{
   font-size: 0.9em;
   color: #999;
-  margin: 24px 0 0 0;
-  padding: 4px 0 0 0;
+  margin-top: 24px;
+  padding-top: 4px;
   border-top: 1px solid #eee;
+}
+
+.table {
+  tfoot {
+    display: table-header-group;
+    th {
+      padding: 0.25rem;
+      input[type="text"] {
+        width: 100%;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        box-sizing: border-box;
+        border: 1px solid #ced4da;
+      }
+    }
+  }
+}
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: white;
 }
 
 // --- cell states
@@ -45,18 +65,6 @@ tr td {
 .autowidth { width: auto; }
 .width25 { width: 25%; }
 .width50 { width: 50%; }
-
-// --- dataTable
-
-table.dataTable.no-footer {
-  border-bottom: 1px solid #ddd;
-}
-div#dataTable_paginate>ul {
-  li.paginate_button {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
-}
 
 .bs-subform:before {
   font-size: 12px;
@@ -82,20 +90,6 @@ div#dataTable_paginate>ul {
 }
 .bs-mandantory:before {
   content: "<%= I18n.t('actions.mandantory') %>" ;
-}
-
-tfoot {
-  display: table-header-group;
-  input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-  }
-}
-
-.turbolinks-progress-bar {
-  height: 5px;
-  background-color: #008000;
 }
 
 dl {  
