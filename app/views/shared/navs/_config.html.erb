@@ -1,13 +1,12 @@
 <% if can? :navigate, :configuration %>
-  <li class="dropdown <%= configuration_active_class %>">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <%= t('boskop.configuration') %><b class="caret"></b></a>
-    <ul class="dropdown-menu">
+  <li class="nav-item dropdown <%= configuration_active_class %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarConfigurationLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('boskop.configuration') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarConfigurationLink">
       <% Boskop::CONFIGURATION_CONTROLLER.each do |ctrlr| %>
-	<li>
-	  <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path")%>
-	</li>
+        <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path"), class: 'dropdown-item'%>
       <% end %>
-    </ul>
+    </div>
   </li>
 <% end %>

@@ -1,18 +1,19 @@
-  <% if can? :read, :hosts %>
-    <li class="dropdown <%= active_class('hosts') %>">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <%= t('controller.hosts') %><b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li> <%=link_to raw('<span class="glyphicon glyphicon-th" aria-hidden="true"></span> '+t('controller.hosts')), main_app.hosts_path %></li>
-        <li> <%=link_to raw('<span class="glyphicon glyphicon-warning-sign aria-hidden="true"></span> '+t('boskop.eol_systems')), main_app.search_hosts_path(eol: 1, limit: 1000, current: 1) %></li>
-        <li> <%=link_to raw('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_hosts_path %></li>
-        <% if can? :create, Host %>
-          <li class="divider"></li>
-          <li> <%=link_to raw('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> '+t('boskop.new_host')), main_app.new_host_path %></li>
-          <% end %>
-          <% if can? :manage, Host %>
-          <li> <%=link_to raw('<span class="glyphicon glyphicon-file" aria-hidden="true"></span> '+t('boskop.import_host_file')), main_app.new_import_hosts_path %></li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
+<% if can? :read, :hosts %>
+  <li class="nav-item dropdown <%= active_class('hosts') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarHostsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.hosts') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarHostsLink">
+      <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.hosts')), main_app.hosts_path, class: 'dropdown-item' %>
+      <%=link_to raw('<span class="fas fa-fw fa-exclamation-triangle aria-hidden="true"></span> '+t('boskop.eol_systems')), main_app.search_hosts_path(eol: 1, limit: 1000, current: 1), class: 'dropdown-item' %>
+      <%=link_to raw('<span class="fas fa-fw fa-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_hosts_path, class: 'dropdown-item' %>
+      <% if can? :create, Host %>
+        <div class="dropdown-divider"></div>
+	<%=link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> '+t('boskop.new_host')), main_app.new_host_path, class: 'dropdown-item' %>
+	<% end %>
+	<% if can? :manage, Host %>
+	<%=link_to raw('<span class="fas fa-fw fa-file" aria-hidden="true"></span> '+t('boskop.import_host_file')), main_app.new_import_hosts_path, class: 'dropdown-item' %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
