@@ -6,7 +6,7 @@
 
 <%= content_tag :table, role: :remotetable,
       id: 'hosts_table',
-      class: "table table-bordered table-striped",
+      class: "table table-bordered",
       data: {
         url: hosts_path(format: :json),
         order: [[0, 'desc']].to_json
