@@ -1,17 +1,11 @@
+<div class="container">
 <%= simple_form_for(@line,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-inputs">
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
       <%= f.input :name
        %>
       <%= f.input :description,
@@ -34,53 +28,58 @@
        %>
       <%= f.association :access_type
        %>
-      <div class="form-group">
-        <label for="bw_downstream" class="col-sm-3 control-label">
-          <%= t('attributes.bw_downstream')%>
-        </label>
+
+      <div class="form-group row">
+        <%= f.label(:bw_downstream, class: 'col-sm-3 col-form-label') %>
         <div class="col-sm-3">
-         <div class="input-group">
+         <div class="input-group mb-2">
           <%= f.text_field :bw_downstream, 
                 class: 'numeric decimal optional form-control',
                 placeholder: t('boskop.primary_line') %>
-          <div class="input-group-addon">
-            <%= Boskop.bandwith_base_unit %> 
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <%= Boskop.bandwith_base_unit %> 
+            </div>
           </div>
          </div>
         </div>
         <div class="col-sm-3">
-         <div class="input-group">
+         <div class="input-group mb-2">
           <%= f.text_field :bw2_downstream, 
                 class: 'numeric decimal optional form-control',
                 placeholder: t('boskop.secondary_line') %>
-          <div class="input-group-addon">
-            <%= Boskop.bandwith_base_unit %> 
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <%= Boskop.bandwith_base_unit %> 
+            </div>
           </div>
          </div>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="bw_upstream" class="col-sm-3 control-label">
-          <%= t('attributes.bw_upstream')%>
-        </label>
+      <div class="form-group row">
+        <%= f.label(:bw_upstream, class: 'col-sm-3 col-form-label') %>
         <div class="col-sm-3">
-         <div class="input-group">
+         <div class="input-group mb-2">
           <%= f.text_field :bw_upstream, 
                 class: 'numeric decimal optional form-control',
                 placeholder: t('boskop.primary_line') %>
-          <div class="input-group-addon">
-            <%= Boskop.bandwith_base_unit %> 
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <%= Boskop.bandwith_base_unit %> 
+            </div>
           </div>
          </div>
         </div>
         <div class="col-sm-3">
-         <div class="input-group">
+         <div class="input-group mb-2">
           <%= f.text_field :bw2_upstream, 
                 class: 'numeric decimal optional form-control',
                 placeholder: t('boskop.secondary_line') %>
-          <div class="input-group-addon">
-            <%= Boskop.bandwith_base_unit %> 
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <%= Boskop.bandwith_base_unit %> 
+            </div>
           </div>
          </div>
         </div>
@@ -98,30 +97,33 @@
             placeholder: t('boskop.describe_contract_period')
        %>
 
-      <div class="row-fluid">
-        <%= f.input :period_of_notice do %>
-          <%= f.text_field :period_of_notice,
-                           class: "form-control autowidth col-sm-3" %>
+      <div class="form-group row">
+        <%= f.label(:period_of_notice, class: 'col-sm-3 col-form-label') %>
+        <div class="col-sm-3">
+          <%= f.text_field :period_of_notice, class: "form-control" %>
+        </div>
+        <div class="col-sm-2">
           <%= f.select     :period_of_notice_unit, Boskop::PERIOD_UNITS,
-                           {}, {class: "form-control autowidth col-sm-3"} %>
-        <% end %>
+                           {}, {class: "form-control"} %>
+        </div>
       </div>
-      <div class="row-fluid">
-        <%= f.input :renewal_period do %>
-          <%= f.text_field :renewal_period,
-                           class: "form-control autowidth col-sm-3" %>
+
+      <div class="form-group row">
+        <%= f.label(:renewal_period, class: 'col-sm-3 col-form-label') %>
+        <div class="col-sm-3">
+          <%= f.text_field :renewal_period, class: "form-control" %>
+        </div>
+        <div class="col-sm-2">
           <%= f.select     :renewal_unit, Boskop::PERIOD_UNITS,
-                           {}, {class: "form-control autowidth col-sm-3"} %>
-      
-        <% end %> 
+                           {}, {class: "form-control"} %>
+        </div>
       </div>
+
       <%= f.association :line_state
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>
