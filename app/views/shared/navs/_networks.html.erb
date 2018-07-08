@@ -8,6 +8,7 @@
       <% if can? :create, Network %>
 	<%=link_to raw('<i class="fas fa-fw fa-plus"></i> '+t('boskop.new_network')), main_app.new_network_path, class: 'dropdown-item' %>
       <% end %>
+     <div class="dropdown-divider"></div>
       <%=link_to raw('<i class="fas fa-fw fa-search"></i> '+t('boskop.search')), main_app.search_networks_path, class: 'dropdown-item' %>
       <%=link_to raw('<i class="fas fa-fw fa-table "></i> '+t('boskop.usage_map')), main_app.usage_form_networks_path, class: 'dropdown-item' %>
     </div>
