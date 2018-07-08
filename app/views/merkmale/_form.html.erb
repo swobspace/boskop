@@ -1,22 +1,16 @@
-<%= simple_form_for(@merkmal,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for(@merkmal,
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-   
-    <%= f.input :merkmalfor_id, as: :hidden %>
-    <%= f.input :merkmalfor_type, as: :hidden %>
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
+      <%= f.input :merkmalfor_id, as: :hidden %>
+      <%= f.input :merkmalfor_type, as: :hidden %>
 
-    <div class="form-inputs">
-      <div class="form-group">
-        <%= label_tag :merkmalfor, "Merkmal für", :class => "col-sm-3 control-label" %>
+      <div class="form-group row">
+        <%= label_tag :merkmalfor, "Merkmal für", :class => "col-sm-3 col-form-label" %>
         <div class="col-sm-9">
           <%= text_field_tag "info_merkmalfor", 
               "#{@merkmal.merkmalfor_type}: #{@merkmal.merkmalfor.to_s}",
@@ -28,11 +22,9 @@
        %>
       <%= f.input :value
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
 <% end %>
+</div>
