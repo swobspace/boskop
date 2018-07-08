@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def orgunits_active_class
-    if controller.controller_name.to_sym == :org_units
+    if [:org_units, :locations].include?(controller.controller_name.to_sym)
       "active"
     end
   end
