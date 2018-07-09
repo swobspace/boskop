@@ -27,7 +27,6 @@ gem 'acts_as_list'
 gem 'ancestry'
 gem 'settingslogic'
 gem 'devise-remote-user'
-# gem 'data-confirm-modal'
 
 gem 'yaml_db'
 group :development do
