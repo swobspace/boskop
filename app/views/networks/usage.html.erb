@@ -1,6 +1,6 @@
 <h1><%= t('controller.networks') %></h1>
 
-<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<table id="dataTable" class="table table-bordered" role="datatable">
 <thead>
   <tr>
     <th><%= t('boskop.subnet') %></th>
@@ -70,5 +70,5 @@
 
 <%= back_link %>
 <%= new_link Network %>
-<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-default" %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>
 

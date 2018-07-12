@@ -1,17 +1,12 @@
-<%= simple_form_for(@merkmalklasse,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for(@merkmalklasse,
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
 
-    <div class="form-inputs">
       <%= f.input :name
        %>
       <%= f.input :tag
@@ -35,11 +30,9 @@
        %>
       <%= f.input :baselink, placeholder: t('boskop.baselink_for_linkindex')
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>

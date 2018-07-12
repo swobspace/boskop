@@ -75,12 +75,12 @@
   </div>
 </div>
 
-<div class="btn-toolbar" role="toolbar">
+<div role="toolbar">
   <%= back_link %>
   <%= edit_link(@host) %>
   <%= delete_link(@host) %>
   <%= new_link Host %>
-  <%= link_to t('boskop.all_host_vulns'), host_vulnerabilities_path(@host), class: 'btn btn-default' %>
+  <%= link_to t('boskop.all_host_vulns'), host_vulnerabilities_path(@host), class: 'btn btn-secondary' %>
 </div>
 
 <br/>

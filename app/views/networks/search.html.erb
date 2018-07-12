@@ -1,47 +1,57 @@
-<%= form_tag search_networks_path, role: "form",
-    method: :post, class: 'form-horizontal well' do %> 
+<div class="container">
+  <%= form_tag(search_networks_path, role: "form",
+        class: 'form-horizontal card') do |f| %>
 
-  <fieldset>
-    <legend>Suche nach Netzwerken</legend>
-    <div class="form-group">
-      <label for="cidr" class="col-sm-2 control-label">
-        <%= t('attributes.netzwerk') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="cidr" name="cidr" 
-               placeholder="<%= t('boskop.cidr_example') %>">
-      </div>
+    <div class="card-header">
+      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_networks') %></legend>
     </div>
+    <div class="card-body">
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <label class="checkbox-inline">
-	  <input type="checkbox" id="is_subset" name="is_subset" value="1"> 
-          <%= t('boskop.subset') %>
+      <div class="form-group row">
+        <label for="cidr" class="col-sm-2 col-form-label">
+          <%= t('attributes.netzwerk') %>
         </label>
-        <label class="checkbox-inline">
-	  <input type="checkbox" id="is_superset" name="is_superset" value="1"> 
-          <%= t('boskop.superset') %>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="cidr" name="cidr" 
+                 placeholder="<%= t('boskop.cidr_example') %>">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-2">
+          Shortcuts
+        </div>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="is_subset" name="is_subset" checked>
+            <label class="form-check-label" for="is_subset">
+              <%=t('boskop.subset')%> 
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="is_superset" name="is_superset" checked>
+            <label class="form-check-label" for="is_superset">
+              <%=t('boskop.superset')%>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ort" class="col-sm-2 col-form-label">
+          <%= t('attributes.ort') %>
         </label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="ort" name="ort">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
+          <%= cancel_button %>
+        </div>
       </div>
     </div>
-
-    <div class="form-group">
-      <label for="ort" class="col-sm-2 control-label">
-        <%= t('attributes.ort') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="ort" name="ort">
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
-        <%= cancel_button %>
-      </div>
-    </div>
-
-  </fieldset>
-<% end %>
+  <% end %>
+</div>

@@ -1,46 +1,39 @@
-<%= simple_form_for(@address,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for(@address,
+      html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <%= f.input :addressfor_id, as: :hidden %>
-    <%= f.input :addressfor_type, as: :hidden %>
-
-    <div class="form-inputs">
-      <div class="form-group">
-        <%= label_tag :addressfor, "Merkmal für", :class => "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= text_field_tag "info_addressfor",
-              "#{@address.addressfor_type}: #{@address.addressfor.to_s}",
-              { :class => 'input form-control', disabled: true } %>
-        </div>
-      </div>
-
-      <%= f.input :streetaddress
-       %>
-      <%= f.input :plz
-       %>
-      <%= f.input :ort
-       %>
-      <%= f.input :care_of
-       %>
-      <%= f.input :postfach
-       %>
-      <%= f.input :postfachplz
-       %>
+    <div class="card-header">
+      <%= form_legend %>
     </div>
+    <div class="card-body">
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
+      <%= f.input :addressfor_id, as: :hidden %>
+      <%= f.input :addressfor_type, as: :hidden %>
+
+	<div class="form-group row">
+	  <%= label_tag :addressfor, "Merkmal für", :class => "col-sm-3 control-label" %>
+	  <div class="col-sm-9">
+	    <%= text_field_tag "info_addressfor",
+		"#{@address.addressfor_type}: #{@address.addressfor.to_s}",
+		{ :class => 'input form-control', disabled: true } %>
+	  </div>
+	</div>
+
+	<%= f.input :streetaddress
+	 %>
+	<%= f.input :plz
+	 %>
+	<%= f.input :ort
+	 %>
+	<%= f.input :care_of
+	 %>
+	<%= f.input :postfach
+	 %>
+	<%= f.input :postfachplz
+	 %>
+
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>

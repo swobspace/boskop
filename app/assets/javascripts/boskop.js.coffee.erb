@@ -1,23 +1,16 @@
 # --- GLOBALS
-$.extend $.fn.dataTableExt.oStdClasses,
-  sWrapper: "dataTables_wrapper form-inline"
-
-dataConfirmModal.setDefaults
-  commit: '<%= I18n.t('actions.destroy')%>',
-  cancel: '<%= I18n.t('actions.cancel')%>'
-
 $.datepicker.setDefaults($.datepicker.regional['de'])
 $.datepicker.setDefaults({
       changeYear: true,
       changeMonth: true,
       dateFormat: "yy-mm-dd",
       yearRange: '2000:2099',
-      showOn: "button",
-      buttonImage: "<%= asset_path('calendar.gif')%>",
-      buttonImageOnly: true
 })
 
 ready = ->
+  $('form').dirtyForms
+    message: "Sie haben Änderungen noch nicht gespeichert. Wenn Sie jetzt weitermachen, verlieren Sie ungesicherte Änderungen."
+
   $('table tfoot th').each  (idx) ->
     unless $(this).hasClass("nosearch")
       title = $('table thead th').eq( $(this).index() ).text()
@@ -33,7 +26,7 @@ ready = ->
   # --- classic datatable ---
   table = $('table[role="datatable"], table[role="wobauth_datatable"]' ).DataTable(
     pagingType: "full_numbers"
-    dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
     lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
@@ -41,6 +34,7 @@ ready = ->
     buttons: [
       {
         extend: 'copy',
+        className: 'btn-sm',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -48,13 +42,8 @@ ready = ->
       },
       {
         extend: 'excel',
-        exportOptions: {
-          columns: ':visible',
-          search: ':applied'
-        }
-      },
-      {
-        extend: 'csv',
+        title: $('table[role="datatable"]').data('title')
+        className: 'btn-sm',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -62,6 +51,7 @@ ready = ->
       },
       {
         extend: 'pdf',
+        className: 'btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
@@ -69,9 +59,13 @@ ready = ->
           search: ':applied'
         }
       },
-      'print',
+      {
+        extend: 'print',
+        className: 'btn-sm',
+      },
       {
         extend: 'colvis',
+        className: 'btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
@@ -107,7 +101,7 @@ ready = ->
       url: remotetableurl
       type: "POST"
     pagingType: "full_numbers"
-    dom: "<'row'<'col-md-3'l><'col-md-5 btn-group'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+    dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
     stateSave: true
     lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
@@ -115,6 +109,7 @@ ready = ->
     buttons: [
       {
         extend: 'excel'
+        className: 'btn-sm',
         title: $('table[role="remotetable"]').data('title')
         text: 'Excel'
         exportOptions: {
@@ -124,6 +119,7 @@ ready = ->
       },
       {
         extend: 'pdf',
+        className: 'btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         title: $('table[role="remotetable"]').data('title')
@@ -133,9 +129,13 @@ ready = ->
           search: ':applied'
         }
       },
-      'print',
+      {
+        extend: 'print',
+        className: 'btn-sm',
+      },
       {
         extend: 'colvis',
+        className: 'btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }

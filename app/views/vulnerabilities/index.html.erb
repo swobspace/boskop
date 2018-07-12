@@ -6,7 +6,7 @@
 
 <%= content_tag :table, role: :remotetable,
       id: 'vulnerabilities_table',
-      class: "table table-bordered table-striped",
+      class: "table table-bordered",
       data: {
         url: polymorphic_path([@host, :vulnerabilities], format: :json),
         order: [[0, 'desc']].to_json
@@ -48,4 +48,4 @@
 <br />
 
 <%= back_link %>
-<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-default" %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>

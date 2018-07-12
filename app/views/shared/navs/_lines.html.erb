@@ -1,0 +1,15 @@
+<% if can? :read, :lines %>
+  <li class="nav-item dropdown <%= active_class('lines') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarLinesLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.lines') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarLinesLink">
+      <%=link_to raw('<i class="fas fa-fw fa-table"></i> '+t('controller.lines')), main_app.lines_path, class: 'dropdown-item' %>
+      <% if can? :create, Network %>
+	<%=link_to raw('<i class="fas fa-fw fa-plus"></i> '+t('boskop.new_line')), main_app.new_line_path, class: 'dropdown-item' %>
+      <% end %>
+      <div class="dropdown-divider"></div>
+      <%=link_to raw('<i class="fas fa-fw fa-search"></i> '+t('boskop.search')), main_app.search_lines_path, class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

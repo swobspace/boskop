@@ -1,52 +1,49 @@
-<%= simple_form_for(@framework_contract,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for(@framework_contract,
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-inputs">
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
       <%= f.input :name
        %>
       <%= f.input :description
        %>
       <%= f.input :contract_start, as: :string, wrapper: :horizontal_date
        %>
-      <%= f.input :contract_end, as: :string, wrapper: :horizontal_date
+      <%= f.input :contract_end,   as: :string, wrapper: :horizontal_date
        %>
       <%= f.input :contract_period,
             placeholder: t('boskop.describe_contract_period')
        %>
-      <div class="row-fluid">
-        <%= f.input :period_of_notice do %>
-          <%= f.text_field :period_of_notice, 
-                           class: "form-control autowidth col-sm-3" %>
-          <%= f.select     :period_of_notice_unit, Boskop::PERIOD_UNITS,
-                           {}, {class: "form-control autowidth col-sm-3"} %>
-        <% end %>
-      </div>
-      <div class="row-fluid">
-        <%= f.input :renewal_period do %>
-          <%= f.text_field :renewal_period, 
-                           class: "form-control autowidth col-sm-3" %>
-          <%= f.select     :renewal_unit, Boskop::PERIOD_UNITS,
-                           {}, {class: "form-control autowidth col-sm-3"} %>
 
-        <% end %>
+      <div class="form-group row">
+        <%= f.label(:period_of_notice, class: 'col-sm-3 col-form-label') %>
+        <div class="col-sm-3">
+          <%= f.text_field :period_of_notice, class: "form-control" %>
+        </div>
+        <div class="col-sm-2">
+          <%= f.select     :period_of_notice_unit, Boskop::PERIOD_UNITS,
+                           {}, {class: "form-control"} %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label(:renewal_period, class: 'col-sm-3 col-form-label') %>
+        <div class="col-sm-3">
+          <%= f.text_field :renewal_period, class: "form-control" %>
+        </div>
+        <div class="col-sm-2">
+          <%= f.select     :renewal_unit, Boskop::PERIOD_UNITS,
+                           {}, {class: "form-control"} %>
+        </div>
       </div>
       <%= f.input :active, as: :select, input_html: {class: "width25 col-sm-3"}
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>
