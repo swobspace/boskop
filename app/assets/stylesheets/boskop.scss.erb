@@ -3,16 +3,30 @@
 @import "v4-shims.min";
 
 // --- colors
-$custom: #197282;
-$customgrey: #E6F2F1;
+$cblue: #197282;
+$cgrey: #77999E;
+$cgreen: #60A360;
+$cred: #BF2B2B;
+$cyellow: #F7D020;
+$ccyan: #489BA8;
+
 $colors: (
-  "blue": $custom
+  "blue": $cblue,
+  "green": $cgreen,
+  "red": $cred,
+  "yellow": $cyellow,
+  "cyan": $ccyan,
 );
 $theme-colors: (
-  "primary": $custom,
-  "secondary": $customgrey,
-  "custom": $custom
+  "primary": $cblue,
+  "secondary": $cgrey,
+  "success": $cgreen,
+  "custom": $cblue,
+  "danger": $cred,
+  "info": $ccyan,
+  "warning": $cyellow,
 );
+
 
 @import "custom-colors";
 
