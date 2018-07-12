@@ -1,0 +1,15 @@
+defaults: &defaults
+  devise_modules:
+    - :remote_user_authenticatable
+    - :database_authenticatable 
+    - :registerable 
+    - :recoverable 
+    - :rememberable
+    - :trackable
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+

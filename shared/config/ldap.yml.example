@@ -1,0 +1,9 @@
+ldap_options:
+  host: 192.0.2.1
+  port: 3268
+  base: dc=example,dc=com
+  auth:
+    method: :simple
+    username: ldapuser@mydom
+    password: ******
+
