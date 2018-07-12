@@ -1,37 +1,40 @@
-<%= form_tag import_vulnerabilities_path, role: "form",
-    multipart: true,
-    method: :post, class: 'form-horizontal well' do %> 
+<div class="container">
+  <%= form_tag(import_vulnerabilities_path, role: "form",
+        class: 'form-horizontal card') do |f| %>
 
-  <fieldset>
-    <legend>Import Vulnerabilities from File</legend>
-    <div class="form-group">
-      <label for="file" class="col-sm-2 control-label">
-        <%= t('attributes.file') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="file" class="form-control" id="file" name="file" 
-               placeholder="<%= t('boskop.import_vulnerabilities_file') %>">
-      </div>
+    <div class="card-header">
+      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_hosts') %></legend>
     </div>
-
-    <div class="form-group">
-      <label for="type" class="col-sm-2 control-label">
-        <%= t('attributes.type') %>
-      </label>
-      <div class="col-sm-9">
-        <select type="text" class="form-control" id="type" name="type">
-          <%= options_for_select([ ["Nessus", "nessus"], ["OpenVAS", "openvas"] ]) %>
-        </select>
+    <div class="card-body">
+      <div class="form-group row">
+	<label for="file" class="col-sm-2 col-form-label">
+	  <%= t('attributes.file') %>
+	</label>
+	<div class="col-sm-10">
+	  <input type="file" class="form-control" id="file" name="file" 
+		 placeholder="<%= t('boskop.import_vulnerabilities_file') %>">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <button type="submit" class="btn btn-primary"><%= t('actions.upload') %></button>
-
-        <%= cancel_button %>
+      <div class="form-group row">
+	<label for="type" class="col-sm-2 col-form-label">
+	  <%= t('attributes.type') %>
+	</label>
+	<div class="col-sm-10">
+	  <select type="text" class="form-control" id="type" name="type">
+	    <%= options_for_select([ ["Nessus", "nessus"], ["OpenVAS", "openvas"] ]) %>
+	  </select>
+	</div>
       </div>
-    </div>
 
-  </fieldset>
-<% end %>
+      <div class="form-group row">
+	<div class="offset-sm-2 col-sm-10">
+	  <button type="submit" class="btn btn-primary"><%= t('actions.upload') %></button>
+
+	  <%= cancel_button %>
+	</div>
+      </div>
+
+    </div>
+  <% end %>
+</div>
