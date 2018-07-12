@@ -2,32 +2,12 @@
 @import "font-awesome";
 @import "v4-shims.min";
 
-// --- colors
-$cblue: #197282;
-$cgrey: #77999E;
-$cgreen: #60A360;
-$cred: #BF2B2B;
-$cyellow: #F7D020;
-$ccyan: #489BA8;
-
-$colors: (
-  "blue": $cblue,
-  "green": $cgreen,
-  "red": $cred,
-  "yellow": $cyellow,
-  "cyan": $ccyan,
-);
+$custom: #111;
 $theme-colors: (
-  "primary": $cblue,
-  "secondary": $cgrey,
-  "success": $cgreen,
-  "custom": $cblue,
-  "danger": $cred,
-  "info": $ccyan,
-  "warning": $cyellow,
+  "custom": $custom
 );
-
-
+// allow overwrite with custom color
+// default: symlink to _colors-wobteal.scss
 @import "custom-colors";
 
 @import "bootstrap/scss/bootstrap";
