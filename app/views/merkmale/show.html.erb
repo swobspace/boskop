@@ -1,21 +1,28 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.merkmalfor')%>:</th>
-    <td><%= @merkmal.merkmalfor %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.merkmalklasse')%>:</th>
-    <td><%= @merkmal.merkmalklasse %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.value')%>:</th>
-    <td><%= @merkmal.value %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.merkmalfor') %>:
+      <%= @merkmalfor.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
 
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@merkmal) %>
-  <%= delete_link(@merkmal) %>
-  <%= new_link Merkmal %>
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.merkmalklasse')%>:</th>
+	<td class="w-100"><%= @merkmal.merkmalklasse %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.value')%>:</th>
+	<td><%= @merkmal.value %></td>
+      </tr>
+    </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@merkmal) %>
+      <%= delete_link(@merkmal) %>
+      <%= new_link Merkmal %>
+    </div>
+  </div>
 </div>

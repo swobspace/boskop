@@ -43,6 +43,8 @@ de:
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
+    vulnerability_detail: Schwachstelle/Details
+    vulnerable_hosts: Verwundbare Hosts
     all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
     location_disabled: Dieser Standort ist deaktiviert

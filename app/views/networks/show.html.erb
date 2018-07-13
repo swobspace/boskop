@@ -1,31 +1,41 @@
-<h2> <%= @network.to_s %> </h2>
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.netzwerk')%>:</th>
-    <td><%= @network.netzwerk.try(:to_cidr_s) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @network.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.lid')%>:</th>
-    <td><%= @network.location.try(:lid) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.location')%>:</th>
-    <td><%= link_to @network.location, location_path(@network.location) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ort')%>:</th>
-    <td><%= @network.location.ort %></td>
-  </tr>
-  <%= render partial: 'merkmale/list', locals: { merkmale: @network.merkmale } %>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.network') %>:
+      <%= @network.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
 
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@network) %>
-  <%= delete_link(@network) %>
-  <%= new_link Network %>
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.netzwerk')%>:</th>
+	<td class="w-100"><%= @network.netzwerk.try(:to_cidr_s) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td><%= @network.description %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.lid')%>:</th>
+	<td><%= @network.location.try(:lid) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.location')%>:</th>
+	<td><%= link_to @network.location, location_path(@network.location) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ort')%>:</th>
+	<td><%= @network.location.ort %></td>
+      </tr>
+      <%= render partial: 'merkmale/list', locals: { merkmale: @network.merkmale } %>
+    </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@network) %>
+      <%= delete_link(@network) %>
+      <%= new_link Network %>
+    </div>
+  </div>
 </div>

@@ -1,73 +1,79 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @line.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @line.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.notes')%>:</th>
-    <td><%= @line.notes %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.provider_id')%>:</th>
-    <td><%= @line.provider_id %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.location_a')%>:</th>
-    <td><%= link_to_attribute(@line, :location_a) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.location_b')%>:</th>
-    <td><%= link_to_attribute(@line, :location_b) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.access_type')%>:</th>
-    <td><%= @line.access_type %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.bandwith_primary')%>:</th>
-    <td><%= bandwith(@line) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.bandwith_secondary')%>:</th>
-    <td><%= bandwith2(@line) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.framework_contract')%>:</th>
-    <td><%= link_to_attribute(@line, :framework_contract) %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_start')%>:</th>
-    <td><%= @line.contract_start %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_end')%>:</th>
-    <td><%= @line.contract_end %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_period')%>:</th>
-    <td><%= @line.contract_period %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.period_of_notice')%>:</th>
-    <td><%= @line.period_of_notice %> <%= @line.period_of_notice_unit %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.renewal_period')%>:</th>
-    <td><%= @line.renewal_period %> <%= @line.renewal_unit %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.line_state')%>:</th>
-    <td><%= @line.line_state %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.line') %>:
+      <%= @line.name %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td class="w-100"><%= @line.description %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.notes')%>:</th>
+	<td><%= @line.notes %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.provider_id')%>:</th>
+	<td><%= @line.provider_id %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.location_a')%>:</th>
+	<td><%= link_to_attribute(@line, :location_a) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.location_b')%>:</th>
+	<td><%= link_to_attribute(@line, :location_b) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.access_type')%>:</th>
+	<td><%= @line.access_type %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.bandwith_primary')%>:</th>
+	<td><%= bandwith(@line) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.bandwith_secondary')%>:</th>
+	<td><%= bandwith2(@line) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.framework_contract')%>:</th>
+	<td><%= link_to_attribute(@line, :framework_contract) %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_start')%>:</th>
+	<td><%= @line.contract_start %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_end')%>:</th>
+	<td><%= @line.contract_end %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_period')%>:</th>
+	<td><%= @line.contract_period %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.period_of_notice')%>:</th>
+	<td><%= @line.period_of_notice %> <%= @line.period_of_notice_unit %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.renewal_period')%>:</th>
+	<td><%= @line.renewal_period %> <%= @line.renewal_unit %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.line_state')%>:</th>
+	<td><%= @line.line_state %></td>
+      </tr>
+    </table>
 
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@line) %>
-  <%= delete_link(@line) %>
-  <%= new_link Line %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@line) %>
+      <%= delete_link(@line) %>
+      <%= new_link Line %>
+    </div>
+  </div>
 </div>

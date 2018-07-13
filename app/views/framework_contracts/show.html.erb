@@ -1,49 +1,55 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @framework_contract.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @framework_contract.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_start')%>:</th>
-    <td><%= @framework_contract.contract_start %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_end')%>:</th>
-    <td><%= @framework_contract.contract_end %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contract_period')%>:</th>
-    <td><%= @framework_contract.contract_period %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.period_of_notice')%>:</th>
-    <td><%= @framework_contract.period_of_notice %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.period_of_notice_unit')%>:</th>
-    <td><%= @framework_contract.period_of_notice_unit %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.renewal_period')%>:</th>
-    <td><%= @framework_contract.renewal_period %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.renewal_unit')%>:</th>
-    <td><%= @framework_contract.renewal_unit %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.active')%>:</th>
-    <td><%= @framework_contract.active %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.framework_contract') %>:
+      <%= @framework_contract.name %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-condensed table-hover">
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td class="w-100"><%= @framework_contract.description %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_start')%>:</th>
+	<td><%= @framework_contract.contract_start %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_end')%>:</th>
+	<td><%= @framework_contract.contract_end %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.contract_period')%>:</th>
+	<td><%= @framework_contract.contract_period %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.period_of_notice')%>:</th>
+	<td><%= @framework_contract.period_of_notice %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.period_of_notice_unit')%>:</th>
+	<td><%= @framework_contract.period_of_notice_unit %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.renewal_period')%>:</th>
+	<td><%= @framework_contract.renewal_period %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.renewal_unit')%>:</th>
+	<td><%= @framework_contract.renewal_unit %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.active')%>:</th>
+	<td><%= @framework_contract.active %></td>
+      </tr>
+    </table>
 
-<div role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@framework_contract) %>
-  <%= delete_link(@framework_contract) %>
-  <%= new_link FrameworkContract %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@framework_contract) %>
+      <%= delete_link(@framework_contract) %>
+      <%= new_link FrameworkContract %>
+    </div>
+  </div>
 </div>
