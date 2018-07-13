@@ -1,45 +1,49 @@
-<%= form_tag usage_networks_path, role: "form",
-    method: :post, class: 'form-horizontal well' do %> 
+<div class="container">
+  <%= form_tag(usage_networks_path, role: "form",
+        class: 'form-horizontal card') do |f| %>
 
-  <fieldset>
-    <legend>Zeige Netzwerk-Nutzungstabelle</legend>
-    <div class="form-group">
-      <label for="cidr" class="col-sm-2 control-label">
-        <%= t('attributes.netzwerk') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="cidr" name="cidr" 
-               placeholder="<%= t('boskop.cidr_example') %>">
-      </div>
+    <div class="card-header">
+      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.usage_map') %></legend>
     </div>
-
-    <div class="form-group">
-      <label for="mask" class="col-sm-2 control-label">
-        <%= t('attributes.cidr_mask') %>
-      </label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="mask" name="mask"
-               placeholder="<%= t('boskop.mask_example') %>">
+    <div class="card-body">
+      <div class="form-group row">
+	<label for="cidr" class="col-sm-2 col-form-label">
+	  <%= t('attributes.netzwerk') %>
+	</label>
+	<div class="col-sm-10">
+	  <input type="text" class="form-control" id="cidr" name="cidr" 
+		 placeholder="<%= t('boskop.cidr_example') %>">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" id="exact_match" name="exact_match">
-            <%= t('attributes.exact_match') %>
-          </label>
-        </div>
+      <div class="form-group row">
+	<label for="mask" class="col-sm-2 col-form-label">
+	  <%= t('attributes.cidr_mask') %>
+	</label>
+	<div class="col-sm-10">
+	  <input type="text" class="form-control" id="mask" name="mask"
+		 placeholder="<%= t('boskop.mask_example') %>">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-9">
-        <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
-        <%= cancel_button %>
+      <div class="form-group row">
+	<div class="offset-sm-2 col-sm-10">
+	  <div class="form-check form-check-inline">
+	    <input class="form-check-input" type="checkbox" id="exact_match" name="exact_match">
+	    <label class="form-check-label" for="exact_match">
+	      <%= t('attributes.exact_match') %>
+	    </label>
+	  </div>
+	</div>
       </div>
-    </div>
 
-  </fieldset>
-<% end %>
+      <div class="form-group row">
+	<div class="offset-sm-2 col-sm-10">
+	  <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
+	  <%= cancel_button %>
+	</div>
+      </div>
+
+    </div>
+  <% end %>
+</div>

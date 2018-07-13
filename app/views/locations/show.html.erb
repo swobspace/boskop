@@ -2,64 +2,71 @@
   <meta name="turbolinks-cache-control" content="no-cache">
 <% end %>
 
-<div class="well">
-  <h2><%= @location.name %></h2>
-  <div class="row">
-    <div class="col-md-6">
-      <table class="table table-condensed table-hover">
-        <caption><%= t('boskop.basics')%></caption>
-	<tr>
-	  <th><%= t('attributes.lid')%>:</th>
-	  <td><%= @location.lid %></td>
-	</tr>
-	<tr>
-	  <th><%= t('attributes.description')%>:</th>
-	  <td><%= @location.description %></td>
-	</tr>
-	<tr>
-	  <th><%= t('attributes.addresses')%>:</th>
-	  <td>
-	    <% @location.addresses.each do |addr| %>
-	      <%= addr.to_s %> <br />
-	    <% end %>
-	  </td>
-	</tr>
-      </table>
-      <% if @location.disabled? %>
-        <div class="alert alert-warning" role="alert">
-        <i class="fas fa-exclamation-triangle"></i> <%= t('boskop.location_disabled')%>
-        </div>
-      <% end %>
-    </div>
-    <div class="col-md-6">
-      <table class="table table-condensed table-hover ">
-        <caption><%= t('controller.merkmale')%></caption>
-        <%= content_tag_for(:tr, @merkmalklassen) do |mklasse| %>
-          <td><%= mklasse.name %></td>
-          <td><%= get_location_merkmal(@location, mklasse) %></td>
-        <% end %>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.location') %>:
+      <%= @location.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+	<table class="table table-condensed table-hover">
+	  <caption><%= t('boskop.basics')%></caption>
+	  <tr>
+	    <th><%= t('attributes.lid')%>:</th>
+	    <td><%= @location.lid %></td>
+	  </tr>
+	  <tr>
+	    <th><%= t('attributes.description')%>:</th>
+	    <td><%= @location.description %></td>
+	  </tr>
+	  <tr>
+	    <th><%= t('attributes.addresses')%>:</th>
+	    <td>
+	      <% @location.addresses.each do |addr| %>
+		<%= addr.to_s %> <br />
+	      <% end %>
+	    </td>
+	  </tr>
+	</table>
+	<% if @location.disabled? %>
+	  <div class="alert alert-warning" role="alert">
+	  <i class="fas fa-exclamation-triangle"></i> <%= t('boskop.location_disabled')%>
+	  </div>
+	<% end %>
+      </div>
+      <div class="col-md-6">
+	<table class="table table-condensed table-hover ">
+	  <caption><%= t('controller.merkmale')%></caption>
+	  <%= content_tag_for(:tr, @merkmalklassen) do |mklasse| %>
+	    <td><%= mklasse.name %></td>
+	    <td><%= get_location_merkmal(@location, mklasse) %></td>
+	  <% end %>
 
-      </table>
+	</table>
+      </div>
+    </div>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@location) %>
+      <%= delete_link(@location) %>
+      <%= new_link Location %>
     </div>
   </div>
 
-  <div class="btn-toolbar" role="toolbar">
-    <%= back_link %>
-    <%= edit_link(@location) %>
-    <%= delete_link(@location) %>
-    <%= new_link Location %>
-  </div>
 </div>
 
 <% if can? :read, Network %>
   <br />
-  <h2><%= t('boskop.assigned_networks') %></h2>
-  <%= render partial: 'networks/list', locals: { networks: @location.networks } %>
+  <h3 class="mb-3"><%= t('boskop.assigned_networks') %></h3>
+    <%= render partial: 'networks/list', locals: { networks: @location.networks } %>
 <% end %>
 
 <% if can? :read, Line %>
   <br />
-  <h2><%= t('boskop.assigned_lines') %></h2>
+  <h3 class="mb-3"><%= t('boskop.assigned_lines') %></h3>
   <%= render partial: 'lines', locals: { lines: @location.lines_a } %>
 <% end %>
 

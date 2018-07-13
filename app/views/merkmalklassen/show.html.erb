@@ -1,55 +1,61 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @merkmalklasse.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.tag')%>:</th>
-    <td><%= @merkmalklasse.tag %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @merkmalklasse.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.format')%>:</th>
-    <td><%= @merkmalklasse.format %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.for_object')%>:</th>
-    <td><%= @merkmalklasse.for_object %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.mandantory')%>:</th>
-    <td><%= @merkmalklasse.mandantory %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.unique')%>:</th>
-    <td><%= @merkmalklasse.unique %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.visible')%>:</th>
-    <td><%= @merkmalklasse.visible %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.position')%>:</th>
-    <td><%= @merkmalklasse.position %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.possible_values')%>:</th>
-    <td><%= @merkmalklasse.possible_values %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.baselink')%>:</th>
-    <td><%= @merkmalklasse.baselink %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.merkmalklasse') %>:
+      <%= @merkmalklasse.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.tag')%>:</th>
+	<td class="w-100"><%= @merkmalklasse.tag %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td><%= @merkmalklasse.description %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.format')%>:</th>
+	<td><%= @merkmalklasse.format %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.for_object')%>:</th>
+	<td><%= @merkmalklasse.for_object %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.mandantory')%>:</th>
+	<td><%= @merkmalklasse.mandantory %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.unique')%>:</th>
+	<td><%= @merkmalklasse.unique %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.visible')%>:</th>
+	<td><%= @merkmalklasse.visible %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.position')%>:</th>
+	<td><%= @merkmalklasse.position %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.possible_values')%>:</th>
+	<td><%= @merkmalklasse.possible_values %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.baselink')%>:</th>
+	<td><%= @merkmalklasse.baselink %></td>
+      </tr>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@merkmalklasse) %>
-  <%= delete_link @merkmalklasse,
-        confirm: t('boskop.this_will_destroy_all_merkmale'),
-        verify: t('boskop.verify_destroy') %>
-  <%= new_link Merkmalklasse %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@merkmalklasse) %>
+      <%= delete_link @merkmalklasse,
+	    confirm: t('boskop.this_will_destroy_all_merkmale'),
+	    verify: t('boskop.verify_destroy') %>
+      <%= new_link Merkmalklasse %>
+    </div>
+  </div>
 </div>

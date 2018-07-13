@@ -1,37 +1,44 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.addressfor')%>:</th>
-    <td><%= @address.addressfor %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.streetaddress')%>:</th>
-    <td><%= @address.streetaddress %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.plz')%>:</th>
-    <td><%= @address.plz %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ort')%>:</th>
-    <td><%= @address.ort %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.care_of')%>:</th>
-    <td><%= @address.care_of %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.postfach')%>:</th>
-    <td><%= @address.postfach %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.postfachplz')%>:</th>
-    <td><%= @address.postfachplz %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.addressfor') %>:
+      <%= @address.addressfor %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-condensed table-hover">
+      <tr>
+	<th><%= t('attributes.streetaddress')%>:</th>
+	<td class="w-100"><%= @address.streetaddress %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.plz')%>:</th>
+	<td><%= @address.plz %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ort')%>:</th>
+	<td><%= @address.ort %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.care_of')%>:</th>
+	<td><%= @address.care_of %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.postfach')%>:</th>
+	<td><%= @address.postfach %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.postfachplz')%>:</th>
+	<td><%= @address.postfachplz %></td>
+      </tr>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@address) %>
-  <%= delete_link(@address) %>
-  <%= new_link Address %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@address) %>
+      <%= delete_link(@address) %>
+      <%= new_link Address %>
+    </div>
+  </div>
 </div>
+

@@ -1,21 +1,32 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @operating_system.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.eol')%>:</th>
-    <td><%= @operating_system.eol %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.matching_pattern')%>:</th>
-    <%= simple_format(@operating_system.matching_pattern&.chomp, {}, wrapper_tag: "td") %>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.operating_system') %>:
+      <%= @operating_system.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.name')%>:</th>
+	<td><%= @operating_system.name %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.eol')%>:</th>
+	<td><%= @operating_system.eol %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.matching_pattern')%>:</th>
+	<%= simple_format(@operating_system.matching_pattern&.chomp, {}, wrapper_tag: "td") %>
+      </tr>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@operating_system) %>
-  <%= delete_link(@operating_system) %>
-  <%= new_link OperatingSystem %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@operating_system) %>
+      <%= delete_link(@operating_system) %>
+      <%= new_link OperatingSystem %>
+    </div>
+  </div>
 </div>
+

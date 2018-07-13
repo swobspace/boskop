@@ -11,6 +11,7 @@ de:
     restore: zurücksetzen
     search: Suche
     search_hosts: Suche Hosts
+    search_networks: Suche Netzwerke
     search_vulnerabilities: Suche Schwachstellen
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
@@ -42,6 +43,8 @@ de:
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
+    vulnerability_detail: Schwachstelle/Details
+    vulnerable_hosts: Verwundbare Hosts
     all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
     location_disabled: Dieser Standort ist deaktiviert

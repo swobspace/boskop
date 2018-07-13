@@ -1,21 +1,31 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.field')%>:</th>
-    <td><%= @operating_system_mapping.field %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.value')%>:</th>
-    <td><%= @operating_system_mapping.value %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.operating_system')%>:</th>
-    <td><%= @operating_system_mapping.operating_system %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('activerecord.models.operating_system_mapping') %>:
+      <%= @operating_system_mapping.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.field')%>:</th>
+	<td><%= @operating_system_mapping.field %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.value')%>:</th>
+	<td><%= @operating_system_mapping.value %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.operating_system')%>:</th>
+	<td><%= @operating_system_mapping.operating_system %></td>
+      </tr>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@operating_system_mapping) %>
-  <%= delete_link(@operating_system_mapping) %>
-  <%= new_link OperatingSystemMapping %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@operating_system_mapping) %>
+      <%= delete_link(@operating_system_mapping) %>
+      <%= new_link OperatingSystemMapping %>
+    </div>
+  </div>
 </div>

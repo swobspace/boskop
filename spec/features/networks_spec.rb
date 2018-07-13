@@ -18,6 +18,7 @@ RSpec.describe "Networks", :type => :feature do
       within 'form' do
         fill_in 'cidr', with: '192.168.1.0/24'
         check 'is_subset'
+        uncheck 'is_superset'
         click_button 'Suche'
       end
       expect(page).to have_content "192.168.1.64/27"
@@ -31,6 +32,7 @@ RSpec.describe "Networks", :type => :feature do
       within 'form' do
         fill_in 'cidr', with: '192.168.1.0/24'
         check 'is_superset'
+        uncheck 'is_subset'
         click_button 'Suche'
       end
       expect(page).not_to have_content "192.168.1.64/27"

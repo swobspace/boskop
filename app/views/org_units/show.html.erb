@@ -1,30 +1,41 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @org_unit.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @org_unit.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ancestry')%>:</th>
-    <td><%= @org_unit.ancestry %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.ancestry_depth')%>:</th>
-    <td><%= @org_unit.ancestry_depth %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.position')%>:</th>
-    <td><%= @org_unit.position %></td>
-  </tr>
-  <%= render partial: 'merkmale/list', locals: { merkmale: @org_unit.merkmale } %>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('attributes.org_unit') %>:
+      <%= @org_unit.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.name')%>:</th>
+	<td class="w-100"><%= @org_unit.name %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.description')%>:</th>
+	<td><%= @org_unit.description %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ancestry')%>:</th>
+	<td><%= @org_unit.ancestry %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.ancestry_depth')%>:</th>
+	<td><%= @org_unit.ancestry_depth %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.position')%>:</th>
+	<td><%= @org_unit.position %></td>
+      </tr>
+      <%= render partial: 'merkmale/list', locals: { merkmale: @org_unit.merkmale } %>
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@org_unit) %>
-  <%= delete_link(@org_unit) %>
-  <%= new_link OrgUnit %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@org_unit) %>
+      <%= delete_link(@org_unit) %>
+      <%= new_link OrgUnit %>
+    </div>
+  </div>
 </div>
+

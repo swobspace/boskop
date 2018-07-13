@@ -1,0 +1,20 @@
+<% if can? :read, :vulnerabilities %>
+  <li class="nav-item dropdown <%= active_class('vulnerabilities') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarVulnsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.vulnerabilities') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarVulnsLink">
+      <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.vulnerabilities')), main_app.vulnerabilities_path, class: 'dropdown-item' %>
+      <%=link_to raw('<span class="fas fa-fw fa-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_vulnerabilities_path, class: 'dropdown-item' %>
+      <% if can? :create, Vulnerability %>
+        <div class="dropdown-divider"></div>
+	<%=link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> '+t('boskop.new_vulnerability')), main_app.new_vulnerability_path, class: 'dropdown-item' %>
+      <% end %>
+      <% if can? :manage, Vulnerability %>
+	<%=link_to raw('<span class="fas fa-fw fa-file" aria-hidden="true"></span> '+t('boskop.import_vulnerabilities_file')), main_app.new_import_vulnerabilities_path, class: 'dropdown-item' %>
+      <% end %>
+      <div class="dropdown-divider"></div>
+      <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.vulnerability_details')), main_app.vulnerability_details_path, class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

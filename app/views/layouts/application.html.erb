@@ -13,40 +13,35 @@
   <% end %>
 </head>
 <body>
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="<%= root_path if defined?(root_path)%>#">Boskop</a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <%= render partial: 'shared/navi' %>
-        <%= render partial: 'wobauth/shared/accounting' %>
-        <%= render partial: 'wobauth/shared/admin' %>
-      </div><!--/.nav-collapse -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-custom">
+    <a class="navbar-brand" href="<%= main_app.root_path if defined?(main_app.root_path)%>#">Boskop</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%= render partial: 'shared/navi' %>
+      <%= render partial: 'wobauth/shared/admin' %>
+      <%= render partial: 'wobauth/shared/accounting' %>
     </div>
-  </div>
-  <div class="container-fluid">
-    <% unless controller.action_name =~ /(new|edit)/ %>
-      <%= render_breadcrumbs %>
-    <% end %>
+  </nav>
+
+  <main class="container-fluid" role="main">
+    <%= render_breadcrumbs %>
     <%= show_flash %>
     <%= yield %>
-  </div>
-  <div id="footer" class="container-fluid visible-desktop">
-    <div class="row-fluid">
-      <div class="col-md-9">
+  </main>
+
+  <div id="footer" class="container-fluid">
+    <div class="row">
+      <div class="col-sm-9">
         <%= render :partial => 'shared/footer' %>
       </div>
-      <div class="col-md-3">
+      <div class="col-sm-3">
         <%= render :partial => 'shared/version' %>
       </div>
     </div>
   </div>
+
 </body>
 </html>

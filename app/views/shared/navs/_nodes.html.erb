@@ -1,0 +1,11 @@
+<% if can? :navigate, :org_units %>
+  <li class="nav-item dropdown <%= orgunits_active_class %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarOrgUnitsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('boskop.nodes') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarOrgUnitsLink">
+      <%=link_to t('boskop.org_units'), main_app.org_units_path, class: 'dropdown-item' %>
+      <%=link_to t('boskop.locations'), main_app.locations_path, class: 'dropdown-item' %>
+    </div>
+  </li>
+<% end %>

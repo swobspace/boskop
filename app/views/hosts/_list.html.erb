@@ -1,7 +1,7 @@
 <% merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index') %>
 <%= content_tag :table, role: :datatable,
       id: 'hosts_table',
-      class: "table table-bordered table-striped",
+      class: "table table-bordered",
       data: {
         order: [[0, 'desc']].to_json
       } do %>

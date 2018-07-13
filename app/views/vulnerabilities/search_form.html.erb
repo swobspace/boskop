@@ -1,110 +1,119 @@
-<%= form_tag search_vulnerabilities_path, role: "form",
-    class: 'form-horizontal well' do %>
+<div class="container">
+  <%= form_tag(search_vulnerabilities_path, role: "form",
+        class: 'form-horizontal card') do |f| %>
 
-    <legend><%= t('boskop.search_vulnerabilities') %></legend>
-
-    <div class="form-group">
-      <label for="name" class="col-sm-2 control-label"><%=t('attributes.name')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="name" id="name" placeholder="">
-      </div>
+    <div class="card-header">
+      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_vulnerabilities') %></legend>
     </div>
 
-    <div class="form-group">
-      <label for="threat" class="col-sm-2 control-label"><%=t('attributes.threat')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="threat" id="threat" placeholder="">
+    <div class="card-body">
+      <div class="form-group row">
+	<label for="name" class="col-sm-2 col-form-label"><%=t('attributes.name')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="name" id="name" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="severity" class="col-sm-2 control-label"><%=t('attributes.severity')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="severity" id="severity" placeholder="">
+      <div class="form-group row">
+	<label for="threat" class="col-sm-2 col-form-label"><%=t('attributes.threat')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="threat" id="threat" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="ip" class="col-sm-2 control-label"><%=t('attributes.ip')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" id="ip" name="ip" placeholder="IP address or CIDR network">
+      <div class="form-group row">
+	<label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="severity" id="severity" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="hostname" class="col-sm-2 control-label"><%=t('attributes.hostname')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="hostname" id="hostname" placeholder="">
+      <div class="form-group row">
+	<label for="ip" class="col-sm-2 col-form-label"><%=t('attributes.ip')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" id="ip" name="ip" placeholder="IP address or CIDR network">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="host_category" class="col-sm-2 control-label"><%=t('attributes.host_category')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="host_category" id="host_category" placeholder="">
+      <div class="form-group row">
+	<label for="hostname" class="col-sm-2 col-form-label"><%=t('attributes.hostname')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="hostname" id="hostname" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="operating_system" class="col-sm-2 control-label"><%=t('attributes.operating_system')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="operating_system" id="operating_system" placeholder="">
+      <div class="form-group row">
+	<label for="host_category" class="col-sm-2 col-form-label"><%=t('attributes.host_category')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="host_category" id="host_category" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="newer" class="col-sm-2 control-label"><%=t('attributes.newer')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="newer" id="newer" placeholder="">
+      <div class="form-group row">
+	<label for="operating_system" class="col-sm-2 col-form-label"><%=t('attributes.operating_system')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="operating_system" id="operating_system" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="older" class="col-sm-2 control-label"><%=t('attributes.older')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="older" id="older" placeholder="">
+      <div class="form-group row">
+	<label for="newer" class="col-sm-2 col-form-label"><%=t('attributes.newer')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="newer" id="newer" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="lid" class="col-sm-2 control-label"><%=t('attributes.lid')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="lid" id="lid" placeholder="">
+      <div class="form-group row">
+	<label for="older" class="col-sm-2 col-form-label"><%=t('attributes.older')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="older" id="older" placeholder="">
+	</div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="limit" class="col-sm-2 control-label"><%=t('attributes.limit')%></label>
-      <div class="col-sm-10">
-        <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
+      <div class="form-group row">
+	<label for="lid" class="col-sm-2 col-form-label"><%=t('attributes.lid')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="lid" id="lid" placeholder="">
+	</div>
       </div>
-    </div>
 
-<hr />
+      <div class="form-group row">
+	<label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
+	<div class="col-sm-10">
+	  <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
+	</div>
+      </div>
 
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <div class="checkbox">
-          <label class="col-sm-2">
-            <input type="checkbox" id="current" name="current" checked><%=t('attributes.current')%>
-          </label>
-          <label class="col-sm-2">
-            <input type="checkbox" id="critical" name="critical" checked><%=t('attributes.critical')%>
-          </label>
+  <hr />
+
+      <div class="form-group row">
+        <div class="col-sm-2">
+          Shortcuts
         </div>
+	<div class="col-sm-10">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="current" name="current" checked>
+            <label class="form-check-label" for="current">
+              <%=t('attributes.current')%>
+            </label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="critical" name="critical" checked>
+            <label class="form-check-label" for="critical">
+              <%=t('attributes.critical')%>
+            </label>
+	  </div>
+	</div>
       </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-      </div>
-    </div>
 
-<hr />
+      <hr />
 
-    <div class="form-group">
-      <div class="col-sm-10 col-sm-offset-2">
-        <%= submit_tag(t('boskop.search_vulnerabilities'), class: 'btn btn-primary') %>
-        <%= cancel_button %>
+      <div class="form-group row">
+	<div class="col-sm-10 offset-sm-2">
+	  <%= submit_tag(t('boskop.search_vulnerabilities'), class: 'btn btn-primary') %>
+	  <%= cancel_button %>
+	</div>
       </div>
     </div>
-<% end %>
+  <% end %>
+</div>
