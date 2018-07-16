@@ -34,7 +34,7 @@ ready = ->
     buttons: [
       {
         extend: 'copy',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -43,7 +43,7 @@ ready = ->
       {
         extend: 'excel',
         title: $('table[role="datatable"]').data('title')
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         exportOptions: {
           columns: ':visible',
           search: ':applied'
@@ -51,7 +51,7 @@ ready = ->
       },
       {
         extend: 'pdf',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
@@ -61,11 +61,11 @@ ready = ->
       },
       {
         extend: 'print',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
       },
       {
         extend: 'colvis',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
@@ -109,7 +109,7 @@ ready = ->
     buttons: [
       {
         extend: 'excel'
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         title: $('table[role="remotetable"]').data('title')
         text: 'Excel'
         exportOptions: {
@@ -119,7 +119,7 @@ ready = ->
       },
       {
         extend: 'pdf',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         title: $('table[role="remotetable"]').data('title')
@@ -131,11 +131,11 @@ ready = ->
       },
       {
         extend: 'print',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
       },
       {
         extend: 'colvis',
-        className: 'btn-sm',
+        className: 'btn-outline-secondary btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
