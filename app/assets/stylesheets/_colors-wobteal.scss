@@ -2,6 +2,7 @@
 // custom color scheme: wobteal
 // 
 $cblue: #176775;
+$custom: #145A66;
 $cgrey: #77999E;
 $cgreen: #60A360;
 $cred: #BF2B2B;
@@ -19,7 +20,7 @@ $theme-colors: (
   "primary": $cblue,
   "secondary": $cgrey,
   "success": $cgreen,
-  "custom": $cblue,
+  "custom": $custom,
   "danger": $cred,
   "info": $ccyan,
   "warning": $cyellow,
