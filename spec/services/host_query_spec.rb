@@ -55,7 +55,7 @@ RSpec.describe HostQuery do
   end # search :name
 
   context "with :limit = 3" do
-    subject { HostQuery.new(all_hosts, {limit: 3}) }
+    subject { HostQuery.new(all_hosts, {limit: "3"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
     end
@@ -78,7 +78,7 @@ RSpec.describe HostQuery do
   end # search :limit = 3
 
   context "with :limit = 0" do
-    subject { HostQuery.new(all_hosts, {limit: 0}) }
+    subject { HostQuery.new(all_hosts, {limit: "0"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5, vpngw) }
     end

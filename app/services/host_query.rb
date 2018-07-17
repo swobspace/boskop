@@ -72,7 +72,7 @@ private
                 'merkmale.merkmalklasse_id = :mk and merkmale.value ILIKE :value',
                  mk: merkmalklasse.id, value: "%#{value}%")
       when :limit
-        @limit = value
+        @limit = value.to_i
       when :ip
         if value =~ /\/\d{1,2}\z/
           query = query.where("ip <<= ?", value)
