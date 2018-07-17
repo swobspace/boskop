@@ -60,7 +60,11 @@
             %Q[</span>]),
             search_hosts_path(lid: @location.lid, limit: 0), 
             class: 'btn btn-secondary' %>
-      <%= link_to t('controller.vulnerabilities'),
+      <%= link_to raw(
+            t('controller.vulnerabilities') +
+            %Q[ <span class="badge badge-light">] +
+               @location.vulnerabilities.count.to_s +
+            %Q[</span>]),
             search_vulnerabilities_path(lid: @location.lid, limit: 0), 
             class: 'btn btn-secondary' %>
     </div>
