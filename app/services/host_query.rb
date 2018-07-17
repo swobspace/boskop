@@ -32,7 +32,7 @@ class HostQuery
   def initialize(relation, search_options = {})
     @relation       = relation
     @search_options = search_options.symbolize_keys!
-    @limit          = false
+    @limit          = 0
     @query          ||= build_query
   end
 
@@ -115,7 +115,7 @@ private
     if search_value
       query = query.where(search_string.join(' or '), search: "%#{search_value}%")
      end
-    if limit
+    if limit > 0
       query.limit(limit)
     else
       query
