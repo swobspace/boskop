@@ -62,6 +62,7 @@ group :test do
   gem 'database_rewinder'
   gem "capybara"
   gem "poltergeist"
+  gem 'launchy'
 end
 
 gem 'record_tag_helper', '~> 1.0'
