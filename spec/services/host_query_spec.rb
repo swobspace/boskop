@@ -54,8 +54,8 @@ RSpec.describe HostQuery do
     end
   end # search :name
 
-  context "with :limit" do
-    subject { HostQuery.new(all_hosts, {limit: 3}) }
+  context "with :limit = 3" do
+    subject { HostQuery.new(all_hosts, {limit: "3"}) }
     describe "#all" do
       it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
     end
@@ -75,7 +75,30 @@ RSpec.describe HostQuery do
       it { skip "special query and limit doesn work"; expect(subject.include?(pc5)).to be_falsey }
       it { skip "special query and limit doesn work"; expect(subject.include?(vpngw)).to be_falsey }
     end
-  end # search :limit
+  end # search :limit = 3
+
+  context "with :limit = 0" do
+    subject { HostQuery.new(all_hosts, {limit: "0"}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5, vpngw) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(pc2.id, pc3.id, nas.id, pc5.id, vpngw.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_truthy }
+      it { expect(subject.include?(pc5)).to be_truthy }
+      it { expect(subject.include?(vpngw)).to be_truthy }
+    end
+  end # search :limit = 0
 
   context "with :description" do
     subject { HostQuery.new(all_hosts, {description: 'WorkStation'}) }
