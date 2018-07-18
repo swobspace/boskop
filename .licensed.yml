@@ -1,0 +1,16 @@
+name: 'Boskop'
+
+sources:
+  rubygem: true
+  npm: true
+  bower: true
+
+rubygems:
+  without:
+    - development
+    - test
+
+ignored:
+  rubygems:
+    - wobauth
+    - wobaduser
