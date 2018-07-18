@@ -25,7 +25,6 @@ gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
-gem 'settingslogic'
 gem 'devise-remote-user'
 
 gem 'yaml_db'

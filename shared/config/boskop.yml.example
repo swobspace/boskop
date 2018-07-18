@@ -1,0 +1,10 @@
+devise_modules:
+  - :remote_user_authenticatable
+  - :database_authenticatable 
+  - :registerable 
+  - :recoverable 
+  - :rememberable
+  - :trackable
+
+host: example.com
+# script_name: lackmus
