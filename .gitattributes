@@ -1,4 +1,4 @@
 /config/database.yml    export-ignore
-/config/application.yml export-ignore
+/config/boskop.yml export-ignore
 /config/secrets.yml export-ignore
 /db/host_categories.yml export-ignore
