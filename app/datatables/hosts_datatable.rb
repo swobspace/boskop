@@ -35,7 +35,7 @@ class HostsDatatable < ApplicationDatatable
         links << show_link(host)
         links << edit_link(host)
         links << delete_link(host)
-        column << links.join('')
+        column << links.join(' ')
       end
     end
   end

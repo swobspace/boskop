@@ -29,7 +29,7 @@ class VulnerabilitiesDatatable < ApplicationDatatable
         links << show_link(vuln)
         links << edit_link(vuln)
         links << delete_link(vuln)
-        column << links.join('')
+        column << links.join(' ')
       end
     end
   end

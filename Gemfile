@@ -5,7 +5,7 @@ gem 'rails', '~> 5.1.0'
 gem 'rails-i18n', '~> 5.0.0' # For 5.0.x and 5.1.x
 gem 'pg'
 
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '>= 4.0.0'
 gem 'therubyracer',  	platforms: :ruby
@@ -18,14 +18,12 @@ gem 'font-awesome-sass', '~> 5.0.13'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
-gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser.git', branch: 'master'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
-                     branch: 'master'
+gem 'wobauth', '~> 3.4.4'
+gem 'wobaduser', '~> 1.0'
+gem 'wobapphelpers', '~> 3.1'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
-gem 'settingslogic'
 gem 'devise-remote-user'
 
 gem 'yaml_db'
@@ -46,6 +44,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "meta_request"
+  gem 'licensed'
 end
 
 group :test, :development do
