@@ -12,7 +12,7 @@ module VulnerabilitiesDatatableHelper
       column << vuln.vulnerability_detail.threat
       column << vuln.vulnerability_detail.severity.to_s
       column << vuln.lastseen.to_s
-      column << "" # dummy for action links
+      column << "  " # dummy for action links
     end
   end
 
@@ -99,8 +99,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
 
   describe "with search:198.51.100" do
     let(:myparams) {{
-      columns: {"0"=> {search: {value: ""}}},
-      order: {"0"=>{column: "0", dir: "asc"}},
+      order: {"0"=>{column: "7", dir: "desc"}},
       start: "0",
       length: "10",
       "search" => {"value" => "198.51.100", regex: "false"}
@@ -108,10 +107,10 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(5) }
-    it { expect(parse_json(subject, "data/1")).to eq(vuln2array(vuln12)) }
     it { expect(parse_json(subject, "data/0")).to eq(vuln2array(vuln11)) }
-    it { expect(parse_json(subject, "data/2")).to eq(vuln2array(vuln13)) }
-    it { expect(parse_json(subject, "data/3")).to eq(vuln2array(vuln22)) }
-    it { expect(parse_json(subject, "data/4")).to eq(vuln2array(vuln23)) }
+    it { expect(parse_json(subject, "data/1")).to eq(vuln2array(vuln22)) }
+    it { expect(parse_json(subject, "data/2")).to eq(vuln2array(vuln12)) }
+    it { expect(parse_json(subject, "data/3")).to eq(vuln2array(vuln23)) }
+    it { expect(parse_json(subject, "data/4")).to eq(vuln2array(vuln13)) }
   end 
 end
