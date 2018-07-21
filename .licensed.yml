@@ -12,5 +12,3 @@ rubygems:
 
 ignored:
   rubygems:
-    - wobauth
-    - wobaduser
