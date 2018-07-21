@@ -1,45 +1,3 @@
-GIT
-  remote: https://github.com/swobspace/wobaduser.git
-  revision: 30cb561c26a20c96bd127a949b3fa4f661a1be1a
-  branch: master
-  specs:
-    wobaduser (0.1.1)
-      activesupport
-      immutable-struct
-      net-ldap
-
-GIT
-  remote: https://github.com/swobspace/wobapphelpers.git
-  revision: 9fa9894164d42f948bc5c90b0a303dba421d8279
-  branch: master
-  specs:
-    wobapphelpers (3.0.2)
-      coffee-rails
-      font-awesome-sass
-      jquery-rails
-      rails (~> 5.0)
-      record_tag_helper (~> 1.0)
-      responders
-      sass-rails
-
-GIT
-  remote: https://github.com/swobspace/wobauth.git
-  revision: d979dca39838de9b396d1af4224c5590df3e507e
-  branch: master
-  specs:
-    wobauth (3.4.4)
-      cancancan
-      coffee-rails
-      devise
-      immutable-struct
-      jquery-rails
-      rails (~> 5.0)
-      record_tag_helper (~> 1.0)
-      sass-rails
-      simple_form
-      wobaduser
-      wobapphelpers
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -427,6 +385,30 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    wobaduser (1.0.0)
+      activesupport
+      immutable-struct
+      net-ldap
+    wobapphelpers (3.1.0)
+      coffee-rails
+      font-awesome-sass (>= 4.7, <= 6)
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      responders
+      sassc-rails
+    wobauth (3.4.4)
+      cancancan
+      coffee-rails
+      devise
+      immutable-struct
+      jquery-rails
+      rails (~> 5.0)
+      record_tag_helper (~> 1.0)
+      sass-rails
+      simple_form
+      wobaduser
+      wobapphelpers
     xpath (3.1.0)
       nokogiri (~> 1.8)
     yaml_db (0.7.0)
@@ -489,9 +471,9 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
-  wobaduser!
-  wobapphelpers!
-  wobauth!
+  wobaduser (~> 1.0)
+  wobapphelpers (~> 3.1)
+  wobauth (~> 3.4.4)
   yaml_db
 
 BUNDLED WITH

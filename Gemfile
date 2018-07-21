@@ -18,10 +18,9 @@ gem 'font-awesome-sass', '~> 5.0.13'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
-gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser.git', branch: 'master'
-gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers.git',
-                     branch: 'master'
+gem 'wobauth', '~> 3.4.4'
+gem 'wobaduser', '~> 1.0'
+gem 'wobapphelpers', '~> 3.1'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
