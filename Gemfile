@@ -5,7 +5,7 @@ gem 'rails', '~> 5.1.0'
 gem 'rails-i18n', '~> 5.0.0' # For 5.0.x and 5.1.x
 gem 'pg'
 
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '>= 4.0.0'
 gem 'therubyracer',  	platforms: :ruby
