@@ -397,7 +397,7 @@ GEM
       record_tag_helper (~> 1.0)
       responders
       sassc-rails
-    wobauth (3.4.4)
+    wobauth (3.4.5)
       cancancan
       coffee-rails
       devise
@@ -407,8 +407,8 @@ GEM
       record_tag_helper (~> 1.0)
       sass-rails
       simple_form
-      wobaduser
-      wobapphelpers
+      wobaduser (~> 1.0)
+      wobapphelpers (~> 3.0)
     xpath (3.1.0)
       nokogiri (~> 1.8)
     yaml_db (0.7.0)
