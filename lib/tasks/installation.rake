@@ -1,4 +1,5 @@
 namespace :installation do
+  desc "all subtasks"
   task all: %w(check_yarn)
 
   desc "check yarn installation"

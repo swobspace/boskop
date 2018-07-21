@@ -3,6 +3,7 @@
 
 namespace :boskop do
   namespace :operating_system do
+    desc "all subtasks"
     task all: %w(scan_hosts build_matrix assign_to_host)
 
     desc "scan hosts for new operating systems"
