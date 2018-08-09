@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<h1> EOL Matrix </h1>
+<div id="eol_pivot">
+</div>
+
+<br />
+<h1> EOL Data </h1>
+<table id="eol_summary" class="table table-bordered">
+ <thead>
+  <tr>
+    <th>Operating System</th>
+    <th>LID</th>
+    <th>Count</th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @hosts.each do |host| %>
+  <tr>
+    <td><%= host['name'] %></td>
+    <td><%= host['lid'] %></td>
+    <td><%= host['count'] %></td>
+  </tr>
+  <% end %>
+ </tbody>
+</table>
+

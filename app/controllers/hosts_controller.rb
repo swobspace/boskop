@@ -80,6 +80,16 @@ class HostsController < ApplicationController
     end
   end
 
+  def eol_summary
+    eol_ids = OperatingSystem.where("eol < ?", Date.today).pluck(:id)
+    hosts = Host.where("lastseen > ? AND operating_system_id IN (?)", 
+                        1.month.before(Date.today), eol_ids)
+    @hosts = hosts.
+      joins(:operating_system, :location).
+      select("count(hosts.id) as count, operating_systems.name, locations.lid").
+      group("operating_systems.name, locations.lid")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host

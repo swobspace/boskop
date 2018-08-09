@@ -47,6 +47,7 @@ de:
     vulnerable_hosts: Verwundbare Hosts
     all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
+    eol_matrix: End-of-Life Matrix
     location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch

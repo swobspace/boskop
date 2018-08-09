@@ -294,7 +294,7 @@ jquery.dirtyforms@^2.0.0:
   dependencies:
     jquery ">=1.4.2"
 
-jquery@3, jquery@>=1.4.2, jquery@>=1.7:
+jquery@3, jquery@>=1.4.2, jquery@>=1.7, jquery@>=1.9.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
@@ -391,6 +391,12 @@ pdfmake@^0.1.32:
     iconv-lite "^0.4.23"
     linebreak "^0.3.0"
     pdfkit "^0.8.3"
+
+pivottable@^2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/pivottable/-/pivottable-2.21.0.tgz#fa510119f5f9181ce0521cc44b2d51c60b37d528"
+  dependencies:
+    jquery ">=1.9.0"
 
 png-js@>=0.1.0:
   version "0.1.1"

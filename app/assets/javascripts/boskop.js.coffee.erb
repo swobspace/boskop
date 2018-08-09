@@ -167,4 +167,15 @@ ready = ->
 
   $(".datepicker").datepicker()
 
+  eol_pivot = ->
+    sum = $.pivotUtilities.aggregatorTemplates.sum
+    numberFormat = $.pivotUtilities.numberFormat
+    intFormat = numberFormat({digitsAfterDecimal: 0})
+    $("#eol_pivot").pivot($("#eol_summary"),
+      rows: ["Operating System"]
+      cols: ["LID"]
+      aggregator: sum(intFormat)(["Count"])
+    )
+  eol_pivot()
+
 $(document).on('turbolinks:load', ready)

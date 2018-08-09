@@ -10,6 +10,7 @@ RSpec.shared_examples "a Reader" do
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
+  it { is_expected.to be_able_to(:eol_summary, Host) }
 
   it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
 
