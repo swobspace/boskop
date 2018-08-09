@@ -5,10 +5,47 @@ sources:
   npm: true
   bower: true
 
-rubygems:
+rubygem:
   without:
     - development
     - test
 
-ignored:
-  rubygems:
+allowed:
+  - mit
+  - apache-2.0
+  - bsd-2-clause
+  - bsd-3-clause
+  - gpl-3.0
+  - gpl-2.0
+
+reviewed:
+  npm:
+    - inherits
+    - source-map
+    - buffer-from
+    - escodegen
+    - esutils
+    - babel-runtime
+    - regenerator-runtime
+    - popper.js
+    - jquery-mousewheel
+  rubygem:
+    - jquery-ui-rails
+    - pg
+    - sdoc
+    - cancancan
+    - devise-remote-user
+    - ruby-nmap
+    - bundler
+    - tilt
+    - rdoc
+    - json
+    - net-ldap
+    - nokogiri
+    - rprogram
+    - rack
+    - concurrent-ruby
+    - websocket-driver
+    - method_source
+    - ffi
+    - bcrypt
