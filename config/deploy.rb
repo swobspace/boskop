@@ -30,7 +30,7 @@ set :deploy_to, config['deploy_to']
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/boskop.yml", "config/secrets.yml"
+append :linked_files, "config/database.yml", "config/boskop.yml", "config/secrets.yml", "config/ldap.yml"
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
