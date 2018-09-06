@@ -58,6 +58,14 @@ module Boskop
     end
   end
 
+  def self.nessus_url
+    if CONFIG['nessus_url'].present?
+      CONFIG['nessus_url']
+    else
+      'https://localhost:8834'
+    end
+  end
+
 # -- not yet used
 #  ActionMailer::Base.default_url_options = {
 #    host: self.host,
