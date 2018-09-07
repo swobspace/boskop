@@ -24,16 +24,17 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe NessusScansController, type: :controller do
+  login_admin
 
   # This should return the minimal set of attributes required to create a valid
   # NessusScan. As you add validations to NessusScan, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:nessus_scan)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+     { uuid: nil, name: nil, nessus_id: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -97,14 +98,14 @@ RSpec.describe NessusScansController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { import_state: 'completed' }
       }
 
       it "updates the requested nessus_scan" do
         nessus_scan = NessusScan.create! valid_attributes
         put :update, params: {id: nessus_scan.to_param, nessus_scan: new_attributes}, session: valid_session
         nessus_scan.reload
-        skip("Add assertions for updated state")
+        expect(nessus_scan.import_state).to eq("completed")
       end
 
       it "redirects to the nessus_scan" do

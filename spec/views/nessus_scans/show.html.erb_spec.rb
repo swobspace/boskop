@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "nessus_scans/show", type: :view do
   before(:each) do
-    @nessus_scan = assign(:nessus_scan, NessusScan.create!(
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "nessus_scans" }
+    allow(controller).to receive(:action_name) { "show" }
+
+    @nessus_scan = assign(:nessus_scan, FactoryBot.create(:nessus_scan,
       :nessus_id => "Nessus",
       :uuid => "Uuid",
       :name => "Name",
