@@ -15,7 +15,6 @@ class Nessus::ListScansJob < ApplicationJob
       scan_list = nessus.scan_list
       scan_list['scans'].each do |scan|
         next if scan['uuid'].blank?
-        puts scan
         nscan = NessusScan.find_or_initialize_by(uuid: scan['uuid'])
         nscan.name      = scan['name']
         nscan.nessus_id = scan['id']
