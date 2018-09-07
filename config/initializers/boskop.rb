@@ -66,6 +66,14 @@ module Boskop
     end
   end
 
+  def self.nessus_ca_file
+    if CONFIG['nessus_ca_file'].present?
+      CONFIG['nessus_ca_file']
+    else
+      nil
+    end
+  end
+
 # -- not yet used
 #  ActionMailer::Base.default_url_options = {
 #    host: self.host,
