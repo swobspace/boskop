@@ -46,38 +46,46 @@ FactoryBot.define do
     line_state
     access_type
     association :location_a, factory: :location
-    description "internet access just for fun"
+    description { "internet access just for fun" }
   end
 
   factory :line_state do
     name { generate(:aname) }
-    active false
+    active { false }
   end
 
   factory :location do
     lid  { generate(:newlid) }
     name { generate(:aname) }
-    position 0
+    position { 0 }
   end
 
   factory :merkmalklasse do
     name { generate(:aname) }
-    format 'string'
-    position 0
-    for_object Merkmalklasse::OBJECTS.first
+    format { 'string' }
+    position { 0 }
+    for_object { Merkmalklasse::OBJECTS.first }
     visible { Merkmalklasse::VISIBLES }
     tag { generate(:tag) }
   end
 
   factory :merkmal do
-    value 'test'
+    value { 'test' }
     merkmalklasse
     merkmalfor {|a| a.association(:location) }
   end
 
+  factory :nessus_scan do
+    nessus_id { '99991' }
+    uuid { SecureRandom.uuid }
+    name { generate(:aname) }
+    status { 'completed' }
+    last_modification_date { 1.week.before(Date.today) }
+  end
+
   factory :network do
     location
-    netzwerk "192.0.2.0/24"
+    netzwerk { "192.0.2.0/24" }
   end
 
   factory :operating_system do
@@ -85,13 +93,13 @@ FactoryBot.define do
   end
 
   factory :operating_system_mapping do
-    field "cpe"
-    value "cpe:/os:microsoft:embedded::"
+    field { "cpe" }
+    value { "cpe:/os:microsoft:embedded::" }
   end
 
   factory :org_unit do
     name { generate(:aname) }
-    position 0
+    position { 0 }
   end
 
   factory :vulnerability do
