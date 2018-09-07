@@ -161,3 +161,14 @@ VulnerabilityDetail
               cves:string bids:string xrefs:string \
               notes:json certs:json
 
+NessusScan
+----------
+
+    bin/rails g scaffold NessusScan \
+              nessus_id:string:index \
+              uuid:string:index \
+              name:string \
+              status:string \
+              last_modification_date:date \
+              import_state:string
+

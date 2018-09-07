@@ -1,0 +1,33 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.nessus_id')%>:</th>
+    <td><%= @nessus_scan.nessus_id %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.uuid')%>:</th>
+    <td><%= @nessus_scan.uuid %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @nessus_scan.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.status')%>:</th>
+    <td><%= @nessus_scan.status %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.last_modification_date')%>:</th>
+    <td><%= @nessus_scan.last_modification_date %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.import_state')%>:</th>
+    <td><%= @nessus_scan.import_state %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@nessus_scan) %>
+  <%= delete_link(@nessus_scan) %>
+  <%= new_link NessusScan %>
+</div>

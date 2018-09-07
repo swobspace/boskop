@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180708122228) do
+ActiveRecord::Schema.define(version: 20180907132438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,6 +179,19 @@ ActiveRecord::Schema.define(version: 20180708122228) do
     t.string "tag", default: ""
     t.index ["for_object"], name: "index_merkmalklassen_on_for_object"
     t.index ["name"], name: "index_merkmalklassen_on_name"
+  end
+
+  create_table "nessus_scans", force: :cascade do |t|
+    t.string "nessus_id", default: ""
+    t.string "uuid", default: ""
+    t.string "name", default: ""
+    t.string "status", default: ""
+    t.date "last_modification_date"
+    t.string "import_state", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nessus_id"], name: "index_nessus_scans_on_nessus_id"
+    t.index ["uuid"], name: "index_nessus_scans_on_uuid"
   end
 
   create_table "networks", id: :serial, force: :cascade do |t|

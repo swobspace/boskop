@@ -1,0 +1,2 @@
+class NessusScan < ApplicationRecord
+end
