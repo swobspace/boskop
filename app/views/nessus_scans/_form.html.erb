@@ -1,34 +1,26 @@
+<div class="container">
 <%= simple_form_for(@nessus_scan,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-inputs">
-      <%= f.input :nessus_id
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
+      <%= f.input :nessus_id, disabled: true
        %>
-      <%= f.input :uuid
+      <%= f.input :uuid, disabled: true
        %>
-      <%= f.input :name
+      <%= f.input :name, disabled: true
        %>
-      <%= f.input :status
+      <%= f.input :status, disabled: true
        %>
-      <%= f.input :last_modification_date
+      <%= f.input :last_modification_date, as: :string, disabled: true
        %>
       <%= f.input :import_state
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>
