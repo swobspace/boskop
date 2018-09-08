@@ -10,7 +10,7 @@ RSpec.describe NessusScan, type: :model do
   it "should get plain factory working" do
     f = FactoryBot.create(:nessus_scan)
     g = FactoryBot.create(:nessus_scan)
-    expect(f).to validate_uniqueness_of(:uuid)
+    expect(f).to validate_uniqueness_of(:nessus_id).case_insensitive
     expect(f).to be_valid
     expect(g).to be_valid
   end

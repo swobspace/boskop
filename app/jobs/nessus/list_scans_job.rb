@@ -1,8 +1,13 @@
 require 'tenable-ruby'
 
+
 class Nessus::ListScansJob < ApplicationJob
   queue_as :default
 
+  # Import current list from Nessus by nessus_id
+  # this means no history, only the last scan will be fetched
+  # reset import_state to new if uuid has changed since last fetch
+  #
   def perform(*args)
     nessus = TenableRuby::Client.new(
                credentials: {
@@ -15,9 +20,12 @@ class Nessus::ListScansJob < ApplicationJob
       scan_list = nessus.scan_list
       scan_list['scans'].each do |scan|
         next if scan['uuid'].blank?
-        nscan = NessusScan.find_or_initialize_by(uuid: scan['uuid'])
+        nscan = NessusScan.find_or_initialize_by(nessus_id: scan['id'])
         nscan.name      = scan['name']
-        nscan.nessus_id = scan['id']
+        unless nscan.uuid == scan['uuid']
+          nscan.uuid         = scan['uuid']
+          nscan.import_state = 'new'
+        end
         nscan.status    = scan['status']
         nscan.last_modification_date = Time.at(scan['last_modification_date'].to_i)
         nscan.save!

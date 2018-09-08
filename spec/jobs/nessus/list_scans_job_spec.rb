@@ -44,11 +44,12 @@ RSpec.describe Nessus::ListScansJob, type: :job do
 
     describe "with an existing scan" do
       let!(:nessus_scan) { FactoryBot.create(:nessus_scan,
-        uuid: "5c7b8a51-b463-8a0b-f975-5e3ce36a35792a10a517152c7296",
+        uuid: "9608eba4-b33d-11e8-82aa-2387b3c5dd08",
         name: "XYZ default",
         nessus_id: "1234567",
         status: "running",
-        last_modification_date: 1.day.before(Date.today)
+        last_modification_date: 1.day.before(Date.today),
+        import_state: 'done'
       )}
       it "creates no new NessusScan entry" do
 	expect {
@@ -56,10 +57,12 @@ RSpec.describe Nessus::ListScansJob, type: :job do
 	}.to change(NessusScan, :count).by(0)
       end
 
-      it "creates a new NessusScan entry" do
+      it "updates entry" do
         job = subject
         expect(NessusScan.first.uuid).to eq("5c7b8a51-b463-8a0b-f975-5e3ce36a35792a10a517152c7296")
         expect(NessusScan.first.status).to eq("completed")
+        expect(NessusScan.first.nessus_id).to eq("1234567")
+        expect(NessusScan.first.import_state).to eq("new")
       end
     end
   end 

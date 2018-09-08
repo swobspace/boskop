@@ -76,7 +76,7 @@ FactoryBot.define do
   end
 
   factory :nessus_scan do
-    nessus_id { '99991' }
+    nessus_id { generate(:serial) }
     uuid { SecureRandom.uuid }
     name { generate(:aname) }
     status { 'completed' }
