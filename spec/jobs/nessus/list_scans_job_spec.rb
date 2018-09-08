@@ -29,6 +29,27 @@ RSpec.describe Nessus::ListScansJob, type: :job do
       }.not_to raise_error
     end
 
+    describe "with a test scan" do
+      let(:scanlist) {{
+	"folders" => [],
+	"scans" => [
+	  { "uuid" => "5c7b8a51-b463-8a0b-f975-5e3ce36a35792a10a517152c7296",
+	    "name" => "XYZ TeST bla",
+	    "id" => "1234567",
+	    "status" => "completed",
+	    "last_modification_date" => Time.now
+	  }
+	],
+	"timestamp" => Time.now
+      }}
+
+      it "does not create a NessusScan" do
+	expect {
+	  subject
+	}.to change(NessusScan, :count).by(0)
+      end
+    end
+
     describe "with new scan" do
       it "creates a new NessusScan entry" do
 	expect {

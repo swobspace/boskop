@@ -19,7 +19,8 @@ class Nessus::ListScansJob < ApplicationJob
     if nessus.authenticate
       scan_list = nessus.scan_list
       scan_list['scans'].each do |scan|
-        next if scan['uuid'].blank?
+        next if scan['uuid'].blank?	# no scan available
+        next if scan['name'] =~ /test/i # ignore test scans
         nscan = NessusScan.find_or_initialize_by(nessus_id: scan['id'])
         nscan.name      = scan['name']
         unless nscan.uuid == scan['uuid']
