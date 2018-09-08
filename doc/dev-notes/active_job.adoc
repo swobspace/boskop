@@ -8,6 +8,7 @@
 
     bin/rails g job update_host_operating_system
 
-== Nessus::ListScans
+== Nessus
 
     bin/rails g job nessus/list_scans
+    bin/rails g job nessus/import_scans
