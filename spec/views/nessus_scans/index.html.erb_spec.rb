@@ -10,14 +10,14 @@ RSpec.describe "nessus_scans/index", type: :view do
 
     assign(:nessus_scans, [
       FactoryBot.create(:nessus_scan,
-        :nessus_id => "Nessus",
+        :nessus_id => "Nessus1",
         :uuid => "Uuid1",
         :name => "Name",
         :status => "Status",
         :import_state => "Import State"
       ),
       FactoryBot.create(:nessus_scan,
-        :nessus_id => "Nessus",
+        :nessus_id => "Nessus2",
         :uuid => "Uuid2",
         :name => "Name",
         :status => "Status",
@@ -28,7 +28,8 @@ RSpec.describe "nessus_scans/index", type: :view do
 
   it "renders a list of nessus_scans" do
     render
-    assert_select "tr>td", :text => "Nessus".to_s, :count => 2
+    assert_select "tr>td", :text => "Nessus1".to_s, :count => 1
+    assert_select "tr>td", :text => "Nessus2".to_s, :count => 1
     assert_select "tr>td", :text => "Uuid1".to_s, :count => 1
     assert_select "tr>td", :text => "Uuid2".to_s, :count => 1
     assert_select "tr>td", :text => "Name".to_s, :count => 2
