@@ -5,6 +5,7 @@
  *= require datatables.net-buttons-bs4/css/buttons.bootstrap4.css
  *= require select2/dist/css/select2
  *= require select2-bootstrap-theme/dist/select2-bootstrap
+ *= require pivottable/dist/pivot
  *= require boskop
  *= require_self
  */

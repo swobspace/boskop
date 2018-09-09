@@ -17,7 +17,7 @@ module HostsDatatableHelper
       column << host.vendor
       column << host.host_category.to_s
       column << host.location.try(:lid)
-      column << "" # dummy for action links
+      column << "  " # dummy for action links
     end
   end
 end

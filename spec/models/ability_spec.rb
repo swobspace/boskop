@@ -10,8 +10,10 @@ RSpec.shared_examples "a Reader" do
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
+  it { is_expected.to be_able_to(:eol_summary, Host) }
 
   it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
+  it { is_expected.not_to be_able_to(:read, NessusScan.new) }
 
   # -- ... but not writeable
   [ Network, Line, Host, HostCategory,
@@ -37,6 +39,7 @@ RSpec.shared_examples "a NetworkManager" do
   end
 
   it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
+  it { is_expected.not_to be_able_to(:read, NessusScan.new) }
 
   # -- writeable
   [ Network, Line ].each do |model|
@@ -89,6 +92,7 @@ RSpec.shared_examples "a HostManager" do
     it { is_expected.not_to be_able_to(:import, Host) }
     it { is_expected.not_to be_able_to(:new_import, Vulnerability) }
     it { is_expected.not_to be_able_to(:import, Vulnerability) }
+    it { is_expected.not_to be_able_to(:read, NessusScan) }
 
   # -- not writeable
   [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
@@ -103,6 +107,8 @@ RSpec.shared_examples "a HostManager" do
 end
 
 RSpec.shared_examples "a HostAdmin" do
+  it { is_expected.not_to be_able_to(:read, NessusScan) }
+
   # -- readable, ...
   [ Network, Line, Host, HostCategory,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
@@ -138,7 +144,7 @@ RSpec.shared_examples "an Admin" do
   [ Network, Line, Host, HostCategory,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Vulnerability, VulnerabilityDetail,
+    Vulnerability, VulnerabilityDetail, NessusScan,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:manage, model.new) }
   end

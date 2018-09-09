@@ -47,6 +47,7 @@ de:
     vulnerable_hosts: Verwundbare Hosts
     all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
+    eol_matrix: End-of-Life Matrix
     location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch
@@ -78,6 +79,7 @@ de:
       location: Lokation
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
+      nessus_scan: Nessus Scan
       network: Netzwerk
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
@@ -130,12 +132,15 @@ de:
     host: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    import_mode: Import-Mode
+    import_state: Import-Status
     ip: IP-Adresse
     lastseen: zuletzt gesehen
     limit: Limit
     newer: Neuer als
     older: Älter als
     raw_os: OS (raw)
+    last_modification_date: letzte Änderung
     lid: StandortID
     line: Leitung/Zugang
     line_state: Status
@@ -149,6 +154,7 @@ de:
     merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
     name: Name
+    nessus_id: NessusID
     netzwerk: Netzwerk
     network: Netzwerk
     network_mask: Netzwerkmaske
@@ -169,6 +175,7 @@ de:
     renewal_unit: Einheit
     severity: Severity
     sn: Nachname
+    status: Status
     streetaddress: Straße, Nr.
     tag: Tag
     threat: Threat
@@ -176,6 +183,7 @@ de:
     unique: Unique
     update: Update
     username: Username
+    uuid: UUID
     value: Wert
     vendor: Vendor
     visible: Sichtbarkeit
@@ -197,6 +205,7 @@ de:
     locations: Lokationen
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
+    nessus_scans: Nessus Scans
     networks: Netzwerke
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix

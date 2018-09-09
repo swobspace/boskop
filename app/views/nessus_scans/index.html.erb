@@ -1,0 +1,51 @@
+<h1><%= t('controller.nessus_scans') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.nessus_id') %></th>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.status') %></th>
+    <th><%= t('attributes.last_modification_date') %></th>
+    <th><%= t('attributes.uuid') %></th>
+    <th><%= t('attributes.import_state') %></th>
+    <th><%= t('attributes.import_mode') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tfoot>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+</tfoot>
+<tbody>
+
+<% @nessus_scans.each do |nessus_scan| %>
+  <%= content_tag_for(:tr, nessus_scan) do %>
+    <td><%= nessus_scan.nessus_id %></td>
+    <td><%= nessus_scan.name %></td>
+    <td><%= nessus_scan.status %></td>
+    <td><%= nessus_scan.last_modification_date %></td>
+    <td><%= nessus_scan.uuid %></td>
+    <td><%= nessus_scan.import_state %></td>
+    <td><%= nessus_scan.import_mode %></td>
+    <td class="nowrap">
+      <%= show_link nessus_scan %>
+      <%= edit_link nessus_scan %>
+      <%= delete_link nessus_scan %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>

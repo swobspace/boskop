@@ -19,7 +19,9 @@ class Ability
       # -- reader
       can :navigate, [:org_units, :configuration]
       can :read, :all
+      can :eol_summary, Host
       cannot :read, Vulnerability
+      cannot :read, NessusScan
       can [:usage, :usage_form], Network
 
       if @user.role?(:network_manager)

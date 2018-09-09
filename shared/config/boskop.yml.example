@@ -8,3 +8,5 @@ devise_modules:
 
 host: example.com
 # script_name: lackmus
+
+nessus_url: https://nessus.example.org:8834

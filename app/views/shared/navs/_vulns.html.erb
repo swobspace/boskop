@@ -15,6 +15,11 @@
       <% end %>
       <div class="dropdown-divider"></div>
       <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.vulnerability_details')), main_app.vulnerability_details_path, class: 'dropdown-item' %>
+
+      <% if can? :read, NessusScan %>
+        <div class="dropdown-divider"></div>
+        <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.nessus_scans')), main_app.nessus_scans_path, class: 'dropdown-item' %>
+      <% end %>
     </div>
   </li>
 <% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :nessus_scans
   post "vulnerabilities", to: "vulnerabilities#index", constraints: lambda {|req| req.format == :json}
   resources :vulnerabilities do
     collection do
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   resources :hosts do
     resources :vulnerabilities, only: [:index], module: :hosts
     collection do
+      get :eol_summary
       get :search
       post :search
       get :search_form

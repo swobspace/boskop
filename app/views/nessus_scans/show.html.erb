@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= t('activerecord.models.vulnerability') %>:
+      <%= @vulnerability.to_s %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <tr>
+	<th><%= t('attributes.nessus_id')%>:</th>
+	<td><%= @nessus_scan.nessus_id %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.uuid')%>:</th>
+	<td><%= @nessus_scan.uuid %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.name')%>:</th>
+	<td><%= @nessus_scan.name %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.status')%>:</th>
+	<td><%= @nessus_scan.status %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.last_modification_date')%>:</th>
+	<td><%= @nessus_scan.last_modification_date %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.import_state')%>:</th>
+	<td><%= @nessus_scan.import_state %></td>
+      </tr>
+      <tr>
+	<th><%= t('attributes.import_mode')%>:</th>
+	<td><%= @nessus_scan.import_mode %></td>
+      </tr>
+    </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@nessus_scan) %>
+      <%= delete_link(@nessus_scan) %>
+    </div>
+  </div>
+</div>
