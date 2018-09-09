@@ -70,7 +70,8 @@ RSpec.describe Nessus::ListScansJob, type: :job do
         nessus_id: "1234567",
         status: "running",
         last_modification_date: 1.day.before(Date.today),
-        import_state: 'done'
+        import_state: 'done',
+        import_mode: 'unassigned'
       )}
       it "creates no new NessusScan entry" do
 	expect {

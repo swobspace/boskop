@@ -22,6 +22,9 @@ class Nessus::ListScansJob < ApplicationJob
         next if scan['uuid'].blank?	# no scan available
         next if scan['name'] =~ /test/i # ignore test scans
         nscan = NessusScan.find_or_initialize_by(nessus_id: scan['id'])
+        if nscan.import_mode.blank?
+          nscan.import_mode = 'unassigned'
+        end
         nscan.name      = scan['name']
         unless nscan.uuid == scan['uuid']
           nscan.uuid         = scan['uuid']
