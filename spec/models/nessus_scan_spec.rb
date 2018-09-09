@@ -6,6 +6,10 @@ RSpec.describe NessusScan, type: :model do
   it { is_expected.to validate_presence_of(:nessus_id) }
   it { is_expected.to validate_presence_of(:status) }
   it { is_expected.to validate_presence_of(:last_modification_date) }
+  it { is_expected.to validate_inclusion_of(:import_state).
+                        in_array(NessusScan::IMPORT_STATES) }
+  it { is_expected.to validate_inclusion_of(:import_mode).
+                        in_array(NessusScan::IMPORT_MODES) }
 
   it "should get plain factory working" do
     f = FactoryBot.create(:nessus_scan)

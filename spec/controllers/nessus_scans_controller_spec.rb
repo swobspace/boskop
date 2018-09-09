@@ -98,14 +98,15 @@ RSpec.describe NessusScansController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        { import_state: 'completed' }
+        { import_state: 'done', import_mode: 'auto' }
       }
 
       it "updates the requested nessus_scan" do
         nessus_scan = NessusScan.create! valid_attributes
         put :update, params: {id: nessus_scan.to_param, nessus_scan: new_attributes}, session: valid_session
         nessus_scan.reload
-        expect(nessus_scan.import_state).to eq("completed")
+        expect(nessus_scan.import_state).to eq("done")
+        expect(nessus_scan.import_mode).to eq("auto")
       end
 
       it "redirects to the nessus_scan" do

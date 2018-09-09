@@ -132,6 +132,7 @@ de:
     host: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    import_mode: Import-Mode
     import_state: Import-Status
     ip: IP-Adresse
     lastseen: zuletzt gesehen

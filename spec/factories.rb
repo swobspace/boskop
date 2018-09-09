@@ -81,6 +81,8 @@ FactoryBot.define do
     name { generate(:aname) }
     status { 'completed' }
     last_modification_date { 1.week.before(Date.today) }
+    import_mode { 'unassigned' }
+    import_state { 'new' }
   end
 
   factory :network do

@@ -16,7 +16,11 @@
        %>
       <%= f.input :last_modification_date, as: :string, disabled: true
        %>
-      <%= f.input :import_state
+      <%= f.input :import_state, collection: NessusScan::IMPORT_STATES,
+                  include_blank: false
+       %>
+      <%= f.input :import_mode, collection: NessusScan::IMPORT_MODES,
+                  include_blank: false
        %>
 
       <%= f.button :submit, class: 'btn btn-primary' %>

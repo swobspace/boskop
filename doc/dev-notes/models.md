@@ -170,5 +170,7 @@ NessusScan
               name:string \
               status:string \
               last_modification_date:date \
-              import_state:string
+              import_state:string \
+              import_mode:string
 
+#    bin/rails g migration AddImportModeToNessusScan import_mode:string

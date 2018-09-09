@@ -51,6 +51,9 @@ class NessusScansController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def nessus_scan_params
-      params.require(:nessus_scan).permit(:nessus_id, :uuid, :name, :status, :last_modification_date, :import_state)
+      params.require(:nessus_scan).permit(
+        :nessus_id, :uuid, :name, :status, :last_modification_date, 
+        :import_state, :import_mode
+      )
     end
 end

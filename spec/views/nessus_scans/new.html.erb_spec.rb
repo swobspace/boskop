@@ -19,7 +19,8 @@ RSpec.describe "nessus_scans/new", type: :view do
       assert_select "input[name=?]", "nessus_scan[uuid]"
       assert_select "input[name=?]", "nessus_scan[name]"
       assert_select "input[name=?]", "nessus_scan[status]"
-      assert_select "input[name=?]", "nessus_scan[import_state]"
+      assert_select "select[name=?]", "nessus_scan[import_state]"
+      assert_select "select[name=?]", "nessus_scan[import_mode]"
     end
   end
 end

@@ -14,14 +14,16 @@ RSpec.describe "nessus_scans/index", type: :view do
         :uuid => "Uuid1",
         :name => "Name",
         :status => "Status",
-        :import_state => "Import State"
+        :import_state => "failed",
+        :import_mode => "auto"
       ),
       FactoryBot.create(:nessus_scan,
         :nessus_id => "Nessus2",
         :uuid => "Uuid2",
         :name => "Name",
         :status => "Status",
-        :import_state => "Import State"
+        :import_state => "failed",
+        :import_mode => "auto"
       )
     ])
   end
@@ -34,6 +36,7 @@ RSpec.describe "nessus_scans/index", type: :view do
     assert_select "tr>td", :text => "Uuid2".to_s, :count => 1
     assert_select "tr>td", :text => "Name".to_s, :count => 2
     assert_select "tr>td", :text => "Status".to_s, :count => 2
-    assert_select "tr>td", :text => "Import State".to_s, :count => 2
+    assert_select "tr>td", :text => "failed".to_s, :count => 2
+    assert_select "tr>td", :text => "auto".to_s, :count => 2
   end
 end

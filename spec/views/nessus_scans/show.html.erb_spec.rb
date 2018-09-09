@@ -13,7 +13,8 @@ RSpec.describe "nessus_scans/show", type: :view do
       :uuid => "Uuid",
       :name => "Name",
       :status => "Status",
-      :import_state => "Import State"
+      :import_state => "failed",
+      :import_mode => "auto"
     ))
   end
 
@@ -23,6 +24,7 @@ RSpec.describe "nessus_scans/show", type: :view do
     expect(rendered).to match(/Uuid/)
     expect(rendered).to match(/Name/)
     expect(rendered).to match(/Status/)
-    expect(rendered).to match(/Import State/)
+    expect(rendered).to match(/failed/)
+    expect(rendered).to match(/auto/)
   end
 end
