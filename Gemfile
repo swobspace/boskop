@@ -72,3 +72,4 @@ gem "ruby-nmap"
 gem 'immutable-struct'
 gem 'kaminari'
 gem 'tenable-ruby'
+gem 'whenever'

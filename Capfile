@@ -26,7 +26,7 @@ require 'capistrano/rails'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
-# require 'whenever/capistrano'
+require 'whenever/capistrano'
 require 'capistrano/delayed_job'
 require 'capistrano/yarn'
 
