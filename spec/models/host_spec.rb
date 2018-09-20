@@ -136,6 +136,21 @@ RSpec.describe Host, type: :model do
         expect(host.operating_system).to eq(os)
       end
     end
+  end
+
+  describe "#most_critical_vulnerability" do
+    let(:host) { FactoryBot.create(:host)}
+    let(:h) { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.3)}
+    let(:m) { FactoryBot.create(:vulnerability_detail, threat: 'Medium', severity: 5.0)}
+    let(:l) { FactoryBot.create(:vulnerability_detail, threat: 'Low', severity: 2.1)}
+    let(:c) { FactoryBot.create(:vulnerability_detail, threat: 'Critical', severity: 10.0)}
+
+    let!(:vh) { FactoryBot.create(:vulnerability, host: host, vulnerability_detail: h)}
+    let!(:vm) { FactoryBot.create(:vulnerability, host: host, vulnerability_detail: m)}
+    let!(:vc) { FactoryBot.create(:vulnerability, host: host, vulnerability_detail: c)}
+    let!(:vl) { FactoryBot.create(:vulnerability, host: host, vulnerability_detail: l)}
+
+    it { expect(host.most_critical_vulnerability).to eq(vc) }
 
   end
 end

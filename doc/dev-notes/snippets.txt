@@ -1,3 +1,10 @@
 Alle Merkmale vom Typ StandortID für 'Location':
 
     Merkmal.joins(:merkmalklasse).where(merkmalklassen: {name: 'StandortID', for_object: 'Location'})
+
+Anzahl Host nach Location mit Vulnerability Threat:
+
+Host.joins(vulnerabilities: :vulnerability_detail).where("vulnerabilities.lastseen > '2018-09-01'").select("hosts.location_id, vulnerability_details.threat, count(hosts.id)").distinct.group("hosts.location_id, vulnerability_details.threat").map {|e| [e.location_id, e.threat, e.count]}
+
+Host.where(id: 5433).joins(vulnerabilities: :vulnerability_detail).where("vulnerabilities.lastseen > '2018-09-01'").order("vulnerability_details.severity desc").limit(1).pluck("vulnerability_details.threat").first.to_s
+
