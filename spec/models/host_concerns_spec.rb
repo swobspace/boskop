@@ -10,6 +10,7 @@ RSpec.describe HostConcerns, type: :model do
   let!(:host4) { FactoryBot.create(:host)}
   let!(:host5) { FactoryBot.create(:host, lastseen: 5.weeks.before(Date.today))}
   let!(:host6) { FactoryBot.create(:host, location: loc2)}
+  let!(:host7) { FactoryBot.create(:host, location: loc2)}
   let(:h)  { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.3)}
   let(:h2) { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.0)}
   let(:m) { FactoryBot.create(:vulnerability_detail, threat: 'Medium', severity: 5.0)}
@@ -46,7 +47,8 @@ RSpec.describe HostConcerns, type: :model do
         {risk: "Critical", lid: "ABC", count: 1},
         {risk: "High", lid: "ABC", count: 1},
         {risk: "Medium", lid: "XYZ", count: 2},
-        {risk: "Low", lid: nil, count: 1}
+        {risk: "Low", lid: nil, count: 1},
+        {risk: "None", lid: "XYZ", count: 1},
       )
     end
 
