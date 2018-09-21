@@ -1,4 +1,6 @@
 class Host < ApplicationRecord
+  include HostConcerns
+
   # -- associations
   belongs_to :operating_system, optional: true
   belongs_to :host_category, optional: true
