@@ -9,6 +9,7 @@ RSpec.describe HostConcerns, type: :model do
   let!(:host3) { FactoryBot.create(:host, location: loc2)}
   let!(:host4) { FactoryBot.create(:host)}
   let!(:host5) { FactoryBot.create(:host, lastseen: 5.weeks.before(Date.today))}
+  let!(:host6) { FactoryBot.create(:host, location: loc2)}
   let(:h)  { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.3)}
   let(:h2) { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.0)}
   let(:m) { FactoryBot.create(:vulnerability_detail, threat: 'Medium', severity: 5.0)}
@@ -33,6 +34,7 @@ RSpec.describe HostConcerns, type: :model do
   let!(:v5l) { FactoryBot.create(:vulnerability, host: host4, vulnerability_detail: l,
                                  lastseen: 5.weeks.before(Date.today))}
 
+  let!(:v6m) { FactoryBot.create(:vulnerability, host: host6, vulnerability_detail: m)}
 
   describe "::vuln_risk_matrix" do
     before(:each) do 
@@ -41,10 +43,10 @@ RSpec.describe HostConcerns, type: :model do
 
     it "generates vuln risk matrix" do
       expect(Host.vuln_risk_matrix).to contain_exactly(
-        ["Critical", 1, "ABC"],
-        ["High", 1, "ABC"],
-        ["Medium", 1, "XYZ"],
-        ["Low", 1, nil]
+        ["Critical", "ABC", 1],
+        ["High", "ABC", 1],
+        ["Medium", "XYZ", 2],
+        ["Low", nil, 1]
       )
     end
 
