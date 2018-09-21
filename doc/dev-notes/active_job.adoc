@@ -12,3 +12,7 @@
 
     bin/rails g job nessus/list_scans
     bin/rails g job nessus/import_scans
+
+== UpdateVulnRisk
+
+    bin/rails g job update_vuln_risk
