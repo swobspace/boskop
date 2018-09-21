@@ -43,10 +43,10 @@ RSpec.describe HostConcerns, type: :model do
 
     it "generates vuln risk matrix" do
       expect(Host.vuln_risk_matrix).to contain_exactly(
-        ["Critical", "ABC", 1],
-        ["High", "ABC", 1],
-        ["Medium", "XYZ", 2],
-        ["Low", nil, 1]
+        {risk: "Critical", lid: "ABC", count: 1},
+        {risk: "High", lid: "ABC", count: 1},
+        {risk: "Medium", lid: "XYZ", count: 2},
+        {risk: "Low", lid: nil, count: 1}
       )
     end
 

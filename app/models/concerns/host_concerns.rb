@@ -6,7 +6,7 @@ module HostConcerns
       where("lastseen >= ?", 4.weeks.before(Date.today))
       .select("count(hosts.id) as count, hosts.vuln_risk, hosts.location_id")
       .group("location_id, vuln_risk")
-      .map {|x| [x.vuln_risk, Location.where(id: x.location_id).first&.lid, x.count]}
+      .map {|x| {risk: x.vuln_risk, lid: Location.where(id: x.location_id).first&.lid, count: x.count}}
     end
   end
 
