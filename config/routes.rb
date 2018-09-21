@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :vulnerabilities, only: [:index], module: :hosts
     collection do
       get :eol_summary
+      get :vuln_risk_matrix
       get :search
       post :search
       get :search_form

@@ -176,6 +176,21 @@ ready = ->
       cols: ["LID"]
       aggregator: sum(intFormat)(["Count"])
     )
-  eol_pivot()
+
+   if $("#eol_pivot").length > 0
+     eol_pivot()
+
+  vuln_risk_pivot = ->
+    sum = $.pivotUtilities.aggregatorTemplates.sum
+    numberFormat = $.pivotUtilities.numberFormat
+    intFormat = numberFormat({digitsAfterDecimal: 0})
+    $("#matrix_pivot").pivot($("#matrix_summary"),
+      rows: ["Risk"]
+      cols: ["LID"]
+      aggregator: sum(intFormat)(["Count"])
+    )
+
+   if $("#matrix_pivot").length > 0
+     vuln_risk_pivot()
 
 $(document).on('turbolinks:load', ready)

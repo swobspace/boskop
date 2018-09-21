@@ -90,6 +90,10 @@ class HostsController < ApplicationController
       group("operating_systems.name, locations.lid")
   end
 
+  def vuln_risk_matrix
+    @matrix = Host.vuln_risk_matrix
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
