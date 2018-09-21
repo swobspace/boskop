@@ -187,10 +187,24 @@ ready = ->
     $("#matrix_pivot").pivot($("#matrix_summary"),
       rows: ["Risk"]
       cols: ["LID"]
-      aggregator: sum(intFormat)(["Count"])
+      aggregator: sum(intFormat)(["Hosts"])
     )
 
-   if $("#matrix_pivot").length > 0
-     vuln_risk_pivot()
+  if $("#matrix_pivot").length > 0
+    vuln_risk_pivot()
+    table = $('#matrix_summary').DataTable(
+      lengthMenu: [ -1]
+      drawCallback: (settings) ->
+        vuln_risk_pivot()
+    )
+    table.columns().search('').draw()
+    $('input[type=search]').val("").trigger('input')
+
+    $("#reset_table").on("click",  ->
+      $('input[type=text]').val("")
+      table.columns().search('').draw()
+      $('input[type=search]').val("").trigger('input')
+    )
+
 
 $(document).on('turbolinks:load', ready)

@@ -8,14 +8,21 @@
 
 <br />
 <h1> Vulnerability Risk Data </h1>
-<table id="matrix_summary" class="table table-bordered">
+<table id="matrix_summary" class="table table-bordered" role="matrixtable">
  <thead>
   <tr>
     <th>Risk</th>
     <th>LID</th>
-    <th>Count</th>
+    <th>Hosts</th>
   </tr>
  </thead>
+ <tfoot>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+ </tfoot>
  <tbody>
   <% @matrix.each do |entry| %>
   <tr>
