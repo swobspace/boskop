@@ -174,11 +174,16 @@ ready = ->
     $("#eol_pivot").pivot($("#eol_summary"),
       rows: ["Operating System"]
       cols: ["LID"]
-      aggregator: sum(intFormat)(["Count"])
+      aggregator: sum(intFormat)(["Hosts"])
     )
 
-   if $("#eol_pivot").length > 0
-     eol_pivot()
+  if $("#eol_pivot").length > 0
+    eol_pivot()
+    table = $('#eol_summary').DataTable(
+      lengthMenu: [ -1]
+      drawCallback: (settings) ->
+        eol_pivot()
+    )
 
   vuln_risk_pivot = ->
     sum = $.pivotUtilities.aggregatorTemplates.sum
@@ -197,14 +202,5 @@ ready = ->
       drawCallback: (settings) ->
         vuln_risk_pivot()
     )
-    table.columns().search('').draw()
-    $('input[type=search]').val("").trigger('input')
-
-    $("#reset_table").on("click",  ->
-      $('input[type=text]').val("")
-      table.columns().search('').draw()
-      $('input[type=search]').val("").trigger('input')
-    )
-
 
 $(document).on('turbolinks:load', ready)
