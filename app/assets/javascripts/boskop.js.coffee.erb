@@ -183,6 +183,20 @@ ready = ->
       lengthMenu: [ -1]
       drawCallback: (settings) ->
         eol_pivot()
+      dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+      buttons: [
+        {
+          extend: 'excel',
+          className: 'btn-outline-secondary btn-sm',
+          sheetName: 'raw',
+          filename: 'boskop-eol-matrix',
+          title: '',
+          exportOptions: {
+            columns: ':visible',
+            search: ':applied'
+          }
+        }
+      ]
     )
 
   vuln_risk_pivot = ->
@@ -201,6 +215,20 @@ ready = ->
       lengthMenu: [ -1]
       drawCallback: (settings) ->
         vuln_risk_pivot()
+      dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+      buttons: [
+        {
+          extend: 'excel',
+          className: 'btn-outline-secondary btn-sm',
+          sheetName: 'raw',
+          filename: 'boskop-vuln-risk-matrix',
+          title: '',
+          exportOptions: {
+            columns: ':visible',
+            search: ':applied'
+          }
+        }
+      ]
     )
 
 $(document).on('turbolinks:load', ready)
