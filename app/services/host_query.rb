@@ -25,6 +25,7 @@ class HostQuery
   # * :lid - location.lid (string)
   # * :eol - operating_systems.eol < today (boolean)
   # * :limit - limit result (integer)
+  # * :vuln_risk - string (High, Critical, ...) or 'higher' for High+Critical
   #
   # please note: 
   # left_outer_join(:host_category, :location, :operating_system) must exist in relation.
@@ -96,6 +97,12 @@ private
       when :lid
         lids = value.split(%r{[,; |]+})
         query = query.where("locations.lid IN (?)", lids)
+      when :vuln_risk
+        if value == 'higher'
+          query = query.where(vuln_risk: ['High', 'Critical'])
+        else
+          query = query.where(vuln_risk: value)
+        end
       when :search
         string_fields.each do |term|
           search_string << "hosts.#{term} ILIKE :search"

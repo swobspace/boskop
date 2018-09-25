@@ -607,4 +607,59 @@ RSpec.describe HostQuery do
       it { expect(subject.all).to contain_exactly(nas) }
     end
   end
+
+  describe "with vuln_risk" do
+  let!(:h1) { FactoryBot.create(:host, vuln_risk: 'Critical')}
+  let!(:h2) { FactoryBot.create(:host, vuln_risk: 'High')}
+  let!(:h3) { FactoryBot.create(:host, vuln_risk: 'Medium')}
+  let!(:h4) { FactoryBot.create(:host, vuln_risk: 'Low')}
+  let!(:h5) { FactoryBot.create(:host, vuln_risk: 'High',
+                                    lastseen: 5.weeks.before(Date.today))}
+
+    context "with vuln_risk: higher" do
+      subject { HostQuery.new(all_hosts, {vuln_risk: 'higher'}) }
+      describe "#all" do
+	it { expect(subject.all).to contain_exactly(h1,h2,h5) }
+      end
+      describe "#find_each" do
+	it "executes matching hosts" do
+	  hosts = []
+	  subject.find_each do |host|
+	    hosts << host.id
+	  end
+	  expect(hosts).to contain_exactly(h1.id, h2.id, h5.id)
+	end
+      end
+      describe "#include?" do
+	it { expect(subject.include?(h1)).to be_truthy }
+	it { expect(subject.include?(h2)).to be_truthy }
+	it { expect(subject.include?(h3)).to be_falsey }
+	it { expect(subject.include?(h4)).to be_falsey }
+	it { expect(subject.include?(h5)).to be_truthy }
+      end
+    end # search :vuln_risk higher
+
+    context "with vuln_risk: 'High'" do
+      subject { HostQuery.new(all_hosts, {vuln_risk: 'High'}) }
+      describe "#all" do
+	it { expect(subject.all).to contain_exactly(h2,h5) }
+      end
+      describe "#find_each" do
+	it "executes matching hosts" do
+	  hosts = []
+	  subject.find_each do |host|
+	    hosts << host.id
+	  end
+	  expect(hosts).to contain_exactly(h2.id, h5.id)
+	end
+      end
+      describe "#include?" do
+	it { expect(subject.include?(h1)).to be_falsey }
+	it { expect(subject.include?(h2)).to be_truthy }
+	it { expect(subject.include?(h3)).to be_falsey }
+	it { expect(subject.include?(h4)).to be_falsey }
+	it { expect(subject.include?(h5)).to be_truthy }
+      end
+    end # search :vuln_risk higher
+  end # vuln_risk
 end
