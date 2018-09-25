@@ -101,12 +101,13 @@ private
         if value == 'higher'
           query = query.where(vuln_risk: ['High', 'Critical'])
         else
-          query = query.where(vuln_risk: value)
+          query = query.where("hosts.vuln_risk ILIKE ?", "%#{value}%")
         end
       when :search
         string_fields.each do |term|
           search_string << "hosts.#{term} ILIKE :search"
         end
+        search_string << "hosts.vuln_risk ILIKE :search"
         if search_value =~ /\/\d{1,2}\z/
           search_string << "ip <<= '#{search_value}'"
         else
@@ -121,7 +122,7 @@ private
     end
     if search_value
       query = query.where(search_string.join(' or '), search: "%#{search_value}%")
-     end
+    end
     if limit > 0
       query.limit(limit)
     else

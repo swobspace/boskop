@@ -640,7 +640,7 @@ RSpec.describe HostQuery do
     end # search :vuln_risk higher
 
     context "with vuln_risk: 'High'" do
-      subject { HostQuery.new(all_hosts, {vuln_risk: 'High'}) }
+      subject { HostQuery.new(all_hosts, {vuln_risk: 'high'}) }
       describe "#all" do
 	it { expect(subject.all).to contain_exactly(h2,h5) }
       end
@@ -660,6 +660,12 @@ RSpec.describe HostQuery do
 	it { expect(subject.include?(h4)).to be_falsey }
 	it { expect(subject.include?(h5)).to be_truthy }
       end
-    end # search :vuln_risk higher
+    end # search :vuln_risk High
+    context "with search string 'High'" do
+      subject { HostQuery.new(all_hosts, {search: 'high'}) }
+      describe "#all" do
+	it { expect(subject.all).to contain_exactly(h2,h5) }
+      end
+    end
   end # vuln_risk
 end
