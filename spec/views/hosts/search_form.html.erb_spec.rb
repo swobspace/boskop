@@ -30,6 +30,9 @@ RSpec.describe "hosts/search_form", type: :view do
       assert_select "input[name=?]", "host_category"
       assert_select "input[name=?]", "lid"
       assert_select "input[name=?]", "limit"
+      assert_select "input[name=?]", "current"
+      assert_select "input[name=?]", "eol"
+      assert_select "input[name=?]", "vuln_risk"
     end
   end
 end

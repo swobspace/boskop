@@ -49,6 +49,7 @@ de:
     eol_systems: End-of-Life Systeme
     eol_matrix: End-of-Life Matrix
     vuln_risk_matrix: Vulnerability Risk Matrix
+    critical_hosts: Nur kritische Hosts
     location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch

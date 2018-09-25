@@ -26,6 +26,7 @@ RSpec.describe "hosts/search", type: :view do
         :workgroup => "Workgroup3",
         :host_category => hostcategory,
         :operating_system => os,
+        :vuln_risk => 'High',
         :location => location),
       FactoryBot.create(:host,
         :name => "MyLovelyHost",
@@ -40,6 +41,7 @@ RSpec.describe "hosts/search", type: :view do
         :workgroup => "Workgroup3",
         :host_category => hostcategory,
         :operating_system => os,
+        :vuln_risk => 'High',
         :location => location)
     ])
   end
@@ -60,5 +62,6 @@ RSpec.describe "hosts/search", type: :view do
     assert_select "tr>td", :text => "Workgroup3".to_s, :count => 2
     assert_select "tr>td", :text => "LID".to_s, :count => 2
     assert_select "tr>td", :text => "SecureServer".to_s, :count => 2
+    assert_select "tr>td", :text => "High".to_s, :count => 2
   end
 end
