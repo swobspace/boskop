@@ -2,9 +2,9 @@ module HostsHelper
   def risk_button(risk)
     case risk
     when 'Critical'
-      raw(%Q[<button type="button" class="btn btn-danger" title="vulnerability risk">#{risk}</button>])
+      raw(%Q[<a href='#host_vulnerabilities' class="btn btn-danger" title="vulnerability risk">#{risk}</a>])
     when 'High'
-      raw(%Q[<button type="button" class="btn btn-danger" title="vulnerability risk">#{risk}</button>])
+      raw(%Q[<a href='#host_vulnerabilities' class="btn btn-danger" title="vulnerability risk">#{risk}</a>])
     when 'Medium'
       raw(%Q[<button type="button" class="btn btn-warning" title="vulnerability risk">#{risk}</button>])
     else

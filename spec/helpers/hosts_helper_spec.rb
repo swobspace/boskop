@@ -6,14 +6,16 @@ RSpec.describe HostsHelper, :type => :helper do
     context "with risk: Critical" do
       let(:risk) { 'Critical' }
       subject { Capybara.string(helper.risk_button(risk)) }
-      it { expect(subject.find("button").text).to match(risk) }
-      it { expect(subject.find("button")['class']).to match("btn btn-danger") }
+      it { expect(subject.find("a").text).to match(risk) }
+      it { expect(subject.find("a")['href']).to match('#host_vulnerabilities') }
+      it { expect(subject.find("a")['class']).to match("btn btn-danger") }
     end
     context "with risk: High" do
       let(:risk) { 'High' }
       subject { Capybara.string(helper.risk_button(risk)) }
-      it { expect(subject.find("button").text).to match(risk) }
-      it { expect(subject.find("button")['class']).to match("btn btn-danger") }
+      it { expect(subject.find("a").text).to match(risk) }
+      it { expect(subject.find("a")['href']).to match('#host_vulnerabilities') }
+      it { expect(subject.find("a")['class']).to match("btn btn-danger") }
     end
     context "with risk: Medium" do
       let(:risk) { 'Medium' }
