@@ -47,7 +47,7 @@ RSpec.describe HostsController, type: :controller do
   describe "GET #search" do
     it "returns a success response" do
       host = Host.create! valid_attributes
-      get :search, params: {eol: 1}, session: valid_session
+      get :search, params: {eol: 1, current: 1, vuln_risk: 1}, session: valid_session
       expect(response).to be_success
     end
   end
