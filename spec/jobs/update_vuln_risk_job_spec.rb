@@ -35,8 +35,6 @@ RSpec.describe UpdateVulnRiskJob, type: :job do
     end
 
     # just as cross check
-    it { puts host1.vulnerabilities.first.lastseen }
-    it { puts host1.most_critical_vulnerability.vulnerability_detail.threat }
     it { expect(host1.vulnerabilities.count).to eq(4) }
     it { expect(host2.vulnerabilities.count).to eq(4) }
     it { expect(host3.vulnerabilities.count).to eq(2) }
