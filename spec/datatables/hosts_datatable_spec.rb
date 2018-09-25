@@ -13,6 +13,7 @@ module HostsDatatableHelper
       column << host.domain_dns
       column << host.workgroup
       column << host.lastseen.to_s
+      column << host.vuln_risk.to_s
       column << host.mac
       column << host.vendor
       column << host.host_category.to_s
@@ -100,4 +101,27 @@ RSpec.describe HostsDatatable, type: :model do
     it { expect(parse_json(subject, "data/0")).to eq(host2array(nas)) }
     it { expect(parse_json(subject, "data/3")).to eq(host2array(pc5)) }
   end 
+
+  describe "with vuln_risk:Critical" do
+    let!(:h1) { FactoryBot.create(:host, name: "A", vuln_risk: 'Critical')}
+    let!(:h2) { FactoryBot.create(:host, name: "B", vuln_risk: 'High')}
+    let!(:h3) { FactoryBot.create(:host, name: "C", vuln_risk: 'Medium')}
+    let!(:h4) { FactoryBot.create(:host, name: "D", vuln_risk: 'Low')}
+    let!(:h5) { FactoryBot.create(:host, name: "E", vuln_risk: 'High',
+                                   lastseen: 5.weeks.before(Date.today))}
+
+    let(:myparams) {{
+      columns: {"10"=> {search: {value: "High"}}},
+      order: {"0"=>{column: "0", dir: "asc"}},
+      start: "0",
+      length: "10",
+      search: {value: "", regex: "false"}
+    }}
+    subject { datatable.to_json }
+    it { expect(parse_json(subject, "recordsTotal")).to eq(10) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
+    it { expect(parse_json(subject, "data/0")).to eq(host2array(h2)) }
+    it { expect(parse_json(subject, "data/1")).to eq(host2array(h5)) }
+  end 
+
 end
