@@ -11,6 +11,7 @@ RSpec.shared_examples "a Reader" do
     it { is_expected.to be_able_to(:read, model.new) }
   end
   it { is_expected.to be_able_to(:eol_summary, Host) }
+  it { is_expected.to be_able_to(:vuln_risk_matrix, Host) }
 
   it { is_expected.not_to be_able_to(:read, Vulnerability.new) }
   it { is_expected.not_to be_able_to(:read, NessusScan.new) }
