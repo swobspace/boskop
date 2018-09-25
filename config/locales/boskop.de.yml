@@ -190,6 +190,7 @@ de:
     visible: Sichtbarkeit
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
+    vuln_risk: Vulnerability Risk
     workgroup: Workgroup
     xrefs: Referenzen
 
