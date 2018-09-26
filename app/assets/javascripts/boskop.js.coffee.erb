@@ -36,6 +36,7 @@ ready = ->
         extend: 'copy',
         className: 'btn-outline-secondary btn-sm',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -45,6 +46,7 @@ ready = ->
         title: $('table[role="datatable"]').data('title')
         className: 'btn-outline-secondary btn-sm',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -55,6 +57,7 @@ ready = ->
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -192,6 +195,7 @@ ready = ->
           filename: 'boskop-eol-matrix',
           title: '',
           exportOptions: {
+            selected: false,
             columns: ':visible',
             search: ':applied'
           }
@@ -224,6 +228,7 @@ ready = ->
           filename: 'boskop-vuln-risk-matrix',
           title: '',
           exportOptions: {
+            selected: false,
             columns: ':visible',
             search: ':applied'
           }
