@@ -51,6 +51,55 @@ RSpec.describe HostConcerns, type: :model do
         {risk: "None", lid: "XYZ", count: 1},
       )
     end
+  end
 
+  describe "::to_csv" do
+    location = FactoryBot.create(:location, lid: "LID")
+    hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
+    os = FactoryBot.create(:operating_system, name: "ZementOS")
+    let!(:host) { FactoryBot.create(:host,
+      :name => "MyLovelyHost",
+      :description => "Runningforever",
+      :ip => "192.168.77.79",
+      :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
+      :raw_os => "Windows 7 Professional 6.1",
+      :mac => "MAC",
+      :vendor => "Tuxolino",
+      :fqdn => "MyLovelyHost.example.net",
+      :domain_dns => "example.net",
+      :workgroup => "Workgroup3",
+      :host_category => hostcategory,
+      :operating_system => os,
+      :location => location,
+      :vuln_risk => 'High',
+      :lastseen => Date.today
+    )}
+
+    it "renders csv" do
+      csv = CSV.parse(Host.to_csv)
+      expect(csv.shift).to contain_exactly(
+                I18n.t('attributes.name'),
+                I18n.t('attributes.description'),
+                I18n.t('attributes.ip'),
+                I18n.t('attributes.operating_system'),
+                I18n.t('attributes.cpe'),
+                I18n.t('attributes.raw_os'),
+                I18n.t('attributes.fqdn'),
+                I18n.t('attributes.domain_dns'),
+                I18n.t('attributes.workgroup'),
+                I18n.t('attributes.lastseen'),
+                I18n.t('attributes.vuln_risk'),
+                I18n.t('attributes.mac'),
+                I18n.t('attributes.vendor'),
+                I18n.t('attributes.host_category'),
+                I18n.t('attributes.location')
+              )
+      expect(csv.last).to contain_exactly(
+      "MyLovelyHost", "Runningforever", "192.168.77.79",
+      "cpe:/o:microsoft:windows_7::sp1:professional",
+      "Windows 7 Professional 6.1", "MAC", "Tuxolino",
+      "MyLovelyHost.example.net", "example.net", "Workgroup3",
+      "SecureServer", "ZementOS", "LID", 'High', Date.today.to_s)
+    end
   end
 end
