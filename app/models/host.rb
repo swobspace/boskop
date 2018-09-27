@@ -60,6 +60,9 @@ class Host < ApplicationRecord
     vulnerabilities.joins(:vulnerability_detail).where("vulnerabilities.lastseen > ?", 4.weeks.before(Date.today)).order("vulnerability_details.severity desc").limit(1).first
   end
 
+  def self.merkmalklassen
+    Merkmalklasse.where(for_object: 'Host')
+  end
 
 private
 

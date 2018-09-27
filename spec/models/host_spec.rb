@@ -153,4 +153,12 @@ RSpec.describe Host, type: :model do
     it { expect(host.most_critical_vulnerability).to eq(vc) }
 
   end
+
+  describe "::merkmalklassen" do
+    let!(:mk1) { FactoryBot.create(:merkmalklasse, for_object: 'Host') }
+    let!(:mk2) { FactoryBot.create(:merkmalklasse, for_object: 'Host') }
+    let!(:mk3) { FactoryBot.create(:merkmalklasse, for_object: 'Location') }
+
+    it { expect(Host.merkmalklassen).to contain_exactly(mk1, mk2) }
+  end
 end
