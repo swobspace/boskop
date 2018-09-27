@@ -54,9 +54,11 @@ RSpec.describe HostConcerns, type: :model do
   end
 
   describe "::to_csv" do
-    location = FactoryBot.create(:location, lid: "LID")
-    hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
-    os = FactoryBot.create(:operating_system, name: "ZementOS")
+    let!(:mklasse) { FactoryBot.create(:merkmalklasse, for_object: 'Host', 
+                                       name: 'Verantwortlich', tag: 'responsible') }
+    let(:location) { FactoryBot.create(:location, lid: "LID") }
+    let(:hostcategory) { FactoryBot.create(:host_category, name: "Secure Server") }
+    let(:os) { FactoryBot.create(:operating_system, name: "ZementOS") }
     let!(:host) { FactoryBot.create(:host,
       :name => "MyLovelyHost",
       :description => "Runningforever",
@@ -72,7 +74,8 @@ RSpec.describe HostConcerns, type: :model do
       :operating_system => os,
       :location => location,
       :vuln_risk => 'High',
-      :lastseen => Date.today
+      :lastseen => Date.today,
+      :merkmal_responsible => "Mr. Superadmin"
     )}
 
     it "renders csv" do
@@ -92,14 +95,15 @@ RSpec.describe HostConcerns, type: :model do
                 I18n.t('attributes.mac'),
                 I18n.t('attributes.vendor'),
                 I18n.t('attributes.host_category'),
-                I18n.t('attributes.location')
+                I18n.t('attributes.location'),
+                "Verantwortlich"
               )
       expect(csv.last).to contain_exactly(
       "MyLovelyHost", "Runningforever", "192.168.77.79",
       "cpe:/o:microsoft:windows_7::sp1:professional",
       "Windows 7 Professional 6.1", "MAC", "Tuxolino",
       "MyLovelyHost.example.net", "example.net", "Workgroup3",
-      "SecureServer", "ZementOS", "LID", 'High', Date.today.to_s)
+      "Secure Server", "ZementOS", "LID", 'High', Date.today.to_s, "Mr. Superadmin")
     end
   end
 end

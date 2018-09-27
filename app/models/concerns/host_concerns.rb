@@ -35,7 +35,7 @@ module HostConcerns
 		I18n.t('attributes.vendor'),
 		I18n.t('attributes.host_category'),
 		I18n.t('attributes.location'),
-               ] 
+               ] + Host.merkmalklassen.pluck(:name)
 
         all.each do |host|
           csv << [ 
@@ -54,10 +54,15 @@ module HostConcerns
 		  host.vendor,
 		  host.host_category.to_s,
 		  host.location.try(:lid),
-                 ]
+                 ] + Host.merkmalklassen.map do |mklasse| 
+                       host.merkmale
+                         .where(merkmalklasse_id: mklasse.id)
+                         .map { |x| x.value.to_s }.join(", ")
+                     end
         end # all.each
       end # CSV
     end # self.to_csv
   end # included do
+
 end
 
