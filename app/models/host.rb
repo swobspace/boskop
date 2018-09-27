@@ -1,4 +1,6 @@
 class Host < ApplicationRecord
+  include HostConcerns
+
   # -- associations
   belongs_to :operating_system, optional: true
   belongs_to :host_category, optional: true
@@ -54,6 +56,13 @@ class Host < ApplicationRecord
     return true
   end
 
+  def most_critical_vulnerability
+    vulnerabilities.joins(:vulnerability_detail).where("vulnerabilities.lastseen > ?", 4.weeks.before(Date.today)).order("vulnerability_details.severity desc").limit(1).first
+  end
+
+  def self.merkmalklassen
+    Merkmalklasse.where(for_object: 'Host')
+  end
 
 private
 

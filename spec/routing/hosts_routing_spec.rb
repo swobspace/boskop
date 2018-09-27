@@ -7,6 +7,14 @@ RSpec.describe HostsController, type: :routing do
       expect(:get => "/hosts").to route_to("hosts#index")
     end
 
+    it "routes to #eol_summary" do
+      expect(:get => "/hosts/eol_summary").to route_to("hosts#eol_summary")
+    end
+
+    it "routes to #vuln_risk_matrix" do
+      expect(:get => "/hosts/vuln_risk_matrix").to route_to("hosts#vuln_risk_matrix")
+    end
+
     it "routes to #search" do
       expect(:get => "/hosts/search").to route_to("hosts#search")
     end

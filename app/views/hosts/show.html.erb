@@ -46,6 +46,12 @@
 	    <th><%= t('attributes.location')%>:</th>
 	    <td><%= @host.location.try(:lid) %></td>
 	  </tr>
+	  <tr>
+	    <th><%= t('attributes.vuln_risk')%>:</th>
+	    <td><%= risk_button(@host.vuln_risk) %></td>
+	    <th></th>
+	    <td></td>
+	  </tr>
 
 	  <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>
 	</table>
@@ -89,9 +95,9 @@
 
 <br/>
 
-<h3 class="mb-3"><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
+<h3 id="host_vulnerabilities" class="mb-3"><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
 <%= render partial: 'vulnerabilities/list', 
-	   locals: {vulnerabilities: @host.vulnerabilities.higher}
+	   locals: {vulnerabilities: @host.vulnerabilities.current.higher}
  %>
 

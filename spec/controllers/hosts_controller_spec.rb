@@ -45,10 +45,21 @@ RSpec.describe HostsController, type: :controller do
   end
 
   describe "GET #search" do
-    it "returns a success response" do
-      host = Host.create! valid_attributes
-      get :search, params: {eol: 1}, session: valid_session
-      expect(response).to be_success
+
+    context "with default format" do
+      it "returns a success response" do
+	host = Host.create! valid_attributes
+	get :search, params: {eol: 1, current: 1, vuln_risk: 1}, session: valid_session
+	expect(response).to be_success
+      end
+    end
+
+    context "with format :csv" do
+      it "returns a success response" do
+        host = Host.create! valid_attributes
+        get :search, params: {eol: 1, current: 1, vuln_risk: 1, format: :csv}, session: valid_session
+        expect(response).to be_success
+      end
     end
   end
 

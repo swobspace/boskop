@@ -4,6 +4,7 @@ class Nessus::ImportScansJob < ApplicationJob
   def perform(options = {})
     options.symbolize_keys!
     @import_mode = options.fetch(:import_mode, 'auto')
+    return unless pending_scans.any?
     pending_scans.each do |scan|
       dlresult = DownloadNessusScanService.new(nessus_id: scan.nessus_id).call
       if dlresult.success?
@@ -24,9 +25,11 @@ class Nessus::ImportScansJob < ApplicationJob
         scan.update_attributes(import_state: 'failed')
       end
     end
+    UpdateVulnRiskJob.perform_now
   end
 
 private
+
   attr_reader :import_mode
   def pending_scans
     importable_scans = NessusScan.where(import_state: 'new', status: 'completed',

@@ -9,6 +9,7 @@ de:
     change_columns: Spalten ändern
     show_all: alles anzeigen
     restore: zurücksetzen
+    csv_export: CSV-Export
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke
@@ -48,6 +49,8 @@ de:
     all_host_vulns: Alle Host-Schwachstellen
     eol_systems: End-of-Life Systeme
     eol_matrix: End-of-Life Matrix
+    vuln_risk_matrix: Vulnerability Risk Matrix
+    critical_hosts: Nur kritische Hosts
     location_disabled: Dieser Standort ist deaktiviert
     threats:
       critical: Kritisch
@@ -189,6 +192,7 @@ de:
     visible: Sichtbarkeit
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
+    vuln_risk: Vulnerability Risk
     workgroup: Workgroup
     xrefs: Referenzen
 

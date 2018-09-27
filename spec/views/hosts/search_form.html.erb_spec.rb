@@ -8,6 +8,7 @@ RSpec.describe "hosts/search_form", type: :view do
     allow(controller).to receive(:controller_name) { "hosts" }
     allow(controller).to receive(:action_name) { "search_form" }
 
+    @ability.can :csv, Host
   end
 
   it "renders search host form" do
@@ -30,6 +31,10 @@ RSpec.describe "hosts/search_form", type: :view do
       assert_select "input[name=?]", "host_category"
       assert_select "input[name=?]", "lid"
       assert_select "input[name=?]", "limit"
+      assert_select "input[name=?]", "current"
+      assert_select "input[name=?]", "eol"
+      assert_select "input[name=?]", "vuln_risk"
+      assert_select "input[name=?]", "commit", count: 2
     end
   end
 end

@@ -25,7 +25,8 @@ RSpec.describe "hosts/show", type: :view do
       :workgroup => "Workgroup3",
       :host_category => hostcategory,
       :operating_system => os,
-      :location => location
+      :location => location,
+      :vuln_risk => 'High'
     ))
   end
 
@@ -44,5 +45,6 @@ RSpec.describe "hosts/show", type: :view do
     expect(rendered).to match(/Workgroup3/)
     expect(rendered).to match(/LID/)
     expect(rendered).to match(/SecureServer/)
+    expect(rendered).to match(/High/)
   end
 end

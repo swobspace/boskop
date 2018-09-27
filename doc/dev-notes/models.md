@@ -116,10 +116,13 @@ Host:
               lastseen:date mac:string vendor:string \
               fqdn:string workgroup:string domain_dns:string \
               host_category:references:index \
-	      location:references:index
+	      location:references:index \
+              vuln_risk:string:index
 
 #    bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
 #               fqdn:string workgroup:string domain_dns:string
+#    bin/rails g migration AddVulnRiskToHost \
+#               vuln_risk:string:index
 
 #    bin/rails g migration AddVendorToHost vendor:string
 #    bin/rails g migration ChangeIpToInet

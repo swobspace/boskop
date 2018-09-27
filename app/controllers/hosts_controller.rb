@@ -17,7 +17,14 @@ class HostsController < ApplicationController
     query = HostQuery.new(@hosts, search_params)
     @filter_info = query.search_options
     @hosts = query.all
-    respond_with(@hosts) 
+    respond_with(@hosts) do |format|
+      format.csv {
+        authorize! :csv, Host
+        send_data @hosts.to_csv(col_sep: "\t"),
+                  filename: 'Hosts.csv'
+      }
+    end
+
   end
 
   # GET /hosts/1
@@ -90,6 +97,10 @@ class HostsController < ApplicationController
       group("operating_systems.name, locations.lid")
   end
 
+  def vuln_risk_matrix
+    @matrix = Host.vuln_risk_matrix
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host
@@ -117,12 +128,12 @@ class HostsController < ApplicationController
         searchparms = params.permit(*submit_parms,
           :name, :description, :ip, :operating_system, :cpe, :raw_os,
           :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
-          :mac, :vendor, :host_category, :lid, :eol, :limit).to_hash
+          :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
     def submit_parms
-      [ "utf8", "authenticity_token", "commit" ]
+      [ "utf8", "authenticity_token", "commit", "format" ]
     end
 
     def merkmale

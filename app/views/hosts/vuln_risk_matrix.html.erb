@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<h1> Vulnerability Risk Matrix </h1>
+<div id="matrix_pivot">
+</div>
+
+<br />
+<h1> Vulnerability Risk Data </h1>
+<table id="matrix_summary" class="table table-bordered" role="matrixtable">
+ <thead>
+  <tr>
+    <th>Risk</th>
+    <th>LID</th>
+    <th>Hosts</th>
+  </tr>
+ </thead>
+ <tbody>
+  <% @matrix.each do |entry| %>
+  <tr>
+    <td><%= entry[:risk] %></td>
+    <td><%= entry[:lid] %></td>
+    <td><%= entry[:count] %></td>
+  </tr>
+  <% end %>
+ </tbody>
+</table>
+

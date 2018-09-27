@@ -36,6 +36,7 @@ ready = ->
         extend: 'copy',
         className: 'btn-outline-secondary btn-sm',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -45,6 +46,7 @@ ready = ->
         title: $('table[role="datatable"]').data('title')
         className: 'btn-outline-secondary btn-sm',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -55,6 +57,7 @@ ready = ->
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
+          selected: false,
           columns: ':visible',
           search: ':applied'
         }
@@ -174,8 +177,63 @@ ready = ->
     $("#eol_pivot").pivot($("#eol_summary"),
       rows: ["Operating System"]
       cols: ["LID"]
-      aggregator: sum(intFormat)(["Count"])
+      aggregator: sum(intFormat)(["Hosts"])
     )
-  eol_pivot()
+
+  if $("#eol_pivot").length > 0
+    eol_pivot()
+    table = $('#eol_summary').DataTable(
+      lengthMenu: [ -1]
+      drawCallback: (settings) ->
+        eol_pivot()
+      dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+      buttons: [
+        {
+          extend: 'excel',
+          className: 'btn-outline-secondary btn-sm',
+          sheetName: 'raw',
+          filename: 'boskop-eol-matrix',
+          title: '',
+          exportOptions: {
+            selected: false,
+            columns: ':visible',
+            search: ':applied'
+          }
+        }
+      ]
+    )
+
+  vuln_risk_pivot = ->
+    sum = $.pivotUtilities.aggregatorTemplates.sum
+    numberFormat = $.pivotUtilities.numberFormat
+    intFormat = numberFormat({digitsAfterDecimal: 0})
+    $("#matrix_pivot").pivot($("#matrix_summary"),
+      rows: ["Risk"]
+      cols: ["LID"]
+      aggregator: sum(intFormat)(["Hosts"])
+    )
+
+  if $("#matrix_pivot").length > 0
+    vuln_risk_pivot()
+    table = $('#matrix_summary').DataTable(
+      lengthMenu: [ -1]
+      drawCallback: (settings) ->
+        vuln_risk_pivot()
+      dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
+      buttons: [
+        {
+          extend: 'excel',
+          className: 'btn-outline-secondary btn-sm',
+          sheetName: 'raw',
+          filename: 'boskop-vuln-risk-matrix',
+          title: '',
+          exportOptions: {
+            selected: false,
+            columns: ':visible',
+            search: ':applied'
+          }
+        }
+      ]
+    )
 
 $(document).on('turbolinks:load', ready)

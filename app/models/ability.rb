@@ -19,7 +19,7 @@ class Ability
       # -- reader
       can :navigate, [:org_units, :configuration]
       can :read, :all
-      can :eol_summary, Host
+      can [:eol_summary, :vuln_risk_matrix], Host
       cannot :read, Vulnerability
       cannot :read, NessusScan
       can [:usage, :usage_form], Network
@@ -30,7 +30,7 @@ class Ability
       end
 
       if @user.role?(:host_manager)
-	can [:create, :update, :destroy], [Host] 
+	can [:csv, :create, :update, :destroy], [Host] 
         can :read, [Vulnerability, VulnerabilityDetail]
       end
 

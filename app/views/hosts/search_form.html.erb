@@ -129,13 +129,19 @@
 	  <div class="form-check form-check-inline">
 	    <input class="form-check-input" type="checkbox" id="current" name="current" checked>
 	    <label class="form-check-label" for="current">
-	      <%=t('attributes.current')%> 
+	      <%=t('attributes.current')%>
 	    </label>
 	  </div>
 	  <div class="form-check form-check-inline">
-	    <input class="form-check-input" type="checkbox" id="eol" name="eol" checked>
+	    <input class="form-check-input" type="checkbox" id="eol" name="eol">
 	    <label class="form-check-label" for="eol">
 	      <%=t('attributes.eol')%>
+	    </label>
+	  </div>
+	  <div class="form-check form-check-inline">
+	    <input class="form-check-input" type="checkbox" id="vuln_risk" name="vuln_risk" value="higher">
+	    <label class="form-check-label" for="vuln_risk">
+	      <%=t('boskop.critical_hosts')%>
 	    </label>
 	  </div>
 	</div>
@@ -145,7 +151,13 @@
 
       <div class="form-group row">
 	<div class="col-sm-10 offset-sm-2">
-	  <%= submit_tag(t('boskop.search_hosts'), class: 'btn btn-primary') %>
+	  <%= submit_tag(t('boskop.search_hosts'),
+                class: 'btn btn-primary') %>
+          <% if can? :csv, Host %>
+	    <%= submit_tag(t('boskop.csv_export'),
+                  name: 'commit', class: 'btn btn-primary',
+                  formaction: search_hosts_path(format: :csv)) %>
+          <% end %>
 	  <%= cancel_button %>
 	</div>
       </div>
