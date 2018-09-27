@@ -17,7 +17,14 @@ class HostsController < ApplicationController
     query = HostQuery.new(@hosts, search_params)
     @filter_info = query.search_options
     @hosts = query.all
-    respond_with(@hosts) 
+    respond_with(@hosts) do |format|
+      format.csv {
+        authorize! :csv, Host
+        send_data @hosts.to_csv(col_sep: "\t"),
+                  filename: 'Hosts.csv'
+      }
+    end
+
   end
 
   # GET /hosts/1
@@ -126,7 +133,7 @@ class HostsController < ApplicationController
     end
 
     def submit_parms
-      [ "utf8", "authenticity_token", "commit" ]
+      [ "utf8", "authenticity_token", "commit", "format" ]
     end
 
     def merkmale
