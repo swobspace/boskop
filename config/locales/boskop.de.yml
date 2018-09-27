@@ -9,6 +9,7 @@ de:
     change_columns: Spalten ändern
     show_all: alles anzeigen
     restore: zurücksetzen
+    csv_export: CSV-Export
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke
