@@ -30,7 +30,7 @@ class Ability
       end
 
       if @user.role?(:host_manager)
-	can [:create, :update, :destroy], [Host] 
+	can [:csv, :create, :update, :destroy], [Host] 
         can :read, [Vulnerability, VulnerabilityDetail]
       end
 

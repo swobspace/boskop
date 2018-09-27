@@ -8,6 +8,7 @@ RSpec.describe "hosts/search_form", type: :view do
     allow(controller).to receive(:controller_name) { "hosts" }
     allow(controller).to receive(:action_name) { "search_form" }
 
+    @ability.can :csv, Host
   end
 
   it "renders search host form" do

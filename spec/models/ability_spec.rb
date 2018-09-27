@@ -88,6 +88,7 @@ RSpec.shared_examples "a HostManager" do
     it { is_expected.not_to be_able_to(:manage, model.new) }
   end
 
+    it { is_expected.to be_able_to(:csv, Host) }
   # -- no import
     it { is_expected.not_to be_able_to(:new_import, Host) }
     it { is_expected.not_to be_able_to(:import, Host) }

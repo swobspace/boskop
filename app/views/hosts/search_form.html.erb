@@ -153,9 +153,11 @@
 	<div class="col-sm-10 offset-sm-2">
 	  <%= submit_tag(t('boskop.search_hosts'),
                 class: 'btn btn-primary') %>
-	  <%= submit_tag(t('boskop.csv_export'),
-                name: 'commit', class: 'btn btn-primary',
-                formaction: search_hosts_path(format: :csv)) %>
+          <% if can? :csv, Host %>
+	    <%= submit_tag(t('boskop.csv_export'),
+                  name: 'commit', class: 'btn btn-primary',
+                  formaction: search_hosts_path(format: :csv)) %>
+          <% end %>
 	  <%= cancel_button %>
 	</div>
       </div>
