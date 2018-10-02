@@ -218,3 +218,6 @@ de:
     vulnerability_details: Schwachstellen-Details
     users: Benutzer
 
+  vulnerabilities_mailer:
+    send_csv:
+      subject: Aktuelle Schwachstellen am Standort %{lid}

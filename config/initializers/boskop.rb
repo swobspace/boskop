@@ -74,11 +74,10 @@ module Boskop
     end
   end
 
-# -- not yet used
-#  ActionMailer::Base.default_url_options = {
-#    host: self.host,
-#    script_name: self.script_name
-#  }
+ ActionMailer::Base.default_url_options = {
+   host: self.host,
+   script_name: self.script_name
+ }
 
   Rails.application.routes.default_url_options[:host] = self.host
   Rails.application.routes.default_url_options[:script_name] = self.script_name
