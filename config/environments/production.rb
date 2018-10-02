@@ -92,4 +92,5 @@ Rails.application.configure do
 
   # --- wob
   config.colorize_logging = false
+  config.action_mailer.delivery_method = :sendmail
 end
