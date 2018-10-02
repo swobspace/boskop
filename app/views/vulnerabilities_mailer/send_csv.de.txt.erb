@@ -2,3 +2,12 @@ Anbei erhalten Sie die aktuellen Schwachstellen für den Standort <%= @lid %>.
 Sie können eine aktuelle Übersicht auch online abrufen unter
 <%= link_to "Boskop / Schwachstellen / Suche", search_vulnerabilities_path(critical: 'on', current: 'on', limit: 0, lid: @lid %>.
 Bitte loggen Sie sich dazu vorher in Boskop ein. Benötigte Rechte: Hostmanager.
+
+
+**Hinweise**
+
+* Die Übersicht ersetzt vorhergehende, ältere Aufstellungen von Schwachstellen für den Standort <%= @lid %>.
+* Es sind nur hochkritische (Critical) und kritische (High) Schwachstellen enthalten.  Schwachstellen mit niedrigerer Priorität erhalten Sie Online in Boskop.
+* Trennzeichen der CSV-Tabelle ist 'tab'.
+* Importieren Sie die CSV-Tabelle nach Excel, setzen Sie einen Autofilter und filtern Sie 'Threat' zunächst nach 'Critical', dann haben Sie die schwerwiegendsten Probleme, die zuerst bearbeitet werden müssen.
+* Weitere Informationen finden Sie im Handbuch zu Boskop.
