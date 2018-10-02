@@ -8,3 +8,8 @@ Host.joins(vulnerabilities: :vulnerability_detail).where("vulnerabilities.lastse
 
 Host.where(id: 5433).joins(vulnerabilities: :vulnerability_detail).where("vulnerabilities.lastseen > '2018-09-01'").order("vulnerability_details.severity desc").limit(1).pluck("vulnerability_details.threat").first.to_s
 
+# Standorte mit neuen Vulns
+Vulnerability.where(lastseen: Date.yesterday).joins(:location).select('locations.lid').distinct.map(&:lid)
+Location.joins(:vulnerabilities).where(vulnerabilities: {lastseen: Date.yesterday}).distinct
+
+
