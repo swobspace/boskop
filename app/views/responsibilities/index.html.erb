@@ -1,0 +1,36 @@
+<h1><%= t('controller.responsibilities') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.responsibility_for') %></th>
+    <th><%= t('attributes.contact') %></th>
+    <th><%= t('attributes.role') %></th>
+    <th><%= t('attributes.title') %></th>
+    <th><%= t('attributes.position') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @responsibilities.each do |responsibility| %>
+  <%= content_tag_for(:tr, responsibility) do %>
+    <td><%= responsibility.responsibility_for %></td>
+    <td><%= responsibility.contact %></td>
+    <td><%= responsibility.role %></td>
+    <td><%= responsibility.title %></td>
+    <td><%= responsibility.position %></td>
+    <td class="nowrap">
+      <%= show_link responsibility %>
+      <%= edit_link responsibility %>
+      <%= delete_link responsibility %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link Responsibility %>

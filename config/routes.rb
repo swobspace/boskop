@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :responsibilities
+  resources :contacts
   resources :nessus_scans
   post "vulnerabilities", to: "vulnerabilities#index", constraints: lambda {|req| req.format == :json}
   resources :vulnerabilities do
