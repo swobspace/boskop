@@ -1,0 +1,9 @@
+<table class="table table-sm">
+  <% responsibilities.each do |responsibility| %>
+    <%= content_tag(:tr) do %>
+      <td class="w-25"><%= responsibility.contact %></td>
+      <td class="w-25"><%= responsibility.role %></td>
+      <td class="w-50"><%= responsibility.title %></td>
+    <% end # content_tag %>
+  <% end # each %>
+</table>

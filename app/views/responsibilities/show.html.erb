@@ -1,29 +1,46 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.responsibility_for')%>:</th>
-    <td><%= @responsibility.responsibility_for %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.contact')%>:</th>
-    <td><%= @responsibility.contact %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.role')%>:</th>
-    <td><%= @responsibility.role %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.title')%>:</th>
-    <td><%= @responsibility.title %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.position')%>:</th>
-    <td><%= @responsibility.position %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.responsibility') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover autowidth">
+    
+      <tr>
+        <th><%= t('attributes.responsibility_for_type')%>:</th>
+        <td><%= t(@responsibility.responsibility_for_type.underscore, scope: 'activerecord.models') %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.responsibility_for')%>:</th>
+        <td><%= @responsibility.responsibility_for %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.contact')%>:</th>
+        <td><%= @responsibility.contact %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.role')%>:</th>
+        <td><%= @responsibility.role %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.title')%>:</th>
+        <td><%= @responsibility.title %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.position')%>:</th>
+        <td><%= @responsibility.position %></td>
+      </tr>
+        </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@responsibility) %>
-  <%= delete_link(@responsibility) %>
-  <%= new_link Responsibility %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@responsibility) %>
+      <%= delete_link(@responsibility) %>
+      <%= new_link Responsibility %>
+    </div>
+  </div>
 </div>
