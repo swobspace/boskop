@@ -82,6 +82,17 @@ module Boskop
     end
   end
 
+  def self.ldap_options
+    if CONFIG['ldap_options'].present?
+      opts = CONFIG['ldap_options'].symbolize_keys
+      opts.each do |k,v|
+        opts[k] = opts[k].symbolize_keys if opts[k].kind_of? Hash
+      end
+    else
+      nil
+    end
+  end
+
  ActionMailer::Base.default_url_options = {
    host: self.host,
    script_name: self.script_name

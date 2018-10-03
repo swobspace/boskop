@@ -53,4 +53,40 @@ describe Boskop do
       it { expect(Boskop.responsibility_role).to contain_exactly("HOSTMAN") }
     end
   end
+  describe "::ldap_options" do
+    context" with empty Settings" do
+      before(:each) do
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
+      end
+      it { expect(Boskop.ldap_options).to be_nil}
+    end
+
+    context" with existing Settings" do
+      let(:ldap_options) {{
+        "host"=>"192.0.2.71",
+        "port"=>3268,
+        "base"=>"dc=example,dc=com",
+        "auth"=>{
+           "method"=>:simple,
+           "username"=>"myldapuser",
+           "password"=>"myldappasswd"
+        }
+      }}
+      let(:ldap_options_sym) {{
+        host: "192.0.2.71",
+        port: 3268,
+        base: "dc=example,dc=com",
+        auth: {
+           method: :simple,
+           username: "myldapuser",
+           password: "myldappasswd"
+        }
+      }}
+      before(:each) do
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').
+          and_return(ldap_options)
+      end
+      it { expect(Boskop.ldap_options).to eq(ldap_options_sym) }
+    end
+  end
 end
