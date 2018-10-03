@@ -74,6 +74,14 @@ module Boskop
     end
   end
 
+  def self.responsibility_role
+    if CONFIG['responsibility_role'].present?
+      CONFIG['responsibility_role']
+    else
+      ["Vulnerabilities"]
+    end
+  end
+
  ActionMailer::Base.default_url_options = {
    host: self.host,
    script_name: self.script_name
