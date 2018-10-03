@@ -1,9 +1,9 @@
 <table class="table table-sm">
   <% responsibilities.each do |responsibility| %>
     <%= content_tag(:tr) do %>
-      <td class="w-25"><%= responsibility.contact&.to_str %></td>
-      <td class="w-25"><%= responsibility.role %></td>
-      <td class="w-50"><%= responsibility.title %></td>
+      <td class=""><%= responsibility.responsibility_for.to_str %></td>
+      <td class=""><%= responsibility.role %></td>
+      <td class=""><%= responsibility.title %></td>
     <% end # content_tag %>
   <% end # each %>
 </table>

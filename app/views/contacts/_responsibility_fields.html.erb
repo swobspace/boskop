@@ -1,0 +1,6 @@
+<div class="nested-fields list-group-item">
+  <h5 class="card-title"><%= t('attributes.responsibility') %></h5>
+    <%= render partial: 'responsibilities/fields', locals: {f: f} %>
+    <%= link_to_remove_association icon_delete, f, class: 'btn btn-danger btn-xs' %>
+</div>
+

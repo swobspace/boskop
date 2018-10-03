@@ -68,6 +68,8 @@ de:
     cancel: abbrechen
     reset_table: Tabelle zurücksetzen
     upload: Upload
+    add: "%{model} hinzufügen"
+    remove: "%{model} löschen"
 
   activerecord:
     models:

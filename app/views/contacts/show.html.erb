@@ -98,6 +98,17 @@
         </table>
       </div>
     </div>
+    <div class="card tab-pane" id="responsibilities" role="tabpanel" aria-labelledby="responsibilities_tab">
+      <div class="card-header">
+        <h5 class="card-title"><%= t('attributes.responsibilities')%></h5>
+      </div>
+      <div class="card-body">
+
+        <%= render partial: 'responsibilities/responsibilities',
+                   locals: { responsibilities: @contact.responsibilities } %>
+      </div>
+    </div>  
+
   </div>
 
 
@@ -117,6 +128,10 @@
            href="#communication" id="communication_tab"
            aria-controls="communication" aria-selected="true">
            <%= t('attributes.communication')%></a>
+        <a class="nav-link" data-toggle="tab" role="tab"
+           href="#responsibilities" id="responsibilities_tab"
+           aria-controls="responsibilities" aria-selected="true">
+           <%= t('attributes.responsibilities')%> <span class="badge badge-light float-right"><%= @contact.responsibilities.count %></span></a>
       </nav>
     </nav>
   </div>

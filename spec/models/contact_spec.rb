@@ -5,6 +5,8 @@ RSpec.describe Contact, type: :model do
   it { is_expected.to validate_presence_of(:sn) }
   it { is_expected.to validate_presence_of(:givenname) }
 
+  it { is_expected.to accept_nested_attributes_for(:responsibilities) }
+
   it "should get plain factory working" do
     f = FactoryBot.create(:contact)
     g = FactoryBot.create(:contact)

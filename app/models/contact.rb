@@ -3,6 +3,10 @@ class Contact < ApplicationRecord
   has_many :responsibilities, dependent: :restrict_with_error
 
   # -- configuration
+  accepts_nested_attributes_for :responsibilities,
+                                allow_destroy: true,
+                                reject_if: proc { |att| att['contact_id'].blank? }
+
   # -- validations and callbacks
   validates :sn, :givenname, presence: true
   validates :mail, uniqueness: { case_sensitive: false }, allow_blank: true

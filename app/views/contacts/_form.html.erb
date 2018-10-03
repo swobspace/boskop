@@ -46,6 +46,21 @@
 	  <%= f.input :internet %>
 	 </div>
 	</div>
+
+        <div class="card tab-pane" id="responsibilities" role="tabpanel" aria-labelledby="responsibilities_tab"> 
+         <div class="card-header">
+          <h5 class="card-title"><%= t('attributes.responsibilities')%></h5>
+         </div>
+         <div class="card-body">
+          <div id="responsibilities_list" class="list-group">
+          <%= f.simple_fields_for :responsibilities do |builder| %>
+            <%= render 'responsibility_fields', f: builder %>
+          <% end %>
+          </div>
+         </div>
+         <%= link_to_add_association t('actions.add', model: t('activerecord.models.responsibility')), f, :responsibilities, class: 'btn btn-primary', data: { association_insertion_node: '#responsibilities_list', association_insertion_method: :append } %>
+        </div>
+
         <br />
         <%= f.button :submit, class: 'btn btn-primary' %>
         <%= cancel_button %>
@@ -68,6 +83,10 @@
            href="#communication" id="communication_tab"
            aria-controls="communication" aria-selected="true">
            <%= t('attributes.communication')%></a>
+        <a class="nav-link" data-toggle="tab" role="tab"
+           href="#responsibilities" id="responsibilities_tab"
+           aria-controls="responsibilities" aria-selected="true">
+           <%= t('attributes.responsibilities')%></a>
       </nav>
     </nav>
   </div>

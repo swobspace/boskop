@@ -84,6 +84,7 @@ GEM
       xpath (~> 3.1)
     chronic (0.10.2)
     cliver (0.3.2)
+    cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -428,6 +429,7 @@ DEPENDENCIES
   capistrano-yarn
   capistrano3-delayed-job (~> 1.0)
   capybara
+  cocoon
   coffee-rails (>= 4.0.0)
   daemons
   database_rewinder
