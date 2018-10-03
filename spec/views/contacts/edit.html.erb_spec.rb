@@ -2,25 +2,13 @@ require 'rails_helper'
 
 RSpec.describe "contacts/edit", type: :view do
   before(:each) do
-    @contact = assign(:contact, Contact.create!(
-      :sn => "MyString",
-      :givenname => "MyString",
-      :displayname => "MyString",
-      :title => "MyString",
-      :anrede => "MyString",
-      :position => "MyString",
-      :streetaddress => "MyString",
-      :plz => "MyString",
-      :ort => "MyString",
-      :postfach => "MyString",
-      :postfachplz => "MyString",
-      :care_of => "MyString",
-      :telephone => "MyString",
-      :telefax => "MyString",
-      :mobile => "MyString",
-      :mail => "MyString",
-      :internet => "MyString"
-    ))
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "contacts" }
+    allow(controller).to receive(:action_name) { "edit" }
+
+    @contact = assign(:contact, FactoryBot.create(:contact))
   end
 
   it "renders the edit contact form" do

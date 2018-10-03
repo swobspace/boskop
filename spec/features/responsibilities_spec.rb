@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Responsibilities", type: :request do
+RSpec.describe "Responsibilities", type: :feature do
   describe "GET /responsibilities" do
-    it "works! (now write some real specs)" do
-      get responsibilities_path
-      expect(response).to have_http_status(200)
+    it "visits responsibilities#index" do
+      login_user
+      visit responsibilities_path
+      expect(current_path).to eq(responsibilities_path)
     end
   end
 end

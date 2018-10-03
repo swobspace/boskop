@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Contacts", type: :request do
+RSpec.describe "Contacts", type: :feature do
   describe "GET /contacts" do
-    it "works! (now write some real specs)" do
-      get contacts_path
-      expect(response).to have_http_status(200)
+    it "visits contacts#index" do
+      login_user
+      visit contacts_path
+      expect(current_path).to eq(contacts_path)
     end
   end
 end

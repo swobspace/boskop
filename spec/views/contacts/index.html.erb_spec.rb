@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "contacts/index", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "contacts" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:contacts, [
       Contact.create!(
         :sn => "Sn",
@@ -19,7 +25,7 @@ RSpec.describe "contacts/index", type: :view do
         :telephone => "Telephone",
         :telefax => "Telefax",
         :mobile => "Mobile",
-        :mail => "Mail",
+        :mail => "mail1@example.net",
         :internet => "Internet"
       ),
       Contact.create!(
@@ -38,7 +44,7 @@ RSpec.describe "contacts/index", type: :view do
         :telephone => "Telephone",
         :telefax => "Telefax",
         :mobile => "Mobile",
-        :mail => "Mail",
+        :mail => "mail2@example.net",
         :internet => "Internet"
       )
     ])
@@ -61,7 +67,8 @@ RSpec.describe "contacts/index", type: :view do
     assert_select "tr>td", :text => "Telephone".to_s, :count => 2
     assert_select "tr>td", :text => "Telefax".to_s, :count => 2
     assert_select "tr>td", :text => "Mobile".to_s, :count => 2
-    assert_select "tr>td", :text => "Mail".to_s, :count => 2
+    assert_select "tr>td", :text => "mail1@example.net".to_s, :count => 1
+    assert_select "tr>td", :text => "mail1@example.net".to_s, :count => 1
     assert_select "tr>td", :text => "Internet".to_s, :count => 2
   end
 end
