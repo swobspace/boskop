@@ -30,15 +30,14 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
     </tr>
   </tfoot>
   <tbody>
     <% @responsibilities.each do |responsibility| %>
       <%= content_tag_for(:tr, responsibility) do %>
         <td><%= t(responsibility.responsibility_for_type.underscore, scope: 'activerecord.models') %></td>
-        <td><%= responsibility.responsibility_for %></td>
-        <td><%= responsibility.contact %></td>
+        <td><%= responsibility.responsibility_for.to_str %></td>
+        <td><%= responsibility.contact&.to_str %></td>
         <td><%= responsibility.role %></td>
         <td><%= responsibility.title %></td>
         <td><%= responsibility.position %></td>

@@ -15,6 +15,10 @@ class Contact < ApplicationRecord
     end
   end
 
+  def to_str
+    "#{to_s} <#{mail}>"
+  end
+
   def name
     if title.present?
       "#{title} #{givenname} #{sn}"

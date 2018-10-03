@@ -12,12 +12,12 @@
     
       <tr>
         <th><%= t('attributes.responsibility_for')%>:</th>
-        <td><%= @responsibility.responsibility_for %></td>
+        <td><%= @responsibility.responsibility_for.to_str %></td>
       </tr>
     
       <tr>
         <th><%= t('attributes.contact')%>:</th>
-        <td><%= @responsibility.contact %></td>
+        <td><%= @responsibility.contact&.to_str %></td>
       </tr>
     
       <tr>

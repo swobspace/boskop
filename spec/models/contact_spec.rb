@@ -18,6 +18,12 @@ RSpec.describe Contact, type: :model do
     expect("#{f}").to match ("Mustermann, Dr. Hans")
   end
 
+  it "to_str returns value" do
+    f = FactoryBot.create(:contact, sn: 'Mustermann', givenname: "Hans", title: "Dr.",
+                          mail: 'Hans.Mustermann@muster.de')
+    expect("#{f.to_str}").to match ("Mustermann, Dr. Hans <Hans.Mustermann@muster.de>")
+  end
+
   it "name returns value" do
     f = FactoryBot.create(:contact, sn: 'Mustermann', givenname: "Hans", title: "Dr.")
     expect("#{f.name}").to match ("Dr. Hans Mustermann")
