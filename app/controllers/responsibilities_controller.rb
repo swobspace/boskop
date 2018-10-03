@@ -4,7 +4,6 @@ class ResponsibilitiesController < ApplicationController
 
   # GET /responsibilities
   def index
-    @responsibilities = Responsibility.all
     respond_with(@responsibilities)
   end
 

@@ -24,28 +24,28 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ResponsibilitiesController, type: :controller do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # Responsibility. As you add validations to Responsibility, be sure to
-  # adjust the attributes here as well.
+  let!(:location) { FactoryBot.create(:location) }
+  let!(:contact) { FactoryBot.create(:contact) }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:responsibility, 
+      responsibility_for_id: location.id, responsibility_for_type: 'Location',
+      contact_id: contact.id)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { responsibility_for_id: nil, responsibility_for_type: nil, role: nil, contact_id: nil }
   }
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ResponsibilitiesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
     it "returns a success response" do
-      Responsibility.create! valid_attributes
+      responsibility = Responsibility.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -53,14 +53,14 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     it "returns a success response" do
       responsibility = Responsibility.create! valid_attributes
       get :show, params: {id: responsibility.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     it "returns a success response" do
       responsibility = Responsibility.create! valid_attributes
       get :edit, params: {id: responsibility.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -89,22 +89,23 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {responsibility: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        title: "Meister Eder",
+        role: "Vulnerabilities"
+      }}
 
       it "updates the requested responsibility" do
         responsibility = Responsibility.create! valid_attributes
         put :update, params: {id: responsibility.to_param, responsibility: new_attributes}, session: valid_session
         responsibility.reload
-        skip("Add assertions for updated state")
+        expect(responsibility.attributes.symbolize_keys).to include(new_attributes)
       end
 
       it "redirects to the responsibility" do
@@ -118,7 +119,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         responsibility = Responsibility.create! valid_attributes
         put :update, params: {id: responsibility.to_param, responsibility: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).to be_success
       end
     end
   end

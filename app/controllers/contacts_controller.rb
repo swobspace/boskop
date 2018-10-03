@@ -4,7 +4,6 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
-    @contacts = Contact.all
     respond_with(@contacts)
   end
 
@@ -15,7 +14,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @contact = Contact.new(new_contact_params)
     respond_with(@contact)
   end
 
@@ -53,4 +52,9 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:sn, :givenname, :displayname, :title, :anrede, :position, :streetaddress, :plz, :ort, :postfach, :postfachplz, :care_of, :telephone, :telefax, :mobile, :mail, :internet)
     end
+
+    def new_contact_params
+      params.slice(:sn, :givenname, :displayname, :title, :anrede, :position, :streetaddress, :plz, :ort, :postfach, :postfachplz, :care_of, :telephone, :telefax, :mobile, :mail, :internet).permit!
+    end
+
 end

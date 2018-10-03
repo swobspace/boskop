@@ -24,16 +24,14 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ContactsController, type: :controller do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # Contact. As you add validations to Contact, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:contact)
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {sn: nil, givenname: nil}
   }
 
   # This should return the minimal set of values that should be in the session
@@ -43,9 +41,9 @@ RSpec.describe ContactsController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      Contact.create! valid_attributes
+      contact = Contact.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -53,14 +51,14 @@ RSpec.describe ContactsController, type: :controller do
     it "returns a success response" do
       contact = Contact.create! valid_attributes
       get :show, params: {id: contact.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -68,7 +66,7 @@ RSpec.describe ContactsController, type: :controller do
     it "returns a success response" do
       contact = Contact.create! valid_attributes
       get :edit, params: {id: contact.to_param}, session: valid_session
-      expect(response).to be_successful
+      expect(response).to be_success
     end
   end
 
@@ -89,22 +87,37 @@ RSpec.describe ContactsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {contact: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).to be_success
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        sn: "Mustermann",
+        givenname: "Max",
+        title: "Dr.",
+        anrede: "Herr",
+        position: "Leitung",
+        streetaddress: "Holzweg 14",
+        plz: "99979",
+        ort: "Nirgendwo",
+        postfach: "00000",
+        postfachplz: "99978",
+        care_of: "ACME Ltd",
+        telephone: "0123 4567",
+        telefax: "0123 5557",
+        mobile: "0199 123456789",
+        mail: "max.mustermann@example.com",
+        internet: "www.example.com",
+      }}
 
       it "updates the requested contact" do
         contact = Contact.create! valid_attributes
         put :update, params: {id: contact.to_param, contact: new_attributes}, session: valid_session
         contact.reload
-        skip("Add assertions for updated state")
+        expect(contact.attributes.symbolize_keys).to include(new_attributes)
       end
 
       it "redirects to the contact" do
@@ -118,7 +131,7 @@ RSpec.describe ContactsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         contact = Contact.create! valid_attributes
         put :update, params: {id: contact.to_param, contact: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response).to be_success
       end
     end
   end
