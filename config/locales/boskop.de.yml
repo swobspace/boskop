@@ -105,6 +105,7 @@ de:
     ancestry_depth: Abstammungstiefe
     anrede: Anrede
     baselink: Basislink
+    basic_info: Grunddaten
     bandwith_primary: Bandbreite Erstweg
     bandwith_secondary: Bandbreite Zweitweg
     bids: BIDs
@@ -115,6 +116,7 @@ de:
     care_of: c/o
     certs: CERTs
     cidr_mask: Maske (CIDR)
+    communication: Kommunikation
     contact: Kontakt
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
@@ -216,6 +218,7 @@ de:
 
   controller:
     access_types: Zugangsarten
+    ad_users: AD-Benutzer
     addresses: Adressen
     contacts: Kontakte
     framework_contracts: Rahmenverträge
