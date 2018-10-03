@@ -6,7 +6,28 @@ devise_modules:
   - :rememberable
   - :trackable
 
+# 
+# used in action_mailer
+#
+
 host: example.com
 # script_name: lackmus
 
+#
+# Url for Nessus API
+#
+
 nessus_url: https://nessus.example.org:8834
+
+#
+# ldap_options: used in contacts -> new user from ad
+# 
+ldap_options:
+  host: example.com
+  port: 3268
+  base: dc=example,dc=com
+  auth:
+    method: :simple
+    username: asimpleuser
+    password: *****
+
