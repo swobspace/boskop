@@ -28,6 +28,14 @@ FactoryBot.define do
     addressfor {|a| a.association(:location) }
   end
 
+  factory :contact do
+    sn { generate(:aname) }
+    givenname { generate(:aname) }
+    trait :with_mail do
+      mail { generate(:amail) }
+    end
+  end
+
   factory :framework_contract do
     name { generate(:aname) }
   end
@@ -102,6 +110,12 @@ FactoryBot.define do
   factory :org_unit do
     name { generate(:aname) }
     position { 0 }
+  end
+
+  factory :responsibility do
+    association :responsibility_for, factory: :host
+    contact
+    role Boskop.responsibility_role.first
   end
 
   factory :vulnerability do
