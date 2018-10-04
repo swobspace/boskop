@@ -8,7 +8,6 @@ RSpec.describe LocationConcerns, type: :model do
   let(:os2) { FactoryBot.create(:operating_system, name: "PlainOS") }
   let(:hc)  { FactoryBot.create(:host_category, name: 'CategoryA') }
 
-
   let!(:host1) { FactoryBot.create(:host, location: loc1) }
   let!(:host2) { FactoryBot.create(:host, location: loc2) }
   let!(:host3) { FactoryBot.create(:host, location: loc3) }
@@ -45,10 +44,28 @@ RSpec.describe LocationConcerns, type: :model do
     vulnerability_detail: m
   )}
 
-  describe "#with_new_vulns_since" do
+  describe "::with_new_vulns_since" do
     it { expect(Location.with_new_vulns_since(Date.today)).to contain_exactly(loc1) }
     it { expect(Location.with_new_vulns_since(Date.yesterday)).to contain_exactly(loc1) }
     it { expect(Location.with_new_vulns_since(3.days.before(Date.today))).to contain_exactly(loc1, loc2) }
     it { expect(Location.with_new_vulns_since(7.days.before(Date.today))).to contain_exactly(loc1, loc2, loc3) }
+  end
+
+  describe "#vuln_responsible_mail" do
+    let(:contact1) { FactoryBot.create(:contact, mail: "vuln_responsible@example.org") }
+    let(:contact2) { FactoryBot.create(:contact, mail: "not_responsible@example.org") }
+    let!(:responsible1) { FactoryBot.create(:responsibility, 
+      responsibility_for: loc1,
+      role: 'Vulnerabilities',
+      contact: contact1
+    )}
+    let!(:responsible2) { FactoryBot.create(:responsibility, 
+      responsibility_for: loc1,
+      role: "",
+      contact: contact2
+    )}
+
+    it { expect(loc1.vuln_responsible_mail).to contain_exactly("vuln_responsible@example.org") }
+      
   end
 end

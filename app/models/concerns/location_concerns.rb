@@ -9,5 +9,9 @@ module LocationConcerns
     end
   end # included do
 
+  def vuln_responsible_mail
+    responsibilities.where(role: 'Vulnerabilities').joins(:contact).pluck('contacts.mail')
+  end
+
 end
 
