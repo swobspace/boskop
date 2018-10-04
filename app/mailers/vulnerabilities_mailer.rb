@@ -11,7 +11,7 @@ class VulnerabilitiesMailer < ApplicationMailer
     mail_to = options.fetch(:mail_to)
     # -- optional
     @lid  = options.fetch(:lid, "")
-    mail_cc = options.fetch(:mail_cc, [])
+    mail_cc = (Array(options.fetch(:mail_cc, [])) + Boskop.always_cc).compact
     prefix  = options.fetch(:prefix, "")
     subject = options.fetch(:subject, I18n.t('vulnerabilities_mailer.send_csv.subject', lid: @lid))
 

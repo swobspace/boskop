@@ -22,7 +22,10 @@ RSpec.describe VulnerabilitiesMailer, type: :mailer do
     let(:vulnerabilities) { Vulnerability.all }
 
     let(:send_options) {{
-      lid: "BER", mail_to: "hostman@example.org", vulnerabilities: vulnerabilities
+      lid: "BER", 
+      mail_to: "hostman@example.org", 
+      mail_cc: "justforinfo@example.org",
+      vulnerabilities: vulnerabilities
     }}
     [:mail_to, :vulnerabilities].each do |option|
       context "with missing option #{option} " do
@@ -37,8 +40,12 @@ RSpec.describe VulnerabilitiesMailer, type: :mailer do
 
     context "with real data" do
       let(:mail) { VulnerabilitiesMailer.send_csv(send_options) }
+      before(:each) do
+        expect(Boskop).to receive(:always_cc).and_return(["always_cc@example.org"])
+      end
 
       it { expect(mail.to).to eq(["hostman@example.org"]) }
+      it { expect(mail.cc).to eq(["justforinfo@example.org", "always_cc@example.org"]) }
       it { expect(mail.from).to eq([Boskop.mail_from]) }
       it { expect(mail.subject).to eq(I18n.t('vulnerabilities_mailer.send_csv.subject', lid: "BER")) }
       it { expect(mail.attachments.count).to eq(1) }
