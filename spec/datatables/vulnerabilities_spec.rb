@@ -97,20 +97,17 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
     it { expect(parse_json(subject, "data/0")).to eq(vuln2array(vuln33)) }
   end 
 
-  describe "with search:198.51.100" do
+  describe "with search:198.51.100.7" do
     let(:myparams) {{
       order: {"0"=>{column: "7", dir: "desc"}},
       start: "0",
       length: "10",
-      "search" => {"value" => "198.51.100", regex: "false"}
+      "search" => {"value" => "198.51.100.7", regex: "false"}
     }}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
-    it { expect(parse_json(subject, "recordsFiltered")).to eq(5) }
-    it { expect(parse_json(subject, "data/0")).to eq(vuln2array(vuln11)) }
-    it { expect(parse_json(subject, "data/1")).to eq(vuln2array(vuln22)) }
-    it { expect(parse_json(subject, "data/2")).to eq(vuln2array(vuln12)) }
-    it { expect(parse_json(subject, "data/3")).to eq(vuln2array(vuln23)) }
-    it { expect(parse_json(subject, "data/4")).to eq(vuln2array(vuln13)) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
+    it { expect(parse_json(subject, "data/0")).to eq(vuln2array(vuln22)) }
+    it { expect(parse_json(subject, "data/1")).to eq(vuln2array(vuln23)) }
   end 
 end
