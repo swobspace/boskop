@@ -82,6 +82,14 @@ module Boskop
     end
   end
 
+  def self.always_cc
+    if CONFIG['always_cc'].present?
+      Array(CONFIG['always_cc'])
+    else
+      []
+    end
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       opts = CONFIG['ldap_options'].symbolize_keys

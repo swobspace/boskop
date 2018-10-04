@@ -12,6 +12,7 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('nessus_url').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('nessus_ca_file').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('responsibility_role').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('always_cc').and_return(nil)
       end
       it { expect(Boskop.proxy).to be_nil}
       it { expect(Boskop.host).to eq("localhost")}
@@ -22,6 +23,7 @@ describe Boskop do
       it { expect(Boskop.nessus_ca_file).to be_nil }
       it { expect(Boskop.responsibility_role).
            to contain_exactly("Vulnerabilities") }
+      it { expect(Boskop.always_cc).to eq([]) }
     end
 
     context" with existing Settings" do
@@ -42,6 +44,8 @@ describe Boskop do
           and_return('/anypath/anyfile')
         allow(Boskop::CONFIG).to receive(:[]).with('responsibility_role').
           and_return(['HOSTMAN'])
+        allow(Boskop::CONFIG).to receive(:[]).with('always_cc').
+          and_return('hostman@example.org')
       end
       it { expect(Boskop.proxy).to eq('http://192.2.0.1:8080') }
       it { expect(Boskop.host).to eq('www.example.com') }
@@ -51,6 +55,7 @@ describe Boskop do
       it { expect(Boskop.nessus_url).to eq('https://nessus.example.org:8834') }
       it { expect(Boskop.nessus_ca_file).to eq('/anypath/anyfile') }
       it { expect(Boskop.responsibility_role).to contain_exactly("HOSTMAN") }
+      it { expect(Boskop.always_cc).to contain_exactly("hostman@example.org") }
     end
   end
   describe "::ldap_options" do
