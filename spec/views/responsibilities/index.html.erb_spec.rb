@@ -1,8 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "responsibilities/index", type: :view do
-  let(:location) { FactoryBot.create(:location, name: 'ACME Ltd.') }
-  let(:contact) { FactoryBot.create(:contact, sn: "Mustermann", givenname: "Hans") }
+  let(:address) { FactoryBot.create(:address, plz: '12345', ort: 'Nirgendwo') }
+  let(:location) { FactoryBot.create(:location, 
+    name: 'ACME Ltd.', 
+    lid: 'ACE',
+    addresses: [address]
+  )}
+  let(:contact) { FactoryBot.create(:contact, 
+    sn: "Mustermann", 
+    givenname: "Hans",
+    mail: 'hm@muster.de'
+  )}
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -28,11 +37,13 @@ RSpec.describe "responsibilities/index", type: :view do
 
   it "renders a list of responsibilities" do
     render
-    assert_select "tr>td", :text => "ACME Ltd.".to_s, :count => 2
-    assert_select "tr>td", :text => "Mustermann, Hans".to_s, :count => 2
+    puts rendered
+    assert_select "tr>td", :text => "ACE / ACME Ltd. / 12345 Nirgendwo".to_s, :count => 2
+    assert_select "tr>td", :text => "Mustermann, Hans <hm@muster.de>".to_s, :count => 2
     assert_select "tr>td", :text => "Vulnerabilities".to_s, :count => 2
     assert_select "tr>td", :text => "Title".to_s, :count => 2
     assert_select "tr>td", :text => "1".to_s, :count => 1
     assert_select "tr>td", :text => "2".to_s, :count => 1
+
   end
 end
