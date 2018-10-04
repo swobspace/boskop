@@ -51,6 +51,29 @@ RSpec.describe LocationConcerns, type: :model do
     it { expect(Location.with_new_vulns_since(7.days.before(Date.today))).to contain_exactly(loc1, loc2, loc3) }
   end
 
+  describe "::with_new_vulns(since: ..)" do
+    it { expect(Location.with_new_vulns(since: Date.today)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns(since: Date.yesterday)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns(since: 3.days.before(Date.today))).to contain_exactly(loc1, loc2) }
+    it { expect(Location.with_new_vulns(since: 7.days.before(Date.today))).to contain_exactly(loc1, loc2, loc3) }
+  end
+
+  describe "::with_new_vulns_at" do
+    it { expect(Location.with_new_vulns_at(Date.today)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns_at(Date.yesterday)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns_at(2.days.before(Date.today))).to contain_exactly(loc2) }
+    it { expect(Location.with_new_vulns_at(4.days.before(Date.today))).to contain_exactly(loc3) }
+    it { expect(Location.with_new_vulns_at(5.days.before(Date.today))).to contain_exactly() }
+  end
+
+  describe "::with_new_vulns(at: ..)" do
+    it { expect(Location.with_new_vulns(at: Date.today)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns(at: Date.yesterday)).to contain_exactly(loc1) }
+    it { expect(Location.with_new_vulns(at: 2.days.before(Date.today))).to contain_exactly(loc2) }
+    it { expect(Location.with_new_vulns(at: 4.days.before(Date.today))).to contain_exactly(loc3) }
+    it { expect(Location.with_new_vulns(at: 5.days.before(Date.today))).to contain_exactly() }
+  end
+
   describe "#vuln_responsible_mail" do
     let(:contact1) { FactoryBot.create(:contact, mail: "vuln_responsible@example.org") }
     let(:contact2) { FactoryBot.create(:contact, mail: "not_responsible@example.org") }
