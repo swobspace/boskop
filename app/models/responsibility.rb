@@ -7,7 +7,7 @@ class Responsibility < ApplicationRecord
   # -- validations and callbacks
   validates :responsibility_for_type, :responsibility_for_id, presence: true, on: :update
   # validates :contact_id, presence: true
-  validates :role, inclusion: Boskop.responsibility_role
+  validates :role, inclusion: Boskop.responsibility_role, allow_blank: true
 
   def to_s
     "#{contact.to_s} (#{title})"
