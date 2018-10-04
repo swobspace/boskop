@@ -115,7 +115,7 @@ FactoryBot.define do
   factory :responsibility do
     association :responsibility_for, factory: :host
     contact
-    role Boskop.responsibility_role.first
+    role { Boskop.responsibility_role.first }
   end
 
   factory :vulnerability do
