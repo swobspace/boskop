@@ -11,4 +11,13 @@ namespace :installation do
       fail "yarn is not available"
     end
   end
+
+  desc "check schedule.rb"
+  task :check_schedule, :environment do
+    if File.readable?(File.join(Rails.root, 'config', 'schedule.rb'))
+      puts "schedule.rb is available"
+    else
+      fail "schedule.rb is not available"
+    end
+  end
 end
