@@ -83,10 +83,12 @@
            href="#communication" id="communication_tab"
            aria-controls="communication" aria-selected="true">
            <%= t('attributes.communication')%></a>
-        <a class="nav-link" data-toggle="tab" role="tab"
+        <% if @contact.persisted? %>
+         <a class="nav-link" data-toggle="tab" role="tab"
            href="#responsibilities" id="responsibilities_tab"
            aria-controls="responsibilities" aria-selected="true">
            <%= t('attributes.responsibilities')%></a>
+        <% end %>
       </nav>
     </nav>
   </div>
