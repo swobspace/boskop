@@ -5,7 +5,7 @@ class Contact < ApplicationRecord
   # -- configuration
   accepts_nested_attributes_for :responsibilities,
                                 allow_destroy: true,
-                                reject_if: proc { |att| att['contact_id'].blank? }
+                                reject_if: proc { |att| (att['responsibility_for_id'].blank? || att['responsibility_for_type'].blank?) }
 
   # -- validations and callbacks
   validates :sn, :givenname, presence: true
