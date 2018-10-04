@@ -37,7 +37,6 @@ RSpec.describe "responsibilities/index", type: :view do
 
   it "renders a list of responsibilities" do
     render
-    puts rendered
     assert_select "tr>td", :text => "ACE / ACME Ltd. / 12345 Nirgendwo".to_s, :count => 2
     assert_select "tr>td", :text => "Mustermann, Hans <hm@muster.de>".to_s, :count => 2
     assert_select "tr>td", :text => "Vulnerabilities".to_s, :count => 2
