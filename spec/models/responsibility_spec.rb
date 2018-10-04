@@ -5,7 +5,7 @@ RSpec.describe Responsibility, type: :model do
   it { is_expected.to belong_to(:responsibility_for) }
   it { is_expected.to validate_presence_of(:responsibility_for_type).on(:update) }
   it { is_expected.to validate_presence_of(:responsibility_for_id).on(:update) }
-  it { is_expected.not_to validate_presence_of(:contact_id) }
+  it { is_expected.to validate_presence_of(:contact_id) }
   it { is_expected.to validate_inclusion_of(:role).in_array(Boskop.responsibility_role) }
 
 
