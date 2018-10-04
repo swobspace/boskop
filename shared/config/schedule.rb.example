@@ -10,3 +10,6 @@ every 1.day, at: ['05:40', '12:40', '19:40'] do
   runner "Nessus::ImportScansJob.perform_now"
 end
 
+every 1.day, at: ['01:00'] do
+  runner "SendVulnerabilitiesMailJob.perform_now(at: Date.yesterday)"
+end
