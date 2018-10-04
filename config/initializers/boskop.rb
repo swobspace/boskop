@@ -1,5 +1,5 @@
 module Boskop
-  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings'].freeze
+  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings', 'contacts', 'responsibilities'].freeze
   PERIOD_UNITS = [ 'day', 'week', 'month', 'quarter', 'year' ].freeze
   CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'boskop.yml'))
   
@@ -74,11 +74,37 @@ module Boskop
     end
   end
 
-# -- not yet used
-#  ActionMailer::Base.default_url_options = {
-#    host: self.host,
-#    script_name: self.script_name
-#  }
+  def self.responsibility_role
+    if CONFIG['responsibility_role'].present?
+      CONFIG['responsibility_role']
+    else
+      ["Vulnerabilities"]
+    end
+  end
+
+  def self.always_cc
+    if CONFIG['always_cc'].present?
+      Array(CONFIG['always_cc'])
+    else
+      []
+    end
+  end
+
+  def self.ldap_options
+    if CONFIG['ldap_options'].present?
+      opts = CONFIG['ldap_options'].symbolize_keys
+      opts.each do |k,v|
+        opts[k] = opts[k].symbolize_keys if opts[k].kind_of? Hash
+      end
+    else
+      nil
+    end
+  end
+
+ ActionMailer::Base.default_url_options = {
+   host: self.host,
+   script_name: self.script_name
+ }
 
   Rails.application.routes.default_url_options[:host] = self.host
   Rails.application.routes.default_url_options[:script_name] = self.script_name

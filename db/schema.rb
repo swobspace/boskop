@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180920134731) do
+ActiveRecord::Schema.define(version: 20181003090536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,28 @@ ActiveRecord::Schema.define(version: 20180920134731) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type"
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "sn", default: "", null: false
+    t.string "givenname", default: "", null: false
+    t.string "displayname", default: ""
+    t.string "title", default: ""
+    t.string "anrede", default: ""
+    t.string "position", default: ""
+    t.string "streetaddress", default: ""
+    t.string "plz", default: ""
+    t.string "ort", default: ""
+    t.string "postfach", default: ""
+    t.string "postfachplz", default: ""
+    t.string "care_of", default: ""
+    t.string "telephone", default: ""
+    t.string "telefax", default: ""
+    t.string "mobile", default: ""
+    t.string "mail", default: ""
+    t.string "internet", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -235,6 +257,20 @@ ActiveRecord::Schema.define(version: 20180920134731) do
     t.datetime "updated_at"
     t.index ["ancestry"], name: "index_org_units_on_ancestry"
     t.index ["name"], name: "index_org_units_on_name"
+  end
+
+  create_table "responsibilities", force: :cascade do |t|
+    t.string "responsibility_for_type"
+    t.bigint "responsibility_for_id"
+    t.bigint "contact_id"
+    t.string "role", default: ""
+    t.string "title", default: ""
+    t.integer "position", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_responsibilities_on_contact_id"
+    t.index ["responsibility_for_type", "responsibility_for_id"], name: "index_responsibility_for"
+    t.index ["role"], name: "index_responsibilities_on_role"
   end
 
   create_table "vulnerabilities", force: :cascade do |t|

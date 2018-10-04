@@ -1,0 +1,2 @@
+class AdUser
+end

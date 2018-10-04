@@ -1,0 +1,9 @@
+<%= f.input :responsibility_for_type, as: :hidden, input_html: { value: 'Location'} %>
+<%= f.input :responsibility_for_id,
+             collection: Location.current,
+             label_method: :to_str,
+             input_html: {class: 'select2'}
+%>
+<%= f.input :role, collection: Boskop.responsibility_role %>
+<%= f.input :title %>
+<%= f.input :position %>

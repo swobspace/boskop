@@ -52,6 +52,7 @@ de:
     vuln_risk_matrix: Vulnerability Risk Matrix
     critical_hosts: Nur kritische Hosts
     location_disabled: Dieser Standort ist deaktiviert
+    new_contact_from_ad: Kontakt mit Vorlage erstellen
     threats:
       critical: Kritisch
       high: Hoch
@@ -67,11 +68,14 @@ de:
     cancel: abbrechen
     reset_table: Tabelle zurücksetzen
     upload: Upload
+    add: "%{model} hinzufügen"
+    remove: "%{model} löschen"
 
   activerecord:
     models:
       access_type: Zugangsart
       address: Adresse
+      contact: Kontakt
       framework_contract: Rahmenvertrag
       group: Gruppe
       host: Host
@@ -87,6 +91,7 @@ de:
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
+      responsibility: Verantwortlichkeit
       vulnerability: Schwachstelle
       vulnerability_detail: Schwachstellen-Detail
       user: User
@@ -100,7 +105,9 @@ de:
     addresses: Adressen
     ancestry: Abstammung
     ancestry_depth: Abstammungstiefe
+    anrede: Anrede
     baselink: Basislink
+    basic_info: Grunddaten
     bandwith_primary: Bandbreite Erstweg
     bandwith_secondary: Bandbreite Zweitweg
     bids: BIDs
@@ -111,6 +118,8 @@ de:
     care_of: c/o
     certs: CERTs
     cidr_mask: Maske (CIDR)
+    communication: Kommunikation
+    contact: Kontakt
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
@@ -119,11 +128,13 @@ de:
     cpe: CPE
     cves: CVEs
     description: Beschreibung
+    department: Abteilung
     disabled: deaktiviert
     displayname: Anzeigename
     domain_dns: Domain
     eol: End-of-Life
     exact_match: exakte Treffer
+    facsimiletelephonenumber: Telefax
     family: Familie
     field: Feld
     file: Datei
@@ -137,6 +148,7 @@ de:
     hostname: Hostname
     import_mode: Import-Mode
     import_state: Import-Status
+    internet: Internet
     ip: IP-Adresse
     lastseen: zuletzt gesehen
     limit: Limit
@@ -176,16 +188,26 @@ de:
     provider_id: Identifikation des Providers
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
+    responsible: Verantwortlicher
+    responsibility: Verantwortlichkeit
+    responsibilities: Verantwortlichkeiten
+    responsibility_for: Verantwortlich für
+    responsibility_for_id: Verantwortlich für
+    responsibility_for_type: Typ
     severity: Severity
     sn: Nachname
     status: Status
     streetaddress: Straße, Nr.
     tag: Tag
+    telefax: Telefax
+    telephone: Telefon
+    telephonenumber: Telefon
     threat: Threat
     type: Typ
     unique: Unique
     update: Update
     username: Username
+    userprincipalname: Principalname
     uuid: UUID
     value: Wert
     vendor: Vendor
@@ -198,7 +220,9 @@ de:
 
   controller:
     access_types: Zugangsarten
+    ad_users: AD-Benutzer
     addresses: Adressen
+    contacts: Kontakte
     framework_contracts: Rahmenverträge
     hosts: Hosts
     hosts/vulnerabilities: Schwachstellen
@@ -214,7 +238,12 @@ de:
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten
+    responsibles: Verantwortliche
+    responsibilities: Verantwortlichkeiten
     vulnerabilities: Schwachstellen
     vulnerability_details: Schwachstellen-Details
     users: Benutzer
 
+  vulnerabilities_mailer:
+    send_csv:
+      subject: Aktuelle Schwachstellen am Standort %{lid}

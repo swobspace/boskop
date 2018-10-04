@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+  include LocationConcerns
   # -- associations
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :addresses, as: :addressfor, dependent: :destroy
@@ -10,6 +11,7 @@ class Location < ApplicationRecord
 
   has_many :hosts
   has_many :vulnerabilities, through: :hosts
+  has_many :responsibilities, as: :responsibility_for, dependent: :restrict_with_error
 
   # -- configuration
   has_ancestry :cache_depth =>true, :orphan_strategy => :adopt
@@ -17,6 +19,10 @@ class Location < ApplicationRecord
 
   accepts_nested_attributes_for :merkmale, :addresses,  allow_destroy: true
   validates_associated :merkmale, :addresses
+
+  accepts_nested_attributes_for :responsibilities,
+                                allow_destroy: true,
+                                reject_if: proc { |att| att['contact_id'].blank? }
 
   # -- validations and callbacks
   validates :name, :lid, presence: true, uniqueness: true

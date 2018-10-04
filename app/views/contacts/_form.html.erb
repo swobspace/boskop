@@ -1,0 +1,96 @@
+<%= form_legend %>
+<div class="row">
+  <div class="col-lg-9">
+    <div id="contact_form">
+      <%= simple_form_for(@contact,
+        html: { class: 'form-horizontal tab-content' }) do |f| %>
+
+        <div class="card tab-pane active" id="basic_info" role="tabpanel" aria-labelledby="basic_info_tab">
+         <div class="card-header">
+          <h5 class="card-title"><%= t('attributes.basic_info')%></h5>
+         </div>
+
+         <div class="card-body">
+           <%= f.input :sn %>
+           <%= f.input :givenname %>
+           <%= f.input :displayname %>
+           <%= f.input :title %>
+           <%= f.input :anrede %>
+           <%= f.input :position %>
+         </div>
+        </div>
+
+        <div class="card tab-pane" id="address" role="tabpanel" aria-labelledby="address_tab">
+         <div class="card-header">
+          <h5 class="card-title"><%= t('attributes.address')%></h5>
+         </div>
+ 	 <div class="card-body">
+	  <%= f.input :streetaddress %>
+	  <%= f.input :plz %>
+	  <%= f.input :ort %>
+	  <%= f.input :postfach %>
+	  <%= f.input :postfachplz %>
+	  <%= f.input :care_of %>
+	 </div>
+	</div>
+
+        <div class="card tab-pane" id="communication" role="tabpanel" aria-labelledby="communication_tab">
+         <div class="card-header">
+          <h5 class="card-title"><%= t('attributes.communication')%></h5>
+         </div>
+	 <div class="card-body">
+	  <%= f.input :telephone %>
+	  <%= f.input :telefax %>
+	  <%= f.input :mobile %>
+	  <%= f.input :mail %>
+	  <%= f.input :internet %>
+	 </div>
+	</div>
+
+        <div class="card tab-pane" id="responsibilities" role="tabpanel" aria-labelledby="responsibilities_tab"> 
+         <div class="card-header">
+          <h5 class="card-title"><%= t('attributes.responsibilities')%></h5>
+         </div>
+         <div class="card-body">
+          <div id="responsibilities_list" class="list-group">
+          <%= f.simple_fields_for :responsibilities do |builder| %>
+            <%= render 'responsibility_fields', f: builder %>
+          <% end %>
+          </div>
+         </div>
+         <%= link_to_add_association t('actions.add', model: t('activerecord.models.responsibility')), f, :responsibilities, class: 'btn btn-primary', data: { association_insertion_node: '#responsibilities_list', association_insertion_method: :append } %>
+        </div>
+
+        <br />
+        <%= f.button :submit, class: 'btn btn-primary' %>
+        <%= cancel_button %>
+      <% end # form %>
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <nav id="navbar-contact-form" class="navbar navbar-light bg-light">
+      <a class="navbar-brand w-100" href="#">Inhalt</a>
+      <nav class="nav nav-pills flex-column" role="tablist">
+        <a class="nav-link active" data-toggle="tab" role="tab"
+           href="#basic_info" id="basic_info_tab"
+           aria-controls="basic_info" aria-selected="true">
+           <%= t('attributes.basic_info')%></a>
+        <a class="nav-link" data-toggle="tab" role="tab"
+           href="#address" id="address_tab"
+           aria-controls="address" aria-selected="true">
+           <%= t('attributes.address')%></a>
+        <a class="nav-link" data-toggle="tab" role="tab"
+           href="#communication" id="communication_tab"
+           aria-controls="communication" aria-selected="true">
+           <%= t('attributes.communication')%></a>
+        <% if @contact.persisted? %>
+         <a class="nav-link" data-toggle="tab" role="tab"
+           href="#responsibilities" id="responsibilities_tab"
+           aria-controls="responsibilities" aria-selected="true">
+           <%= t('attributes.responsibilities')%></a>
+        <% end %>
+      </nav>
+    </nav>
+  </div>
+</div>
+

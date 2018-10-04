@@ -111,11 +111,11 @@ RSpec.describe HostsDatatable, type: :model do
                                    lastseen: 5.weeks.before(Date.today))}
 
     let(:myparams) {{
-      columns: {"10"=> {search: {value: "High"}}},
+      columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
-      search: {value: "", regex: "false"}
+      "search"=> {"value"=>"High", regex: "false"}
     }}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(10) }

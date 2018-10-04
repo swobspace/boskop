@@ -11,6 +11,8 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('mail_from').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('nessus_url').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('nessus_ca_file').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('responsibility_role').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('always_cc').and_return(nil)
       end
       it { expect(Boskop.proxy).to be_nil}
       it { expect(Boskop.host).to eq("localhost")}
@@ -19,6 +21,9 @@ describe Boskop do
       it { expect(Boskop.mail_from).to eq("boskop@localhost.local")}
       it { expect(Boskop.nessus_url).to eq("https://localhost:8834")}
       it { expect(Boskop.nessus_ca_file).to be_nil }
+      it { expect(Boskop.responsibility_role).
+           to contain_exactly("Vulnerabilities") }
+      it { expect(Boskop.always_cc).to eq([]) }
     end
 
     context" with existing Settings" do
@@ -37,6 +42,10 @@ describe Boskop do
           and_return('https://nessus.example.org:8834')
         allow(Boskop::CONFIG).to receive(:[]).with('nessus_ca_file').
           and_return('/anypath/anyfile')
+        allow(Boskop::CONFIG).to receive(:[]).with('responsibility_role').
+          and_return(['HOSTMAN'])
+        allow(Boskop::CONFIG).to receive(:[]).with('always_cc').
+          and_return('hostman@example.org')
       end
       it { expect(Boskop.proxy).to eq('http://192.2.0.1:8080') }
       it { expect(Boskop.host).to eq('www.example.com') }
@@ -45,6 +54,44 @@ describe Boskop do
       it { expect(Boskop.mail_from).to eq('sender@example.org') }
       it { expect(Boskop.nessus_url).to eq('https://nessus.example.org:8834') }
       it { expect(Boskop.nessus_ca_file).to eq('/anypath/anyfile') }
+      it { expect(Boskop.responsibility_role).to contain_exactly("HOSTMAN") }
+      it { expect(Boskop.always_cc).to contain_exactly("hostman@example.org") }
+    end
+  end
+  describe "::ldap_options" do
+    context" with empty Settings" do
+      before(:each) do
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
+      end
+      it { expect(Boskop.ldap_options).to be_nil}
+    end
+
+    context" with existing Settings" do
+      let(:ldap_options) {{
+        "host"=>"192.0.2.71",
+        "port"=>3268,
+        "base"=>"dc=example,dc=com",
+        "auth"=>{
+           "method"=>:simple,
+           "username"=>"myldapuser",
+           "password"=>"myldappasswd"
+        }
+      }}
+      let(:ldap_options_sym) {{
+        host: "192.0.2.71",
+        port: 3268,
+        base: "dc=example,dc=com",
+        auth: {
+           method: :simple,
+           username: "myldapuser",
+           password: "myldappasswd"
+        }
+      }}
+      before(:each) do
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').
+          and_return(ldap_options)
+      end
+      it { expect(Boskop.ldap_options).to eq(ldap_options_sym) }
     end
   end
 end
