@@ -42,6 +42,7 @@ module Boskop
       nil
     end
   end
+
   def self.script_name
     if CONFIG['script_name'].present?
       CONFIG['script_name']
@@ -106,6 +107,6 @@ module Boskop
    script_name: self.script_name
  }
 
-  Rails.application.routes.default_url_options[:host] = self.host
-  Rails.application.routes.default_url_options[:script_name] = self.script_name
+  # Rails.application.routes.default_url_options[:host] = self.host
+  # Rails.application.routes.default_url_options[:script_name] = self.script_name
 end
