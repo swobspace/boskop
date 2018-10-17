@@ -112,7 +112,7 @@ class HostsController < ApplicationController
       params.require(:host).permit(
         :name, :description, :ip, :cpe, :raw_os, :operating_system_id,
         :lastseen, :mac, :host_category_id, :location_id, :fqdn,
-        :workgroup, :domain_dns, :vendor,  
+        :workgroup, :domain_dns, :vendor,  :serial,
         [ merkmale_attributes:
           [ :id, :value, :merkmalklasse_id, :_destroy ],
         ]
@@ -126,7 +126,7 @@ class HostsController < ApplicationController
     def search_params
         # see class HostQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :description, :ip, :operating_system, :cpe, :raw_os,
+          :name, :description, :ip, :operating_system, :cpe, :raw_os, :serial,
           :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
           :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}

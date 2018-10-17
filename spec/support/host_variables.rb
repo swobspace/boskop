@@ -43,6 +43,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:02',
     operating_system: os1,
     location: loc_london,
+    serial: 'XXX7784N'
   )}
   let!(:pc3)  { FactoryBot.create(:host, 
     name: "MYPC003",
@@ -57,6 +58,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:03',
     operating_system: os2,
     location: loc_london,
+    serial: 'XXX7785T'
   )}
   let!(:vpngw)  { FactoryBot.create(:host, 
     name: "vpngw",

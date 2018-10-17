@@ -49,7 +49,7 @@ RSpec.describe HostsController, type: :controller do
     context "with default format" do
       it "returns a success response" do
 	host = Host.create! valid_attributes
-	get :search, params: {eol: 1, current: 1, vuln_risk: 1}, session: valid_session
+	get :search, params: {serial: 'XXX73V', eol: 1, current: 1, vuln_risk: 1}, session: valid_session
 	expect(response).to be_success
       end
     end
@@ -134,11 +134,13 @@ RSpec.describe HostsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        { name: "othertux", fqdn: 'othertux.example.net', 
-          vendor: "Tuxolino",
-          domain_dns: 'example.net', workgroup: 'WORKGROUP2' }
-      }
+      let(:new_attributes) {{ 
+        name: "othertux", fqdn: 'othertux.example.net', 
+        vendor: "Tuxolino",
+        domain_dns: 'example.net', 
+        workgroup: 'WORKGROUP2',
+        serial: 'BRAXX937'
+      }}
 
       it "updates the requested host" do
         host = Host.create! valid_attributes
@@ -149,6 +151,7 @@ RSpec.describe HostsController, type: :controller do
         expect(host.vendor).to eq("Tuxolino")
         expect(host.domain_dns).to eq("example.net")
         expect(host.workgroup).to eq("WORKGROUP2")
+        expect(host.serial).to eq("BRAXX937")
       end
 
       it "redirects to the host" do
