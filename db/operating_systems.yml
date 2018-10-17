@@ -207,36 +207,84 @@ operating_systems:
   - name: Linux (Sonstige)
 
   - name: VMware ESX 4
+    eol: 2014-05-21
     matching_pattern:
       |
         raw_os:VMware ESX Server 4
+
   - name: VMware ESXi 5
+    eol: 2016-08-24
     matching_pattern:
       |
         raw_os:VMware ESXi 5
+
+  - name: VMware ESXi 5.1
+    eol: 2016-08-24
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 5.1
+
   - name: VMware ESXi 5.5
+    eol: 2018-09-19
     matching_pattern:
       |
         raw_os:VMware ESXi 5.5
+
   - name: VMware ESXi 6
+    eol: 2020-03-12
     matching_pattern:
       |
         raw_os:VMware ESXi 6
+
   - name: VMware ESXi 6.5
+    eol: 2021-11-15
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 6.7
+
+  - name: VMware ESXi 6.7
+    eol: 2021-11-15
     matching_pattern:
       |
         raw_os:VMware ESXi 6.5
+
+  - name: VMware vCenter Server 4.x
+    eol: 2014-05-21
+    matching_pattern:
+      |
+        raw_os:VMware vCenter Server 4
+
+  - name: VMware vCenter Server 5.0/5.1
+    eol: 2016-08-24
+    matching_pattern:
+      |
+        raw_os:VMware vCenter Server 5.0
+        raw_os:VMware vCenter Server 5.1
+
   - name: VMware vCenter Server 5.5
+    eol: 2018-09-19
     matching_pattern:
       |
         raw_os:VMware vCenter Server 5.5
+
+  - name: VMware vCenter Server 6.0
+    eol: 2020-03-12
+    matching_pattern:
+      |
+        raw_os:VMware vCenter Server 6.0
+
   - name: VMware vCenter Server 6.5
+    eol: 2021-11-15
     matching_pattern:
       |
         raw_os:VMware vCenter Server 6.5
+
+  - name: VMware vCenter Server 6.7
+    eol: 2021-11-15
     matching_pattern:
       |
-        raw_os:VMware ESXi 6.5
+        raw_os:VMware vCenter Server 6.7
+
   - name: 3Com SuperStack Switch
     matching_pattern:
       |
