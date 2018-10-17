@@ -22,6 +22,7 @@ RSpec.describe "hosts/search_form", type: :view do
       assert_select "input[name=?]", "cpe"
       assert_select "input[name=?]", "raw_os"
       assert_select "input[name=?]", "mac"
+      assert_select "input[name=?]", "serial"
       assert_select "input[name=?]", "fqdn"
       assert_select "input[name=?]", "domain_dns"
       assert_select "input[name=?]", "workgroup"

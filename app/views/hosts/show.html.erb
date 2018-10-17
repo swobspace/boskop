@@ -49,8 +49,8 @@
 	  <tr>
 	    <th><%= t('attributes.vuln_risk')%>:</th>
 	    <td><%= risk_button(@host.vuln_risk) %></td>
-	    <th></th>
-	    <td></td>
+	    <th><%= t('attributes.serial')%>:</th>
+	    <td><%= @host.serial %></td>
 	  </tr>
 
 	  <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>

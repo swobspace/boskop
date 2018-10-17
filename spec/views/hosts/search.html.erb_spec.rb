@@ -20,6 +20,7 @@ RSpec.describe "hosts/search", type: :view do
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
+        :serial => "XXX7785T",
         :fqdn => "MyLovelyHost.example.net",
         :vendor => "Tuxolino",
         :domain_dns => "example.net",
@@ -35,6 +36,7 @@ RSpec.describe "hosts/search", type: :view do
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
         :mac => "MAC",
+        :serial => "XXX7785T",
         :vendor => "Tuxolino",
         :fqdn => "MyLovelyHost.example.net",
         :domain_dns => "example.net",
@@ -55,6 +57,7 @@ RSpec.describe "hosts/search", type: :view do
     assert_select "tr>td", :text => "cpe:/o:microsoft:windows_7::sp1:professional".to_s, :count => 2
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
     assert_select "tr>td", :text => "MAC".to_s, :count => 2
+    assert_select "tr>td", :text => "XXX7785T".to_s, :count => 2
     assert_select "tr>td", :text => "Tuxolino".to_s, :count => 2
     assert_select "tr>td", :text => "ZementOS".to_s, :count => 2
     assert_select "tr>td", :text => "MyLovelyHost.example.net".to_s, :count => 2
