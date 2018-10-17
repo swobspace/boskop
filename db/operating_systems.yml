@@ -87,10 +87,6 @@ operating_systems:
     matching_pattern:
       |
         raw_os:Windows Embedded Standard
-  - name: VMware ESX
-    matching_pattern:
-      |
-        raw_os:VMware ESX
   - name: Unix
     matching_pattern:
       |
@@ -107,10 +103,6 @@ operating_systems:
     matching_pattern:
       |
         raw_os:AOS
-  - name: ESXi
-    matching_pattern:
-      |
-        raw_os:ESXi
   - name: FreeBSD
     matching_pattern:
       |
@@ -131,10 +123,6 @@ operating_systems:
     matching_pattern:
       |
         raw_os:XenServer
-  - name: iOS
-    matching_pattern:
-      |
-        raw_os:IOS
   - name: Debian 4.0
     eol: 2010-02-15
     matching_pattern:
@@ -217,3 +205,280 @@ operating_systems:
       |
         raw_os:Linux Kernel .*-wob
   - name: Linux (Sonstige)
+
+  - name: VMware ESX 4
+    matching_pattern:
+      |
+        raw_os:VMware ESX Server 4
+  - name: VMware ESXi 5
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 5
+  - name: VMware ESXi 5.5
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 5.5
+  - name: VMware ESXi 6
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 6
+  - name: VMware ESXi 6.5
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 6.5
+  - name: VMware vCenter Server 5.5
+    matching_pattern:
+      |
+        raw_os:VMware vCenter Server 5.5
+  - name: VMware vCenter Server 6.5
+    matching_pattern:
+      |
+        raw_os:VMware vCenter Server 6.5
+    matching_pattern:
+      |
+        raw_os:VMware ESXi 6.5
+  - name: 3Com SuperStack Switch
+    matching_pattern:
+      |
+        raw_os:3Com SuperStack Switch
+  - name: APC UPS Network Management Card
+    matching_pattern:
+      |
+        raw_os:UPS Network Management Card
+  - name: Apple Airport
+    matching_pattern:
+      |
+        raw_os:Apple Airport
+  - name: AVM Fritzbox
+    matching_pattern:
+      |
+        raw_os:AVM Berlin FRITZ!Box WLAN 3370 avm
+  - name: Brocade Switch
+    matching_pattern:
+      |
+        raw_os:Brocade Switch
+  - name: Brother Printer
+    matching_pattern:
+      |
+        raw_os:Brother Printer
+  - name: Canon Printer
+    matching_pattern:
+      |
+        raw_os:Canon imageRunner Printer
+  - name: Cisco IOS
+    matching_pattern:
+      |
+        raw_os:Cisco IOS
+        raw_os:CISCO IOS
+  - name: Cisco TelePresence
+    matching_pattern:
+      |
+        raw_os:Cisco TelePresence
+  - name: Cisco Video Communication Server
+    matching_pattern:
+      |
+        raw_os:Cisco Video Communication Server
+  - name: Cisco Wireless Controller
+    matching_pattern:
+      |
+        raw_os:Cisco Wireless Controller
+  - name: Citrix NetScaler
+    matching_pattern:
+      |
+        raw_os:Citrix NetScaler
+  - name: Dell iDRAC
+    matching_pattern:
+      |
+        raw_os:Dell iDRAC
+  - name: Dell KVM
+    matching_pattern:
+      |
+        raw_os:Dell KVM
+  - name: Dell PowerConnect Switch
+    matching_pattern:
+      |
+        raw_os:Dell PowerConnect Switch
+  - name: Dell PowerEdge Blade Chassis
+    matching_pattern:
+      |
+        raw_os:Dell PowerEdge Blade Chassis
+  - name: ELSA LANCOM
+    matching_pattern:
+      |
+        raw_os:ELSA LANCOM
+  - name: F5 Networks BIG-IP
+    matching_pattern:
+      |
+        raw_os:F5 Networks BIG-IP
+  - name: Foscam IP Camera
+    matching_pattern:
+      |
+        raw_os:Foscam IP Camera
+  - name: HP 1820-8G Switch
+    matching_pattern:
+      |
+        raw_os:HP 1820-8G Switch
+  - name: HP 2510G-48 Switch (J9280A)
+    matching_pattern:
+      |
+        raw_os:HP 2510G-48 Switch (J9280A)
+  - name: HP 2524 Switch (J4813A)
+    matching_pattern:
+      |
+        raw_os:HP 2524 Switch (J4813A)
+  - name: HP 3PAR IBM WebSphere DataPower
+    matching_pattern:
+      |
+        raw_os:HP 3PAR IBM WebSphere DataPower
+  - name: HP 4000M Switch (J4121A) 
+    matching_pattern:
+      |
+        raw_os:HP 4000M Switch (J4121A) 
+  - name: HP 4108GL Switch (J4865A) 
+    matching_pattern:
+      |
+        raw_os:HP 4108GL Switch (J4865A) 
+  - name: HP 5406Rzl2 Switch (J9850A) 
+    matching_pattern:
+      |
+        raw_os:HP 5406Rzl2 Switch (J9850A) 
+  - name: HP 5406zl Switch (J8697A) 
+    matching_pattern:
+      |
+        raw_os:HP 5406zl Switch (J8697A) 
+  - name: HP 5412zl Switch (J8698A) 
+    matching_pattern:
+      |
+        raw_os:HP 5412zl Switch (J8698A) 
+  - name: HP Integrated Lights Out
+    matching_pattern:
+      |
+        raw_os:HP Integrated Lights Out
+  - name: HP JetDirect
+    matching_pattern:
+      |
+        raw_os:HP JetDirect
+  - name: HP OfficeJet Pro Printer
+    matching_pattern:
+      |
+        raw_os:HP OfficeJet Pro Printer
+  - name: HP PS1810-8G Switch
+    matching_pattern:
+      |
+        raw_os:HP PS1810-8G Switch
+  - name: HP-UX 11.00
+    matching_pattern:
+      |
+        raw_os:HP-UX 11.00
+  - name: HP-UX 9
+    matching_pattern:
+      |
+        raw_os:HP-UX 9
+  - name: IRIX 6.5
+    matching_pattern:
+      |
+        raw_os:IRIX 6.5
+  - name: Janitza electronics
+    matching_pattern:
+      |
+        raw_os:Janitza electronics
+  - name: Juniper SSL VPN Appliance
+    matching_pattern:
+      |
+        raw_os:Juniper SSL VPN Appliance
+  - name: Konica Minolta Digital Copier/Printer
+    matching_pattern:
+      |
+        raw_os:Konica Minolta Digital Copier/Printer
+  - name: Kyocera Printer
+    matching_pattern:
+      |
+        raw_os:Kyocera Printer
+  - name: Lantronix Universal Device Server UDS1100
+    matching_pattern:
+      |
+        raw_os:Lantronix Universal Device Server UDS1100
+  - name: Mac OS X 10.10
+    matching_pattern:
+      |
+        raw_os:Mac OS X 10.10
+  - name: Mac OS X 10.4
+    matching_pattern:
+      |
+        raw_os:Mac OS X 10.4
+  - name: Mac OS X 10.5 Mac OS X 10.6 Mac OS X 10.7
+    matching_pattern:
+      |
+        raw_os:Mac OS X 10.5 Mac OS X 10.6 Mac OS X 10.7
+  - name: Mac OS X 10.8 Mac OS X 10.9
+    matching_pattern:
+      |
+        raw_os:Mac OS X 10.8 Mac OS X 10.9
+  - name: Microsoft Windows CE Version 6.0
+    matching_pattern:
+      |
+        raw_os:Microsoft Windows CE Version 6.0
+  - name: MikroTik RouterOS
+    matching_pattern:
+      |
+        raw_os:MikroTik RouterOS
+  - name: NetApp Release 7.3.2
+    matching_pattern:
+      |
+        raw_os:NetApp Release 7.3.2
+  - name: NetBSD 1.6
+    matching_pattern:
+      |
+        raw_os:NetBSD 1.6
+  - name: NetBSD 3.0
+    matching_pattern:
+      |
+        raw_os:NetBSD 3.0
+  - name: Netreon OS 1.0
+    matching_pattern:
+      |
+        raw_os:Netreon OS 1.0
+  - name: Nortel Switch
+    matching_pattern:
+      |
+        raw_os:Nortel Switch
+  - name: Oracle Integrated Lights Out Manager
+    matching_pattern:
+      |
+        raw_os:Oracle Integrated Lights Out Manager
+  - name: Ricoh Printer
+    matching_pattern:
+      |
+        raw_os:Ricoh Printer
+  - name: Samsung Electronics
+    matching_pattern:
+      |
+        raw_os:Samsung Electronics
+  - name: Samsung SCX Series Printer
+    matching_pattern:
+      |
+        raw_os:Samsung SCX Series Printer
+  - name: SonicOS 3.1
+    matching_pattern:
+      |
+        raw_os:SonicOS 3.1
+  - name: Synology
+    matching_pattern:
+      |
+        raw_os:Synology
+  - name: Xerox Printer
+    matching_pattern:
+      |
+        raw_os:Xerox Printer
+  - name: Yealink SIP-T46G VoIP Phone
+    matching_pattern:
+      |
+        raw_os:Yealink SIP-T46G VoIP Phone
+  - name: Yealink SIP-T48G VoIP Phone
+    matching_pattern:
+      |
+        raw_os:Yealink SIP-T48G VoIP Phone
+  - name: ZebraNet Printer
+    matching_pattern:
+      |
+        raw_os:ZebraNet Printer
