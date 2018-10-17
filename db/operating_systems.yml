@@ -206,17 +206,26 @@ operating_systems:
         raw_os:Linux Kernel .*-wob
   - name: Linux (Sonstige)
 
+  - name: VMware ESX Server 3i
+    eol: 2010-05-21
+    matching_pattern:
+      |
+        raw_os:VMware ESX Server 3i
+        raw_os:VMware ESX 4
+
   - name: VMware ESX 4.x
     eol: 2014-05-21
     matching_pattern:
       |
         raw_os:VMware ESX Server 4
+        raw_os:VMware ESX 4
 
   - name: VMware ESXi 4.x
     eol: 2014-05-21
     matching_pattern:
       |
         raw_os:VMware ESXi Server 4
+        raw_os:VMware ESXi 4
 
   - name: VMware ESXi 5
     eol: 2016-08-24
