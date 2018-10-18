@@ -229,9 +229,7 @@ operating_systems:
 
   - name: VMware ESXi 5
     eol: 2016-08-24
-    matching_pattern:
-      |
-        raw_os:VMware ESXi 5
+        raw_os:VMware ESXi 5.0
 
   - name: VMware ESXi 5.1
     eol: 2016-08-24
@@ -249,19 +247,19 @@ operating_systems:
     eol: 2020-03-12
     matching_pattern:
       |
-        raw_os:VMware ESXi 6
+        raw_os:VMware ESXi 6.0
 
   - name: VMware ESXi 6.5
     eol: 2021-11-15
     matching_pattern:
       |
-        raw_os:VMware ESXi 6.7
+        raw_os:VMware ESXi 6.5
 
   - name: VMware ESXi 6.7
     eol: 2021-11-15
     matching_pattern:
       |
-        raw_os:VMware ESXi 6.5
+        raw_os:VMware ESXi 6.7
 
   - name: VMware vCenter Server 4.x
     eol: 2014-05-21
