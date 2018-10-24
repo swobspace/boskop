@@ -211,7 +211,6 @@ operating_systems:
     matching_pattern:
       |
         raw_os:VMware ESX Server 3i
-        raw_os:VMware ESX 4
 
   - name: VMware ESX 4.x
     eol: 2014-05-21
