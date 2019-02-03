@@ -223,3 +223,11 @@ bin/rails g scaffold Responsibility \
   title:string position:integer
 ----
 
+## MacPrefix
+
+----
+bin/rails g scaffold MacPrefix \
+  oui:string:index \
+  vendor:string
+----
+

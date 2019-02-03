@@ -1,0 +1,17 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.oui')%>:</th>
+    <td><%= @mac_prefix.oui %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.vendor')%>:</th>
+    <td><%= @mac_prefix.vendor %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@mac_prefix) %>
+  <%= delete_link(@mac_prefix) %>
+  <%= new_link MacPrefix %>
+</div>

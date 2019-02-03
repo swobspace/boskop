@@ -1,0 +1,30 @@
+<h1><%= t('controller.mac_prefixes') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.oui') %></th>
+    <th><%= t('attributes.vendor') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @mac_prefixes.each do |mac_prefix| %>
+  <%= content_tag_for(:tr, mac_prefix) do %>
+    <td><%= mac_prefix.oui %></td>
+    <td><%= mac_prefix.vendor %></td>
+    <td class="nowrap">
+      <%= show_link mac_prefix %>
+      <%= edit_link mac_prefix %>
+      <%= delete_link mac_prefix %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link MacPrefix %>
