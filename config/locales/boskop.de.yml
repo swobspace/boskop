@@ -84,6 +84,7 @@ de:
       line: Leitung/Zugang
       line_state: Status
       location: Lokation
+      mac_prefix: MAC-Prefix
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
       nessus_scan: Nessus Scan
@@ -163,6 +164,7 @@ de:
     location_a: Standort A
     location_b: Standort B
     mac: MAC
+    max_prefix: MAC-Prefix
     mandantory: Pflichtfeld
     matching_pattern: Muster für die Zuweisung
     merkmal: Merkmal
@@ -178,6 +180,7 @@ de:
     operating_system: Betriebssystem
     org_unit: Organisationseinheit
     ort: Ort
+    oui: OUI
     period_of_notice: Kündigungsfrist
     period_of_notice_unit: Einheit
     plz: PLZ
@@ -211,7 +214,7 @@ de:
     userprincipalname: Principalname
     uuid: UUID
     value: Wert
-    vendor: Vendor
+    vendor: Hersteller
     visible: Sichtbarkeit
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
@@ -232,6 +235,7 @@ de:
     lines: Leitungen/Zugänge
     line_states: Status
     locations: Lokationen
+    mac_prefixes: MAC-Prefixes
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
     nessus_scans: Nessus Scans
