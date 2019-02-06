@@ -65,7 +65,7 @@ RSpec.describe HostConcerns, type: :model do
       :ip => "192.168.77.79",
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
       :raw_os => "Windows 7 Professional 6.1",
-      :mac => "MAC",
+      :mac => "11:22:33:44.55:66",
       :vendor => "Tuxolino",
       :fqdn => "MyLovelyHost.example.net",
       :domain_dns => "example.net",
@@ -101,7 +101,7 @@ RSpec.describe HostConcerns, type: :model do
       expect(csv.last).to contain_exactly(
       "MyLovelyHost", "Runningforever", "192.168.77.79",
       "cpe:/o:microsoft:windows_7::sp1:professional",
-      "Windows 7 Professional 6.1", "MAC", "Tuxolino",
+      "Windows 7 Professional 6.1", "112233445566", "Tuxolino",
       "MyLovelyHost.example.net", "example.net", "Workgroup3",
       "Secure Server", "ZementOS", "LID", 'High', Date.today.to_s, "Mr. Superadmin")
     end

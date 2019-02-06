@@ -19,7 +19,7 @@ RSpec.describe "hosts/search", type: :view do
         :ip => "192.168.81.82",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
-        :mac => "MAC",
+        :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
         :fqdn => "MyLovelyHost.example.net",
         :vendor => "Tuxolino",
@@ -35,7 +35,7 @@ RSpec.describe "hosts/search", type: :view do
         :ip => "192.168.83.84",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
-        :mac => "MAC",
+        :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
         :vendor => "Tuxolino",
         :fqdn => "MyLovelyHost.example.net",
@@ -56,7 +56,7 @@ RSpec.describe "hosts/search", type: :view do
     assert_select "tr>td", :text => "192.168.83.84".to_s, :count => 1
     assert_select "tr>td", :text => "cpe:/o:microsoft:windows_7::sp1:professional".to_s, :count => 2
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
-    assert_select "tr>td", :text => "MAC".to_s, :count => 2
+    assert_select "tr>td", :text => "112233445566".to_s, :count => 2
     assert_select "tr>td", :text => "XXX7785T".to_s, :count => 2
     assert_select "tr>td", :text => "Tuxolino".to_s, :count => 2
     assert_select "tr>td", :text => "ZementOS".to_s, :count => 2

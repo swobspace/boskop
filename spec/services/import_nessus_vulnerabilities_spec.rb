@@ -52,7 +52,7 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(host.lastseen.to_s).to eq("2018-06-10") }
       it { expect(host.ip).to eq("192.168.1.87") }
       it { expect(host.name).to eq("W-AB8159B407254") }
-      it { expect(host.mac).to eq("00:21:85:54:b2:3e") }
+      it { expect(host.mac).to eq("00218554B23E") }
       it { expect(host.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
       it { expect(host.fqdn).to eq("") }
     end
@@ -63,14 +63,14 @@ RSpec.describe ImportNessusVulnerabilitiesService do
         ip: '192.168.1.87', 
         name: "nobody",
         raw_os: "empty",
-        mac: "12:34:56:78:AA:BB",
+        mac: "12345678AABB",
         fqdn: "nobody.example.com",
         lastseen: "2017-01-01"
       )}
       it { expect(host.lastseen.to_s).to eq("2018-06-10") }
       it { expect(host.ip).to eq("192.168.1.87") }
       it { expect(host.name).to eq("W-AB8159B407254") }
-      it { expect(host.mac).to eq("00:21:85:54:b2:3e") }
+      it { expect(host.mac).to eq("00218554B23E") }
       it { expect(host.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
       it { expect(host.fqdn).to eq("nobody.example.com") }
     end
@@ -81,14 +81,14 @@ RSpec.describe ImportNessusVulnerabilitiesService do
         ip: '192.168.1.87', 
         name: "nobody",
         raw_os: "empty",
-        mac: "12:34:56:78:AA:BB",
+        mac: "12345678AABB",
         fqdn: "nobody.example.com",
         lastseen: "2018-06-30"
       )}
       it { expect(host.lastseen.to_s).to eq("2018-06-30") }
       it { expect(host.ip).to eq("192.168.1.87") }
       it { expect(host.name).to eq("nobody") }
-      it { expect(host.mac).to eq("12:34:56:78:AA:BB") }
+      it { expect(host.mac).to eq("12345678AABB") }
       it { expect(host.raw_os).to eq("empty") }
       it { expect(host.fqdn).to eq("nobody.example.com") }
     end
