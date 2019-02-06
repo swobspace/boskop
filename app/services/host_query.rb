@@ -81,6 +81,9 @@ private
         else
           query = query.where("host(ip) ILIKE ?", "#{value}%")
         end
+      when :mac
+        mac = value.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
+        query = query.where("hosts.mac ILIKE ?", "%#{mac}%")
       when :lastseen
         query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer
@@ -132,7 +135,7 @@ private
   end
 
   def string_fields
-    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :mac, :vendor, :serial ]
+    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :serial ]
   end
 
   def merkmalklassen
