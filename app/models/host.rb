@@ -120,8 +120,9 @@ private
   end
 
   def check_mac_address
+    return true if mac.blank?
     if mac !~ /[0-9A-F]{8}/
-      self[:mac] = mac.upcase.gsub(/[^0-9A-F]/, '')
+      self[:mac] = mac.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
     end
     true
   end
