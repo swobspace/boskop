@@ -16,6 +16,10 @@ FactoryBot.define do
     "192.0.2.#{n % 256}"
   end
 
+  sequence :oui do |n|
+    3.times.map { '%02x' % rand(0..255) }.join('').upcase
+  end
+
   sequence :serial do |number|
     number
   end
@@ -66,6 +70,11 @@ FactoryBot.define do
     lid  { generate(:newlid) }
     name { generate(:aname) }
     position { 0 }
+  end
+
+  factory :mac_prefix do
+    oui { generate(:oui) }
+    vendor { generate(:aname) }
   end
 
   factory :merkmalklasse do
