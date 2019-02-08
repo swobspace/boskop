@@ -4,6 +4,8 @@ shared_context "host variables" do
   let!(:loc_london) { FactoryBot.create(:location, name: 'London', lid: 'LONDON') }
   let!(:loc_berlin) { FactoryBot.create(:location, name: 'Berlin', lid: 'BER') }
 
+  let!(:macprefix) { FactoryBot.create(:mac_prefix, oui: '0084ED', vendor: 'Gnadenlos unlimited') }
+
   let(:os1) { FactoryBot.create(:operating_system, 
     name: 'DummyOS',
     eol: 5.years.before(Date.today)

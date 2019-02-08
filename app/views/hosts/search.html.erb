@@ -27,6 +27,7 @@
       <th><%= t('attributes.lastseen') %></th>
       <th><%= t('attributes.vuln_risk') %></th>
       <th class="notvisible"><%= t('attributes.mac') %></th>
+      <th class="notvisible"><%= t('attributes.oui_vendor') %></th>
       <th class="notvisible"><%= t('attributes.serial') %></th>
       <th class="notvisible"><%= t('attributes.vendor') %></th>
       <th><%= t('attributes.host_category') %></th>
@@ -39,6 +40,7 @@
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -75,6 +77,7 @@
     <td><%= host.lastseen %></td>
     <td><%= host.vuln_risk %></td>
     <td><%= host.mac %></td>
+    <td><%= host.oui_vendor %></td>
     <td><%= host.serial %></td>
     <td><%= host.vendor %></td>
     <td><%= host.host_category.to_s %></td>

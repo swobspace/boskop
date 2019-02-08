@@ -25,8 +25,13 @@
 	  <tr>
 	    <th><%= t('attributes.operating_system')%>:</th>
 	    <td><%= @host.operating_system %></td>
-	    <th><%= t('attributes.mac')%>:</th>
-	    <td><%= @host.mac %></td>
+	    <th>
+              <%= t('attributes.mac')%>:<br/>
+              <%= t('attributes.oui_vendor')%>:</th>
+	    <td>
+              <%= @host.mac %> <br/>
+              <%= @host.oui_vendor %>
+            </td>
 	  </tr>
 	  <tr>
 	    <th><%= t('attributes.cpe')%>:</th>

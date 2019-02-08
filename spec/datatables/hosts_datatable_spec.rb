@@ -15,6 +15,7 @@ module HostsDatatableHelper
       column << host.lastseen.to_s
       column << host.vuln_risk.to_s
       column << host.mac
+      column << host.oui_vendor
       column << host.serial
       column << host.vendor
       column << host.host_category.to_s

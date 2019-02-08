@@ -20,6 +20,7 @@ class HostQuery
   # * :older - lastseen <= :older(date)
   # * :current - shortcut for lastseen >= 1.month.before(Date.today)
   # * :mac - macaddr (string)
+  # * :oui_vendor - (string)
   # * :serial - string
   # * :vendor - string
   # * :host_category - host_categories.name (string)
@@ -135,7 +136,7 @@ private
   end
 
   def string_fields
-    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :serial ]
+    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :serial, :oui_vendor ]
   end
 
   def merkmalklassen

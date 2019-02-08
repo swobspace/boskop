@@ -11,6 +11,7 @@ RSpec.describe "hosts/search", type: :view do
     location = FactoryBot.create(:location, lid: "LID")
     hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
     os = FactoryBot.create(:operating_system, name: 'ZementOS')
+    macprefix = FactoryBot.create(:mac_prefix, oui: '112233', vendor: "Granite C.")
 
     assign(:hosts, [
       FactoryBot.create(:host,
@@ -57,6 +58,7 @@ RSpec.describe "hosts/search", type: :view do
     assert_select "tr>td", :text => "cpe:/o:microsoft:windows_7::sp1:professional".to_s, :count => 2
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
     assert_select "tr>td", :text => "112233445566".to_s, :count => 2
+    assert_select "tr>td", :text => "Granite C.".to_s, :count => 2
     assert_select "tr>td", :text => "XXX7785T".to_s, :count => 2
     assert_select "tr>td", :text => "Tuxolino".to_s, :count => 2
     assert_select "tr>td", :text => "ZementOS".to_s, :count => 2
