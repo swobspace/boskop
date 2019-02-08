@@ -99,6 +99,22 @@ RSpec.describe Host, type: :model do
         expect(host.mac).to eq("5C260A7665E5")
       end
     end
+    describe "oui vendor" do
+      let!(:macprefix) { MacPrefix.create!(oui: '0011D2', vendor: 'Mustermax Ltd.' ) }
+      let!(:macprefix2) { MacPrefix.create!(oui: '5C260A', vendor: 'Musterpartner' ) }
+      it "sets oui vendor if blank?" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
+        host.reload
+        expect(host.oui_vendor).to eq("Mustermax Ltd.")
+      end
+
+      it "sets oui vendor if mac_changed?" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
+        host.reload
+        host.update_attributes(mac: '5C:26:0A:76:65:E5')
+        expect(host.oui_vendor).to eq("Musterpartner")
+      end
+    end
   end
 
   describe "changing :cpe or :raw_os" do
