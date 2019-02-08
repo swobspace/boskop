@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190203123447) do
+ActiveRecord::Schema.define(version: 20190208160739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20190203123447) do
     t.string "vendor"
     t.string "vuln_risk", default: ""
     t.string "serial", default: ""
+    t.string "oui_vendor"
     t.index ["cpe"], name: "index_hosts_on_cpe"
     t.index ["host_category_id"], name: "index_hosts_on_host_category_id"
     t.index ["location_id"], name: "index_hosts_on_location_id"

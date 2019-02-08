@@ -127,14 +127,15 @@ bin/rails g scaffold Host \
   host_category:references:index \
   location:references:index \
   vuln_risk:string:index \
-  serial:string:index
+  serial:string:index \
+  oui_vendor:string
 
 #    bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
 #               fqdn:string workgroup:string domain_dns:string
 #    bin/rails g migration AddVulnRiskToHost \
 #               vuln_risk:string:index
-
 #    bin/rails g migration AddVendorToHost vendor:string
+#    bin/rails g migration AddOuiVendorToHost oui_vendor:string
 #    bin/rails g migration ChangeIpToInet
 #    bin/rails g migration AddSerialToHost serial:string:index
 ----
