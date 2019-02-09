@@ -4,6 +4,10 @@ RSpec.describe ImportNessusVulnerabilitiesService do
   let(:nessusxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'netxp-nessus.xml') }
   subject { ImportNessusVulnerabilitiesService.new(file: nessusxml) }
 
+  before(:each) do
+    allow(Boskop).to receive(:graylog_host).and_return(nil)
+  end
+
   # check for class methods
   it { expect(ImportNessusVulnerabilitiesService.respond_to? :new).to be_truthy}
 

@@ -10,6 +10,11 @@ class ImportNessusVulnerabilitiesService
   def initialize(options = {})
     options.symbolize_keys!
     @xmlfile = get_file(options)
+    if Boskop.graylog_host
+      @notifier = GELF::Notifier.new(Boskop.graylog_host, 12201) 
+    else
+      @notifier = nil
+    end
   end
 
   # service.call()
@@ -68,6 +73,7 @@ class ImportNessusVulnerabilitiesService
             vuln.update(lastseen: report.lastseen)
           end
           vulnerabilities << vuln
+          notifier.notify(vuln.to_gelf) if notifier
         end
       end
     end
@@ -81,7 +87,7 @@ class ImportNessusVulnerabilitiesService
   end
 
 private
-  attr_reader :xmlfile
+  attr_reader :xmlfile, :notifier
 
   #
   # extract host attributes
