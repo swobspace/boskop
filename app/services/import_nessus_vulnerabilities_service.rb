@@ -46,7 +46,12 @@ class ImportNessusVulnerabilitiesService
         vulndetail = VulnerabilityDetail.
                      create_with(vd_attributes(item)).
                      find_or_create_by(nvt: item.nvt)
-        vulnerability_details << vulndetail
+        if vulndetail.errors.any?
+          success = false
+          errors << vulndetail.errors.full_messages.join(', ')
+        else
+          vulnerability_details << vulndetail
+        end
 
         # create or update vulnerability record
         vuln = Vulnerability.
@@ -55,10 +60,15 @@ class ImportNessusVulnerabilitiesService
                    host_id: host.id, 
                    vulnerability_detail_id: vulndetail.id
                  )
-        if vuln.lastseen.to_date < report.lastseen.to_date
-          vuln.update(lastseen: report.lastseen)
+        if vuln.errors.any?
+          success = false
+          errors << vuln.errors.full_messages.join(', ')
+        else
+          if vuln.lastseen.to_date < report.lastseen.to_date
+            vuln.update(lastseen: report.lastseen)
+          end
+          vulnerabilities << vuln
         end
-        vulnerabilities << vuln
       end
     end
     return_result =  Result.new(
