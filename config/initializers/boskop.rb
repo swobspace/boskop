@@ -91,6 +91,14 @@ module Boskop
     end
   end
 
+  def self.graylog_host
+    if CONFIG['graylog_host'].present?
+      CONFIG['graylog_host']
+    else
+      nil
+    end
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       opts = CONFIG['ldap_options'].symbolize_keys
