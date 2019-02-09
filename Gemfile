@@ -74,4 +74,4 @@ gem 'kaminari'
 gem 'tenable-ruby'
 gem 'whenever'
 gem 'cocoon'
-
+gem 'gelf'
