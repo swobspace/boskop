@@ -13,7 +13,7 @@ n.notify!(
   _ip_address: "192.0.2.71",
   _host_kategorie: "Windows/Fileserver",
   _operating_system: "Windows Server 2008 R2",
-  _vulnerability: "Unsupported OS"
+  _vulnerability: "Unsupported OS",
   _lastseen: "heute",
   _threat: "Critical",
   _severity: "10.0"
