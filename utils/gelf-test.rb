@@ -8,6 +8,7 @@ n = GELF::Notifier.new(ENV['GRAYLOG_SERVER'], 12201)
 n.notify!(
   short_message: "linux01 / unsupported OS",
   full_message: "Boskop: should be al very long full message",
+  timestamp: Time.now.utc.to_f,
   _host: "linux01",
   _location: "BER",
   _ip_address: "192.0.2.71",
