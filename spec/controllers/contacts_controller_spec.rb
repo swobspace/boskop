@@ -43,7 +43,7 @@ RSpec.describe ContactsController, type: :controller do
     it "returns a success response" do
       contact = Contact.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -51,14 +51,14 @@ RSpec.describe ContactsController, type: :controller do
     it "returns a success response" do
       contact = Contact.create! valid_attributes
       get :show, params: {id: contact.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe ContactsController, type: :controller do
     it "returns a success response" do
       contact = Contact.create! valid_attributes
       get :edit, params: {id: contact.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -87,7 +87,7 @@ RSpec.describe ContactsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {contact: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -131,7 +131,7 @@ RSpec.describe ContactsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         contact = Contact.create! valid_attributes
         put :update, params: {id: contact.to_param, contact: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

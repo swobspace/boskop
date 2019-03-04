@@ -45,7 +45,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     it "returns a success response" do
       responsibility = Responsibility.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -53,14 +53,14 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     it "returns a success response" do
       responsibility = Responsibility.create! valid_attributes
       get :show, params: {id: responsibility.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     it "returns a success response" do
       responsibility = Responsibility.create! valid_attributes
       get :edit, params: {id: responsibility.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -89,7 +89,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {responsibility: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe ResponsibilitiesController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         responsibility = Responsibility.create! valid_attributes
         put :update, params: {id: responsibility.to_param, responsibility: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end

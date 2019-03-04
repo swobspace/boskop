@@ -40,7 +40,7 @@ RSpec.describe HostsController, type: :controller do
     it "returns a success response" do
       host = Host.create! valid_attributes
       get :index, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -50,7 +50,7 @@ RSpec.describe HostsController, type: :controller do
       it "returns a success response" do
 	host = Host.create! valid_attributes
 	get :search, params: {serial: 'XXX73V', eol: 1, current: 1, vuln_risk: 1}, session: valid_session
-	expect(response).to be_success
+	expect(response).to be_successful
       end
     end
 
@@ -58,7 +58,7 @@ RSpec.describe HostsController, type: :controller do
       it "returns a success response" do
         host = Host.create! valid_attributes
         get :search, params: {eol: 1, current: 1, vuln_risk: 1, format: :csv}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -67,21 +67,21 @@ RSpec.describe HostsController, type: :controller do
     it "returns a success response" do
       host = Host.create! valid_attributes
       get :show, params: {id: host.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
       get :new, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
   describe "GET #new_import" do
     it "returns a success response" do
       get :new_import, params: {}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -90,7 +90,7 @@ RSpec.describe HostsController, type: :controller do
     it "returns a success response" do
       host = Host.create! valid_attributes
       get :edit, params: {id: host.to_param}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
@@ -127,7 +127,7 @@ RSpec.describe HostsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {host: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
@@ -165,7 +165,7 @@ RSpec.describe HostsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         host = Host.create! valid_attributes
         put :update, params: {id: host.to_param, host: invalid_attributes}, session: valid_session
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
   end
