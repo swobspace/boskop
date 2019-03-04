@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Network, :type => :model do
   let(:location) { FactoryBot.create(:location, lid: 'JCST') }
-  it { is_expected.to belong_to(:location) }
+  it { is_expected.to belong_to(:location).optional }
   it { is_expected.to have_many(:merkmale) }
 
   it { is_expected.to validate_presence_of(:location_id) }

@@ -5,7 +5,7 @@ RSpec.describe Merkmal, :type => :model do
   let(:location2) { FactoryBot.create(:location) }
 
   it { is_expected.to belong_to(:merkmalklasse) }
-  it { is_expected.to belong_to(:merkmalfor) }
+  it { is_expected.to belong_to(:merkmalfor).optional }
   it { is_expected.to validate_presence_of(:merkmalklasse_id) }
   # it { is_expected.to validate_presence_of(:merkmalfor_id) }
   # it { is_expected.to validate_presence_of(:merkmalfor_type) }
