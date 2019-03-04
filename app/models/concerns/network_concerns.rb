@@ -6,7 +6,7 @@ module NetworkConcerns
       return [] if ip.nil?
       networks = Network.
                    where("? << netzwerk", ip.to_s).
-                   order("masklen(netzwerk) desc")
+                   order(Arel.sql("masklen(netzwerk) desc"))
       if networks.any?
         masklen = networks.first.netzwerk.to_cidr_mask
         networks.where("masklen(netzwerk) >= ?", masklen)
