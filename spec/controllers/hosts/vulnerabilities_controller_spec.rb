@@ -47,7 +47,7 @@ RSpec.describe Hosts::VulnerabilitiesController, type: :controller do
       vulnerability = Vulnerability.create! valid_attributes
       otherhostvuln = FactoryBot.create(:vulnerability)
       get :index, params: {host_id: host.id}, session: valid_session
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(assigns(:vulnerabilities)).to contain_exactly(vulnerability)
     end
   end
