@@ -18,14 +18,10 @@ database yet.
 Requirements
 ------------
 
-* ruby >= 2.0
+* ruby >= 2.3
 * postgresql database
 * postgresql development files (i.e. fedora: package postgresql-devel) for 
 compiling ruby pg gem
-
-System dependencies
--------------------
-TBD
 
 Installation
 ------------
@@ -45,18 +41,10 @@ Installation
 ### Setup postgres
 See ''doc/postgres.md''
 
-Configuration
--------------
-TBD
-
-Deployment
-----------
-TBD
-
 Licence
 -------
 
-boskop Copyright (C) 2014-2018  Wolfgang Barth
+boskop Copyright (C) 2014-2019  Wolfgang Barth
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
