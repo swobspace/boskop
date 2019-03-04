@@ -1,3 +1,15 @@
+# monkey patch ascii-8bit problem
+module TenableRuby
+  class MyClient < Client
+    def report_download_file(scan_id, format, output_file_name)
+      report_content = report_download_quick(scan_id, format)
+      File.open(output_file_name, 'w') do |f|
+        f.write(report_content.force_encoding("UTF-8"))
+      end
+    end
+  end
+end
+
 # import nmap scan results in xml
 class DownloadNessusScanService
   Result = ImmutableStruct.new( :success?, :error_message, :xmlfile )
@@ -44,7 +56,7 @@ private
   attr_reader :nessus_id, :xmldoc
 
   def nessus
-    nessi = TenableRuby::Client.new(
+    nessi = TenableRuby::MyClient.new(
               credentials: {
                 access_key: Rails.application.secrets.nessus_access_key,
                 secret_key: Rails.application.secrets.nessus_secret_key
