@@ -11,7 +11,13 @@ devise_modules:
 #
 
 host: example.com
-# script_name: lackmus
+script_name: /lackmus
+
+mail_from: sender@example.com
+default_recipient: default@example.com
+always_cc: 
+  - always_cc@example.net
+  - always_cc@example.com
 
 #
 # Url for Nessus API

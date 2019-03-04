@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Responsibility, type: :model do
-  it { is_expected.to belong_to(:contact).inverse_of(:responsibilities) }
-  it { is_expected.to belong_to(:responsibility_for) }
+  it { is_expected.to belong_to(:contact).inverse_of(:responsibilities).optional }
+  it { is_expected.to belong_to(:responsibility_for).optional }
   it { is_expected.to validate_presence_of(:responsibility_for_type).on(:update) }
   it { is_expected.to validate_presence_of(:responsibility_for_id).on(:update) }
   it { is_expected.to validate_presence_of(:contact_id) }

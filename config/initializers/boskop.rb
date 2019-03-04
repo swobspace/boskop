@@ -1,5 +1,5 @@
 module Boskop
-  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings', 'contacts', 'responsibilities'].freeze
+  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings', 'contacts', 'responsibilities', 'mac_prefixes'].freeze
   PERIOD_UNITS = [ 'day', 'week', 'month', 'quarter', 'year' ].freeze
   CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'boskop.yml'))
   
@@ -42,6 +42,7 @@ module Boskop
       nil
     end
   end
+
   def self.script_name
     if CONFIG['script_name'].present?
       CONFIG['script_name']
@@ -90,6 +91,14 @@ module Boskop
     end
   end
 
+  def self.graylog_host
+    if CONFIG['graylog_host'].present?
+      CONFIG['graylog_host']
+    else
+      nil
+    end
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       opts = CONFIG['ldap_options'].symbolize_keys
@@ -106,6 +115,6 @@ module Boskop
    script_name: self.script_name
  }
 
-  Rails.application.routes.default_url_options[:host] = self.host
-  Rails.application.routes.default_url_options[:script_name] = self.script_name
+  # Rails.application.routes.default_url_options[:host] = self.host
+  # Rails.application.routes.default_url_options[:script_name] = self.script_name
 end

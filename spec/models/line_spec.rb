@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Line, type: :model do
   it { is_expected.to belong_to(:line_state) }
   it { is_expected.to belong_to(:access_type) }
-  it { is_expected.to belong_to(:framework_contract) }
+  it { is_expected.to belong_to(:framework_contract).optional }
   it { is_expected.to belong_to(:location_a) }
-  it { is_expected.to belong_to(:location_b) }
+  it { is_expected.to belong_to(:location_b).optional }
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:location_a_id) }
@@ -13,9 +13,11 @@ RSpec.describe Line, type: :model do
   it { is_expected.to validate_presence_of(:line_state_id) }
   it { is_expected.to validate_presence_of(:description) }
   it { is_expected.to validate_inclusion_of(:period_of_notice_unit).
-                        in_array(Boskop::PERIOD_UNITS) }
+                        in_array(Boskop::PERIOD_UNITS).
+                        with_message("Select one of #{Boskop::PERIOD_UNITS.join(', ')}") }
   it { is_expected.to validate_inclusion_of(:renewal_unit).
-                        in_array(Boskop::PERIOD_UNITS) }
+                        in_array(Boskop::PERIOD_UNITS).
+                        with_message("Select one of #{Boskop::PERIOD_UNITS.join(', ')}") }
 
   it "should get plain factory working" do
     f = FactoryBot.create(:line)

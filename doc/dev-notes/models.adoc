@@ -126,15 +126,18 @@ bin/rails g scaffold Host \
   fqdn:string workgroup:string domain_dns:string \
   host_category:references:index \
   location:references:index \
-  vuln_risk:string:index
+  vuln_risk:string:index \
+  serial:string:index \
+  oui_vendor:string
 
 #    bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
 #               fqdn:string workgroup:string domain_dns:string
 #    bin/rails g migration AddVulnRiskToHost \
 #               vuln_risk:string:index
-
 #    bin/rails g migration AddVendorToHost vendor:string
+#    bin/rails g migration AddOuiVendorToHost oui_vendor:string
 #    bin/rails g migration ChangeIpToInet
+#    bin/rails g migration AddSerialToHost serial:string:index
 ----
 
 ## HostCategory:
@@ -219,5 +222,13 @@ bin/rails g scaffold Responsibility \
   contact:references \
   role:string:index \
   title:string position:integer
+----
+
+## MacPrefix
+
+----
+bin/rails g scaffold MacPrefix \
+  oui:string:index \
+  vendor:string
 ----
 

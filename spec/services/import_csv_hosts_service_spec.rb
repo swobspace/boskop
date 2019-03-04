@@ -57,12 +57,14 @@ RSpec.describe ImportCsvHostsService do
           it { expect(host.ip.to_s).to eq("192.168.1.42") }
           it { expect(host.lastseen.to_s).to match(/\A2017-08-20/) }
           it { expect(host.name).to eq("wob42") }
-          it { expect(host.mac).to eq("C8:FF:28:78:29:DB") }
+          it { expect(host.mac).to eq("C8FF287829DB") }
+          it { expect(host.serial).to eq("XXX7785G") }
           it { expect(host.cpe).to eq("/o:microsoft:windows_10::-") }
           it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
           it { expect(host.fqdn).to eq("wob42.my.example.net") }
           it { expect(host.workgroup).to eq("MY") }
           it { expect(host.domain_dns).to eq("my.example.net") }
+          it { expect(host.vendor).to eq("VeryBigComputerCorp.") }
           it { expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler") }
           it { expect(host.merkmal_next).to eq("My next steps") }
         end

@@ -5,9 +5,11 @@ RSpec.describe FrameworkContract, type: :model do
 
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_inclusion_of(:period_of_notice_unit).
-                        in_array(Boskop::PERIOD_UNITS) }
+                        in_array(Boskop::PERIOD_UNITS).
+                        with_message("Select one of #{Boskop::PERIOD_UNITS.join(", ")}")}
   it { is_expected.to validate_inclusion_of(:renewal_unit).
-                        in_array(Boskop::PERIOD_UNITS) }
+                        in_array(Boskop::PERIOD_UNITS).
+                        with_message("Select one of #{Boskop::PERIOD_UNITS.join(", ")}")}
 
   it "should get plain factory working" do
     f = FactoryBot.create(:framework_contract)

@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Host, type: :model do
-  it { is_expected.to belong_to(:host_category) }
-  it { is_expected.to belong_to(:location) }
-  it { is_expected.to belong_to(:operating_system) }
+  it { is_expected.to belong_to(:host_category).optional }
+  it { is_expected.to belong_to(:location).optional }
+  it { is_expected.to belong_to(:operating_system).optional }
   it { is_expected.to have_many(:merkmale) }
   it { is_expected.to have_many(:vulnerabilities) }
   it { is_expected.to validate_presence_of(:ip) }
@@ -68,20 +68,55 @@ RSpec.describe Host, type: :model do
       let(:loc) { FactoryBot.create(:location, lid: 'JCST') }
       let!(:n1) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
 
-       it "sets location from ip address and existing networks" do
-         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
-         host.reload
-         expect(host.location).to eq(loc)
-       end
+      it "sets location from ip address and existing networks" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+        host.reload
+        expect(host.location).to eq(loc)
+      end
 
-       it "doesn't set location if there is no uniq matching network" do
-         n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
-         host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
-         host.reload
-         expect(host.location).to be_nil
-       end
+      it "doesn't set location if there is no uniq matching network" do
+        n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today)
+        host.reload
+        expect(host.location).to be_nil
+      end
+    end
+
+    describe "mac address" do
+      it "normalize 00:11:D2:f3:a4:B5" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
+        host.reload
+        expect(host.mac).to eq("0011D2F3A4B5")
+      end
+      it "normalize 00-11-D2-f3-a4-B5" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00-11-D2-f3-a4-B5')
+        host.reload
+        expect(host.mac).to eq("0011D2F3A4B5")
+      end
+      it "normalize doublicate mac to single one" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: "5C:26:0A:76:65:E5\nD0:DF:9A:D8:62:71")
+        host.reload
+        expect(host.mac).to eq("5C260A7665E5")
+      end
+    end
+    describe "oui vendor" do
+      let!(:macprefix) { MacPrefix.create!(oui: '0011D2', vendor: 'Mustermax Ltd.' ) }
+      let!(:macprefix2) { MacPrefix.create!(oui: '5C260A', vendor: 'Musterpartner' ) }
+      it "sets oui vendor if blank?" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
+        host.reload
+        expect(host.oui_vendor).to eq("Mustermax Ltd.")
+      end
+
+      it "sets oui vendor if mac_changed?" do
+        host = Host.create!(ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
+        host.reload
+        host.update_attributes(mac: '5C:26:0A:76:65:E5')
+        expect(host.oui_vendor).to eq("Musterpartner")
+      end
     end
   end
+
   describe "changing :cpe or :raw_os" do
     let(:os) { FactoryBot.create(:operating_system, name: "DummyOS") }
     describe "updating :raw_os" do

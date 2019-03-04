@@ -25,8 +25,13 @@
 	  <tr>
 	    <th><%= t('attributes.operating_system')%>:</th>
 	    <td><%= @host.operating_system %></td>
-	    <th><%= t('attributes.mac')%>:</th>
-	    <td><%= @host.mac %></td>
+	    <th>
+              <%= t('attributes.mac')%>:<br/>
+              <%= t('attributes.oui_vendor')%>:</th>
+	    <td>
+              <%= @host.mac %> <br/>
+              <%= @host.oui_vendor %>
+            </td>
 	  </tr>
 	  <tr>
 	    <th><%= t('attributes.cpe')%>:</th>
@@ -49,8 +54,8 @@
 	  <tr>
 	    <th><%= t('attributes.vuln_risk')%>:</th>
 	    <td><%= risk_button(@host.vuln_risk) %></td>
-	    <th></th>
-	    <td></td>
+	    <th><%= t('attributes.serial')%>:</th>
+	    <td><%= @host.serial %></td>
 	  </tr>
 
 	  <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>

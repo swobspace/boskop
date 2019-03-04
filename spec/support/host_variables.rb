@@ -4,6 +4,8 @@ shared_context "host variables" do
   let!(:loc_london) { FactoryBot.create(:location, name: 'London', lid: 'LONDON') }
   let!(:loc_berlin) { FactoryBot.create(:location, name: 'Berlin', lid: 'BER') }
 
+  let!(:macprefix) { FactoryBot.create(:mac_prefix, oui: '0084ED', vendor: 'Gnadenlos unlimited') }
+
   let(:os1) { FactoryBot.create(:operating_system, 
     name: 'DummyOS',
     eol: 5.years.before(Date.today)
@@ -43,6 +45,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:02',
     operating_system: os1,
     location: loc_london,
+    serial: 'XXX7784N'
   )}
   let!(:pc3)  { FactoryBot.create(:host, 
     name: "MYPC003",
@@ -57,6 +60,7 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:03',
     operating_system: os2,
     location: loc_london,
+    serial: 'XXX7785T'
   )}
   let!(:vpngw)  { FactoryBot.create(:host, 
     name: "vpngw",

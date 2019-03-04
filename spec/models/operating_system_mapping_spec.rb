@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe OperatingSystemMapping, type: :model do
-  it { is_expected.to belong_to(:operating_system) }
+  it { is_expected.to belong_to(:operating_system).optional }
   it { is_expected.to validate_presence_of(:field) }
   it { is_expected.to validate_presence_of(:value) }
 

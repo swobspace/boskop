@@ -15,6 +15,8 @@ module HostsDatatableHelper
       column << host.lastseen.to_s
       column << host.vuln_risk.to_s
       column << host.mac
+      column << host.oui_vendor
+      column << host.serial
       column << host.vendor
       column << host.host_category.to_s
       column << host.location.try(:lid)
@@ -85,6 +87,20 @@ RSpec.describe HostsDatatable, type: :model do
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
     it { expect(parse_json(subject, "data/0")).to eq(host2array(nas)) }
+  end 
+
+  describe "with search:serial" do
+    let(:myparams) {{
+      order: {"0"=>{column: "0", dir: "asc"}},
+      start: "0",
+      length: "10",
+      "search"=> {"value"=>"XXX778", regex: "false"}
+    }}
+    subject { datatable.to_json }
+    it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
+    it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
+    it { expect(parse_json(subject, "data/0")).to eq(host2array(pc2)) }
+    it { expect(parse_json(subject, "data/1")).to eq(host2array(pc3)) }
   end 
 
   describe "with search:198.51.100" do

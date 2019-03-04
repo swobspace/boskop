@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :mac_prefixes
   resources :ad_users,  :only => [:index] do
     collection do
       post :index

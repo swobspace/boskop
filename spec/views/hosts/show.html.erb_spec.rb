@@ -11,6 +11,7 @@ RSpec.describe "hosts/show", type: :view do
     location = FactoryBot.create(:location, lid: "LID")
     hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
     os = FactoryBot.create(:operating_system, name: "ZementOS")
+    macprefix = FactoryBot.create(:mac_prefix, oui: '112233', vendor: "Granite C.")
 
     @host = assign(:host, FactoryBot.create(:host,
       :name => "MyLovelyHost",
@@ -18,7 +19,8 @@ RSpec.describe "hosts/show", type: :view do
       :ip => "192.168.77.79",
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
       :raw_os => "Windows 7 Professional 6.1",
-      :mac => "MAC",
+      :mac => "112233445566",
+      :serial => "XXX7785T",
       :vendor => "Tuxolino",
       :fqdn => "MyLovelyHost.example.net",
       :domain_dns => "example.net",
@@ -37,7 +39,9 @@ RSpec.describe "hosts/show", type: :view do
     expect(rendered).to match(/192.168.77.79/)
     expect(rendered).to match("cpe:/o:microsoft:windows_7::sp1:professional")
     expect(rendered).to match(/Windows 7 Professional 6.1/)
-    expect(rendered).to match(/MAC/)
+    expect(rendered).to match(/112233445566/)
+    expect(rendered).to match(/Granite C./)
+    expect(rendered).to match(/XXX7785T/)
     expect(rendered).to match(/Tuxolino/)
     expect(rendered).to match(/ZementOS/)
     expect(rendered).to match(/MyLovelyHost.example.net/)

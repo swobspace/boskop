@@ -307,6 +307,53 @@ RSpec.describe HostQuery do
     end
   end # search :mac
 
+  context "with :oui_vendor" do
+    let!(:macprefix) { FactoryBot.create(:mac_prefix, oui: '0084ED', vendor: 'Gnadenlos unlimited') }
+    subject { HostQuery.new(all_hosts, {oui_vendor: 'gnadenlos'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_truthy }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_truthy }
+      it { expect(subject.include?(pc5)).to be_truthy }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :oui_vendor
+
+  context "with :serial" do
+    subject { HostQuery.new(all_hosts, {serial: 'XXX778'}) }
+    describe "#all" do
+      it { expect(subject.all).to contain_exactly(pc2, pc3) }
+    end
+    describe "#find_each" do
+      it "executes matching hosts" do
+        hosts = []
+        subject.find_each do |host|
+          hosts << host.id
+        end
+        expect(hosts).to contain_exactly(pc2.id, pc3.id)
+      end
+    end
+    describe "#include?" do
+      it { expect(subject.include?(nas)).to be_falsey }
+      it { expect(subject.include?(pc2)).to be_truthy }
+      it { expect(subject.include?(pc3)).to be_truthy }
+      it { expect(subject.include?(pc5)).to be_falsey }
+      it { expect(subject.include?(vpngw)).to be_falsey }
+    end
+  end # search :serial
+
   context "with :ip as string match" do
     subject { HostQuery.new(all_hosts, {ip: '198.51.100'}) }
     describe "#all" do

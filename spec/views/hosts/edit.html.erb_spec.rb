@@ -15,25 +15,18 @@ RSpec.describe "hosts/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", host_path(@host), "post" do
-
       assert_select "input[name=?]", "host[name]"
-
       assert_select "textarea[name=?]", "host[description]"
-
       assert_select "input[name=?]", "host[ip]"
-
       assert_select "input[name=?]", "host[cpe]"
-
       assert_select "input[name=?]", "host[raw_os]"
-
       assert_select "input[name=?]", "host[mac]"
+      assert_select "input[name=?]", "host[serial]"
       assert_select "input[name=?]", "host[fqdn]"
       assert_select "input[name=?]", "host[domain_dns]"
       assert_select "input[name=?]", "host[workgroup]"
       assert_select "input[name=?]", "host[vendor]"
-
       assert_select "select[name=?]", "host[host_category_id]"
-
       assert_select "select[name=?]", "host[location_id]"
       assert_select "select[name=?]", "host[operating_system_id]"
     end

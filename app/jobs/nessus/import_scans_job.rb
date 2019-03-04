@@ -15,8 +15,10 @@ class Nessus::ImportScansJob < ApplicationJob
           Rails.logger.info("### Nessus Scan #{scan.name} successfully imported")
           scan.update_attributes(import_state: 'done')
         else
-        Rails.logger.warn("### Import Nessus Scan #{scan.name} failed for some reason: " +
-                          "#{imresult.error_message}")
+          Rails.logger.warn(
+            "### Import Nessus Scan #{scan.name} failed for some reason: " +
+            "#{imresult.error_message}"
+          )
           scan.update_attributes(import_state: 'failed')
         end
       else

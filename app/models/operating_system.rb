@@ -1,8 +1,8 @@
 class OperatingSystem < ApplicationRecord
   # -- associations
-  has_many :hosts, dependent: :restrict_with_error
+  has_many :hosts, dependent: :nullify
   has_many :vulnerabilities, through: :hosts
-  has_many :operating_system_mappings, dependent: :restrict_with_error
+  has_many :operating_system_mappings, dependent: :nullify
 
   # -- configuration
   # -- validations and callbacks

@@ -18,6 +18,7 @@ class Host < ApplicationRecord
 
   before_save :set_location
   before_save :check_operating_system
+  before_save :check_mac_address
 
   def to_s
     "#{ip} (#{name})"
@@ -116,6 +117,17 @@ private
     check_raw_os
     assign_operating_system
     return true
+  end
+
+  def check_mac_address
+    return true if mac.blank?
+    if mac !~ /[0-9A-F]{12}/
+      self[:mac] = mac.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
+    end
+    if oui_vendor.blank? || mac_changed?
+      self[:oui_vendor] = MacPrefix.where(oui: mac[0..5]).limit(1).first&.vendor
+    end
+    true
   end
 
   def check_raw_os

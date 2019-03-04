@@ -7,9 +7,11 @@ RSpec.describe NessusScan, type: :model do
   it { is_expected.to validate_presence_of(:status) }
   it { is_expected.to validate_presence_of(:last_modification_date) }
   it { is_expected.to validate_inclusion_of(:import_state).
-                        in_array(NessusScan::IMPORT_STATES) }
+                        in_array(NessusScan::IMPORT_STATES).
+                        with_message("Select one of #{NessusScan::IMPORT_STATES.join(", ")}")}
   it { is_expected.to validate_inclusion_of(:import_mode).
-                        in_array(NessusScan::IMPORT_MODES) }
+                        in_array(NessusScan::IMPORT_MODES).
+                        with_message("Select one of #{NessusScan::IMPORT_MODES.join(", ")}")}
 
   it "should get plain factory working" do
     f = FactoryBot.create(:nessus_scan)
