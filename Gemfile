@@ -76,3 +76,5 @@ gem 'whenever'
 gem 'cocoon'
 gem 'gelf'
 gem 'bootsnap'
+gem 'exception_notification'
+
