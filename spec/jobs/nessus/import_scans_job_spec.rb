@@ -88,6 +88,14 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
 	end
 	it_behaves_like "a importable scan"
       end
+
+      describe "with given nessus_id" do
+	subject { Nessus::ImportScansJob.perform_now(nessus_id: '1234567') }
+	before(:each) do
+	  nessus_scan.update_attributes(import_mode: 'manual', import_state: 'new', status: 'completed')
+	end
+	it_behaves_like "a importable scan"
+      end
     end
 
     describe "no imports on" do
@@ -134,6 +142,7 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
 	end
 	it_behaves_like "a non-importable scan"
       end
+
     end
   end
 end

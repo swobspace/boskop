@@ -4,6 +4,7 @@ class Nessus::ImportScansJob < ApplicationJob
   def perform(options = {})
     options.symbolize_keys!
     @import_mode = options.fetch(:import_mode, 'auto')
+    @nessus_id = options.fetch(:nessus_id, nil)
     return unless pending_scans.any?
     pending_scans.each do |scan|
       dlresult = DownloadNessusScanService.new(nessus_id: scan.nessus_id).call
@@ -32,10 +33,15 @@ class Nessus::ImportScansJob < ApplicationJob
 
 private
 
-  attr_reader :import_mode
+  attr_reader :import_mode, :nessus_id
+
   def pending_scans
-    importable_scans = NessusScan.where(import_state: 'new', status: 'completed',
-                                        import_mode: import_mode)
+    if nessus_id
+      importable_scans = NessusScan.where(nessus_id: nessus_id).limit(1)
+    else
+      importable_scans = NessusScan.where(import_state: 'new', status: 'completed',
+                                          import_mode: import_mode)
+    end
     if importable_scans.any?
       Rails.logger.info("### Starting import on #{importable_scans.count} scan(s)")
     else
