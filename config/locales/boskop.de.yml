@@ -70,6 +70,7 @@ de:
     upload: Upload
     add: "%{model} hinzufügen"
     remove: "%{model} löschen"
+    update_list: Liste aktualisieren
 
   activerecord:
     models:
