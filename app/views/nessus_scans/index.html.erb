@@ -40,6 +40,7 @@
       <%= show_link nessus_scan %>
       <%= edit_link nessus_scan %>
       <%= delete_link nessus_scan %>
+      <%= import_nessus_link nessus_scan %>
     </td>
   <% end %>
 <% end %>
@@ -49,3 +50,4 @@
 <br />
 
 <%= back_link %>
+<%= link_to t('actions.update_list'), main_app.update_list_nessus_scans_path, method: :post, class: 'btn btn-secondary' %>
