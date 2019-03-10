@@ -1,4 +1,5 @@
 require 'dotenv'
+require 'json_spec'
 
 Dotenv.load( File.expand_path(__FILE__ + '/../.localenv'),
               File.expand_path(__FILE__ + '/../.env'))
