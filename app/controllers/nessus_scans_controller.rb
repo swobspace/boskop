@@ -1,5 +1,5 @@
 class NessusScansController < ApplicationController
-  before_action :set_nessus_scan, only: [:show, :edit, :update, :destroy]
+  before_action :set_nessus_scan, only: [:show, :edit, :update, :destroy, :import]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /nessus_scans
@@ -41,6 +41,20 @@ class NessusScansController < ApplicationController
   def destroy
     @nessus_scan.destroy
     respond_with(@nessus_scan)
+  end
+
+  # get current list of nessus scans
+  def update_list
+    Nessus::ListScansJob.perform_now
+    flash[:notice] = "list update done"
+    redirect_to nessus_scans_path
+  end
+
+  # import a nessus scan
+  def import
+    Nessus::ImportScansJob.perform_later(nessus_id: @nessus_scan.nessus_id)
+    flash[:notice] = "Import nessus data started in background; please reload index page a few minutes later"
+    redirect_to nessus_scans_path
   end
 
   private
