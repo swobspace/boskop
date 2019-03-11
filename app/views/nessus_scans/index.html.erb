@@ -50,4 +50,9 @@
 <br />
 
 <%= back_link %>
-<%= link_to t('actions.update_list'), main_app.update_list_nessus_scans_path, method: :post, class: 'btn btn-secondary' %>
+<%= link_to t('actions.update_list'), 
+            main_app.update_list_nessus_scans_path, 
+            method: :post, 
+            class: 'btn btn-secondary',
+            title: t('boskop.update_nessus_list')
+%>

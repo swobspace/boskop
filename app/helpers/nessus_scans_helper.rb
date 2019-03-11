@@ -3,6 +3,7 @@ module NessusScansHelper
     link_to raw('<i class="fas fa-arrow-alt-circle-down"></i>'), 
             import_nessus_scan_path(nessus_scan),
             method: :put,
-            class: 'btn btn-secondary'
+            class: 'btn btn-secondary',
+            title: t('boskop.import_nessus_scan')
   end
 end

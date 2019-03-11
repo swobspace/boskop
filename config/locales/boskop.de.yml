@@ -53,6 +53,8 @@ de:
     critical_hosts: Nur kritische Hosts
     location_disabled: Dieser Standort ist deaktiviert
     new_contact_from_ad: Kontakt mit Vorlage erstellen
+    import_nessus_scan: Scanergebnis von Nessus importieren
+    update_nessus_list: Liste der Nessus-Scans aktualisieren
     threats:
       critical: Kritisch
       high: Hoch

@@ -53,7 +53,7 @@ class NessusScansController < ApplicationController
   # import a nessus scan
   def import
     Nessus::ImportScansJob.perform_later(nessus_id: @nessus_scan.nessus_id)
-    flash[:notice] = "Import nessus data started in background; please reload index page a few minutes later"
+    flash[:notice] = "Starting import in background; please reload index page a few minutes later"
     redirect_to nessus_scans_path
   end
 
