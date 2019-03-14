@@ -108,7 +108,7 @@ private
 
   def host_attributes
     Host.attribute_names.map(&:to_sym).reject do |k|
-      [:id, :created_at, :updated_at].include?(k)
+      [:id, :created_at, :updated_at, :vuln_risk, :oui_vendor].include?(k)
     end
   end
 
