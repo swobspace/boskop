@@ -1,2 +1,2 @@
-ip;name;raw_os;server;lastseen;fqdn;domain_dns;workgroup;cpe;mac;merkmal_responsible;merkmal_next;vendor;serial;
-192.168.1.42;wob42;Windows 10 Pro 15063;DESKTOP-6GLIL73;2017-08-20T15:42:07+02:00;wob42.my.example.net;my.example.net;MY;cpe:/o:microsoft:windows_10::-;C8:FF:28:78:29:DB;KrummhoernigerSchnarchkackler;My next steps;VeryBigComputerCorp.;XXX7785G;
+"ip";"name";raw_os;server;lastseen;fqdn;domain_dns;workgroup;cpe;mac;merkmal_responsible;merkmal_next;vendor;serial;
+"192.168.1.42";"wob42";"Windows 10 Pro 15063";"DESKTOP-6GLIL73";"2017-08-20T15:42:07+02:00";"wob42.my.example.net";my.example.net;MY;cpe:/o:microsoft:windows_10::-;C8:FF:28:78:29:DB;KrummhoernigerSchnarchkackler;My next steps;VeryBigComputerCorp.;XXX7785G;

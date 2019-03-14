@@ -1,4 +1,4 @@
 ip;operating_system_id;host_category_id;location_id;lastseen;
-192.168.1.42;Linux;Linux/Webserver;@home;2017-12-31;
-192.168.1.43;Linux;lin_web;HOME;2017-12-31;
+"192.168.1.42";"Linux";"Linux/Webserver";"@home";"2017-12-31";
+192.168.1.43;Linux;lin_web;HOME;31.12.2017;
 192.168.1.44;771;772;773;2017-12-31;
