@@ -33,46 +33,46 @@ wird allerdings dabei auch aktualisiert.
 | IP-Adresse des Hosts
 
 |`name`
-|
+| Hostname
 
 |`description`
-|
+| Beschreibung der Aufgabe oder anderweitige Angaben
 
 |`cpe`
-|
+| Common Plattform Enumeration; eine Angabe zum Betriebssystem z.B. aus `nmap`-Scans.
 
 |`raw_os`
-|
+| Betriebssystemangabe. Boskop versucht die Angabe  dann einem Betriebssystem aus der Betriebssystemtabelle zuzuordnen.
 
 |`operating_system_id`
-|
+|Name oder ID aus der Betriebssystem-Tabelle. Ein Tag ist derzeit noch nicht implementiert.
 
 |`lastseen`
-|
+| Zuletzt gesehen am; Format: `YYYY-MM-DD`
 
 |`mac`
-|
+| MAC-Adresse
 
 |`host_category_id`
-|
+| ID, Name oder Tag aus der Host-Kategorie-Tabelle.
 
 |`location_id`
-|
+|Name, Lokation_ID oder ID der Lokation aus der Lokation-Tabelle.
 
 |`fqdn`
-|
+| Full Qualified Domain Name
 
 |`workgroup`
-|
+| Windows-Arbeitsgruppe
 
 |`domain_dns`
-|
+|Windows-Domäne
 
 |`vendor`
-|
+|Hersteller (der Host-Hardware)
 
 |`serial`
-|
+|Seriennummer (Bios-Seriennummer)
 
 |===
 
