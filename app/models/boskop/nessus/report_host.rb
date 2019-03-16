@@ -122,6 +122,18 @@ module Boskop
         each.to_a
       end
 
+      #
+      #
+      #
+      def report_item(options = {})
+        options.symbolize_keys!
+        plugin_id = options.fetch(:plugin_id, nil)
+        return nil if plugin_id.blank?
+        report_item = @report_host.at("ReportItem[@pluginID='48337']")
+        return nil if report_item.blank?
+        ReportItem.new(report_item: report_item)
+      end
+
     end
   end
 end

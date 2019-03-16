@@ -75,6 +75,8 @@ RSpec.describe Boskop::Nessus::ReportHost do
     it { expect(subject).to be_valid }
     it { expect(subject.all? {|o| o.kind_of? Boskop::Nessus::ReportItem}).to be_truthy }
     it { expect(subject.report_items.first).to be_a_kind_of Boskop::Nessus::ReportItem }
+    # plugin 48337 Windows ComputerSystemProduct Enumeration (WMI)
+    it { expect(subject.report_item(plugin_id: 48337)).to be_nil }
 
     describe "with first report_item" do
       let(:report_item) { (subject.report_items.first) }
@@ -87,4 +89,14 @@ RSpec.describe Boskop::Nessus::ReportHost do
     end
   end
 
+  describe "with authenticated scans" do
+    # plugin 48337 Windows ComputerSystemProduct Enumeration (WMI)
+    describe "existing plugin 48337 entry" do
+      let(:xmlfile) {"/home/wob/Projects/boskop/spec/fixtures/files/ws1020_48337.nessus"}
+      let(:xmldoc)  { File.open(xmlfile) { |f| Nokogiri::XML(f) } }
+      let(:report_host) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[0] }
+      subject { Boskop::Nessus::ReportHost.new(report_host: report_host) }
+      it { expect(subject.report_item(plugin_id: 48337)).to be_a_kind_of Boskop::Nessus::ReportItem }
+    end
+  end
 end
