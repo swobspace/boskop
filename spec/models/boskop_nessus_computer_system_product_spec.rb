@@ -34,6 +34,12 @@ RSpec.describe Boskop::Nessus::ComputerSystemProduct do
     it { expect(subject.name).to eq("OptiPlex 3020") }
     it { expect(subject.uuid).to eq("FA289A70-4803-11E9-8CCD-111222333444") }
     it { expect(subject.version).to eq("01") }
+    it { expect(subject.attributes).to include(
+           serial: "ZZZ4DTAG",
+           vendor: "Dell Inc.",
+           product: "OptiPlex 3020",
+           uuid: "FA289A70-4803-11E9-8CCD-111222333444"
+       )}
   end
 
 end

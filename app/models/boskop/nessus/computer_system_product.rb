@@ -49,6 +49,15 @@ module Boskop
         get_entry("Version")
       end
 
+      def attributes
+        { 
+          serial: identifying_number,
+          vendor: vendor,
+          product: name,
+          uuid: uuid
+        }
+      end
+
     private
       attr_reader :report_item, :options
 
