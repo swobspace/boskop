@@ -25,6 +25,9 @@ class HostQuery
   # * :uuid - string
   # * :vendor - string
   # * :product - string
+  # * :warranty_start - date
+  # * :warranty_start_from - date
+  # * :warranty_start_until - date
   # * :host_category - host_categories.name (string)
   # * :lid - location.lid (string)
   # * :eol - operating_systems.eol < today (boolean)
@@ -87,6 +90,12 @@ private
       when :mac
         mac = value.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
         query = query.where("hosts.mac ILIKE ?", "%#{mac}%")
+      when :warranty_start
+        query = query.where("to_char(warranty_start, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+      when :warranty_start_from
+        query = query.where("warranty_start >= ?", "#{value}%")
+      when :warranty_start_until
+        query = query.where("warranty_start <= ?", "#{value}%")
       when :lastseen
         query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer

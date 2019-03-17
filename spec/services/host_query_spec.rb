@@ -210,6 +210,23 @@ RSpec.describe HostQuery do
     it_behaves_like "a host query"
   end # search :product
 
+  context "with :warranty_start" do
+    subject { HostQuery.new(all_hosts, {warranty_start: '2017-03'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
+
+  context "with :warranty_start from-until" do
+    subject { HostQuery.new(all_hosts, {warranty_start_from: '2017-03-01', warranty_start_until: '2017-03-01'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
 
   context "with :ip as string match" do
     subject { HostQuery.new(all_hosts, {ip: '198.51.100'}) }
