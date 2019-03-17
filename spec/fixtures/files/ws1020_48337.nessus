@@ -6164,8 +6164,8 @@
 <tag name="system-type">general-purpose</tag>
 <tag name="operating-system">Microsoft Windows 7 Professional Service Pack 1</tag>
 <tag name="Credentialed_Scan">true</tag>
-<tag name="netbios-name">DLWS1020</tag>
-<tag name="hostname">DLWS1020</tag>
+<tag name="netbios-name">WS1020</tag>
+<tag name="hostname">WS1020</tag>
 <tag name="bios-uuid">FA289A70-4803-11E9-8CCD-111222333444</tag>
 <tag name="netstat-listen-udp6-30">[::1]:59916</tag>
 <tag name="netstat-listen-udp6-29">[::1]:1900</tag>

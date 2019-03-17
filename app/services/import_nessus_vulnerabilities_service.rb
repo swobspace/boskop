@@ -92,10 +92,18 @@ private
   #
   # extract host attributes
   #
-  def host_attributes(result)
-    result.attributes.reject do |k,v| 
-      !(Host.attribute_names.include?(k.to_s))
-    end
+  def host_attributes(report)
+    csp_attributes(report).merge(report.attributes).
+      reject do |k,v| 
+        !(Host.attribute_names.include?(k.to_s))
+      end
+  end
+
+  #
+  # get attributes from plugin 48337 WMI Computer System Product
+  #
+  def csp_attributes(report)
+    Boskop::Nessus::ComputerSystemProduct.new(report_host: report)&.attributes || {}
   end
 
   #
