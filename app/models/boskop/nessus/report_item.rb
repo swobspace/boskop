@@ -170,10 +170,10 @@ module Boskop
       end
 
       #
-      # description
+      # plugin_output
       #
-      def description
-        @report_item.at("description")&.inner_text
+      def plugin_output
+        @report_item.at("plugin_output")&.inner_text
       end
 
       #

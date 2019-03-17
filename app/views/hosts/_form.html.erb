@@ -31,7 +31,17 @@
        %>
       <%= f.input :serial
        %>
+      <%= f.input :uuid
+       %>
       <%= f.input :vendor
+       %>
+      <%= f.input :product
+       %>
+      <%= f.input :warranty_sla
+       %>
+      <%= f.input :warranty_start, as: :string, wrapper: :horizontal_date
+       %>
+      <%= f.input :warranty_end, as: :string, wrapper: :horizontal_date
        %>
       <%= f.association :host_category,
             input_html: { class: 'select2' }

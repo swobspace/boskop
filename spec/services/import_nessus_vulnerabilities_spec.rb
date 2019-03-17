@@ -61,6 +61,22 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(host.fqdn).to eq("") }
     end
 
+    describe "create a nonexisting host with plugin data" do
+      let(:nessusxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'ws1020_48337.nessus') }
+      let(:host) { result.hosts[0] }
+      it { expect(host.lastseen.to_s).to eq("2019-03-16") }
+      it { expect(host.ip).to eq("192.0.2.17") }
+      it { expect(host.name).to eq("WS1020") }
+      it { expect(host.mac).to eq("64006AAABBCC") }
+      it { expect(host.raw_os).to eq("Microsoft Windows 7 Professional Service Pack 1") }
+      it { expect(host.cpe).to eq("") }
+      it { expect(host.fqdn).to eq("ws1020.example.com") }
+      it { expect(host.uuid).to eq("FA289A70-4803-11E9-8CCD-111222333444") }
+      it { expect(host.vendor).to eq("Dell Inc.") }
+      it { expect(host.product).to eq("OptiPlex 3020") }
+      it { expect(host.serial).to eq("ZZZ4DTAG") }
+    end
+
     describe "update an existing host with older data" do
       let(:host) { result.hosts[0] }
       let!(:oldhost) { FactoryBot.create(:host, 

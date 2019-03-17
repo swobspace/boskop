@@ -29,7 +29,12 @@
       <th class="notvisible"><%= t('attributes.mac') %></th>
       <th class="notvisible"><%= t('attributes.oui_vendor') %></th>
       <th class="notvisible"><%= t('attributes.serial') %></th>
+      <th class="notvisible"><%= t('attributes.uuid') %></th>
       <th class="notvisible"><%= t('attributes.vendor') %></th>
+      <th class="notvisible"><%= t('attributes.product') %></th>
+      <th class="notvisible"><%= t('attributes.warranty_sla') %></th>
+      <th class="notvisible"><%= t('attributes.warranty_start') %></th>
+      <th class="notvisible"><%= t('attributes.warranty_end') %></th>
       <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.location') %></th>
       <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
@@ -40,6 +45,11 @@
   </thead>
   <tfoot>
     <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -79,7 +89,12 @@
     <td><%= host.mac %></td>
     <td><%= host.oui_vendor %></td>
     <td><%= host.serial %></td>
+    <td><%= host.uuid %></td>
     <td><%= host.vendor %></td>
+    <td><%= host.product %></td>
+    <td><%= host.warranty_sla %></td>
+    <td><%= host.warranty_start %></td>
+    <td><%= host.warranty_end %></td>
     <td><%= host.host_category.to_s %></td>
     <td><%= host.location&.lid %></td>
     <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>

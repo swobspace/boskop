@@ -139,7 +139,12 @@ RSpec.describe HostsController, type: :controller do
         vendor: "Tuxolino",
         domain_dns: 'example.net', 
         workgroup: 'WORKGROUP2',
-        serial: 'BRAXX937'
+        serial: 'BRAXX937',
+        uuid: 'FA289A70-4803-11E9-8CCD-111222333444',
+        product: "Optimus Primus",
+        warranty_sla: "3 years bring in",
+        warranty_start: "2019-03-01",
+        warranty_end: "2022-02-28",
       }}
 
       it "updates the requested host" do
@@ -152,6 +157,11 @@ RSpec.describe HostsController, type: :controller do
         expect(host.domain_dns).to eq("example.net")
         expect(host.workgroup).to eq("WORKGROUP2")
         expect(host.serial).to eq("BRAXX937")
+        expect(host.uuid).to eq('FA289A70-4803-11E9-8CCD-111222333444')
+        expect(host.product).to eq("Optimus Primus")
+        expect(host.warranty_sla).to eq("3 years bring in")
+        expect(host.warranty_start.to_s).to eq("2019-03-01")
+        expect(host.warranty_end.to_s).to eq("2022-02-28")
       end
 
       it "redirects to the host" do

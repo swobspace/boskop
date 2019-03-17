@@ -20,6 +20,8 @@ let(:host1_item2_solution) { "Microsoft has released a set of patches for Window
 
 For unsupported Windows operating systems, e.g. Windows XP, Microsoft recommends that users discontinue the use of SMBv1. SMBv1 lacks security features that were included in later SMB versions. SMBv1 can be disabled by following the vendor instructions provided in Microsoft KB2696547. Additionally, US-CERT recommends that users block SMB directly by blocking TCP port 445 on all network boundary devices. For SMB over the NetBIOS API, block TCP ports 137 / 139 and UDP ports 137 / 138 on all network boundary devices." }
 
+let(:host1_item2_plugin_output) { "Information about this scan : \n\nNessus version : 7.1.0\nPlugin feed version : 201806032020\nScanner edition used : Nessus\nScan type : Normal\nScan policy used : WannaCry Ransomware\nScanner IP : 192.0.2.1\n\nWARNING : No port scanner was enabled during the scan. This may\nlead to incomplete results.\n\nPort range : default\nThorough tests : no\nExperimental tests : no\nParanoia level : 1\nReport verbosity : 1\nSafe checks : yes\nOptimize the test : yes\nCredentialed checks : no\nPatch management checks : None\nCGI scanning : disabled\nWeb application tests : disabled\nMax hosts : 120\nMax checks : 5\nRecv timeout : 5\nBackports : None\nAllow post-scan editing: Yes\nScan Start Date : 2018/6/4 12:57 CEST\nScan duration : 53 sec\n" }
+
 let(:host1_item2_synopsis) { "The remote Windows host is affected by multiple vulnerabilities." }
 let(:host1_item2_see_also) {
 "https://technet.microsoft.com/library/security/MS17-010
@@ -119,6 +121,7 @@ http://www.nessus.org/u?59db5b5b" }
     it { expect(subject.threat).to eq("None") }
     it { expect(subject.solution).to eq("n/a") }
     it { expect(subject.synopsis).to eq("This plugin displays information about the Nessus scan.") }
+    it { expect(subject.plugin_output).to eq( host1_item2_plugin_output) }
     it { 
       expect(subject.attributes).to include(
         nvt: "nessus:19506",

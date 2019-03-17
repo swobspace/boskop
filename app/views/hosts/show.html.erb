@@ -13,14 +13,14 @@
 	  <tr>
 	    <th class="w-25"><%= t('attributes.description')%>:</th>
 	    <td class="w-25"><%= @host.description %></td>
-	    <th class="w-25"><%= t('attributes.workgroup')%>:</th>
-	    <td class="w-25"><%= @host.workgroup %></td>
+	    <th><%= t('attributes.host_category')%>:</th>
+	    <td><%= @host.host_category.to_s %></td>
 	  </tr>
 	  <tr>
 	    <th><%= t('attributes.domain_dns')%>:</th>
 	    <td><%= @host.domain_dns %></td>
-	    <th><%= t('attributes.lastseen')%>:</th>
-	    <td><%= @host.lastseen %></td>
+	    <th class="w-25"><%= t('attributes.workgroup')%>:</th>
+	    <td class="w-25"><%= @host.workgroup %></td>
 	  </tr>
 	  <tr>
 	    <th><%= t('attributes.operating_system')%>:</th>
@@ -34,16 +34,22 @@
             </td>
 	  </tr>
 	  <tr>
-	    <th><%= t('attributes.cpe')%>:</th>
-	    <td><%= @host.cpe %></td>
-	    <th><%= t('attributes.vendor')%>:</th>
-	    <td><%= @host.vendor %></td>
-	  </tr>
-	  <tr>
 	    <th><%= t('attributes.raw_os')%>:</th>
 	    <td><%= @host.raw_os %></td>
-	    <th><%= t('attributes.host_category')%>:</th>
-	    <td><%= @host.host_category.to_s %></td>
+	    <th><%= t('attributes.cpe')%>:</th>
+	    <td><%= @host.cpe %></td>
+	  </tr>
+	  <tr>
+	    <th><%= t('attributes.vendor')%>:</th>
+	    <td><%= @host.vendor %></td>
+	    <th><%= t('attributes.product')%>:</th>
+	    <td><%= @host.product %></td>
+	  </tr>
+	  <tr>
+	    <th><%= t('attributes.serial')%>:</th>
+	    <td><%= @host.serial %></td>
+	    <th><%= t('attributes.uuid')%>:</th>
+	    <td><%= @host.uuid %></td>
 	  </tr>
 	  <tr>
 	    <th><%= t('attributes.fqdn')%>:</th>
@@ -52,10 +58,21 @@
 	    <td><%= @host.location.try(:lid) %></td>
 	  </tr>
 	  <tr>
+	    <th><%= t('attributes.lastseen')%>:</th>
+	    <td><%= @host.lastseen %></td>
 	    <th><%= t('attributes.vuln_risk')%>:</th>
 	    <td><%= risk_button(@host.vuln_risk) %></td>
-	    <th><%= t('attributes.serial')%>:</th>
-	    <td><%= @host.serial %></td>
+	  </tr>
+	  <tr>
+	    <th><%= t('attributes.warranty_sla')%>:</th>
+	    <td><%= @host.warranty_sla %></td>
+	    <th>
+              <%= t('attributes.warranty_start')%>:<br/>
+              <%= t('attributes.warranty_end')%>:</th>
+	    <td>
+              <%= @host.warranty_start %> <br/>
+              <%= @host.warranty_end %>
+            </td>
 	  </tr>
 
 	  <%= render partial: 'merkmale/list', locals: { merkmale: @host.merkmale } %>

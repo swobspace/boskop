@@ -12,7 +12,7 @@ module Boskop
       # (host) attributes
       #
       ATTRIBUTES = [:lastseen, :ip, :name, :mac,
-                    :raw_os, :fqdn ]
+                    :raw_os, :fqdn, :uuid ]
 
       #
       # Creates a Boskop::Nessus::ReportHost object
@@ -91,6 +91,13 @@ module Boskop
       end
 
       #
+      # uuid
+      #
+      def uuid
+        @report_host.at("HostProperties/tag[@name='bios-uuid']")&.inner_text
+      end
+
+      #
       # raw_os
       #
       def raw_os
@@ -120,6 +127,18 @@ module Boskop
       #
       def report_items
         each.to_a
+      end
+
+      #
+      #
+      #
+      def report_item(options = {})
+        options.symbolize_keys!
+        plugin_id = options.fetch(:plugin_id, nil)
+        return nil if plugin_id.blank?
+        report_item = @report_host.at("ReportItem[@pluginID='48337']")
+        return nil if report_item.blank?
+        ReportItem.new(report_item: report_item)
       end
 
     end

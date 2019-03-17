@@ -1,5 +1,30 @@
 require 'rails_helper'
 
+RSpec.shared_examples "a host query" do
+  describe "#all" do
+    it { expect(subject.all).to contain_exactly(*@matching) }
+  end
+  describe "#find_each" do
+    it "iterates over matching events" do
+      a = []
+      subject.find_each do |act|
+        a << act
+      end
+      expect(a).to contain_exactly(*@matching)
+    end
+  end
+  describe "#include?" do
+    it "includes only matching events" do
+      @matching.each do |ma|
+        expect(subject.include?(ma)).to be_truthy
+      end
+      @nonmatching.each do |noma|
+        expect(subject.include?(noma)).to be_falsey
+      end
+    end
+  end
+end
+
 RSpec.describe HostQuery do
   include_context "host variables"
   let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale).distinct.order("name asc") }
@@ -33,534 +58,256 @@ RSpec.describe HostQuery do
 
   context "with :name" do
     subject { HostQuery.new(all_hosts, {name: 'MyPc'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5]
+      @nonmatching = [vpngw, nas]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :name
 
   context "with :limit = 3" do
     subject { HostQuery.new(all_hosts, {limit: "3"}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
+    before(:each) do
+      @matching = [nas, pc2, pc3]
+      @nonmatching = [] # does not work
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id, nas.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { skip "special query and limit doesn work"; expect(subject.include?(pc5)).to be_falsey }
-      it { skip "special query and limit doesn work"; expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :limit = 3
 
   context "with :limit = 0" do
     subject { HostQuery.new(all_hosts, {limit: "0"}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5, vpngw) }
+    before(:each) do
+      @matching = [nas, pc2, pc3, pc5, vpngw]
+      @nonmatching = []
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id, nas.id, pc5.id, vpngw.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_truthy }
-    end
+    it_behaves_like "a host query"
   end # search :limit = 0
 
   context "with :description" do
     subject { HostQuery.new(all_hosts, {description: 'WorkStation'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5]
+      @nonmatching = [nas, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :description
 
   context "with :operating_system" do
     subject { HostQuery.new(all_hosts, {operating_system: 'ummyO'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, nas) }
+    before(:each) do
+      @matching = [pc2, nas]
+      @nonmatching = [pc3, pc5, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, nas.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :operating_system
 
   context "with eol: true" do
     subject { HostQuery.new(all_hosts, {eol: true}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, nas) }
+    before(:each) do
+      @matching = [pc2, nas]
+      @nonmatching = [pc3, pc5, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, nas.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :operating_system
 
   context "with :cpe" do
     subject { HostQuery.new(all_hosts, {cpe: 'WindowS_7'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, pc3) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [nas, pc5, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :cpe
 
   context "with :raw_os" do
     subject { HostQuery.new(all_hosts, {raw_os: 'windows 7 PROFessional'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, pc3) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [nas, pc5, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :raw_os
 
   context "with :domain_dns" do
     subject { HostQuery.new(all_hosts, {domain_dns: 'MY.example.net'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5, nas]
+      @nonmatching = [vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :domain_dns
 
   context "with :fqdn" do
     subject { HostQuery.new(all_hosts, {fqdn: 'pC005'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc5) }
+    before(:each) do
+      @matching = [pc5]
+      @nonmatching = [nas, pc2, pc3, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :fqdn
 
   context "with :workgroup" do
     subject { HostQuery.new(all_hosts, {workgroup: 'My'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [nas, pc2, pc3, pc5]
+      @nonmatching = [vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :workgroup
 
   context "with :mac" do
     subject { HostQuery.new(all_hosts, {mac: '00:84:ED'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [nas, pc2, pc3, pc5]
+      @nonmatching = [vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :mac
 
   context "with :oui_vendor" do
     let!(:macprefix) { FactoryBot.create(:mac_prefix, oui: '0084ED', vendor: 'Gnadenlos unlimited') }
     subject { HostQuery.new(all_hosts, {oui_vendor: 'gnadenlos'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [nas, pc2, pc3, pc5]
+      @nonmatching = [vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :oui_vendor
 
   context "with :serial" do
     subject { HostQuery.new(all_hosts, {serial: 'XXX778'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(pc2, pc3) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :serial
+
+  context "with :uuid" do
+    subject { HostQuery.new(all_hosts, {uuid: 'D4618E67'}) }
+    before(:each) do
+      @matching = [nas]
+      @nonmatching = [vpngw, pc2, pc3, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :uuid
+
+  context "with :vendor" do
+    subject { HostQuery.new(all_hosts, {vendor: 'DELL'}) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5]
+      @nonmatching = [vpngw, nas]
+    end
+    it_behaves_like "a host query"
+  end # search :vendor
+
+  context "with :product" do
+    subject { HostQuery.new(all_hosts, {product: '7010'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
+
+  context "with :warranty_start" do
+    subject { HostQuery.new(all_hosts, {warranty_start: '2017-03'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
+
+  context "with :warranty_start from-until" do
+    subject { HostQuery.new(all_hosts, {warranty_start_from: '2017-03-01', warranty_start_until: '2017-03-01'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
 
   context "with :ip as string match" do
     subject { HostQuery.new(all_hosts, {ip: '198.51.100'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3, pc5) }
+    before(:each) do
+      @matching = [nas, pc2, pc3, pc5]
+      @nonmatching = [vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :ip string match
 
   context "with :ip as subnet" do
     subject { HostQuery.new(all_hosts, {ip: '198.51.100.0/26'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2) }
+    before(:each) do
+      @matching = [nas, pc2]
+      @nonmatching = [vpngw, pc3, pc5]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :ip subnet match
 
   context "with :lastseen" do
     subject { HostQuery.new(all_hosts, {lastseen: Date.today.to_s[0,7]}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
+    before(:each) do
+      @matching = [nas, pc2, pc3]
+      @nonmatching = [vpngw, pc5]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :lastseen
 
   context "with :older" do
     subject { HostQuery.new(all_hosts, {older: 2.weeks.before(Date.today)}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(vpngw, pc5) }
+    before(:each) do
+      @matching = [vpngw, pc5]
+      @nonmatching = [nas, pc2, pc3]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(vpngw.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_truthy }
-    end
+    it_behaves_like "a host query"
   end # search :older
 
   context "with :newer" do
     subject { HostQuery.new(all_hosts, {newer: 1.day.before(Date.today)}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, pc2, pc3) }
+    before(:each) do
+      @matching = [nas, pc2, pc3]
+      @nonmatching = [vpngw, pc5]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :newer
 
   context "with :current" do
     subject { HostQuery.new(all_hosts, {current: 1}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(vpngw, nas, pc2, pc3) }
+    before(:each) do
+      @matching = [nas, vpngw, pc2, pc3]
+      @nonmatching = [pc5]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(vpngw.id, nas.id, pc2.id, pc3.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_truthy }
-      it { expect(subject.include?(pc3)).to be_truthy }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_truthy }
-    end
+    it_behaves_like "a host query"
   end # search :current
 
   context "with :host_category" do
     subject { HostQuery.new(all_hosts, {host_category: 'inu'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(vpngw) }
+    before(:each) do
+      @matching = [vpngw]
+      @nonmatching = [pc5, nas, pc2, pc3]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(vpngw.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_falsey }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_truthy }
-    end
+    it_behaves_like "a host query"
   end # search :host_category
 
   context "with :lid" do
     subject { HostQuery.new(all_hosts, {lid: 'PARIS'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas) }
+    before(:each) do
+      @matching = [nas]
+      @nonmatching = [pc5, vpngw, pc2, pc3]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
   end # search :lid
 
   context "with multiple lid" do
     subject { HostQuery.new(all_hosts, {lid: 'BER, PARIS'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas, vpngw, pc5) }
+    before(:each) do
+      @matching = [nas, vpngw, pc5]
+      @nonmatching = [pc2, pc3]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id, vpngw.id, pc5.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_truthy }
-      it { expect(subject.include?(vpngw)).to be_truthy }
-    end
+    it_behaves_like "a host query"
   end # search :lid
-
 
   context "with :merkmal_responsible" do
     let(:merkmalklasse1) { FactoryBot.create(:merkmalklasse,
@@ -588,29 +335,12 @@ RSpec.describe HostQuery do
       value: 'Replace it'
     )}
     subject { HostQuery.new(all_hosts, {merkmal_responsible: 'gAnDalf'}) }
-    describe "#all" do
-      it { expect(subject.all).to contain_exactly(nas) }
-      it { expect(subject.all.count).to eq(1) }
-      # it "debug" do
-      #   pp Merkmalklasse.visibles(:host, 'index')
-      # end
+    before(:each) do
+      @matching = [nas]
+      @nonmatching = [pc2, pc3, pc5, vpngw]
     end
-    describe "#find_each" do
-      it "executes matching hosts" do
-        hosts = []
-        subject.find_each do |host|
-          hosts << host.id
-        end
-        expect(hosts).to contain_exactly(nas.id)
-      end
-    end
-    describe "#include?" do
-      it { expect(subject.include?(nas)).to be_truthy }
-      it { expect(subject.include?(pc2)).to be_falsey }
-      it { expect(subject.include?(pc3)).to be_falsey }
-      it { expect(subject.include?(pc5)).to be_falsey }
-      it { expect(subject.include?(vpngw)).to be_falsey }
-    end
+    it_behaves_like "a host query"
+
     describe "deliver exactly one result (clean join)" do
       # search for one host, but not for merkmal
       subject { HostQuery.new(all_hosts, {name: 'NAS'}) }
@@ -665,54 +395,29 @@ RSpec.describe HostQuery do
 
     context "with vuln_risk: higher" do
       subject { HostQuery.new(all_hosts, {vuln_risk: 'higher'}) }
-      describe "#all" do
-	it { expect(subject.all).to contain_exactly(h1,h2,h5) }
+      before(:each) do
+        @matching = [h1, h2, h5]
+        @nonmatching = [h3, h4]
       end
-      describe "#find_each" do
-	it "executes matching hosts" do
-	  hosts = []
-	  subject.find_each do |host|
-	    hosts << host.id
-	  end
-	  expect(hosts).to contain_exactly(h1.id, h2.id, h5.id)
-	end
-      end
-      describe "#include?" do
-	it { expect(subject.include?(h1)).to be_truthy }
-	it { expect(subject.include?(h2)).to be_truthy }
-	it { expect(subject.include?(h3)).to be_falsey }
-	it { expect(subject.include?(h4)).to be_falsey }
-	it { expect(subject.include?(h5)).to be_truthy }
-      end
+      it_behaves_like "a host query"
     end # search :vuln_risk higher
 
     context "with vuln_risk: 'High'" do
       subject { HostQuery.new(all_hosts, {vuln_risk: 'high'}) }
-      describe "#all" do
-	it { expect(subject.all).to contain_exactly(h2,h5) }
+      before(:each) do
+        @matching = [h2, h5]
+        @nonmatching = [h1, h3, h4]
       end
-      describe "#find_each" do
-	it "executes matching hosts" do
-	  hosts = []
-	  subject.find_each do |host|
-	    hosts << host.id
-	  end
-	  expect(hosts).to contain_exactly(h2.id, h5.id)
-	end
-      end
-      describe "#include?" do
-	it { expect(subject.include?(h1)).to be_falsey }
-	it { expect(subject.include?(h2)).to be_truthy }
-	it { expect(subject.include?(h3)).to be_falsey }
-	it { expect(subject.include?(h4)).to be_falsey }
-	it { expect(subject.include?(h5)).to be_truthy }
-      end
+      it_behaves_like "a host query"
     end # search :vuln_risk High
+
     context "with search string 'High'" do
       subject { HostQuery.new(all_hosts, {search: 'high'}) }
-      describe "#all" do
-	it { expect(subject.all).to contain_exactly(h2,h5) }
+      before(:each) do
+        @matching = [h2, h5]
+        @nonmatching = [h1, h3, h4]
       end
+      it_behaves_like "a host query"
     end
   end # vuln_risk
 end

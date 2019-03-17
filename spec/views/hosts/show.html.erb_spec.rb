@@ -28,7 +28,12 @@ RSpec.describe "hosts/show", type: :view do
       :host_category => hostcategory,
       :operating_system => os,
       :location => location,
-      :vuln_risk => 'High'
+      :vuln_risk => 'High',
+      :uuid => '1234-4567-9101112FFFFFFFF',
+      :product => 'Optimus Primus',
+      :warranty_sla => '3 years bring in',
+      :warranty_start => '2019-03-01',
+      :warranty_end => '2022-02-28'
     ))
   end
 
@@ -50,5 +55,10 @@ RSpec.describe "hosts/show", type: :view do
     expect(rendered).to match(/LID/)
     expect(rendered).to match(/SecureServer/)
     expect(rendered).to match(/High/)
+    expect(rendered).to match(/Optimus Primus/)
+    expect(rendered).to match(/1234-4567-9101112FFFFFFFF/)
+    expect(rendered).to match(/3 years bring in/)
+    expect(rendered).to match(/2019-03-01/)
+    expect(rendered).to match(/2022-02-28/)
   end
 end

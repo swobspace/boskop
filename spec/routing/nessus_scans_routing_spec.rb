@@ -34,5 +34,15 @@ RSpec.describe NessusScansController, type: :routing do
     it "routes to #destroy" do
       expect(:delete => "/nessus_scans/1").to route_to("nessus_scans#destroy", :id => "1")
     end
+
+    it "routes to #update_list" do
+      expect(:post => "/nessus_scans/update_list").to route_to("nessus_scans#update_list")
+    end
+
+    it "routes to #import via PUT" do
+      expect(:put => "/nessus_scans/1/import").to route_to("nessus_scans#import", :id => "1")
+    end
+
+
   end
 end

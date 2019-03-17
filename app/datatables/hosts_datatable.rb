@@ -27,7 +27,12 @@ class HostsDatatable < ApplicationDatatable
         column << host.mac    
         column << host.oui_vendor
         column << host.serial    
+        column << host.uuid    
         column << host.vendor 
+        column << host.product 
+        column << host.warranty_sla 
+        column << host.warranty_start.to_s
+        column << host.warranty_end.to_s
         column << host.host_category.to_s 
         column << host.location.try(:lid) 
         merkmalklassen.each do |mklasse|
@@ -68,12 +73,12 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial vendor host_categories.name locations.lid) +
+    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial uuid vendor product warranty_start warranty_end host_categories.name locations.lid) +
     merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
   end
 
   def search_columns
-    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial vendor host_category lid) + 
+    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial uuid vendor product warranty_start warranty_end host_category lid) + 
     merkmalklassen.map {|m| "merkmal_#{m.tag}" }
   end
 

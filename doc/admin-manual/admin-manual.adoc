@@ -1,0 +1,56 @@
+= Boskop::Admin Manual
+:doctype: book
+:lang: de-DE
+:ascii-ids:
+:sectnums:
+:showcomments:
+:code_dir: code
+:image_dir: pics
+:author: Wolfgang Barth
+:Email: wob@swobspace.de
+:revision: 0.0.1
+:revdate: 2019-03-14
+:rights:  Copyright 2019 (C) Wolfgang Barth
+:language: de-DE
+:icons: font
+:media: prepress
+:toc:
+:toc-title: Inhalt
+:chapter-label: Kapitel
+:figure-caption: Abbildung
+ifdef::backend-html5[]
+:w-20: width='20%'
+:w-25: width='25%'
+:w-33: width='33%'
+:w-50: width='50%'
+:w-66: width='66%'
+:w-75: width='75%'
+endif::[]
+ifdef::backend-pdf[]
+:w-20: pdfwidth='20%'
+:w-25: pdfwidth='25%'
+:w-33: pdfwidth='33%'
+:w-50: pdfwidth='50%'
+:w-66: pdfwidth='66%'
+:w-75: pdfwidth='75%'
+endif::[]
+ifdef::backend-docbook5[]
+:w-20: scaledwidth='20%'
+:w-25: scaledwidth='25%'
+:w-33: scaledwidth='33%'
+:w-50: scaledwidth='50%'
+:w-66: scaledwidth='66%'
+:w-75: scaledwidth='75%'
+endif::[]
+
+// Preface
+//[%nonfacing]
+//include::preface.adoc[]
+
+// Hosts
+[%nonfacing]
+include::hosts.adoc[]
+
+// Users
+//[%nonfacing]
+//include::users.adoc[]

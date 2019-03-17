@@ -140,4 +140,21 @@ RSpec.describe NessusScansController, type: :controller do
     end
   end
 
+  describe "POST #update_list" do
+    it "calls Nessus::ListScansJob.perform_now" do
+      expect(Nessus::ListScansJob).to receive(:perform_now).and_return(true)
+      post :update_list, params: {}, session: valid_session
+      expect(response).to redirect_to(nessus_scans_url)
+    end
+  end
+
+  describe "PUT #import" do
+    it "calls Nessus::ListScansJob.perform_now" do
+      nessus_scan = NessusScan.create! valid_attributes
+      expect(Nessus::ImportScansJob).to receive(:perform_later).and_return(true)
+      put :import, params: {id: nessus_scan.to_param}, session: valid_session
+      expect(response).to redirect_to(nessus_scans_url)
+    end
+  end
+
 end

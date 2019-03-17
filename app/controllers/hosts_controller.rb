@@ -112,7 +112,8 @@ class HostsController < ApplicationController
       params.require(:host).permit(
         :name, :description, :ip, :cpe, :raw_os, :operating_system_id,
         :lastseen, :mac, :host_category_id, :location_id, :fqdn,
-        :workgroup, :domain_dns, :vendor,  :serial,
+        :workgroup, :domain_dns, :vendor,  :serial, :uuid, :product,
+        :warranty_sla, :warranty_start, :warranty_end,
         [ merkmale_attributes:
           [ :id, :value, :merkmalklasse_id, :_destroy ],
         ]
@@ -128,6 +129,7 @@ class HostsController < ApplicationController
         searchparms = params.permit(*submit_parms,
           :name, :description, :ip, :operating_system, :cpe, :raw_os, :serial,
           :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
+          :uuid, :product, :warranty_start_from, :warranty_start_until,
           :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end

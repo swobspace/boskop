@@ -53,6 +53,8 @@ de:
     critical_hosts: Nur kritische Hosts
     location_disabled: Dieser Standort ist deaktiviert
     new_contact_from_ad: Kontakt mit Vorlage erstellen
+    import_nessus_scan: Scanergebnis von Nessus importieren
+    update_nessus_list: Liste der Nessus-Scans aktualisieren
     threats:
       critical: Kritisch
       high: Hoch
@@ -70,6 +72,7 @@ de:
     upload: Upload
     add: "%{model} hinzufügen"
     remove: "%{model} löschen"
+    update_list: Liste aktualisieren
 
   activerecord:
     models:
@@ -189,6 +192,7 @@ de:
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
+    product: Produkt
     provider_id: Identifikation des Providers
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
@@ -220,6 +224,11 @@ de:
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
     vuln_risk: Vulnerability Risk
+    warranty_sla: Garantie/Support
+    warranty_start: Support-Start
+    warranty_start_from: Support-Start von
+    warranty_start_until: Support-Start bis
+    warranty_end: Support-Ende
     workgroup: Workgroup
     xrefs: Referenzen
 

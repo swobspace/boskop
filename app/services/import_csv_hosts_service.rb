@@ -45,7 +45,7 @@ class ImportCsvHostsService
       message = "File #{csvfile} is not readable or does not exist"
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
-    CSV.foreach(csvfile, headers: true, col_sep: ';') do |row|
+    CSV.foreach(csvfile, headers: true, converters: :all, col_sep: ';') do |row|
       csvattributes = attributes(host_attributes,row)
       host = Host.create_with(csvattributes).find_or_create_by(ip: csvattributes[:ip])
       if host.persisted? && host.update_attributes(attributes_for_update(csvattributes, host))
@@ -108,7 +108,7 @@ private
 
   def host_attributes
     Host.attribute_names.map(&:to_sym).reject do |k|
-      [:id, :created_at, :updated_at].include?(k)
+      [:id, :created_at, :updated_at, :vuln_risk, :oui_vendor].include?(k)
     end
   end
 

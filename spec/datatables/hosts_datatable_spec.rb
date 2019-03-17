@@ -17,7 +17,12 @@ module HostsDatatableHelper
       column << host.mac
       column << host.oui_vendor
       column << host.serial
+      column << host.uuid
       column << host.vendor
+      column << host.product
+      column << host.warranty_sla
+      column << host.warranty_start.to_s
+      column << host.warranty_end.to_s
       column << host.host_category.to_s
       column << host.location.try(:lid)
       column << "  " # dummy for action links

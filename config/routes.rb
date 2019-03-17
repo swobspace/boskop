@@ -8,7 +8,14 @@ Rails.application.routes.draw do
 
   resources :responsibilities
   resources :contacts
-  resources :nessus_scans
+  resources :nessus_scans do
+    collection do
+      post :update_list
+    end
+    member do
+      put :import
+    end
+  end
   post "vulnerabilities", to: "vulnerabilities#index", constraints: lambda {|req| req.format == :json}
   resources :vulnerabilities do
     collection do

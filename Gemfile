@@ -29,7 +29,7 @@ gem 'devise-remote-user'
 gem 'yaml_db'
 group :development do
   gem 'puma'
-  gem 'spring'
+  # gem 'spring'
   gem 'guard'
   gem "guard-livereload", require: false
   gem 'guard-rails'
@@ -49,9 +49,9 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
-  gem 'spring-commands-rspec'
+  # gem 'spring-commands-rspec'
   gem 'dotenv'
-  gem 'json_spec'
+  gem 'json_spec', require: false
 end
 
 group :test do
@@ -75,4 +75,6 @@ gem 'tenable-ruby'
 gem 'whenever'
 gem 'cocoon'
 gem 'gelf'
-gem 'bootsnap'
+gem 'bootsnap', require: false
+gem 'exception_notification'
+

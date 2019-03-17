@@ -128,7 +128,9 @@ bin/rails g scaffold Host \
   location:references:index \
   vuln_risk:string:index \
   serial:string:index \
-  oui_vendor:string
+  oui_vendor:string \
+  uuid:string:index product:string \
+  warrantay_sla:string warranty_start:date warranty_end:date
 
 #    bin/rails g migration AddWorkgroupDomainDnsFqdnToHost \
 #               fqdn:string workgroup:string domain_dns:string
@@ -138,6 +140,9 @@ bin/rails g scaffold Host \
 #    bin/rails g migration AddOuiVendorToHost oui_vendor:string
 #    bin/rails g migration ChangeIpToInet
 #    bin/rails g migration AddSerialToHost serial:string:index
+#    bin/rails g migration AddUuidAndWarrantyToHost \
+#                 uuid:string:index product:string \
+#                warrantay_sla:string warranty_start:date warranty_end:date
 ----
 
 ## HostCategory:
