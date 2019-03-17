@@ -22,8 +22,13 @@ RSpec.describe "hosts/search", type: :view do
         :raw_os => "Windows 7 Professional 6.1",
         :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
+        :uuid => "31eb2a81-2fc6-4be8-815d-543fe9ce9fd7",
         :fqdn => "MyLovelyHost.example.net",
         :vendor => "Tuxolino",
+        :product => "TuxStation",
+        :warranty_sla => "2 years bring in",
+        :warranty_start => "2017-03-01",
+        :warranty_end => "2019-02-28",
         :domain_dns => "example.net",
         :workgroup => "Workgroup3",
         :host_category => hostcategory,
@@ -39,6 +44,10 @@ RSpec.describe "hosts/search", type: :view do
         :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
         :vendor => "Tuxolino",
+        :product => "TuxStation",
+        :warranty_sla => "2 years bring in",
+        :warranty_start => "2017-03-01",
+        :warranty_end => "2019-02-28",
         :fqdn => "MyLovelyHost.example.net",
         :domain_dns => "example.net",
         :workgroup => "Workgroup3",
@@ -60,7 +69,12 @@ RSpec.describe "hosts/search", type: :view do
     assert_select "tr>td", :text => "112233445566".to_s, :count => 2
     assert_select "tr>td", :text => "Granite C.".to_s, :count => 2
     assert_select "tr>td", :text => "XXX7785T".to_s, :count => 2
+    assert_select "tr>td", :text => "31eb2a81-2fc6-4be8-815d-543fe9ce9fd7".to_s, :count => 1
     assert_select "tr>td", :text => "Tuxolino".to_s, :count => 2
+    assert_select "tr>td", :text => "TuxStation".to_s, :count => 2
+    assert_select "tr>td", :text => "2 years bring in".to_s, :count => 2
+    assert_select "tr>td", :text => "2017-03-01".to_s, :count => 2
+    assert_select "tr>td", :text => "2019-02-28".to_s, :count => 2
     assert_select "tr>td", :text => "ZementOS".to_s, :count => 2
     assert_select "tr>td", :text => "MyLovelyHost.example.net".to_s, :count => 2
     assert_select "tr>td", :text => "example.net".to_s, :count => 2
