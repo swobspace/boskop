@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_03_16_131822) do
     t.string "oui_vendor"
     t.string "uuid", default: ""
     t.string "product", default: ""
-    t.string "warrantay_sla", default: ""
+    t.string "warranty_sla", default: ""
     t.date "warranty_start"
     t.date "warranty_end"
     t.index ["cpe"], name: "index_hosts_on_cpe"
