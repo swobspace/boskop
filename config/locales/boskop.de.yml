@@ -192,6 +192,7 @@ de:
     possible_values: Mögliche Werte
     postfach: Postfach
     postfachplz: Postfach-PLZ
+    product: Produkt
     provider_id: Identifikation des Providers
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
@@ -223,6 +224,11 @@ de:
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
     vuln_risk: Vulnerability Risk
+    warranty_sla: Garantie/Support
+    warranty_start: Support-Start
+    warranty_start_from: Support-Start von
+    warranty_start_until: Support-Start bis
+    warranty_end: Support-Ende
     workgroup: Workgroup
     xrefs: Referenzen
 
