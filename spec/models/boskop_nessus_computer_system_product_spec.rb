@@ -21,7 +21,7 @@ RSpec.describe Boskop::Nessus::ComputerSystemProduct do
     end
   end
 
-  describe "with valid report_host" do
+  describe "report_host with plugin data" do
     subject { Boskop::Nessus::ComputerSystemProduct.new(report_host: report_host) }
 
     it { expect(subject.respond_to? :valid?).to be_truthy}
@@ -42,4 +42,17 @@ RSpec.describe Boskop::Nessus::ComputerSystemProduct do
     it { expect(subject.attributes).not_to include(:uuid) }
   end
 
+  describe "report_host missing plugin data" do
+    let(:xmlfile) {"/home/wob/Projects/boskop/spec/fixtures/files/cry-nessus.xml"}
+    subject { Boskop::Nessus::ComputerSystemProduct.new(report_host: report_host) }
+
+    it { expect(subject).to be_a_kind_of Boskop::Nessus::ComputerSystemProduct }
+    it { expect(subject).not_to be_valid }
+    it { expect(subject.raw_output).to eq(nil) }
+    it { expect(subject.vendor).to eq(nil) }
+    it { expect(subject.name).to eq(nil) }
+    it { expect(subject.uuid).to eq(nil) }
+    it { expect(subject.description).to eq(nil) }
+    it { expect(subject.version).to eq(nil) }
+  end
 end

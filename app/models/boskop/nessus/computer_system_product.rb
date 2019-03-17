@@ -61,6 +61,7 @@ module Boskop
       attr_reader :report_item, :options
 
       def get_entry(tag)
+        return nil if raw_output.blank?
         entry = raw_output.split(/\n/).grep(/#{tag}/).first
         return nil if entry.blank?
         entry.match(/- #{tag}\s+: (.*)\z/)[1]
