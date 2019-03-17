@@ -12,7 +12,7 @@ module Boskop
       # (host) attributes
       #
       ATTRIBUTES = [:lastseen, :ip, :name, :mac,
-                    :raw_os, :fqdn ]
+                    :raw_os, :fqdn, :uuid ]
 
       #
       # Creates a Boskop::Nessus::ReportHost object
@@ -88,6 +88,13 @@ module Boskop
       #
       def mac
         @report_host.at("HostProperties/tag[@name='mac-address']")&.inner_text
+      end
+
+      #
+      # uuid
+      #
+      def uuid
+        @report_host.at("HostProperties/tag[@name='bios-uuid']")&.inner_text
       end
 
       #

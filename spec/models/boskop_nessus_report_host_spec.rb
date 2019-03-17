@@ -35,6 +35,7 @@ RSpec.describe Boskop::Nessus::ReportHost do
     it { expect(subject.mac).to eq(nil) }
     it { expect(subject.fqdn).to eq(nil) }
     it { expect(subject.raw_os).to eq(nil) }
+    it { expect(subject.uuid).to eq(nil) }
     
     it { expect(subject.attributes).to include(
            lastseen: "2018-06-04T12:57:46+00:00",
@@ -55,6 +56,7 @@ RSpec.describe Boskop::Nessus::ReportHost do
     it { expect(subject.mac).to eq("34:17:eb:b6:60:6b") }
     it { expect(subject.fqdn).to eq("ws1228") }
     it { expect(subject.raw_os).to eq("Microsoft Windows 7 Professional") }
+    it { expect(subject.uuid).to eq(nil) }
     
     it { expect(subject.attributes).to include(
            lastseen: "2018-06-04T12:57:46+00:00",
@@ -91,12 +93,15 @@ RSpec.describe Boskop::Nessus::ReportHost do
 
   describe "with authenticated scans" do
     # plugin 48337 Windows ComputerSystemProduct Enumeration (WMI)
-    describe "existing plugin 48337 entry" do
-      let(:xmlfile) {"/home/wob/Projects/boskop/spec/fixtures/files/ws1020_48337.nessus"}
-      let(:xmldoc)  { File.open(xmlfile) { |f| Nokogiri::XML(f) } }
-      let(:report_host) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[0] }
-      subject { Boskop::Nessus::ReportHost.new(report_host: report_host) }
+    let(:xmlfile) {"/home/wob/Projects/boskop/spec/fixtures/files/ws1020_48337.nessus"}
+    let(:xmldoc)  { File.open(xmlfile) { |f| Nokogiri::XML(f) } }
+    let(:report_host) { xmldoc.xpath("//NessusClientData_v2/Report/ReportHost")[0] }
+    subject { Boskop::Nessus::ReportHost.new(report_host: report_host) }
+
+    describe "and existing plugin 48337 entry" do
       it { expect(subject.report_item(plugin_id: 48337)).to be_a_kind_of Boskop::Nessus::ReportItem }
+      it { expect(subject.uuid).to eq("FA289A70-4803-11E9-8CCD-111222333444") }
+      it { expect(subject.attributes).to include(uuid: "FA289A70-4803-11E9-8CCD-111222333444") }
     end
   end
 end
