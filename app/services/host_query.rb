@@ -22,7 +22,9 @@ class HostQuery
   # * :mac - macaddr (string)
   # * :oui_vendor - (string)
   # * :serial - string
+  # * :uuid - string
   # * :vendor - string
+  # * :product - string
   # * :host_category - host_categories.name (string)
   # * :lid - location.lid (string)
   # * :eol - operating_systems.eol < today (boolean)
@@ -136,7 +138,7 @@ private
   end
 
   def string_fields
-    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :serial, :oui_vendor ]
+    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :product, :serial, :uuid, :oui_vendor ]
   end
 
   def merkmalklassen

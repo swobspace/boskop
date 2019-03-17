@@ -31,6 +31,9 @@ shared_context "host variables" do
     mac: '00:84:ed:12:34:56',
     location: loc_paris,
     operating_system: os1,
+    vendor: 'MegaQX',
+    product: 'QX1704',
+    uuid: 'd4618e67-5b24-495e-94dd-fc2568c01dd6',
   )}
   let!(:pc2)  { FactoryBot.create(:host, 
     name: "MYPC002",
@@ -45,7 +48,11 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:02',
     operating_system: os1,
     location: loc_london,
-    serial: 'XXX7784N'
+    serial: 'XXX7784N',
+    uuid: 'c64af2a5-7191-4d8e-a4e0-ed6ee36d9bf6',
+    vendor: 'Dell Inc.',
+    product: 'OptiPlex 7010',
+    warranty_start: '2017-03-01',
   )}
   let!(:pc3)  { FactoryBot.create(:host, 
     name: "MYPC003",
@@ -60,7 +67,10 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:03',
     operating_system: os2,
     location: loc_london,
-    serial: 'XXX7785T'
+    serial: 'XXX7785T',
+    vendor: 'Dell Inc.',
+    product: 'OptiPlex 7010',
+    warranty_start: '2017-03-01',
   )}
   let!(:vpngw)  { FactoryBot.create(:host, 
     name: "vpngw",
@@ -76,6 +86,7 @@ shared_context "host variables" do
     host_category: cat_linux,
     operating_system: os3,
     location: loc_berlin,
+    vendor: 'Tuxnolinux',
   )}
   let!(:pc5)  { FactoryBot.create(:host, 
     name: "MYPC005",
@@ -90,6 +101,8 @@ shared_context "host variables" do
     mac: '00:84:ed:00:12:05',
     operating_system: os2,
     location: loc_berlin,
+    vendor: 'Dell Inc.',
+    product: 'OptiPlex 755',
   )}
 end
 

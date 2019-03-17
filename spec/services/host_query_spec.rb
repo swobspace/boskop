@@ -183,6 +183,34 @@ RSpec.describe HostQuery do
     it_behaves_like "a host query"
   end # search :serial
 
+  context "with :uuid" do
+    subject { HostQuery.new(all_hosts, {uuid: 'D4618E67'}) }
+    before(:each) do
+      @matching = [nas]
+      @nonmatching = [vpngw, pc2, pc3, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :uuid
+
+  context "with :vendor" do
+    subject { HostQuery.new(all_hosts, {vendor: 'DELL'}) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5]
+      @nonmatching = [vpngw, nas]
+    end
+    it_behaves_like "a host query"
+  end # search :vendor
+
+  context "with :product" do
+    subject { HostQuery.new(all_hosts, {product: '7010'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search :product
+
+
   context "with :ip as string match" do
     subject { HostQuery.new(all_hosts, {ip: '198.51.100'}) }
     before(:each) do
