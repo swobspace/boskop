@@ -53,8 +53,7 @@ module Boskop
         { 
           serial: identifying_number,
           vendor: vendor,
-          product: name,
-          uuid: uuid
+          product: name
         }
       end
 

@@ -38,8 +38,8 @@ RSpec.describe Boskop::Nessus::ComputerSystemProduct do
            serial: "ZZZ4DTAG",
            vendor: "Dell Inc.",
            product: "OptiPlex 3020",
-           uuid: "FA289A70-4803-11E9-8CCD-111222333444"
        )}
+    it { expect(subject.attributes).not_to include(:uuid) }
   end
 
 end
