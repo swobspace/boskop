@@ -237,3 +237,12 @@ bin/rails g scaffold MacPrefix \
   vendor:string
 ----
 
+## NetworkInterface:
+
+----
+bin/rails g scaffold NetworkInterface \
+  host:references:index \
+  description:string \
+  ip:inet lastseen:date \
+  mac:string oui_vendor:string
+----
