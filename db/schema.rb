@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_131822) do
+ActiveRecord::Schema.define(version: 2019_03_31_090640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,12 +99,10 @@ ActiveRecord::Schema.define(version: 2019_03_16_131822) do
   create_table "hosts", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description", default: ""
-    t.inet "ip"
     t.string "cpe", default: ""
     t.string "raw_os", default: ""
     t.bigint "operating_system_id"
     t.date "lastseen"
-    t.string "mac", default: ""
     t.bigint "host_category_id"
     t.bigint "location_id"
     t.datetime "created_at", null: false
@@ -115,7 +113,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_131822) do
     t.string "vendor"
     t.string "vuln_risk", default: ""
     t.string "serial", default: ""
-    t.string "oui_vendor"
     t.string "uuid", default: ""
     t.string "product", default: ""
     t.string "warranty_sla", default: ""
@@ -234,6 +231,18 @@ ActiveRecord::Schema.define(version: 2019_03_16_131822) do
     t.string "import_mode", default: ""
     t.index ["nessus_id"], name: "index_nessus_scans_on_nessus_id"
     t.index ["uuid"], name: "index_nessus_scans_on_uuid"
+  end
+
+  create_table "network_interfaces", force: :cascade do |t|
+    t.bigint "host_id"
+    t.string "description", default: ""
+    t.inet "ip"
+    t.date "lastseen"
+    t.macaddr "mac"
+    t.string "oui_vendor", default: ""
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["host_id"], name: "index_network_interfaces_on_host_id"
   end
 
   create_table "networks", id: :serial, force: :cascade do |t|

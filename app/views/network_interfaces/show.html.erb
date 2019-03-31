@@ -1,0 +1,33 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.host')%>:</th>
+    <td><%= @network_interface.host %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.description')%>:</th>
+    <td><%= @network_interface.description %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.ip')%>:</th>
+    <td><%= @network_interface.ip %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.lastseen')%>:</th>
+    <td><%= @network_interface.lastseen %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.mac')%>:</th>
+    <td><%= @network_interface.mac %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.oui_vendor')%>:</th>
+    <td><%= @network_interface.oui_vendor %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@network_interface) %>
+  <%= delete_link(@network_interface) %>
+  <%= new_link NetworkInterface %>
+</div>
