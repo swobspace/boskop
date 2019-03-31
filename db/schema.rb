@@ -238,7 +238,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_090640) do
     t.string "description", default: ""
     t.inet "ip"
     t.date "lastseen"
-    t.macaddr "mac"
+    t.string "mac", default: ""
     t.string "oui_vendor", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
