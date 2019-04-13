@@ -7,6 +7,12 @@ module Hosts
     attr_reader :host
     #
     # Hosts::Creator.new(mode: :newer, attributes: {some attribs})
+    # 
+    # mandantory options:
+    # * attributes: hash of host and network_interface attributes
+    #
+    # optional options:
+    # * mode: [:newer, :missing, :always]
     #
     def initialize(options = {})
       @options = options.symbolize_keys
@@ -18,12 +24,13 @@ module Hosts
 
     def save
       if @host.nil?
-        @host = Host.create(host_attributes.merge(network_interface_attributes: if_attributes)
+        @host = Host.create(host_attributes.merge(network_interfaces_attributes: [ if_attributes ]))
+        @host.valid?
       else
         # update attributes if @host.persisted?
         @host.update_attributes(host_updates) &&
-          NetworkInterface.create_with(if_attributes)
-                          .create_or_find_by(host_id: host.id, ip: ip)
+          !!(NetworkInterface.create_with(if_attributes)
+                          .create_or_find_by(host_id: host.id, ip: ip))
       end
     end
 
@@ -32,7 +39,7 @@ module Hosts
     def fetch_host
       if on_blacklist?(:uuid)
         host = Host.where(uuid: uuid, name: name).order("lastseen desc").first
-      if on_blacklist?(:serial)
+      elsif on_blacklist?(:serial)
         host = Host.where(serial: serial, name: name).order("lastseen desc").first
       elsif uuid.present?
         host = Host.where(uuid: uuid).order("lastseen desc").first
@@ -43,7 +50,6 @@ module Hosts
         host = NetworkInterface.where(ip: ip).order("lastseen desc").first&.host
       end
     end
-
 
     def host_attributes
       options.fetch(:attributes).reject do |k,v|
@@ -58,7 +64,7 @@ module Hosts
 
     def if_attributes
       options.fetch(:attributes).reject do |k,v|
-        # !(NetworkInterface.attribute_names.include?(k.to_s))
+        !(NetworkInterface.attribute_names.include?(k.to_s))
       end
     end
 
