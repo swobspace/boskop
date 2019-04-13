@@ -14,6 +14,8 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('responsibility_role').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('always_cc').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('graylog_host').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('uuid_blacklist').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('serial_blacklist').and_return(nil)
       end
       it { expect(Boskop.proxy).to be_nil}
       it { expect(Boskop.host).to eq("localhost")}
@@ -26,6 +28,8 @@ describe Boskop do
            to contain_exactly("Vulnerabilities") }
       it { expect(Boskop.always_cc).to eq([]) }
       it { expect(Boskop.graylog_host).to eq(nil) }
+      it { expect(Boskop.uuid_blacklist).to eq([]) }
+      it { expect(Boskop.serial_blacklist).to eq([]) }
     end
 
     context" with existing Settings" do
@@ -50,6 +54,10 @@ describe Boskop do
           and_return('hostman@example.org')
         allow(Boskop::CONFIG).to receive(:[]).with('graylog_host').
           and_return('192.0.2.100')
+        allow(Boskop::CONFIG).to receive(:[]).with('uuid_blacklist').
+          and_return('to be filled by O.E.M.')
+        allow(Boskop::CONFIG).to receive(:[]).with('serial_blacklist').
+          and_return('O.E.M.')
       end
       it { expect(Boskop.proxy).to eq('http://192.2.0.1:8080') }
       it { expect(Boskop.host).to eq('www.example.com') }
@@ -61,6 +69,8 @@ describe Boskop do
       it { expect(Boskop.responsibility_role).to contain_exactly("HOSTMAN") }
       it { expect(Boskop.always_cc).to contain_exactly("hostman@example.org") }
       it { expect(Boskop.graylog_host).to eq("192.0.2.100") }
+      it { expect(Boskop.uuid_blacklist).to contain_exactly("to be filled by O.E.M.") }
+      it { expect(Boskop.serial_blacklist).to contain_exactly("O.E.M.") }
     end
   end
   describe "::ldap_options" do
