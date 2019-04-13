@@ -13,7 +13,7 @@ module Hosts
       @mode    = options.fetch(:mode, :newer)
       @host_attributes ||= host_attributes
       @if_attributes   ||= if_attributes
-      @host    ||= initialize_host
+      @host    ||= fetch_host
     end
 
     def save
@@ -29,7 +29,7 @@ module Hosts
 
   private
     attr_reader :options, :mode
-    def initialize_host
+    def fetch_host
       if on_blacklist?(:uuid)
         host = Host.where(uuid: uuid, name: name).order("lastseen desc").first
       if on_blacklist?(:serial)
