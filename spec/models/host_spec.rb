@@ -89,7 +89,7 @@ RSpec.describe Host, type: :model do
 
       it "sets location from ip address and existing networks" do
         iface = FactoryBot.create(:network_interface, ip: '192.0.2.35')
-        host = Host.create!(interfaces: [iface], lastseen: Date.today)
+        host = Host.create!(network_interfaces: [iface], lastseen: Date.today)
         host.reload
         expect(host.location).to eq(loc)
       end
