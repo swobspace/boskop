@@ -32,6 +32,9 @@ class Host < ApplicationRecord
   def ip
     network_interfaces.order("lastseen desc").first&.ip
   end
+  def mac
+    network_interfaces.order("lastseen desc").first&.mac
+  end
 
   #
   # caching location identifier lid
