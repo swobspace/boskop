@@ -16,26 +16,32 @@ module Hosts
     #
     def initialize(options = {})
       @options = options.symbolize_keys
-      @mode    = options.fetch(:mode, :newer)
+      @mode    = fetch_mode
       @host_attributes ||= host_attributes
       @if_attributes   ||= if_attributes
       @host    ||= fetch_host
+      @old_lastseen = @host&.lastseen
+      @debug = options.fetch(:debug, false)
     end
 
     def save
       if @host.nil?
-        @host = Host.create(host_attributes.merge(network_interfaces_attributes: [ if_attributes ]))
+        @host = Host.create(create_attributes)
         @host.valid?
       else
+        if debug
+          puts NetworkInterface.where(host_id: host.id, ip: if_attributes[:ip]).inspect
+          puts "#{host.id}, #{if_attributes[:ip]}"
+        end
         # update attributes if @host.persisted?
         @host.update_attributes(host_updates) &&
-          !!(NetworkInterface.create_with(if_attributes)
-                          .create_or_find_by(host_id: host.id, ip: ip))
+          !!(NetworkInterface.create_with(if_attributes.except(:host_id, :ip))
+                          .find_or_create_by(host_id: host.id, ip: if_attributes[:ip]))
       end
     end
 
   private
-    attr_reader :options, :mode
+    attr_reader :options, :mode, :old_lastseen, :debug
     def fetch_host
       if on_blacklist?(:uuid)
         host = Host.where(uuid: uuid, name: name).order("lastseen desc").first
@@ -51,6 +57,22 @@ module Hosts
       end
     end
 
+    def fetch_mode
+      mode = options.fetch(:mode, :newer)
+      unless [:newer, :missing, :always, :none].include?(mode)
+        raise ArgumentError, "host updates with mode #{mode} is not implemented"
+      end
+      mode
+    end
+
+    def create_attributes
+      if if_attributes[:ip].blank?
+        host_attributes
+      else
+        host_attributes.merge(network_interfaces_attributes: [ if_attributes ])
+      end
+    end
+
     def host_attributes
       options.fetch(:attributes).reject do |k,v|
         !(Host.attribute_names.include?(k.to_s))
@@ -58,8 +80,18 @@ module Hosts
     end
     
     def host_updates
-      # FIXME
-      host_attributes
+      case mode
+      when :none
+        {}
+      when :newer
+        ( old_lastseen <= lastseen ) ? host_attributes : {}
+      when :missing
+        host_attributes.select {|k,v| host.send(k).blank?}.merge(lastseen: lastseen)
+      when :always
+        host_attributes
+      else
+        raise ArgumentError, "host updates with mode #{mode} is not implemented"
+      end
     end
 
     def if_attributes
@@ -69,7 +101,7 @@ module Hosts
     end
 
     def on_blacklist?(attr)
-      Boskop.send("#{attr}_blacklist").include?(attr)
+      Boskop.send("#{attr}_blacklist").include?(host_attributes[attr])
     end
 
     def uuid
@@ -82,6 +114,10 @@ module Hosts
 
     def name
       host_attributes[:name]
+    end
+
+    def lastseen
+      host_attributes[:lastseen].to_date
     end
 
     def ip
