@@ -27,17 +27,21 @@ module Hosts
     def save
       if @host.nil?
         @host = Host.create(create_attributes)
-        @host.valid?
+        status = @host.valid?
       else
         if debug
           puts NetworkInterface.where(host_id: host.id, ip: if_attributes[:ip]).inspect
           puts "#{host.id}, #{if_attributes[:ip]}"
         end
         # update attributes if @host.persisted?
-        @host.update_attributes(host_updates) &&
+        status = @host.update_attributes(host_updates) &&
           !!(NetworkInterface.create_with(if_attributes.except(:host_id, :ip))
                           .find_or_create_by(host_id: host.id, ip: if_attributes[:ip]))
       end
+      if @host.location.nil?
+        @host.set_location.save
+      end
+      status
     end
 
   private

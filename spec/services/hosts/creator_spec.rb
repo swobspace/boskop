@@ -3,6 +3,8 @@ require 'rails_helper'
 module Hosts
   RSpec.describe Creator do
     subject { Creator.new(attributes: attributes) }
+    let(:loc) { FactoryBot.create(:location, lid: 'JCST') }
+    let!(:n1) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
     let(:attributes) {{
       name: "Mumpitz",
       lastseen: "2019-04-15",
@@ -86,7 +88,7 @@ module Hosts
           it { expect(host.name).to eq("Mumpitz") }
           it { expect(host.lastseen.to_s).to eq("2019-04-15") }
           it { expect(host.ip).to eq("192.0.2.35") }
-          it { expect(host.mac).to eq('00:11:22:33:44:55') }
+          it { expect(host.mac).to eq('001122334455') }
           it { expect(host.description).to eq("some info about the host") }
           it { expect(host.cpe).to eq("/o:microsoft:windows_10::-") }
           it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
@@ -102,7 +104,18 @@ module Hosts
           it { expect(host.warranty_end.to_s).to eq("2021-07-31") }
         end
       end
-    end
+      describe "without a location" do
+        let(:host) { subject.save; subject.host }
+        it "sets location from ip address and existing networks" do
+          expect(host.location).to eq(loc)
+        end
+
+        it "doesn't set location if there is no uniq matching network" do
+          n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
+          expect(host.location).to be_nil
+        end
+      end
+    end # non existent host
 
     describe "on existing host" do
       let(:iface) { FactoryBot.create(:network_interface,
@@ -192,6 +205,18 @@ module Hosts
           ip: '192.0.2.7',
         }}
         it { expect(subject.host).to eq(ip_host) }
+
+        describe "without a location" do
+          let(:host) { subject.save; subject.host }
+          it "sets location from ip address and existing networks" do
+            expect(host.location).to eq(loc)
+          end
+
+          it "doesn't set location if there is no uniq matching network" do
+            n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
+            expect(host.location).to be_nil
+          end
+        end
       end
 
       describe "mode :newer and newer attributes" do
@@ -204,7 +229,7 @@ module Hosts
         it { expect(uuid_host.lastseen.to_s).to eq("2019-04-15") }
         it { expect(uuid_host.name).to eq("Mumpitz") }
         it { expect(uuid_host.ip).to eq("192.0.2.35") }
-        it { expect(uuid_host.mac).to eq('00:11:22:33:44:55') }
+        it { expect(uuid_host.mac).to eq('001122334455') }
         it { expect(uuid_host.description).to eq("some info about the host") }
         it { expect(uuid_host.cpe).to eq("/o:microsoft:windows_10::-") }
         it { expect(uuid_host.raw_os).to eq("Windows 10 Pro 15063") }
@@ -244,7 +269,7 @@ module Hosts
         it { expect(uuid_host.lastseen.to_s).to eq("2019-04-15") }
         it { expect(uuid_host.name).to eq("oldname") }
         it { expect(uuid_host.ip).to eq("192.0.2.35") }
-        it { expect(uuid_host.mac).to eq('00:11:22:33:44:55') }
+        it { expect(uuid_host.mac).to eq('001122334455') }
         it { expect(uuid_host.description).to eq("olddescription") }
         it { expect(uuid_host.cpe).to eq("oldcpe") }
         it { expect(uuid_host.raw_os).to eq("oldrawos") }
@@ -269,7 +294,7 @@ module Hosts
         it { expect(uuid_host.name).to eq("Mumpitz") }
         it { expect(uuid_host.lastseen.to_s).to eq("2019-04-15") }
         it { expect(uuid_host.ip).to eq("192.0.2.35") }
-        it { expect(uuid_host.mac).to eq('00:11:22:33:44:55') }
+        it { expect(uuid_host.mac).to eq('001122334455') }
         it { expect(uuid_host.description).to eq("some info about the host") }
         it { expect(uuid_host.cpe).to eq("/o:microsoft:windows_10::-") }
         it { expect(uuid_host.raw_os).to eq("Windows 10 Pro 15063") }
@@ -294,6 +319,8 @@ module Hosts
         end
       end
     end
+
+
 
   end
 end
