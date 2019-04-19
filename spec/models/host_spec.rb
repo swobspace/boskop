@@ -56,14 +56,21 @@ RSpec.describe Host, type: :model do
     end
   end
 
-  describe "#ip" do
-    let(:h) { FactoryBot.create(:host, name: 'anyhost') }
-    describe "without interface" do
-      it { expect(h.ip).to eq(nil) }
+  describe "#set_location" do
+    let!(:host) { FactoryBot.create(:host, name: 'anyhost') }
+    let!(:loc) { FactoryBot.create(:location, lid: 'JCST') }
+    let!(:n1) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
+    let!(:iface) { FactoryBot.create(:network_interface, ip: '192.0.2.77', host: host) }
+
+    it "sets location from ip address and existing networks" do
+      host.set_location.save
+      expect(host.location).to eq(loc)
     end
-    describe "with given interface" do
-      let!(:if) { FactoryBot.create(:network_interface, ip: '192.0.2.77', host: h) }
-      it { expect(h.ip).to eq("192.0.2.77") }
+
+    it "doesn't set location if there is no uniq matching network" do
+      n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
+      host.set_location.save
+      expect(host.location).to be_nil
     end
   end
 

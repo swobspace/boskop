@@ -80,6 +80,19 @@ class Host < ApplicationRecord
     Merkmalklasse.where(for_object: 'Host')
   end
 
+  #
+  # works on update host only, not on create host
+  #
+  def set_location
+    if self.location.nil?
+      networks = Network.best_match(self.ip)
+      if networks.count == 1
+        self[:location_id] = networks.first.location.id
+      end
+    end
+    self
+  end
+
 private
 
   #
@@ -116,16 +129,6 @@ private
   def mk_id(rawkey)
     key = rawkey.to_s.sub(/\Amerkmal_/, '').sub(/=\z/, '')
     Merkmalklasse.where(for_object: 'Host', tag: key).first&.id
-  end
-
-  def set_location
-    if self.location.nil?
-      networks = Network.best_match(self.ip)
-      if networks.count == 1
-        self.location = networks.first.location
-      end
-    end
-    true
   end
 
   def check_operating_system
