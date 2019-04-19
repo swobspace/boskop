@@ -59,14 +59,14 @@ RSpec.describe HostConcerns, type: :model do
     let(:location) { FactoryBot.create(:location, lid: "LID") }
     let(:hostcategory) { FactoryBot.create(:host_category, name: "Secure Server") }
     let(:os) { FactoryBot.create(:operating_system, name: "ZementOS") }
-    let(:iface) { FactoryBot.create(:network_interface,
+    let!(:iface) { FactoryBot.create(:network_interface,
       :host_id => host.id,
       :lastseen => Date.today,
       :ip => "192.168.77.79",
       :mac => "11:22:33:44:55:66",
     )}
       
-    let!(:host) { FactoryBot.create(:host,
+    let(:host) { FactoryBot.create(:host,
       :name => "MyLovelyHost",
       :description => "Runningforever",
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
