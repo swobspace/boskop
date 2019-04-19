@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "NetworkInterfaces", type: :request do
+RSpec.describe "NetworkInterfaces", type: :feature do
   describe "GET /network_interfaces" do
-    it "works! (now write some real specs)" do
-      get network_interfaces_path
-      expect(response).to have_http_status(200)
+    it "visits network_interfaces#index" do
+      login_user
+      visit network_interfaces_path
+      expect(current_path).to eq(network_interfaces_path)
     end
   end
 end
