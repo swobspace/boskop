@@ -12,17 +12,18 @@
     <%= form_legend %>
 
     <div class="form-inputs">
-      <%= f.association :host
+      <%= f.association :host, label_method: proc {|x| "#{x.lid} / #{x.name} / #{x.serial} / #{x.uuid}"}
        %>
       <%= f.input :description
        %>
-      <%= f.input :ip
+      <%= f.input :ip, as: :string
        %>
-      <%= f.input :lastseen
+      <%= f.input :lastseen, as: :string,
+                  wrapper: 'horizontal_date' 
        %>
       <%= f.input :mac
        %>
-      <%= f.input :oui_vendor
+      <%= f.input :oui_vendor, disabled: true
        %>
     </div>
 
