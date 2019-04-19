@@ -24,21 +24,18 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe NetworkInterfacesController, type: :controller do
+  login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # NetworkInterface. As you add validations to NetworkInterface, be sure to
-  # adjust the attributes here as well.
+  let!(:host) { FactoryBot.create(:host) }
+
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryBot.attributes_for(:network_interface, host_id: host.id)
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let(:invalid_attributes) {{
+    host_id: nil
+  }}
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # NetworkInterfacesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -52,6 +49,7 @@ RSpec.describe NetworkInterfacesController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       network_interface = NetworkInterface.create! valid_attributes
+      expect(network_interface).to be_valid
       get :show, params: {id: network_interface.to_param}, session: valid_session
       expect(response).to be_successful
     end
@@ -96,15 +94,15 @@ RSpec.describe NetworkInterfacesController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) {{
+        mac: '00:11:22:33:EE:FF'
+      }}
 
       it "updates the requested network_interface" do
         network_interface = NetworkInterface.create! valid_attributes
         put :update, params: {id: network_interface.to_param, network_interface: new_attributes}, session: valid_session
         network_interface.reload
-        skip("Add assertions for updated state")
+        expect(network_interface.mac).to eq('00112233EEFF')
       end
 
       it "redirects to the network_interface" do
