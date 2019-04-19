@@ -35,9 +35,35 @@ RSpec.describe Host, type: :model do
       it { expect(h.ip).to eq(nil) }
     end
     describe "with given interface" do
+      let!(:iface) { FactoryBot.create(:network_interface, ip: '192.0.2.77', host: h) }
+      it { expect(h.ip).to eq("192.0.2.77") }
+    end
+  end
+
+  describe "#mac" do
+    let(:h) { FactoryBot.create(:host, name: 'anyhost') }
+    describe "without interface" do
+      it { expect(h.mac).to eq(nil) }
+    end
+    describe "with given interface" do
+      let!(:mac_prefix) { FactoryBot.create(:mac_prefix, oui: '001122', vendor: '0ACME') }
+      let!(:iface) { FactoryBot.create(:network_interface, 
+        mac: '00:11:22:33:EE:FF', 
+        host: h
+      )}
+      it { expect(h.mac).to eq("00112233EEFF") }
+      it { expect(h.oui_vendor).to eq("0ACME") }
+    end
+  end
+
+  describe "#ip" do
+    let(:h) { FactoryBot.create(:host, name: 'anyhost') }
+    describe "without interface" do
+      it { expect(h.ip).to eq(nil) }
+    end
+    describe "with given interface" do
       let!(:if) { FactoryBot.create(:network_interface, ip: '192.0.2.77', host: h) }
       it { expect(h.ip).to eq("192.0.2.77") }
-      
     end
   end
 
@@ -82,34 +108,10 @@ RSpec.describe Host, type: :model do
     end
   end
 
-  describe "on save" do
-    describe "without a location" do
-      let(:loc) { FactoryBot.create(:location, lid: 'JCST') }
-      let!(:n1) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
-
-      it "sets location from ip address and existing networks" do
-        iface = FactoryBot.create(:network_interface, ip: '192.0.2.35')
-        host = Host.create!(network_interfaces: [iface], lastseen: Date.today)
-        host.reload
-        expect(host.location).to eq(loc)
-      end
-
-      it "doesn't set location if there is no uniq matching network" do
-        n2 = FactoryBot.create(:network, netzwerk: '192.0.2.0/24')
-        iface = FactoryBot.create(:network_interface, ip: '192.0.2.35')
-        host = Host.create!(network_interfaces: [iface], lastseen: Date.today)
-        host.reload
-        expect(host.location).to be_nil
-      end
-    end
-
-  end
-
   describe "changing :cpe or :raw_os" do
     let(:os) { FactoryBot.create(:operating_system, name: "DummyOS") }
     describe "updating :raw_os" do
-      let!(:host) { FactoryBot.create(:host, ip: '192.0.2.35',
-                      cpe: 'o/brabbel', operating_system: os) }
+      let!(:host) { FactoryBot.create(:host, cpe: 'o/brabbel', operating_system: os) }
       it "clears cpe and os" do
         host.update(raw_os: 'TrueOS')
         host.reload
@@ -118,8 +120,7 @@ RSpec.describe Host, type: :model do
       end
     end
     describe "updating :cpe" do
-      let!(:host) { FactoryBot.create(:host, ip: '192.0.2.35',
-                      raw_os: 'DummyOS', operating_system: os) }
+      let!(:host) { FactoryBot.create(:host, raw_os: 'DummyOS', operating_system: os) }
       it "clears raw_os and os" do
         host.update(cpe: 'o/keiner')
         host.reload
@@ -143,7 +144,7 @@ RSpec.describe Host, type: :model do
     )}
 
     describe "with cpe: o:dummy_os" do
-      let(:host) { FactoryBot.create(:host, ip: '192.0.2.35', cpe: '/o:dummy_os') }
+      let(:host) { FactoryBot.create(:host, cpe: '/o:dummy_os') }
       it "assigns an operating system" do
         host.assign_operating_system
         host.reload
@@ -152,7 +153,7 @@ RSpec.describe Host, type: :model do
     end
 
     describe "with raw_os: DummyOS" do
-      let(:host) { FactoryBot.create(:host, ip: '192.0.2.35', raw_os: 'DummyOS') }
+      let(:host) { FactoryBot.create(:host, raw_os: 'DummyOS') }
       it "assigns an operating system" do
         host.assign_operating_system
         host.reload
