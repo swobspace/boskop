@@ -1,4 +1,4 @@
-class CreateLineStates < ActiveRecord::Migration
+class CreateLineStates < ActiveRecord::Migration[5.1]
   def change
     create_table :line_states do |t|
       t.string :name, null: false

@@ -1,4 +1,4 @@
-class CreateOrgUnits < ActiveRecord::Migration
+class CreateOrgUnits < ActiveRecord::Migration[5.1]
   def change
     create_table :org_units do |t|
       t.string :name, default: "", null: false

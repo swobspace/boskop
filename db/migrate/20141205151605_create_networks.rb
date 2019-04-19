@@ -1,4 +1,4 @@
-class CreateNetworks < ActiveRecord::Migration
+class CreateNetworks < ActiveRecord::Migration[5.1]
   def change
     create_table :networks do |t|
       t.references :location, index: true
