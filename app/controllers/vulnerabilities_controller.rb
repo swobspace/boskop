@@ -5,9 +5,9 @@ class VulnerabilitiesController < ApplicationController
   # GET /vulnerabilities
   def index
     if @host
-      @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     else
-      @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     end
     respond_with(@vulnerabilities) do |format|
       format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
@@ -15,7 +15,7 @@ class VulnerabilitiesController < ApplicationController
   end
 
   def search
-    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all

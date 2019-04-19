@@ -27,7 +27,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
 
   let(:view_context) { double("ActionView::Base") }
   let(:vulnerabilities) { Vulnerability.left_outer_joins(
-    :vulnerability_detail, host: [ :host_category, :operating_system, :location ]
+    :vulnerability_detail, host: [ :network_interfaces, :host_category, :operating_system, :location ]
   )}
   let(:datatable)    { VulnerabilitiesDatatable.new(vulnerabilities, view_context) }
 
