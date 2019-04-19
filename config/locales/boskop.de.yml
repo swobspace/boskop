@@ -92,6 +92,7 @@ de:
       merkmalklasse: Merkmalklasse
       nessus_scan: Nessus Scan
       network: Netzwerk
+      network_interface: Netzwerk-Interface
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
@@ -177,6 +178,7 @@ de:
     nessus_id: NessusID
     netzwerk: Netzwerk
     network: Netzwerk
+    network_interface: Netzwerk-Interface
     network_mask: Netzwerkmaske
     notes: Anmerkungen
     nvt: NVT
@@ -250,6 +252,7 @@ de:
     merkmalklassen: Merkmalklassen
     nessus_scans: Nessus Scans
     networks: Netzwerke
+    network_interfaces: Netzwerk-Interfaces
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten
