@@ -85,7 +85,9 @@ module Hosts
     end
 
     def fetch_attributes
-      options.fetch(:attributes).symbolize_keys
+      attributes = options.fetch(:attributes).symbolize_keys
+      attributes[:cpe].to_s.sub!(/cpe:/, '')
+      attributes
     end
 
     def fetch_mode

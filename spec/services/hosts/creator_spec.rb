@@ -11,7 +11,7 @@ module Hosts
       "ip" => "192.0.2.35",
       "mac" => '00:11:22:33:44:55',
       "description" => "some info about the host",
-      "cpe" => "/o:microsoft:windows_10::-",
+      "cpe" => "cpe:/o:microsoft:windows_10::-",
       "raw_os" => "Windows 10 Pro 15063",
       "fqdn" => "Mumpitz.example.net",
       "workgroup" => "EXANET",
