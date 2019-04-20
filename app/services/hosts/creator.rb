@@ -107,13 +107,18 @@ module Hosts
     end
     
     def host_updates
+      update_seen = (old_lastseen <= lastseen) ? {lastseen: lastseen} : {}
       case mode
       when :none
-        {}
+        update_seen
       when :newer
         ( old_lastseen <= lastseen ) ? host_attributes : {}
       when :missing
-        host_attributes.select {|k,v| host.send(k).blank?}.merge(lastseen: lastseen)
+        if 4.weeks.after(lastseen) > old_lastseen
+          host_attributes.select {|k,v| host.send(k).blank?}.merge(update_seen)
+        else
+          {}
+        end
       when :always
         host_attributes
       else

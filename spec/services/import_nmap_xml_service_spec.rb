@@ -18,15 +18,6 @@ RSpec.describe ImportNmapXmlService do
   describe "#call" do
     subject { ImportNmapXmlService.new(file: nmapxml) }
 
-    it "calls Host.create" do
-      host = instance_double(Host)
-      expect(Host).to receive_message_chain(:create_with, :find_or_create_by).with(any_args).and_return(host)
-      expect(host).to receive(:persisted?).and_return(false)
-      allow(host).to receive_message_chain(:errors, :any?).and_return(true)
-      allow(host).to receive_message_chain(:errors, :messages).and_return(["a", "b"])
-      subject.call
-    end
-
     context "with valid import_attributes" do
       it "creates an Host" do
 	expect {
@@ -76,38 +67,44 @@ RSpec.describe ImportNmapXmlService do
   end
   
   describe "with existing host" do
-    let!(:host) { FactoryBot.create(:host, 
-      ip: '192.51.100.17',
+    let(:ehost) { FactoryBot.create(:host, 
       lastseen: 1.day.ago(Date.today),
       name: 'myhost',
       cpe: "/o:microsoft:windows:4711",
       fqdn: 'myhost.example.net'
     )}
+    let!(:if_ehost) { FactoryBot.create(:network_interface,
+      host: ehost,
+      ip: '192.51.100.17',
+      lastseen: 1.day.ago(Date.today),
+    )}
+    let(:attributes) {{
+      ip: '192.51.100.17',
+      name: 'otherhost',
+      cpe: "/o:linux:tux",
+      fqdn: 'otherhost.example.net',
+      domain_dns: 'example.net',
+      workgroup: 'WORKGROUP5',
+    }}
     before(:each) do
-      allow_any_instance_of(Boskop::NMAP::Host).to receive_messages(
-        ip: '192.51.100.17',
-        name: 'otherhost',
-        cpe: "/o:linux:tux",
-        fqdn: 'otherhost.example.net',
-        domain_dns: 'example.net',
-        workgroup: 'WORKGROUP5'
-      )
+      allow_any_instance_of(Boskop::NMAP::Host).to receive(:attributes).and_return(attributes)
     end
 
     describe "update: :none" do
       let(:service) { ImportNmapXmlService.new(file: nmapxml, update: :none) }
+      before(:each) do
+        attributes.merge!(lastseen: 1.week.after(Date.today).to_s)
+      end
       it "updates only lastseen" do
-        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
-          at_least(:once).and_return(1.week.after(Date.today))
         service.call
-        host = Host.first
-        expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq(1.week.after(Date.today).to_s)
-        expect(host.name).to eq("myhost")
-        expect(host.cpe).to eq("/o:microsoft:windows:4711")
-        expect(host.fqdn).to eq("myhost.example.net")
-        expect(host.domain_dns).to eq("")
-        expect(host.workgroup).to eq("")
+        ehost.reload
+        expect(ehost.ip.to_s).to eq("192.51.100.17")
+        expect(ehost.lastseen.to_s).to eq(1.week.after(Date.today).to_s)
+        expect(ehost.name).to eq("myhost")
+        expect(ehost.cpe).to eq("/o:microsoft:windows:4711")
+        expect(ehost.fqdn).to eq("myhost.example.net")
+        expect(ehost.domain_dns).to eq("")
+        expect(ehost.workgroup).to eq("")
       end
     end
 
@@ -115,8 +112,7 @@ RSpec.describe ImportNmapXmlService do
       let(:service) { ImportNmapXmlService.new(file: nmapxml, update: :newer) }
 
       it "doesn't update any attribute from old data" do
-        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
-          at_least(:once).and_return(1.year.ago(Date.today).to_s)
+        attributes.merge!(lastseen: 1.year.ago(Date.today).to_s)
         service.call
         host = Host.first
         expect(host.ip.to_s).to eq("192.51.100.17")
@@ -129,8 +125,7 @@ RSpec.describe ImportNmapXmlService do
       end
 
       it "updates any attribute from current data" do
-        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
-          at_least(:once).and_return(1.week.after(Date.today))
+        attributes.merge!(lastseen: 1.week.after(Date.today))
         service.call
         host = Host.first
         expect(host.lastseen.to_s).to eq(1.week.after(Date.today).to_s)
@@ -146,22 +141,21 @@ RSpec.describe ImportNmapXmlService do
       let!(:service) { ImportNmapXmlService.new(file: nmapxml, update: :missing) }
 
       it "updates only missing attributes if data is not older than 4 weeks" do
-        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
-          at_least(:once).and_return(Date.today)
+        attributes.merge!(lastseen: 2.weeks.before(Date.today))
         service.call
         host = Host.first
         expect(host.ip.to_s).to eq("192.51.100.17")
-        expect(host.lastseen.to_s).to eq(Date.today.to_s)
+        expect(host.lastseen.to_s).to eq(1.day.before(Date.today).to_s)
         expect(host.name).to eq("myhost")
-        expect(host.cpe).to eq("")
-        expect(host.raw_os).to eq("Windows 10 Pro 15063")
+        expect(host.cpe).to eq("/o:microsoft:windows:4711")
+        expect(host.raw_os).to eq("")
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("example.net")
         expect(host.workgroup).to eq("WORKGROUP5")
       end
+
       it "doesn't update any attribute from old data" do
-        expect_any_instance_of(Boskop::NMAP::Host).to receive(:lastseen).
-          at_least(:once).and_return(1.year.ago(Date.today).to_s)
+        attributes.merge!(lastseen: 1.year.ago(Date.today).to_s)
         service.call
         host = Host.first
         expect(host.ip.to_s).to eq("192.51.100.17")

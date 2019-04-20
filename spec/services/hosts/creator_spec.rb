@@ -338,14 +338,21 @@ module Hosts
       describe "mode :none" do
         subject { Creator.new(mode: :none, attributes: attributes) }
 
-        it "doesn't update existing host" do
-          expect_any_instance_of(Host).to receive(:update_attributes).with({})
+        it "updates timestamp on existing host" do
           subject.save
+          uuid_host.reload
+          expect(uuid_host.lastseen.to_s).to eq("2019-04-15")
+        end
+
+        context "fresher host" do
+          let(:attributes) {{ lastseen: "2018-06-07" }}
+          it "doesn't update timestamp on existing fresher host" do
+            subject.save
+            uuid_host.reload
+            expect(uuid_host.lastseen.to_s).to eq("2019-04-01")
+          end
         end
       end
     end
-
-
-
   end
 end
