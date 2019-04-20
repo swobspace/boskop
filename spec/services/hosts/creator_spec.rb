@@ -157,6 +157,7 @@ module Hosts
         name: 'Judas',
       )}
       let!(:ip_host) { FactoryBot.create(:host,
+        name: 'ip_host',
         lastseen: '2019-04-01',
         network_interfaces: [iface],
       )}
@@ -270,6 +271,7 @@ module Hosts
         let(:attributes) {{
           lastseen: '2018-12-04', 
           ip: '192.0.2.7',
+          mac: 'AA-BB-CC-DD-EE-FF',
           name: 'Blafasel',
         }}
         it "doesn't update host" do
@@ -277,6 +279,9 @@ module Hosts
           hc = Creator.new(mode: :newer, attributes: attributes)
           expect(hc.host).to eq(ip_host)
           hc.save
+          host = hc.host
+          expect(host.name).to eq("ip_host")
+          expect(host.mac).to eq("001122334455")
         end
       end
 

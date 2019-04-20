@@ -72,7 +72,7 @@ module Hosts
     end
 
     def fetch_iface
-      if host.nil? || if_attributes[:ip].blank?
+      if if_attributes[:ip].blank?
         return nil
       end
       if if_attributes[:mac].present?
