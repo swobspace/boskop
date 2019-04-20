@@ -25,10 +25,10 @@ module Hosts
     def save
       if @host.nil?
         @host = Host.new(create_attributes)
-        status = @host.save
+        status = @host.save && update_merkmale
       else
         # update attributes if @host.persisted?
-        status = @host.update_attributes(host_updates) && save_iface
+        status = @host.update_attributes(host_updates) && update_merkmale && save_iface
       end
       save_location
       status
@@ -84,10 +84,39 @@ module Hosts
       ifaces.order("lastseen desc").first
     end
 
+    # fetch_attributes:
+    # symbolize all attribute keys
+    # * remove prefix or suffixes
+    # * search for matching objects in relations if attribute =~ /_id\z/
+    #
     def fetch_attributes
       attributes = options.fetch(:attributes).symbolize_keys
       attributes[:cpe].to_s.sub!(/cpe:/, '')
+      attributes.keys.grep(/_id\z/).map(&:to_sym).each do |attr|
+        attributes[attr] = search_for_id(attributes, attr)
+      end
       attributes
+    end
+
+    def search_for_id(attributes, key)
+      myklass = key.to_s.sub(/_id\z/,'').camelize.constantize
+      value   = attributes.fetch(key, nil)
+      return nil unless value.present?
+      # search for id
+      if value.to_i > 0
+        myklass.where(id: value).first&.id
+      # search for field with exact string value match
+      elsif value.kind_of? String
+        search_string = []
+        ['tag', 'name', 'lid'].each do |attr|
+          if myklass.attribute_names.include?(attr)
+            search_string << "#{attr} ILIKE :search"
+          end
+        end
+        myklass.where(search_string.join(' or '), search: "#{value}").first&.id
+      else
+        nil
+      end
     end
 
     def fetch_mode
@@ -147,6 +176,20 @@ module Hosts
         # old data, update missing only
         if_attributes.select {|k,v| iface.send(k).blank?}
       end
+    end
+
+    def update_merkmale
+      fetch_attributes.slice(*merkmal_attributes).each do |key,val|
+        if mode == :always || 
+          (mode == :newer && old_lastseen <= lastseen) || 
+          (mode == :missing && host.send(key).blank?)
+            host.send("#{key}=", val)
+        end
+      end
+    end
+
+    def merkmal_attributes
+      Merkmalklasse.where(for_object: 'Host').pluck(:tag).map {|t| "merkmal_#{t}".to_sym }
     end
 
     def on_blacklist?(attr)

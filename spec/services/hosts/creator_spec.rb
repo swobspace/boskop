@@ -5,6 +5,17 @@ module Hosts
     subject { Creator.new(attributes: attributes) }
     let(:loc) { FactoryBot.create(:location, lid: 'JCST') }
     let!(:n1) { FactoryBot.create(:network, netzwerk: '192.0.2.0/24', location: loc) }
+    let!(:mk_responsible) { FactoryBot.create(:merkmalklasse,
+      name: "Responsible",
+      tag: "responsible",
+      for_object: "Host",
+    )}
+    let!(:mk_next) { FactoryBot.create(:merkmalklasse,
+      name: "NextSteps",
+      tag: "next",
+      for_object: "Host",
+    )}
+
     let(:attributes) {{
       "name" => "Mumpitz",
       "lastseen" => "2019-04-15",
@@ -23,6 +34,8 @@ module Hosts
       "warranty_sla" => "3 years bring in",
       "warranty_start" => "2018-08-01",
       "warranty_end" => "2021-07-31",
+      "merkmal_responsible" => "KrummhoernigerSchnarchkackler",
+      "merkmal_next" => "My next steps"
     }}
     # check for class methods
     it { expect(Creator.respond_to? :new).to be_truthy}
@@ -102,8 +115,11 @@ module Hosts
           it { expect(host.warranty_sla).to eq("3 years bring in") }
           it { expect(host.warranty_start.to_s).to eq("2018-08-01") }
           it { expect(host.warranty_end.to_s).to eq("2021-07-31") }
+          it { expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler") }
+          it { expect(host.merkmal_next).to eq("My next steps") }
         end
       end
+
       describe "without a location" do
         let(:host) { subject.save; subject.host }
         it "sets location from ip address and existing networks" do
