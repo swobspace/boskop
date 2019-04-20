@@ -206,6 +206,26 @@ module Hosts
         }}
         it { expect(subject.host).to eq(ip_host) }
 
+        describe "whith changed mac" do
+          let(:attributes) {{
+            lastseen: '2019-04-15',
+            ip: '192.0.2.7',
+            mac: 'AA-BB-CC-DD-EE-FF',
+          }}
+          let(:host) { subject.save; subject.host }
+          it { expect(host.mac).to eq('AABBCCDDEEFF') }
+        end
+
+        describe "whith blank mac" do
+          let(:attributes) {{
+            lastseen: '2019-04-15',
+            ip: '192.0.2.7',
+            mac: '',
+          }}
+          let(:host) { subject.save; subject.host }
+          it { expect(host.mac).to eq('001122334455') }
+        end
+
         describe "without a location" do
           let(:host) { subject.save; subject.host }
           it "sets location from ip address and existing networks" do
