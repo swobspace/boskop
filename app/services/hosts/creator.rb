@@ -107,7 +107,7 @@ module Hosts
     end
 
     def host_attributes
-      fetch_attributes.reject do |k,v|
+      @host_attributes ||= fetch_attributes.reject do |k,v|
         !(Host.attribute_names.include?(k.to_s)) || v.blank?
       end
     end
@@ -133,7 +133,7 @@ module Hosts
     end
 
     def if_attributes
-      fetch_attributes.reject do |k,v|
+      @if_attributes ||= fetch_attributes.reject do |k,v|
         !(NetworkInterface.attribute_names.include?(k.to_s)) || v.blank?
       end
     end
