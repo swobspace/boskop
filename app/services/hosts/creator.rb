@@ -84,6 +84,10 @@ module Hosts
       ifaces.order("lastseen desc").first
     end
 
+    def fetch_attributes
+      options.fetch(:attributes).symbolize_keys
+    end
+
     def fetch_mode
       mode = options.fetch(:mode, :newer)
       unless [:newer, :missing, :always, :none].include?(mode)
@@ -101,7 +105,7 @@ module Hosts
     end
 
     def host_attributes
-      options.fetch(:attributes).reject do |k,v|
+      fetch_attributes.reject do |k,v|
         !(Host.attribute_names.include?(k.to_s)) || v.blank?
       end
     end
@@ -127,7 +131,7 @@ module Hosts
     end
 
     def if_attributes
-      options.fetch(:attributes).reject do |k,v|
+      fetch_attributes.reject do |k,v|
         !(NetworkInterface.attribute_names.include?(k.to_s)) || v.blank?
       end
     end
