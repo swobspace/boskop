@@ -26,16 +26,7 @@ RSpec.describe ImportCsvHostsService do
   end
 
   describe "#call" do
-    subject { ImportCsvHostsService.new(file: csvfile) }
-
-    it "calls Host.create" do
-      host = instance_double(Host)
-      expect(Host).to receive_message_chain(:create_with, :find_or_create_by).with(any_args).and_return(host)
-      expect(host).to receive(:persisted?).and_return(false)
-      allow(host).to receive_message_chain(:errors, :any?).and_return(true)
-      allow(host).to receive_message_chain(:errors, :full_messages).and_return(["a", "b"])
-      subject.call
-    end
+    subject { ImportCsvHostsService.new(file: csvfile, update: :always) }
 
     context "with valid import_attributes" do
       it "creates an Host" do
@@ -91,15 +82,20 @@ RSpec.describe ImportCsvHostsService do
 
   describe "with existing host" do
     let!(:host) { FactoryBot.create(:host,
-      ip: '192.168.1.42',
       lastseen: '2017-08-30',
       name: 'myhost',
       cpe: "/o:microsoft:windows:4711",
       fqdn: 'myhost.example.net',
+      serial: 'XXX7785G',
       merkmale_attributes: [
         { merkmalklasse_id: mk_next.id, value: "old steps" },
       ]
     )}
+    let!(:if_host) { FactoryBot.create(:network_interface,
+      host: host,
+      ip: '192.168.1.42',
+      lastseen: '2017-08-30',
+     )}
 
     describe "update: :none" do
       let(:service) { ImportCsvHostsService.new(file: csvfile, update: :none) }
@@ -138,7 +134,7 @@ RSpec.describe ImportCsvHostsService do
       it "updates any attribute from current data" do
         host.update_attributes!(lastseen: '2017-07-31')
         service.call
-        host.reload
+        host = Host.first
         expect(host.lastseen.to_s).to eq("2017-08-20")
         expect(host.ip.to_s).to eq("192.168.1.42")
         expect(host.name).to eq("wob42")

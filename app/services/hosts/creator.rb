@@ -84,7 +84,7 @@ module Hosts
       ifaces.order("lastseen desc").first
     end
 
-    # fetch_attributes:
+    # fetch_attributes and cleanup
     # symbolize all attribute keys
     # * remove prefix or suffixes
     # * search for matching objects in relations if attribute =~ /_id\z/
