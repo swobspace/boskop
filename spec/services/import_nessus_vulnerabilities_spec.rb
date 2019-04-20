@@ -77,9 +77,8 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(host.serial).to eq("ZZZ4DTAG") }
     end
 
-    describe "update an existing host with older data" do
-      let(:host) { result.hosts[0] }
-      let!(:oldhost) { FactoryBot.create(:host, 
+    describe "update an existing older host with newer data" do
+      let(:oldhost) { FactoryBot.create(:host, 
         name: "nobody",
         raw_os: "empty",
         fqdn: "nobody.example.com",
@@ -89,16 +88,21 @@ RSpec.describe ImportNessusVulnerabilitiesService do
         host: oldhost,
         ip: '192.168.1.87', 
         mac: "12345678AABB",
+        lastseen: "2017-01-01",
       )}
-      it { expect(host.lastseen.to_s).to eq("2018-06-10") }
-      it { expect(host.ip).to eq("192.168.1.87") }
-      it { expect(host.name).to eq("W-AB8159B407254") }
-      it { pending "not yet implemented"; expect(host.mac).to eq("00218554B23E") }
-      it { expect(host.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
-      it { expect(host.fqdn).to eq("nobody.example.com") }
+      before(:each) do
+        host = result.hosts[0]
+        oldhost.reload
+      end
+      it { expect(oldhost.lastseen.to_s).to eq("2018-06-10") }
+      it { expect(oldhost.ip).to eq("192.168.1.87") }
+      it { expect(oldhost.name).to eq("W-AB8159B407254") }
+      it { expect(oldhost.mac).to eq("00218554B23E") }
+      it { expect(oldhost.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
+      it { expect(oldhost.fqdn).to eq("nobody.example.com") }
     end
 
-    describe "does not update an existing host with newer data" do
+    describe "does not update an newer host with older xml" do
       let(:host) { result.hosts[0] }
       let!(:oldhost) { FactoryBot.create(:host, 
         name: "nobody",
@@ -111,12 +115,12 @@ RSpec.describe ImportNessusVulnerabilitiesService do
         ip: '192.168.1.87', 
         mac: "12345678AABB",
       )}
-      it { expect(host.lastseen.to_s).to eq("2018-06-30") }
-      it { expect(host.ip).to eq("192.168.1.87") }
-      it { expect(host.name).to eq("nobody") }
-      it { expect(host.mac).to eq("12345678AABB") }
-      it { expect(host.raw_os).to eq("empty") }
-      it { expect(host.fqdn).to eq("nobody.example.com") }
+      it { expect(oldhost.lastseen.to_s).to eq("2018-06-30") }
+      it { expect(oldhost.ip).to eq("192.168.1.87") }
+      it { expect(oldhost.name).to eq("nobody") }
+      it { expect(oldhost.mac).to eq("12345678AABB") }
+      it { expect(oldhost.raw_os).to eq("empty") }
+      it { expect(oldhost.fqdn).to eq("nobody.example.com") }
     end
   end
 
