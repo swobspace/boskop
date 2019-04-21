@@ -12,7 +12,6 @@ RSpec.describe "Hosts", type: :feature do
   describe "with import nmap xml file", js: false do
     let(:nmapfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-42.xml')}
     it "uploads hosts" do
-      pending "nmap import not yet migrated to HostsCreator"
       login_admin
       visit hosts_path
       click_link "Hosts aus Datei importieren"

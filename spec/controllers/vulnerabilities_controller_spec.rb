@@ -95,14 +95,12 @@ RSpec.describe VulnerabilitiesController, type: :controller do
     context "with openvas xml" do
       let(:import_form_attributes) {{ type: 'openvas', file: openvas_file }}
       it "imports vulnerabilities from openvas xml" do
-        pending "openvas import not yet migrated to HostsCreator"
         expect {
           post :import, params: import_form_attributes, session: valid_session
         }.to change(Vulnerability, :count).by(2)
       end
 
       it "redirects to vulnerabilities_path" do
-        pending "openvas import not yet migrated to HostsCreator"
         post :import, params: import_form_attributes, session: valid_session
         expect(response).to redirect_to(vulnerabilities_path)
       end

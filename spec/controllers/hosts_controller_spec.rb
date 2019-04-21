@@ -98,14 +98,12 @@ RSpec.describe HostsController, type: :controller do
     context "with valid params" do
       let(:import_form_attributes) {{ type: 'csv', file: csv_file }}
       it "imports hosts from csv" do
-        pending "import csv not yet migrated"
         expect {
           post :import, params: import_form_attributes, session: valid_session
         }.to change(Host, :count).by(1)
       end
 
       it "redirects to hosts_path" do
-        pending "import csv not yet migrated"
         post :import, params: import_form_attributes, session: valid_session
         expect(response).to redirect_to(hosts_path)
       end
