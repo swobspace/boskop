@@ -120,7 +120,7 @@ module Hosts
     end
 
     def fetch_mode
-      mode = options.fetch(:mode, :newer)
+      mode = options.fetch(:mode, :newer).to_sym
       unless [:newer, :missing, :always, :none].include?(mode)
         raise ArgumentError, "host updates with mode #{mode} is not implemented"
       end

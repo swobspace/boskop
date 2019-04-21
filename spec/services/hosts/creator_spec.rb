@@ -335,7 +335,7 @@ module Hosts
       describe "mode :always" do
         before(:each) do 
           uuid_host.network_interfaces << iface
-          Creator.new(mode: :always, attributes: attributes).save
+          Creator.new(mode: "always", attributes: attributes).save
           uuid_host.reload
         end
         it { expect(uuid_host.name).to eq("Mumpitz") }
