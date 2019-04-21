@@ -34,11 +34,9 @@ class ImportOpenvasVulnerabilitiesService
 
     xml.results.each do |result|
       # find or create host
-      host = Host.create_with(lastseen: result.lastseen).
-                  find_or_create_by!(ip: result.host)
-      if host.lastseen.to_date < result.lastseen.to_date
-        host.update(lastseen: result.lastseen)
-      end
+      hc = Hosts::Creator.new(mode: :newer, attributes: host_attributes(result))
+      hc.save
+      host = hc.host
       hosts << host
       # find or create vulnerability_detail
       vulndetail = VulnerabilityDetail.
@@ -69,6 +67,13 @@ class ImportOpenvasVulnerabilitiesService
 
 private
   attr_reader :xmlfile
+
+  def host_attributes(result)
+    {
+      lastseen: result.lastseen,
+      ip: result.host.to_s,
+    }
+  end
 
   # extract vulnerability detail attributes for Host.new
   def vd_attributes(result)
