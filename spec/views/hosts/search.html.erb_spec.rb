@@ -11,16 +11,14 @@ RSpec.describe "hosts/search", type: :view do
     location = FactoryBot.create(:location, lid: "LID")
     hostcategory = FactoryBot.create(:host_category, name: "SecureServer")
     os = FactoryBot.create(:operating_system, name: 'ZementOS')
-    macprefix = FactoryBot.create(:mac_prefix, oui: '112233', vendor: "Granite C.")
+    macprefix = FactoryBot.create(:mac_prefix, oui: '001122', vendor: "Granite C.")
 
     assign(:hosts, [
       FactoryBot.create(:host,
         :name => "MyLovelyHost",
         :description => "Runningforever",
-        :ip => "192.168.81.82",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
-        :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
         :uuid => "31eb2a81-2fc6-4be8-815d-543fe9ce9fd7",
         :fqdn => "MyLovelyHost.example.net",
@@ -34,14 +32,15 @@ RSpec.describe "hosts/search", type: :view do
         :host_category => hostcategory,
         :operating_system => os,
         :vuln_risk => 'High',
+        :network_interfaces_attributes => [
+          {ip: '192.168.81.82', mac: '00:11:22:33:44:55', lastseen: Date.today}
+        ],
         :location => location),
       FactoryBot.create(:host,
         :name => "MyLovelyHost",
         :description => "Runningforever",
-        :ip => "192.168.83.84",
         :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
         :raw_os => "Windows 7 Professional 6.1",
-        :mac => "11:22:33:44:55:66",
         :serial => "XXX7785T",
         :vendor => "Tuxolino",
         :product => "TuxStation",
@@ -54,19 +53,23 @@ RSpec.describe "hosts/search", type: :view do
         :host_category => hostcategory,
         :operating_system => os,
         :vuln_risk => 'High',
+        :network_interfaces_attributes => [
+          {ip: '192.168.83.84', mac: '00:11:22:33:44:55', lastseen: Date.today}
+        ],
         :location => location)
     ])
   end
 
   it "renders a list of hosts" do
     render
+    puts rendered
     assert_select "tr>td", :text => "MyLovelyHost".to_s, :count => 2
     assert_select "tr>td", :text => "Runningforever".to_s, :count => 2
     assert_select "tr>td", :text => "192.168.81.82".to_s, :count => 1
     assert_select "tr>td", :text => "192.168.83.84".to_s, :count => 1
     assert_select "tr>td", :text => "cpe:/o:microsoft:windows_7::sp1:professional".to_s, :count => 2
     assert_select "tr>td", :text => "Windows 7 Professional 6.1".to_s, :count => 2
-    assert_select "tr>td", :text => "112233445566".to_s, :count => 2
+    assert_select "tr>td", :text => "001122334455".to_s, :count => 2
     assert_select "tr>td", :text => "Granite C.".to_s, :count => 2
     assert_select "tr>td", :text => "XXX7785T".to_s, :count => 2
     assert_select "tr>td", :text => "31eb2a81-2fc6-4be8-815d-543fe9ce9fd7".to_s, :count => 1

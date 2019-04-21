@@ -8,7 +8,7 @@ RSpec.describe "network_interfaces/index", type: :view do
     allow(controller).to receive(:controller_name) { "network_interfaces" }
     allow(controller).to receive(:action_name) { "index" }
 
-    assign(:network_interfaces, FactoryBot.create_list(:network_interfaces))
+    assign(:network_interfaces, FactoryBot.create_list(:network_interface, 2))
   end
 
   it "renders a list of network_interfaces" do

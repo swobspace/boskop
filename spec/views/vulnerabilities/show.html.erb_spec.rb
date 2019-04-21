@@ -8,7 +8,10 @@ RSpec.describe "vulnerabilities/show", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "show" }
 
-    host = FactoryBot.create(:host, ip: '192.81.51.117', name: 'vxserver')
+    host = FactoryBot.create(:host, name: 'vxserver',
+                             network_interfaces_attributes: [
+                               { ip: '192.81.51.117', lastseen: Date.today }
+                             ])
     @vulnerability = assign(:vulnerability, Vulnerability.create!(
       :host => host,
       :lastseen => 1.day.before(Date.today),
