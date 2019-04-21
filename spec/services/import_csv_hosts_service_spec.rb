@@ -109,7 +109,7 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("")
         expect(host.workgroup).to eq("")
-        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_responsible).to eq(nil)
         expect(host.merkmal_next).to eq("old steps")
       end
     end
@@ -127,7 +127,7 @@ RSpec.describe ImportCsvHostsService do
         expect(host.fqdn).to eq("myhost.example.net")
         expect(host.domain_dns).to eq("")
         expect(host.workgroup).to eq("")
-        expect(host.merkmal_responsible).to eq("KrummhoernigerSchnarchkackler")
+        expect(host.merkmal_responsible).to eq(nil)
         expect(host.merkmal_next).to eq("old steps")
       end
 
