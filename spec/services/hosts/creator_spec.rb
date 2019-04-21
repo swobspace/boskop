@@ -147,6 +147,9 @@ module Hosts
         raw_os: 'oldrawos',
         uuid: '13d1a35d-e6da-4247-8dbd-13124172779b',
         network_interfaces: [iface],
+        merkmale_attributes: [
+          { merkmalklasse_id: mk_next.id, value: "old steps" },
+        ]
       )}
       let!(:serial_host) { FactoryBot.create(:host,
         lastseen: '2019-04-01',
@@ -281,6 +284,7 @@ module Hosts
         it { expect(uuid_host.warranty_start.to_s).to eq("2018-08-01") }
         it { expect(uuid_host.warranty_end.to_s).to eq("2021-07-31") }
         it { expect(uuid_host.network_interfaces.count).to eq(2) }
+        it { expect(uuid_host.merkmal_next).to eq("My next steps") }
       end
 
       describe "mode :newer and older attributes" do
@@ -298,6 +302,7 @@ module Hosts
           host = hc.host
           expect(host.name).to eq("ip_host")
           expect(host.mac).to eq("001122334455")
+          expect(host.merkmal_next).to eq(nil)
         end
       end
 
@@ -324,6 +329,7 @@ module Hosts
         it { expect(uuid_host.warranty_sla).to eq("3 years bring in") }
         it { expect(uuid_host.warranty_start.to_s).to eq("2018-08-01") }
         it { expect(uuid_host.warranty_end.to_s).to eq("2021-07-31") }
+        it { expect(uuid_host.merkmal_next).to eq("old steps") }
       end
 
       describe "mode :always" do
@@ -349,6 +355,7 @@ module Hosts
         it { expect(uuid_host.warranty_sla).to eq("3 years bring in") }
         it { expect(uuid_host.warranty_start.to_s).to eq("2018-08-01") }
         it { expect(uuid_host.warranty_end.to_s).to eq("2021-07-31") }
+        it { expect(uuid_host.merkmal_next).to eq("My next steps") }
       end
 
       describe "mode :none" do
@@ -358,6 +365,7 @@ module Hosts
           subject.save
           uuid_host.reload
           expect(uuid_host.lastseen.to_s).to eq("2019-04-15")
+          expect(uuid_host.merkmal_next).to eq("old steps")
         end
 
         context "fresher host" do
