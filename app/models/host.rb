@@ -22,6 +22,8 @@ class Host < ApplicationRecord
   before_save :set_location
   before_save :check_operating_system
 
+  scope :current, -> { where("hosts.lastseen >= ?", 1.month.before(Date.today)) }
+
   def to_s
     "#{ip} (#{name})"
   end
