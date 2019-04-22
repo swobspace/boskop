@@ -137,6 +137,11 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(vulndetail).to be_persisted }
       it { expect(vulnerability.host.ip.to_s).to eq("192.168.1.87") }
       it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+      it { expect(vulnerability.plugin_output).to match(/The following Windows version is installed and not supported:/)}
+      it { expect(vulnerability.plugin_output).to match(/Microsoft Windows XP Service Pack 2/)}
+      it { expect(vulnerability.plugin_output).to match(/Microsoft Windows XP Service Pack 3/)}
+      it { expect(vulnerability.plugin_output).to match(/Windows XP for Embedded Systems/)
+}
       it { expect(vulndetail.name).to eq("Unsupported Windows OS") }
       it { expect(vulndetail.family).to eq("Windows") }
       it { expect(vulndetail.severity.to_s).to eq("10.0") }

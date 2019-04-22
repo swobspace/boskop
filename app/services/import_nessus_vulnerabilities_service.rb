@@ -58,12 +58,13 @@ class ImportNessusVulnerabilitiesService
         end
 
         # create or update vulnerability record
-        vuln = Vulnerability.
-                 create_with(lastseen: report.lastseen).
-                 find_or_create_by(
-                   host_id: host.id, 
-                   vulnerability_detail_id: vulndetail.id
-                 )
+        vuln = Vulnerability.create_with(
+                 lastseen: report.lastseen, 
+                 plugin_output: item.plugin_output
+               ).find_or_create_by(
+                 host_id: host.id, 
+                 vulnerability_detail_id: vulndetail.id
+               )
         if vuln.errors.any?
           success = false
           errors << vuln.errors.full_messages.join(', ')
