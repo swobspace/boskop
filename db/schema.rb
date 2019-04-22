@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_31_090640) do
+ActiveRecord::Schema.define(version: 2019_04_22_081921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 2019_03_31_090640) do
 
   create_table "network_interfaces", force: :cascade do |t|
     t.bigint "host_id"
-    t.string "description", default: ""
+    t.string "if_description", default: ""
     t.inet "ip"
     t.date "lastseen"
     t.string "mac", default: ""

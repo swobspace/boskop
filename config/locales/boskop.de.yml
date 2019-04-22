@@ -133,6 +133,7 @@ de:
     cpe: CPE
     cves: CVEs
     description: Beschreibung
+    if_description: Interface-Beschreibung
     department: Abteilung
     disabled: deaktiviert
     displayname: Anzeigename
@@ -151,6 +152,7 @@ de:
     host: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    if_description: Interface-Beschreibung
     import_mode: Import-Mode
     import_state: Import-Status
     internet: Internet

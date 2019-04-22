@@ -11,7 +11,7 @@ RSpec.describe "network_interfaces/show", type: :view do
     host = FactoryBot.create(:host, name: 'myName', serial: 'ABCDEFG', uuid: '9f60214e-ac06-4f66-b2ae-ad4ffba02826')
     @network_interface = assign(:network_interface, FactoryBot.create(:network_interface,
       :host => host,
-      :description => "Description",
+      :if_description => "Description",
       :ip => '192.0.2.77',
       :mac => "00-11-22-33-44-55",
     ))

@@ -14,7 +14,7 @@
     <div class="form-inputs">
       <%= f.association :host, label_method: proc {|x| "#{x.lid} / #{x.name} / #{x.serial} / #{x.uuid}"}
        %>
-      <%= f.input :description
+      <%= f.input :if_description
        %>
       <%= f.input :ip, as: :string
        %>

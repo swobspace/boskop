@@ -95,7 +95,8 @@ RSpec.describe NetworkInterfacesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {{
-        mac: '00:11:22:33:EE:FF'
+        mac: '00:11:22:33:EE:FF',
+        if_description: "brabbelfasel"
       }}
 
       it "updates the requested network_interface" do
@@ -103,6 +104,7 @@ RSpec.describe NetworkInterfacesController, type: :controller do
         put :update, params: {id: network_interface.to_param, network_interface: new_attributes}, session: valid_session
         network_interface.reload
         expect(network_interface.mac).to eq('00112233EEFF')
+        expect(network_interface.if_description).to eq('brabbelfasel')
       end
 
       it "redirects to the network_interface" do

@@ -242,7 +242,9 @@ bin/rails g scaffold MacPrefix \
 ----
 bin/rails g scaffold NetworkInterface \
   host:references:index \
-  description:string \
+  if_description:string \
   ip:inet lastseen:date \
   mac:string oui_vendor:string
+
+#    bin/rails g migration ChangeDescriptionToIfDescriptionNetworkInterface
 ----

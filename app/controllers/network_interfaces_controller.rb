@@ -51,6 +51,6 @@ class NetworkInterfacesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def network_interface_params
-      params.require(:network_interface).permit(:host_id, :description, :ip, :lastseen, :mac, :oui_vendor)
+      params.require(:network_interface).permit(:host_id, :if_description, :ip, :lastseen, :mac, :oui_vendor)
     end
 end
