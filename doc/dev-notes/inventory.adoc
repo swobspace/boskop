@@ -18,12 +18,17 @@ Host.joins(location: {networks: :merkmale}).where(merkmale: {value: 'INTERN'}).w
 
 * No UUID or serial
 * blacklisting uuid or serial like
-  uuid:00000000-0000-0000-0807-060504030201
-  uuid:03000200-0400-0500-0006-000700080009
-  serial:System Serial Number
-  serial:To be filled by O.E.M.
-  serial:To Be Filled By O.E.M.
-  serial:OEM
+
+----
+uuid_blacklist:
+  - 00000000-0000-0000-0807-060504030201
+  - 03000200-0400-0500-0006-000700080009
+serial_blacklist:
+  - l:System Serial Number
+  - l:To be filled by O.E.M.
+  - l:To Be Filled By O.E.M.
+  - l:OEM
+----
 * One ip, multiple Macs
 
 == Import new host data
