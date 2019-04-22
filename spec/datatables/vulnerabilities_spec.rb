@@ -9,6 +9,7 @@ module VulnerabilitiesDatatableHelper
       column << vuln.host.host_category.to_s
       column << vuln.host.operating_system.to_s
       column << vuln.vulnerability_detail.to_s
+      column << vuln.plugin_output
       column << vuln.vulnerability_detail.threat
       column << vuln.vulnerability_detail.severity.to_s
       column << vuln.lastseen.to_s

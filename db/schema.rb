@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_22_081921) do
+ActiveRecord::Schema.define(version: 2019_04_22_090831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -305,6 +305,7 @@ ActiveRecord::Schema.define(version: 2019_04_22_081921) do
     t.date "lastseen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "plugin_output"
     t.index ["host_id"], name: "index_vulnerabilities_on_host_id"
     t.index ["vulnerability_detail_id"], name: "index_vulnerabilities_on_vulnerability_detail_id"
   end

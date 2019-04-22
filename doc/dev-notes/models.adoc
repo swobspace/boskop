@@ -174,7 +174,9 @@ bin/rails g scaffold OperatingSystemMapping \
 
 ----
 bin/rails g scaffold Vulnerability \
-  host:references vulnerability_detail:references lastseen:date
+  host:references vulnerability_detail:references \
+  lastseen:date plugin_output:text
+#    bin/rails g migration AddPluginOutputToVulnerability plugin_output:text
 ----
 
 ## VulnerabilityDetail

@@ -18,6 +18,7 @@ RSpec.describe "vulnerabilities/search", type: :view do
       Vulnerability.create!(
         :host => host,
         :lastseen => 1.day.before(Date.today),
+        :plugin_output => "brabbelfasel",
         :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                    name: "End-of-Life", 
                                    severity: "10.0",
@@ -27,6 +28,7 @@ RSpec.describe "vulnerabilities/search", type: :view do
       Vulnerability.create!(
         :host => host,
         :lastseen => 1.day.before(Date.today),
+        :plugin_output => "brabbelfasel",
         :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                    name: "Hackable by Kids",
                                    severity: "8.7",
@@ -47,6 +49,7 @@ RSpec.describe "vulnerabilities/search", type: :view do
     assert_select "tr>td", :text => "End-of-Life".to_s, :count => 1
     assert_select "tr>td", :text => "Hackable by Kids".to_s, :count => 1
     assert_select "tr>td", :text => 1.day.before(Date.today).to_s, :count => 2
+    assert_select "tr>td", :text => "brabbelfasel", :count => 2
     assert_select "tr>td", :text => "high", :count => 2
     assert_select "tr>td", :text => "10.0", :count => 1
     assert_select "tr>td", :text => "8.7", :count => 1

@@ -191,6 +191,7 @@ de:
     oui_vendor: OUI Vendor
     period_of_notice: Kündigungsfrist
     period_of_notice_unit: Einheit
+    plugin_output: Plugin Output
     plz: PLZ
     position: Position
     possible_values: Mögliche Werte

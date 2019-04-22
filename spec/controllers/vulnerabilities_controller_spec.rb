@@ -148,6 +148,7 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {{
+        plugin_output: "some more info",
         lastseen: 1.day.after(Date.today)
       }}
 
@@ -156,6 +157,7 @@ RSpec.describe VulnerabilitiesController, type: :controller do
         put :update, params: {id: vulnerability.to_param, vulnerability: new_attributes}, session: valid_session
         vulnerability.reload
         expect(vulnerability.lastseen).to eq(1.day.after(Date.today))
+        expect(vulnerability.plugin_output).to eq("some more info")
       end
 
       it "redirects to the vulnerability" do

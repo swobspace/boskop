@@ -88,7 +88,8 @@ class VulnerabilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def vulnerability_params
-      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, :lastseen)
+      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, 
+                                            :plugin_output, :lastseen)
     end
 
     def import_params
@@ -98,7 +99,7 @@ class VulnerabilitiesController < ApplicationController
    def search_params
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :threat, :severity, :ip, :operating_system, 
+          :name, :threat, :severity, :ip, :operating_system, :plugin_output,
           :hostname, :host_category, :critical, :current,
           :lastseen, :newer, :older, :current, :lid, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
