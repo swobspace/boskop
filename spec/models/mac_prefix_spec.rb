@@ -6,7 +6,7 @@ RSpec.describe MacPrefix, type: :model do
   it "should get plain factory working" do
     f = FactoryBot.create(:mac_prefix)
     g = FactoryBot.create(:mac_prefix)
-    expect(f).to validate_uniqueness_of(:oui)
+    expect(f).to validate_uniqueness_of(:oui).case_insensitive
     expect(f).to be_valid
     expect(g).to be_valid
   end
