@@ -4,7 +4,7 @@ class HostsController < ApplicationController
 
   # GET /hosts
   def index
-    @hosts = Host.left_outer_joins(:network_interfaces, :location, :host_category, :operating_system, :merkmale).distinct
+    @hosts = Host.current.left_outer_joins(:network_interfaces, :location, :host_category, :operating_system, :merkmale).distinct
     @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     respond_with(@hosts) do |format|
       format.json { render json: HostsDatatable.new(@hosts, view_context) }

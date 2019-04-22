@@ -40,6 +40,13 @@ RSpec.describe Host, type: :model do
     end
   end
 
+  describe "#current" do    
+    let!(:host1) { FactoryBot.create(:host, lastseen: 2.month.before(Date.today)) }
+    let!(:host2) { FactoryBot.create(:host, lastseen: 1.month.before(Date.today)) }
+    let!(:host3) { FactoryBot.create(:host, lastseen: Date.today) }
+    it { expect(Host.current).to contain_exactly(host2, host3) }
+  end
+
   describe "#mac" do
     let(:h) { FactoryBot.create(:host, name: 'anyhost') }
     describe "without interface" do
