@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.network_interface') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered table-hover">
+      <tr>
+        <th class="w-25"><%= t('attributes.host')%>:</th>
+        <td class="w-75">
+          <%= @network_interface.host.lid %> / <%= @network_interface.host.name %> / <%= @network_interface.host.serial %> / <%= @network_interface.host.uuid %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('attributes.if_description')%>:</th>
+        <td><%= @network_interface.if_description %></td>
+      </tr>
+      <tr>
+        <th><%= t('attributes.ip')%>:</th>
+        <td><%= @network_interface.ip %></td>
+      </tr>
+      <tr>
+        <th><%= t('attributes.lastseen')%>:</th>
+        <td><%= @network_interface.lastseen %></td>
+      </tr>
+      <tr>
+        <th><%= t('attributes.mac')%>:</th>
+        <td><%= @network_interface.mac %></td>
+      </tr>
+      <tr>
+        <th><%= t('attributes.oui_vendor')%>:</th>
+        <td><%= @network_interface.oui_vendor %></td>
+      </tr>
+    </table>
+
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@network_interface) %>
+      <%= delete_link(@network_interface) %>
+      <%= new_link NetworkInterface %>
+    </div>
+  </div>
+</div>

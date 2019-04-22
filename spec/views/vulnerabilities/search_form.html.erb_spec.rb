@@ -20,6 +20,7 @@ RSpec.describe "vulnerabilities/search_form", type: :view do
       assert_select "input[name=?]", "hostname"
       assert_select "input[name=?]", "host_category"
       assert_select "input[name=?]", "operating_system"
+      assert_select "input[name=?]", "plugin_output"
       assert_select "input[name=?]", "newer"
       assert_select "input[name=?]", "older"
       assert_select "input[name=?]", "lid"

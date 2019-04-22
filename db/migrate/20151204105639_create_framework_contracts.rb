@@ -1,4 +1,4 @@
-class CreateFrameworkContracts < ActiveRecord::Migration
+class CreateFrameworkContracts < ActiveRecord::Migration[5.1]
   def change
     create_table :framework_contracts do |t|
       t.string :name, null: false

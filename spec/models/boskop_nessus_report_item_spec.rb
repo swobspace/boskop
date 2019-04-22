@@ -127,7 +127,8 @@ http://www.nessus.org/u?59db5b5b" }
         nvt: "nessus:19506",
         family: "Settings",
         solution: "n/a",
-        threat: "None"
+        threat: "None",
+        plugin_output: host1_item2_plugin_output
     )}
   end
 

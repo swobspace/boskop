@@ -1,0 +1,48 @@
+= Inventory
+== Basics
+
+* identify host by uuid, serial or, if both not available, by MAC or IP
+
+== Snippets for conversion
+
+.Get hosts where :ip is within a network label 'INTERN'
+----
+Host.joins(location: {networks: :merkmale}).where(merkmale: {value: 'INTERN'}).where("hosts.ip <<= networks.netzwerk").where("hosts.lastseen >= ?", 6.weeks.before(Date.today)).
+  .count
+  .group(:serial).having("count(*) > 1").count
+  .group(:uuid).having("count(*) > 1").count
+  .group(:name).having("count(*) > 1").count
+----
+
+== Migration problems
+
+* No UUID or serial
+* blacklisting uuid or serial like
+
+----
+uuid_blacklist:
+  - 00000000-0000-0000-0807-060504030201
+  - 03000200-0400-0500-0006-000700080009
+
+serial_blacklist:
+  - System Serial Number
+  - To be filled by O.E.M.
+  - To Be Filled By O.E.M.
+  - OEM
+  - (n/a)
+----
+* One ip, multiple Macs
+
+== Import new host data
+
+.Logic for import host data
+----
+if on_blacklist(:uuid, :serial)
+  host = Host.find_or_create_by(:uuid, :name)
+if uuid.present?
+  host = Host.find_or_create_by(:uuid)...
+elsif serial.present?
+  host = Host.find_or_create_by(:serial)...
+else
+  host = Host.where
+----

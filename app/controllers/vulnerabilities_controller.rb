@@ -5,9 +5,9 @@ class VulnerabilitiesController < ApplicationController
   # GET /vulnerabilities
   def index
     if @host
-      @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     else
-      @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     end
     respond_with(@vulnerabilities) do |format|
       format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
@@ -15,7 +15,7 @@ class VulnerabilitiesController < ApplicationController
   end
 
   def search
-    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+    @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all
@@ -88,7 +88,8 @@ class VulnerabilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def vulnerability_params
-      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, :lastseen)
+      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, 
+                                            :plugin_output, :lastseen)
     end
 
     def import_params
@@ -98,7 +99,7 @@ class VulnerabilitiesController < ApplicationController
    def search_params
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :threat, :severity, :ip, :operating_system, 
+          :name, :threat, :severity, :ip, :operating_system, :plugin_output,
           :hostname, :host_category, :critical, :current,
           :lastseen, :newer, :older, :current, :lid, :limit).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}

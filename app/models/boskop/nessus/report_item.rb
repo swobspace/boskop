@@ -13,7 +13,8 @@ module Boskop
                     :threat, :severity, :cves, :bids, :xrefs,
                     :notes, :description, :synopsis, :see_also, :solution,
                     :vuln_publication_date, :patch_publication_date, 
-                    :exploit_available, :exploited_by_malware  ]
+                    :exploit_available, :exploited_by_malware,
+                    :plugin_output ]
 
       #
       # Creates a Boskop::Nessus::ReportItem object

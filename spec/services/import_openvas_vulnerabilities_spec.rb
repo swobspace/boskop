@@ -120,7 +120,12 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
       threat: "High",
       nvt: "1.3.6.1.4.1.25623.1.0.103674",
     )}
-    let(:host) { FactoryBot.create(:host, ip: '127.0.0.1', lastseen: '2017-08-31')}
+    let!(:host) { FactoryBot.create(:host, name: "Oops", lastseen: '2017-08-31')}
+    let!(:if_host) { FactoryBot.create(:network_interface, 
+      host: host,
+      ip: '127.0.0.1', 
+      lastseen: '2017-08-31'
+    )}
     let!(:vuln) { FactoryBot.create(:vulnerability,
       vulnerability_detail: vuln_detail,
       host: host
@@ -130,6 +135,7 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
       before(:each) do
         vuln.update(lastseen: '2017-10-01')
         host.update(lastseen: '2017-10-01')
+        host.reload
       end
       it { expect { subject.call }.to change(Host, :count).by(0) }
       it { expect { subject.call }.to change(Vulnerability, :count).by(1) }

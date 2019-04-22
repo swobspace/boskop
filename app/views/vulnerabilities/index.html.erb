@@ -15,11 +15,12 @@
   <thead>
     <tr>
       <th><%= t('attributes.lid') %></th>
-      <th><%= t('attributes.ip') %></th>
+      <th class="nosort"><%= t('attributes.ip') %></th>
       <th><%= t('attributes.hostname') %></th>
       <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.operating_system') %></th>
       <th><%= t('attributes.vulnerability_detail') %></th>
+      <th class="notvisible"><%= t('attributes.plugin_output') %></th>
       <th><%= t('attributes.threat') %></th>
       <th><%= t('attributes.severity') %></th>
       <th><%= t('attributes.lastseen') %></th>
@@ -28,6 +29,7 @@
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

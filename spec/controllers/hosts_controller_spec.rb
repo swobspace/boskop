@@ -32,7 +32,7 @@ RSpec.describe HostsController, type: :controller do
     FactoryBot.attributes_for(:host)
   }
   let(:invalid_attributes) {
-    { ip: nil }
+    { lastseen: nil }
   }
   let(:valid_session) { {} }
 

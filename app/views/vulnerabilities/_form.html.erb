@@ -13,6 +13,8 @@
       <%= f.association :vulnerability_detail,
             input_html: { class: 'select2'}
        %>
+      <%= f.input :plugin_output
+       %>
       <%= f.input :lastseen, as: :string, wrapper: :horizontal_date
        %>
 

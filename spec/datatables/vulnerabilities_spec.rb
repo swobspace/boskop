@@ -9,6 +9,7 @@ module VulnerabilitiesDatatableHelper
       column << vuln.host.host_category.to_s
       column << vuln.host.operating_system.to_s
       column << vuln.vulnerability_detail.to_s
+      column << vuln.plugin_output
       column << vuln.vulnerability_detail.threat
       column << vuln.vulnerability_detail.severity.to_s
       column << vuln.lastseen.to_s
@@ -27,7 +28,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
 
   let(:view_context) { double("ActionView::Base") }
   let(:vulnerabilities) { Vulnerability.left_outer_joins(
-    :vulnerability_detail, host: [ :host_category, :operating_system, :location ]
+    :vulnerability_detail, host: [ :network_interfaces, :host_category, :operating_system, :location ]
   )}
   let(:datatable)    { VulnerabilitiesDatatable.new(vulnerabilities, view_context) }
 

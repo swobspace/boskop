@@ -77,40 +77,50 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(host.serial).to eq("ZZZ4DTAG") }
     end
 
-    describe "update an existing host with older data" do
-      let(:host) { result.hosts[0] }
-      let!(:oldhost) { FactoryBot.create(:host, 
-        ip: '192.168.1.87', 
+    describe "update an existing older host with newer data" do
+      let(:oldhost) { FactoryBot.create(:host, 
         name: "nobody",
         raw_os: "empty",
-        mac: "12345678AABB",
         fqdn: "nobody.example.com",
         lastseen: "2017-01-01"
       )}
-      it { expect(host.lastseen.to_s).to eq("2018-06-10") }
-      it { expect(host.ip).to eq("192.168.1.87") }
-      it { expect(host.name).to eq("W-AB8159B407254") }
-      it { expect(host.mac).to eq("00218554B23E") }
-      it { expect(host.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
-      it { expect(host.fqdn).to eq("nobody.example.com") }
+      let!(:if_oldhost) { FactoryBot.create(:network_interface, 
+        host: oldhost,
+        ip: '192.168.1.87', 
+        mac: "12345678AABB",
+        lastseen: "2017-01-01",
+      )}
+      before(:each) do
+        host = result.hosts[0]
+        oldhost.reload
+      end
+      it { expect(oldhost.lastseen.to_s).to eq("2018-06-10") }
+      it { expect(oldhost.ip).to eq("192.168.1.87") }
+      it { expect(oldhost.name).to eq("W-AB8159B407254") }
+      it { expect(oldhost.mac).to eq("00218554B23E") }
+      it { expect(oldhost.raw_os).to eq("Microsoft Windows XP Service Pack 2\nMicrosoft Windows XP Service Pack 3\nWindows XP for Embedded Systems") }
+      it { expect(oldhost.fqdn).to eq("nobody.example.com") }
     end
 
-    describe "does not update an existing host with newer data" do
+    describe "does not update an newer host with older xml" do
       let(:host) { result.hosts[0] }
       let!(:oldhost) { FactoryBot.create(:host, 
-        ip: '192.168.1.87', 
         name: "nobody",
         raw_os: "empty",
-        mac: "12345678AABB",
         fqdn: "nobody.example.com",
         lastseen: "2018-06-30"
       )}
-      it { expect(host.lastseen.to_s).to eq("2018-06-30") }
-      it { expect(host.ip).to eq("192.168.1.87") }
-      it { expect(host.name).to eq("nobody") }
-      it { expect(host.mac).to eq("12345678AABB") }
-      it { expect(host.raw_os).to eq("empty") }
-      it { expect(host.fqdn).to eq("nobody.example.com") }
+      let!(:if_oldhost) { FactoryBot.create(:network_interface, 
+        host: oldhost,
+        ip: '192.168.1.87', 
+        mac: "12345678AABB",
+      )}
+      it { expect(oldhost.lastseen.to_s).to eq("2018-06-30") }
+      it { expect(oldhost.ip).to eq("192.168.1.87") }
+      it { expect(oldhost.name).to eq("nobody") }
+      it { expect(oldhost.mac).to eq("12345678AABB") }
+      it { expect(oldhost.raw_os).to eq("empty") }
+      it { expect(oldhost.fqdn).to eq("nobody.example.com") }
     end
   end
 
@@ -127,6 +137,11 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       it { expect(vulndetail).to be_persisted }
       it { expect(vulnerability.host.ip.to_s).to eq("192.168.1.87") }
       it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+      it { expect(vulnerability.plugin_output).to match(/The following Windows version is installed and not supported:/)}
+      it { expect(vulnerability.plugin_output).to match(/Microsoft Windows XP Service Pack 2/)}
+      it { expect(vulnerability.plugin_output).to match(/Microsoft Windows XP Service Pack 3/)}
+      it { expect(vulnerability.plugin_output).to match(/Windows XP for Embedded Systems/)
+}
       it { expect(vulndetail.name).to eq("Unsupported Windows OS") }
       it { expect(vulndetail.family).to eq("Windows") }
       it { expect(vulndetail.severity.to_s).to eq("10.0") }
@@ -200,7 +215,12 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       threat: "Critical",
       nvt: "nessus:108797",
     )}
-    let(:host) { FactoryBot.create(:host, ip: '192.168.1.87', lastseen: '2017-08-31')}
+    let(:host) { FactoryBot.create(:host, lastseen: '2017-08-31')}
+    let!(:if_host) { FactoryBot.create(:network_interface,
+      host: host,
+      ip: '192.168.1.87',
+    )}
+
     let!(:vuln) { FactoryBot.create(:vulnerability,
       vulnerability_detail: vuln_detail,
       host: host

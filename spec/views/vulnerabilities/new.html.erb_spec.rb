@@ -18,6 +18,7 @@ RSpec.describe "vulnerabilities/new", type: :view do
 
       assert_select "select[name=?]", "vulnerability[host_id]"
       assert_select "select[name=?]", "vulnerability[vulnerability_detail_id]"
+      assert_select "textarea[name=?]", "vulnerability[plugin_output]"
       assert_select "input[name=?]", "vulnerability[lastseen]"
     end
   end

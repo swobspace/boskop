@@ -39,10 +39,9 @@ class ImportNessusVulnerabilitiesService
 
     xml.host_reports.each do |report|
       # find or create host
-      host = Host.create_with(host_attributes(report)).find_or_create_by!(ip: report.ip)
-      if host.lastseen.to_date < report.lastseen.to_date
-        host.update(host_attributes(report))
-      end
+      hc = Hosts::Creator.new(attributes: host_attributes(report))
+      hc.save
+      host = hc.host
       hosts << host
       # find or create vulnerability_detail
       report.report_items.each do |item|
@@ -59,12 +58,13 @@ class ImportNessusVulnerabilitiesService
         end
 
         # create or update vulnerability record
-        vuln = Vulnerability.
-                 create_with(lastseen: report.lastseen).
-                 find_or_create_by(
-                   host_id: host.id, 
-                   vulnerability_detail_id: vulndetail.id
-                 )
+        vuln = Vulnerability.create_with(
+                 lastseen: report.lastseen, 
+                 plugin_output: item.plugin_output
+               ).find_or_create_by(
+                 host_id: host.id, 
+                 vulnerability_detail_id: vulndetail.id
+               )
         if vuln.errors.any?
           success = false
           errors << vuln.errors.full_messages.join(', ')
@@ -93,10 +93,7 @@ private
   # extract host attributes
   #
   def host_attributes(report)
-    csp_attributes(report).merge(report.attributes).
-      reject do |k,v| 
-        !(Host.attribute_names.include?(k.to_s))
-      end
+    csp_attributes(report).merge(report.attributes)
   end
 
   #

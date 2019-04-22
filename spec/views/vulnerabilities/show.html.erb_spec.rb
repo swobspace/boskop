@@ -8,10 +8,14 @@ RSpec.describe "vulnerabilities/show", type: :view do
     allow(controller).to receive(:controller_name) { "vulnerability" }
     allow(controller).to receive(:action_name) { "show" }
 
-    host = FactoryBot.create(:host, ip: '192.81.51.117', name: 'vxserver')
+    host = FactoryBot.create(:host, name: 'vxserver',
+                             network_interfaces_attributes: [
+                               { ip: '192.81.51.117', lastseen: Date.today }
+                             ])
     @vulnerability = assign(:vulnerability, Vulnerability.create!(
       :host => host,
       :lastseen => 1.day.before(Date.today),
+      :plugin_output => "brabbelfasel",
       :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                  name: "Hackable by Kids",
                                  severity: "10.0",
@@ -28,6 +32,7 @@ RSpec.describe "vulnerabilities/show", type: :view do
     expect(rendered).to match(/Hackable by Kids/)
     expect(rendered).to match(/#{1.day.before(Date.today).to_s}/)
     expect(rendered).to match(/10.0/)
+    expect(rendered).to match(/brabbelfasel/)
     expect(rendered).to match(/high/)
     expect(rendered).to match(/Nonux/)
     expect(rendered).to match(/XYZ/)

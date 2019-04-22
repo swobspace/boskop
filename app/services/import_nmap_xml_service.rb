@@ -37,9 +37,9 @@ class ImportNmapXmlService
     end
 
     nmap_xml.all_hosts.each do |nmaphost|
-      host = Host.create_with(attributes(nmaphost)).find_or_create_by(ip: nmaphost.ip)
-      if host.persisted? && host.update_attributes(attributes_for_update(nmaphost, host))
-        hosts << host
+      hc = Hosts::Creator.new(mode: update, attributes: nmaphost.attributes)
+      if hc.save
+        hosts << hc.host
       else
         errors << "#{host.errors.messages.join(', ')}" if host.errors.any?
         success = false
@@ -50,37 +50,6 @@ class ImportNmapXmlService
 
 private
   attr_reader :xmlfile, :update
-
-  # extract attributes for Host.new
-  def attributes(nmaphost)
-    nmaphost.attributes.reject do |k,v| 
-      (k == :ip) || !(Host.attribute_names.include?(k.to_s))
-    end
-  end
-
-  def attributes_for_update(nmaphost, host)
-    recently_seen = (nmaphost.lastseen.to_date > host.lastseen) ? 
-                    { lastseen: nmaphost.lastseen.to_date } : {}
-    result = case update.to_sym
-    when :none
-      {}
-    when :missing
-      if 4.week.after(nmaphost.lastseen.to_date) >= host.lastseen
-        attributes(nmaphost).select {|k,v| host.send(k).blank?}
-      else
-        {}
-      end
-    when :newer
-      if nmaphost.lastseen.to_s >= host.lastseen.to_s
-        attributes(nmaphost)
-      else
-        {}
-      end
-    else
-      raise KeyError, ":update should be one of :none, :missing, :newer (was #{update})"
-    end
-    result.merge(recently_seen)
-  end
 
   # file may be ActionDispatch::Http::UploadedFile
   #

@@ -7,21 +7,36 @@ class Host < ApplicationRecord
   belongs_to :location, optional: true
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :vulnerabilities, dependent: :destroy
+  has_many :network_interfaces, inverse_of: :host, dependent: :destroy
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true
+  accepts_nested_attributes_for :network_interfaces, allow_destroy: true
   validates_associated :merkmale
+  validates_associated :network_interfaces
 
   # -- configuration
   # -- validations and callbacks
-  validates :ip, presence: :true, uniqueness: true
+  # validates :ip, presence: :true, uniqueness: true
   validates :lastseen, presence: :true
 
   before_save :set_location
   before_save :check_operating_system
-  before_save :check_mac_address
 
   def to_s
     "#{ip} (#{name})"
+  end
+
+  #
+  # backwards compatibility
+  #
+  def ip
+    network_interfaces.order("lastseen desc").first&.ip
+  end
+  def mac
+    network_interfaces.order("lastseen desc").first&.mac
+  end
+  def oui_vendor
+    network_interfaces.order("lastseen desc").first&.oui_vendor
   end
 
   #
@@ -65,6 +80,19 @@ class Host < ApplicationRecord
     Merkmalklasse.where(for_object: 'Host')
   end
 
+  #
+  # works on update host only, not on create host
+  #
+  def set_location
+    if self.location.nil?
+      networks = Network.best_match(self.ip)
+      if networks.count == 1
+        self[:location_id] = networks.first.location.id
+      end
+    end
+    self
+  end
+
 private
 
   #
@@ -103,31 +131,10 @@ private
     Merkmalklasse.where(for_object: 'Host', tag: key).first&.id
   end
 
-  def set_location
-    if self.location.nil?
-      networks = Network.best_match(self.ip)
-      if networks.count == 1
-        self.location = networks.first.location
-      end
-    end
-    true
-  end
-
   def check_operating_system
     check_raw_os
     assign_operating_system
     return true
-  end
-
-  def check_mac_address
-    return true if mac.blank?
-    if mac !~ /[0-9A-F]{12}/
-      self[:mac] = mac.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
-    end
-    if oui_vendor.blank? || mac_changed?
-      self[:oui_vendor] = MacPrefix.where(oui: mac[0..5]).limit(1).first&.vendor
-    end
-    true
   end
 
   def check_raw_os
