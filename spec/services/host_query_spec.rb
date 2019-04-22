@@ -27,7 +27,7 @@ end
 
 RSpec.describe HostQuery do
   include_context "host variables"
-  let(:all_hosts) { Host.left_outer_joins(:location, :host_category, :operating_system, :merkmale).distinct.order("name asc") }
+  let(:all_hosts) { Host.left_outer_joins(:network_interfaces, :location, :host_category, :operating_system, :merkmale).distinct.order("name asc") }
 
 
   # check for class methods

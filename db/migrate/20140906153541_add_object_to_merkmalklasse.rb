@@ -1,4 +1,4 @@
-class AddObjectToMerkmalklasse < ActiveRecord::Migration
+class AddObjectToMerkmalklasse < ActiveRecord::Migration[5.1]
   def change
     add_column :merkmalklassen, :mandantory, :boolean, default: false
     add_column :merkmalklassen, :unique, :boolean, default: false

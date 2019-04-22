@@ -99,6 +99,22 @@ module Boskop
     end
   end
 
+  def self.uuid_blacklist
+    if CONFIG['uuid_blacklist'].present?
+      Array(CONFIG['uuid_blacklist'])
+    else
+      []
+    end
+  end
+
+  def self.serial_blacklist
+    if CONFIG['serial_blacklist'].present?
+      Array(CONFIG['serial_blacklist'])
+    else
+      []
+    end
+  end
+
   def self.ldap_options
     if CONFIG['ldap_options'].present?
       opts = CONFIG['ldap_options'].symbolize_keys

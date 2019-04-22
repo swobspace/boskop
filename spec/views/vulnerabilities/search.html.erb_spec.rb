@@ -9,8 +9,11 @@ RSpec.describe "vulnerabilities/search", type: :view do
     allow(controller).to receive(:action_name) { "search" }
 
     hostcat = FactoryBot.create(:host_category, name: 'Server')
-    host = FactoryBot.create(:host, ip: '192.81.51.117', name: 'vxserver', 
-                              host_category: hostcat)
+    host = FactoryBot.create(:host, name: 'vxserver', host_category: hostcat,
+                             network_interfaces_attributes: [
+                               { ip: '192.81.51.117', lastseen: Date.today }
+                             ]
+                             )
     assign(:vulnerabilities, [
       Vulnerability.create!(
         :host => host,

@@ -27,7 +27,7 @@ RSpec.describe Hosts::VulnerabilitiesController, type: :controller do
   login_admin
  
   let(:vulndetail) { FactoryBot.create(:vulnerability_detail, name: "End-of-Life") }
-  let(:host)       { FactoryBot.create(:host, ip: '192.81.51.93', name: 'vxserver') }
+  let(:host)       { FactoryBot.create(:host, name: 'vxserver') }
 
   let(:valid_attributes) {{
     host_id: host.id, vulnerability_detail_id: vulndetail.id, lastseen: Date.today

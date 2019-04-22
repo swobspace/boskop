@@ -1,4 +1,4 @@
-class CreateAccessTypes < ActiveRecord::Migration
+class CreateAccessTypes < ActiveRecord::Migration[5.1]
   def change
     create_table :access_types do |t|
       t.string :name, null: false

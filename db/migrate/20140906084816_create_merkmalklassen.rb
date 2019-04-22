@@ -1,4 +1,4 @@
-class CreateMerkmalklassen < ActiveRecord::Migration
+class CreateMerkmalklassen < ActiveRecord::Migration[5.1]
   def change
     create_table :merkmalklassen do |t|
       t.string :name, null: false, default: ""

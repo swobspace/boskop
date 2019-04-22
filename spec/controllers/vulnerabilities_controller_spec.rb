@@ -29,7 +29,8 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   let(:openvas_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'openvas-wobnet-anon.xml') }
   let(:nessus_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'netxp-nessus.xml') }
   let(:vulndetail) { FactoryBot.create(:vulnerability_detail, name: "End-of-Life") }
-  let(:host)       { FactoryBot.create(:host, ip: '192.81.51.93', name: 'vxserver') }
+  let(:host)       { FactoryBot.create(:host, name: 'vxserver') }
+  let!(:iface)      { FactoryBot.create(:network_interface, ip: '192.81.51.93', host: host) }
 
   let(:valid_attributes) {{
     host_id: host.id, vulnerability_detail_id: vulndetail.id, lastseen: Date.today

@@ -83,13 +83,15 @@ private
         @limit = value.to_i
       when :ip
         if value =~ /\/\d{1,2}\z/
-          query = query.where("ip <<= ?", value)
+          query = query.where("network_interfaces.ip <<= ?", value)
         else
-          query = query.where("host(ip) ILIKE ?", "#{value}%")
+          query = query.where("host(network_interfaces.ip) ILIKE ?", "#{value}%")
         end
       when :mac
         mac = value.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
-        query = query.where("hosts.mac ILIKE ?", "%#{mac}%")
+        query = query.where("network_interfaces.mac ILIKE ?", "%#{mac}%")
+      when :oui_vendor
+        query = query.where("network_interfaces.oui_vendor ILIKE ?", "%#{value}%")
       when :warranty_start
         query = query.where("to_char(warranty_start, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :warranty_start_from
@@ -97,13 +99,13 @@ private
       when :warranty_start_until
         query = query.where("warranty_start <= ?", "#{value}%")
       when :lastseen
-        query = query.where("to_char(lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(hosts.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer
-        query = query.where("lastseen >= ?", "#{value}%")
+        query = query.where("hosts.lastseen >= ?", "#{value}%")
       when :current
-        query = query.where("lastseen >= ?", 1.month.before(Date.today))
+        query = query.where("hosts.lastseen >= ?", 1.month.before(Date.today))
       when :older
-        query = query.where("lastseen <= ?", "#{value}%")
+        query = query.where("hosts.lastseen <= ?", "#{value}%")
       when :host_category
         query = query.where("host_categories.name ILIKE ?", "%#{value}%")
       when :operating_system
@@ -123,13 +125,14 @@ private
         string_fields.each do |term|
           search_string << "hosts.#{term} ILIKE :search"
         end
+        search_string << "network_interfaces.oui_vendor ILIKE :search"
         search_string << "hosts.vuln_risk ILIKE :search"
         if search_value =~ /\/\d{1,2}\z/
-          search_string << "ip <<= '#{search_value}'"
+          search_string << "network_interfaces.ip <<= '#{search_value}'"
         else
-          search_string << "host(ip) ILIKE :search"
+          search_string << "host(network_interfaces.ip) ILIKE :search"
         end
-        search_string << "to_char(lastseen, 'IYYY-MM-DD') ILIKE :search"
+        search_string << "to_char(hosts.lastseen, 'IYYY-MM-DD') ILIKE :search"
         search_string << "host_categories.name ILIKE :search"
         search_string << "locations.lid ILIKE :search"
       else
@@ -147,7 +150,7 @@ private
   end
 
   def string_fields
-    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :product, :serial, :uuid, :oui_vendor ]
+    [ :name, :description, :cpe, :raw_os, :fqdn, :domain_dns, :workgroup, :vendor, :product, :serial, :uuid ]
   end
 
   def merkmalklassen

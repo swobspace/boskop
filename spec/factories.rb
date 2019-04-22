@@ -45,8 +45,13 @@ FactoryBot.define do
   end
 
   factory :host do
-    ip { generate(:aip) }
+    # ip { generate(:aip) }
     lastseen { Date.today }
+    trait :with_ip do
+      after(:create) do |user, evaluator|
+        create(:network_interface)
+      end
+    end
   end
 
   factory :host_category do
@@ -105,6 +110,12 @@ FactoryBot.define do
   factory :network do
     location
     netzwerk { "192.0.2.0/24" }
+  end
+
+  factory :network_interface do
+    host
+    ip { generate(:aip) }
+    lastseen { Date.today }
   end
 
   factory :operating_system do

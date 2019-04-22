@@ -92,6 +92,7 @@ de:
       merkmalklasse: Merkmalklasse
       nessus_scan: Nessus Scan
       network: Netzwerk
+      network_interface: Netzwerk-Interface
       operating_system: Betriebssystem
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
@@ -132,6 +133,7 @@ de:
     cpe: CPE
     cves: CVEs
     description: Beschreibung
+    if_description: Interface-Beschreibung
     department: Abteilung
     disabled: deaktiviert
     displayname: Anzeigename
@@ -150,6 +152,7 @@ de:
     host: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    if_description: Interface-Beschreibung
     import_mode: Import-Mode
     import_state: Import-Status
     internet: Internet
@@ -177,6 +180,7 @@ de:
     nessus_id: NessusID
     netzwerk: Netzwerk
     network: Netzwerk
+    network_interface: Netzwerk-Interface
     network_mask: Netzwerkmaske
     notes: Anmerkungen
     nvt: NVT
@@ -250,6 +254,7 @@ de:
     merkmalklassen: Merkmalklassen
     nessus_scans: Nessus Scans
     networks: Netzwerke
+    network_interfaces: Netzwerk-Interfaces
     operating_systems: Betriebssysteme
     operating_system_mappings: Betriebssystem-Matrix
     org_units: Organisationseinheiten

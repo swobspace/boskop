@@ -35,7 +35,7 @@ RSpec.describe HostsDatatable, type: :model do
   include_context "host variables"
 
   let(:view_context) { double("ActionView::Base") }
-  let(:hosts)        { Host.left_outer_joins(:location, :host_category) }
+  let(:hosts)        { Host.left_outer_joins(:network_interfaces, :location, :host_category) }
   let(:datatable)    { HostsDatatable.new(hosts, view_context) }
 
   before(:each) do

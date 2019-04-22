@@ -1,4 +1,4 @@
-class CreateMerkmale < ActiveRecord::Migration
+class CreateMerkmale < ActiveRecord::Migration[5.1]
   def change
     create_table :merkmale do |t|
       t.references :merkmalfor, polymorphic: true, index: true

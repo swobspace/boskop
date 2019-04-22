@@ -73,7 +73,7 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(hosts.name hosts.description host(ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_categories.name locations.lid) +
+    %w(hosts.name hosts.description host(network_interfaces.ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup hosts.lastseen vuln_risk network_interfaces.mac network_interfaces.oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_categories.name locations.lid) +
     merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
   end
 

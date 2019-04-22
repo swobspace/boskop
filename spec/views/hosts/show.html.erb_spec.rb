@@ -16,10 +16,8 @@ RSpec.describe "hosts/show", type: :view do
     @host = assign(:host, FactoryBot.create(:host,
       :name => "MyLovelyHost",
       :description => "Runningforever",
-      :ip => "192.168.77.79",
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
       :raw_os => "Windows 7 Professional 6.1",
-      :mac => "112233445566",
       :serial => "XXX7785T",
       :vendor => "Tuxolino",
       :fqdn => "MyLovelyHost.example.net",
@@ -33,7 +31,10 @@ RSpec.describe "hosts/show", type: :view do
       :product => 'Optimus Primus',
       :warranty_sla => '3 years bring in',
       :warranty_start => '2019-03-01',
-      :warranty_end => '2022-02-28'
+      :warranty_end => '2022-02-28',
+      :network_interfaces_attributes => [
+        { :ip => "192.168.77.79", :mac => "112233445566", lastseen: Date.today }
+      ]
     ))
   end
 

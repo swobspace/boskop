@@ -59,13 +59,18 @@ RSpec.describe HostConcerns, type: :model do
     let(:location) { FactoryBot.create(:location, lid: "LID") }
     let(:hostcategory) { FactoryBot.create(:host_category, name: "Secure Server") }
     let(:os) { FactoryBot.create(:operating_system, name: "ZementOS") }
-    let!(:host) { FactoryBot.create(:host,
+    let!(:iface) { FactoryBot.create(:network_interface,
+      :host_id => host.id,
+      :lastseen => Date.today,
+      :ip => "192.168.77.79",
+      :mac => "11:22:33:44:55:66",
+    )}
+      
+    let(:host) { FactoryBot.create(:host,
       :name => "MyLovelyHost",
       :description => "Runningforever",
-      :ip => "192.168.77.79",
       :cpe => "cpe:/o:microsoft:windows_7::sp1:professional",
       :raw_os => "Windows 7 Professional 6.1",
-      :mac => "11:22:33:44.55:66",
       :vendor => "Tuxolino",
       :fqdn => "MyLovelyHost.example.net",
       :domain_dns => "example.net",
@@ -79,6 +84,7 @@ RSpec.describe HostConcerns, type: :model do
     )}
 
     it "renders csv" do
+      hosts = [host]
       csv = CSV.parse(Host.to_csv)
       expect(csv.shift).to contain_exactly(
                 I18n.t('attributes.name'),

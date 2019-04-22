@@ -11,10 +11,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
     eol: "2020-01-14",
     matching_pattern: "cpe:windows_7\nraw_os:Windows 7",
 )}
-  let(:host) { FactoryBot.create(:host,
-    ip: '192.0.2.197',
-)}
-
+  let(:host) { FactoryBot.create(:host)} 
 
   describe "#perform" do
     describe "without :host option" do
@@ -74,7 +71,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
 
     describe "old host with updated :raw_os" do
       let!(:host) { FactoryBot.create(:host,
-        ip: '192.0.2.197', operating_system: xp, cpe: "cpe:/o:microsoft:windows_xp::-"
+        operating_system: xp, cpe: "cpe:/o:microsoft:windows_xp::-"
       )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:raw_os]) }
       before(:each) do
@@ -96,7 +93,7 @@ RSpec.describe MapOperatingSystemJob, type: :job do
 
     describe "old host with updated :cpe" do
       let!(:host) { FactoryBot.create(:host,
-        ip: '192.0.2.197', operating_system: xp, raw_os: "Windows 5.1"
+        operating_system: xp, raw_os: "Windows 5.1"
       )}
       let(:job) { MapOperatingSystemJob.perform_now(host: host, fields: [:cpe]) }
       before(:each) do
