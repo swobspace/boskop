@@ -22,6 +22,7 @@ module Hosts
       "ip" => "192.0.2.35",
       "mac" => '00:11:22:33:44:55',
       "description" => "some info about the host",
+      "if_description" => "about the network interface",
       "cpe" => "cpe:/o:microsoft:windows_10::-",
       "raw_os" => "Windows 10 Pro 15063",
       "fqdn" => "Mumpitz.example.net",
@@ -95,6 +96,7 @@ module Hosts
 
         context "creates a new host" do
           let(:host) { subject.save; subject.host }
+          let(:iface) { host.network_interfaces.first }
           it { expect(subject.save).to be_truthy }
           it { expect(host).to be_kind_of(Host) }
           it { expect(host).to be_valid }
@@ -103,6 +105,9 @@ module Hosts
           it { expect(host.ip).to eq("192.0.2.35") }
           it { expect(host.mac).to eq('001122334455') }
           it { expect(host.description).to eq("some info about the host") }
+          it { expect(iface.ip).to eq("192.0.2.35") }
+          it { expect(iface.mac).to eq('001122334455') }
+          it { expect(iface.if_description).to eq("about the network interface") }
           it { expect(host.cpe).to eq("/o:microsoft:windows_10::-") }
           it { expect(host.raw_os).to eq("Windows 10 Pro 15063") }
           it { expect(host.fqdn).to eq("Mumpitz.example.net") }
