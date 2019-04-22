@@ -117,6 +117,13 @@
 
 <br/>
 
+<h3 id="host_network_interfaces" class="mb-3"><%=t('controller.network_interfaces')%></h3>
+
+<%= render partial: 'network_interfaces/list', 
+	   locals: {network_interfaces: @host.network_interfaces}
+ %>
+
+
 <h3 id="host_vulnerabilities" class="mb-3"><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
 <%= render partial: 'vulnerabilities/list', 
