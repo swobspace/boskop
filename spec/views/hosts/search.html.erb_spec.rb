@@ -62,7 +62,6 @@ RSpec.describe "hosts/search", type: :view do
 
   it "renders a list of hosts" do
     render
-    puts rendered
     assert_select "tr>td", :text => "MyLovelyHost".to_s, :count => 2
     assert_select "tr>td", :text => "Runningforever".to_s, :count => 2
     assert_select "tr>td", :text => "192.168.81.82".to_s, :count => 1
