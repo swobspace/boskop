@@ -7,7 +7,7 @@ class VulnerabilitiesController < ApplicationController
     if @host
       @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     else
-      @vulnerabilities = Vulnerability.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
+      @vulnerabilities = Vulnerability.current.left_outer_joins(:vulnerability_detail, host: [:network_interfaces, :host_category, :location, :operating_system])
     end
     respond_with(@vulnerabilities) do |format|
       format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
