@@ -30,6 +30,7 @@ serial_blacklist:
   - To Be Filled By O.E.M.
   - OEM
   - (n/a)
+  - Default string
 ----
 * One ip, multiple Macs
 
