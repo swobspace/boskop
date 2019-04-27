@@ -26,6 +26,7 @@ class VulnerabilitiesDatatable < ApplicationDatatable
         column << vuln.vulnerability_detail.threat
         column << vuln.vulnerability_detail.severity.to_s
         column << vuln.lastseen.to_s
+        column << vuln.created_at.to_date.to_s
         links = []
         links << show_link(vuln)
         links << edit_link(vuln)
@@ -60,11 +61,11 @@ class VulnerabilitiesDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(locations.lid host(network_interfaces.ip) hosts.name host_categories.name operating_systems.name vulnerability_details.name vulnerabilities.plugin_output vulnerability_details.threat vulnerability_details.severity vulnerabilities.lastseen)
+    %w(locations.lid host(network_interfaces.ip) hosts.name host_categories.name operating_systems.name vulnerability_details.name vulnerabilities.plugin_output vulnerability_details.threat vulnerability_details.severity vulnerabilities.lastseen vulnerabilities.created_at)
   end
 
   def search_columns
-    %w(lid ip hostname host_category operating_system name plugin_output threat severity lastseen)
+    %w(lid ip hostname host_category operating_system name plugin_output threat severity lastseen created_at)
   end
 
 end

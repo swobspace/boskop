@@ -25,11 +25,13 @@
       <th><%= t('attributes.threat') %></th>
       <th><%= t('attributes.severity') %></th>
       <th><%= t('attributes.lastseen') %></th>
+      <th class="notvisible"><%= t('attributes.created_at') %></th>
       <th class="nosort"><%= t('boskop.action') %></th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -61,6 +63,7 @@
 	<td><%= vulnerability.vulnerability_detail.threat %></td>
 	<td><%= vulnerability.vulnerability_detail.severity %></td>
 	<td><%= vulnerability.lastseen %></td>
+	<td class="notvisible"><%= vulnerability.created_at.to_date.to_s %></td>
 	<td class="nowrap">
 	  <%= show_link vulnerability %>
 	  <%= edit_link vulnerability %>

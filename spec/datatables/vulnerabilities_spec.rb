@@ -13,6 +13,7 @@ module VulnerabilitiesDatatableHelper
       column << vuln.vulnerability_detail.threat
       column << vuln.vulnerability_detail.severity.to_s
       column << vuln.lastseen.to_s
+      column << vuln.created_at.to_date.to_s
       column << "  " # dummy for action links
     end
   end

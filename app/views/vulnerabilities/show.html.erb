@@ -39,6 +39,10 @@
 	<th><%= t('attributes.lastseen')%>:</th>
 	<td><%= @vulnerability.lastseen %></td>
       </tr>
+      <tr>
+	<th><%= t('attributes.created_at')%>:</th>
+	<td><%= @vulnerability.created_at.to_date %></td>
+      </tr>
     </table>
 
     <div role="toolbar">
