@@ -16,6 +16,7 @@ class HostQuery
   # * :domain_dns - string
   # * :workgroup - string
   # * :lastseen - date
+  # * :created_at - date
   # * :newer - lastseen >= :newer(date)
   # * :older - lastseen <= :older(date)
   # * :current - shortcut for lastseen >= 1.month.before(Date.today)
@@ -100,6 +101,8 @@ private
         query = query.where("warranty_start <= ?", "#{value}%")
       when :lastseen
         query = query.where("to_char(hosts.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+      when :created_at
+        query = query.where("to_char(hosts.created_at, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer
         query = query.where("hosts.lastseen >= ?", "#{value}%")
       when :current

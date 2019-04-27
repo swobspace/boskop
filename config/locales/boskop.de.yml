@@ -128,6 +128,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
+    created_at: angelegt am
     critical: Nur kritische Daten
     current: Nur aktuelle Daten
     cpe: CPE

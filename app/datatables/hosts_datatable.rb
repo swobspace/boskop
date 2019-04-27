@@ -23,6 +23,7 @@ class HostsDatatable < ApplicationDatatable
         column << host.domain_dns 
         column << host.workgroup 
         column << host.lastseen 
+        column << host.created_at.to_date.to_s
         column << host.vuln_risk
         column << host.mac    
         column << host.oui_vendor
@@ -73,12 +74,12 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def columns
-    %w(hosts.name hosts.description host(network_interfaces.ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup hosts.lastseen vuln_risk network_interfaces.mac network_interfaces.oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_categories.name locations.lid) +
+    %w(hosts.name hosts.description host(network_interfaces.ip) operating_systems.name cpe raw_os fqdn domain_dns workgroup hosts.lastseen hosts.created_at vuln_risk network_interfaces.mac network_interfaces.oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_categories.name locations.lid) +
     merkmalklassen.map {|m| "merkmal_#{m.name.downcase}" }
   end
 
   def search_columns
-    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen vuln_risk mac oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_category lid) + 
+    %w(name description ip operating_system cpe raw_os fqdn domain_dns workgroup lastseen created_at vuln_risk mac oui_vendor serial uuid vendor product warranty_sla warranty_start warranty_end host_category lid) + 
     merkmalklassen.map {|m| "merkmal_#{m.tag}" }
   end
 

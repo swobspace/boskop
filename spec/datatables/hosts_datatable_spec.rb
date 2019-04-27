@@ -13,6 +13,7 @@ module HostsDatatableHelper
       column << host.domain_dns
       column << host.workgroup
       column << host.lastseen.to_s
+      column << host.created_at.to_date.to_s
       column << host.vuln_risk.to_s
       column << host.mac
       column << host.oui_vendor

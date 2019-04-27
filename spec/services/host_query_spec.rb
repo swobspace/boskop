@@ -255,6 +255,16 @@ RSpec.describe HostQuery do
     it_behaves_like "a host query"
   end # search :lastseen
 
+  context "with :created_at" do
+    subject { HostQuery.new(all_hosts, {created_at: Date.today.to_s[0,7]}) }
+    before(:each) do
+      @matching = [pc2, pc3, pc5, vpngw]
+      @nonmatching = [nas]
+    end
+    it_behaves_like "a host query"
+  end # search :lastseen
+
+
   context "with :older" do
     subject { HostQuery.new(all_hosts, {older: 2.weeks.before(Date.today)}) }
     before(:each) do
