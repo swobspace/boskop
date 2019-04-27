@@ -72,7 +72,9 @@ RSpec.describe VulnerabilitiesMailer, type: :mailer do
 		  I18n.t('attributes.vulnerability_detail'),
 		  I18n.t('attributes.threat'),
 		  I18n.t('attributes.severity'),
-		  I18n.t('attributes.lastseen')
+		  I18n.t('attributes.lastseen'),
+		  I18n.t('attributes.created_at'),
+		  I18n.t('attributes.plugin_output'),
 		)
            expect(csv.count).to eq(3)
 	end
