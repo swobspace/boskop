@@ -7,6 +7,13 @@ $.datepicker.setDefaults({
       yearRange: '2000:2099',
 })
 
+DataTable = $.fn.dataTable
+$.extend( true, DataTable.Buttons.defaults, {
+  dom:
+    button:
+      className: 'btn btn-outline-secondary btn-sm'
+})
+
 ready = ->
   $('form').dirtyForms
     message: "Sie haben Änderungen noch nicht gespeichert. Wenn Sie jetzt weitermachen, verlieren Sie ungesicherte Änderungen."
@@ -35,7 +42,6 @@ ready = ->
       {
         extend: 'csv',
         title: $('table[role="datatable"]').data('title')
-        className: 'btn-outline-secondary btn-sm',
         exportOptions: {
           selected: false,
           columns: ':visible',
@@ -45,7 +51,6 @@ ready = ->
       {
         extend: 'excel',
         title: $('table[role="datatable"]').data('title')
-        className: 'btn-outline-secondary btn-sm',
         exportOptions: {
           selected: false,
           columns: ':visible',
@@ -54,7 +59,6 @@ ready = ->
       },
       {
         extend: 'pdf',
-        className: 'btn-outline-secondary btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         exportOptions: {
@@ -65,11 +69,9 @@ ready = ->
       },
       {
         extend: 'print',
-        className: 'btn-outline-secondary btn-sm',
       },
       {
         extend: 'colvis',
-        className: 'btn-outline-secondary btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
@@ -113,7 +115,6 @@ ready = ->
     buttons: [
       {
         extend: 'csv'
-        className: 'btn-outline-secondary btn-sm',
         title: $('table[role="remotetable"]').data('title')
         text: 'CSV'
         exportOptions: {
@@ -123,7 +124,6 @@ ready = ->
       },
       {
         extend: 'excel'
-        className: 'btn-outline-secondary btn-sm',
         title: $('table[role="remotetable"]').data('title')
         text: 'Excel'
         exportOptions: {
@@ -133,7 +133,6 @@ ready = ->
       },
       {
         extend: 'pdf',
-        className: 'btn-outline-secondary btn-sm',
         orientation: 'landscape',
         pageSize: 'A4',
         title: $('table[role="remotetable"]').data('title')
@@ -145,11 +144,9 @@ ready = ->
       },
       {
         extend: 'print',
-        className: 'btn-outline-secondary btn-sm',
       },
       {
         extend: 'colvis',
-        className: 'btn-outline-secondary btn-sm',
         text: "<%= I18n.t('boskop.change_columns') %>",
         columns: ':gt(0)'
       }
@@ -201,7 +198,6 @@ ready = ->
       buttons: [
         {
           extend: 'csv',
-          className: 'btn-outline-secondary btn-sm',
           sheetName: 'raw',
           filename: 'boskop-eol-matrix',
           title: '',
@@ -213,7 +209,6 @@ ready = ->
         },
         {
           extend: 'excel',
-          className: 'btn-outline-secondary btn-sm',
           sheetName: 'raw',
           filename: 'boskop-eol-matrix',
           title: '',
@@ -246,7 +241,6 @@ ready = ->
       buttons: [
         {
           extend: 'csv',
-          className: 'btn-outline-secondary btn-sm',
           sheetName: 'raw',
           filename: 'boskop-vuln-risk-matrix',
           title: '',
@@ -258,7 +252,6 @@ ready = ->
         },
         {
           extend: 'excel',
-          className: 'btn-outline-secondary btn-sm',
           sheetName: 'raw',
           filename: 'boskop-vuln-risk-matrix',
           title: '',
