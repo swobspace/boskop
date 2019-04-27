@@ -25,6 +25,7 @@
       <th class="notvisible"><%= t('attributes.domain_dns') %></th>
       <th><%= t('attributes.workgroup') %></th>
       <th><%= t('attributes.lastseen') %></th>
+      <th class="notvisible"><%= t('attributes.created_at') %></th>
       <th><%= t('attributes.vuln_risk') %></th>
       <th class="notvisible"><%= t('attributes.mac') %></th>
       <th class="notvisible"><%= t('attributes.oui_vendor') %></th>
@@ -67,6 +68,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
       <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
       <% end %>
       <th></th>
@@ -85,6 +87,7 @@
     <td><%= host.domain_dns %></td>
     <td><%= host.workgroup %></td>
     <td><%= host.lastseen %></td>
+    <td><%= host.created_at.to_date.to_s %></td>
     <td><%= host.vuln_risk %></td>
     <td><%= host.mac %></td>
     <td><%= host.oui_vendor %></td>

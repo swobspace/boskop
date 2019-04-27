@@ -27,6 +27,7 @@ shared_context "host variables" do
     domain_dns: 'my.example.net',
     workgroup: 'MY',
     lastseen: Date.today,
+    created_at: 4.month.before(Date.today),
     location: loc_paris,
     operating_system: os1,
     vendor: 'MegaQX',

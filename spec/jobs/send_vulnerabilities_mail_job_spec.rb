@@ -16,31 +16,41 @@ RSpec.describe SendVulnerabilitiesMailJob, type: :job do
     role: 'Vulnerabilities',
     responsibility_for: loc1
   )}
+  let(:send_csv) { double(VulnerabilitiesMailer.send_csv(vulnerabilities: Vulnerability.limit(1), mail_to: "nonsense@example.com")) }
 
   describe "#perform" do
     before(:each) do
-      send_csv = double(VulnerabilitiesMailer.send_csv(vulnerabilities: Vulnerability.limit(1), mail_to: "nonsense@example.com"))
-      expect(VulnerabilitiesMailer).to receive(:send_csv).with(
-        vulnerabilities: loc1.vulnerabilities.higher.current,
-        mail_to: ['vulns@example.net'],
-        lid: 'PXC'
-      ).and_return(send_csv)
       expect(send_csv).to receive(:deliver_now)
     end
 
     context "with at: Date.today" do
       it "calls VulnerabiltiesMail.send_csv with" do
+        expect(VulnerabilitiesMailer).to receive(:send_csv).with(
+          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.yesterday).all,
+          mail_to: ['vulns@example.net'],
+          lid: 'PXC'
+        ).and_return(send_csv)
         SendVulnerabilitiesMailJob.perform_now(at: Date.today)
       end
     end
 
     context "with location: PXC" do
       it "calls VulnerabiltiesMail.send_csv with" do
+        expect(VulnerabilitiesMailer).to receive(:send_csv).with(
+          vulnerabilities:  VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.yesterday).all,
+          mail_to: ['vulns@example.net'],
+          lid: 'PXC'
+        ).and_return(send_csv)
         SendVulnerabilitiesMailJob.perform_now(lid: 'PXC')
       end
     end
     context "with no args" do
       it "calls VulnerabiltiesMail.send_csv with" do
+        expect(VulnerabilitiesMailer).to receive(:send_csv).with(
+          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.today).all,
+          mail_to: ['vulns@example.net'],
+          lid: 'PXC'
+        ).and_return(send_csv)
         SendVulnerabilitiesMailJob.perform_now()
       end
     end

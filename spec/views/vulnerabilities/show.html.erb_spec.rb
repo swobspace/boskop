@@ -15,6 +15,7 @@ RSpec.describe "vulnerabilities/show", type: :view do
     @vulnerability = assign(:vulnerability, Vulnerability.create!(
       :host => host,
       :lastseen => 1.day.before(Date.today),
+      :created_at => 1.year.before(Date.today),
       :plugin_output => "brabbelfasel",
       :vulnerability_detail => FactoryBot.create(:vulnerability_detail,
                                  name: "Hackable by Kids",
@@ -31,6 +32,7 @@ RSpec.describe "vulnerabilities/show", type: :view do
     expect(rendered).to match(/192.81.51.117 \(vxserver\)/)
     expect(rendered).to match(/Hackable by Kids/)
     expect(rendered).to match(/#{1.day.before(Date.today).to_s}/)
+    expect(rendered).to match(/#{1.year.before(Date.today).to_s}/)
     expect(rendered).to match(/10.0/)
     expect(rendered).to match(/brabbelfasel/)
     expect(rendered).to match(/high/)

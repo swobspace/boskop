@@ -80,6 +80,7 @@ RSpec.describe HostConcerns, type: :model do
       :location => location,
       :vuln_risk => 'High',
       :lastseen => Date.today,
+      :created_at => 1.month.before(Date.today),
       :merkmal_responsible => "Mr. Superadmin"
     )}
 
@@ -97,6 +98,7 @@ RSpec.describe HostConcerns, type: :model do
                 I18n.t('attributes.domain_dns'),
                 I18n.t('attributes.workgroup'),
                 I18n.t('attributes.lastseen'),
+                I18n.t('attributes.created_at'),
                 I18n.t('attributes.vuln_risk'),
                 I18n.t('attributes.mac'),
                 I18n.t('attributes.vendor'),
@@ -109,7 +111,9 @@ RSpec.describe HostConcerns, type: :model do
       "cpe:/o:microsoft:windows_7::sp1:professional",
       "Windows 7 Professional 6.1", "112233445566", "Tuxolino",
       "MyLovelyHost.example.net", "example.net", "Workgroup3",
-      "Secure Server", "ZementOS", "LID", 'High', Date.today.to_s, "Mr. Superadmin")
+      "Secure Server", "ZementOS", "LID", 'High', 
+       Date.today.to_s, 1.month.before(Date.today).to_s,
+       "Mr. Superadmin")
     end
   end
 end

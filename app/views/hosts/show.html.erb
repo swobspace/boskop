@@ -58,8 +58,14 @@
 	    <td><%= @host.location.try(:lid) %></td>
 	  </tr>
 	  <tr>
-	    <th><%= t('attributes.lastseen')%>:</th>
-	    <td><%= @host.lastseen %></td>
+	    <th>
+              <%= t('attributes.lastseen')%>:<br/>
+              <%= t('attributes.created_at')%>:
+            </th>
+	    <td>
+              <%= @host.lastseen %> <br/>
+              <%= @host.created_at.to_date %>
+            </td>
 	    <th><%= t('attributes.vuln_risk')%>:</th>
 	    <td><%= risk_button(@host.vuln_risk) %></td>
 	  </tr>
