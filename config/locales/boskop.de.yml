@@ -245,6 +245,7 @@ de:
     contacts: Kontakte
     framework_contracts: Rahmenverträge
     hosts: Hosts
+    hosts/network_interfaces: Netzwerk-Interfaces
     hosts/vulnerabilities: Schwachstellen
     host_categories: Host-Kategorien
     ipaddresses: IP-Adressen

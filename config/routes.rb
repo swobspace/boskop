@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :network_interfaces
+  resources :network_interfaces, except: [:new, :create]
   resources :mac_prefixes
   resources :ad_users,  :only => [:index] do
     collection do
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post "hosts/:host_id/vulnerabilities", to: "hosts/vulnerabilities#index",
         constraints: lambda {|req| req.format == :json}
   resources :hosts do
+    resources :network_interfaces, module: :hosts
     resources :vulnerabilities, only: [:index], module: :hosts
     collection do
       get :eol_summary

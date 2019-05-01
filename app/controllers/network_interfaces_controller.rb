@@ -4,7 +4,11 @@ class NetworkInterfacesController < ApplicationController
 
   # GET /network_interfaces
   def index
-    @network_interfaces = NetworkInterface.all
+    if @host
+      @network_interfaces = @host.network_interfaces
+    else
+      @network_interfaces = NetworkInterface.all
+    end
     respond_with(@network_interfaces)
   end
 
@@ -15,7 +19,7 @@ class NetworkInterfacesController < ApplicationController
 
   # GET /network_interfaces/new
   def new
-    @network_interface = NetworkInterface.new
+    @network_interface = @host.network_interfaces.new
     respond_with(@network_interface)
   end
 
@@ -25,22 +29,22 @@ class NetworkInterfacesController < ApplicationController
 
   # POST /network_interfaces
   def create
-    @network_interface = NetworkInterface.new(network_interface_params)
+    @network_interface = @host.network_interfaces.new(network_interface_params)
 
     @network_interface.save
-    respond_with(@network_interface)
+    respond_with(@network_interface, location: location)
   end
 
   # PATCH/PUT /network_interfaces/1
   def update
     @network_interface.update(network_interface_params)
-    respond_with(@network_interface)
+    respond_with(@network_interface, location: location)
   end
 
   # DELETE /network_interfaces/1
   def destroy
     @network_interface.destroy
-    respond_with(@network_interface)
+    respond_with(@network_interface, location: location)
   end
 
   private
@@ -53,4 +57,13 @@ class NetworkInterfacesController < ApplicationController
     def network_interface_params
       params.require(:network_interface).permit(:host_id, :if_description, :ip, :lastseen, :mac, :oui_vendor)
     end
+
+  #
+  # if @host exist: hosts/host_id#network_interfaces
+  # else network_interfaces/network_interface_id
+  #
+  def location
+    polymorphic_path(@host || @network_interface)
+  end
+
 end

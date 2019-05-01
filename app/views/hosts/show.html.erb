@@ -129,6 +129,10 @@
 	   locals: {network_interfaces: @host.network_interfaces}
  %>
 
+<%= new_link [@host, NetworkInterface] %>
+
+<div class="mb-3">
+</div>
 
 <h3 id="host_vulnerabilities" class="mb-3"><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
