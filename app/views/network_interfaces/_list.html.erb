@@ -24,9 +24,9 @@
     <td><%= network_interface.oui_vendor %></td>
     <td><%= network_interface.if_description %></td>
     <td class="nowrap">
-      <%= show_link network_interface %>
-      <%= edit_link network_interface %>
-      <%= delete_link network_interface %>
+      <%= show_link [network_interface.host, network_interface] %>
+      <%= edit_link [network_interface.host, network_interface] %>
+      <%= delete_link [network_interface.host, network_interface] %>
     </td>
   <% end %>
 <% end %>

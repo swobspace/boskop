@@ -6,8 +6,8 @@ RSpec.describe NetworkInterfacesController, type: :routing do
       expect(:get => "/network_interfaces").to route_to("network_interfaces#index")
     end
 
-    it "routes to #new" do
-      expect(:get => "/network_interfaces/new").to route_to("network_interfaces#new")
+    it "doesn't routes to #new" do
+      expect(:get => "/network_interfaces/new").not_to route_to("network_interfaces#new")
     end
 
     it "routes to #show" do
@@ -19,8 +19,8 @@ RSpec.describe NetworkInterfacesController, type: :routing do
     end
 
 
-    it "routes to #create" do
-      expect(:post => "/network_interfaces").to route_to("network_interfaces#create")
+    it "doesn't routes to #create" do
+      expect(:post => "/network_interfaces").not_to route_to("network_interfaces#create")
     end
 
     it "routes to #update via PUT" do

@@ -1,18 +1,12 @@
-<%= simple_form_for(@network_interface,
-  html: { class: 'form-horizontal well' },
-  wrapper: :horizontal_form,
-  wrapper_mappings: {
-    check_boxes: :horizontal_radio_and_checkboxes,
-    radio_buttons: :horizontal_radio_and_checkboxes,
-    file: :horizontal_file_input,
-    boolean: :horizontal_boolean
-  }) do |f| %>
+<div class="container">
+  <%= simple_form_for([@host, @network_interface],
+    html: { class: 'form-horizontal card' }) do |f| %>
 
-  <fieldset>
-    <%= form_legend %>
-
-    <div class="form-inputs">
-      <%= f.association :host, label_method: proc {|x| "#{x.lid} / #{x.name} / #{x.serial} / #{x.uuid}"}
+    <div class="card-header">
+      <h5 class="card-title"><%= t('actions.add', model: t('activerecord.models.network_interface')) %> für: <%= @network_interface.host %></h5>
+    </div>
+    <div class="card-body">
+      <%= f.hidden_field :host_id, value: @network_interface.host.to_param
        %>
       <%= f.input :if_description
        %>
@@ -25,11 +19,9 @@
        %>
       <%= f.input :oui_vendor, disabled: true
        %>
-    </div>
 
-    <div class="form-actions col-sm-9 col-sm-offset-3">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
-  </fieldset>
-<% end %>
+  <% end %>
+</div>

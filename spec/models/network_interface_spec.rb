@@ -48,4 +48,12 @@ RSpec.describe NetworkInterface, type: :model do
       end
     end
   end
+
+  describe "#current" do    
+    let!(:if1) { FactoryBot.create(:network_interface, lastseen: Date.today) }
+    let!(:if2) { FactoryBot.create(:network_interface, lastseen: 1.month.before(Date.today)) }
+    let!(:if3) { FactoryBot.create(:network_interface, lastseen: 5.weeks.before(Date.today)) }
+
+    it { expect(NetworkInterface.current.all).to contain_exactly(if1, if2) }
+  end
 end

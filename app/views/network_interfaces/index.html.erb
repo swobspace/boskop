@@ -1,38 +1,46 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <h1><%= t('controller.network_interfaces') %></h1>
 
-<table id="dataTable" class="table table-bordered table-striped" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.host') %></th>
-    <th><%= t('attributes.if_description') %></th>
-    <th><%= t('attributes.ip') %></th>
-    <th><%= t('attributes.lastseen') %></th>
-    <th><%= t('attributes.mac') %></th>
-    <th><%= t('attributes.oui_vendor') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<%= content_tag :table, role: :remotetable,
+      id: 'network_interfaces_table',
+      class: "table table-bordered",
+      data: {
+        url: polymorphic_path([@host, :network_interfaces], format: :json),
+        order: [[0, 'desc']].to_json
+      } do %>
 
-<% @network_interfaces.each do |network_interface| %>
-  <%= content_tag_for(:tr, network_interface) do %>
-    <td><%= network_interface.host %></td>
-    <td><%= network_interface.if_description %></td>
-    <td><%= network_interface.ip %></td>
-    <td><%= network_interface.lastseen %></td>
-    <td><%= network_interface.mac %></td>
-    <td><%= network_interface.oui_vendor %></td>
-    <td class="nowrap">
-      <%= show_link network_interface %>
-      <%= edit_link network_interface %>
-      <%= delete_link network_interface %>
-    </td>
-  <% end %>
-<% end %>
-</tbody>
-</table>
+
+  <thead>
+    <tr>
+      <th><%= t('attributes.lid') %></th>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.ip') %></th>
+      <th><%= t('attributes.mac') %></th>
+      <th><%= t('attributes.if_description') %></th>
+      <th><%= t('attributes.lastseen') %></th>
+      <th><%= t('attributes.created_at') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tfoot>
+  <tbody>
+  </tbody>
+<%end%>
 
 <br />
 
 <%= back_link %>
-<%= new_link NetworkInterface %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>

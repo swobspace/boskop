@@ -7,6 +7,8 @@ class NetworkInterface < ApplicationRecord
 
   before_save :check_mac_address
 
+  scope :current, -> { where("network_interfaces.lastseen >= ?", 1.month.before(Date.today)) }
+
   def to_s
     "#{ip} / #{mac} / #{oui_vendor}"
   end

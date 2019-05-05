@@ -15,7 +15,7 @@ RSpec.describe "network_interfaces/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", network_interfaces_path, "post" do
-      assert_select "select[name=?]", "network_interface[host_id]"
+      assert_select "input[type=hidden][name=?]", "network_interface[host_id]"
       assert_select "input[name=?]", "network_interface[if_description]"
       assert_select "input[name=?]", "network_interface[ip]"
       assert_select "input[name=?]", "network_interface[mac]"
