@@ -5,11 +5,13 @@ class NetworkInterfacesController < ApplicationController
   # GET /network_interfaces
   def index
     if @host
-      @network_interfaces = @host.network_interfaces
+      @network_interfaces = @host.network_interfaces.left_outer_joins(host: [:location])
     else
-      @network_interfaces = NetworkInterface.all
+      @network_interfaces = NetworkInterface.current.left_outer_joins(host: [:location])
     end
-    respond_with(@network_interfaces)
+    respond_with(@network_interfaces) do |format|
+      format.json { render json: NetworkInterfacesDatatable.new(@network_interfaces, view_context) }
+    end
   end
 
   # GET /network_interfaces/1
