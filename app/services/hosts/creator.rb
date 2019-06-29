@@ -76,7 +76,7 @@ module Hosts
         return nil
       end
       if mac.present?
-        ifaces = NetworkInterface.where(host_id: host.id, ip: ip, mac: ip)
+        ifaces = NetworkInterface.where(host_id: host.id, ip: ip, mac: mac)
       else
         ifaces = NetworkInterface.where(host_id: host.id, ip: ip)
       end
