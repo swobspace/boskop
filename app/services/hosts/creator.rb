@@ -72,14 +72,13 @@ module Hosts
     end
 
     def fetch_iface
-      if if_attributes[:ip].blank?
+      if ip.blank?
         return nil
       end
-      if if_attributes[:mac].present?
-        ifaces = NetworkInterface.where(host_id: host.id, ip: if_attributes[:ip], 
-                                        mac: if_attributes[:mac])
+      if mac.present?
+        ifaces = NetworkInterface.where(host_id: host.id, ip: ip, mac: mac)
       else
-        ifaces = NetworkInterface.where(host_id: host.id, ip: if_attributes[:ip])
+        ifaces = NetworkInterface.where(host_id: host.id, ip: ip)
       end
       ifaces.order("lastseen desc").first
     end
@@ -128,7 +127,7 @@ module Hosts
     end
 
     def create_attributes
-      if if_attributes[:ip].blank?
+      if ip.blank?
         host_attributes
       else
         host_attributes.merge(network_interfaces_attributes: [ if_attributes ])
@@ -166,6 +165,7 @@ module Hosts
         !(NetworkInterface.attribute_names.include?(k.to_s)) || v.blank?
       end
     end
+
 
     def if_updates
       if old_lastseen <= lastseen
@@ -214,6 +214,12 @@ module Hosts
 
     def ip
       if_attributes[:ip]
+    end
+
+    def mac
+      if if_attributes[:mac].present?
+        if_attributes[:mac].upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
+      end
     end
   end
 end

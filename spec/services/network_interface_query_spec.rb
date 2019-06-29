@@ -126,7 +126,7 @@ RSpec.describe NetworkInterfaceQuery do
       @nonmatching = [if_host2, if1_host3]
     end
     it_behaves_like "a network_interface query"
-  end # search :lastseen
+  end # search :created_at
 
   context "with :at" do
     subject { NetworkInterfaceQuery.new(ifaces, {at: today}) }
@@ -138,7 +138,7 @@ RSpec.describe NetworkInterfaceQuery do
   end # search :at
 
   context "with :newer" do
-    subject { NetworkInterfaceQuery.new(ifaces, {newer: lastweek}) }
+    subject { NetworkInterfaceQuery.new(ifaces, {newer: lastmonth}) }
     before(:each) do
       @matching = [if_host1, if_host2, if1_host3]
       @nonmatching = [if2_host3]
@@ -147,7 +147,7 @@ RSpec.describe NetworkInterfaceQuery do
   end # search :newer
 
   context "with :since" do
-    subject { NetworkInterfaceQuery.new(ifaces, {since: lastweek}) }
+    subject { NetworkInterfaceQuery.new(ifaces, {since: lastmonth}) }
     before(:each) do
       @matching = [if_host1, if_host2, if1_host3]
       @nonmatching = [if2_host3]
@@ -158,8 +158,8 @@ RSpec.describe NetworkInterfaceQuery do
   context "with :older" do
     subject { NetworkInterfaceQuery.new(ifaces, {older: fourweeks}) }
     before(:each) do
-      @matching = [if2_host3]
-      @nonmatching = [if_host1, if_host2, if1_host3]
+      @matching = [if_host2, if1_host3, if2_host3]
+      @nonmatching = [if_host1]
     end
     it_behaves_like "a network_interface query"
   end # search :older
