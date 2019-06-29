@@ -139,7 +139,7 @@ module Hosts
     end # non existent host
 
     describe "on existing host" do
-      let(:iface) { FactoryBot.create(:network_interface,
+      let(:uuface) { FactoryBot.create(:network_interface,
         ip: '192.0.2.7',
         mac: '00:11:22:33:44:55',
         lastseen: '2019-04-01',
@@ -151,7 +151,7 @@ module Hosts
         description: 'olddescription',
         raw_os: 'oldrawos',
         uuid: '13d1a35d-e6da-4247-8dbd-13124172779b',
-        network_interfaces: [iface],
+        network_interfaces: [uuface],
         merkmale_attributes: [
           { merkmalklasse_id: mk_next.id, value: "old steps" },
         ]
@@ -180,10 +180,15 @@ module Hosts
         serial: 'O.E.M.',
         name: 'Judas',
       )}
+      let(:ipface) { FactoryBot.create(:network_interface,
+        ip: '192.0.2.9',
+        mac: '00:11:22:33:44:AA',
+        lastseen: '2019-04-01',
+      )}
       let!(:ip_host) { FactoryBot.create(:host,
         name: 'ip_host',
         lastseen: '2019-04-01',
-        network_interfaces: [iface],
+        network_interfaces: [ipface],
       )}
 
       describe "with blacklisted uuid" do
@@ -227,18 +232,32 @@ module Hosts
       describe "with existing ip" do
         let(:attributes) {{
           lastseen: '2019-04-15',
-          ip: '192.0.2.7',
+          ip: '192.0.2.9',
         }}
         it { expect(subject.host).to eq(ip_host) }
 
-        describe "whith changed mac" do
+        describe "with same mac" do
           let(:attributes) {{
             lastseen: '2019-04-15',
-            ip: '192.0.2.7',
+            ip: '192.0.2.9',
+            mac: '00:11:22:33:44:AA',
+          }}
+          let(:host) { subject.save; subject.host }
+          it { expect(subject.host).to eq(ip_host) }
+          it { expect(host.mac).to eq('0011223344AA') }
+          it { expect(ip_host.network_interfaces.count).to eq(1) }
+        end
+
+        describe "with changed mac" do
+          let(:attributes) {{
+            lastseen: '2019-04-15',
+            ip: '192.0.2.9',
             mac: 'AA-BB-CC-DD-EE-FF',
           }}
           let(:host) { subject.save; subject.host }
+          it { expect(subject.host).to eq(ip_host) }
           it { expect(host.mac).to eq('AABBCCDDEEFF') }
+          it { expect(host.network_interfaces.count).to eq(2) }
         end
 
         describe "whith blank mac" do
@@ -266,7 +285,7 @@ module Hosts
 
       describe "mode :newer and newer attributes" do
         before(:each) do 
-          uuid_host.network_interfaces << iface
+          # uuid_host.network_interfaces << ipface
           Creator.new(mode: :newer, attributes: attributes).save
           uuid_host.reload
         end
@@ -295,7 +314,7 @@ module Hosts
       describe "mode :newer and older attributes" do
         let(:attributes) {{
           lastseen: '2018-12-04', 
-          ip: '192.0.2.7',
+          ip: '192.0.2.9',
           mac: 'AA-BB-CC-DD-EE-FF',
           name: 'Blafasel',
         }}
@@ -306,14 +325,14 @@ module Hosts
           hc.save
           host = hc.host
           expect(host.name).to eq("ip_host")
-          expect(host.mac).to eq("001122334455")
+          expect(host.mac).to eq("0011223344AA")
           expect(host.merkmal_next).to eq(nil)
         end
       end
 
       describe "mode :missing" do
         before(:each) do 
-          uuid_host.network_interfaces << iface
+          uuid_host.network_interfaces << ipface
           Creator.new(mode: :missing, attributes: attributes).save
           uuid_host.reload
         end
@@ -339,7 +358,7 @@ module Hosts
 
       describe "mode :always" do
         before(:each) do 
-          uuid_host.network_interfaces << iface
+          uuid_host.network_interfaces << ipface
           Creator.new(mode: "always", attributes: attributes).save
           uuid_host.reload
         end
