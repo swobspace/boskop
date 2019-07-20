@@ -50,7 +50,7 @@ ARGV.each do |file|
     puts "Host: #{report_host.name} [#{report_host.ip}]"
     options.plugin_ids.each do |pid|
       puts "--- Plugin-ID: #{pid}"
-      puts report_host.report_item(plugin_id: pid)&.plugin_output.strip
+      puts report_host.report_item(plugin_id: pid)&.plugin_output&.strip
     end
     puts ""
   end
