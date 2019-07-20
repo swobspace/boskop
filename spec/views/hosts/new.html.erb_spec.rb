@@ -17,10 +17,8 @@ RSpec.describe "hosts/new", type: :view do
     assert_select "form[action=?][method=?]", hosts_path, "post" do
       assert_select "input[name=?]", "host[name]"
       assert_select "textarea[name=?]", "host[description]"
-      assert_select "input[name=?]", "host[ip]"
       assert_select "input[name=?]", "host[cpe]"
       assert_select "input[name=?]", "host[raw_os]"
-      assert_select "input[name=?]", "host[mac]"
       assert_select "input[name=?]", "host[serial]"
       assert_select "input[name=?]", "host[uuid]"
       assert_select "input[name=?]", "host[fqdn]"
