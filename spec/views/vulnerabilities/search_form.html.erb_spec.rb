@@ -23,7 +23,8 @@ RSpec.describe "vulnerabilities/search_form", type: :view do
       assert_select "input[name=?]", "plugin_output"
       assert_select "input[name=?]", "newer"
       assert_select "input[name=?]", "older"
-      assert_select "input[name=?]", "created_at"
+      assert_select "input[name=?]", "created_newer"
+      assert_select "input[name=?]", "created_older"
       assert_select "input[name=?]", "lid"
       assert_select "input[name=?]", "limit"
     end
