@@ -136,7 +136,7 @@ module Boskop
         options.symbolize_keys!
         plugin_id = options.fetch(:plugin_id, nil)
         return nil if plugin_id.blank?
-        report_item = @report_host.at("ReportItem[@pluginID='48337']")
+        report_item = @report_host.at(%Q(ReportItem[@pluginID="#{plugin_id}"]))
         return nil if report_item.blank?
         ReportItem.new(report_item: report_item)
       end

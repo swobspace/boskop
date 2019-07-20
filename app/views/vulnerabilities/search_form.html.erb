@@ -69,20 +69,29 @@
           <div class="input-group-prepend">
             <div class="input-group-text">&geq;</div>
           </div>
-          <input class="form-control datepicker" name="newer" id="newer" placeholder="<%= t('attributes.newer')%>">
+          <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
         </div>
         <div class="input-group col-sm-3">
           <div class="input-group-prepend">
             <div class="input-group-text">&leq;</div>
           </div>
-          <input class="form-control datepicker" name="older" id="older" placeholder="<%= t('attributes.older')%>">
+          <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
         </div>
       </div>
 
-      <div class="form-group row">
+     <div class="form-group form-row">
         <label for="created_at" class="col-sm-2 col-form-label"><%=t('attributes.created_at')%></label>
-        <div class="col-sm-10">
-          <input class="form-control" name="created_at" id="created_at" placeholder="">
+        <div class="input-group col-sm-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">&geq;</div>
+          </div>
+          <input class="form-control datepicker" name="created_newer" id="created_newer" autocomplete="off" placeholder="<%= t('attributes.created_newer')%>">
+        </div>
+        <div class="input-group col-sm-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">&leq;</div>
+          </div>
+          <input class="form-control datepicker" name="created_older" id="created_older" autocomplete="off" placeholder="<%= t('attributes.created_older')%>">
         </div>
       </div>
 
