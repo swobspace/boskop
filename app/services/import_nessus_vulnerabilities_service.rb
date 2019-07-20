@@ -58,20 +58,20 @@ class ImportNessusVulnerabilitiesService
         end
 
         # create or update vulnerability record
-        vuln = Vulnerability.create_with(
+        vc = Vulnerabilities::Creator.new(mode: :newer,
+               attributes: {
                  lastseen: report.lastseen, 
-                 plugin_output: item.plugin_output
-               ).find_or_create_by(
+                 plugin_output: item.plugin_output,
                  host_id: host.id, 
                  vulnerability_detail_id: vulndetail.id
-               )
+               }
+             )
+        vc.save
+        vuln = vc.vulnerability
         if vuln.errors.any?
           success = false
           errors << vuln.errors.full_messages.join(', ')
         else
-          if vuln.lastseen.to_date < report.lastseen.to_date
-            vuln.update(lastseen: report.lastseen)
-          end
           vulnerabilities << vuln
           notifier.notify(vuln.to_gelf) if notifier
         end
