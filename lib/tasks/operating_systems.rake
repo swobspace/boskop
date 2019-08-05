@@ -19,7 +19,7 @@ namespace :boskop do
     task :build_matrix => :environment do
       OperatingSystem.all.each do |os|
 	next if os.matching_pattern.blank?
-	os.matching_pattern.chomp.split(/\n/).each do |pattern|
+	os.matching_pattern.split(/\n/).map(&:chomp).compact.each do |pattern|
 	  m = pattern.match(/\A(\w+):(.*)\z/)
 	  field = m[1]
 	  value = m[2]
