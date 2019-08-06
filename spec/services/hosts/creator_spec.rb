@@ -194,7 +194,7 @@ module Hosts
       describe "with blacklisted uuid" do
         let(:attributes) {{
           uuid: '00000001-0002-0003-0005-000000000009',
-          name: 'Wargh',
+          name: 'waRGh',
         }}
         before(:each) do
           expect(Boskop).to receive(:uuid_blacklist).and_return(['00000001-0002-0003-0005-000000000009'])
@@ -205,7 +205,7 @@ module Hosts
       describe "with blacklisted serial" do
         let(:attributes) {{
           serial: 'O.E.M.',
-          name: 'Judas',
+          name: 'juDaS',
         }}
         before(:each) do
           expect(Boskop).to receive(:serial_blacklist).and_return(['O.E.M.'])

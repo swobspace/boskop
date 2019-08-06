@@ -58,9 +58,9 @@ module Hosts
 
     def fetch_host
       if on_blacklist?(:uuid)
-        host = Host.where(uuid: uuid, name: name).order("lastseen desc").first
+        host = Host.where("name ILIKE ?", name).where(uuid: uuid).order("lastseen desc").first
       elsif on_blacklist?(:serial)
-        host = Host.where(serial: serial, name: name).order("lastseen desc").first
+        host = Host.where("name ILIKE ?", name).where(serial: serial).order("lastseen desc").first
       elsif uuid.present?
         host = Host.where(uuid: uuid).order("lastseen desc").first
       elsif serial.present?
