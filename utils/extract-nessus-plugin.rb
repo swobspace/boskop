@@ -13,7 +13,7 @@ options.hosts = []
 OptionParser.new do |opts|
   opts.banner = "Usage: #{__FILE__} [options] <xmlfile> [... <xmlfile>]"
   opts.on("-p", "--plugin-id <id>", "nessus plugin id to extract") do |pid|
-    options.plugin_ids << pid
+    options.plugin_ids += pid.split(/,/)
   end
   opts.on("-H", "--host <ip>", "extract only data from host") do |host|
     options.hosts << host
@@ -43,15 +43,21 @@ ARGV.each do |file|
     next
   end
 
-  xml.each do |report_host|
-    if options.hosts.any?
-      next unless options.hosts.include?(report_host.ip)
+  CSV.open("plugin_report.csv", "wb") do |csv|
+    csv << ["name", "ip"] + options.plugin_ids
+    xml.each do |report_host|
+      if options.hosts.any?
+	next unless options.hosts.include?(report_host.ip)
+      end
+      entry = ["#{report_host.name}", "#{report_host.ip}"]
+      puts entry.join("; ")
+      options.plugin_ids.each do |pid|
+	item = report_host.report_item(plugin_id: pid)
+        unless item.blank?
+          entry << item.plugin_output&.strip
+        end
+      end
+      csv << entry
     end
-    puts "Host: #{report_host.name} [#{report_host.ip}]"
-    options.plugin_ids.each do |pid|
-      puts "--- Plugin-ID: #{pid}"
-      puts report_host.report_item(plugin_id: pid)&.plugin_output&.strip
-    end
-    puts ""
   end
 end
