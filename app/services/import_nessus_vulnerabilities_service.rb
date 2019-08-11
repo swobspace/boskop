@@ -45,8 +45,6 @@ class ImportNessusVulnerabilitiesService
       hosts << host
       # find or create vulnerability_detail
       report.report_items.each do |item|
-
-        next if item.threat == "None"
         vulndetail = VulnerabilityDetail.
                      create_with(vd_attributes(item)).
                      find_or_create_by(nvt: item.nvt)
