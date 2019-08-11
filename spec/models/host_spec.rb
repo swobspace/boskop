@@ -41,8 +41,8 @@ RSpec.describe Host, type: :model do
   end
 
   describe "#current" do    
-    let!(:host1) { FactoryBot.create(:host, lastseen: 2.month.before(Date.today)) }
-    let!(:host2) { FactoryBot.create(:host, lastseen: 1.month.before(Date.today)) }
+    let!(:host1) { FactoryBot.create(:host, lastseen: 4.month.before(Date.today)) }
+    let!(:host2) { FactoryBot.create(:host, lastseen: 3.month.before(Date.today)) }
     let!(:host3) { FactoryBot.create(:host, lastseen: Date.today) }
     it { expect(Host.current).to contain_exactly(host2, host3) }
   end
