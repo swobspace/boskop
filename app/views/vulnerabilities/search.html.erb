@@ -21,6 +21,7 @@
       <th><%= t('attributes.host_category') %></th>
       <th><%= t('attributes.operating_system') %></th>
       <th><%= t('attributes.vulnerability_detail') %></th>
+      <th class="notvisible"><%= t('attributes.nvt') %></th>
       <th class="notvisible"><%= t('attributes.plugin_output') %></th>
       <th><%= t('attributes.threat') %></th>
       <th><%= t('attributes.severity') %></th>
@@ -31,6 +32,7 @@
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -59,6 +61,7 @@
                       vulnerability_detail_path(vulnerability.vulnerability_detail)
          %>
         </td>
+	<td class="notvisible"><%= vulnerability.vulnerability_detail&.nvt %></td>
 	<td class="notvisible"><%= vulnerability.plugin_output %></td>
 	<td><%= vulnerability.vulnerability_detail.threat %></td>
 	<td><%= vulnerability.vulnerability_detail.severity %></td>

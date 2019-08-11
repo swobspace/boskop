@@ -99,7 +99,7 @@ class VulnerabilitiesController < ApplicationController
    def search_params
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :threat, :severity, :ip, :operating_system, :plugin_output,
+          :name, :threat, :severity, :ip, :operating_system, :plugin_output, :nvt,
           :hostname, :host_category, :critical, :current, 
           :created_at, :created_newer, :created_older,
           :lastseen, :newer, :older, :current, :lid, :limit).to_hash
