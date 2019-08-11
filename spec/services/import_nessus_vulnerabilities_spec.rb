@@ -262,4 +262,43 @@ RSpec.describe ImportNessusVulnerabilitiesService do
       end
     end
   end
+
+  describe "importing informational data from xml" do
+    subject { ImportNessusVulnerabilitiesService.new(file: nessusxml, level: :informational) }
+    let(:result) { subject.call }
+
+    describe "the first vulnerability" do
+      let(:vulnerabilities) { result.vulnerabilities }
+      let(:vulnerability) { vulnerabilities.first }
+
+      it { expect(vulnerabilities.count).to eq(25) }
+      it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+      it { expect(vulnerability.plugin_output).to match(/Nessus version : 7.1.0/)}
+      it { expect(vulnerability.plugin_output).to match(/Plugin feed version : 201806082120/)}
+    end
+  end
+
+  describe "importing critical data from xml" do
+    subject { ImportNessusVulnerabilitiesService.new(file: nessusxml, level: :critical) }
+    let(:result) { subject.call }
+    let(:vulnerabilities) { result.vulnerabilities }
+    let(:vulnerability) { vulnerabilities.first }
+
+    it { expect(vulnerabilities.count).to eq(3) }
+    it { expect(vulnerability.lastseen.to_s).to match(/\A2018-06-10\z/) }
+    it { expect(vulnerabilities.last.vulnerability_detail.threat).to match(/Critical/)}
+    it { expect(vulnerabilities.first.plugin_output).to match(/The following Windows version is installed and not supported:/)}
+    it { expect(vulnerabilities.last.plugin_output).to be_nil}
+  end
+
+  describe "importing critical data from xml" do
+    let(:result) { subject.call }
+    let(:vulnerabilities) { result.vulnerabilities }
+
+    it { expect(vulnerabilities.count).to eq(5) }
+    it { expect(vulnerabilities.first.vulnerability_detail.threat).to match(/Critical/)}
+    it { expect(vulnerabilities.last.vulnerability_detail.threat).to match(/Medium/)}
+    it { expect(vulnerabilities.first.plugin_output).to match(/The following Windows version is installed and not supported:/)}
+    it { expect(vulnerabilities.last.plugin_output).to match(/It was possible to bind to the \\browser pipe/)}
+  end
 end
