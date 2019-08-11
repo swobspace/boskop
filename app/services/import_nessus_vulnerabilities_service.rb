@@ -6,10 +6,16 @@ class ImportNessusVulnerabilitiesService
   #
   # mandatory options:
   # * :file   - nessus xml file
+  # * :level  - vulnerability level. Possible options:
+  #             :default  = Low, Medium, High, Critical
+  #             :critical = High, Critical
+  #             :informational = None only
+  #             :all
   #
   def initialize(options = {})
     options.symbolize_keys!
     @xmlfile = get_file(options)
+    @level   = options.fetch(:level, :default)
     if Boskop.graylog_host
       @notifier = GELF::Notifier.new(Boskop.graylog_host, 12201) 
     else
@@ -45,8 +51,7 @@ class ImportNessusVulnerabilitiesService
       hosts << host
       # find or create vulnerability_detail
       report.report_items.each do |item|
-
-        next if item.threat == "None"
+        next unless threat.include?(item.threat)
         vulndetail = VulnerabilityDetail.
                      create_with(vd_attributes(item)).
                      find_or_create_by(nvt: item.nvt)
@@ -87,7 +92,7 @@ class ImportNessusVulnerabilitiesService
   end
 
 private
-  attr_reader :xmlfile, :notifier
+  attr_reader :xmlfile, :notifier, :level, :threat
 
   #
   # extract host attributes
@@ -120,6 +125,21 @@ private
       file.path
     else
       file.to_s
+    end
+  end
+
+  def threat
+    case level
+    when :default
+      [ 'Low,', 'Medium', 'High', 'Critical']
+    when :informational
+      [ 'None']
+    when :critical
+      [ 'High', 'Critical']
+    when :all
+      [ 'None', 'Low,', 'Medium', 'High', 'Critical']
+    else
+      raise ArgumentError, "level #{level} not implemented"
     end
   end
 end

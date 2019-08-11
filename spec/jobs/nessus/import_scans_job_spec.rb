@@ -11,15 +11,15 @@ RSpec.shared_examples "a importable scan" do
       subject
     }.to change{Host.count}.by(1)
   end
-  it "creates 5 vulnerabilities" do
+  it "creates 27 vulnerabilities" do
     expect {
       subject
-    }.to change(Vulnerability, :count).by(5)
+    }.to change(Vulnerability, :count).by(27)
   end
-  it "creates 5 vulnerability_details" do
+  it "creates 27 vulnerability_details" do
     expect {
       subject
-    }.to change{VulnerabilityDetail.count}.by(5)
+    }.to change{VulnerabilityDetail.count}.by(27)
   end
 end
 

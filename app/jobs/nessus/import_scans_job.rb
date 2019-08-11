@@ -11,7 +11,7 @@ class Nessus::ImportScansJob < ApplicationJob
       if dlresult.success?
         Rails.logger.info("### Nessus XML #{dlresult.xmlfile} #{scan.name} " +
                           "successfull downloaded")
-        imresult = ImportNessusVulnerabilitiesService.new(file: dlresult.xmlfile).call
+        imresult = ImportNessusVulnerabilitiesService.new(file: dlresult.xmlfile, level: :all).call
         if imresult.success?
           Rails.logger.info("### Nessus Scan #{scan.name} successfully imported")
           scan.update_attributes(import_state: 'done')
