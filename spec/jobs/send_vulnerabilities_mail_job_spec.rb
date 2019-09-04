@@ -6,9 +6,13 @@ RSpec.describe SendVulnerabilitiesMailJob, type: :job do
   let(:c) { FactoryBot.create(:vulnerability_detail, threat: 'Critical', severity: 10.0)}
   let(:h)  { FactoryBot.create(:vulnerability_detail, threat: 'High', severity: 9.3)}
   let(:m)  { FactoryBot.create(:vulnerability_detail, threat: 'Medium', severity: 5.0)}
+  let(:l)  { FactoryBot.create(:vulnerability_detail, threat: 'Low', severity: 1.0)}
+  let(:n)  { FactoryBot.create(:vulnerability_detail, threat: 'None', severity: 0.0)}
   let!(:v1c) { FactoryBot.create(:vulnerability, host: host1, vulnerability_detail: c)}
   let!(:v1h) { FactoryBot.create(:vulnerability, host: host1, vulnerability_detail: h)}
   let!(:v1m) { FactoryBot.create(:vulnerability, host: host1, vulnerability_detail: m)}
+  let!(:v1l) { FactoryBot.create(:vulnerability, host: host1, vulnerability_detail: l)}
+  let!(:v1n) { FactoryBot.create(:vulnerability, host: host1, vulnerability_detail: n)}
 
   let(:contact) { FactoryBot.create(:contact, mail: "vulns@example.net") }
   let!(:responsible) { FactoryBot.create(:responsibility, 
@@ -26,7 +30,7 @@ RSpec.describe SendVulnerabilitiesMailJob, type: :job do
     context "with at: Date.today" do
       it "calls VulnerabiltiesMail.send_csv with" do
         expect(VulnerabilitiesMailer).to receive(:send_csv).with(
-          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.yesterday).all,
+          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities.joins(:vulnerability_detail), critical: true, since: Date.yesterday).all,
           mail_to: ['vulns@example.net'],
           lid: 'PXC'
         ).and_return(send_csv)
@@ -37,7 +41,7 @@ RSpec.describe SendVulnerabilitiesMailJob, type: :job do
     context "with location: PXC" do
       it "calls VulnerabiltiesMail.send_csv with" do
         expect(VulnerabilitiesMailer).to receive(:send_csv).with(
-          vulnerabilities:  VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.yesterday).all,
+          vulnerabilities:  VulnerabilityQuery.new(loc1.vulnerabilities.joins(:vulnerability_detail), critical: true, since: Date.yesterday).all,
           mail_to: ['vulns@example.net'],
           lid: 'PXC'
         ).and_return(send_csv)
@@ -47,7 +51,7 @@ RSpec.describe SendVulnerabilitiesMailJob, type: :job do
     context "with no args" do
       it "calls VulnerabiltiesMail.send_csv with" do
         expect(VulnerabilitiesMailer).to receive(:send_csv).with(
-          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities, since: Date.today).all,
+          vulnerabilities: VulnerabilityQuery.new(loc1.vulnerabilities.joins(:vulnerability_detail), critical:true, since: Date.today).all,
           mail_to: ['vulns@example.net'],
           lid: 'PXC'
         ).and_return(send_csv)
