@@ -36,7 +36,6 @@ private
     Zip::OutputStream::open(t.path) do |zip|
       zip.put_next_entry(filename)
       zip << vulnerabilities.to_csv(col_sep: "\t")
-      zip.close_buffer
     end
     t
   end
