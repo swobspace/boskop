@@ -336,6 +336,7 @@ GEM
       rprogram (~> 0.3)
     ruby-xxHash (0.4.0.1)
     ruby_dep (1.5.0)
+    rubyzip (1.2.3)
     rugged (0.28.2)
     sassc (2.0.1)
       ffi (~> 1.9)
@@ -472,6 +473,7 @@ DEPENDENCIES
   record_tag_helper (~> 1.0)
   rspec-rails
   ruby-nmap
+  rubyzip (~> 1.2.3)
   sassc-rails
   sdoc (~> 0.4.0)
   shoulda-matchers

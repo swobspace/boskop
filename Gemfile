@@ -77,4 +77,5 @@ gem 'cocoon'
 gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
+gem 'rubyzip', '~> 1.2.3'
 
