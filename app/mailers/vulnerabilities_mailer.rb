@@ -1,3 +1,5 @@
+require 'zip'
+
 class VulnerabilitiesMailer < ApplicationMailer
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -15,13 +17,27 @@ class VulnerabilitiesMailer < ApplicationMailer
     prefix  = options.fetch(:prefix, "")
     subject = options.fetch(:subject, I18n.t('vulnerabilities_mailer.send_csv.subject', lid: @lid))
 
-    attachments["vulnerabilities-#{@lid}-#{Date.today}.csv"] =
+    filename = "vulnerabilities-#{@lid}-#{Date.today}.csv"
+    temp     = zipped_vulnerabilities(vulnerabilities, filename)
+
+    attachments["#{filename}.zip"] =
       {
-        mime_type: 'text/csv', 
-        content: vulnerabilities.to_csv(col_sep: "\t")
+        mime_type: 'application/zip',
+        content: temp.read
       }
 
     mail to: mail_to, cc: mail_cc, subject: "#{prefix}#{subject}"
+    temp.close!
+  end
+
+private
+  def zipped_vulnerabilities(vulnerabilities, filename)
+    t = Tempfile.new("zipped-vulnerabilities")
+    Zip::OutputStream::open(t.path) do |zip|
+      zip.put_next_entry(filename)
+      zip << vulnerabilities.to_csv(col_sep: "\t")
+    end
+    t
   end
 
 end

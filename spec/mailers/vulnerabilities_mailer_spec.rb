@@ -52,17 +52,24 @@ RSpec.describe VulnerabilitiesMailer, type: :mailer do
    
       context "first attachment" do
 	let(:attachment) { mail.attachments.first }
-
-	it "is valid csv" do
-	  expect(attachment.content_type).to eq("text/csv")
-	  expect(attachment.filename).to eq("vulnerabilities-BER-#{Date.today}.csv")
+        let!(:content)   { 
+          Zip::InputStream.open(StringIO.new(attachment.body.decoded)) do |io|
+            io.get_next_entry
+            content = io.read
+          end
+        }
+	it "is zipped csv" do
+	  expect(attachment.content_type).to eq("application/zip")
+	  expect(attachment.filename).to eq("vulnerabilities-BER-#{Date.today}.csv.zip")
 	  expect {
-	    CSV.parse(attachment.body.decoded, {col_sep: "\t", encoding: 'utf-8'})
+            content do |io|
+	      CSV.parse(content, {col_sep: "\t", encoding: 'utf-8'})
+            end
 	  }.not_to raise_error
 	end
 
 	it "contains some data" do
-	  csv = CSV.parse(attachment.body.decoded, {col_sep: "\t", encoding: 'utf-8'})
+	  csv = CSV.parse(content, {col_sep: "\t", encoding: 'utf-8'})
 	  expect(csv.shift).to contain_exactly(
 		  I18n.t('attributes.lid'),
 		  I18n.t('attributes.host'),
