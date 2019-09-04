@@ -23,7 +23,10 @@ class SendVulnerabilitiesMailJob < ApplicationJob
 
     locations.each do |location|
       recipients = Array(mail_to) + Array(location.vuln_responsible_mail)
-      vulns = VulnerabilityQuery.new(location.vulnerabilities, since_or_at).all
+      vulns = VulnerabilityQuery.new(
+                location.vulnerabilities.joins(:vulnerability_detail),
+                {critical: true}.merge(since_or_at)
+              ).all
       VulnerabilitiesMailer.
         send_csv(vulnerabilities: vulns, mail_to: recipients, lid: location.lid).
         deliver_now
@@ -34,7 +37,7 @@ private
 
   def since_or_at(mode = :vulnerability)
     sat = @options.slice(:since, :at)
-    if sat.empty? 
+    if sat.empty?
       sat = { since: Date.today }
     end
     # special mode for "nessus scan started yesterday and ended today"
