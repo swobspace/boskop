@@ -100,7 +100,7 @@ ready = ->
   # --- remote datatable ---
   remotetableurl = $('table[role="remotetable"]').data('url')
   remotetable = $('table[role="remotetable"]').DataTable(
-    searchDelay: 1000
+    searchDelay: 400
     processing: true
     serverSide: true
     ajax:
@@ -158,13 +158,13 @@ ready = ->
   )
   if $('table[role="remotetable"]').length
     remotetable.columns().eq(0).each (colIdx) ->
-      $('input[name=idx'+colIdx+']').on( 'keyup change', ->
-        remotetable.column(colIdx).search(this.value).draw()
+      mysearch = $.debounce(400, (val) ->
+        remotetable.column(colIdx).search(val).draw()
       )
-
-  # if remotetable.length
-  remotetable.columns().search('').draw()
-  $('input[type=search]').val("").trigger('input')
+      $('input[name=idx'+colIdx+']').on( 'keyup change', ->
+        if (this.value.length >= 2  || this.value.length == 0)
+          mysearch(this.value)
+      )
 
   $("#reset_table").on("click",  ->
     $('input[type=text]').val("")

@@ -20,5 +20,6 @@
 //= require jquery.dirtyforms/jquery.dirtyforms
 //= require pivottable/dist/pivot
 //= require cocoon
+//= require debounce
 //= require boskop
 //
