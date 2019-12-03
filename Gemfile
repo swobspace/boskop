@@ -18,9 +18,9 @@ gem 'font-awesome-sass', '~> 5.0'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', '~> 3.4.4'
+gem 'wobauth', '~> 4.0'
 gem 'wobaduser', '~> 1.0'
-gem 'wobapphelpers', '~> 3.1'
+gem 'wobapphelpers', '~> 4.0'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
@@ -29,7 +29,6 @@ gem 'devise-remote-user'
 gem 'yaml_db'
 group :development do
   gem 'puma'
-  # gem 'spring'
   gem 'guard'
   gem "guard-livereload", require: false
   gem 'guard-rails'
@@ -49,13 +48,11 @@ end
 
 group :test, :development do
   gem 'rspec-rails'
-  # gem 'spring-commands-rspec'
   gem 'dotenv'
   gem 'json_spec', require: false
 end
 
 group :test do
-  # gem "shoulda-matchers", require: false, git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
   gem "shoulda-matchers", require: false
   gem 'factory_bot_rails'
   gem 'database_rewinder'
