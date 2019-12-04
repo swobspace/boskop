@@ -23,7 +23,13 @@ class VulnerabilitiesController < ApplicationController
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all
-    respond_with(@vulnerabilities)
+    respond_with(@vulnerabilities) do |format|
+      format.csv {
+        authorize! :csv, Vulnerability
+        send_data @vulnerabilities.to_csv(col_sep: "\t"),
+                  filename: 'vulnerabilities.csv'
+      }
+    end
   end
 
   # GET /vulnerabilities/1
@@ -115,7 +121,7 @@ class VulnerabilitiesController < ApplicationController
     end
 
     def submit_parms
-      [ "utf8", "authenticity_token", "commit" ]
+      [ "utf8", "authenticity_token", "commit", "format" ]
     end
 
 end
