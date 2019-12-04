@@ -103,10 +103,13 @@ class VulnerabilitiesController < ApplicationController
    def search_params
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :threat, :severity, :ip, :operating_system, :plugin_output, :nvt,
+          :name, :severity, :ip, :operating_system, :plugin_output, :nvt,
           :hostname, :host_category, :critical, :current, 
           :created_at, :created_newer, :created_older,
-          :lastseen, :newer, :older, :current, :lid, :limit).to_hash
+          :lastseen, :newer, :older, :current, :lid, :limit,
+          :threat,
+          threats: [],
+        ).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
