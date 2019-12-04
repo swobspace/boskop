@@ -34,7 +34,7 @@ ready = ->
   table = $('table[role="datatable"], table[role="wobauth_datatable"]' ).DataTable(
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
-    stateSave: true
+    stateSave: false
     lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
@@ -108,7 +108,7 @@ ready = ->
       type: "POST"
     pagingType: "full_numbers"
     dom: "<'row'<'col-md-3'l><'col-md-5'BC><'col-md-4'f>>t<'row'<'col-md-6'ir><'col-md-6'p>>"
-    stateSave: true
+    stateSave: false
     lengthMenu: [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     language:
       url: "<%= asset_path('dataTable.german.txt') %>"
