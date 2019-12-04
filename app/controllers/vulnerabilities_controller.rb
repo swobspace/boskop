@@ -5,6 +5,7 @@ class VulnerabilitiesController < ApplicationController
   # GET /vulnerabilities
   def index
     if @host
+      @filter_info = { host_id: @host.id }
       @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     else
       @vulnerabilities = Vulnerability.current.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])

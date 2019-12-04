@@ -153,6 +153,7 @@ de:
     framework_contract: Rahmenvertrag
     givenname: Vorname
     host: Host
+    host_id: Host
     host_category: Host-Kategorie
     hostname: Hostname
     if_description: Interface-Beschreibung
