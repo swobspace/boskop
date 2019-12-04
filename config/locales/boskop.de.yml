@@ -152,6 +152,7 @@ de:
     fqdn: FQDN
     framework_contract: Rahmenvertrag
     givenname: Vorname
+    higher: Critical+High
     host: Host
     host_id: Host
     host_category: Host-Kategorie

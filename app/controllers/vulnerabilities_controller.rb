@@ -5,13 +5,16 @@ class VulnerabilitiesController < ApplicationController
   # GET /vulnerabilities
   def index
     if @host
-      @filter_info = { host_id: @host.id }
+      @filter_info = { host_id: @host.id, current: 1 }
+      @filter_params = { current: 1 }
       @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     else
-      @vulnerabilities = Vulnerability.current.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @filter_info = { current: 1, higher: 1 }
+      @filter_params = { current: 1, higher: 1 }
+      @vulnerabilities = Vulnerability.current.higher.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     end
     respond_with(@vulnerabilities) do |format|
-      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
+      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context, @filter_params) }
     end
   end
 

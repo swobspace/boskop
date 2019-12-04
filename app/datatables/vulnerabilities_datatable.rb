@@ -4,13 +4,14 @@ class VulnerabilitiesDatatable < ApplicationDatatable
   delegate :vulnerability_path, to: :@view
   delegate :vulnerability_detail_path, to: :@view
 
-  def initialize(relation, view)
+  def initialize(relation, view, filter = {})
     @view = view
     @relation = relation
+    @filter = filter || {}
   end
 
   private
-  attr_reader :relation
+  attr_reader :relation, :filter
 
   def data
     vulnerabilities.map do |vuln|
@@ -58,7 +59,7 @@ class VulnerabilitiesDatatable < ApplicationDatatable
     unless params[:length] == "-1"
       vulnerabilities = vulnerabilities.page(page).per(per_page)
     end
-    vulnerabilities = VulnerabilityQuery.new(vulnerabilities, search_params(params, search_columns)).all
+    vulnerabilities = VulnerabilityQuery.new(vulnerabilities, search_params(params, search_columns).merge(filter)).all
   end
 
   def columns
