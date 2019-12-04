@@ -109,6 +109,7 @@ class VulnerabilitiesController < ApplicationController
           :lastseen, :newer, :older, :current, :lid, :limit,
           :threat,
           threats: [],
+          lid: [],
         ).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end

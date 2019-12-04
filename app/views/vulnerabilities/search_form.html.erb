@@ -112,7 +112,12 @@
       <div class="form-group row">
 	<label for="lid" class="col-sm-2 col-form-label"><%=t('attributes.lid')%></label>
 	<div class="col-sm-10">
-	  <input class="form-control" name="lid" id="lid" placeholder="">
+          <%= select_tag "lid",
+                options_from_collection_for_select(Location.current, 'lid', 'to_str'),
+                multiple: true,
+                include_blank: true, 
+                class: 'form-control select2' 
+           %>
 	</div>
       </div>
 
