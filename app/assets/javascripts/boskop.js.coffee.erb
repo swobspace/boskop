@@ -263,5 +263,14 @@ ready = ->
         }
       ]
     )
+  select_threats = $('select#threats').select2()
+  $('select#threats').on('change', ->
+    if $(this).val() != ""
+      $('input[type=checkbox]#critical').prop("checked", false)
+  )
+  $('input[type=checkbox]#critical').on('change', ->
+    if $(this).prop("checked") == true
+      $('select#threats').val([]).trigger("change.select2")
+  )
 
 $(document).on('turbolinks:load', ready)
