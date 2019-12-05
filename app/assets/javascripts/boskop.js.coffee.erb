@@ -263,14 +263,18 @@ ready = ->
         }
       ]
     )
-  select_threats = $('select#threats').select2()
   $('select#threats').on('change', ->
+    if $(this).val() != ""
+      $('input[type=checkbox]#critical').prop("checked", false)
+  )
+  $('input#severity').on('keyup change', ->
     if $(this).val() != ""
       $('input[type=checkbox]#critical').prop("checked", false)
   )
   $('input[type=checkbox]#critical').on('change', ->
     if $(this).prop("checked") == true
       $('select#threats').val([]).trigger("change.select2")
+      $('input#severity').val(null).trigger("change")
   )
 
 $(document).on('turbolinks:load', ready)
