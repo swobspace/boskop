@@ -25,7 +25,7 @@
         <label for="threats" class="col-sm-2 col-form-label">
           <%=t('attributes.threats')%>
         </label>
-	<div class="col-sm-10">
+	<div class="col-sm">
           <%= select_tag "threats",
                 options_for_select(VulnerabilityDetail::THREATS),
                 multiple: true,
@@ -37,8 +37,14 @@
 
       <div class="form-group row">
 	<label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="severity" id="severity" placeholder="">
+	<div class="input-group col-sm-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">&geq;</div>
+          </div>
+	  <input type="number" class="form-control" 
+                 name="severity" id="severity" 
+                 placeholder="0..10"
+          >
 	</div>
       </div>
 
@@ -123,7 +129,7 @@
 
       <div class="form-group row">
 	<label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
-	<div class="col-sm-10">
+	<div class="col-sm-3">
 	  <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
 	</div>
       </div>
