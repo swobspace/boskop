@@ -70,6 +70,40 @@ RSpec.shared_examples "a NetworkManager" do
   end
 end
 
+RSpec.shared_examples "a HostReader" do
+  # -- readable, ...
+  [ Network, Line, Host, HostCategory, NetworkInterface,
+    Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.to be_able_to(:read, model.new) }
+  end
+
+  # -- writeable
+  # nothing
+
+    it { is_expected.to be_able_to(:csv, Host) }
+    it { is_expected.to be_able_to(:csv, Vulnerability) }
+  # -- no import
+    it { is_expected.not_to be_able_to(:new_import, Host) }
+    it { is_expected.not_to be_able_to(:import, Host) }
+    it { is_expected.not_to be_able_to(:new_import, Vulnerability) }
+    it { is_expected.not_to be_able_to(:import, Vulnerability) }
+    it { is_expected.not_to be_able_to(:read, NessusScan) }
+
+  # -- not writeable
+  [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
+    Location, OrgUnit, FrameworkContract, Host, HostCategory, NetworkInterface,
+    Vulnerability, VulnerabilityDetail,
+    OperatingSystem, OperatingSystemMapping ].each do |model|
+    it { is_expected.not_to be_able_to(:create, model.new) }
+    it { is_expected.not_to be_able_to(:update, model.new) }
+    it { is_expected.not_to be_able_to(:destroy, model.new) }
+    it { is_expected.not_to be_able_to(:manage, model.new) }
+  end
+end
+
 RSpec.shared_examples "a HostManager" do
   # -- readable, ...
   [ Network, Line, Host, HostCategory, NetworkInterface,
@@ -258,6 +292,28 @@ RSpec.describe "User", :type => :model do
 	role: wobauth_roles(:network_manager))
     }
     it_behaves_like "a NetworkManager"
+  end
+
+  context "with role HostReader assigned to user" do
+    let(:user) { FactoryBot.create(:user) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: user, 
+	role: wobauth_roles(:host_reader))
+    }
+    it_behaves_like "a HostReader"
+  end
+
+  context "with role HostReader assigned to group" do
+    let(:user) { FactoryBot.create(:user) }
+    let(:group) { FactoryBot.create(:group) }
+    let!(:membership) { FactoryBot.create(:membership, user: user, group: group) }
+    let!(:authority) { 
+      FactoryBot.create(:authority, 
+	authorizable: group, 
+	role: wobauth_roles(:host_reader))
+    }
+    it_behaves_like "a HostReader"
   end
 
   context "with role HostManager assigned to user" do

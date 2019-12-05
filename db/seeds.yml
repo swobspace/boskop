@@ -2,6 +2,7 @@ roles:
   - name: Admin
   - name: NetworkManager
   - name: Reader
+  - name: HostReader
   - name: HostManager
   - name: HostAdmin
 
