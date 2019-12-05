@@ -30,7 +30,7 @@ class HostQuery
   # * :warranty_start_from - date
   # * :warranty_start_until - date
   # * :host_category - host_categories.name (string)
-  # * :lid - location.lid (string)
+  # * :lid - location.lid (string or array)
   # * :eol - operating_systems.eol < today (boolean)
   # * :limit - limit result (integer)
   # * :vuln_risk - string (High, Critical, ...) or 'higher' for High+Critical
@@ -116,7 +116,11 @@ private
       when :eol
         query = query.where("operating_systems.eol < ?", Date.today)
       when :lid
-        lids = value.split(%r{[,; |]+})
+        if value.kind_of? String
+          lids = value.split(%r{[,; |]+})
+        else
+          lids = Array(value)
+        end
         query = query.where("locations.lid IN (?)", lids)
       when :vuln_risk
         if value == 'higher'
