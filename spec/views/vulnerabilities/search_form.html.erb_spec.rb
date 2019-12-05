@@ -14,7 +14,7 @@ RSpec.describe "vulnerabilities/search_form", type: :view do
 
     assert_select "form[action=?][method=?]", search_vulnerabilities_path, "post" do
       assert_select "input[name=?]", "name"
-      assert_select "input[name=?]", "threat"
+      assert_select "select[name=?]", "threats[]"
       assert_select "input[name=?]", "severity"
       assert_select "input[name=?]", "ip"
       assert_select "input[name=?]", "hostname"
@@ -25,7 +25,7 @@ RSpec.describe "vulnerabilities/search_form", type: :view do
       assert_select "input[name=?]", "older"
       assert_select "input[name=?]", "created_newer"
       assert_select "input[name=?]", "created_older"
-      assert_select "input[name=?]", "lid"
+      assert_select "select[name=?]", "lid[]"
       assert_select "input[name=?]", "limit"
     end
   end

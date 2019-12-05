@@ -5,12 +5,16 @@ class VulnerabilitiesController < ApplicationController
   # GET /vulnerabilities
   def index
     if @host
+      @filter_info = { host_id: @host.id, current: 1 }
+      @filter_params = { current: 1 }
       @vulnerabilities = @host.vulnerabilities.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     else
-      @vulnerabilities = Vulnerability.current.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
+      @filter_info = { current: 1, higher: 1 }
+      @filter_params = { current: 1, higher: 1 }
+      @vulnerabilities = Vulnerability.current.higher.left_outer_joins(:vulnerability_detail, host: [:host_category, :location, :operating_system])
     end
     respond_with(@vulnerabilities) do |format|
-      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context) }
+      format.json { render json: VulnerabilitiesDatatable.new(@vulnerabilities, view_context, @filter_params) }
     end
   end
 
@@ -19,7 +23,13 @@ class VulnerabilitiesController < ApplicationController
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all
-    respond_with(@vulnerabilities)
+    respond_with(@vulnerabilities) do |format|
+      format.csv {
+        authorize! :csv, Vulnerability
+        send_data @vulnerabilities.to_csv(col_sep: "\t"),
+                  filename: 'vulnerabilities.csv'
+      }
+    end
   end
 
   # GET /vulnerabilities/1
@@ -99,15 +109,19 @@ class VulnerabilitiesController < ApplicationController
    def search_params
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
-          :name, :threat, :severity, :ip, :operating_system, :plugin_output, :nvt,
+          :name, :severity, :ip, :operating_system, :plugin_output, :nvt,
           :hostname, :host_category, :critical, :current, 
           :created_at, :created_newer, :created_older,
-          :lastseen, :newer, :older, :current, :lid, :limit).to_hash
+          :lastseen, :newer, :older, :current, :lid, :limit,
+          :threat,
+          threats: [],
+          lid: [],
+        ).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
     def submit_parms
-      [ "utf8", "authenticity_token", "commit" ]
+      [ "utf8", "authenticity_token", "commit", "format" ]
     end
 
 end

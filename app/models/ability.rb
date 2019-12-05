@@ -29,9 +29,13 @@ class Ability
 	can [:read, :update], [Host, HostCategory]
       end
 
+      if @user.role?(:host_reader)
+	can [:read, :csv], [Host, Vulnerability]
+      end
+
       if @user.role?(:host_manager)
 	can [:csv, :create, :update, :destroy], [Host, NetworkInterface] 
-        can :read, [Vulnerability, VulnerabilityDetail]
+        can [:read, :csv], [Vulnerability, VulnerabilityDetail]
       end
 
       if @user.role?(:host_admin)

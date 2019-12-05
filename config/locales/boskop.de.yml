@@ -152,7 +152,9 @@ de:
     fqdn: FQDN
     framework_contract: Rahmenvertrag
     givenname: Vorname
+    higher: Critical+High
     host: Host
+    host_id: Host
     host_category: Host-Kategorie
     hostname: Hostname
     if_description: Interface-Beschreibung
@@ -220,6 +222,7 @@ de:
     telephone: Telefon
     telephonenumber: Telefon
     threat: Threat
+    threats: Threats
     type: Typ
     unique: Unique
     update: Update

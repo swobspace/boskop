@@ -54,10 +54,20 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   end
 
   describe "GET #search" do
-    it "returns a success response" do
-      vulnerability = Vulnerability.create! valid_attributes
-      get :search, params: {ip: '192.81.51'}, session: valid_session
-      expect(response).to be_successful
+    context "with default format" do
+      it "returns a success response" do
+        vulnerability = Vulnerability.create! valid_attributes
+        get :search, params: {ip: '192.81.51'}, session: valid_session
+        expect(response).to be_successful
+      end
+    end
+
+    context "with format :csv" do
+      it "returns a success response" do
+        host = Vulnerability.create! valid_attributes
+        get :search, params: {threats: ['Critical'], format: :csv}, session: valid_session
+        expect(response).to be_successful
+      end
     end
   end
 
