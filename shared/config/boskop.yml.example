@@ -43,6 +43,7 @@ ldap_options:
 uuid_blacklist:
   - 00000000-0000-0000-0807-060504030201
   - 03000200-0400-0500-0006-000700080009
+  - FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF
 
 serial_blacklist:
   - System Serial Number
@@ -52,4 +53,6 @@ serial_blacklist:
   - (n/a)
   - noSuchObject
   - noSuchInstance
+  - INVALID
+  - -
 

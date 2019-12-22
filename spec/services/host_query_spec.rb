@@ -310,14 +310,23 @@ RSpec.describe HostQuery do
     it_behaves_like "a host query"
   end # search :lid
 
-  context "with multiple lid" do
+  context "with multiple lid (String)" do
     subject { HostQuery.new(all_hosts, {lid: 'BER, PARIS'}) }
     before(:each) do
       @matching = [nas, vpngw, pc5]
       @nonmatching = [pc2, pc3]
     end
     it_behaves_like "a host query"
-  end # search :lid
+  end # search multiple :lid (String)
+
+  context "with multiple lid (Array)" do
+    subject { HostQuery.new(all_hosts, {lid: ['BER', 'PARIS']}) }
+    before(:each) do
+      @matching = [nas, vpngw, pc5]
+      @nonmatching = [pc2, pc3]
+    end
+    it_behaves_like "a host query"
+  end # search multiple :lid (Array)
 
   context "with :merkmal_responsible" do
     let(:merkmalklasse1) { FactoryBot.create(:merkmalklasse,

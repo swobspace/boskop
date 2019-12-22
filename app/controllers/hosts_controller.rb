@@ -130,7 +130,9 @@ class HostsController < ApplicationController
           :name, :description, :ip, :operating_system, :cpe, :raw_os, :serial,
           :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
           :uuid, :product, :warranty_start_from, :warranty_start_until, :created_at,
-          :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit).to_hash
+          :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit,
+          lid: [],
+        ).to_hash
       {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
