@@ -19,7 +19,7 @@ gem 'jquery-ui-rails'
 
 gem 'simple_form'
 # gem 'wobauth', '~> 4.0'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'develop'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'zeitwerk'
 gem 'wobaduser', '~> 1.0'
 gem 'wobapphelpers', '~> 4.0'
 gem 'cancancan'

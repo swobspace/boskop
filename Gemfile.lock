@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 092ea19466b26a0bd096c664ff90c264e54ef32f
-  branch: develop
+  revision: 63a8ed36e27e7e087fa7c8dcee73aaa6b38dda9a
+  branch: zeitwerk
   specs:
     wobauth (4.0.0)
       cancancan
