@@ -23,7 +23,7 @@ RSpec.describe "operating_systems/show", type: :view do
   end
 
   it "renders os without name and matching pattern" do
-    @operating_system.update_attributes(eol: nil, matching_pattern: nil)
+    @operating_system.update(eol: nil, matching_pattern: nil)
     render
     expect(rendered).to match(/#{@operating_system.name}/)
     

@@ -319,7 +319,7 @@ module Hosts
           name: 'Blafasel',
         }}
         it "doesn't update host" do
-          expect_any_instance_of(Host).to receive(:update_attributes).with({})
+          expect_any_instance_of(Host).to receive(:update).with({})
           hc = Creator.new(mode: :newer, attributes: attributes)
           expect(hc.host).to eq(ip_host)
           hc.save
