@@ -48,7 +48,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 4.0.0.beta3'
   gem 'dotenv'
   gem 'json_spec', require: false
 end
