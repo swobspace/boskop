@@ -76,7 +76,7 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
 
       describe "with import_mode: auto" do
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'auto', import_state: 'new', status: 'completed')
+	  nessus_scan.update(import_mode: 'auto', import_state: 'new', status: 'completed')
 	end
 	it_behaves_like "a importable scan"
       end
@@ -84,7 +84,7 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
       describe "with import_mode: manual" do
 	subject { Nessus::ImportScansJob.perform_now(import_mode: 'manual') }
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'manual', import_state: 'new', status: 'completed')
+	  nessus_scan.update(import_mode: 'manual', import_state: 'new', status: 'completed')
 	end
 	it_behaves_like "a importable scan"
       end
@@ -92,7 +92,7 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
       describe "with given nessus_id" do
 	subject { Nessus::ImportScansJob.perform_now(nessus_id: '1234567') }
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'manual', import_state: 'new', status: 'completed')
+	  nessus_scan.update(import_mode: 'manual', import_state: 'new', status: 'completed')
 	end
 	it_behaves_like "a importable scan"
       end
@@ -101,21 +101,21 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
     describe "no imports on" do
       describe "import_mode: unassigned, import_state: new" do
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'unassigned', import_state: 'new', status: 'completed')
+	  nessus_scan.update(import_mode: 'unassigned', import_state: 'new', status: 'completed')
 	end
 	it_behaves_like "a non-importable scan"
       end
 
       describe "import_mode: ignore, import_state: new" do
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'ignore', import_state: 'new', status: 'completed')
+	  nessus_scan.update(import_mode: 'ignore', import_state: 'new', status: 'completed')
 	end
 	it_behaves_like "a non-importable scan"
       end
 
       describe "import_mode: auto, import_state: done" do
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'auto', import_state: 'done', status: 'completed')
+	  nessus_scan.update(import_mode: 'auto', import_state: 'done', status: 'completed')
 	end
 	it_behaves_like "a non-importable scan"
       end
@@ -123,14 +123,14 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
       describe "import_mode: manual, import_state: done" do
 	subject { Nessus::ImportScansJob.perform_now(import_mode: 'manual') }
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'manual', import_state: 'done', status: 'completed')
+	  nessus_scan.update(import_mode: 'manual', import_state: 'done', status: 'completed')
 	end
 	it_behaves_like "a non-importable scan"
       end
 
       describe "import_mode: auto, status: running" do
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'auto', import_state: 'new', status: 'running')
+	  nessus_scan.update(import_mode: 'auto', import_state: 'new', status: 'running')
 	end
 	it_behaves_like "a non-importable scan"
       end
@@ -138,7 +138,7 @@ RSpec.describe Nessus::ImportScansJob, type: :job do
       describe "import_mode: manual, status: running" do
 	subject { Nessus::ImportScansJob.perform_now(import_mode: 'manual') }
 	before(:each) do
-	  nessus_scan.update_attributes(import_mode: 'manual', import_state: 'new', status: 'running')
+	  nessus_scan.update(import_mode: 'manual', import_state: 'new', status: 'running')
 	end
 	it_behaves_like "a non-importable scan"
       end

@@ -28,7 +28,7 @@ module Vulnerabilities
         @vulnerability.save
       else
         # update attributes if @vulnerability.persisted?
-        @vulnerability.update_attributes(vulnerability_updates)
+        @vulnerability.update(vulnerability_updates)
       end
     end
 

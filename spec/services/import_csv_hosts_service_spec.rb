@@ -132,7 +132,7 @@ RSpec.describe ImportCsvHostsService do
       end
 
       it "updates any attribute from current data" do
-        host.update_attributes!(lastseen: '2017-07-31')
+        host.update!(lastseen: '2017-07-31')
         service.call
         host = Host.first
         expect(host.lastseen.to_s).to eq("2017-08-20")
