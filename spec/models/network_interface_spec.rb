@@ -43,7 +43,7 @@ RSpec.describe NetworkInterface, type: :model do
       it "sets oui vendor if mac_changed?" do
         iface = NetworkInterface.create!(host: host, ip: '192.0.2.35', lastseen: Date.today, mac: '00:11:D2:f3:a4:B5')
         iface.reload
-        iface.update_attributes(mac: '5C:26:0A:76:65:E5')
+        iface.update(mac: '5C:26:0A:76:65:E5')
         expect(iface.oui_vendor).to eq("Musterpartner")
       end
     end

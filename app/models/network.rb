@@ -1,4 +1,4 @@
-require 'cidr_addresses'
+# require 'cidr_addresses'
 class Network < ApplicationRecord
   include NetworkConcerns
   # -- associations

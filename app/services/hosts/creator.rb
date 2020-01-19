@@ -28,7 +28,7 @@ module Hosts
         status = @host.save && update_merkmale
       else
         # update attributes if @host.persisted?
-        status = @host.update_attributes(host_updates) && update_merkmale && save_iface
+        status = @host.update(host_updates) && update_merkmale && save_iface
       end
       save_location
       status
@@ -41,7 +41,7 @@ module Hosts
         @iface = NetworkInterface.new(if_attributes.merge(host_id: host.id))
         @iface.save!
       else
-        @iface.update_attributes(if_updates)
+        @iface.update(if_updates)
       end
     end
 

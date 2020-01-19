@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 gem 'sassc-rails'
-gem 'rails', '~> 5.2.0'
-gem 'rails-i18n', '~> 5.1' # For 5.0.x, 5.1.x and 5.2.x
+gem 'rails', '~> 6.0.0'
+gem 'rails-i18n', '~> 6.0' # For 5.0.x, 5.1.x and 5.2.x
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
@@ -18,7 +18,7 @@ gem 'font-awesome-sass', '~> 5.0'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', '~> 4.0'
+gem 'wobauth', '~> 5.0'
 gem 'wobaduser', '~> 1.0'
 gem 'wobapphelpers', '~> 4.0'
 gem 'cancancan'
@@ -47,7 +47,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 4.0.0.beta3'
   gem 'dotenv'
   gem 'json_spec', require: false
 end
