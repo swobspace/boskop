@@ -1,0 +1,40 @@
+= Memo Softwareportfolio
+
+== Models
+
+=== Raw data from docusnap
+
+SoftwareRawData: attribute / tag from docusnap (german version)
+
+  - name / Name
+  - version / Version
+  - vendor / Hersteller
+  - count / Anzahl 
+  - operating_system / Betriebssystem (= Windows, Linux)
+  - lastseen / - (date of import or raw data exfiltration)
+  
+=== Software
+
+  - name
+  - pattern (regex to match SoftwareRawData -> Software)
+  - vendor
+  - description
+  - minimum_allowed_version
+  - maximum_allowed_version
+  - green (current year)
+  - yellow (year or date of investigation)
+  - red (year of blocked use)
+  - category_id
+  
+=== Category (Dienstplan, Personalabrechnung, KIS, ...)
+
+  - name
+  - description: :text
+  - main_business_process: :text
+
+=== Note
+
+  - software_id
+  - description
+  - date (of note creation) -> use updated_at
+  - state: :ok, :warning, :critical, :unknown (default)
