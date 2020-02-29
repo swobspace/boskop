@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :software_raw_data
   resources :network_interfaces, except: [:new, :create]
   post "network_interfaces", to: "network_interfaces#index", constraints: lambda {|req| req.format == :json}
   resources :mac_prefixes

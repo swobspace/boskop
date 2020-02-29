@@ -1,0 +1,41 @@
+<table class="table table-bordered table-hover autowidth">
+  <tr>
+    <th><%= t('attributes.software')%>:</th>
+    <td><%= @software_raw_datum.software %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.name')%>:</th>
+    <td><%= @software_raw_datum.name %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.version')%>:</th>
+    <td><%= @software_raw_datum.version %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.vendor')%>:</th>
+    <td><%= @software_raw_datum.vendor %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.count')%>:</th>
+    <td><%= @software_raw_datum.count %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.operation_system')%>:</th>
+    <td><%= @software_raw_datum.operation_system %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.lastseen')%>:</th>
+    <td><%= @software_raw_datum.lastseen %></td>
+  </tr>
+  <tr>
+    <th><%= t('attributes.source')%>:</th>
+    <td><%= @software_raw_datum.source %></td>
+  </tr>
+</table>
+
+<div class="btn-toolbar" role="toolbar">
+  <%= back_link %>
+  <%= edit_link(@software_raw_datum) %>
+  <%= delete_link(@software_raw_datum) %>
+  <%= new_link SoftwareRawDatum %>
+</div>
