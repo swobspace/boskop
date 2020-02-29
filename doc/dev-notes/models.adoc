@@ -257,13 +257,15 @@ for usage with docusnap
 
 ----
 bin/rails g scaffold SoftwareRawData \
+  software:references:index \
   name:string:index \
   version:string \
   vendor:string:index \
   count:integer \
   operation_system:string:index \
   lastseen:date \
-  source:string
+  source:string \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
 ----
 
 ## Software:
@@ -279,7 +281,8 @@ bin/rails g scaffold Software \
   green:date \
   yellow:date \
   red:date \
-  software_category:references:index
+  software_category:references:index \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
 ----
 
 ## SoftwareCategory:
