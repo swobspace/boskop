@@ -250,3 +250,53 @@ bin/rails g scaffold NetworkInterface \
 
 #    bin/rails g migration ChangeDescriptionToIfDescriptionNetworkInterface
 ----
+
+## SoftwareRawData:
+
+for usage with docusnap
+
+----
+bin/rails g scaffold SoftwareRawData \
+  name:string:index \
+  version:string \
+  vendor:string:index \
+  count:integer \
+  operation_system:string:index \
+  lastseen:date \
+  source:string
+----
+
+## Software:
+
+----
+bin/rails g scaffold Software \
+  name:string \
+  pattern:text \
+  vendor:string:index \
+  description:text \
+  minimum_allowed_version:string \
+  maximum_allowed_version:string \
+  green:date \
+  yellow:date \
+  red:date \
+  software_category:references:index
+----
+
+## SoftwareCategory:
+
+----
+bin/rails g scaffold SoftwareCategory \
+  name:string \
+  description:text \
+  main_business_process:text
+## SoftwareCategory:
+----
+
+## Note
+
+----
+bin/rails g scaffold Note \
+  'notable:references{polymorphic}'
+  description:text \
+  date:date state:string:index
+----

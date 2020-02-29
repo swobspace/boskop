@@ -12,6 +12,7 @@ SoftwareRawData: attribute / tag from docusnap (german version)
   - count / Anzahl 
   - operating_system / Betriebssystem (= Windows, Linux)
   - lastseen / - (date of import or raw data exfiltration)
+  - source / - (Source of inventory, i.e. "docusnap")
   
 === Software
 
@@ -26,15 +27,17 @@ SoftwareRawData: attribute / tag from docusnap (german version)
   - red (year of blocked use)
   - category_id
   
-=== Category (Dienstplan, Personalabrechnung, KIS, ...)
+=== SoftwareCategory (Dienstplan, Personalabrechnung, KIS, ...)
 
   - name
   - description: :text
   - main_business_process: :text
 
-=== Note
+=== Note (polymorphic)
 
-  - software_id
+  - notable_id
+  - notable_type
   - description
   - date (of note creation) -> use updated_at
   - state: :ok, :warning, :critical, :unknown (default)
+
