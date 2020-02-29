@@ -1,0 +1,32 @@
+<h1><%= t('controller.software_categories') %></h1>
+
+<table id="dataTable" class="table table-bordered table-striped" role="datatable">
+<thead>
+  <tr>
+    <th><%= t('attributes.name') %></th>
+    <th><%= t('attributes.description') %></th>
+    <th><%= t('attributes.main_business_process') %></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+
+<% @software_categories.each do |software_category| %>
+  <%= content_tag_for(:tr, software_category) do %>
+    <td><%= software_category.name %></td>
+    <td><%= software_category.description %></td>
+    <td><%= software_category.main_business_process %></td>
+    <td class="nowrap">
+      <%= show_link software_category %>
+      <%= edit_link software_category %>
+      <%= delete_link software_category %>
+    </td>
+  <% end %>
+<% end %>
+</tbody>
+</table>
+
+<br />
+
+<%= back_link %>
+<%= new_link SoftwareCategory %>

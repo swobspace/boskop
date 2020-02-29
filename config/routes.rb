@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :software_categories
   resources :softwares
   resources :software_raw_data
   resources :network_interfaces, except: [:new, :create]

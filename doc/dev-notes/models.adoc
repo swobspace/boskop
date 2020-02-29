@@ -291,8 +291,8 @@ bin/rails g scaffold Software \
 bin/rails g scaffold SoftwareCategory \
   name:string \
   description:text \
-  main_business_process:text
-## SoftwareCategory:
+  main_business_process:text \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
 ----
 
 ## Note

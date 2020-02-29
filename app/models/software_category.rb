@@ -1,0 +1,2 @@
+class SoftwareCategory < ApplicationRecord
+end
