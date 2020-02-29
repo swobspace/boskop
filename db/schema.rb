@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_11_132508) do
+ActiveRecord::Schema.define(version: 2020_02_29_183610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -299,6 +299,48 @@ ActiveRecord::Schema.define(version: 2020_01_11_132508) do
     t.index ["role"], name: "index_responsibilities_on_role"
   end
 
+  create_table "software_categories", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.text "description"
+    t.text "main_business_process"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "software_raw_data", force: :cascade do |t|
+    t.bigint "software_id"
+    t.string "name", default: "", null: false
+    t.string "version", default: ""
+    t.string "vendor", default: ""
+    t.integer "count", default: 0
+    t.string "operation_system", default: ""
+    t.date "lastseen"
+    t.string "source", default: ""
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_software_raw_data_on_name"
+    t.index ["operation_system"], name: "index_software_raw_data_on_operation_system"
+    t.index ["software_id"], name: "index_software_raw_data_on_software_id"
+    t.index ["vendor"], name: "index_software_raw_data_on_vendor"
+  end
+
+  create_table "softwares", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.text "pattern"
+    t.string "vendor", default: ""
+    t.text "description"
+    t.string "minimum_allowed_version", default: ""
+    t.string "maximum_allowed_version", default: ""
+    t.date "green"
+    t.date "yellow"
+    t.date "red"
+    t.bigint "software_category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["software_category_id"], name: "index_softwares_on_software_category_id"
+    t.index ["vendor"], name: "index_softwares_on_vendor"
+  end
+
   create_table "vulnerabilities", force: :cascade do |t|
     t.bigint "host_id"
     t.bigint "vulnerability_detail_id"
@@ -395,4 +437,6 @@ ActiveRecord::Schema.define(version: 2020_01_11_132508) do
     t.index ["username"], name: "index_wobauth_users_on_username", unique: true
   end
 
+  add_foreign_key "software_raw_data", "softwares"
+  add_foreign_key "softwares", "software_categories"
 end
