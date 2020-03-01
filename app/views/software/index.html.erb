@@ -1,44 +1,67 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
 <h1><%= t('controller.software') %></h1>
 
-<table id="dataTable" class="table table-bordered table-striped" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.pattern') %></th>
-    <th><%= t('attributes.vendor') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.minimum_allowed_version') %></th>
-    <th><%= t('attributes.maximum_allowed_version') %></th>
-    <th><%= t('attributes.green') %></th>
-    <th><%= t('attributes.yellow') %></th>
-    <th><%= t('attributes.red') %></th>
-    <th><%= t('attributes.software_category') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
-
-<% @software.each do |software| %>
-  <%= content_tag_for(:tr, software) do %>
-    <td><%= software.name %></td>
-    <td><%= software.pattern %></td>
-    <td><%= software.vendor %></td>
-    <td><%= software.description %></td>
-    <td><%= software.minimum_allowed_version %></td>
-    <td><%= software.maximum_allowed_version %></td>
-    <td><%= software.green %></td>
-    <td><%= software.yellow %></td>
-    <td><%= software.red %></td>
-    <td><%= software.software_category %></td>
-    <td class="nowrap">
-      <%= show_link software %>
-      <%= edit_link software %>
-      <%= delete_link software %>
-    </td>
-  <% end %>
+<%= content_tag :table, role: :datatable,
+      id: "software_table",
+      class: "table table-bordered table-responsive-xl",
+      data: {
+        order: [[0, 'desc']].to_json
+      } do %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.pattern') %></th>
+      <th><%= t('attributes.vendor') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.minimum_allowed_version') %></th>
+      <th><%= t('attributes.maximum_allowed_version') %></th>
+      <th><%= t('attributes.green') %></th>
+      <th><%= t('attributes.yellow') %></th>
+      <th><%= t('attributes.red') %></th>
+      <th><%= t('attributes.software_category') %></th>
+      <th class="nosort"><%= t('boskop.action') %></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <% @software.each do |software| %>
+      <%= content_tag_for(:tr, software) do %>
+        <td><%= software.name %></td>
+        <td><%= software.pattern %></td>
+        <td><%= software.vendor %></td>
+        <td><%= software.description %></td>
+        <td><%= software.minimum_allowed_version %></td>
+        <td><%= software.maximum_allowed_version %></td>
+        <td><%= software.green %></td>
+        <td><%= software.yellow %></td>
+        <td><%= software.red %></td>
+        <td><%= software.software_category %></td>
+        <td class="text-nowrap">
+          <%= show_link software %>
+          <%= edit_link software %>
+          <%= delete_link software %>
+        </td>
+      <% end %>
+    <% end %>
+  </tbody>
 <% end %>
-</tbody>
-</table>
 
 <br />
 

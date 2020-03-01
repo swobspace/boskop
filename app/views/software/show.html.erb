@@ -1,49 +1,67 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @software.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.pattern')%>:</th>
-    <td><%= @software.pattern %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.vendor')%>:</th>
-    <td><%= @software.vendor %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @software.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.minimum_allowed_version')%>:</th>
-    <td><%= @software.minimum_allowed_version %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.maximum_allowed_version')%>:</th>
-    <td><%= @software.maximum_allowed_version %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.green')%>:</th>
-    <td><%= @software.green %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.yellow')%>:</th>
-    <td><%= @software.yellow %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.red')%>:</th>
-    <td><%= @software.red %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.software_category')%>:</th>
-    <td><%= @software.software_category %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.software') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table">
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.name')%>:</th>
+        <td><%= @software.name %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.pattern')%>:</th>
+        <td><%= @software.pattern %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.vendor')%>:</th>
+        <td><%= @software.vendor %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.description')%>:</th>
+        <td><%= @software.description %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.minimum_allowed_version')%>:</th>
+        <td><%= @software.minimum_allowed_version %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.maximum_allowed_version')%>:</th>
+        <td><%= @software.maximum_allowed_version %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.green')%>:</th>
+        <td><%= @software.green %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.yellow')%>:</th>
+        <td><%= @software.yellow %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.red')%>:</th>
+        <td><%= @software.red %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.software_category')%>:</th>
+        <td><%= @software.software_category %></td>
+      </tr>
+    
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@software) %>
-  <%= delete_link(@software) %>
-  <%= new_link Software %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@software) %>
+      <%= delete_link(@software) %>
+      <%= new_link Software %>
+    </div>
+  </div>
 </div>
