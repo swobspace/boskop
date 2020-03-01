@@ -3,22 +3,18 @@
     html: { class: 'form-horizontal card' }) do |f| %>
 
     <div class="card-header">
-     <%= form_legend %>
+      <%= form_legend %>
     </div>
     <div class="card-body">
-    <div class="form-inputs">
       <%= f.input :name
-       %>
+	 %>
       <%= f.input :description
-       %>
+	 %>
       <%= f.input :main_business_process
-       %>
-    </div>
+	 %>
 
-   <div class="card-body">
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
     </div>
   <% end %>
 </div>
-

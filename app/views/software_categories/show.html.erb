@@ -1,21 +1,32 @@
-<table class="table table-bordered table-hover autowidth">
-  <tr>
-    <th><%= t('attributes.name')%>:</th>
-    <td><%= @software_category.name %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.description')%>:</th>
-    <td><%= @software_category.description %></td>
-  </tr>
-  <tr>
-    <th><%= t('attributes.main_business_process')%>:</th>
-    <td><%= @software_category.main_business_process %></td>
-  </tr>
-</table>
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.software_category') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered">
+    
+      <tr>
+        <th><%= t('attributes.name')%>:</th>
+        <td><%= @software_category.name %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.description')%>:</th>
+        <td><%= @software_category.description %></td>
+      </tr>
+    
+      <tr>
+        <th><%= t('attributes.main_business_process')%>:</th>
+        <td><%= @software_category.main_business_process %></td>
+      </tr>
+    
+    </table>
 
-<div class="btn-toolbar" role="toolbar">
-  <%= back_link %>
-  <%= edit_link(@software_category) %>
-  <%= delete_link(@software_category) %>
-  <%= new_link SoftwareCategory %>
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@software_category) %>
+      <%= delete_link(@software_category) %>
+      <%= new_link SoftwareCategory %>
+    </div>
+  </div>
 </div>
