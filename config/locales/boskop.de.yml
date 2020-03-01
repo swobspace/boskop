@@ -97,6 +97,9 @@ de:
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
       responsibility: Verantwortlichkeit
+      software: Software
+      software_category: Software-Kategorie
+      software_raw_datum: Software-Rohdaten
       vulnerability: Schwachstelle
       vulnerability_detail: Schwachstellen-Detail
       user: User
@@ -151,12 +154,14 @@ de:
     for_object: Objektklasse 
     fqdn: FQDN
     framework_contract: Rahmenvertrag
+    framework: Framework
     givenname: Vorname
     higher: Critical+High
     host: Host
     host_id: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    hosts: Hosts
     if_description: Interface-Beschreibung
     import_mode: Import-Mode
     import_state: Import-Status
@@ -170,11 +175,13 @@ de:
     last_modification_date: letzte Änderung
     lid: StandortID
     line: Leitung/Zugang
+    lines: Leitungen/Zugänge
     line_state: Status
     location: Lokation
     location_a: Standort A
     location_b: Standort B
     mac: MAC
+    main_business_process: Wesentlicher Geschäftsprozess
     max_prefix: MAC-Prefix
     mandantory: Pflichtfeld
     matching_pattern: Muster für die Zuweisung
@@ -196,6 +203,7 @@ de:
     oui_vendor: OUI Vendor
     period_of_notice: Kündigungsfrist
     period_of_notice_unit: Einheit
+    people: Personen
     plugin_output: Plugin Output
     plz: PLZ
     position: Position
@@ -215,6 +223,9 @@ de:
     serial: Serial
     severity: Severity
     sn: Nachname
+    software: Software
+    software_category: Software-Kategorie
+    software_raw_data: Software-Rohdaten
     status: Status
     streetaddress: Straße, Nr.
     tag: Tag
@@ -268,6 +279,9 @@ de:
     org_units: Organisationseinheiten
     responsibles: Verantwortliche
     responsibilities: Verantwortlichkeiten
+    software: Software
+    software_categories: Software-Kategorien
+    software_raw_data: Software-Rohdaten
     vulnerabilities: Schwachstellen
     vulnerability_details: Schwachstellen-Details
     users: Benutzer

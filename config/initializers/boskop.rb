@@ -1,5 +1,12 @@
 module Boskop
-  CONFIGURATION_CONTROLLER = ['merkmalklassen', 'access_types', 'line_states', 'framework_contracts', 'host_categories', 'operating_systems', 'operating_system_mappings', 'contacts', 'responsibilities', 'mac_prefixes'].freeze
+  CONFIGURATION_CONTROLLER = {
+    hosts: ['host_categories', 'operating_systems', 
+             'operating_system_mappings', 'mac_prefixes'], 
+    software: ['software_categories'],
+    lines: ['access_types', 'line_states', 'framework_contracts'], 
+    people: ['contacts', 'responsibilities'], 
+    framework: ['merkmalklassen'], 
+  }.freeze
   PERIOD_UNITS = [ 'day', 'week', 'month', 'quarter', 'year' ].freeze
   CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'boskop.yml'))
   
