@@ -21,9 +21,6 @@ require 'rails_helper'
 RSpec.describe OrgUnitsController, :type => :controller do
   login_admin
 
-  # This should return the minimal set of attributes required to create a valid
-  # OrgUnit. As you add validations to OrgUnit, be sure to
-  # adjust the attributes here as well.
   let(:valid_attributes) {
     FactoryBot.attributes_for(:org_unit)
   }
