@@ -131,6 +131,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
+    count: Anzahl
     created_at: angelegt am
     created_newer: angelegt nach
     created_older: angelegt vor
@@ -247,6 +248,7 @@ de:
     uuid: UUID
     value: Wert
     vendor: Hersteller
+    version: Version
     visible: Sichtbarkeit
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail

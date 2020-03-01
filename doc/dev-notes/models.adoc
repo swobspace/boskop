@@ -262,7 +262,7 @@ bin/rails g scaffold SoftwareRawData \
   version:string \
   vendor:string:index \
   count:integer \
-  operation_system:string:index \
+  operating_system:string:index \
   lastseen:date \
   source:string \
   --no-stylesheets --no-javascripts --no-helper --no-jbuilder

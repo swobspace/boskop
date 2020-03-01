@@ -9,7 +9,7 @@ RSpec.describe "software_raw_data/index", type: :view do
         version: "Version",
         vendor: "Vendor",
         count: 2,
-        operation_system: "Operation System",
+        operating_system: "Operating System",
         source: "Source"
       ),
       SoftwareRawDatum.create!(
@@ -18,7 +18,7 @@ RSpec.describe "software_raw_data/index", type: :view do
         version: "Version",
         vendor: "Vendor",
         count: 2,
-        operation_system: "Operation System",
+        operating_system: "Operating System",
         source: "Source"
       )
     ])
@@ -31,7 +31,7 @@ RSpec.describe "software_raw_data/index", type: :view do
     assert_select "tr>td", text: "Version".to_s, count: 2
     assert_select "tr>td", text: "Vendor".to_s, count: 2
     assert_select "tr>td", text: 2.to_s, count: 2
-    assert_select "tr>td", text: "Operation System".to_s, count: 2
+    assert_select "tr>td", text: "Operating System".to_s, count: 2
     assert_select "tr>td", text: "Source".to_s, count: 2
   end
 end

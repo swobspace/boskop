@@ -8,7 +8,7 @@ RSpec.describe "software_raw_data/edit", type: :view do
       version: "MyString",
       vendor: "MyString",
       count: 1,
-      operation_system: "MyString",
+      operating_system: "MyString",
       source: "MyString"
     ))
   end
@@ -28,7 +28,7 @@ RSpec.describe "software_raw_data/edit", type: :view do
 
       assert_select "input[name=?]", "software_raw_datum[count]"
 
-      assert_select "input[name=?]", "software_raw_datum[operation_system]"
+      assert_select "input[name=?]", "software_raw_datum[operating_system]"
 
       assert_select "input[name=?]", "software_raw_datum[source]"
     end

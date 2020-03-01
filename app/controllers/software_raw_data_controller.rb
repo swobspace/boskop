@@ -51,6 +51,6 @@ class SoftwareRawDataController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def software_raw_datum_params
-      params.require(:software_raw_datum).permit(:software_id, :name, :version, :vendor, :count, :operation_system, :lastseen, :source)
+      params.require(:software_raw_datum).permit(:software_id, :name, :version, :vendor, :count, :operating_system, :lastseen, :source)
     end
 end

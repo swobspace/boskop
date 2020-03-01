@@ -8,7 +8,7 @@ RSpec.describe "software_raw_data/show", type: :view do
       version: "Version",
       vendor: "Vendor",
       count: 2,
-      operation_system: "Operation System",
+      operating_system: "Operating System",
       source: "Source"
     ))
   end
@@ -20,7 +20,7 @@ RSpec.describe "software_raw_data/show", type: :view do
     expect(rendered).to match(/Version/)
     expect(rendered).to match(/Vendor/)
     expect(rendered).to match(/2/)
-    expect(rendered).to match(/Operation System/)
+    expect(rendered).to match(/Operating System/)
     expect(rendered).to match(/Source/)
   end
 end

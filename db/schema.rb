@@ -330,13 +330,13 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.string "version", default: ""
     t.string "vendor", default: ""
     t.integer "count", default: 0
-    t.string "operation_system", default: ""
+    t.string "operating_system", default: ""
     t.date "lastseen"
     t.string "source", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_software_raw_data_on_name"
-    t.index ["operation_system"], name: "index_software_raw_data_on_operation_system"
+    t.index ["operating_system"], name: "index_software_raw_data_on_operating_system"
     t.index ["software_id"], name: "index_software_raw_data_on_software_id"
     t.index ["vendor"], name: "index_software_raw_data_on_vendor"
   end
