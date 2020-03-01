@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "software/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "software" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:software, Software.new(
       name: "MyString",
       pattern: "MyText",
@@ -16,7 +22,7 @@ RSpec.describe "software/new", type: :view do
   it "renders new software form" do
     render
 
-    assert_select "form[action=?][method=?]", software_path, "post" do
+    assert_select "form[action=?][method=?]", software_index_path, "post" do
 
       assert_select "input[name=?]", "software[name]"
 
@@ -30,7 +36,11 @@ RSpec.describe "software/new", type: :view do
 
       assert_select "input[name=?]", "software[maximum_allowed_version]"
 
-      assert_select "input[name=?]", "software[software_category_id]"
+      assert_select "select[name=?]", "software[software_category_id]"
+
+      assert_select "input[name=?]", "software[green]"
+      assert_select "input[name=?]", "software[yellow]"
+      assert_select "input[name=?]", "software[red]"
     end
   end
 end
