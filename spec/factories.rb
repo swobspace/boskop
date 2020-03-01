@@ -138,6 +138,10 @@ FactoryBot.define do
     role { Boskop.responsibility_role.first }
   end
 
+  factory :software_category do
+    name { generate(:aname) }
+  end
+
   factory :vulnerability do
     host
     vulnerability_detail
