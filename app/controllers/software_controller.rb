@@ -1,29 +1,29 @@
-class SoftwaresController < ApplicationController
+class SoftwareController < ApplicationController
   before_action :set_software, only: [:show, :edit, :update, :destroy]
   before_action :add_breadcrumb_show, only: [:show]
 
-  # GET /softwares
+  # GET /software
   def index
-    @softwares = Software.all
-    respond_with(@softwares)
+    @software = Software.all
+    respond_with(@software)
   end
 
-  # GET /softwares/1
+  # GET /software/1
   def show
     respond_with(@software)
   end
 
-  # GET /softwares/new
+  # GET /software/new
   def new
     @software = Software.new
     respond_with(@software)
   end
 
-  # GET /softwares/1/edit
+  # GET /software/1/edit
   def edit
   end
 
-  # POST /softwares
+  # POST /software
   def create
     @software = Software.new(software_params)
 
@@ -31,13 +31,13 @@ class SoftwaresController < ApplicationController
     respond_with(@software)
   end
 
-  # PATCH/PUT /softwares/1
+  # PATCH/PUT /software/1
   def update
     @software.update(software_params)
     respond_with(@software)
   end
 
-  # DELETE /softwares/1
+  # DELETE /software/1
   def destroy
     @software.destroy
     respond_with(@software)

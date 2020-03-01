@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "softwares/show", type: :view do
+RSpec.describe "software/show", type: :view do
   before(:each) do
     @software = assign(:software, Software.create!(
       name: "Name",

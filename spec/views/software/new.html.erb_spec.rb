@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "softwares/edit", type: :view do
+RSpec.describe "software/new", type: :view do
   before(:each) do
-    @software = assign(:software, Software.create!(
+    assign(:software, Software.new(
       name: "MyString",
       pattern: "MyText",
       vendor: "MyString",
@@ -13,10 +13,10 @@ RSpec.describe "softwares/edit", type: :view do
     ))
   end
 
-  it "renders the edit software form" do
+  it "renders new software form" do
     render
 
-    assert_select "form[action=?][method=?]", software_path(@software), "post" do
+    assert_select "form[action=?][method=?]", software_path, "post" do
 
       assert_select "input[name=?]", "software[name]"
 

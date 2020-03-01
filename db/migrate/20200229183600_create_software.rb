@@ -1,6 +1,6 @@
-class CreateSoftwares < ActiveRecord::Migration[6.0]
+class CreateSoftware < ActiveRecord::Migration[6.0]
   def change
-    create_table :softwares do |t|
+    create_table :software do |t|
       t.string :name, default: "", null: false
       t.text :pattern
       t.string :vendor, default: ""
@@ -14,6 +14,6 @@ class CreateSoftwares < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :softwares, :vendor
+    add_index :software, :vendor
   end
 end

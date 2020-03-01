@@ -23,7 +23,7 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe SoftwaresController, type: :controller do
+RSpec.describe SoftwareController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Software. As you add validations to Software, be sure to
@@ -38,7 +38,7 @@ RSpec.describe SoftwaresController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # SoftwaresController. Be sure to keep this updated too.
+  # SoftwareController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
@@ -131,10 +131,10 @@ RSpec.describe SoftwaresController, type: :controller do
       }.to change(Software, :count).by(-1)
     end
 
-    it "redirects to the softwares list" do
+    it "redirects to the software list" do
       software = Software.create! valid_attributes
       delete :destroy, params: {id: software.to_param}, session: valid_session
-      expect(response).to redirect_to(softwares_url)
+      expect(response).to redirect_to(software_url)
     end
   end
 

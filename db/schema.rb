@@ -299,6 +299,23 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["role"], name: "index_responsibilities_on_role"
   end
 
+  create_table "software", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.text "pattern"
+    t.string "vendor", default: ""
+    t.text "description"
+    t.string "minimum_allowed_version", default: ""
+    t.string "maximum_allowed_version", default: ""
+    t.date "green"
+    t.date "yellow"
+    t.date "red"
+    t.bigint "software_category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["software_category_id"], name: "index_software_on_software_category_id"
+    t.index ["vendor"], name: "index_software_on_vendor"
+  end
+
   create_table "software_categories", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description"
@@ -322,23 +339,6 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["operation_system"], name: "index_software_raw_data_on_operation_system"
     t.index ["software_id"], name: "index_software_raw_data_on_software_id"
     t.index ["vendor"], name: "index_software_raw_data_on_vendor"
-  end
-
-  create_table "softwares", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.text "pattern"
-    t.string "vendor", default: ""
-    t.text "description"
-    t.string "minimum_allowed_version", default: ""
-    t.string "maximum_allowed_version", default: ""
-    t.date "green"
-    t.date "yellow"
-    t.date "red"
-    t.bigint "software_category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["software_category_id"], name: "index_softwares_on_software_category_id"
-    t.index ["vendor"], name: "index_softwares_on_vendor"
   end
 
   create_table "vulnerabilities", force: :cascade do |t|
@@ -437,6 +437,6 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["username"], name: "index_wobauth_users_on_username", unique: true
   end
 
-  add_foreign_key "software_raw_data", "softwares"
-  add_foreign_key "softwares", "software_categories"
+  add_foreign_key "software", "software_categories"
+  add_foreign_key "software_raw_data", "software"
 end

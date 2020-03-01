@@ -1,4 +1,4 @@
-<h1><%= t('controller.softwares') %></h1>
+<h1><%= t('controller.software') %></h1>
 
 <table id="dataTable" class="table table-bordered table-striped" role="datatable">
 <thead>
@@ -18,7 +18,7 @@
 </thead>
 <tbody>
 
-<% @softwares.each do |software| %>
+<% @software.each do |software| %>
   <%= content_tag_for(:tr, software) do %>
     <td><%= software.name %></td>
     <td><%= software.pattern %></td>
