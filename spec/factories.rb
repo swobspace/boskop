@@ -138,7 +138,15 @@ FactoryBot.define do
     role { Boskop.responsibility_role.first }
   end
 
+  factory :software do
+    name { generate(:aname) }
+  end
+
   factory :software_category do
+    name { generate(:aname) }
+  end
+
+  factory :software_raw_datum do
     name { generate(:aname) }
   end
 
