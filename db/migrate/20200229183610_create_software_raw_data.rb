@@ -1,7 +1,7 @@
 class CreateSoftwareRawData < ActiveRecord::Migration[6.0]
   def change
     create_table :software_raw_data do |t|
-      t.references :software, foreign_key: true
+      t.references :software, foreign_key: false
       t.string :name, default: "", null: false
       t.string :version, default: ""
       t.string :vendor, default: ""

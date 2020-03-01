@@ -10,7 +10,7 @@ class CreateSoftware < ActiveRecord::Migration[6.0]
       t.date :green
       t.date :yellow
       t.date :red
-      t.references :software_category, foreign_key: true
+      t.references :software_category, foreign_key: false
 
       t.timestamps
     end

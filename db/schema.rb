@@ -15,25 +15,25 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "access_types", force: :cascade do |t|
+  create_table "access_types", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "addressfor_type"
-    t.bigint "addressfor_id"
-    t.string "streetaddress", default: ""
-    t.string "plz", default: ""
-    t.string "ort", default: ""
-    t.string "care_of", default: ""
-    t.string "postfach", default: ""
-    t.string "postfachplz", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["addressfor_type", "addressfor_id"], name: "index_addresses_on_addressfor_type_and_addressfor_id"
+  create_table "addresses", id: :serial, force: :cascade do |t|
+    t.integer "addressfor_id"
+    t.string "addressfor_type", limit: 255
+    t.string "streetaddress", limit: 255, default: ""
+    t.string "plz", limit: 255, default: ""
+    t.string "ort", limit: 255, default: ""
+    t.string "care_of", limit: 255, default: ""
+    t.string "postfach", limit: 255, default: ""
+    t.string "postfachplz", limit: 255, default: ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "framework_contracts", force: :cascade do |t|
+  create_table "framework_contracts", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
     t.date "contract_start"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["vuln_risk"], name: "index_hosts_on_vuln_risk"
   end
 
-  create_table "line_states", force: :cascade do |t|
+  create_table "line_states", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
     t.boolean "active", default: false
@@ -136,16 +136,16 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lines", force: :cascade do |t|
+  create_table "lines", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
     t.string "provider_id", default: ""
     t.integer "location_a_id"
     t.integer "location_b_id"
-    t.bigint "access_type_id"
+    t.integer "access_type_id"
     t.decimal "bw_upstream", precision: 10, scale: 1
     t.decimal "bw_downstream", precision: 10, scale: 1
-    t.bigint "framework_contract_id"
+    t.integer "framework_contract_id"
     t.date "contract_start"
     t.date "contract_end"
     t.string "contract_period", default: ""
@@ -153,7 +153,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.string "period_of_notice_unit"
     t.integer "renewal_period"
     t.string "renewal_unit"
-    t.bigint "line_state_id"
+    t.integer "line_state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "bw2_upstream", precision: 10, scale: 1
@@ -166,15 +166,15 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["location_b_id"], name: "index_lines_on_location_b_id"
   end
 
-  create_table "locations", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "description", default: ""
-    t.string "ancestry"
+  create_table "locations", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255, default: "", null: false
+    t.string "description", limit: 255, default: ""
+    t.string "ancestry", limit: 255
     t.integer "ancestry_depth", default: 0, null: false
     t.integer "position", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "lid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "lid", limit: 255
     t.boolean "disabled", default: false
     t.index ["ancestry"], name: "index_locations_on_ancestry"
     t.index ["disabled"], name: "index_locations_on_disabled"
@@ -190,30 +190,30 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["oui"], name: "index_mac_prefixes_on_oui"
   end
 
-  create_table "merkmale", force: :cascade do |t|
-    t.string "merkmalfor_type"
-    t.bigint "merkmalfor_id"
-    t.bigint "merkmalklasse_id"
-    t.string "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["merkmalfor_type", "merkmalfor_id"], name: "index_merkmale_on_merkmalfor_type_and_merkmalfor_id"
+  create_table "merkmale", id: :serial, force: :cascade do |t|
+    t.integer "merkmalfor_id"
+    t.string "merkmalfor_type", limit: 255
+    t.integer "merkmalklasse_id"
+    t.string "value", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["merkmalfor_id", "merkmalfor_type"], name: "index_merkmale_on_merkmalfor_id_and_merkmalfor_type"
     t.index ["merkmalklasse_id"], name: "index_merkmale_on_merkmalklasse_id"
   end
 
-  create_table "merkmalklassen", force: :cascade do |t|
-    t.string "name", default: "", null: false
+  create_table "merkmalklassen", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255, default: "", null: false
     t.text "description", default: ""
-    t.string "format", default: "", null: false
+    t.string "format", limit: 255, default: "", null: false
     t.text "possible_values"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean "mandantory", default: false
     t.boolean "unique", default: false
     t.integer "position", default: 0
-    t.string "for_object", default: "", null: false
-    t.string "visible"
-    t.string "baselink", default: ""
+    t.string "for_object", limit: 255, default: "", null: false
+    t.string "visible", limit: 255
+    t.string "baselink", limit: 255, default: ""
     t.string "tag", default: ""
     t.index ["for_object"], name: "index_merkmalklassen_on_for_object"
     t.index ["name"], name: "index_merkmalklassen_on_name"
@@ -245,12 +245,12 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["host_id"], name: "index_network_interfaces_on_host_id"
   end
 
-  create_table "networks", force: :cascade do |t|
-    t.bigint "location_id"
+  create_table "networks", id: :serial, force: :cascade do |t|
+    t.integer "location_id"
     t.cidr "netzwerk"
     t.text "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["location_id"], name: "index_networks_on_location_id"
   end
 
@@ -273,14 +273,14 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.date "eol"
   end
 
-  create_table "org_units", force: :cascade do |t|
-    t.string "name", default: "", null: false
-    t.string "description", default: ""
-    t.string "ancestry"
+  create_table "org_units", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255, default: "", null: false
+    t.string "description", limit: 255, default: ""
+    t.string "ancestry", limit: 255
     t.integer "ancestry_depth", default: 0, null: false
     t.integer "position", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["ancestry"], name: "index_org_units_on_ancestry"
     t.index ["name"], name: "index_org_units_on_name"
   end
@@ -370,65 +370,65 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["threat"], name: "index_vulnerability_details_on_threat"
   end
 
-  create_table "wobauth_authorities", force: :cascade do |t|
-    t.bigint "authorizable_id"
-    t.string "authorizable_type"
-    t.bigint "role_id"
-    t.bigint "authorized_for_id"
-    t.string "authorized_for_type"
+  create_table "wobauth_authorities", id: :serial, force: :cascade do |t|
+    t.integer "authorizable_id"
+    t.string "authorizable_type", limit: 255
+    t.integer "role_id"
+    t.integer "authorized_for_id"
+    t.string "authorized_for_type", limit: 255
     t.date "valid_from"
     t.date "valid_until"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["authorizable_id"], name: "index_wobauth_authorities_on_authorizable_id"
     t.index ["authorized_for_id"], name: "index_wobauth_authorities_on_authorized_for_id"
     t.index ["role_id"], name: "index_wobauth_authorities_on_role_id"
   end
 
-  create_table "wobauth_groups", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "wobauth_groups", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "description", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "wobauth_memberships", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "group_id"
+  create_table "wobauth_memberships", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
     t.boolean "auto", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["group_id"], name: "index_wobauth_memberships_on_group_id"
     t.index ["user_id"], name: "index_wobauth_memberships_on_user_id"
   end
 
-  create_table "wobauth_roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "wobauth_roles", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "wobauth_users", force: :cascade do |t|
-    t.string "username", default: "", null: false
+  create_table "wobauth_users", id: :serial, force: :cascade do |t|
+    t.string "username", limit: 255, default: "", null: false
     t.text "gruppen"
-    t.string "sn"
-    t.string "givenname"
-    t.string "displayname"
-    t.string "telephone"
-    t.string "active_directory_guid"
-    t.string "userprincipalname"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
+    t.string "sn", limit: 255
+    t.string "givenname", limit: 255
+    t.string "displayname", limit: 255
+    t.string "telephone", limit: 255
+    t.string "active_directory_guid", limit: 255
+    t.string "userprincipalname", limit: 255
+    t.string "email", limit: 255, default: "", null: false
+    t.string "encrypted_password", limit: 255, default: "", null: false
+    t.string "reset_password_token", limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "current_sign_in_ip", limit: 255
+    t.string "last_sign_in_ip", limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string "title", default: ""
     t.string "position", default: ""
     t.string "department", default: ""
@@ -437,6 +437,4 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
     t.index ["username"], name: "index_wobauth_users_on_username", unique: true
   end
 
-  add_foreign_key "software", "software_categories"
-  add_foreign_key "software_raw_data", "software"
 end
