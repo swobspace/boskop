@@ -2,6 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "software_categories/new", type: :view do
   before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    allow(controller).to receive(:current_ability) { @ability }
+    allow(controller).to receive(:controller_name) { "software_categories" }
+    allow(controller).to receive(:action_name) { "new" }
+
     assign(:software_category, SoftwareCategory.new(
       name: "MyString",
       description: "MyText",
