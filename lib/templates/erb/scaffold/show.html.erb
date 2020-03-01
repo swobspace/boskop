@@ -3,13 +3,13 @@
     <h4><%%= t('activerecord.models.<%= singular_table_name %>') %></h4>
   </div>
   <div class="card-body">
-    <table class="table table-bordered table-hover autowidth">
+    <table class="table table-bordered">
     <% attributes.each do |attribute| %>
       <tr>
         <th><%%= t('attributes.<%= attribute.name %>')%>:</th>
         <td><%%= @<%= singular_table_name %>.<%= attribute.name %> %></td>
       </tr>
-    <% end -%>
+    <% end %>
     </table>
 
     <div role="toolbar">
