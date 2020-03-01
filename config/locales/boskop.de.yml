@@ -156,6 +156,7 @@ de:
     framework_contract: Rahmenvertrag
     framework: Framework
     givenname: Vorname
+    green: Grün
     higher: Critical+High
     host: Host
     host_id: Host
@@ -188,6 +189,8 @@ de:
     merkmal: Merkmal
     merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
+    maximum_allowed_version: Maximal erlaubte Version
+    minimum_allowed_version: Minimal erlaubte Version
     name: Name
     nessus_id: NessusID
     netzwerk: Netzwerk
@@ -201,6 +204,7 @@ de:
     ort: Ort
     oui: OUI
     oui_vendor: OUI Vendor
+    pattern: Matching Pattern
     period_of_notice: Kündigungsfrist
     period_of_notice_unit: Einheit
     people: Personen
@@ -212,6 +216,7 @@ de:
     postfachplz: Postfach-PLZ
     product: Produkt
     provider_id: Identifikation des Providers
+    red: Rot
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
     responsible: Verantwortlicher
@@ -252,6 +257,7 @@ de:
     warranty_start_until: Support-Start bis
     warranty_end: Support-Ende
     workgroup: Workgroup
+    yellow: Gelb
     xrefs: Referenzen
 
   controller:
