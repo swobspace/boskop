@@ -4,7 +4,9 @@ class SoftwareRawDatum < ApplicationRecord
 
   # -- configuration
   # -- validations and callbacks
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: {
+              scope: [:vendor, :version, :operating_system]
+            }
 
   def to_s
     "#{name} (#{vendor})"

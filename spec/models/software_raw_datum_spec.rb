@@ -9,7 +9,7 @@ RSpec.describe SoftwareRawDatum, type: :model do
     expect(f).to be_valid
     expect(g).to be_valid
 
-    is_expected.to validate_uniqueness_of :name
+    is_expected.to validate_uniqueness_of(:name).scoped_to(:vendor, :version, :operating_system)
   end
 
   it "to_s returns value" do
