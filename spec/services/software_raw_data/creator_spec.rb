@@ -31,7 +31,7 @@ module SoftwareRawData
     end
 
     describe "with missing mandantory argument" do
-      SoftwareRawData::Creator::CREATE_ATTRIBUTES.each do |arg|
+      [:name, :vendor, :version].each do |arg|
         it "raise an ArgumentError" do
           attribs = attributes.except(arg.to_s)
           expect {
@@ -102,6 +102,20 @@ module SoftwareRawData
         end
         it { expect(SoftwareRawDatum.count).to eq(1) }
         it { expect(swr.count).to eq(5) }
+        it { expect(swr.lastseen.to_s).to eq(Date.today.to_s) }
+        it { expect(swr.source).to eq("docusnap") }
+      end
+
+      describe "new entry with different operating system" do
+        before(:each) do
+          attributes['lastseen'] = Date.today.to_s
+          attributes['operating_system'] = "FullOS"
+        end
+        it { expect(subject.save && SoftwareRawDatum.count).to eq(2) }
+        it { expect(swr.name).to eq("7-Zip 19.00") }
+        it { expect(swr.vendor).to eq("Igor Pavlov") }
+        it { expect(swr.count).to eq(5) }
+        it { expect(swr.operating_system).to eq("FullOS") }
         it { expect(swr.lastseen.to_s).to eq(Date.today.to_s) }
         it { expect(swr.source).to eq("docusnap") }
       end

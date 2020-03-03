@@ -5,7 +5,7 @@ module SoftwareRawData
   #
   class Creator
     attr_reader :software_raw_datum, :attributes
-    CREATE_ATTRIBUTES = [:name, :vendor, :version]
+    CREATE_ATTRIBUTES = [:name, :vendor, :version, :operating_system]
 
     # SoftwareRawData::Creator.new(attributes: {some attribs})
     # 
