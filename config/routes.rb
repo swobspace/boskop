@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :software_categories
   resources :software
-  resources :software_raw_data
+  resources :software_raw_data do
+    collection do
+      get :new_import
+      post :import
+    end
+  end
   resources :network_interfaces, except: [:new, :create]
   post "network_interfaces", to: "network_interfaces#index", constraints: lambda {|req| req.format == :json}
   resources :mac_prefixes

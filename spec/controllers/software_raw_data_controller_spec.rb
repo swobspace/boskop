@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe SoftwareRawDataController, type: :controller do
   login_admin
 
+  let(:csv_file) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'raw_software.csv') }
+
   let(:valid_attributes) {
     FactoryBot.attributes_for(:software_raw_datum)
   }
@@ -36,11 +38,34 @@ RSpec.describe SoftwareRawDataController, type: :controller do
     end
   end
 
+  describe "GET #new_import" do
+    it "returns a success response" do
+      get :new_import, params: {}, session: valid_session
+      expect(response).to be_successful
+    end
+  end
+
   describe "GET #edit" do
     it "returns a success response" do
       software_raw_datum = SoftwareRawDatum.create! valid_attributes
       get :edit, params: {id: software_raw_datum.to_param}, session: valid_session
       expect(response).to be_successful
+    end
+  end
+
+  describe "POST #import" do
+    context "with valid params" do
+      let(:import_form_attributes) {{ file: csv_file, lastseen: Date.today, source: "Unknown" }}
+      it "imports raw software data from csv" do
+        expect {
+          post :import, params: import_form_attributes, session: valid_session
+        }.to change(SoftwareRawDatum, :count).by(4)
+      end
+
+      it "redirects to software_raw_data_path" do
+        post :import, params: import_form_attributes, session: valid_session
+        expect(response).to redirect_to(software_raw_data_path)
+      end
     end
   end
 

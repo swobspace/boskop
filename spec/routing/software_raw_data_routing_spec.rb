@@ -34,5 +34,14 @@ RSpec.describe SoftwareRawDataController, type: :routing do
     it "routes to #destroy" do
       expect(delete: "/software_raw_data/1").to route_to("software_raw_data#destroy", id: "1")
     end
+
+    it "routes to #new_import" do
+      expect(:get => "/software_raw_data/new_import").to route_to("software_raw_data#new_import")
+    end
+
+    it "routes to #import" do
+      expect(:post => "/software_raw_data/import").to route_to("software_raw_data#import")
+    end
+
   end
 end

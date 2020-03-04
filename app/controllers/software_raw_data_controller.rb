@@ -43,6 +43,22 @@ class SoftwareRawDataController < ApplicationController
     respond_with(@software_raw_datum)
   end
 
+  def new_import
+  end
+
+  def import
+    result = SoftwareRawData::ImportCsvService.new(import_params).call
+
+    if result.success?
+      flash[:success] = "Import successful"
+      redirect_to software_raw_data_path
+    else
+      flash[:error] = result.error_message.to_s
+      redirect_to software_raw_data_path
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_software_raw_datum
@@ -53,4 +69,9 @@ class SoftwareRawDataController < ApplicationController
     def software_raw_datum_params
       params.require(:software_raw_datum).permit(:software_id, :name, :version, :vendor, :count, :operating_system, :lastseen, :source)
     end
+
+    def import_params
+      params.permit(:utf8, :authenticity_token, :file, :source, :lastseen).to_hash
+    end
+
 end

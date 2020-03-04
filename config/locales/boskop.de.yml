@@ -41,6 +41,7 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
+    import_software_raw_data_file: Software-Rohdaten aus Datei importieren
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
