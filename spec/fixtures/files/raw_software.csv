@@ -1,5 +1,5 @@
-"name";"version";"vendor";"count";"operating_system"
-"7-Zip 19.00";"19.00";"Igor Pavlov";77;"Windows"
-"7-Zip 19.00 (x64 edition)";"19.00.00.0";"Igor Pavlov";25;"Windows"
-"7-Zip 19.00 (x64)";"19.00";"Igor Pavlov";80;"Windows"
-"7-Zip 19.02 alpha (x64)";"19.02 alpha";"Igor Pavlov";2;"Windows"
+"name";"version";"vendor";"count";"operating_system";"lastseen";"source"
+"7-Zip 19.00";"19.00";"Igor Pavlov";77;"Windows";;
+"7-Zip 19.00 (x64 edition)";"19.00.00.0";"Igor Pavlov";25;"Windows";;
+"7-Zip 19.00 (x64)";"19.00";"Igor Pavlov";80;"Windows";;
+"7-Zip 19.02 alpha (x64)";"19.02 alpha";"Igor Pavlov";2;"Windows";2020-03-13;"Dokusnap"

@@ -12,10 +12,14 @@ module SoftwareRawData
     # * :file   - csv import file
     #
     # optional parameters:
+    # * :lastseen - global default if entry from csv is missing
+    # * :source   - global default if entry from csv is missing
     #
     def initialize(options = {})
       options.symbolize_keys!
-      @csvfile = get_file(options)
+      @csvfile  = get_file(options)
+      @lastseen = options.fetch(:lastseen) { Date.today.to_s }
+      @source   = options.fetch(:source)   { "" }
     end
 
     # service.call()
@@ -32,8 +36,11 @@ module SoftwareRawData
                  software_raw_data: software_raw_data
                )
       end
-      CSV.foreach(csvfile, headers: true, converters: :all, col_sep: ';') do |row|
-        sc = SoftwareRawData::Creator.new(attributes: row.to_hash)
+      CSV.foreach(csvfile, headers: true, converters: :date, col_sep: ';') do |row|
+        attributes = row.to_hash
+        attributes["lastseen"] ||= lastseen
+        attributes["source"] ||= source
+        sc = SoftwareRawData::Creator.new(attributes: attributes)
         if sc.save
            software_raw_data << sc.software_raw_datum
         else
@@ -51,7 +58,7 @@ module SoftwareRawData
     end
 
   private
-    attr_reader :csvfile
+    attr_reader :csvfile, :lastseen, :source
 
     # file may be ActionDispatch::Http::UploadedFile
     #
