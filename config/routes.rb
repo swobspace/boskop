@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :software_categories
   resources :software
   resources :software_raw_data do
+    member do
+      get :add_software
+    end
     collection do
       get :search
       post :search

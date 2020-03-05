@@ -57,6 +57,15 @@ RSpec.describe SoftwareRawDataController, type: :controller do
     end
   end
 
+  describe "GET #new_software" do
+    it "returns a success response" do
+      software_raw_datum = SoftwareRawDatum.create! valid_attributes
+      get :add_software, params: {id: software_raw_datum.to_param}, session: valid_session
+      expect(response).to be_successful
+    end
+  end
+
+
   describe "GET #new_import" do
     it "returns a success response" do
       get :new_import, params: {}, session: valid_session

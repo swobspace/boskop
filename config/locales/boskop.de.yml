@@ -1,5 +1,8 @@
 de:
   # mostly used in navigation
+  wobapphelpers:
+    actions:
+      add_software: Software hinzufügen
   boskop:
     action: Aktion
     nodes: Knoten

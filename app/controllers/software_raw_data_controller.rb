@@ -1,5 +1,5 @@
 class SoftwareRawDataController < ApplicationController
-  before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy]
+  before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy, :add_software]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /software_raw_data
@@ -59,7 +59,6 @@ class SoftwareRawDataController < ApplicationController
 
   def import
     result = SoftwareRawData::ImportCsvService.new(import_params).call
-
     if result.success?
       flash[:success] = "Import successful"
       redirect_to software_raw_data_path
@@ -67,7 +66,14 @@ class SoftwareRawDataController < ApplicationController
       flash[:error] = result.error_message.to_s
       redirect_to software_raw_data_path
     end
+  end
 
+  def add_software
+    @software = Software.new(
+                name: @software_raw_datum.name,
+                vendor: @software_raw_datum.vendor,
+                minimum_allowed_version: @software_raw_datum.version,
+                )
   end
 
   private
