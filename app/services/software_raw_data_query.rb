@@ -22,7 +22,7 @@ class SoftwareRawDataQuery
     @relation       = relation
     @search_options = search_options.symbolize_keys!
     @limit          = 0
-    @use_pattern    = @search_options.delete(:use_pattern) { false }
+    @use_pattern    = @search_options.fetch(:use_pattern) { false }
     @query          ||= build_query
   end
 
@@ -71,6 +71,7 @@ private
         value.each_pair do |k,v|
           query = query.where("#{k} ~* ?", v)
         end
+      when :use_pattern
       when :software_id
         if use_pattern
           sw = Software.find(value)
