@@ -31,6 +31,11 @@ RSpec.describe SoftwareController, type: :routing do
       expect(patch: "/software/1").to route_to("software#update", id: "1")
     end
 
+    it "routes to #assign_raw_software via PATCH" do
+      expect(patch: "/software/1/assign_raw_software").to route_to("software#assign_raw_software", id: "1")
+    end
+
+
     it "routes to #destroy" do
       expect(delete: "/software/1").to route_to("software#destroy", id: "1")
     end

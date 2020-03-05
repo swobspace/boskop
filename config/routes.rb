@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :software_categories
-  resources :software
+  resources :software do
+    member do
+      patch :assign_raw_software
+    end
+  end
   resources :software_raw_data do
     member do
       get :add_software

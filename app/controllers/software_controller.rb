@@ -1,5 +1,5 @@
 class SoftwareController < ApplicationController
-  before_action :set_software, only: [:show, :edit, :update, :destroy]
+  before_action :set_software, only: [:show, :edit, :update, :destroy, :assign_raw_software]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /software
@@ -41,6 +41,11 @@ class SoftwareController < ApplicationController
   def destroy
     @software.destroy
     respond_with(@software)
+  end
+
+  def assign_raw_software
+    flash[:notice] = "stay tuned"
+    redirect_to(@software)
   end
 
   private
