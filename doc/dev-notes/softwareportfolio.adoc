@@ -41,3 +41,11 @@ SoftwareRawData: attribute / tag from docusnap (german version)
   - date (of note creation) -> use updated_at
   - state: :ok, :warning, :critical, :unknown (default)
 
+
+== Queries
+
+=== Postgresql: search for pattern
+
+----
+SoftwareRawDatum.where("name ~* 'microsoft visual studio 2010.*(Runtime|Laufzeit)'").count
+----
