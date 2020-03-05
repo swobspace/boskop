@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_183610) do
+ActiveRecord::Schema.define(version: 2020_03_05_071709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -301,7 +301,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_183610) do
 
   create_table "software", force: :cascade do |t|
     t.string "name", default: "", null: false
-    t.text "pattern"
+    t.jsonb "pattern", default: {}
     t.string "vendor", default: ""
     t.text "description"
     t.string "minimum_allowed_version", default: ""

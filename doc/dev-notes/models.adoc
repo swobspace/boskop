@@ -273,7 +273,7 @@ bin/rails g scaffold SoftwareRawData \
 ----
 bin/rails g scaffold Software \
   name:string \
-  pattern:text \
+  pattern:jsonb \
   vendor:string:index \
   description:text \
   minimum_allowed_version:string \
@@ -283,6 +283,8 @@ bin/rails g scaffold Software \
   red:date \
   software_category:references:index \
   --no-stylesheets --no-javascripts --no-helper --no-jbuilder
+
+# bin/rails g migration ChangePatternToTypeJsonbInSoftware
 ----
 
 ## SoftwareCategory:
