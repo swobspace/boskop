@@ -18,7 +18,6 @@ RSpec.describe SoftwareRawDataController, type: :routing do
       expect(get: "/software_raw_data/1/edit").to route_to("software_raw_data#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/software_raw_data").to route_to("software_raw_data#create")
     end
@@ -42,6 +41,20 @@ RSpec.describe SoftwareRawDataController, type: :routing do
     it "routes to #import" do
       expect(:post => "/software_raw_data/import").to route_to("software_raw_data#import")
     end
+
+    it "routes to #search" do
+      expect(:get => "software_raw_data/search").to route_to("software_raw_data#search")
+    end
+
+    it "routes to #search" do
+      expect(:post => "software_raw_data/search").to route_to("software_raw_data#search")
+    end
+
+    it "routes to #search_form" do
+      expect(:get => "software_raw_data/search_form").to route_to("software_raw_data#search_form")
+    end
+
+
 
   end
 end

@@ -23,6 +23,25 @@ RSpec.describe SoftwareRawDataController, type: :controller do
     end
   end
 
+  describe "GET #search" do
+    context "with default format" do
+      it "returns a success response" do
+        SoftwareRawDatum.create! valid_attributes
+        get :search, params: {name: 'anything'}, session: valid_session
+        expect(response).to be_successful
+      end
+    end
+
+    context "with format :csv" do
+      it "returns a success response" do
+        pending "not yet implemented"
+        SoftwareRawDatum.create! valid_attributes
+        get :search, params: {name: 'anything', format: :csv}, session: valid_session
+        expect(response).to be_successful
+      end
+    end
+  end
+
   describe "GET #show" do
     it "returns a success response" do
       software_raw_datum = SoftwareRawDatum.create! valid_attributes
@@ -41,6 +60,13 @@ RSpec.describe SoftwareRawDataController, type: :controller do
   describe "GET #new_import" do
     it "returns a success response" do
       get :new_import, params: {}, session: valid_session
+      expect(response).to be_successful
+    end
+  end
+
+  describe "GET #search_form" do
+    it "returns a success response" do
+      get :search_form, params: {}, session: valid_session
       expect(response).to be_successful
     end
   end

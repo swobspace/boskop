@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :software
   resources :software_raw_data do
     collection do
+      get :search
+      post :search
+      get :search_form
       get :new_import
       post :import
     end

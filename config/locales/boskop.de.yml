@@ -13,6 +13,7 @@ de:
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke
+    search_software_raw_data: Suche Software-Rohdaten
     search_vulnerabilities: Suche Schwachstellen
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
@@ -44,6 +45,7 @@ de:
     import_software_raw_data_file: Software-Rohdaten aus Datei importieren
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
+    software_raw_data_searchresult: Software-Rohdaten / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
     vulnerability_detail: Schwachstelle/Details
     vulnerable_hosts: Verwundbare Hosts
@@ -231,6 +233,7 @@ de:
     severity: Severity
     sn: Nachname
     software: Software
+    software_id: Software
     software_category: Software-Kategorie
     software_raw_data: Software-Rohdaten
     source: Quelle
@@ -245,6 +248,7 @@ de:
     type: Typ
     unique: Unique
     update: Update
+    use_pattern: Verwende Suchmuster der ausgewählten Software (Softwareauswahl erforderlich)
     username: Username
     userprincipalname: Principalname
     uuid: UUID

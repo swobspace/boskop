@@ -8,6 +8,17 @@ class SoftwareRawDataController < ApplicationController
     respond_with(@software_raw_data)
   end
 
+  def search
+    query = SoftwareRawDataQuery.new(@software_raw_data, search_params)
+    @filter_info = query.search_options
+    @software_raw_data = query.all
+    add_breadcrumb(t('boskop.search_software_raw_data'), 
+                   search_software_raw_data_path(search_params))
+    respond_with(@software_raw_data) do |format|
+      format.csv { raise RuntimeError, "not yet implemented" }
+    end
+  end
+
   # GET /software_raw_data/1
   def show
     respond_with(@software_raw_datum)
@@ -72,6 +83,13 @@ class SoftwareRawDataController < ApplicationController
 
     def import_params
       params.permit(:utf8, :authenticity_token, :file, :source, :lastseen).to_hash
+    end
+
+    def search_params
+      searchparms = params.permit(*submit_parms,
+        :software_id, :use_pattern, :name, :vendor, :operating_system,
+        :lastseen, :newer, :older, :limit).to_hash
+      searchparms.reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
 end

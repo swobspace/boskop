@@ -13,6 +13,7 @@
         <div class="dropdown-header"><%= t('attributes.software_raw_data')%></div>
 
 	<%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.software_raw_data')), main_app.software_raw_data_path, class: 'dropdown-item' %>
+        <%=link_to raw('<span class="fas fa-fw fa-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_software_raw_data_path, class: 'dropdown-item' %>
         <% if can? :create, SoftwareRawData %>
           <%=link_to raw('<span class="fas fa-fw fa-file" aria-hidden="true"></span> '+t('boskop.import_software_raw_data_file')), main_app.new_import_software_raw_data_path, class: 'dropdown-item' %>
 
