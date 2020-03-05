@@ -13,10 +13,13 @@ de:
     show_all: alles anzeigen
     restore: zurücksetzen
     csv_export: CSV-Export
+    add_software_from_raw_data: Softwareeintrag aus Rohdaten erstellen
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke
     search_software_raw_data: Suche Software-Rohdaten
+    search_software_via_pattern: Suche Software via Pattern
+    assign_software_via_pattern: Software via Pattern zuweisen
     search_vulnerabilities: Suche Schwachstellen
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/

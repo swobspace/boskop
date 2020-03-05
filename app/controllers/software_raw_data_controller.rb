@@ -1,5 +1,6 @@
 class SoftwareRawDataController < ApplicationController
-  before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy, :add_software]
+  before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy, 
+                                                :add_software]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /software_raw_data
@@ -70,9 +71,14 @@ class SoftwareRawDataController < ApplicationController
 
   def add_software
     @software = Software.new(
-                name: @software_raw_datum.name,
-                vendor: @software_raw_datum.vendor,
-                minimum_allowed_version: @software_raw_datum.version,
+                  name: @software_raw_datum.name,
+                  vendor: @software_raw_datum.vendor,
+                  minimum_allowed_version: @software_raw_datum.version,
+                  pattern: {
+                    "name" => @software_raw_datum.name,
+                    "vendor" => @software_raw_datum.vendor,
+                    "operating_system" => @software_raw_datum.operating_system,
+                  }
                 )
   end
 
