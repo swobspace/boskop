@@ -1,4 +1,13 @@
 shared_context "software_raw_data variables" do
+  let(:sw1) { FactoryBot.create(:software,
+    name: "Microsoft Visual Studio Runtime",
+    vendor: "Microsoft Corporation",
+    pattern: {'name' => '.*studio.*(runtime|laufzeit)', "vendor" => 'microsoft'}
+  )}
+  let(:sw2) { FactoryBot.create(:software,
+    name: "Wrong Software",
+    vendor: "Wrong Vendor"
+  )}
   let!(:raw1) { FactoryBot.create(:software_raw_datum,
     name: "Microsoft Visual Studio 2010 Runtime",
     version: "10.0.50903",
@@ -6,7 +15,8 @@ shared_context "software_raw_data variables" do
     count: "22",
     operating_system: "Windows",
     lastseen: '2020-03-01',
-    source: "docusnap"
+    source: "docusnap",
+    software_id: sw1.id
   )}
   let!(:raw2) { FactoryBot.create(:software_raw_datum,
     name: "Microsoft Visual Studio 2010 Laufzeit",
@@ -15,7 +25,8 @@ shared_context "software_raw_data variables" do
     count: "3",
     operating_system: "Windows",
     lastseen: '2020-03-02',
-    source: "docusnap"
+    source: "docusnap",
+    software_id: sw2.id
   )}
   let!(:raw3) { FactoryBot.create(:software_raw_datum,
     name: "7-Zip 19.00 (x64 edition)",

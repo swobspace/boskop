@@ -11,6 +11,8 @@ class SoftwareRawDataQuery
   # * :created_at - date
   # * :newer - lastseen >= :newer(date)
   # * :older - lastseen <= :older(date)
+  # * :software_id - integer
+  # * :use_pattern - boolean (only with software_id)
   # * :limit - limit result (integer)
   #
   # please note: 
@@ -20,6 +22,7 @@ class SoftwareRawDataQuery
     @relation       = relation
     @search_options = search_options.symbolize_keys!
     @limit          = 0
+    @use_pattern    = @search_options.delete(:use_pattern) { false }
     @query          ||= build_query
   end
 
@@ -42,7 +45,7 @@ class SoftwareRawDataQuery
   end
 
 private
-  attr_accessor :relation, :limit
+  attr_accessor :relation, :limit, :use_pattern
 
   def build_query
     query = relation
@@ -67,6 +70,15 @@ private
       when :pattern
         value.each_pair do |k,v|
           query = query.where("#{k} ~* ?", v)
+        end
+      when :software_id
+        if use_pattern
+          sw = Software.find(value)
+          sw.pattern.each_pair do |k,v|
+            query = query.where("#{k} ~* ?", v)
+          end
+        else
+          query = query.where(software_id: value)
         end
       when :search
         string_fields.each do |term|
