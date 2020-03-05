@@ -6,8 +6,9 @@ module SoftwareRawData
   class ImportCsvService
     Result = ImmutableStruct.new( :success?, :error_message, :software_raw_data )
     
-    # service = SoftwareRawData::ImportCsvService.new(file: 'csvfile')
-    #
+    # service = SoftwareRawData::ImportCsvService.new(
+    #             file: 'csvfile', source: 'docusnap', lastseen: '2020-02-29'
+    #            )
     # mandatory options:
     # * :file   - csv import file
     #
@@ -20,6 +21,7 @@ module SoftwareRawData
       @csvfile  = get_file(options)
       @lastseen = options.fetch(:lastseen) { Date.today.to_s }
       @source   = options.fetch(:source)   { "" }
+      update_csv_converters
     end
 
     # service.call()
@@ -36,7 +38,9 @@ module SoftwareRawData
                  software_raw_data: software_raw_data
                )
       end
-      CSV.foreach(csvfile, headers: true, converters: :date, col_sep: ';') do |row|
+      CSV.foreach(csvfile, headers: true, col_sep: ';',
+                           header_converters: header_converters(source),
+                           converters: :date) do |row|
         attributes = row.to_hash
         attributes["lastseen"] ||= lastseen
         attributes["source"] ||= source
@@ -70,5 +74,29 @@ module SoftwareRawData
         file.to_s
       end
     end
-  end
-end
+
+    def update_csv_converters
+      CSV::HeaderConverters[:docusnap] = ->(v) { docusnap_headers[v] || v }
+    end
+
+    def docusnap_headers
+      { 
+        "Name" => "name",
+        "Version" => "version",
+        "Hersteller" => "vendor",
+        "Anzahl" => "count",
+        "Betriebssystem" => "operating_system"
+      }
+    end
+
+    def header_converters(source)
+      if source.to_sym == :docusnap
+        :docusnap
+      else
+        nil
+      end
+      
+    end
+  end # class ImportCsvService
+end # module SoftwareRawData
+

@@ -49,6 +49,28 @@ module SoftwareRawData
         end
       end
 
+      context "with german header values" do
+        let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'docusnap.csv') }
+        it "creates 4 SoftwareRawData" do
+          expect {
+            subject.call
+          }.to change{SoftwareRawDatum.count}.by(4)
+        end
+        describe "the first software_raw_datum" do
+          let(:result) { subject.call }
+          let!(:swr) { result.software_raw_data.first }
+          it { expect(swr).to be_a_kind_of SoftwareRawDatum }
+          it { expect(swr).to be_persisted }
+          it { expect(swr.name.to_s).to eq("7-Zip 19.00") }
+          it { expect(swr.version).to eq("19.00") }
+          it { expect(swr.vendor).to eq("Igor Pavlov") }
+          it { expect(swr.count).to eq(77) }
+          it { expect(swr.operating_system).to eq("Windows") }
+          it { expect(swr.lastseen.to_s).to match(/2020-03-03/) }
+          it { expect(swr.source).to eq("docusnap") }
+        end
+      end
+
       context "with invalid import_attributes" do
         subject { ImportCsvService.new(file: "") }
 
