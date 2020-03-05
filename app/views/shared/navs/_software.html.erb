@@ -1,0 +1,23 @@
+<% if can? :read, :software %>
+  <li class="nav-item dropdown <%= active_class('software') %>">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarHostsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= t('controller.software') %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarHostsLink">
+      <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.software')), main_app.software_index_path, class: 'dropdown-item' %>
+      <% if false %>
+      <%=link_to raw('<span class="fas fa-fw fa-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_software_path, class: 'dropdown-item' %>
+      <% end %>
+      <% if can? :read, SoftwareRawData %>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-header"><%= t('attributes.software_raw_data')%></div>
+
+	<%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.software_raw_data')), main_app.software_raw_data_path, class: 'dropdown-item' %>
+        <% if can? :create, SoftwareRawData %>
+          <%=link_to raw('<span class="fas fa-fw fa-file" aria-hidden="true"></span> '+t('boskop.import_software_raw_data_file')), main_app.new_import_software_raw_data_path, class: 'dropdown-item' %>
+
+        <% end %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
