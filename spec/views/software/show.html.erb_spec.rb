@@ -10,7 +10,7 @@ RSpec.describe "software/show", type: :view do
 
     @software = assign(:software, Software.create!(
       name: "Name",
-      pattern: "MyText",
+      pattern: { 'name' => '/Hans/', 'vendor' => '/Fritz/' },
       vendor: "Vendor",
       description: "MyText",
       minimum_allowed_version: "Minimum Allowed Version",
@@ -25,7 +25,7 @@ RSpec.describe "software/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Name/)
-    expect(rendered).to match(/MyText/)
+    expect(rendered).to match(/Hans.*Fritz/)
     expect(rendered).to match(/Vendor/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/Minimum Allowed Version/)

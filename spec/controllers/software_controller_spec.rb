@@ -70,7 +70,7 @@ RSpec.describe SoftwareController, type: :controller do
     let(:swcat) { FactoryBot.create(:software_category) }
     context "with valid params" do
       let(:new_attributes) {{
-        "pattern" => 'name:/\A7-zip.*\z/',
+        "pattern" => {'name' => '/\A7-zip.*\z/', 'vendor' => 'ACME Ltd'},
         "vendor" => "MyVendor",
         "description" => "MyDescription",
         "minimum_allowed_version" => "19.4",

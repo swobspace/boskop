@@ -12,7 +12,7 @@ RSpec.describe "software/index", type: :view do
     assign(:software, [
       Software.create!(
         name: "Name1",
-        pattern: "myPattern",
+        pattern: { 'name' => '/Hans/', 'vendor' => '/Fritz/' },
         vendor: "Vendor",
         description: "MyText",
         minimum_allowed_version: "Minimum Allowed Version",
@@ -24,7 +24,7 @@ RSpec.describe "software/index", type: :view do
       ),
       Software.create!(
         name: "Name2",
-        pattern: "myPattern",
+        pattern: { 'name' => '/Hans/', 'vendor' => '/Fritz/' },
         vendor: "Vendor",
         description: "MyText",
         minimum_allowed_version: "Minimum Allowed Version",
@@ -41,7 +41,7 @@ RSpec.describe "software/index", type: :view do
     render
     assert_select "tr>td", text: "Name1".to_s, count: 1
     assert_select "tr>td", text: "Name2".to_s, count: 1
-    assert_select "tr>td", text: "myPattern".to_s, count: 2
+    assert_select "tr>td", text: { 'name' => '/Hans/', 'vendor' => '/Fritz/' }.to_s, count: 2
     assert_select "tr>td", text: "Vendor".to_s, count: 2
     assert_select "tr>td", text: "MyText".to_s, count: 2
     assert_select "tr>td", text: "Minimum Allowed Version".to_s, count: 2

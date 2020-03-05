@@ -4,6 +4,8 @@ class Software < ApplicationRecord
   belongs_to :software_category, optional: true
 
   # -- configuration
+  PATTERN_ATTRIBUTES = [ 'name', 'vendor', 'version', 'operating_system' ]
+
   # -- validations and callbacks
   validates :name, presence: true, uniqueness: true
 

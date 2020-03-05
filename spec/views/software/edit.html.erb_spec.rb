@@ -26,7 +26,11 @@ RSpec.describe "software/edit", type: :view do
 
       assert_select "input[name=?]", "software[name]"
 
-      assert_select "textarea[name=?]", "software[pattern]"
+
+      assert_select "input[name=?]", "software[pattern][name]"
+      assert_select "input[name=?]", "software[pattern][vendor]"
+      assert_select "input[name=?]", "software[pattern][version]"
+      assert_select "input[name=?]", "software[pattern][operating_system]"
 
       assert_select "input[name=?]", "software[vendor]"
 
