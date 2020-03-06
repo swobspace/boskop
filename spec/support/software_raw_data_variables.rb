@@ -1,12 +1,17 @@
 shared_context "software_raw_data variables" do
-  let(:sw1) { FactoryBot.create(:software,
+  let!(:sw1) { FactoryBot.create(:software,
     name: "Microsoft Visual Studio Runtime",
     vendor: "Microsoft Corporation",
     pattern: {'name' => '.*studio.*(runtime|laufzeit)', "vendor" => 'microsoft'}
   )}
-  let(:sw2) { FactoryBot.create(:software,
+  let!(:sw2) { FactoryBot.create(:software,
     name: "Wrong Software",
-    vendor: "Wrong Vendor"
+    vendor: "Wrong Vendor",
+  )}
+  let!(:swzip) { FactoryBot.create(:software,
+    name: "7-Zip",
+    vendor: "Igor Pavlov",
+    pattern: {'name' => '^7-Zip', "vendor" => 'Igor Pavlov'}
   )}
   let!(:raw1) { FactoryBot.create(:software_raw_datum,
     name: "Microsoft Visual Studio 2010 Runtime",
