@@ -146,6 +146,16 @@ RSpec.describe SoftwareRawDataQuery do
     it_behaves_like "a software_raw_data query"
   end # :software_id
 
+  context "with no_software_id: true" do
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {no_software_id: true}) }
+    before(:each) do
+      @matching = [raw3, raw4, raw5]
+      @nonmatching = [raw1, raw2]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :software_id
+
+
   context "with :software_id and :use_pattern" do
     subject { SoftwareRawDataQuery.new(all_software_raw_data, {use_pattern: true, software_id: sw1.id}) }
     before(:each) do

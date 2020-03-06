@@ -12,6 +12,7 @@ class SoftwareRawDataQuery
   # * :newer - lastseen >= :newer(date)
   # * :older - lastseen <= :older(date)
   # * :software_id - integer
+  # * :no_software_id - boolean: raw data without assigned software
   # * :use_pattern - boolean (only with software_id)
   # * :limit - limit result (integer)
   #
@@ -72,8 +73,10 @@ private
           query = query.where("#{k} ~* ?", v)
         end
       when :use_pattern
-      when :software_id
-        if use_pattern
+      when :software_id, :no_software_id
+        if key == :no_software_id
+          query = query.where(software_id: nil)
+        elsif use_pattern
           sw = Software.find(value)
           sw.pattern.each_pair do |k,v|
             query = query.where("#{k} ~* ?", v)
