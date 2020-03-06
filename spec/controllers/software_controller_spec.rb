@@ -88,6 +88,14 @@ RSpec.describe SoftwareController, type: :controller do
         expect(software.attributes).to include(new_attributes)
       end
 
+      it "updates pattern only with non-empty fields" do
+        pattributes = { 'pattern' =>  {'name' => '/\A7-zip.*\z/', 'vendor' => '', 'version' => '', 'operating_system' => ''}}
+        software = Software.create! valid_attributes
+        put :update, params: {id: software.to_param, software: pattributes}, session: valid_session
+        software.reload
+        expect(software.pattern).to eq({'name' => '/\A7-zip.*\z/'})
+      end
+
       it "redirects to the software" do
         software = Software.create! valid_attributes
         put :update, params: {id: software.to_param, software: valid_attributes}, session: valid_session

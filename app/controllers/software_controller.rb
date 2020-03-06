@@ -56,10 +56,14 @@ class SoftwareController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def software_params
-      params.require(:software)
-            .permit(:name, :vendor, :description, 
-                    :minimum_allowed_version, :maximum_allowed_version, 
-                    :green, :yellow, :red, :software_category_id,
-                    pattern: Software::PATTERN_ATTRIBUTES)
+      parms = params.require(:software)
+                    .permit(:name, :vendor, :description, 
+                            :minimum_allowed_version, :maximum_allowed_version, 
+                            :green, :yellow, :red, :software_category_id,
+                            pattern: Software::PATTERN_ATTRIBUTES)
+      if parms['pattern'].present?
+        parms['pattern'] = parms['pattern'].reject {|k,v| v.blank? }
+      end
+      parms
     end
 end
