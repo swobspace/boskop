@@ -27,7 +27,7 @@ RSpec.describe SoftwareRawDataController, type: :controller do
     context "with default format" do
       it "returns a success response" do
         SoftwareRawDatum.create! valid_attributes
-        get :search, params: {name: 'anything'}, session: valid_session
+        get :search, params: {name: 'anything', no_software_id: true}, session: valid_session
         expect(response).to be_successful
       end
     end

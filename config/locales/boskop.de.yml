@@ -240,6 +240,7 @@ de:
     sn: Nachname
     software: Software
     software_id: Software
+    no_software_id: ohne zugewiesene Software
     software_category: Software-Kategorie
     software_raw_data: Software-Rohdaten
     source: Quelle

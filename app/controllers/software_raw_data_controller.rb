@@ -100,7 +100,7 @@ class SoftwareRawDataController < ApplicationController
     def search_params
       searchparms = params.permit(*submit_parms,
         :software_id, :use_pattern, :name, :vendor, :operating_system,
-        :lastseen, :newer, :older, :limit).to_hash
+        :no_software_id, :lastseen, :newer, :older, :limit).to_hash
       searchparms.reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
