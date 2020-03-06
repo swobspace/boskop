@@ -78,8 +78,12 @@ private
           query = query.where(software_id: nil)
         elsif use_pattern
           sw = Software.find(value)
-          sw.pattern.each_pair do |k,v|
-            query = query.where("#{k} ~* ?", v)
+          if sw.pattern.empty?
+            query = query.none
+          else
+            sw.pattern.each_pair do |k,v|
+              query = query.where("#{k} ~* ?", v)
+            end
           end
         else
           query = query.where(software_id: value)
