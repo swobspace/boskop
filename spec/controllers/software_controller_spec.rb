@@ -103,6 +103,18 @@ RSpec.describe SoftwareController, type: :controller do
       end
     end
   end
+  describe "PATCH #assign_raw_software" do
+    it "returns a success response" do
+      software = Software.create! valid_attributes
+      patch :assign_raw_software, params: {id: software.to_param}, session: valid_session
+      expect(response).to redirect_to(software)
+    end
+    it "calls AssignSoftwareJob" do
+      software = Software.create! valid_attributes
+      expect(AssignSoftwareJob).to receive(:perform_now).with(software_id: software.id)
+      patch :assign_raw_software, params: {id: software.to_param}, session: valid_session
+    end
+  end
 
   describe "DELETE #destroy" do
     it "destroys the requested software" do

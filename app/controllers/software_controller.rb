@@ -44,7 +44,7 @@ class SoftwareController < ApplicationController
   end
 
   def assign_raw_software
-    flash[:notice] = "stay tuned"
+    AssignSoftwareJob.perform_now(software_id: @software.id)
     redirect_to(@software)
   end
 
