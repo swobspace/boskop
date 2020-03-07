@@ -47,4 +47,8 @@ protected
     end
   end
 
+ def submit_parms
+    [ "bci", "utf8", "authenticity_token", "commit", "format" ]
+  end
+
 end

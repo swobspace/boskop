@@ -1,5 +1,8 @@
 de:
   # mostly used in navigation
+  wobapphelpers:
+    actions:
+      add_software: Software hinzufügen
   boskop:
     action: Aktion
     nodes: Knoten
@@ -10,9 +13,13 @@ de:
     show_all: alles anzeigen
     restore: zurücksetzen
     csv_export: CSV-Export
+    add_software_from_raw_data: Softwareeintrag aus Rohdaten erstellen
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke
+    search_software_raw_data: Suche Software-Rohdaten
+    search_software_via_pattern: Suche Software via Pattern
+    assign_software_via_pattern: Software via Pattern zuweisen
     search_vulnerabilities: Suche Schwachstellen
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
@@ -32,6 +39,7 @@ de:
     applied_filter: Angewandter Filter
     assigned_networks: Zugeordnete Netzwerke
     assigned_lines: Zugeordnete Leitungen/Zugänge
+    assigned_software_raw_data: Zugeordnete Software-Rohdaten
     basics: Basics
     this_will_destroy_all_merkmale: Das Löschen einer Merkmalklasse löscht alle Merkmale dieser Klasse unwiderruflich! Wollen Sie die Merkmalklasse wirklich, wirklich löschen? Geben Sie 'Ja bitte' ein
     verify_destroy: Ja bitte
@@ -41,8 +49,10 @@ de:
     primary_line: Erstweg
     secondary_line: Zweitweg
     import_host_file: Hosts aus Datei importieren
+    import_software_raw_data_file: Software-Rohdaten aus Datei importieren
     import_vulnerabilities_file: Schwachstellenscan importieren
     hosts_searchresult: Hosts / Suchergebnis
+    software_raw_data_searchresult: Software-Rohdaten / Suchergebnis
     vulnerabilities_searchresult: Schwachstellen / Suchergebnis
     vulnerability_detail: Schwachstelle/Details
     vulnerable_hosts: Verwundbare Hosts
@@ -97,6 +107,9 @@ de:
       operating_system_mapping: Betriebssystem-Matrix
       org_unit: Organisationseinheit
       responsibility: Verantwortlichkeit
+      software: Software
+      software_category: Software-Kategorie
+      software_raw_datum: Software-Rohdaten
       vulnerability: Schwachstelle
       vulnerability_detail: Schwachstellen-Detail
       user: User
@@ -128,6 +141,7 @@ de:
     contract_start: Vertragsbeginn
     contract_end: Vertragsende
     contract_period: Vertragslaufzeit
+    count: Anzahl
     created_at: angelegt am
     created_newer: angelegt nach
     created_older: angelegt vor
@@ -151,12 +165,15 @@ de:
     for_object: Objektklasse 
     fqdn: FQDN
     framework_contract: Rahmenvertrag
+    framework: Framework
     givenname: Vorname
+    green: Grün
     higher: Critical+High
     host: Host
     host_id: Host
     host_category: Host-Kategorie
     hostname: Hostname
+    hosts: Hosts
     if_description: Interface-Beschreibung
     import_mode: Import-Mode
     import_state: Import-Status
@@ -170,17 +187,21 @@ de:
     last_modification_date: letzte Änderung
     lid: StandortID
     line: Leitung/Zugang
+    lines: Leitungen/Zugänge
     line_state: Status
     location: Lokation
     location_a: Standort A
     location_b: Standort B
     mac: MAC
+    main_business_process: Wesentlicher Geschäftsprozess
     max_prefix: MAC-Prefix
     mandantory: Pflichtfeld
     matching_pattern: Muster für die Zuweisung
     merkmal: Merkmal
     merkmalfor: Merkmal für
     merkmalklasse: Merkmalklasse
+    maximum_allowed_version: Maximal erlaubte Version
+    minimum_allowed_version: Minimal erlaubte Version
     name: Name
     nessus_id: NessusID
     netzwerk: Netzwerk
@@ -194,8 +215,10 @@ de:
     ort: Ort
     oui: OUI
     oui_vendor: OUI Vendor
+    pattern: Matching Pattern
     period_of_notice: Kündigungsfrist
     period_of_notice_unit: Einheit
+    people: Personen
     plugin_output: Plugin Output
     plz: PLZ
     position: Position
@@ -204,6 +227,7 @@ de:
     postfachplz: Postfach-PLZ
     product: Produkt
     provider_id: Identifikation des Providers
+    red: Rot
     renewal_period: Verlängerungszeitraum
     renewal_unit: Einheit
     responsible: Verantwortlicher
@@ -215,6 +239,12 @@ de:
     serial: Serial
     severity: Severity
     sn: Nachname
+    software: Software
+    software_id: Software
+    no_software_id: ohne zugewiesene Software
+    software_category: Software-Kategorie
+    software_raw_data: Software-Rohdaten
+    source: Quelle
     status: Status
     streetaddress: Straße, Nr.
     tag: Tag
@@ -226,11 +256,13 @@ de:
     type: Typ
     unique: Unique
     update: Update
+    use_pattern: Verwende Suchmuster der ausgewählten Software (Softwareauswahl erforderlich)
     username: Username
     userprincipalname: Principalname
     uuid: UUID
     value: Wert
     vendor: Hersteller
+    version: Version
     visible: Sichtbarkeit
     vulnerability: Schwachstellen
     vulnerability_detail: Schwachstellen-Detail
@@ -241,6 +273,7 @@ de:
     warranty_start_until: Support-Start bis
     warranty_end: Support-Ende
     workgroup: Workgroup
+    yellow: Gelb
     xrefs: Referenzen
 
   controller:
@@ -268,6 +301,9 @@ de:
     org_units: Organisationseinheiten
     responsibles: Verantwortliche
     responsibilities: Verantwortlichkeiten
+    software: Software
+    software_categories: Software-Kategorien
+    software_raw_data: Software-Rohdaten
     vulnerabilities: Schwachstellen
     vulnerability_details: Schwachstellen-Details
     users: Benutzer

@@ -1,0 +1,79 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.software') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table">
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.name')%>:</th>
+        <td><%= @software.name %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.pattern')%>:</th>
+        <td><%= @software.pattern %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.vendor')%>:</th>
+        <td><%= @software.vendor %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.description')%>:</th>
+        <td><%= @software.description %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.minimum_allowed_version')%>:</th>
+        <td><%= @software.minimum_allowed_version %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.maximum_allowed_version')%>:</th>
+        <td><%= @software.maximum_allowed_version %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.green')%>:</th>
+        <td><%= @software.green %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.yellow')%>:</th>
+        <td><%= @software.yellow %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.red')%>:</th>
+        <td><%= @software.red %></td>
+      </tr>
+
+      <tr>
+        <th class="w-25"><%= t('attributes.status')%>:</th>
+        <td class="<%= @software.status(:color) %>"><%= @software.status(:show_date) %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.software_category')%>:</th>
+        <td><%= @software.software_category %></td>
+      </tr>
+    
+    </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@software) %>
+      <%= delete_link(@software) %>
+      <%= new_link Software %>
+      <%= matching_raw_software_link(@software) %>
+      <%= assign_raw_software_link(@software) %>
+    </div>
+  </div>
+</div>
+
+<br />
+
+<h4><%= t('boskop.assigned_software_raw_data') %></h4>
+<%= render partial: 'software_raw_data', locals: {software_raw_data: @software.software_raw_data} %>

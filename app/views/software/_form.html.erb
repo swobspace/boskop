@@ -1,0 +1,66 @@
+<div class="container">
+  <%= simple_form_for(@software,
+    html: { class: 'form-horizontal card' }) do |f| %>
+
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
+      <%= f.input :name
+	 %>
+
+      <div class="form-group row">
+        <label for="pattern" class="col-sm-3 col-form-label">
+          <%= t('attributes.pattern') %>
+        </label>
+        <div class="col-sm-9">
+          <div class="card">
+           <div class="card-body bg-light">
+            <%= f.simple_fields_for :pattern do |ff| %>
+              <% Software::PATTERN_ATTRIBUTES.each do |attrib| %>
+                <div class="form-group row">
+                  <label for="<%= attrib %>" class="col-sm-3 col-form-label">
+                    <%= t('attributes.' + attrib.to_s) %>
+                  </label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control string" 
+                           id="software_pattern_<%= attrib %>" 
+                           name="software[pattern][<%= attrib %>]"
+                           value="<%= @software.pattern[attrib]%>"
+                    >
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+           </div>
+          </div>
+        </div>
+      </div>
+
+
+      <%= f.input :vendor
+	 %>
+      <%= f.input :description
+	 %>
+      <%= f.input :minimum_allowed_version
+	 %>
+      <%= f.input :maximum_allowed_version
+	 %>
+      <%= f.input :green, as: :string,
+                  wrapper: :horizontal_date
+	 %>
+      <%= f.input :yellow, as: :string,
+                  wrapper: :horizontal_date
+	 %>
+      <%= f.input :red, as: :string,
+                  wrapper: :horizontal_date
+	 %>
+      <%= f.association :software_category, 
+                  input_html: { class: 'select2'}
+	 %>
+
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  <% end %>
+</div>

@@ -250,3 +250,58 @@ bin/rails g scaffold NetworkInterface \
 
 #    bin/rails g migration ChangeDescriptionToIfDescriptionNetworkInterface
 ----
+
+## SoftwareRawData:
+
+for usage with docusnap
+
+----
+bin/rails g scaffold SoftwareRawData \
+  software:references:index \
+  name:string:index \
+  version:string \
+  vendor:string:index \
+  count:integer \
+  operating_system:string:index \
+  lastseen:date \
+  source:string \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
+----
+
+## Software:
+
+----
+bin/rails g scaffold Software \
+  name:string \
+  pattern:jsonb \
+  vendor:string:index \
+  description:text \
+  minimum_allowed_version:string \
+  maximum_allowed_version:string \
+  green:date \
+  yellow:date \
+  red:date \
+  software_category:references:index \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
+
+# bin/rails g migration ChangePatternToTypeJsonbInSoftware
+----
+
+## SoftwareCategory:
+
+----
+bin/rails g scaffold SoftwareCategory \
+  name:string \
+  description:text \
+  main_business_process:text \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
+----
+
+## Note
+
+----
+bin/rails g scaffold Note \
+  'notable:references{polymorphic}'
+  description:text \
+  date:date state:string:index
+----

@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-header">
+    <h4><%= t('activerecord.models.software_raw_datum') %></h4>
+  </div>
+  <div class="card-body">
+    <table class="table">
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.software')%>:</th>
+        <td><%= @software_raw_datum.software %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.name')%>:</th>
+        <td><%= @software_raw_datum.name %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.version')%>:</th>
+        <td><%= @software_raw_datum.version %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.vendor')%>:</th>
+        <td><%= @software_raw_datum.vendor %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.count')%>:</th>
+        <td><%= @software_raw_datum.count %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.operating_system')%>:</th>
+        <td><%= @software_raw_datum.operating_system %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.lastseen')%>:</th>
+        <td><%= @software_raw_datum.lastseen %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25"><%= t('attributes.source')%>:</th>
+        <td><%= @software_raw_datum.source %></td>
+      </tr>
+    
+    </table>
+
+    <div role="toolbar">
+      <%= back_link %>
+      <%= edit_link(@software_raw_datum) %>
+      <%= delete_link(@software_raw_datum) %>
+      <%= add_software_from_raw_data(@software_raw_datum) %>
+      <%= new_link SoftwareRawDatum %>
+    </div>
+  </div>
+</div>

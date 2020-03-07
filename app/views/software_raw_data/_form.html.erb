@@ -1,0 +1,31 @@
+<div class="container">
+  <%= simple_form_for(@software_raw_datum,
+    html: { class: 'form-horizontal card' }) do |f| %>
+
+    <div class="card-header">
+      <%= form_legend %>
+    </div>
+    <div class="card-body">
+      <%= f.association :software, input_html: { class: 'select2' }
+	 %>
+      <%= f.input :name
+	 %>
+      <%= f.input :version
+	 %>
+      <%= f.input :vendor
+	 %>
+      <%= f.input :count
+	 %>
+      <%= f.input :operating_system
+	 %>
+      <%= f.input :lastseen, as: :string,
+                  wrapper: :horizontal_date
+	 %>
+      <%= f.input :source
+	 %>
+
+      <%= f.button :submit, class: 'btn btn-primary' %>
+      <%= cancel_button %>
+    </div>
+  <% end %>
+</div>

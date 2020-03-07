@@ -4,8 +4,12 @@
       <%= t('boskop.configuration') %>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarConfigurationLink">
-      <% Boskop::CONFIGURATION_CONTROLLER.each do |ctrlr| %>
-        <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path"), class: 'dropdown-item'%>
+      <% Boskop::CONFIGURATION_CONTROLLER.each_pair do |cat,items| %>
+        <div class="dropdown-divider"></div>
+        <div class="dropdown-header"><%= t('attributes.' + cat.to_s)%></div>
+        <% items.each do |ctrlr| %>
+          <%=link_to t('controller.' + ctrlr), main_app.send("#{ctrlr}_path"), class: 'dropdown-item'%>
+        <% end %>
       <% end %>
     </div>
   </li>

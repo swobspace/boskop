@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  resources :software_categories
+  resources :software do
+    member do
+      patch :assign_raw_software
+    end
+  end
+  post "software_raw_data", to: "software_raw_data#index", constraints: lambda {|req| req.format == :json}
+  resources :software_raw_data do
+    member do
+      get :add_software
+    end
+    collection do
+      get :search
+      post :search
+      get :search_form
+      get :new_import
+      post :import
+    end
+  end
   resources :network_interfaces, except: [:new, :create]
   post "network_interfaces", to: "network_interfaces#index", constraints: lambda {|req| req.format == :json}
   resources :mac_prefixes
