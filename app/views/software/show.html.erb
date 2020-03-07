@@ -49,6 +49,11 @@
         <th class="w-25"><%= t('attributes.red')%>:</th>
         <td><%= @software.red %></td>
       </tr>
+
+      <tr>
+        <th class="w-25"><%= t('attributes.status')%>:</th>
+        <td class="<%= @software.status(:color) %>"><%= @software.status(:show_date) %></td>
+      </tr>
     
       <tr>
         <th class="w-25"><%= t('attributes.software_category')%>:</th>

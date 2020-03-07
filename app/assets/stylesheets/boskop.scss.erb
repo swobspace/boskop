@@ -54,9 +54,9 @@ div#footer{
 // --- cell states
 
 tr td {
-  &.CRITICAL {background-color: #FAA !important;}
-  &.WARNING  {background-color: #FF9 !important;}
-  &.OK       {background-color: #FF9 !important;}
+  &.CRITICAL, &.red {background-color: #FAA !important;}
+  &.WARNING, &.yellow {background-color: #FF9 !important;}
+  &.OK, &.green {background-color: #AFA !important;}
 }
 
 .autowidth { width: auto; }
@@ -103,3 +103,4 @@ dl {
 .btn {
   margin-bottom: .2em;
 }
+

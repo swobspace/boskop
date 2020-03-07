@@ -18,15 +18,17 @@
       <th><%= t('attributes.description') %></th>
       <th><%= t('attributes.minimum_allowed_version') %></th>
       <th><%= t('attributes.maximum_allowed_version') %></th>
-      <th><%= t('attributes.green') %></th>
-      <th><%= t('attributes.yellow') %></th>
-      <th><%= t('attributes.red') %></th>
+      <th class="notvisible"><%= t('attributes.green') %></th>
+      <th class="notvisible"><%= t('attributes.yellow') %></th>
+      <th class="notvisible"><%= t('attributes.red') %></th>
+      <th><%= t('attributes.status') %></th>
       <th><%= t('attributes.software_category') %></th>
       <th class="nosort"><%= t('boskop.action') %></th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -52,6 +54,7 @@
         <td><%= software.green %></td>
         <td><%= software.yellow %></td>
         <td><%= software.red %></td>
+        <td class="<%= software.status(:color) %>"><%= software.status(:show_date) %></td>
         <td><%= software.software_category %></td>
         <td class="text-nowrap">
           <%= show_link software %>

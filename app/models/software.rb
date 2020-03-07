@@ -1,4 +1,6 @@
 class Software < ApplicationRecord
+  include SoftwareConcerns
+
   # -- associations
   has_many :software_raw_data, dependent: :restrict_with_error
   belongs_to :software_category, optional: true
