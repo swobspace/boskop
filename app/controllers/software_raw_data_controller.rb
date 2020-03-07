@@ -6,7 +6,10 @@ class SoftwareRawDataController < ApplicationController
   # GET /software_raw_data
   def index
     @software_raw_data = SoftwareRawDatum.all
-    respond_with(@software_raw_data)
+    respond_with(@software_raw_data) do |format|
+      format.json { 
+        render json: SoftwareRawDataDatatable.new(@software_raw_data, view_context) }
+    end
   end
 
   def search

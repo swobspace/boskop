@@ -52,7 +52,10 @@ class SoftwareRawDataDatatable < ApplicationDatatable
     unless params[:length] == "-1"
       software_raw_data = software_raw_data.page(page).per(per_page)
     end
-    software_raw_data = SoftwareRawDataQuery.new(software_raw_data, search_params(params, search_columns).merge(filter)).all
+    software_raw_data = SoftwareRawDataQuery.new(
+                          software_raw_data.left_outer_joins(:software), 
+                          search_params(params, search_columns).merge(filter))
+                        .all
   end
 
   def columns

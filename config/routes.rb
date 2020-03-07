@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       patch :assign_raw_software
     end
   end
+  post "software_raw_data", to: "software_raw_data#index", constraints: lambda {|req| req.format == :json}
   resources :software_raw_data do
     member do
       get :add_software
