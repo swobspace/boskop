@@ -27,7 +27,7 @@ end
 
 RSpec.describe SoftwareRawDataQuery do
   include_context "software_raw_data variables"
-  let(:all_software_raw_data) { SoftwareRawDatum.all.order("name asc") }
+  let(:all_software_raw_data) { SoftwareRawDatum.left_outer_joins(:software).order("name asc") }
 
   # check for class methods
   it { expect(SoftwareRawDataQuery.respond_to? :new).to be_truthy}
@@ -175,5 +175,21 @@ RSpec.describe SoftwareRawDataQuery do
     it { expect(sw2.pattern).to be_empty }
   end # :software_id
 
+  context "with count: 44" do
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {count: 44}) }
+    before(:each) do
+      @matching = [raw3]
+      @nonmatching = [raw1, raw2, raw4, raw5]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :count
 
+  context "with software: visual studio" do
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {software: "visual studio"}) }
+    before(:each) do
+      @matching = [raw1]
+      @nonmatching = [raw2, raw3, raw4, raw5]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :software
 end

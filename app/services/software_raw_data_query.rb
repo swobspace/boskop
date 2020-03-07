@@ -13,11 +13,12 @@ class SoftwareRawDataQuery
   # * :older - lastseen <= :older(date)
   # * :software_id - integer
   # * :no_software_id - boolean: raw data without assigned software
+  # * :software - search for software.name
   # * :use_pattern - boolean (only with software_id)
   # * :limit - limit result (integer)
   #
-  # please note: 
-  # TBD: neccessary join
+  # please note: relation should have:
+  #   left_outer_joins(:software)
   #
   def initialize(relation, search_options = {})
     @relation       = relation
@@ -70,7 +71,7 @@ private
         query = query.where("software_raw_data.lastseen <= ?", "#{value}%")
       when :pattern
         value.each_pair do |k,v|
-          query = query.where("#{k} ~* ?", v)
+          query = query.where("software_raw_data.#{k} ~* ?", v)
         end
       when :use_pattern
       when :software_id, :no_software_id
@@ -82,12 +83,16 @@ private
             query = query.none
           else
             sw.pattern.each_pair do |k,v|
-              query = query.where("#{k} ~* ?", v)
+              query = query.where("software_raw_data.#{k} ~* ?", v)
             end
           end
         else
           query = query.where(software_id: value)
         end
+      when :count
+        query = query.where(count: value)
+      when :software
+        query = query.where("software.name ILIKE ?", "%#{value}%")
       when :search
         string_fields.each do |term|
           search_string << "software_raw_data.#{term} ILIKE :search"
