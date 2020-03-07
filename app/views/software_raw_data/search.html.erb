@@ -63,3 +63,7 @@
 
 <%= back_link %>
 <%= new_link SoftwareRawDatum %>
+<% if !!@filter_info[:use_pattern] == true %>
+  <%= assign_raw_software_link(@filter_info[:software_id]) %>
+<% end %>
+
