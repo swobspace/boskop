@@ -23,7 +23,8 @@ module SoftwareConcerns
     when :show_date
       date
     else
-      "#{color} (#{date})"
+      msg = "#{color}" 
+      msg += " (#{date})" if date.present?
     end
   end
 

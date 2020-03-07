@@ -24,7 +24,7 @@ RSpec.describe SoftwareConcerns, type: :model do
   it { expect(sw2.status(:show_date)).to eq(1.month.before(Date.today)) }
   it { expect(sw3.status(:color)).to eq("red") }
   it { expect(sw3.status(:show_date)).to eq(1.year.before(Date.today)) }
-  it { expect(sw4.status(:color)).to eq("grey") }
+  it { expect(sw4.status(:color)).to be_nil }
   it { expect(sw4.status(:show_date)).to be_nil }
   it { expect(sw5.status(:color)).to eq("green") }
   it { expect(sw5.status(:show_date)).to eq(1.year.before(Date.today)) }
