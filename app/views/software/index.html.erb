@@ -44,7 +44,7 @@
   </tfoot>
   <tbody>
     <% @software.each do |software| %>
-      <%= content_tag_for(:tr, software) do %>
+      <%= content_tag_for(:tr, software, class: "#{software.status(:color)}") do %>
         <td><%= software.name %></td>
         <td><%= software.pattern %></td>
         <td><%= software.vendor %></td>
@@ -54,7 +54,7 @@
         <td><%= software.green %></td>
         <td><%= software.yellow %></td>
         <td><%= software.red %></td>
-        <td class="<%= software.status(:color) %>"><%= software.status(:show_date) %></td>
+        <td><%= software.status %></td>
         <td><%= software.software_category %></td>
         <td class="text-nowrap">
           <%= show_link software %>

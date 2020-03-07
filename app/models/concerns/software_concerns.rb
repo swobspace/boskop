@@ -4,7 +4,7 @@ module SoftwareConcerns
   included do
   end # included do
 
-  def status(flag)
+  def status(flag = nil)
     today = Date.today
     if red.present? && today >= red
       color = 'red'
@@ -15,8 +15,6 @@ module SoftwareConcerns
     elsif green.present? && today >= green
       color = 'green'
       date  = green
-    else
-      color = 'grey'
     end
 
     case flag 
@@ -25,7 +23,7 @@ module SoftwareConcerns
     when :show_date
       date
     else
-      raise RuntimeError, "flag #{flag} not implemented"
+      "#{color} (#{date})"
     end
   end
 
