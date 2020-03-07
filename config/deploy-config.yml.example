@@ -9,4 +9,4 @@ repo_url: https://github.com/swobspace/boskop.git
 user: deploy
 deploy_to: /var/www/apps/boskop
 relative_url_root: /
-ruby_path: "/opt/ruby/2.3/bin:$PATH"
+ruby_path: "/opt/ruby/2.6/bin:$PATH"
