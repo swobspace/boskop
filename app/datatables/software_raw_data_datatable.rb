@@ -1,6 +1,7 @@
 class SoftwareRawDataDatatable < ApplicationDatatable
   delegate :edit_software_raw_datum_path, to: :@view
   delegate :software_raw_datum_path, to: :@view
+  delegate :add_software_from_raw_data, to: :@view
 
   def initialize(relation, view, filter = {})
     @view = view
@@ -25,7 +26,7 @@ class SoftwareRawDataDatatable < ApplicationDatatable
         links = []
         links << show_link(swr)
         links << edit_link(swr)
-        links << delete_link(swr)
+        links << add_software_from_raw_data(swr)
         column << links.join(' ')
       end
     end

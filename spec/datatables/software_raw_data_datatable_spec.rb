@@ -33,6 +33,7 @@ RSpec.describe SoftwareRawDataDatatable, type: :model do
     allow(view_context).to receive_messages(
       edit_software_raw_datum_path: "",
       software_raw_datum_path: "",
+      add_software_from_raw_data: "",
       show_link: "",
       edit_link: "",
       delete_link: "",
