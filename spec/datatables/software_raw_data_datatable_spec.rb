@@ -113,16 +113,16 @@ RSpec.describe SoftwareRawDataDatatable, type: :model do
       it { expect(parse_json(subject, "data/1")).to eq(swr2array(raw1)) }
     end
 
-    context "column 1: version, search: 19.00" do
+    context "column 1: version, search: 10" do
       let(:myparams) {ActiveSupport::HashWithIndifferentAccess.new(
-        columns: {"1" => {search: {value: "19.00", regex: "false"}}},
+        columns: {"1" => {search: {value: "10", regex: "false"}}},
         order: {"0" => {"column" => "0", "dir" => "asc"}},
         start: "0", length: "10", search: {value: "", regex: "false"}
       )}
       it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
       it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
-      it { expect(parse_json(subject, "data/0")).to eq(swr2array(raw4)) }
-      it { expect(parse_json(subject, "data/1")).to eq(swr2array(raw3)) }
+      it { expect(parse_json(subject, "data/0")).to eq(swr2array(raw2)) }
+      it { expect(parse_json(subject, "data/1")).to eq(swr2array(raw1)) }
     end
 
     context "column 2: vendor, search: microsoft" do
