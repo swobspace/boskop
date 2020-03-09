@@ -34,10 +34,15 @@ RSpec.describe SoftwareRawDataDatatable, type: :model do
       edit_software_raw_datum_path: "",
       software_raw_datum_path: "",
       add_software_from_raw_data: "",
+      software_path: "",
       show_link: "",
       edit_link: "",
       delete_link: "",
     )
+    allow(view_context).to receive(:link_to) do |text, url|
+      link_helper(text, url)
+    end
+
   end
 
   describe "without search params, start:0, length:10" do

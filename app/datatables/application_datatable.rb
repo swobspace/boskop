@@ -1,7 +1,7 @@
 class ApplicationDatatable
   include ApplicationDatatableConcerns
   delegate :params, to: :@view
-  delegate :link_to, to: :@view
+  delegate :link_to, :link_to_unless, :link_to_if, to: :@view
   delegate :show_link, to: :@view
   delegate :edit_link, to: :@view
   delegate :delete_link, to: :@view
