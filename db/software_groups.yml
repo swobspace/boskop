@@ -1,0 +1,42 @@
+# SoftwareGroup/Example
+# 
+# to import:
+# rails console production
+# irb:1> config = YAML::load_file(File.join(Rails.root, 'db', 'software_group.yml'))
+# irb:2> HostCategory.create(config['software_group'])
+#
+
+software_group:
+  - name: Infrastruktur
+    description: 
+      |
+        Backend, Netzwerk, Datensicherung, Active Directory, klassisches Intranet,
+        aber keine weiteren Intranetanwendungen
+        (BSC, BeschlussDB -> Administrative Systeme);
+        Digitale Archivierung;
+        PC-Utilities;
+
+  - name: Administrative Systeme
+    description: 
+      |
+        Fibu, Controlling, Patientenabrechnung und Bewohnerverwaltung 
+        (z.B. IS-H und IS*Social);
+        Personalverwaltung und Management, Dienstplan; 
+        Küchenlogistik, Speisenversorgung/-planung, Speisenanforderung;
+        Kassensysteme, etc.
+
+  - name: Medizinische Systeme
+    description: 
+      |
+        KAS (Klinische Arbeitsplatzsysteme), z.B. iMedOne, ORBIS; 
+        alle medizinischen Experten- und Dokumentationssysteme;
+        Pflegeplanung und -dokumentation; Medikation;
+        Entlassmanagment;
+
+  - name: Desktop
+    description: 
+      |
+        Office, PC-Software, die der Anwender für den eigenen Gebrauch nutzt,
+        und die in der Regel standalone genutzt werden kann, z.B. 
+        ZIP, Acrobat -> Desktop, Fernwartungssoftware -> Infrastruktur;
+        Videokonferenz-Clients -> Infrastruktur

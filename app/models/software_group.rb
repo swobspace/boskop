@@ -1,7 +1,6 @@
-class SoftwareCategory < ApplicationRecord
+class SoftwareGroup < ApplicationRecord
   # -- associations
-  has_many :software, dependent: :restrict_with_error
-  belongs_to :software_group, optional: true
+  has_many :software_categories, dependent: :restrict_with_error
 
   # -- configuration
   # -- validations and callbacks
@@ -10,4 +9,5 @@ class SoftwareCategory < ApplicationRecord
   def to_s
     "#{name.to_s}"
   end
+
 end
