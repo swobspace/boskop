@@ -447,5 +447,4 @@ ActiveRecord::Schema.define(version: 2020_03_11_122956) do
     t.index ["username"], name: "index_wobauth_users_on_username", unique: true
   end
 
-  add_foreign_key "software_categories", "software_groups"
 end
