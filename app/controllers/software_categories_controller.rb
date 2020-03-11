@@ -27,7 +27,10 @@ class SoftwareCategoriesController < ApplicationController
   def create
     @software_category = SoftwareCategory.new(software_category_params)
 
-    @software_category.save
+    unless @software_category.save
+      @error = @software_category.errors.full_messages.join('; ')
+    end
+
     respond_with(@software_category)
   end
 

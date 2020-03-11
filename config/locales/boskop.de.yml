@@ -14,6 +14,7 @@ de:
     restore: zurücksetzen
     csv_export: CSV-Export
     add_software_from_raw_data: Softwareeintrag aus Rohdaten erstellen
+    add_new_software_category: Neue Software-Kategorie hinzufügen
     search: Suche
     search_hosts: Suche Hosts
     search_networks: Suche Netzwerke

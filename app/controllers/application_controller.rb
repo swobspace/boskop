@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   # -- flash responder
   self.responder = Wobapphelpers::Responders
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

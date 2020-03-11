@@ -3,7 +3,7 @@
 # to import:
 # rails console production
 # irb:1> config = YAML::load_file(File.join(Rails.root, 'db', 'software_groups.yml'))
-# irb:2> HostCategory.create(config['software_groups'])
+# irb:2> SoftwareGroup.create(config['software_groups'])
 #
 
 software_groups:

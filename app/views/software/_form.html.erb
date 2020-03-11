@@ -1,3 +1,10 @@
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
+
+<%= render partial: 'software_categories/modal_form',
+           locals: { software_category: SoftwareCategory.new } %>
+
 <div class="container">
   <%= simple_form_for(@software,
     html: { class: 'form-horizontal card' }) do |f| %>
@@ -55,9 +62,25 @@
       <%= f.input :red, as: :string,
                   wrapper: :horizontal_date
 	 %>
-      <%= f.association :software_category, 
-                  input_html: { class: 'select2'}
-	 %>
+      <div class="form-group row">
+        <%= f.label :software_category, class: "col-sm-3 col-form-label" %>
+        <div class="col-sm-8">
+          <%= f.select :software_category_id,
+                SoftwareCategory.all.collect {|s| [s.name, s.id]},
+                {include_blank: true}, { class: "select2 form-control" }
+           %>
+        </div>
+
+        <div class="col-sm-1">
+          <button type="button" id="addSoftwareCategoryButton" 
+                  class="btn btn-outline-secondary float-right"
+                  data-toggle="modal" data-target="#softwareCategoryModal"
+                  title="<%= t('boskop.add_new_software_category') %>"
+                  <%= "disabled" unless can? :create, SoftwareCategory %>
+           ><%= icon_new %></button>
+        </div>
+      </div>
+
 
       <%= f.button :submit, class: 'btn btn-primary' %>
       <%= cancel_button %>
