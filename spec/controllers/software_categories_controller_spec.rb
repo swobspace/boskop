@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe SoftwareCategoriesController, type: :controller do
   login_admin
 
+  let(:swgrp) { FactoryBot.create(:software_group) }
   let(:valid_attributes) {
     FactoryBot.attributes_for(:software_category)
   }
@@ -70,7 +71,8 @@ RSpec.describe SoftwareCategoriesController, type: :controller do
     context "with valid params" do
       let(:new_attributes) {{
         description: "A new description",  
-        main_business_process: "Hammeringsomethingfine"
+        main_business_process: "Hammeringsomethingfine",
+        software_group_id: swgrp.id
       }}
 
       it "updates the requested software_category" do

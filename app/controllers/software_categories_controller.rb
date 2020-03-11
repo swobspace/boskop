@@ -51,6 +51,6 @@ class SoftwareCategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def software_category_params
-      params.require(:software_category).permit(:name, :description, :main_business_process)
+      params.require(:software_category).permit(:name, :description, :main_business_process, :software_group_id)
     end
 end
