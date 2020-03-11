@@ -15,11 +15,13 @@
       <th><%= t('attributes.name') %></th>
       <th><%= t('attributes.description') %></th>
       <th><%= t('attributes.main_business_process') %></th>
+      <th><%= t('attributes.software_group') %></th>
       <th class="nosort"><%= t('boskop.action') %></th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -32,6 +34,7 @@
         <td><%= software_category.name %></td>
         <td><%= software_category.description %></td>
         <td><%= software_category.main_business_process %></td>
+        <td><%= software_category.software_group %></td>
         <td class="text-nowrap">
           <%= show_link software_category %>
           <%= edit_link software_category %>

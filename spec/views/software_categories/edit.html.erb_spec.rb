@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "software_categories/edit", type: :view do
+  let(:swgrp) { FactoryBot.create(:software_group, name: "SomeGroup") }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -21,10 +22,9 @@ RSpec.describe "software_categories/edit", type: :view do
     assert_select "form[action=?][method=?]", software_category_path(@software_category), "post" do
 
       assert_select "input[name=?]", "software_category[name]"
-
       assert_select "textarea[name=?]", "software_category[description]"
-
       assert_select "textarea[name=?]", "software_category[main_business_process]"
+      assert_select "select[name=?]", "software_category[software_group_id]"
     end
   end
 end

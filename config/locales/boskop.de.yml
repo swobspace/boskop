@@ -243,6 +243,8 @@ de:
     software_id: Software
     no_software_id: ohne zugewiesene Software
     software_category: Software-Kategorie
+    software_group: Software-Gruppe
+    software_group_id: Software-Gruppe
     software_raw_data: Software-Rohdaten
     source: Quelle
     status: Status

@@ -55,4 +55,11 @@ module ApplicationHelper
     list << ["</dl>"]
     msg = list.join.html_safe
   end
+
+  def collection_select_option_with_title(collection)
+    Array(collection).map do |c|
+      [c.name, c.id, {title: "#{c.description&.gsub(/[\s]*\n/, ' ')}"}]
+    end
+  end
+
 end
