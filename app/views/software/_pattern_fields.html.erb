@@ -1,0 +1,16 @@
+<% Software::PATTERN_ATTRIBUTES.each do |attrib| %>
+  <div class="form-group row nested-fields">
+    <label for="<%= attrib %>" class="col-sm-3 col-form-label">
+      <%= t('attributes.' + attrib.to_s) %>
+    </label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control string" 
+             id="software_pattern_<%= attrib %>" 
+             name="software[pattern][<%= attrib %>]"
+             value="<%= pattern[attrib] %>"
+      >
+    </div>
+  </div>
+<% end %>
+
+
