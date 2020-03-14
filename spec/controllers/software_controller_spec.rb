@@ -70,7 +70,7 @@ RSpec.describe SoftwareController, type: :controller do
     let(:swcat) { FactoryBot.create(:software_category) }
     context "with valid params" do
       let(:new_attributes) {{
-        "pattern" => {'name' => '/\A7-zip.*\z/', 'vendor' => 'ACME Ltd'},
+        "pattern" => [{'name' => '/\A7-zip.*\z/', 'vendor' => 'ACME Ltd'}],
         "vendor" => "MyVendor",
         "description" => "MyDescription",
         "minimum_allowed_version" => "19.4",
@@ -86,6 +86,19 @@ RSpec.describe SoftwareController, type: :controller do
         put :update, params: {id: software.to_param, software: new_attributes}, session: valid_session
         software.reload
         expect(software.attributes).to include(new_attributes)
+      end
+
+      describe "with hash pattern" do
+        let(:new_attributes) {{
+          "pattern" => {'name' => '/\A7-zip.*\z/', 'vendor' => 'ACME Ltd'},
+        }}
+        it "updates the requested software" do
+          software = Software.create! valid_attributes
+          put :update, params: {id: software.to_param, software: new_attributes}, session: valid_session
+          software.reload
+          expect(software.attributes).to include(new_attributes)
+        end
+
       end
 
       it "updates pattern only with non-empty fields" do
