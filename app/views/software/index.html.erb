@@ -55,7 +55,7 @@
         <td><%= software.yellow %></td>
         <td><%= software.red %></td>
         <td><%= software.status %></td>
-        <td><%= software.software_category %></td>
+        <td><%= software_category_link(software.software_category) %></td>
         <td class="text-nowrap">
           <%= show_link software %>
           <%= edit_link software %>
