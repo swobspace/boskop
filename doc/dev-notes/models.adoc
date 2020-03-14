@@ -294,7 +294,19 @@ bin/rails g scaffold SoftwareCategory \
   name:string \
   description:text \
   main_business_process:text \
+  software_group:references:index
+
   --no-stylesheets --no-javascripts --no-helper --no-jbuilder
+
+# bin/rails g migration AddSoftwareGroupToSoftwareCategory software_group:references:index
+----
+
+## SoftwareGroup:
+
+----
+bin/rails g model SoftwareGroup \
+  name:string:index \
+  description:text
 ----
 
 ## Note

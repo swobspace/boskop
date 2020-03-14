@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_071709) do
+ActiveRecord::Schema.define(version: 2020_03_11_122956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,6 +322,16 @@ ActiveRecord::Schema.define(version: 2020_03_05_071709) do
     t.text "main_business_process"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "software_group_id"
+    t.index ["software_group_id"], name: "index_software_categories_on_software_group_id"
+  end
+
+  create_table "software_groups", force: :cascade do |t|
+    t.string "name", default: ""
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_software_groups_on_name"
   end
 
   create_table "software_raw_data", force: :cascade do |t|

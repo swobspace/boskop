@@ -20,4 +20,12 @@ module SoftwareHelper
       ""
     end
   end
+
+  def software_category_link(swcat)
+    if swcat.present?
+      link_to swcat.name, software_category_path(swcat)
+    else
+      ""
+    end
+  end
 end

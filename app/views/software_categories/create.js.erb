@@ -1,0 +1,17 @@
+var $info = $("#new_software_category").find("div.infomsg");
+<% if @error.present? %>
+  $info.html("<%= escape_javascript(@error) %>")
+    .removeClass('alert alert-info')
+    .addClass('float-left alert alert-danger')
+    .show();
+<% else %>
+$('#softwareCategoryModal').modal('toggle');
+var data = {
+    id: "<%= @software_category.id %>",
+    text: "<%= @software_category.name %>"
+};
+var newOption = new Option(data.text, data.id, false, true);
+
+$('#software_software_category_id').append(newOption).trigger('change');
+<% end %>
+// $('form:dirty').dirtyForms('setClean');

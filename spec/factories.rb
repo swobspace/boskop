@@ -146,6 +146,10 @@ FactoryBot.define do
     name { generate(:aname) }
   end
 
+  factory :software_group do
+    name { generate(:aname) }
+  end
+
   factory :software_raw_datum do
     name { generate(:aname) }
   end

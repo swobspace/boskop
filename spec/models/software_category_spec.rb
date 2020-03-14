@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SoftwareCategory, type: :model do
   it { is_expected.to have_many(:software) }
+  it { is_expected.to belong_to(:software_group).optional(true) }
   it { is_expected.to validate_presence_of(:name) }
 
   it "should get plain factory working" do

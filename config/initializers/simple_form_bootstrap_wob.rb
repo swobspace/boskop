@@ -8,7 +8,7 @@ SimpleForm.setup do |config|
 
     b.wrapper :grid_wrapper, tag: 'div', class: 'col-sm-9' do |ba|
       ba.wrapper tag: 'div', class: 'input-group mb-2' do |bai|
-        bai.use :input, class: 'form-control datepicker col-sm-3', error_class: 'is-invalid', valid_class: 'is-valid'
+        bai.use :input, class: 'form-control datepicker col-sm-3', error_class: 'is-invalid', valid_class: 'is-valid', autocomplete: 'off'
         bai.wrapper tag: 'div', class: 'input-group-append' do |baig|
           baig.wrapper tag: 'i', class: 'input-group-text fas fa-calendar-alt fa-2x' do |baigi|
           end

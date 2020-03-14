@@ -184,6 +184,15 @@ RSpec.describe SoftwareRawDataQuery do
     it_behaves_like "a software_raw_data query"
   end # :count
 
+  context "with version: ^10" do
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {version: "10"}) }
+    before(:each) do
+      @matching = [raw1, raw2]
+      @nonmatching = [raw3, raw4, raw5]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :version
+
   context "with software: visual studio" do
     subject { SoftwareRawDataQuery.new(all_software_raw_data, {software: "visual studio"}) }
     before(:each) do

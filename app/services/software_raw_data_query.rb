@@ -59,6 +59,8 @@ private
         query = query.where("software_raw_data.#{key} ILIKE ?", "%#{value}%")
       when :limit
         @limit = value.to_i
+      when :version
+        query = query.where("software_raw_data.version ILIKE ?", "#{value}%")
       when :lastseen
         query = query.where("to_char(software_raw_data.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
       when :created_at
@@ -113,7 +115,7 @@ private
   end
 
   def string_fields
-    [ :name, :vendor, :version, :operating_system, :source ]
+    [ :name, :vendor, :operating_system, :source ]
   end
 
 end

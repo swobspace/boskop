@@ -27,7 +27,10 @@ class SoftwareCategoriesController < ApplicationController
   def create
     @software_category = SoftwareCategory.new(software_category_params)
 
-    @software_category.save
+    unless @software_category.save
+      @error = @software_category.errors.full_messages.join('; ')
+    end
+
     respond_with(@software_category)
   end
 
@@ -51,6 +54,6 @@ class SoftwareCategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def software_category_params
-      params.require(:software_category).permit(:name, :description, :main_business_process)
+      params.require(:software_category).permit(:name, :description, :main_business_process, :software_group_id)
     end
 end

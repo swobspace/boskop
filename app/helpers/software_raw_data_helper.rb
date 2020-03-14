@@ -9,4 +9,13 @@ module SoftwareRawDataHelper
       ""
     end
   end
+
+  def swr_software_link(swr)
+    if swr.software.nil?
+      ""
+    else
+      link_to swr.software.to_s, software_path(swr.software)
+    end
+  end
+
 end

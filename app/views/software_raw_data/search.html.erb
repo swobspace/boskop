@@ -10,7 +10,7 @@
       id: "software_raw_data_table",
       class: "table table-bordered table-responsive-xl",
       data: {
-        order: [[0, 'desc']].to_json
+        order: [[0, 'asc']].to_json
       } do %>
   <thead>
     <tr>
@@ -48,7 +48,7 @@
         <td><%= software_raw_datum.operating_system %></td>
         <td><%= software_raw_datum.lastseen %></td>
         <td><%= software_raw_datum.source %></td>
-        <td><%= software_raw_datum.software %></td>
+        <td><%= swr_software_link(software_raw_datum) %></td>
         <td class="text-nowrap">
           <%= show_link software_raw_datum %>
           <%= edit_link software_raw_datum %>

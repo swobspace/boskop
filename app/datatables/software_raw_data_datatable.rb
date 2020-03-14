@@ -2,6 +2,7 @@ class SoftwareRawDataDatatable < ApplicationDatatable
   delegate :edit_software_raw_datum_path, to: :@view
   delegate :software_raw_datum_path, to: :@view
   delegate :add_software_from_raw_data, to: :@view
+  delegate :software_path, to: :@view
 
   def initialize(relation, view, filter = {})
     @view = view
@@ -22,7 +23,7 @@ class SoftwareRawDataDatatable < ApplicationDatatable
         column << swr.operating_system
         column << swr.lastseen.to_s
         column << swr.source
-        column << swr.software.to_s
+        column << software_link(swr)
         links = []
         links << show_link(swr)
         links << edit_link(swr)
@@ -83,6 +84,14 @@ class SoftwareRawDataDatatable < ApplicationDatatable
       source
       software
     )
+  end
+
+  def software_link(swr)
+    if swr.software.nil?
+      ""
+    else
+      link_to swr.software.to_s, software_path(swr.software)
+    end
   end
 
 end
