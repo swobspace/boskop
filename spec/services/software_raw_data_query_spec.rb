@@ -118,8 +118,23 @@ RSpec.describe SoftwareRawDataQuery do
     it_behaves_like "a software_raw_data query"
   end # :older
 
-  context "with :pattern" do
+  context "with :pattern (Hash)" do
     let(:pattern) {{ "name" => '.*studio.*(runtime|laufzeit)', "vendor" => 'microsoft' }}
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {pattern: pattern}) }
+    before(:each) do
+      @matching = [raw1, raw2]
+      @nonmatching = [raw3, raw4, raw5]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :pattern
+
+  context "with :pattern (Array)" do
+    let(:pattern) {
+      [
+        { "name" => '.*studio.*(runtime|xxxxxx)', "vendor" => 'microsoft' },
+        { "name" => '.*studio.*(laufzeit|yyyyyy)', "vendor" => 'microsoft' }
+      ]
+    }
     subject { SoftwareRawDataQuery.new(all_software_raw_data, {pattern: pattern}) }
     before(:each) do
       @matching = [raw1, raw2]
@@ -156,11 +171,20 @@ RSpec.describe SoftwareRawDataQuery do
   end # :software_id
 
 
-  context "with :software_id and :use_pattern" do
+  context "with :software_id and :use_pattern (Array)" do
     subject { SoftwareRawDataQuery.new(all_software_raw_data, {use_pattern: true, software_id: sw1.id}) }
     before(:each) do
       @matching = [raw1, raw2]
       @nonmatching = [raw3, raw4, raw5]
+    end
+    it_behaves_like "a software_raw_data query"
+  end # :software_id
+
+  context "with :software_id and :use_pattern (Hash)" do
+    subject { SoftwareRawDataQuery.new(all_software_raw_data, {use_pattern: true, software_id: swzip.id}) }
+    before(:each) do
+      @matching = [raw3, raw4]
+      @nonmatching = [raw1, raw2, raw5]
     end
     it_behaves_like "a software_raw_data query"
   end # :software_id

@@ -11,6 +11,7 @@ class SoftwareRawDataQuery
   # * :created_at - date
   # * :newer - lastseen >= :newer(date)
   # * :older - lastseen <= :older(date)
+  # * :pattern - Array of Hashes with postgres regexp [:name, :vendor, :version, :operating_system]
   # * :software_id - integer
   # * :no_software_id - boolean: raw data without assigned software
   # * :software - search for software.name
@@ -72,9 +73,7 @@ private
       when :older
         query = query.where("software_raw_data.lastseen <= ?", "#{value}%")
       when :pattern
-        value.each_pair do |k,v|
-          query = query.where("software_raw_data.#{k} ~* ?", v)
-        end
+        query = pattern_query(query, value)
       when :use_pattern
       when :software_id, :no_software_id
         if key == :no_software_id
@@ -84,9 +83,7 @@ private
           if sw.pattern.empty?
             query = query.none
           else
-            sw.pattern.each_pair do |k,v|
-              query = query.where("software_raw_data.#{k} ~* ?", v)
-            end
+            query = pattern_query(query, sw.pattern)
           end
         else
           query = query.where(software_id: value)
@@ -116,6 +113,22 @@ private
 
   def string_fields
     [ :name, :vendor, :operating_system, :source ]
+  end
+
+  def pattern_query(query, value)
+    if value.kind_of? Hash
+      value = [value]
+    end
+    or_strings = []
+    value.each do |hash|
+      and_strings = []
+      hash.each_pair do |k,v|
+        and_strings << "software_raw_data.#{k} ~* \'#{v}\'"
+      end
+      or_strings << "(#{and_strings.join(' AND ')})"
+    end
+    all_strings = or_strings.join(" OR ")
+    query.where(all_strings)
   end
 
 end
