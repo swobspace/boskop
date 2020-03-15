@@ -23,8 +23,8 @@
         <div class="col-sm-9">
           <div class="card">
            <div class="card-body bg-light">
-            <% @software.patterns.each_with_index do |subpattern,idx| %>
-              <%= render 'pattern_fields', pattern: subpattern, idx: idx %>
+            <%= f.simple_fields_for :pattern do |ff| %>
+              <%= render 'pattern_fields', f: ff, pattern: @software.pattern %>
             <% end %>
            </div>
           </div>
