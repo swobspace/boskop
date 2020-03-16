@@ -29,6 +29,7 @@ de:
     new_host: Neuer Host
     new_line: Neue Leitung
     new_network: Neues Netzwerk
+    new_software: Neue Software
     new_vulnerability: Neue Schwachstelle
     network_mask: Netzwerkmaske
     subset: enthaltene Netzwerke
