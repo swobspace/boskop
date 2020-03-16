@@ -24,7 +24,7 @@
           <div class="card">
            <div class="card-body bg-light">
             <%= f.simple_fields_for :pattern do |ff| %>
-              <%= render 'pattern_fields', f: ff, pattern: @software.pattern %>
+              <%= render 'software/pattern_fields', f: ff, pattern: @software.pattern %>
             <% end %>
            </div>
           </div>
