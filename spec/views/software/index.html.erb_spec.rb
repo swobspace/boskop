@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "software/index", type: :view do
-  let(:swcat) { FactoryBot.create(:software_category) }
+  let(:swgrp) { FactoryBot.create(:software_group, name: "administrativa") }
+  let(:swcat) { FactoryBot.create(:software_category, software_group: swgrp) }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -50,5 +51,6 @@ RSpec.describe "software/index", type: :view do
     assert_select "tr>td", text: 2.years.before(Date.today).to_s, count: 2
     assert_select "tr>td", text: 2.years.after(Date.today).to_s, count: 2
     assert_select "tr>td", text: 10.years.after(Date.today).to_s, count: 2
+    assert_select "tr>td", text: "administrativa".to_s, count: 2
   end
 end
