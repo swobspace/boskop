@@ -68,6 +68,7 @@ class SoftwareRawDataController < ApplicationController
       redirect_to software_raw_data_path
     else
       flash[:error] = result.error_message.to_s
+      Rails.logger.warn("### WARNING ###: import failure: #{result.errors.inspect}")
       redirect_to software_raw_data_path
     end
   end

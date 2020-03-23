@@ -4,7 +4,7 @@ module SoftwareRawData
   # import csv data
   #
   class ImportCsvService
-    Result = ImmutableStruct.new( :success?, :error_message, :software_raw_data )
+    Result = ImmutableStruct.new( :success?, :errors, :error_message, :software_raw_data )
     
     # service = SoftwareRawData::ImportCsvService.new(
     #             file: 'csvfile', source: 'docusnap', lastseen: '2020-02-29'
@@ -29,11 +29,13 @@ module SoftwareRawData
     def call
       software_raw_data = []
       errors = []
+      error_messages = []
       success = true
       unless File.readable?(csvfile)
         message = "File #{csvfile} is not readable or does not exist"
         return Result.new(
                  success: false, 
+                 errors: errors,
                  error_message: message, 
                  software_raw_data: software_raw_data
                )
@@ -49,15 +51,17 @@ module SoftwareRawData
         if sc.save
            software_raw_data << sc.software_raw_datum
         else
-          if software_raw_data.errors.any?
-           errors << "#{software_raw_data.errors.full_messages.join(', ')}" 
+          if sc.software_raw_datum.errors.any?
+           error_messages << "#{sc.software_raw_datum.errors.full_messages.join(", ")}"
+           errors << sc.software_raw_datum.errors
           end
           success = false
         end
       end
       return_result = Result.new(
                         success: success, 
-                        error_message: errors, 
+                        error_message: error_messages.join("; "), 
+                        errors: errors, 
                         software_raw_data: software_raw_data
                       )
     end
