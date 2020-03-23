@@ -142,5 +142,14 @@ module SoftwareRawData
          )}
     end
 
+    context "with blank and empty fields" do
+      subject { ImportCsvService.new(file: csvfile, lastseen: Date.parse('2020-03-03')) }
+      let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'empty_fields.csv') }
+      let(:swr) { subject.call.software_raw_data.first }
+      it { expect(swr.name).to eq("mySoftware") }
+      it { expect(swr.version).to eq("") }
+      it { expect(swr.vendor).to eq("") }
+      it { expect(swr.source).to eq("") }
+    end
   end
 end

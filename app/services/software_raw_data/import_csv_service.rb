@@ -40,10 +40,11 @@ module SoftwareRawData
       end
       CSV.foreach(csvfile, headers: true, col_sep: ';',
                            header_converters: header_converters(source),
+                           nil_value: "",
                            converters: :date) do |row|
         attributes = row.to_hash
-        attributes["lastseen"] ||= lastseen
-        attributes["source"] ||= source
+        attributes["lastseen"] = lastseen if attributes["lastseen"].blank?
+        attributes["source"] = source if attributes["source"].blank?
         sc = SoftwareRawData::Creator.new(attributes: attributes)
         if sc.save
            software_raw_data << sc.software_raw_datum
