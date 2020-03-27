@@ -77,7 +77,6 @@ class SoftwareRawDataController < ApplicationController
     @software = Software.new(
                   name: @software_raw_datum.name,
                   vendor: @software_raw_datum.vendor,
-                  minimum_allowed_version: @software_raw_datum.version,
                   pattern: {
                     "name" => @software_raw_datum.name,
                     "vendor" => @software_raw_datum.vendor,
