@@ -18,4 +18,16 @@ module SoftwareRawDataHelper
     end
   end
 
+  def remove_software_link(swr)
+    if can? :update, swr
+      link_to(
+        %Q[<i class="fas fa-fw fa-times"></i>].html_safe,
+        remove_software_software_raw_datum_path(swr.software, swr), 
+        method: :patch,
+        class: "btn btn-danger"
+      )
+    else
+      ""
+    end
+  end
 end
