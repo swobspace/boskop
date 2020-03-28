@@ -24,7 +24,10 @@ module SoftwareRawDataHelper
         %Q[<i class="fas fa-fw fa-times"></i>].html_safe,
         remove_software_software_raw_datum_path(swr.software, swr), 
         method: :patch,
-        class: "btn btn-danger"
+        class: "btn btn-danger",
+        data: {
+          confirm: 'Remove software assignment?'
+        }
       )
     else
       ""
