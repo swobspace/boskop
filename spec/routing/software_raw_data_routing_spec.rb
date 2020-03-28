@@ -59,7 +59,8 @@ RSpec.describe SoftwareRawDataController, type: :routing do
       expect(:get => "software_raw_data/search_form").to route_to("software_raw_data#search_form")
     end
 
-
-
+    it "routes to #remove via PATCH" do
+      expect(patch: "/software_raw_data/1/remove").to route_to(controller: 'software_raw_data', action: 'remove', id: '1')
+    end
   end
 end

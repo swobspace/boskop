@@ -1,6 +1,6 @@
 class SoftwareRawDataController < ApplicationController
   before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy, 
-                                                :add_software]
+                                                :add_software, :remove]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /software_raw_data
@@ -85,6 +85,11 @@ class SoftwareRawDataController < ApplicationController
                 )
   end
 
+  def remove
+    @software_raw_datum.update(software_id: nil)
+    respond_with(@software_raw_datum, location: location)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_software_raw_datum
@@ -107,4 +112,9 @@ class SoftwareRawDataController < ApplicationController
       searchparms.reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
+    def location
+      polymorphic_path(
+        (@software || :software_raw_data)
+      )
+    end
 end
