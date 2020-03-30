@@ -22,7 +22,7 @@ module SoftwareRawDataHelper
     if can? :update, swr
       link_to(
         %Q[<i class="fas fa-fw fa-times"></i>].html_safe,
-        remove_software_software_raw_datum_path(swr.software, swr), 
+        polymorphic_path([:remove, swr.software, swr]), 
         method: :patch,
         class: "btn btn-danger",
         data: {
