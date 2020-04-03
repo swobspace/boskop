@@ -260,7 +260,7 @@ module Hosts
           it { expect(host.network_interfaces.count).to eq(2) }
         end
 
-        describe "whith blank mac" do
+        describe "with blank mac" do
           let(:attributes) {{
             lastseen: '2019-04-15',
             ip: '192.0.2.7',
