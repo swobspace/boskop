@@ -18,4 +18,19 @@ module SoftwareRawDataHelper
     end
   end
 
+  def remove_software_link(swr)
+    if can? :update, swr
+      link_to(
+        %Q[<i class="fas fa-fw fa-times"></i>].html_safe,
+        polymorphic_path([:remove, swr.software, swr]), 
+        method: :patch,
+        class: "btn btn-danger",
+        data: {
+          confirm: 'Remove software assignment?'
+        }
+      )
+    else
+      ""
+    end
+  end
 end

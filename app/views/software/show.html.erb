@@ -1,63 +1,69 @@
 <div class="card">
   <div class="card-header">
-    <h4><%= t('activerecord.models.software') %></h4>
+    <span class="subtitle"><%= t('activerecord.models.software') %>:</span>
+    <h4 class="title"><%= @software.name %></h4>
   </div>
   <div class="card-body">
-    <table class="table">
+    <table class="table table-sm table-borderless">
     
       <tr>
-        <th class="w-25"><%= t('attributes.name')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.name')%>:</th>
         <td><%= @software.name %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.pattern')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.pattern')%>:</th>
         <td><%= @software.pattern %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.vendor')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.vendor')%>:</th>
         <td><%= @software.vendor %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.description')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.description')%>:</th>
         <td><%= @software.description %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.minimum_allowed_version')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.minimum_allowed_version')%>:</th>
         <td><%= @software.minimum_allowed_version %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.maximum_allowed_version')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.maximum_allowed_version')%>:</th>
         <td><%= @software.maximum_allowed_version %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.green')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.green')%>:</th>
         <td><%= @software.green %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.yellow')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.yellow')%>:</th>
         <td><%= @software.yellow %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.red')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.red')%>:</th>
         <td><%= @software.red %></td>
       </tr>
 
       <tr>
-        <th class="w-25"><%= t('attributes.status')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.status')%>:</th>
         <td class="<%= @software.status(:color) %>"><%= @software.status(:show_date) %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.software_category')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.software_category')%>:</th>
         <td><%= software_category_link(@software.software_category) %></td>
+      </tr>
+    
+      <tr>
+        <th class="w-25 text-left"><%= t('attributes.software_group')%>:</th>
+        <td><%= @software.software_category&.software_group %></td>
       </tr>
     
     </table>

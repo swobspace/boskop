@@ -16,18 +16,20 @@
       <th class="notvisible"><%= t('attributes.pattern') %></th>
       <th><%= t('attributes.vendor') %></th>
       <th><%= t('attributes.description') %></th>
-      <th><%= t('attributes.minimum_allowed_version') %></th>
-      <th><%= t('attributes.maximum_allowed_version') %></th>
+      <th class="notvisible"><%= t('attributes.minimum_allowed_version') %></th>
+      <th class="notvisible"><%= t('attributes.maximum_allowed_version') %></th>
       <th class="notvisible"><%= t('attributes.green') %></th>
       <th class="notvisible"><%= t('attributes.yellow') %></th>
       <th class="notvisible"><%= t('attributes.red') %></th>
       <th><%= t('attributes.status') %></th>
       <th><%= t('attributes.software_category') %></th>
+      <th><%= t('attributes.software_group') %></th>
       <th class="nosort"><%= t('boskop.action') %></th>
     </tr>
   </thead>
   <tfoot>
     <tr>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -55,7 +57,8 @@
         <td><%= software.yellow %></td>
         <td><%= software.red %></td>
         <td><%= software.status %></td>
-        <td><%= software.software_category %></td>
+        <td><%= software_category_link(software.software_category) %></td>
+        <td><%= software.software_category&.software_group %></td>
         <td class="text-nowrap">
           <%= show_link software %>
           <%= edit_link software %>

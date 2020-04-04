@@ -65,10 +65,15 @@ module Hosts
         host = Host.where(uuid: uuid).order("lastseen desc").first
       elsif serial.present?
         host = Host.where(serial: serial).order("lastseen desc").first
-      else
+      end
+      if host.nil? && name.present?
+        host = Host.where(name: name).order("lastseen desc").first
+      end
+      if host.nil? && ip.present?
         # use ip as fallback
         host = NetworkInterface.where(ip: ip).order("lastseen desc").first&.host
       end
+      host
     end
 
     def fetch_iface

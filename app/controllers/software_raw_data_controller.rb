@@ -1,6 +1,6 @@
 class SoftwareRawDataController < ApplicationController
   before_action :set_software_raw_datum, only: [:show, :edit, :update, :destroy, 
-                                                :add_software]
+                                                :add_software, :remove]
   before_action :add_breadcrumb_show, only: [:show]
 
   # GET /software_raw_data
@@ -68,6 +68,7 @@ class SoftwareRawDataController < ApplicationController
       redirect_to software_raw_data_path
     else
       flash[:error] = result.error_message.to_s
+      Rails.logger.warn("### WARNING ###: import failure: #{result.errors.inspect}")
       redirect_to software_raw_data_path
     end
   end
@@ -76,13 +77,17 @@ class SoftwareRawDataController < ApplicationController
     @software = Software.new(
                   name: @software_raw_datum.name,
                   vendor: @software_raw_datum.vendor,
-                  minimum_allowed_version: @software_raw_datum.version,
                   pattern: {
                     "name" => @software_raw_datum.name,
                     "vendor" => @software_raw_datum.vendor,
                     "operating_system" => @software_raw_datum.operating_system,
                   }
                 )
+  end
+
+  def remove
+    @software_raw_datum.update(software_id: nil)
+    respond_with(@software_raw_datum, location: location)
   end
 
   private
@@ -107,4 +112,9 @@ class SoftwareRawDataController < ApplicationController
       searchparms.reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
+    def location
+      polymorphic_path(
+        (@software || :software_raw_data)
+      )
+    end
 end

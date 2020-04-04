@@ -4,11 +4,17 @@ Rails.application.routes.draw do
     member do
       patch :assign_raw_software
     end
+    resources :software_raw_data, only: [:remove], module: :software do
+      member do
+        patch :remove
+      end
+    end
   end
   post "software_raw_data", to: "software_raw_data#index", constraints: lambda {|req| req.format == :json}
   resources :software_raw_data do
     member do
       get :add_software
+      patch :remove
     end
     collection do
       get :search

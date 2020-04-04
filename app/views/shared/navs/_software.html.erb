@@ -5,6 +5,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarHostsLink">
       <%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.software')), main_app.software_index_path, class: 'dropdown-item' %>
+      <%=link_to raw('<span class="fas fa-fw fa-plus" aria-hidden="true"></span> '+t('boskop.new_software')), main_app.new_software_path, class: 'dropdown-item' %>
       <% if false %>
       <%=link_to raw('<span class="fas fa-fw fa-search" aria-hidden="true"></span> '+t('boskop.search')), main_app.search_form_software_path, class: 'dropdown-item' %>
       <% end %>
@@ -19,6 +20,9 @@
 
         <% end %>
       <% end %>
+      <div class="dropdown-divider"></div>
+        <div class="dropdown-header"><%= t('controller.software_categories')%></div>
+	<%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.software_categories')), main_app.software_categories_path, class: 'dropdown-item' %>
     </div>
   </li>
 <% end %>

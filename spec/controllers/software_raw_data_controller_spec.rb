@@ -177,4 +177,27 @@ RSpec.describe SoftwareRawDataController, type: :controller do
     end
   end
 
+  describe "PATCH #remove" do
+    let(:sw) { FactoryBot.create(:software) }
+    it "removes the software_id from requested software_raw_datum" do
+      software_raw_datum = SoftwareRawDatum.create! valid_attributes
+      software_raw_datum.update(software_id: sw.id)
+      software_raw_datum.reload
+      expect(software_raw_datum.software_id).to be_present
+      patch :remove, params: {id: software_raw_datum.to_param}, session: valid_session
+      software_raw_datum.reload
+      expect(software_raw_datum.software_id).to be_nil
+    end
+
+    it "redirects to the software_raw_data list" do
+      software_raw_datum = SoftwareRawDatum.create! valid_attributes
+      software_raw_datum.update(software_id: sw.id)
+      software_raw_datum.reload
+      expect(software_raw_datum.software_id).to be_present
+      patch :remove, params: {id: software_raw_datum.to_param}, session: valid_session
+      expect(response).to redirect_to(software_raw_data_url)
+    end
+  end
+
+
 end

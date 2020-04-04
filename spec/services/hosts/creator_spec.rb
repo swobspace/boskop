@@ -232,9 +232,17 @@ module Hosts
       describe "with existing ip" do
         let(:attributes) {{
           lastseen: '2019-04-15',
-          ip: '192.0.2.9',
+          name: 'ip_host',
+          ip: '192.0.2.17',
         }}
-        it { expect(subject.host).to eq(ip_host) }
+
+        it "doesn't create a new host" do
+          expect {
+            subject.save
+          }.to change(Host, :count).by(0)
+        end
+        it { subject.save; expect(subject.host).to eq(ip_host) }
+        it { subject.save; ip_host.reload; expect(ip_host.lastseen.to_s).to eq('2019-04-15') }
 
         describe "with same mac" do
           let(:attributes) {{
@@ -260,7 +268,7 @@ module Hosts
           it { expect(host.network_interfaces.count).to eq(2) }
         end
 
-        describe "whith blank mac" do
+        describe "with blank mac" do
           let(:attributes) {{
             lastseen: '2019-04-15',
             ip: '192.0.2.7',
@@ -400,6 +408,118 @@ module Hosts
             expect(uuid_host.lastseen.to_s).to eq("2019-04-01")
           end
         end
+      end
+    end
+
+    # Scenario: hosts exists, has uuid (or serial) attribute set.
+    # update the same host from data like Get-ADComputer (powershell),
+    # having name and ip, but not other identifier set.
+    describe "existing uuid host, but incomplete new data" do
+      subject { Creator.new(mode: :newer, attributes: attributes) }
+      let(:iface) { FactoryBot.create(:network_interface,
+        ip: '192.0.2.7',
+        mac: '00:11:22:33:44:55',
+        lastseen: '2019-04-01',
+      )}
+      let!(:host) { FactoryBot.create(:host,
+        lastseen: '2019-04-01',
+        name: 'uuname',
+        uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
+        network_interfaces: [iface],
+        description: "oldDescription",
+      )}
+      let(:attributes) {{
+        name: 'uuname',
+        lastseen: '2019-04-15',
+        ip: '192.0.2.9',
+        description: "newDescription",
+      }}
+      it "doesn't create a new Host" do
+        expect {
+          subject.save
+        }.to change{Host.count}.by(0)
+      end
+      describe "#save" do
+        before(:each) do
+          subject.save
+          host.reload
+        end
+        it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+        it { expect(host.description).to eq('newDescription') }
+      end
+    end
+
+    # Scenario: hosts exists, has only name and ip set.
+    # Update the same host with full data including uuid attribute
+    # should update existing host with same name, but not create a new one.
+    describe "existing plain host, new data containing uuid" do
+      subject { Creator.new(mode: :newer, attributes: attributes) }
+      let(:iface) { FactoryBot.create(:network_interface,
+        ip: '192.0.2.7',
+        mac: '00:11:22:33:44:55',
+        lastseen: '2019-04-01',
+      )}
+      let!(:host) { FactoryBot.create(:host,
+        lastseen: '2019-04-01',
+        name: 'plainname',
+        description: "oldDescription",
+        network_interfaces: [iface],
+      )}
+      let(:attributes) {{
+        name: 'plainname',
+        uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
+        lastseen: '2019-04-15',
+        description: "newDescription",
+        ip: '192.0.2.9',
+      }}
+      it "doesn't create a new Host" do
+        expect {
+          subject.save
+        }.to change{Host.count}.by(0)
+      end
+      describe "#save" do
+        before(:each) do
+          subject.save
+          host.reload
+        end
+        it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+        it { expect(host.uuid).to eq('64e1c15e-764b-11ea-a495-f48e387521dd') }
+        it { expect(host.description).to eq('newDescription') }
+      end
+    end
+    # Scenario: multiple hosts with same name exists
+    # Update only the latest entry
+    describe "with multiple hosts with same name" do
+      subject { Creator.new(attributes: attributes) }
+      let!(:host1) { FactoryBot.create(:host,
+        lastseen: '2019-04-01',
+        name: 'somehost',
+        description: "older version",
+      )}
+      let!(:host2) { FactoryBot.create(:host,
+        lastseen: '2019-04-10',
+        name: 'somehost',
+        description: "newer version",
+      )}
+      let(:attributes) {{
+        name: 'somehost',
+        lastseen: '2019-04-20',
+        description: "current version",
+      }}
+      it "doesn't create a new Host" do
+        expect {
+          subject.save
+        }.to change{Host.count}.by(0)
+      end
+      describe "#save" do
+        before(:each) do
+          subject.save
+          host1.reload; host2.reload
+        end
+        it { expect(host1.lastseen.to_s).to eq('2019-04-01') }
+        it { expect(host1.description).to eq('older version') }
+        it { expect(host2.lastseen.to_s).to eq('2019-04-20') }
+        it { expect(host2.description).to eq('current version') }
       end
     end
   end

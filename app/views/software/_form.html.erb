@@ -24,20 +24,7 @@
           <div class="card">
            <div class="card-body bg-light">
             <%= f.simple_fields_for :pattern do |ff| %>
-              <% Software::PATTERN_ATTRIBUTES.each do |attrib| %>
-                <div class="form-group row">
-                  <label for="<%= attrib %>" class="col-sm-3 col-form-label">
-                    <%= t('attributes.' + attrib.to_s) %>
-                  </label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control string" 
-                           id="software_pattern_<%= attrib %>" 
-                           name="software[pattern][<%= attrib %>]"
-                           value="<%= @software.pattern[attrib]%>"
-                    >
-                  </div>
-                </div>
-              <% end %>
+              <%= render 'software/pattern_fields', f: ff, pattern: @software.pattern %>
             <% end %>
            </div>
           </div>
@@ -66,7 +53,7 @@
         <%= f.label :software_category, class: "col-sm-3 col-form-label" %>
         <div class="col-sm-8">
           <%= f.select :software_category_id,
-                SoftwareCategory.all.collect {|s| [s.name, s.id]},
+                SoftwareCategory.order('name asc').all.collect {|s| [s.name, s.id]},
                 {include_blank: true}, { class: "select2 form-control" }
            %>
         </div>

@@ -64,6 +64,6 @@ Rails.application.configure do
   config.action_view.raise_on_missing_translations = true
   config.colorize_logging = false
   # -- strong parameters
-  config.action_controller.action_on_unpermitted_parameters = :raise
+  config.action_controller.action_on_unpermitted_parameters = :log
   config.action_mailer.delivery_method = :sendmail
 end

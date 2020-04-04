@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "software/show", type: :view do
+  let(:swgrp) { FactoryBot.create(:software_group, name: "administrativa") }
+  let(:swcat) { FactoryBot.create(:software_category, name: "Others", software_group: swgrp) }
   before(:each) do
     @ability = Object.new
     @ability.extend(CanCan::Ability)
@@ -18,7 +20,7 @@ RSpec.describe "software/show", type: :view do
       green: 2.years.before(Date.today),
       yellow: 2.years.after(Date.today),
       red: 10.years.after(Date.today),
-      software_category: nil
+      software_category_id: swcat.id
     ))
   end
 
@@ -33,5 +35,7 @@ RSpec.describe "software/show", type: :view do
     expect(rendered).to match(/#{2.years.before(Date.today).to_s}/)
     expect(rendered).to match(/#{2.years.after(Date.today).to_s}/)
     expect(rendered).to match(/#{10.years.after(Date.today).to_s}/)
+    expect(rendered).to match(/Others/)
+    expect(rendered).to match(/administrativa/)
   end
 end

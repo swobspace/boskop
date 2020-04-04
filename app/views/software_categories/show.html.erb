@@ -1,27 +1,28 @@
 <div class="card">
   <div class="card-header">
-    <h4><%= t('activerecord.models.software_category') %></h4>
+    <h6 class="subtitle"><%= t('activerecord.models.software_category') %></h6>
+    <h4 class="title"><%= @software_category.name %></h4>
   </div>
   <div class="card-body">
-    <table class="table">
+    <table class="table table-sm table-borderless">
     
       <tr>
-        <th class="w-25"><%= t('attributes.name')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.name')%>:</th>
         <td><%= @software_category.name %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.description')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.description')%>:</th>
         <td><%= @software_category.description %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.main_business_process')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.main_business_process')%>:</th>
         <td><%= @software_category.main_business_process %></td>
       </tr>
     
       <tr>
-        <th class="w-25"><%= t('attributes.software_group')%>:</th>
+        <th class="w-25 text-left"><%= t('attributes.software_group')%>:</th>
         <td><%= @software_category.software_group %></td>
       </tr>
     
@@ -40,4 +41,7 @@
 
 <h4><%= t('attributes.software') %></h4>
 <%= render partial: 'software', locals: {software: @software_category.software} %>
+
+<br />
+<%= new_link Software %>
 

@@ -15,4 +15,13 @@ class Software < ApplicationRecord
     "#{name} (#{vendor})"
   end
 
+  def patterns
+    if pattern.kind_of? Hash
+      [pattern]
+    elsif pattern.kind_of? Array
+      pattern
+    else
+      []
+    end
+  end
 end

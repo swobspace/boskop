@@ -2,7 +2,10 @@ shared_context "software_raw_data variables" do
   let!(:sw1) { FactoryBot.create(:software,
     name: "Microsoft Visual Studio Runtime",
     vendor: "Microsoft Corporation",
-    pattern: {'name' => '.*studio.*(runtime|laufzeit)', "vendor" => 'microsoft'}
+    pattern: [
+               {'name' => '.*studio.*(laufzeit|sonstnix)', "vendor" => 'microsoft'},
+               {'name' => '.*studio.*(runtime|sonstwas)', "vendor" => 'microsoft'}
+             ]
   )}
   let!(:sw2) { FactoryBot.create(:software,
     name: "Wrong Software",
