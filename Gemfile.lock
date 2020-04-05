@@ -413,7 +413,7 @@ GEM
       activesupport
       immutable-struct
       net-ldap
-    wobapphelpers (4.1.0)
+    wobapphelpers (4.1.1)
       coffee-rails
       font-awesome-sass (>= 4.7, <= 6)
       jquery-rails
