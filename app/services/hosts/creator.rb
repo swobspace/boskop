@@ -66,8 +66,11 @@ module Hosts
       elsif serial.present?
         host = Host.where(serial: serial).order("lastseen desc").first
       end
+      if host.nil? && fqdn.present?
+        host = Host.where('fqdn ILIKE ?', fqdn).order("lastseen desc").first
+      end
       if host.nil? && name.present?
-        host = Host.where(name: name).order("lastseen desc").first
+        host = Host.where('name ILIKE ?', name).order("lastseen desc").first
       end
       if host.nil? && ip.present?
         # use ip as fallback
@@ -211,6 +214,10 @@ module Hosts
 
     def name
       host_attributes[:name]
+    end
+
+    def fqdn
+      host_attributes[:fqdn]
     end
 
     def lastseen

@@ -1,9 +1,9 @@
-#d#
+#
 # Query object mainly for use in hosts_controller
 #
 class HostQuery
   attr_reader :search_options, :query
-
+  include ActiveRecord::Sanitization::ClassMethods
   ##
   # possible search options:
   # * :name - hostname
@@ -71,6 +71,9 @@ private
     search_string = [] # for global search_option :search
     search_value  = search_options.fetch(:search, false) # for global option :search
     search_options.each do |key,value|
+      if array_values.include?(key)
+        values = Array(value.gsub(/[;,] +/, ";").split(%r{[,; |]+}))
+      end
       case key 
       when *string_fields
         query = query.where("hosts.#{key} ILIKE ?", "%#{value}%")
@@ -83,11 +86,15 @@ private
       when :limit
         @limit = value.to_i
       when :ip
-        if value =~ /\/\d{1,2}\z/
-          query = query.where("network_interfaces.ip <<= ?", value)
-        else
-          query = query.where("host(network_interfaces.ip) ILIKE ?", "#{value}%")
+        qstring = []
+        values.each do |val|
+          if val =~ /\/\d{1,2}\z/
+            qstring << sanitize_sql("network_interfaces.ip <<= \'#{val}\'")
+          else
+            qstring << sanitize_sql("host(network_interfaces.ip) ILIKE \'#{val}%\'")
+          end
         end
+        query = query.where(qstring.join(' or '))
       when :mac
         mac = value.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
         query = query.where("network_interfaces.mac ILIKE ?", "%#{mac}%")
@@ -164,6 +171,10 @@ private
     Merkmalklasse.visibles(:host, 'index').map do |m|
       "merkmal_#{m.tag}".to_sym
     end
+  end
+
+  def array_values
+    [ :ip ]
   end
 
 end

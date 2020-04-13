@@ -92,7 +92,17 @@ describe Boskop do
            "password"=>"myldappasswd"
         }
       }}
-      let(:ldap_options_sym) {{
+      let(:ldap_options_ary) {[{
+        "host"=>"192.0.2.71",
+        "port"=>3268,
+        "base"=>"dc=example,dc=com",
+        "auth"=>{
+           "method"=>:simple,
+           "username"=>"myldapuser",
+           "password"=>"myldappasswd"
+        }
+      }]}
+      let(:ldap_options_sym) {[{
         host: "192.0.2.71",
         port: 3268,
         base: "dc=example,dc=com",
@@ -101,12 +111,17 @@ describe Boskop do
            username: "myldapuser",
            password: "myldappasswd"
         }
-      }}
-      before(:each) do
+      }]}
+      it "returns symbolized keys from Hash" do
         allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').
           and_return(ldap_options)
+        expect(Boskop.ldap_options).to eq(ldap_options_sym)
       end
-      it { expect(Boskop.ldap_options).to eq(ldap_options_sym) }
+      it "returns symbolized keys from Array of Hashes" do
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').
+          and_return(ldap_options_ary)
+        expect(Boskop.ldap_options).to eq(ldap_options_sym)
+      end
     end
   end
 end

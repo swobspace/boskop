@@ -4,9 +4,6 @@ class SearchAdUserService
   def initialize(options = {})
     @options = options.symbolize_keys
     @ldap_options = options.fetch(:ldap_options, Boskop.ldap_options)
-    if @ldap_options.blank?
-      raise RuntimeError, "ldap_options not set!"
-    end
     @query        = options.fetch(:query, false)
   end
 
@@ -15,21 +12,32 @@ class SearchAdUserService
       return Result.new(success: false, error_messages: ["no query given"], ad_users: [])
     end
 
-    ldap = Wobaduser::LDAP.new(ldap_options: ldap_options)
-    if ldap.errors.any?
-      return Result.new(success: false, error_messages: ldap.errors, ad_users: [])
+    errors = []
+    ad_users = []
+    ldap_options.each do |ldapopts|
+      ldap = Wobaduser::LDAP.new(ldap_options: ldapopts)
+      if ldap.errors.any?
+        errors += ldap.errors
+        next
+      end
+      search = Wobaduser::User.search(ldap: ldap, filter: user_filter(query))
+      if search.success?
+        ad_users += search.entries
+      else
+        errors += search.errors
+      end
     end
 
-    search = Wobaduser::User.search(ldap: ldap, filter: user_filter(query))
-    if search.success?
-      result = Result.new(success: true, error_messages: [], ad_users: search.entries)
+
+    if errors.any?
+      return Result.new(success: false, error_messages: errors, ad_users: ad_users)
     else
-      result = Result.new(success: false, error_messages: search.errors, ad_users: [])
+      result = Result.new(success: true, error_messages: errors, ad_users: ad_users)
      end
   end
 
 private
-  attr_reader :query, :ldap_options
+  attr_reader :query
 
   # use filter in Wobaduser::User.search
   # objectclass=user will be implicit added via Wobaduser::User.filter
@@ -47,5 +55,13 @@ private
     filter += "(!(msExchHideFromAddressLists=TRUE))"
     filter += ")"
     filter = Net::LDAP::Filter.construct(filter)
+  end
+
+  def ldap_options
+    if @ldap_options.kind_of? Hash
+      [@ldap_options]
+    else
+      @ldap_options
+    end
   end
 end

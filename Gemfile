@@ -18,9 +18,9 @@ gem 'font-awesome-sass', '~> 5.0'
 gem 'jquery-ui-rails'
 
 gem 'simple_form'
-gem 'wobauth', '~> 5.0'
+gem 'wobauth', '~> 5.1'
 gem 'wobaduser', '~> 1.0'
-gem 'wobapphelpers', '~> 4.0'
+gem 'wobapphelpers', '~> 4.1'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
@@ -47,7 +47,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '>= 4.0.0.beta3'
+  gem 'rspec-rails', '>= 4.0.0'
   gem 'dotenv'
   gem 'json_spec', require: false
 end
