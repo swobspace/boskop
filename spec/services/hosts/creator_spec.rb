@@ -423,29 +423,54 @@ module Hosts
       )}
       let!(:host) { FactoryBot.create(:host,
         lastseen: '2019-04-01',
-        name: 'uuname',
+        name: 'UUname',
+        fqdn: 'UUname.example.org',
         uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
         network_interfaces: [iface],
         description: "oldDescription",
       )}
-      let(:attributes) {{
-        name: 'uuname',
-        lastseen: '2019-04-15',
-        ip: '192.0.2.9',
-        description: "newDescription",
-      }}
-      it "doesn't create a new Host" do
-        expect {
-          subject.save
-        }.to change{Host.count}.by(0)
-      end
-      describe "#save" do
-        before(:each) do
-          subject.save
-          host.reload
+      describe "matching on name" do
+        let(:attributes) {{
+          name: 'uuname',
+          lastseen: '2019-04-15',
+          ip: '192.0.2.9',
+          description: "newDescription",
+        }}
+        it "doesn't create a new Host" do
+          expect {
+            subject.save
+          }.to change{Host.count}.by(0)
         end
-        it { expect(host.lastseen.to_s).to eq('2019-04-15') }
-        it { expect(host.description).to eq('newDescription') }
+        describe "#save" do
+          before(:each) do
+            subject.save
+            host.reload
+          end
+          it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+          it { expect(host.description).to eq('newDescription') }
+        end
+      end
+
+      describe "matching on fqdn" do
+        let(:attributes) {{
+          fqdn: 'uuname.example.org',
+          lastseen: '2019-04-15',
+          ip: '192.0.2.9',
+          description: "newDescription",
+        }}
+        it "doesn't create a new Host" do
+          expect {
+            subject.save
+          }.to change{Host.count}.by(0)
+        end
+        describe "#save" do
+          before(:each) do
+            subject.save
+            host.reload
+          end
+          it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+          it { expect(host.description).to eq('newDescription') }
+        end
       end
     end
 
@@ -461,32 +486,59 @@ module Hosts
       )}
       let!(:host) { FactoryBot.create(:host,
         lastseen: '2019-04-01',
-        name: 'plainname',
+        name: 'PlainName',
+        fqdn: 'PlainName.example.com',
         description: "oldDescription",
         network_interfaces: [iface],
       )}
-      let(:attributes) {{
-        name: 'plainname',
-        uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
-        lastseen: '2019-04-15',
-        description: "newDescription",
-        ip: '192.0.2.9',
-      }}
-      it "doesn't create a new Host" do
-        expect {
-          subject.save
-        }.to change{Host.count}.by(0)
-      end
-      describe "#save" do
-        before(:each) do
-          subject.save
-          host.reload
+      describe "with matching name" do
+        let(:attributes) {{
+          name: 'plainname',
+          uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
+          lastseen: '2019-04-15',
+          description: "newDescription",
+          ip: '192.0.2.9',
+        }}
+        it "doesn't create a new Host" do
+          expect {
+            subject.save
+          }.to change{Host.count}.by(0)
         end
-        it { expect(host.lastseen.to_s).to eq('2019-04-15') }
-        it { expect(host.uuid).to eq('64e1c15e-764b-11ea-a495-f48e387521dd') }
-        it { expect(host.description).to eq('newDescription') }
+        describe "#save" do
+          before(:each) do
+            subject.save
+            host.reload
+          end
+          it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+          it { expect(host.uuid).to eq('64e1c15e-764b-11ea-a495-f48e387521dd') }
+          it { expect(host.description).to eq('newDescription') }
+        end
+      end
+      describe "with matching fqdn" do
+        let(:attributes) {{
+          fqdn: 'plainname.example.com',
+          uuid: '64e1c15e-764b-11ea-a495-f48e387521dd',
+          lastseen: '2019-04-15',
+          description: "newDescription",
+          ip: '192.0.2.9',
+        }}
+        it "doesn't create a new Host" do
+          expect {
+            subject.save
+          }.to change{Host.count}.by(0)
+        end
+        describe "#save" do
+          before(:each) do
+            subject.save
+            host.reload
+          end
+          it { expect(host.lastseen.to_s).to eq('2019-04-15') }
+          it { expect(host.uuid).to eq('64e1c15e-764b-11ea-a495-f48e387521dd') }
+          it { expect(host.description).to eq('newDescription') }
+        end
       end
     end
+
     # Scenario: multiple hosts with same name exists
     # Update only the latest entry
     describe "with multiple hosts with same name" do
