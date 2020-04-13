@@ -2,7 +2,13 @@ require 'rails_helper'
 
 RSpec.describe SearchAdUserService do
   let(:q) {{ query: ENV['LDAP_SEARCH_SN'] }}
-  let(:ldap_options) { Boskop.ldap_options }
+  let(:ldap_options) {{
+      :auth=>{:method=>:simple, :password=>"brabbel", :username=>"quark"}, 
+      :base=>"dc=marienhaus,dc=org", 
+      :encryption=>:simple_tls, 
+      :host=>"nonexistent", 
+      :port=>3269
+  }}
 
   # check for class methods
   it { expect(SearchAdUserService.respond_to? :new).to be_truthy}
@@ -27,7 +33,7 @@ RSpec.describe SearchAdUserService do
   end
 
   describe "#call" do
-    subject { SearchAdUserService.new(q) }
+    subject { SearchAdUserService.new({ query: "a", ldap_options: [ldap_options] }) }
 
     it "calls Wobaduser::LDAP.new" do
       ldap = instance_double(Wobaduser::LDAP)
