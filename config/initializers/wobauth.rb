@@ -12,5 +12,5 @@ Wobauth.setup do |config|
   #
   # config.authorized_for_types = [ "MyClass", ...]
   #
-  config.ldap_config = File.join( Rails.root, 'config', 'ldap.yml')
+  config.ldap_config = File.join( Rails.root, 'config', 'boskop.yml')
 end
