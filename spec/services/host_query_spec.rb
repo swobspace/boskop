@@ -246,6 +246,15 @@ RSpec.describe HostQuery do
     it_behaves_like "a host query"
   end # search :ip subnet match
 
+  context "with list of :ip " do
+    subject { HostQuery.new(all_hosts, {ip: '198.51.100.63, 198.51.100.66'}) }
+    before(:each) do
+      @matching = [pc2, pc3]
+      @nonmatching = [vpngw, nas, pc5]
+    end
+    it_behaves_like "a host query"
+  end # search list of :ip match
+
   context "with :lastseen" do
     subject { HostQuery.new(all_hosts, {lastseen: Date.today.to_s[0,7]}) }
     before(:each) do
