@@ -44,7 +44,7 @@
         <td><%= software_raw_datum.source %></td>
         <td class="text-nowrap">
           <%= show_link software_raw_datum %>
-          <%= remove_software_link software_raw_datum %>
+          <%= remove_software_link(@software, software_raw_datum)%>
         </td>
       <% end %>
     <% end %>
