@@ -46,11 +46,7 @@ module Hosts
     end
 
     def save_location
-      if @host.location.nil?
-        @host.set_location.save
-      else
-        true
-      end
+      @host.set_location(true).save
     end
 
   private

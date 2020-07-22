@@ -86,8 +86,8 @@ class Host < ApplicationRecord
   #
   # works on update host only, not on create host
   #
-  def set_location
-    if self.location.nil?
+  def set_location(force = false)
+    if self.location.nil? || force
       networks = Network.best_match(self.ip)
       if networks.count == 1
         self[:location_id] = networks.first.location.id
