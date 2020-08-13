@@ -7,14 +7,15 @@
 :code_dir: code
 :image_dir: pics
 :author: Wolfgang Barth
-:Email: wob@swobspace.de
+:Email: wob@swobspace.net
 :revision: 0.0.1
-:revdate: 2019-03-14
-:rights:  Copyright 2019 (C) Wolfgang Barth
+:revdate: 2020-08-12
+:rights:  Copyright 2019-2020 (C) Wolfgang Barth
 :language: de-DE
 :icons: font
 :media: prepress
 :toc:
+:toc-levels: 3
 :toc-title: Inhalt
 :chapter-label: Kapitel
 :figure-caption: Abbildung
@@ -47,10 +48,17 @@ endif::[]
 //[%nonfacing]
 //include::preface.adoc[]
 
+Administration von Boskop
+
 // Hosts
 [%nonfacing]
 include::hosts.adoc[]
 
+// Software
+[%nonfacing]
+include::software.adoc[]
+
+// Users
 // Users
 //[%nonfacing]
 //include::users.adoc[]

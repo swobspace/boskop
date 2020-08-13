@@ -74,6 +74,15 @@ wird allerdings dabei auch aktualisiert.
 |`serial`
 |Seriennummer (Bios-Seriennummer)
 
+|`uuid`
+|UUID (Bios- oder Motherboard)
+
+|`product`
+|Herstellerbezeichnung des Produktes, z.B. Optiplex 3030
+
+|`warranty_sla`, `warranty_start`, `warranty_end`
+|Garantiedaten zum System: SLA, Start (Datum), Ende (Datum)
+
 |===
 
 .Ermittlung der für den Import verwendbaren Attribute
@@ -81,7 +90,7 @@ wird allerdings dabei auch aktualisiert.
 ----
   def host_attributes <!--1-->
     Host.attribute_names.map(&:to_sym).reject do |k|
-      [:id, :created_at, :updated_at, :vuln_risk, :oui_vendor].include?(k)
+      [:id, :created_at, :updated_at, :vuln_risk].include?(k)
     end
   end
 ----
@@ -90,5 +99,8 @@ wird allerdings dabei auch aktualisiert.
 .Verwendbare Attribute (Ausgabe von `host_attributes`)
 [source]
 ----
-[:name, :description, :ip, :cpe, :raw_os, :operating_system_id, :lastseen, :mac, :host_category_id, :location_id, :fqdn, :workgroup, :domain_dns, :vendor, :serial]
+[:id, :name, :description, :cpe, :raw_os, :operating_system_id, :lastseen,
+:host_catego ry_id, :location_id, :created_at, :updated_at, :fqdn, :workgroup,
+:domain_dns, :vendor, :v uln_risk, :serial, :uuid, :product, :warranty_sla,
+:warranty_start, :warranty_end]
 ----

@@ -1,0 +1,95 @@
+== Software
+
+Das Software-Portfolio besteht aus mehreren Modellen: `Software` komprimiert
+die Rohdaten über Regular Expressions auf sinnvolle Softwarepakete.
+`SoftwareRawDatum` (die Rohdaten) spiegeln die Information wieder, wie eine
+Software unter Windows installiert und registriert wurde. Dabei besteht ein
+Softwarepaket wie z.B. Microsoft Office 20xx meist aus mehreren
+Rohdaten-Einträgen; Updates und Patches werden in der Regel einzeln
+ausgewiesen. Um eine Aussage über ein bestimmtes Softwarepaket treffen zu
+können, werden einzelne Rohdaten unter einer `Software` gruppiert.
+
+Die Zuordnung von Rohdaten zu einzelnen Hosts erfolgt in der Tabelle
+`InstalledSoftware`.
+
+=== CSV-Import von Rohdaten
+
+Für den Import von Software-Rohdaten-Daten legt man eine CSV-Datei an mit
+Separator `;` und den Attributnamen in der Kopfzeile. Die Attribute `name`
+(der Software), `vendor` und `version` (der Software). Außerdem ist die Angabe
+von `lastseen` erforderlich (letztes Scandatum), um keine aktuelleren Daten zu
+überschreiben.
+
+IMPORTANT: Wenn aus manuell erzeugten oder gepflegten Tabellen Daten
+importiert werden sollen, muss ebenfalls `lastseen` gesetzt sein - `lastseen`
+wird allerdings dabei auch aktualisiert.
+
+.Beispiel für eine Import-Tabelle
+[options="header"]
+|===
+| name  | version | vendor | lastseen   | attr1 | ... | attrN |
+| 7-Zip |	20.00   |	Igor P.| 10.08.2020 | .
+
+|===
+
+==== SoftwareRawDatum Attribute
+
+.Importierbare Attribute SoftwareRawDatum
+[options="header", cols="20,80"]
+|===
+|Attribut
+|Beschreibung
+
+| `name`
+| Name der Software
+
+|`version`
+| Versionsnummer
+
+|`vendor`
+|Hersteller der Software
+
+|`lastseen`
+| Zuletzt gesehen am; Format: `YYYY-MM-DD`
+
+|`serial`
+|Seriennummer (Bios-Seriennummer)
+
+|===
+
+.Ermittlung der für den Import verwendbaren Attribute
+[source]
+----
+  def fetch_attributes <!--1-->
+    SoftwareRawDatum.attribute_names.map(&:to_sym).reject do |k|
+      [:id, :created_at, :updated_at].include?(k)
+    end
+  end
+----
+<1> `app/services/software_raw_data/import_csv_service.rb`
+
+.Verwendbare Attribute (Ausgabe von `fetch_attributes`)
+[source]
+----
+[:software_id, :name, :version, :vendor, :operating_system, :lastseen,
+:source]
+----
+
+==== Ergänzende Attribute für die Hostzuordnung (`InstalledSoftware`)
+
+.Importierbare Attribute für Hostzuordnung
+[options="header", cols="20,80"]
+|===
+|Attribut
+|Beschreibung
+
+| `host_name`
+| Name des Hosts
+
+| `host_ip`
+| IP-Adresse des Hosts
+
+|`host_serial`
+|Seriennummer (Bios-Seriennummer) des Hosts
+
+|===
