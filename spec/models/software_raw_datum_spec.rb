@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SoftwareRawDatum, type: :model do
   it { is_expected.to belong_to(:software).optional }
+  it { is_expected.to have_many(:installed_software).dependent(:destroy) }
 
   it "should get plain factory working" do
     f = FactoryBot.create(:software_raw_datum)

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe InstalledSoftware, type: :model do
-  it { is_expected.to belong_to(:software_raw_data) }
+  it { is_expected.to belong_to(:software_raw_datum) }
   it { is_expected.to belong_to(:host) }
   it { is_expected.to validate_presence_of(:lastseen) }
 

@@ -157,6 +157,7 @@ FactoryBot.define do
   factory :installed_software do
     software_raw_datum
     host
+    lastseen { Date.today }
   end
 
 
