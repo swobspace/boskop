@@ -154,6 +154,12 @@ FactoryBot.define do
     name { generate(:aname) }
   end
 
+  factory :installed_software do
+    software_raw_datum
+    host
+  end
+
+
   factory :vulnerability do
     host
     vulnerability_detail

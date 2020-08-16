@@ -251,12 +251,12 @@ bin/rails g scaffold NetworkInterface \
 #    bin/rails g migration ChangeDescriptionToIfDescriptionNetworkInterface
 ----
 
-## SoftwareRawData:
+## SoftwareRawDatum:
 
 for usage with docusnap
 
 ----
-bin/rails g scaffold SoftwareRawData \
+bin/rails g scaffold SoftwareRawDatum \
   software:references:index \
   name:string:index \
   version:string \
@@ -307,6 +307,18 @@ bin/rails g scaffold SoftwareCategory \
 bin/rails g model SoftwareGroup \
   name:string:index \
   description:text
+----
+
+## InstalledSoftware:
+
+for usage with docusnap
+
+----
+bin/rails g model InstalledSoftware \
+  software_raw_datum:references:index \
+  host:references:index \
+  lastseen:date \
+  --no-stylesheets --no-javascripts --no-helper --no-jbuilder
 ----
 
 ## Note
