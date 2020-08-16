@@ -9,6 +9,8 @@ class Host < ApplicationRecord
   has_many :vulnerabilities, dependent: :destroy
   has_many :network_interfaces, inverse_of: :host, dependent: :destroy
   has_many :installed_software, inverse_of: :host, dependent: :destroy
+  has_many :software_raw_data, through: :installed_software
+  has_many :software, through: :software_raw_data
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true
   accepts_nested_attributes_for :network_interfaces, allow_destroy: true
