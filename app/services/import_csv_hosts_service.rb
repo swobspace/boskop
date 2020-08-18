@@ -34,6 +34,7 @@ class ImportCsvHostsService
     options.symbolize_keys!
     @csvfile = get_file(options)
     @update  = options.fetch(:update) { :newer }.to_sym
+    update_csv_converters
   end
 
   # service.call()
@@ -46,7 +47,11 @@ class ImportCsvHostsService
       message = "File #{csvfile} is not readable or does not exist"
       return Result.new(success: false, error_message: message, hosts: hosts)
     end
-    CSV.foreach(csvfile, headers: true, converters: :all, col_sep: ';') do |row|
+    CSV.foreach(csvfile, headers: true, col_sep: ';',
+                         header_converters: :german,
+                         nil_value: "",
+                         liberal_parsing: true,
+                         converters: :all ) do |row|
       hc = Hosts::Creator.new(mode: update, attributes: row.to_hash)
       if hc.save
          hosts << hc.host
@@ -71,4 +76,23 @@ private
       file.to_s
     end
   end
+
+    def update_csv_converters
+      CSV::HeaderConverters[:german] = ->(v) { german_headers[v] || v }
+    end
+
+    def german_headers
+      {
+        "Hostname" => "name",
+        "IP" => "ip",
+        "Description" => "description",
+        "MAC" => "mac",
+        "Scandatum" => "lastseen",
+        "Seriennummer" => "serial",
+        "Betriebssystem" => "raw_os",
+        "Hersteller" => "vendor",
+        "Produkt" => "product",
+      }
+    end
+
 end

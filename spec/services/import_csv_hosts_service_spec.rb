@@ -213,4 +213,17 @@ RSpec.describe ImportCsvHostsService do
     it { expect(hosts[2].host_category_id).to eq(host_category.id) }
     it { expect(hosts[2].location_id).to eq(location.id) }
   end
+
+  describe "german hosts header" do
+    let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'german-hosts.csv') }
+    let(:result) { ImportCsvHostsService.new(file: csvfile).call }
+    let(:host)  { result.hosts.first }
+    it { expect(host.ip.to_s).to eq("192.0.2.81") }
+    it { expect(host.mac).to eq("A41F725436F0") }
+    it { expect(host.serial).to eq("79NH9X1") }
+    it { expect(host.lastseen.to_s).to eq("2020-08-05") }
+    it { expect(host.raw_os).to eq("Microsoft Windows 10 Enterprise") }
+    it { expect(host.product).to eq("OptiPlex 3010") }
+    it { expect(host.vendor).to eq("Dell Inc.") }
+  end
 end
