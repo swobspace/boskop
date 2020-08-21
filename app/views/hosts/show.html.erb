@@ -131,12 +131,19 @@
 
 <%= new_link [@host, NetworkInterface] %>
 
-<div class="mb-3">
-</div>
+<div class="mb-3"></div>
 
 <h3 id="host_vulnerabilities" class="mb-3"><%= t('controller.vulnerabilities') %> (<%= t('boskop.threats.critical') %>)</h3>
 
 <%= render partial: 'vulnerabilities/list', 
 	   locals: {vulnerabilities: @host.vulnerabilities.current.higher}
+ %>
+
+<div class="mb-3"></div>
+
+<h3 id="host_software" class="mb-3"><%= t('controller.software') %></h3>
+
+<%= render partial: 'software/list', 
+	   locals: {host_software: @host.software.distinct}
  %>
 
