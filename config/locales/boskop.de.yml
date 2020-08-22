@@ -306,6 +306,8 @@ de:
     responsibles: Verantwortliche
     responsibilities: Verantwortlichkeiten
     software: Software
+    software/software_raw_data: Software-Rohdaten
+    software/hosts: Hosts
     software_categories: Software-Kategorien
     software_raw_data: Software-Rohdaten
     vulnerabilities: Schwachstellen
