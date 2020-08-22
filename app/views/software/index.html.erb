@@ -59,10 +59,14 @@
         <td><%= software.status %></td>
         <td><%= software_category_link(software.software_category) %></td>
         <td><%= software.software_category&.software_group %></td>
-        <td class="text-nowrap">
+        <td><span class="text-nowrap">
           <%= show_link software %>
           <%= edit_link software %>
           <%= delete_link software %>
+          </span>
+          <%= link_to raw(%Q[<i class="fas fa-desktop"></i>]), 
+                      software_hosts_path(software),
+                      class: 'btn btn-secondary' %>
         </td>
       <% end %>
     <% end %>
