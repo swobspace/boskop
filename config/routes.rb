@@ -4,6 +4,11 @@ Rails.application.routes.draw do
     member do
       patch :assign_raw_software
     end
+    resources :hosts, only: [:index], module: :software do
+      collection do
+        post :index, constraints: lambda {|req| req.format == :json}
+      end
+    end
     resources :software_raw_data, only: [:remove], module: :software do
       member do
         patch :remove
