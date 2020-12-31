@@ -186,5 +186,22 @@ module SoftwareRawData
       it { expect(swr.vendor).to eq("") }
       it { expect(swr.source).to eq("") }
     end
+
+    context "avoid old data" do
+      let!(:pc2){FactoryBot.create(:host, name:'PC453', serial: '3H4FZ72') }
+      let!(:pc3){FactoryBot.create(:host, name:'PC461', serial: '822XJ52') }
+      let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'swr_ext2.csv') }
+      let(:swr) { subject.call.software_raw_data }
+      subject { 
+                ImportCsvService.new(
+                  file: csvfile, 
+                  recent_only: true, 
+                  lastseen: Date.today,
+                  source: 'docusnap'
+                ) 
+              }
+      it { expect(swr.count).to eq(1) }
+    end
+
   end
 end
