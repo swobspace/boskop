@@ -69,7 +69,8 @@ class SoftwareRawDataController < ApplicationController
     SoftwareRawData::ImportCsvJob.perform_later(
       file: file.path, 
       source: import_params["source"],
-      lastseen: import_params["lastseen"]
+      lastseen: import_params["lastseen"],
+      recent_only: import_params["recent_only"]
     )
     flash[:notice] = "Import started; please check your logs"
     redirect_to software_raw_data_path

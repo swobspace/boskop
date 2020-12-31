@@ -10,11 +10,13 @@ class SoftwareRawData::ImportCsvJob < ApplicationJob
   #
   def perform(options = {})
     @options = options.symbolize_keys!
-    file   = options.fetch(:file)   { raise ArgumentError, "missing option :file"   }
-    source = options.fetch(:source) { raise ArgumentError, "missing option :source" }
-    lastseen = options.fetch(:lastseen) { nil }
+    file        = options.fetch(:file)   { raise ArgumentError, "missing option :file" }
+    source      = options.fetch(:source) { raise ArgumentError, "missing option :source" }
+    lastseen    = options.fetch(:lastseen) { nil }
+    recent_only = options.fetch(:recent_only) { false }
 
-    result = SoftwareRawData::ImportCsvService.new(file: file, source: source, lastseen: lastseen).call
+    result = SoftwareRawData::ImportCsvService.new(file: file, source: source, 
+             recent_only: recent_only, lastseen: lastseen).call
     if result.success?
       logger.info "Import successful; #{result.software_raw_data.count} records imported"
     else

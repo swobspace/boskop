@@ -91,7 +91,12 @@ RSpec.describe SoftwareRawDataController, type: :controller do
 
   describe "POST #import" do
     context "with valid params" do
-      let(:import_form_attributes) {{ file: csv_file, lastseen: Date.today, source: "Unknown" }}
+      let(:import_form_attributes) {{ 
+        file: csv_file, 
+        lastseen: Date.today, 
+        source: "Unknown",
+        recent_only: true 
+      }}
       it "imports raw software data from csv" do
         expect(SoftwareRawData::ImportCsvJob).to receive(:perform_later).with(any_args)
         post :import, params: import_form_attributes, session: valid_session
