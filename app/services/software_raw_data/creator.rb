@@ -23,6 +23,7 @@ module SoftwareRawData
     end
 
     def save
+      return false if lastseen.nil?
       if @software_raw_datum.nil?
         @software_raw_datum = SoftwareRawDatum.new(create_attributes.merge(upd_attributes))
         status = @software_raw_datum.save
@@ -62,8 +63,15 @@ module SoftwareRawData
     end
 
     def lastseen
-      (attributes[:lastseen] || "1970-01-01").to_s
+      if attributes[:lastseen].kind_of? Date
+        attributes[:lastseen]
+      else
+        begin
+          Date.parse(attributes[:lastseen].to_s)
+        rescue ArgumentError
+          nil
+        end
+      end
     end
-
   end
 end

@@ -51,7 +51,7 @@ module SoftwareRawData
           before(:each) do
             attributes['lastseen'] = nil
           end
-          it { expect(subject.save).to be_truthy }
+          it { expect(subject.save).to be_falsey }
         end
 
         context "creates a new entry" do
@@ -65,6 +65,25 @@ module SoftwareRawData
           it { expect(swr.operating_system).to eq("NixOS") }
           it { expect(swr.lastseen.to_s).to eq("2020-02-29") }
           it { expect(swr.source).to eq("docusnap") }
+        end
+
+        describe "with illegal date format" do
+          before(:each) do
+            attributes['lastseen'] = "Some Nonsense"
+          end
+          let(:swr) { subject.save; subject.software_raw_datum }
+          it { expect(subject.save).to be_falsey }
+        end
+
+        describe "with unparsed date format" do
+          before(:each) do
+            attributes['lastseen'] = "21.12.2020 16:35:03"
+          end
+          let(:swr) { subject.save; subject.software_raw_datum }
+          it { expect(subject.save).to be_truthy }
+          it { expect(swr).to be_kind_of(SoftwareRawDatum) }
+          it { expect(swr).to be_valid }
+          it { expect(swr.lastseen.to_s).to eq("2020-12-21") }
         end
       end
     end
