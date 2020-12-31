@@ -105,7 +105,7 @@ class SoftwareRawDataController < ApplicationController
     end
 
     def import_params
-      params.permit(:utf8, :authenticity_token, :file, :source, :lastseen).to_hash
+      params.permit(:utf8, :authenticity_token, :file, :source, :lastseen, :recent_only).to_hash
     end
 
     def search_params
