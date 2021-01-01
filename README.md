@@ -44,7 +44,7 @@ See ''doc/postgres.md''
 Licence
 -------
 
-boskop Copyright (C) 2014-2020  Wolfgang Barth
+boskop Copyright (C) 2014-2021  Wolfgang Barth
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
