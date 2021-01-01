@@ -69,9 +69,9 @@ private
         mac = value.upcase.gsub(/[^0-9A-F\n]/, '').split(/\n/).first
         query = query.where("network_interfaces.mac ILIKE ?", "%#{mac}%")
       when :lastseen
-        query = query.where("to_char(network_interfaces.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(network_interfaces.lastseen, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :created_at
-        query = query.where("to_char(network_interfaces.created_at, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(network_interfaces.created_at, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :at
         query = query.where("network_interfaces.lastseen = ?", "#{value}")
       when :newer, :since
@@ -93,7 +93,7 @@ private
         else
           search_string << "host(network_interfaces.ip) ILIKE :search"
         end
-        search_string << "to_char(network_interfaces.lastseen, 'IYYY-MM-DD') ILIKE :search"
+        search_string << "to_char(network_interfaces.lastseen, 'YYYY-MM-DD') ILIKE :search"
         search_string << "hosts.name ILIKE :search"
         search_string << "network_interfaces.if_description ILIKE :search"
         search_string << "network_interfaces.mac ILIKE :search"

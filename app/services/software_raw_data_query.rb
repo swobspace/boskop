@@ -63,9 +63,9 @@ private
       when :version
         query = query.where("software_raw_data.version ILIKE ?", "#{value}%")
       when :lastseen
-        query = query.where("to_char(software_raw_data.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(software_raw_data.lastseen, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :created_at
-        query = query.where("to_char(software_raw_data.created_at, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(software_raw_data.created_at, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer
         query = query.where("software_raw_data.lastseen >= ?", "#{value}%")
       when :current
@@ -96,7 +96,7 @@ private
         string_fields.each do |term|
           search_string << "software_raw_data.#{term} ILIKE :search"
         end
-        search_string << "to_char(software_raw_data.lastseen, 'IYYY-MM-DD') ILIKE :search"
+        search_string << "to_char(software_raw_data.lastseen, 'YYYY-MM-DD') ILIKE :search"
       else
         raise ArgumentError, "unknown search option #{key}"
       end
