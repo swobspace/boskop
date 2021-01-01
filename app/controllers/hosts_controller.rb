@@ -6,6 +6,17 @@ class HostsController < ApplicationController
   def index
     if @hostable
       @hosts = @hostable.hosts.current
+    elsif params[:filter].present?
+      @filter = params[:filter]
+      if @filter == "fqdn_mismatch"
+        @hosts = Host.current
+                     .where("hosts.fqdn <> '' and hosts.name <> '' and hosts.lastseen >= ?", 1.month.before(Date.today))
+                     .where("fqdn NOT ILIKE CONCAT(hosts.name, '%')")
+      elsif params[:filter] == "duplicate_names"
+        hostnames = Host.where("lastseen > ?", 5.weeks.before(Date.today))
+                        .group(:name).having("count(*) > 1").count
+        @hosts = Host.current.where(name: hostnames.keys)
+      end
     else
       @hosts = Host.current
     end

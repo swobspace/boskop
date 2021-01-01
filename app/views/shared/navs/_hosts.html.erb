@@ -21,6 +21,12 @@
         <div class="dropdown-divider"></div>
 	<%=link_to raw('<span class="fas fa-fw fa-table" aria-hidden="true"></span> '+t('controller.network_interfaces')), main_app.network_interfaces_path, class: 'dropdown-item' %>
       <% end %>
+      <div class="dropdown-divider"></div>
+      <div class="dropdown-header"><%= t('boskop.consistency_checks')%></div>
+
+      <%=link_to raw('<span class="fas fa-fw fa-not-equal" aria-hidden="true"></span> '+t('boskop.fqdn_mismatch')), main_app.hosts_path(filter: 'fqdn_mismatch'), class: 'dropdown-item' %>
+      <%=link_to raw('<span class="far fa-fw fa-clone" aria-hidden="true"></span> '+t('boskop.duplicate_names')), main_app.hosts_path(filter: 'duplicate_names'), class: 'dropdown-item' %>
+ 
     </div>
   </li>
 <% end %>

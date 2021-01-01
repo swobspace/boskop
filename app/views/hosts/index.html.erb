@@ -6,7 +6,7 @@
       id: 'hosts_table',
       class: "table table-bordered",
       data: {
-        url: polymorphic_path([@hostable, :hosts], format: :json),
+        url: polymorphic_path([@hostable, :hosts], format: :json, filter: @filter),
         order: [[0, 'desc']].to_json
       } do %>
 

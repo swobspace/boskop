@@ -9,6 +9,9 @@ de:
     org_units: Organisationseinheiten
     locations: Lokationen
     configuration: Konfiguration
+    consistency_checks: Prüfberichte
+    fqdn_mismatch: FQDN Mismatch
+    duplicate_names: Doubletten
     change_columns: Spalten ändern
     show_all: alles anzeigen
     restore: zurücksetzen
