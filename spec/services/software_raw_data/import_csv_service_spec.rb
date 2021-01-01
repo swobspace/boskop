@@ -87,6 +87,41 @@ module SoftwareRawData
           it { expect(result.software_raw_data.first).to be_nil }
         end
       end
+
+      context "with extended software raw data (containing host installations)" do
+        let!(:pc1){FactoryBot.create(:host, name: 'PC41', serial: 'YL3M104238') }
+        let!(:pc2){FactoryBot.create(:host, name:'PC453', serial: '3H4FZ72') }
+        let!(:pc3){FactoryBot.create(:host, name:'PC461', serial: '822XJ52') }
+                     
+        let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'swr_extended.csv') }
+        subject { ImportCsvService.new(file: csvfile, 
+                                       source: "docusnap") }
+
+        it "creates 3 SoftwareRawData" do
+          expect {
+            subject.call
+          }.to change{SoftwareRawDatum.count}.by(3)
+        end
+      
+        it "creates 5 InstalledSoftware entries" do
+          expect {
+            subject.call
+          }.to change{InstalledSoftware.count}.by(4)
+        end
+
+        describe "the first software_raw_datum" do
+          let(:result) { subject.call }
+          let!(:swr) { result.software_raw_data.first }
+          it { expect(swr).to be_a_kind_of SoftwareRawDatum }
+          it { expect(swr).to be_persisted }
+          it { expect(swr.name.to_s).to eq("Java 7 Update 55") }
+          it { expect(swr.version).to eq("7.0.550") }
+          it { expect(swr.vendor).to eq("Oracle") }
+          it { expect(swr.operating_system).to eq("Windows") }
+          it { expect(swr.lastseen.to_s).to match(/#{Date.today}/) }
+          it { expect(swr.source).to eq("docusnap") }
+        end
+      end
     end
 
     describe "with existing software_raw_datum" do
@@ -151,5 +186,22 @@ module SoftwareRawData
       it { expect(swr.vendor).to eq("") }
       it { expect(swr.source).to eq("") }
     end
+
+    context "avoid old data" do
+      let!(:pc2){FactoryBot.create(:host, name:'PC453', serial: '3H4FZ72') }
+      let!(:pc3){FactoryBot.create(:host, name:'PC461', serial: '822XJ52') }
+      let(:csvfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'swr_ext2.csv') }
+      let(:swr) { subject.call.software_raw_data }
+      subject { 
+                ImportCsvService.new(
+                  file: csvfile, 
+                  recent_only: true, 
+                  lastseen: Date.today,
+                  source: 'docusnap'
+                ) 
+              }
+      it { expect(swr.count).to eq(1) }
+    end
+
   end
 end

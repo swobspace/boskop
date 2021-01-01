@@ -19,7 +19,7 @@ class SoftwareRawDataDatatable < ApplicationDatatable
         column << swr.name
         column << swr.version
         column << swr.vendor
-        column << swr.count
+        column << swr.hosts.count
         column << swr.operating_system
         column << swr.lastseen.to_s
         column << swr.source

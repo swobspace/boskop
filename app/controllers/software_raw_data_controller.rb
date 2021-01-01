@@ -62,15 +62,18 @@ class SoftwareRawDataController < ApplicationController
   end
 
   def import
-    result = SoftwareRawData::ImportCsvService.new(import_params).call
-    if result.success?
-      flash[:success] = "Import successful"
-      redirect_to software_raw_data_path
-    else
-      flash[:error] = result.error_message.to_s
-      Rails.logger.warn("### WARNING ###: import failure: #{result.errors.inspect}")
-      redirect_to software_raw_data_path
-    end
+    file = Tempfile.new("software_raw_data_import_csv")
+    data = import_params["file"].read
+    data.force_encoding('UTF-8')
+    file.write(data)
+    SoftwareRawData::ImportCsvJob.perform_later(
+      file: file.path, 
+      source: import_params["source"],
+      lastseen: import_params["lastseen"],
+      recent_only: import_params["recent_only"]
+    )
+    flash[:notice] = "Import started; please check your logs"
+    redirect_to software_raw_data_path
   end
 
   def add_software
@@ -102,7 +105,7 @@ class SoftwareRawDataController < ApplicationController
     end
 
     def import_params
-      params.permit(:utf8, :authenticity_token, :file, :source, :lastseen).to_hash
+      params.permit(:utf8, :authenticity_token, :file, :source, :lastseen, :recent_only).to_hash
     end
 
     def search_params

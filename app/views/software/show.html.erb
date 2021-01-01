@@ -75,6 +75,10 @@
       <%= new_link Software %>
       <%= matching_raw_software_link(@software) %>
       <%= assign_raw_software_link(@software) %>
+      <%= link_to raw(%Q[<i class="fas fa-desktop"></i>]),  
+                      software_hosts_path(@software),
+                      class: 'btn btn-secondary' %>
+
     </div>
   </div>
 </div>

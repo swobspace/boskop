@@ -19,4 +19,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'Merkmal', 'Merkmale'
   inflect.irregular 'Merkmalklasse', 'Merkmalklassen'
   inflect.uncountable %(software)
+  inflect.uncountable %(installed_software)
 end

@@ -4,9 +4,12 @@ RSpec.describe Host, type: :model do
   it { is_expected.to belong_to(:host_category).optional }
   it { is_expected.to belong_to(:location).optional }
   it { is_expected.to belong_to(:operating_system).optional }
-  it { is_expected.to have_many(:merkmale) }
-  it { is_expected.to have_many(:vulnerabilities) }
-  it { is_expected.to have_many(:network_interfaces) }
+  it { is_expected.to have_many(:merkmale).dependent(:destroy) }
+  it { is_expected.to have_many(:vulnerabilities).dependent(:destroy) }
+  it { is_expected.to have_many(:network_interfaces).dependent(:destroy) }
+  it { is_expected.to have_many(:installed_software).dependent(:destroy) }
+  it { is_expected.to have_many(:software_raw_data).through(:installed_software) }
+  it { is_expected.to have_many(:software).through(:software_raw_data) }
   it { is_expected.to validate_presence_of(:lastseen) }
 
   it { is_expected.to accept_nested_attributes_for(:network_interfaces) }

@@ -1,9 +1,3 @@
-<% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
-<% end %>
-
-<h1><%= t('controller.software') %></h1>
-
 <%= content_tag :table, role: :datatable,
       id: "software_table",
       class: "table table-bordered table-responsive-xl",
@@ -45,7 +39,7 @@
     </tr>
   </tfoot>
   <tbody>
-    <% @software.each do |software| %>
+    <% host_software.each do |software| %>
       <%= content_tag_for(:tr, software, class: "#{software.status(:color)}") do %>
         <td><%= software.name %></td>
         <td><%= software.pattern %></td>
@@ -59,14 +53,8 @@
         <td><%= software.status %></td>
         <td><%= software_category_link(software.software_category) %></td>
         <td><%= software.software_category&.software_group %></td>
-        <td><span class="text-nowrap">
+        <td class="text-nowrap">
           <%= show_link software %>
-          <%= edit_link software %>
-          <%= delete_link software %>
-          </span>
-          <%= link_to raw(%Q[<i class="fas fa-desktop"></i>]), 
-                      software_hosts_path(software),
-                      class: 'btn btn-secondary' %>
         </td>
       <% end %>
     <% end %>
@@ -76,4 +64,3 @@
 <br />
 
 <%= back_link %>
-<%= new_link Software %>

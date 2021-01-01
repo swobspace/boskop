@@ -101,15 +101,15 @@ private
       when :oui_vendor
         query = query.where("network_interfaces.oui_vendor ILIKE ?", "%#{value}%")
       when :warranty_start
-        query = query.where("to_char(warranty_start, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(warranty_start, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :warranty_start_from
         query = query.where("warranty_start >= ?", "#{value}%")
       when :warranty_start_until
         query = query.where("warranty_start <= ?", "#{value}%")
       when :lastseen
-        query = query.where("to_char(hosts.lastseen, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(hosts.lastseen, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :created_at
-        query = query.where("to_char(hosts.created_at, 'IYYY-MM-DD') ILIKE ?", "#{value}%")
+        query = query.where("to_char(hosts.created_at, 'YYYY-MM-DD') ILIKE ?", "#{value}%")
       when :newer
         query = query.where("hosts.lastseen >= ?", "#{value}%")
       when :current
@@ -146,7 +146,7 @@ private
         else
           search_string << "host(network_interfaces.ip) ILIKE :search"
         end
-        search_string << "to_char(hosts.lastseen, 'IYYY-MM-DD') ILIKE :search"
+        search_string << "to_char(hosts.lastseen, 'YYYY-MM-DD') ILIKE :search"
         search_string << "host_categories.name ILIKE :search"
         search_string << "locations.lid ILIKE :search"
       else

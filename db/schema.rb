@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_23_124850) do
+ActiveRecord::Schema.define(version: 2020_08_16_120509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,16 @@ ActiveRecord::Schema.define(version: 2020_03_23_124850) do
     t.index ["serial"], name: "index_hosts_on_serial"
     t.index ["uuid"], name: "index_hosts_on_uuid"
     t.index ["vuln_risk"], name: "index_hosts_on_vuln_risk"
+  end
+
+  create_table "installed_software", force: :cascade do |t|
+    t.bigint "software_raw_datum_id", null: false
+    t.bigint "host_id", null: false
+    t.date "lastseen"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["host_id"], name: "index_installed_software_on_host_id"
+    t.index ["software_raw_datum_id"], name: "index_installed_software_on_software_raw_datum_id"
   end
 
   create_table "line_states", id: :serial, force: :cascade do |t|

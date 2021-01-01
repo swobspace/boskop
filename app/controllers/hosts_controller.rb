@@ -4,7 +4,23 @@ class HostsController < ApplicationController
 
   # GET /hosts
   def index
-    @hosts = Host.current.left_outer_joins(:network_interfaces, :location, :host_category, :operating_system, :merkmale).distinct
+    if @hostable
+      @hosts = @hostable.hosts.current
+    elsif params[:filter].present?
+      @filter = params[:filter]
+      if @filter == "fqdn_mismatch"
+        @hosts = Host.current
+                     .where("hosts.fqdn <> '' and hosts.name <> '' and hosts.lastseen >= ?", 1.month.before(Date.today))
+                     .where("fqdn NOT ILIKE CONCAT(hosts.name, '%')")
+      elsif params[:filter] == "duplicate_names"
+        hostnames = Host.where("lastseen > ?", 5.weeks.before(Date.today))
+                        .group(:name).having("count(*) > 1").count
+        @hosts = Host.current.where(name: hostnames.keys)
+      end
+    else
+      @hosts = Host.current
+    end
+    @hosts = @hosts.left_outer_joins(:network_interfaces, :location, :host_category, :operating_system, :merkmale).distinct
     @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:host, 'index')
     respond_with(@hosts) do |format|
       format.json { render json: HostsDatatable.new(@hosts, view_context) }

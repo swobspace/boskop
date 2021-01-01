@@ -8,6 +8,11 @@ class Host < ApplicationRecord
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :vulnerabilities, dependent: :destroy
   has_many :network_interfaces, inverse_of: :host, dependent: :destroy
+  has_many :installed_software, 
+             -> {where('installed_software.lastseen >= ?', 6.weeks.before(Date.today))},
+             inverse_of: :host, dependent: :destroy
+  has_many :software_raw_data, through: :installed_software
+  has_many :software, through: :software_raw_data
 
   accepts_nested_attributes_for :merkmale, allow_destroy: true
   accepts_nested_attributes_for :network_interfaces, allow_destroy: true
@@ -86,8 +91,8 @@ class Host < ApplicationRecord
   #
   # works on update host only, not on create host
   #
-  def set_location
-    if self.location.nil?
+  def set_location(force = false)
+    if self.location.nil? || force
       networks = Network.best_match(self.ip)
       if networks.count == 1
         self[:location_id] = networks.first.location.id

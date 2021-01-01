@@ -1,14 +1,12 @@
-<% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
-<% end %>
-
 <h1><%= t('controller.hosts') %></h1>
+
+<%= render partial: 'shared/hostable', locals: {hostable: @hostable} %>
 
 <%= content_tag :table, role: :remotetable,
       id: 'hosts_table',
       class: "table table-bordered",
       data: {
-        url: hosts_path(format: :json),
+        url: polymorphic_path([@hostable, :hosts], format: :json, filter: @filter),
         order: [[0, 'desc']].to_json
       } do %>
 

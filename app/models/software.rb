@@ -4,6 +4,10 @@ class Software < ApplicationRecord
   # -- associations
   has_many :software_raw_data, dependent: :restrict_with_error
   belongs_to :software_category, optional: true
+  has_many :installed_software, 
+             -> {where('installed_software.lastseen >= ?', 6.weeks.before(Date.today))},
+             through: :software_raw_data
+  has_many :hosts, through: :installed_software
 
   # -- configuration
   PATTERN_ATTRIBUTES = [ 'name', 'vendor', 'version', 'operating_system' ]

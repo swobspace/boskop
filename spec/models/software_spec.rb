@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Software, type: :model do
   it { is_expected.to have_many(:software_raw_data) }
+  it { is_expected.to have_many(:installed_software).through(:software_raw_data) }
+  it { is_expected.to have_many(:hosts).through(:installed_software) }
   it { is_expected.to belong_to(:software_category).optional }
   it { is_expected.to validate_presence_of(:name) }
 

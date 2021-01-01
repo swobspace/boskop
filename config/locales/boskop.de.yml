@@ -9,6 +9,9 @@ de:
     org_units: Organisationseinheiten
     locations: Lokationen
     configuration: Konfiguration
+    consistency_checks: Prüfberichte
+    fqdn_mismatch: FQDN Mismatch
+    duplicate_names: Doubletten
     change_columns: Spalten ändern
     show_all: alles anzeigen
     restore: zurücksetzen
@@ -186,6 +189,7 @@ de:
     newer: Neuer als
     older: Älter als
     raw_os: OS (raw)
+    recent_only: Nur aktuelle Datensätze
     last_modification_date: letzte Änderung
     lid: StandortID
     line: Leitung/Zugang
@@ -306,6 +310,8 @@ de:
     responsibles: Verantwortliche
     responsibilities: Verantwortlichkeiten
     software: Software
+    software/software_raw_data: Software-Rohdaten
+    software/hosts: Hosts
     software_categories: Software-Kategorien
     software_raw_data: Software-Rohdaten
     vulnerabilities: Schwachstellen
