@@ -8,7 +8,9 @@ class Host < ApplicationRecord
   has_many :merkmale, as: :merkmalfor, dependent: :destroy
   has_many :vulnerabilities, dependent: :destroy
   has_many :network_interfaces, inverse_of: :host, dependent: :destroy
-  has_many :installed_software, inverse_of: :host, dependent: :destroy
+  has_many :installed_software, 
+             -> {where('installed_software.lastseen >= ?', 6.weeks.before(Date.today))},
+             inverse_of: :host, dependent: :destroy
   has_many :software_raw_data, through: :installed_software
   has_many :software, through: :software_raw_data
 
