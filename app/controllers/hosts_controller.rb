@@ -9,11 +9,12 @@ class HostsController < ApplicationController
     elsif params[:filter].present?
       @filter = params[:filter]
       if @filter == "fqdn_mismatch"
-        @hosts = Host.current
-                     .where("hosts.fqdn <> '' and hosts.name <> '' and hosts.lastseen >= ?", 1.month.before(Date.today))
+        @hosts = Host.active
+                     .where("hosts.fqdn <> '' and hosts.name <> ''")
                      .where("fqdn NOT ILIKE CONCAT(hosts.name, '%')")
       elsif params[:filter] == "duplicate_names"
-        hostnames = Host.where("lastseen > ?", 5.weeks.before(Date.today))
+        hostnames = Host.active
+                        .where("hosts.name <> ''")
                         .group(:name).having("count(*) > 1").count
         @hosts = Host.current.where(name: hostnames.keys)
       end

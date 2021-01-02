@@ -43,13 +43,13 @@ RSpec.describe NetworkInterfacesDatatable, type: :model do
   end
 
   describe "without search params, start:0, length:10" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "1", dir: "asc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of NetworkInterfacesDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(4) }
@@ -59,13 +59,13 @@ RSpec.describe NetworkInterfacesDatatable, type: :model do
   end 
 
   describe "without search params, start:2, length:2" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "1", dir: "asc"}},
       start: "2",
       length: "2",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(4) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(4) }
@@ -74,12 +74,12 @@ RSpec.describe NetworkInterfacesDatatable, type: :model do
   end 
 
   describe "with search: bbelfas" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "1", dir: "asc"}},
       start: "0",
       length: "10",
       "search"=> {"value"=>"bbelfas", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(4) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
@@ -87,12 +87,12 @@ RSpec.describe NetworkInterfacesDatatable, type: :model do
   end 
 
   describe "with search:198.51.100.7" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "2", dir: "desc"}},
       start: "0",
       length: "10",
       "search" => {"value" => "198.51.100.7", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(4) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
