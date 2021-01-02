@@ -59,7 +59,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   describe "without search params, start:0, length:10" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
-      order: {"0"=>{column: "1", dir: "desc"}},
+      order: {"0"=>{column: "1", dir: "desc"}, "1"=>{column: "5", dir: "desc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
