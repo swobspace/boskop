@@ -57,13 +57,13 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   end
 
   describe "without search params, start:0, length:10" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "1", dir: "desc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of VulnerabilitiesDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
@@ -73,13 +73,13 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   end 
 
   describe "without search params, start:2, length:2" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "1", dir: "asc"}},
       start: "2",
       length: "2",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(6) }
@@ -88,12 +88,12 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   end 
 
   describe "with search: Server" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "1", dir: "asc"}},
       start: "0",
       length: "10",
       "search"=> {"value"=>"Server", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
@@ -101,12 +101,12 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   end 
 
   describe "with search:198.51.100.7" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "7", dir: "desc"}},
       start: "0",
       length: "10",
       "search" => {"value" => "198.51.100.7", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(6) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }

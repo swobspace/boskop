@@ -52,13 +52,13 @@ RSpec.describe HostsDatatable, type: :model do
   end
 
   describe "without search params, start:0, length:10" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "desc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(datatable).to be_a_kind_of HostsDatatable }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
@@ -68,13 +68,13 @@ RSpec.describe HostsDatatable, type: :model do
   end 
 
   describe "without search params, start:2, length:2" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "2",
       length: "2",
       search: {value: "", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(5) }
@@ -83,12 +83,12 @@ RSpec.describe HostsDatatable, type: :model do
   end 
 
   describe "with search:nas" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
       "search"=> {"value"=>"nas", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(1) }
@@ -96,12 +96,12 @@ RSpec.describe HostsDatatable, type: :model do
   end 
 
   describe "with search:serial" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
       "search"=> {"value"=>"XXX778", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
@@ -110,13 +110,13 @@ RSpec.describe HostsDatatable, type: :model do
   end 
 
   describe "with search:198.51.100" do
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
       "search" => {"value" => "198.51.100", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(5) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(4) }
@@ -132,13 +132,13 @@ RSpec.describe HostsDatatable, type: :model do
     let!(:h5) { FactoryBot.create(:host, name: "E", vuln_risk: 'High',
                                    lastseen: 5.weeks.before(Date.today))}
 
-    let(:myparams) {{
+    let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
       order: {"0"=>{column: "0", dir: "asc"}},
       start: "0",
       length: "10",
       "search"=> {"value"=>"High", regex: "false"}
-    }}
+    )}
     subject { datatable.to_json }
     it { expect(parse_json(subject, "recordsTotal")).to eq(10) }
     it { expect(parse_json(subject, "recordsFiltered")).to eq(2) }
