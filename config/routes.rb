@@ -100,7 +100,8 @@ Rails.application.routes.draw do
 
   resources :addresses
 
-  resources :locations
+  get "locations/:lid", to: "locations#by_lid", constraints: { lid: /[A-Za-z]+/ }
+  resources :locations, constraints: { id: /[0-9]+/ }
 
   resources :merkmale
 
