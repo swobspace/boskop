@@ -67,9 +67,9 @@
         <%= line.renewal_period %> <%= line.renewal_unit %></td>
     <td><%= line.line_state %></td>
     <td class="nowrap">
-      <%= show_link line %>
-      <%= edit_link line %>
-      <%= delete_link line %>
+      <%= show_link [@framework_contract, line] %>
+      <%= edit_link [@framework_contract, line] %>
+      <%= delete_link [@framework_contract, line] %>
     </td>
   <% end %>
 <% end %>
