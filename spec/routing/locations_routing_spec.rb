@@ -15,6 +15,10 @@ RSpec.describe LocationsController, :type => :routing do
       expect(:get => "/locations/1").to route_to("locations#show", :id => "1")
     end
 
+    it "routes to #by_lid" do
+      expect(:get => "/locations/XXX").to route_to("locations#by_lid", :lid => "XXX")
+    end
+
     it "routes to #edit" do
       expect(:get => "/locations/1/edit").to route_to("locations#edit", :id => "1")
     end
