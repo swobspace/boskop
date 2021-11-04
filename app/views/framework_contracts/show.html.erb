@@ -58,7 +58,10 @@
   <br />
   <div class="card ">
     <div class="card-header">
-      <h3 class=""><%= t('boskop.assigned_lines') %></h3>
+      <h3 class=" title float-left "><%= t('boskop.assigned_lines') %></h3>
+      <div role="toolbar" class="float-right">
+        <%= new_link [@framework_contract, Line] %>
+      </div>
     </div>
     <div class="card-body">
       <%= render 'lines/index', lines: @framework_contract.lines %>

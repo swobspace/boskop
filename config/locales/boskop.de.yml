@@ -95,6 +95,7 @@ de:
       address: Adresse
       contact: Kontakt
       framework_contract: Rahmenvertrag
+      framework_contracts/line: Leitung/Zugang
       group: Gruppe
       host: Host
       host_category: Host-Kategorie
@@ -290,6 +291,7 @@ de:
     addresses: Adressen
     contacts: Kontakte
     framework_contracts: Rahmenverträge
+    framework_contracts/lines: Leitungen/Zugänge
     hosts: Hosts
     hosts/network_interfaces: Netzwerk-Interfaces
     hosts/vulnerabilities: Schwachstellen

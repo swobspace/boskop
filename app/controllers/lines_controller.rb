@@ -7,9 +7,13 @@ class LinesController < ApplicationController
 
   # GET /lines
   def index
-    @lines = Line.includes(:line_state, :access_type, :framework_contract,
-                           location_a: [:addresses], 
-                           location_b: [:addresses]).all
+    if @framework_contract
+      @lines = @framework_contract.lines
+    else
+      @lines = Line.includes(:line_state, :access_type, :framework_contract,
+                             location_a: [:addresses], 
+                             location_b: [:addresses]).all
+    end
     respond_with(@lines)
   end
 
@@ -20,7 +24,11 @@ class LinesController < ApplicationController
 
   # GET /lines/new
   def new
-    @line = Line.new
+    if @framework_contract
+      @line = @framework_contract.lines.new
+    else
+      @line = Line.new
+    end
     respond_with(@line)
   end
 
@@ -30,22 +38,26 @@ class LinesController < ApplicationController
 
   # POST /lines
   def create
-    @line = Line.new(line_params)
+    if @framework_contract
+      @line = @framework_contract.lines.new(line_params)
+    else
+      @line = Line.new(line_params)
+    end
 
     @line.save
-    respond_with(@line)
+    respond_with(@line, location: location)
   end
 
   # PATCH/PUT /lines/1
   def update
     @line.update(line_params)
-    respond_with(@line)
+    respond_with(@line, location: location)
   end
 
   # DELETE /lines/1
   def destroy
     @line.destroy
-    respond_with(@line)
+    respond_with(@line, location: location)
   end
 
   private
@@ -63,5 +75,9 @@ class LinesController < ApplicationController
         :framework_contract_id, :contract_start, :contract_end, :contract_period,
         :period_of_notice, :period_of_notice_unit, :renewal_period,
         :renewal_unit, :line_state_id)
+    end
+
+    def location
+      polymorphic_path(@framework_contract || @line)
     end
 end
