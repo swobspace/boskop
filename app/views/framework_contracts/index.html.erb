@@ -24,7 +24,7 @@
 
 <% @framework_contracts.each do |framework_contract| %>
   <%= content_tag_for(:tr, framework_contract) do %>
-    <td><%= framework_contract.name %></td>
+    <td><%= link_to framework_contract.name, framework_contract %></td>
     <td><%= framework_contract.description %></td>
     <td><%= framework_contract.contract_start %></td>
     <td><%= framework_contract.contract_end %></td>
