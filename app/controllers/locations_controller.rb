@@ -16,6 +16,8 @@ class LocationsController < ApplicationController
 
   def by_lid
     @location = Location.where(lid: params[:lid]).first
+    @merkmalklassen = Merkmalklasse.where(for_object: 'Location')
+    @networkmerkmalklassen = Merkmalklasse.visibles(:network, 'index')
     render action: :show
   end
 
