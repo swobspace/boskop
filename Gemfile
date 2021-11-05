@@ -12,7 +12,6 @@ gem 'therubyracer',  	platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
-gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'font-awesome-sass', '~> 5.0'
 
 gem 'jquery-ui-rails'
@@ -75,4 +74,3 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
-
