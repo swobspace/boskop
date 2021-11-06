@@ -2,8 +2,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    alias_action :search, :to => :read
-    alias_action :search_form, :to => :read
+    alias_action :search, to: :read
+    alias_action :search_form, to: :read
+    alias_action :by_lid, to: :read
 
     @user = user
     if @user.nil?

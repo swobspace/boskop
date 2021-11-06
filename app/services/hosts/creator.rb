@@ -94,7 +94,7 @@ module Hosts
     #
     def fetch_attributes
       attributes = options.fetch(:attributes).symbolize_keys
-      attributes[:cpe].to_s.sub!(/cpe:/, '')
+      attributes[:cpe].to_s.sub!(/cpe:/, '') unless attributes[:cpe].blank?
       attributes.keys.grep(/_id\z/).map(&:to_sym).each do |attr|
         attributes[attr] = search_for_id(attributes, attr)
       end

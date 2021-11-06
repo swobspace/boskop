@@ -71,9 +71,9 @@
 
     <div role="toolbar">
       <%= back_link %>
-      <%= edit_link(@line) %>
-      <%= delete_link(@line) %>
-      <%= new_link Line %>
+      <%= edit_link([@framework_contract, @line]) %>
+      <%= delete_link([@framework_contract, @line]) %>
+      <%= new_link [@framework_contract, Line] %>
     </div>
   </div>
 </div>

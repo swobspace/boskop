@@ -1,5 +1,5 @@
 <div class="container">
-<%= simple_form_for(@line,
+<%= simple_form_for([@framework_contract, @line],
     html: { class: 'form-horizontal card' }) do |f| %>
 
     <div class="card-header">
@@ -85,7 +85,8 @@
         </div>
       </div>
 
-      <%= f.association :framework_contract
+      <%= f.association :framework_contract,
+            disabled: @framework_contract.present?
        %>
       <%= f.input :contract_start, 
             as: :string, wrapper: :horizontal_date

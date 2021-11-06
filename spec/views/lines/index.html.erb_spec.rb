@@ -58,7 +58,7 @@ RSpec.describe "lines/index", type: :view do
     ])
     allow_any_instance_of(Line).to receive(:access_type).and_return("VDSL")
     allow_any_instance_of(Line).to receive(:framework_contract).and_return("myFrameworkContract")
-    allow_any_instance_of(Line).to receive(:line_state).and_return("active")
+    allow_any_instance_of(Line).to receive_message_chain(:line_state, :active).and_return(true)
 
   end
 
@@ -77,6 +77,6 @@ RSpec.describe "lines/index", type: :view do
     expect(rendered).to include("7 <br />")
     expect(rendered).to include("2 year <br />")
     expect(rendered).to include("3 month")
-    assert_select "tr>td", :text => "active".to_s, :count => 2
+    assert_select "tr>td", :text => "true".to_s, :count => 2
   end
 end

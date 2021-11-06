@@ -14,6 +14,13 @@ class LocationsController < ApplicationController
     respond_with(@location)
   end
 
+  def by_lid
+    @location = Location.where(lid: params[:lid]).first
+    @merkmalklassen = Merkmalklasse.where(for_object: 'Location')
+    @networkmerkmalklassen = Merkmalklasse.visibles(:network, 'index')
+    render action: :show
+  end
+
   def new
     @location = Location.new
     @location.addresses.build
@@ -44,7 +51,13 @@ class LocationsController < ApplicationController
 
   private
     def set_location
-      @location = Location.find(params[:id])
+      parid = params[:id]
+      if parid =~ /\A[0-9]+\Z/
+        @location = Location.find(parid)
+      else
+        # search by LID
+        @location = Location.where(lid: parid).first
+      end
     end
 
     def location_params

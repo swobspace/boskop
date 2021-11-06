@@ -84,7 +84,9 @@ Rails.application.routes.draw do
       post :search, action: :index
     end
   end
-  resources :framework_contracts
+  resources :framework_contracts do
+    resources :lines, module: :framework_contracts
+  end
   resources :line_states
   resources :access_types
   resources :networks do
@@ -100,7 +102,9 @@ Rails.application.routes.draw do
 
   resources :addresses
 
-  resources :locations
+  get "locations/new", to: "locations#new"
+  get "locations/:lid", to: "locations#by_lid", constraints: { lid: /[A-Za-z]+/ }
+  resources :locations, constraints: { id: /[0-9]+/ }
 
   resources :merkmale
 
