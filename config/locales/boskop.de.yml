@@ -103,7 +103,7 @@ de:
       ipaddress: IP-Adresse
       line: Leitung/Zugang
       line_state: Status
-      location: Lokation
+      location: Standort
       mac_prefix: MAC-Prefix
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
@@ -197,7 +197,7 @@ de:
     line: Leitung/Zugang
     lines: Leitungen/Zugänge
     line_state: Status
-    location: Lokation
+    location: Standort
     location_a: Standort A
     location_b: Standort B
     mac: MAC
@@ -300,7 +300,7 @@ de:
     ipaddresses: IP-Adressen
     lines: Leitungen/Zugänge
     line_states: Status
-    locations: Lokationen
+    locations: Standorte
     mac_prefixes: MAC-Prefixes
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen
