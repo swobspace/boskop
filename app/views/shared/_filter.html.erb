@@ -10,7 +10,7 @@
       )%>
    </span>
   <% @filter_info.map do |key,value| %>
-    <%= content_tag(:span, "#{t('attributes.' + key.to_s)} = #{value}; ") %>
+    <%= content_tag(:span, "#{begin t('attributes.' + key.to_s) rescue key.to_s end} = #{value}; ") %>
   <% end %>
 </div>
 <% end %>

@@ -5,6 +5,10 @@ class NetworksController < ApplicationController
 
   include NetworksControllerConcerns
 
+  def search_form
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
+  end
+
   def search
     @networks = @networks.left_outer_joins(:merkmale, :location).distinct
     query = NetworkQuery.new(@networks, search_params) 
@@ -78,11 +82,16 @@ class NetworksController < ApplicationController
 
     def search_params
       searchparms = params.permit(*submit_parms,
+                                  *merkmal_parms,
                                   :netzwerk, :ort, :limit, :lid, :description,
                                   :is_subset, :is_superset).to_hash
       {limit: 100}
         .merge(searchparms)
         .reject{|k, v| (v.blank? || submit_parms.include?(k))}
+    end
+
+    def merkmal_parms
+      @merkmalklassen = Merkmalklasse.visibles(:network, 'index').map{|m| "merkmal_#{m.tag}"}
     end
 
     def usage_params
