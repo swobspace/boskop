@@ -7,7 +7,7 @@ de:
     action: Aktion
     nodes: Knoten
     org_units: Organisationseinheiten
-    locations: Lokationen
+    locations: Standorte
     configuration: Konfiguration
     consistency_checks: Prüfberichte
     fqdn_mismatch: FQDN Mismatch
@@ -31,6 +31,7 @@ de:
     mask_example: z.B. 21 oder 24 (mögliche Werte 1-32)
     new_host: Neuer Host
     new_line: Neue Leitung
+    new_location: Neuer Standort
     new_network: Neues Netzwerk
     new_software: Neue Software
     new_vulnerability: Neue Schwachstelle
