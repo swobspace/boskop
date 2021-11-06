@@ -15,7 +15,7 @@ class NetworkQuery
   # * :merkmal_* - string : all available merkmale
   #
   # please note: 
-  # left_outer_join(:location, :merkmale) must exist in relation.
+  # left_outer_join(:merkmale, :location) must exist in relation.
   #
   def initialize(relation, search_options = {})
     @relation       = relation
@@ -63,22 +63,24 @@ private
                  mk: merkmalklasse.id, value: "%#{value}%")
       when :limit
         @limit = value.to_i
+      when :is_subset, :is_superset
+        # do nothing
       when :netzwerk
-        if (is_subset? or is_superset?)
+        if (!!is_subset or !!is_superset)
           sub_ids = []
           super_ids = []
-          if is_subset?
+          if !!is_subset
             sub_ids = query.where("networks.netzwerk <<= ?", value).pluck(:id)
           end
-          if is_superset?
+          if !!is_superset
             super_ids = query.where("networks.netzwerk >>= ?", value).pluck(:id)
           end
-          query = networks.where(['networks.id in (?)', sub_ids + super_ids])
+          query = query.where(['networks.id in (?)', sub_ids + super_ids])
         else
-          query = networks.where(netzwerk: value)
+          query = query.where("TEXT(networks.netzwerk) LIKE ?", "#{value}%")
         end
       when :ort
-        query = query.where("locations.ort ILIKE :value", value: "%#{value}%")
+        query = query.joins("INNER JOIN addresses ON addresses.addressfor_id = locations.id AND addresses.addressfor_type = 'Location'").where("addresses.ort ILIKE :value", value: "%#{value}%")
       when :lid
         if value.kind_of? String
           lids = value.split(%r{[,; |]+})
@@ -91,6 +93,7 @@ private
           search_string << "locations.#{term} ILIKE :search"
         end
         search_string << "locations.lid ILIKE :search"
+        search_string << "TEXT(networks.netzwerk) LIKE :search"
       else
         raise ArgumentError, "unknown search option #{key}"
       end

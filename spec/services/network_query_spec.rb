@@ -27,7 +27,7 @@ end
 
 RSpec.describe NetworkQuery do
   include_context "network variables"
-  let(:networks) { Network.left_outer_joins(:location, :merkmale).distinct }
+  let(:networks) { Network.left_outer_joins(:merkmale, location: :addresses).distinct }
 
 
   # check for class methods
@@ -58,11 +58,7 @@ RSpec.describe NetworkQuery do
 
   context "with :limit = 2" do
     subject { NetworkQuery.new(networks, {limit: "2"}) }
-    before(:each) do
-      @matching = [net1, net2]
-      @nonmatching = [] # does not work
-    end
-    it_behaves_like "a network query"
+    it { expect(subject.all.count).to eq(2) }
   end # search :limit = 2
 
   context "with :limit = 0" do
@@ -93,7 +89,7 @@ RSpec.describe NetworkQuery do
   end # search :ip string match
 
   context "with :network" do
-    subject { NetworkQuery.new(networks, {ip: '198.51.100.0/24'}) }
+    subject { NetworkQuery.new(networks, {netzwerk: '198.51.100.0/24'}) }
     before(:each) do
       @matching = [net1]
       @nonmatching = [net2,net3]
@@ -101,8 +97,17 @@ RSpec.describe NetworkQuery do
     it_behaves_like "a network query"
   end # search :ip subnet match
 
+  context "with :network and :superset " do
+    subject { NetworkQuery.new(networks, {netzwerk: '192.0.2.63/32', is_superset: true}) }
+    before(:each) do
+      @matching = [net2]
+      @nonmatching = [net1,net3]
+    end
+    it_behaves_like "a network query"
+  end # search list of :ip match
+
   context "with :network and :subset " do
-    subject { NetworkQuery.new(networks, {network: '192.0.2.63/32', is_subset: true}) }
+    subject { NetworkQuery.new(networks, {netzwerk: '192.0.0.0/16', is_subset: true}) }
     before(:each) do
       @matching = [net2]
       @nonmatching = [net1,net3]
@@ -112,6 +117,15 @@ RSpec.describe NetworkQuery do
 
   context "with :lid" do
     subject { NetworkQuery.new(networks, {lid: 'PARIS'}) }
+    before(:each) do
+      @matching = [net3]
+      @nonmatching = [net1, net2]
+    end
+    it_behaves_like "a network query"
+  end # search :lid
+
+  context "with :ort" do
+    subject { NetworkQuery.new(networks, {ort: 'F_PARIS'}) }
     before(:each) do
       @matching = [net3]
       @nonmatching = [net1, net2]
@@ -187,13 +201,13 @@ RSpec.describe NetworkQuery do
   end # search :merkmal_doesnotexist
 
   describe "#all" do
-    context "with search: 'nas'" do
-      subject { NetworkQuery.new(networks, {search: 'BERLIN'}) }
+    context "with search: 'BERLIN'" do
+      subject { NetworkQuery.new(networks, {search: 'BER'}) }
       it { expect(subject.all).to contain_exactly(net1) }
     end
     context "with search: 'PariS'" do
       subject { NetworkQuery.new(networks, {search: 'PariS'}) }
-      it { expect(subject.all).to contain_exactly(net2) }
+      it { expect(subject.all).to contain_exactly(net3) }
     end
   end
 
