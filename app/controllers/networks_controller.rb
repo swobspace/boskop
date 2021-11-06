@@ -6,6 +6,11 @@ class NetworksController < ApplicationController
   include NetworksControllerConcerns
 
   def search
+    @networks = @networks.left_outer_joins(:merkmale, :location).distinct
+    query = NetworkQuery.new(@networks, search_params) 
+    @filter_info = query.search_options
+    @networks = query.all
+    @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
   end
 
   def usage_form
@@ -17,7 +22,6 @@ class NetworksController < ApplicationController
   end
 
   def index
-    @networks = filter_networks(search_params).includes(location: [:addresses])
     @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
     respond_with(@networks)
   end
@@ -73,7 +77,12 @@ class NetworksController < ApplicationController
     end
 
     def search_params
-      params.permit(:utf8, :authenticity_token, :cidr, :ort, :is_subset, :is_superset)
+      searchparms = params.permit(*submit_parms,
+                                  :netzwerk, :ort, :limit, :lid, :description,
+                                  :is_subset, :is_superset).to_hash
+      {limit: 100}
+        .merge(searchparms)
+        .reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
     def usage_params
@@ -89,6 +98,10 @@ class NetworksController < ApplicationController
           @network.merkmale.build(merkmalklasse_id: kl.id)
         end
       end
+    end
+
+    def submit_parms
+      [ "utf8", "authenticity_token", "commit", "format" ]
     end
 
 end
