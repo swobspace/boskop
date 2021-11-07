@@ -79,6 +79,8 @@ private
         else
           query = query.where("TEXT(networks.netzwerk) LIKE ?", "#{value}%")
         end
+      when :location
+        query = query.where("locations.name ILIKE ?", "%#{value}%")
       when :ort
         query = query.joins("INNER JOIN addresses ON addresses.addressfor_id = locations.id AND addresses.addressfor_type = 'Location'").where("addresses.ort ILIKE :value", value: "%#{value}%")
       when :lid

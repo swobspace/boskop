@@ -115,6 +115,15 @@ RSpec.describe NetworkQuery do
     it_behaves_like "a network query"
   end # search list of :ip match
 
+  context "with :location" do
+    subject { NetworkQuery.new(networks, {location: 'London City'}) }
+    before(:each) do
+      @matching = [net2]
+      @nonmatching = [net1, net3]
+    end
+    it_behaves_like "a network query"
+  end # search :lid
+
   context "with :lid" do
     subject { NetworkQuery.new(networks, {lid: 'PARIS'}) }
     before(:each) do
