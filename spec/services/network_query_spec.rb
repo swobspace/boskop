@@ -27,7 +27,7 @@ end
 
 RSpec.describe NetworkQuery do
   include_context "network variables"
-  let(:networks) { Network.left_outer_joins(:merkmale, location: :addresses).distinct }
+  let(:networks) { Network.left_outer_joins(:merkmale, :location).distinct }
 
 
   # check for class methods
