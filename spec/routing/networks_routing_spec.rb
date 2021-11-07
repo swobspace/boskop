@@ -15,6 +15,18 @@ RSpec.describe NetworksController, :type => :routing do
       expect(:get => "/networks/1").to route_to("networks#show", :id => "1")
     end
 
+    it "routes to #search_form" do
+      expect(:get => "/networks/search_form").to route_to("networks#search_form")
+    end
+
+    it "routes to #search" do
+      expect(:get => "/networks/search").to route_to("networks#search")
+    end
+
+    it "routes to #search" do
+      expect(:post => "/networks/search").to route_to("networks#search")
+    end
+
     it "routes to #edit" do
       expect(:get => "/networks/1/edit").to route_to("networks#edit", :id => "1")
     end

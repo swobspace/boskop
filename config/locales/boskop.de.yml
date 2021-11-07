@@ -7,7 +7,7 @@ de:
     action: Aktion
     nodes: Knoten
     org_units: Organisationseinheiten
-    locations: Lokationen
+    locations: Standorte
     configuration: Konfiguration
     consistency_checks: Prüfberichte
     fqdn_mismatch: FQDN Mismatch
@@ -27,10 +27,11 @@ de:
     search_vulnerabilities: Suche Schwachstellen
     possible_values_for_dropdown: Mögliche Werte für :dropdown-Felder; Trennzeichen = Semikolon
     baselink_for_linkindex: Basislink für Format :linkindex, z.B. http://host/a/b/c/
-    cidr_example: z.B. 192.0.2.0/24
+    cidr_example: "Format: 192.0.2.0/24 oder 192.0.2.1"
     mask_example: z.B. 21 oder 24 (mögliche Werte 1-32)
     new_host: Neuer Host
     new_line: Neue Leitung
+    new_location: Neuer Standort
     new_network: Neues Netzwerk
     new_software: Neue Software
     new_vulnerability: Neue Schwachstelle
@@ -102,7 +103,7 @@ de:
       ipaddress: IP-Adresse
       line: Leitung/Zugang
       line_state: Status
-      location: Lokation
+      location: Standort
       mac_prefix: MAC-Prefix
       merkmal: Merkmal
       merkmalklasse: Merkmalklasse
@@ -196,7 +197,7 @@ de:
     line: Leitung/Zugang
     lines: Leitungen/Zugänge
     line_state: Status
-    location: Lokation
+    location: Standort
     location_a: Standort A
     location_b: Standort B
     mac: MAC
@@ -256,6 +257,8 @@ de:
     source: Quelle
     status: Status
     streetaddress: Straße, Nr.
+    is_subset: enthaltene Netzwerke
+    is_superset: übergeordnete Netzwerke
     tag: Tag
     telefax: Telefax
     telephone: Telefon
@@ -299,7 +302,7 @@ de:
     ipaddresses: IP-Adressen
     lines: Leitungen/Zugänge
     line_states: Status
-    locations: Lokationen
+    locations: Standorte
     mac_prefixes: MAC-Prefixes
     merkmale: Merkmale
     merkmalklassen: Merkmalklassen

@@ -29,7 +29,15 @@ FactoryBot.define do
   end
 
   factory :address do
-    addressfor {|a| a.association(:location) }
+    for_location
+    trait :for_location do
+      association :addressfor, factory: :location
+    end
+    trait :for_org_unit do
+      association :addressfor, factory: :org_unit
+    end
+
+    # initialize_with { new(**attributes) }
   end
 
   factory :contact do

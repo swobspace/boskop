@@ -1,57 +1,71 @@
-<div class="container">
-  <%= form_tag(search_networks_path, role: "form",
-        class: 'form-horizontal card') do |f| %>
+<% content_for :head do %>
+  <meta name="turbolinks-cache-control" content="no-cache">
+<% end %>
 
-    <div class="card-header">
-      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_networks') %></legend>
-    </div>
-    <div class="card-body">
+<h1><%= t('controller.networks') %></h1>
 
-      <div class="form-group row">
-        <label for="cidr" class="col-sm-2 col-form-label">
-          <%= t('attributes.netzwerk') %>
-        </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="cidr" name="cidr" 
-                 placeholder="<%= t('boskop.cidr_example') %>">
-        </div>
-      </div>
+<%= render partial: 'shared/filter' %>
 
-      <div class="form-group row">
-        <div class="col-sm-2">
-          Shortcuts
-        </div>
-        <div class="col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="is_subset" name="is_subset" checked>
-            <label class="form-check-label" for="is_subset">
-              <%=t('boskop.subset')%> 
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="is_superset" name="is_superset" checked>
-            <label class="form-check-label" for="is_superset">
-              <%=t('boskop.superset')%>
-            </label>
-          </div>
-        </div>
-      </div>
+<%= content_tag :table, role: :datatable,
+      id: 'networks_table',
+      class: "table table-bordered",
+      data: {
+        order: [[0, 'asc']].to_json
+      } do %>
 
-      <div class="form-group row">
-        <label for="ort" class="col-sm-2 col-form-label">
-          <%= t('attributes.ort') %>
-        </label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="ort" name="ort">
-        </div>
-      </div>
+  <thead>
+    <tr>
+      <th><%= t('attributes.netzwerk') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.lid') %></th>
+      <th><%= t('attributes.location') %></th>
+      <th><%= t('attributes.ort') %></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <% end %>
+      <th></th>
+    </tr>
+  </tfoot>
 
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <button type="submit" class="btn btn-primary"><%= t('actions.search') %></button>
-          <%= cancel_button %>
-        </div>
-      </div>
-    </div>
+  <tbody>
+
+  <% @networks.each do |network| %>
+    <%= content_tag_for(:tr, network) do %>
+      <td><%= network.netzwerk.try(:to_cidr_s) %></td>
+      <td><%= network.description %></td>
+      <td><%= network.location.try(:lid) %></td>
+      <td><%= link_to network.location, location_path(network.location) %></td>
+      <td><%= network.location.ort %></td>
+      <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+        <%= get_location_merkmal(network, mklasse) %>
+      <% end %>
+
+      <td class="nowrap">
+        <%= show_link network %>
+        <%= edit_link network %>
+        <%= delete_link network %>
+      </td>
+    <% end %>
   <% end %>
-</div>
+  </tbody>
+<% end %>
+
+<br />
+
+<%= back_link %>
+<%= new_link Network %>
+<%= link_to t('actions.search'), search_form_networks_path, class: 'btn btn-secondary' %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>
+

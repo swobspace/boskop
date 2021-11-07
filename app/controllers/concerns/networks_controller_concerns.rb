@@ -6,32 +6,7 @@ module NetworksControllerConcerns
   included do
   end
 
-  def filter_networks(search_params)
-    @search_params = search_params
-    networks = Network.accessible_by(current_ability, :read)
-    if cidr.present?
-      if (is_subset? or is_superset?)
-        sub_ids = []
-        super_ids = []
-        if is_subset?
-          sub_ids = networks.where("netzwerk <<= ?", cidr).pluck(:id)
-        end
-        if is_superset?
-          super_ids = networks.where("netzwerk >>= ?", cidr).pluck(:id)
-        end
-        networks = networks.where(['networks.id in (?)', sub_ids + super_ids])
-      else
-        networks = networks.where(netzwerk: cidr)
-      end
-    end
-    if ort.present?
-      networks = networks.joins(location: :addresses).
-                 where(["addresses.ort like ?", "%#{ort}%"])
-    end
-    networks
-  end
-
-def generate_usage_map(usage_params)
+  def generate_usage_map(usage_params)
     hash   = Hash.new
     parent = IPAddr.new(usage_params.fetch('cidr', '192.0.2.0/24'))
     mask   = usage_params.fetch('mask', 24).to_i

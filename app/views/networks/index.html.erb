@@ -4,60 +4,47 @@
 
 <h1><%= t('controller.networks') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.netzwerk') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.lid') %></th>
-    <th><%= t('attributes.location') %></th>
-    <th><%= t('attributes.ort') %></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-      <%= mklasse.to_s %>
-    <% end %>
-    <th></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-    <% end %>
-    <th></th>
-  </tr>
-</tfoot>
+<%= content_tag :table, role: :remotetable,
+      id: 'networks',
+      class: "table table-bordered",
+      data: {
+        url: polymorphic_path(:networks, format: :json, filter: @filter),
+        order: [[0, 'desc']].to_json
+      } do %>
 
-<tbody>
-
-<% @networks.each do |network| %>
-  <%= content_tag_for(:tr, network) do %>
-    <td><%= network.netzwerk.try(:to_cidr_s) %></td>
-    <td><%= network.description %></td>
-    <td><%= network.location.try(:lid) %></td>
-    <td><%= link_to network.location, location_path(network.location) %></td>
-    <td><%= network.location.ort %></td>
-    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
-      <%= get_location_merkmal(network, mklasse) %>
-    <% end %>
-
-    <td class="nowrap">
-      <%= show_link network %>
-      <%= edit_link network %>
-      <%= delete_link network %>
-    </td>
-  <% end %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.netzwerk') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.lid') %></th>
+      <th><%= t('attributes.location') %></th>
+      <th><%= t('attributes.ort') %></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <% end %>
+      <th></th>
+    </tr>
+  </tfoot>
+  <tbody>
+  </tbody>
 <% end %>
-</tbody>
-</table>
 
 <br />
 
 <%= back_link %>
 <%= new_link Network %>
-<%= link_to t('actions.search'), search_networks_path, class: 'btn btn-secondary' %>
+<%= link_to t('actions.search'), search_form_networks_path, class: 'btn btn-secondary' %>
 <%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>
 
