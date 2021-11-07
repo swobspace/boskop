@@ -26,8 +26,12 @@ class NetworksController < ApplicationController
   end
 
   def index
+    @networks = @networks.left_outer_joins(:merkmale, :location).distinct
     @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
-    respond_with(@networks)
+    respond_with(@networks) do |format|
+      format.json { render json: NetworksDatatable.new(@networks, view_context) }
+    end
+
   end
 
   def show

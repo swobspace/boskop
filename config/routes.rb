@@ -89,6 +89,7 @@ Rails.application.routes.draw do
   end
   resources :line_states
   resources :access_types
+  post "networks", to: "networks#index", constraints: lambda {|req| req.format == :json}
   resources :networks do
     collection do
       get :search
