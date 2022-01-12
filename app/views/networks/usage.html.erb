@@ -46,7 +46,13 @@
 	<%= get_location_merkmal(used, mklasse) %>
       <% end %>
       <td><%= sortable_network(subnet) %></td>
-      <td class="center"><%= new_link Network, netzwerk: subnet  %></td>
+      <td class="center">
+        <% if can? :create, Network %>
+          <%= link_to t('boskop.new_network'), new_network_path(netzwerk: subnet),
+              class: 'btn btn-secondary'  %>
+        <% end %>
+     </td>
+
     </tr>
   <% end.empty? and begin %>
   <tr>
