@@ -48,8 +48,9 @@
       <td><%= sortable_network(subnet) %></td>
       <td class="center">
         <% if can? :create, Network %>
-          <%= link_to t('boskop.new_network'), new_network_path(netzwerk: subnet),
-              class: 'btn btn-secondary'  %>
+          <%= link_to icon_new, new_network_path(netzwerk: subnet),
+                      title: t('boskop.new_network'), 
+                      class: 'btn btn-secondary'  %>
         <% end %>
      </td>
 
@@ -65,7 +66,13 @@
     <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
     <% end %>
     <td><%= sortable_network(subnet) %></td>
-    <td class="center"><%= new_link Network, netzwerk: subnet  %></td>
+    <td class="center">
+      <% if can? :create, Network %>
+        <%= link_to icon_new, new_network_path(netzwerk: subnet),
+                    title: t('boskop.new_network'), 
+                    class: 'btn btn-secondary'  %>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 <% end %>
