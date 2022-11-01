@@ -74,3 +74,8 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
+
+# for deployment
+gem "ed25519"
+gem "bcrypt_pbkdf"
+
