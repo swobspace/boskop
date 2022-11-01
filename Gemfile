@@ -31,9 +31,8 @@ group :development do
   gem 'guard'
   gem "guard-livereload", require: false
   gem 'guard-puma'
-  gem 'guard-bundler'
   gem "guard-rspec", require: false
-  gem "capistrano", '~> 3.6'
+  gem "capistrano", '~> 3.17'
   gem "capistrano-rails", '~> 1.1'
   gem 'capistrano-passenger'
   gem 'capistrano3-delayed-job', '~> 1.0'
@@ -74,3 +73,8 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
+
+# for deployment
+gem "ed25519"
+gem "bcrypt_pbkdf"
+
