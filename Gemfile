@@ -30,7 +30,7 @@ group :development do
   gem 'puma'
   gem 'guard'
   gem "guard-livereload", require: false
-  gem 'guard-rails'
+  gem 'guard-puma'
   gem 'guard-bundler'
   gem "guard-rspec", require: false
   gem "capistrano", '~> 3.6'
