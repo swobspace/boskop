@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 
 gem 'sassc-rails'
-gem 'rails', '~> 6.0.0'
-gem 'rails-i18n', '~> 6.0' # For 5.0.x, 5.1.x and 5.2.x
+gem 'rails', '~> 6.1.0'
+gem 'rails-i18n', '~> 6.0'
 gem 'pg'
 
 gem 'uglifier', '>= 1.3.0'
@@ -30,7 +30,7 @@ group :development do
   gem 'puma'
   gem 'guard'
   gem "guard-livereload", require: false
-  gem 'guard-rails'
+  gem 'guard-puma'
   gem 'guard-bundler'
   gem "guard-rspec", require: false
   gem "capistrano", '~> 3.6'
