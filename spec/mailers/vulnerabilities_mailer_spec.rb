@@ -69,7 +69,7 @@ RSpec.describe VulnerabilitiesMailer, type: :mailer do
 	end
 
 	it "contains some data" do
-	  csv = CSV.parse(content, {col_sep: "\t", encoding: 'utf-8'})
+	  csv = CSV.parse(content, col_sep: "\t", encoding: 'utf-8')
 	  expect(csv.shift).to contain_exactly(
 		  I18n.t('attributes.lid'),
 		  I18n.t('attributes.host'),
