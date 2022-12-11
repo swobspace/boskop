@@ -17,8 +17,8 @@ module HostConcerns
       end
     end
 
-    def self.to_csv(options = {})
-      CSV.generate(options) do |csv|
+    def self.to_csv(**options)
+      CSV.generate(**options) do |csv|
         csv << [ 
                 I18n.t('attributes.name'),
 		I18n.t('attributes.description'),
