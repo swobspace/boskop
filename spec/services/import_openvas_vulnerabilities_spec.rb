@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe ImportOpenvasVulnerabilitiesService do
+RSpec.describe ImportOpenVASVulnerabilitiesService do
   let(:openvasxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'openvas-wobnet-anon.xml') }
-  subject { ImportOpenvasVulnerabilitiesService.new(file: openvasxml) }
+  subject { ImportOpenVASVulnerabilitiesService.new(file: openvasxml) }
 
   # check for class methods
-  it { expect(ImportOpenvasVulnerabilitiesService.respond_to? :new).to be_truthy}
+  it { expect(ImportOpenVASVulnerabilitiesService.respond_to? :new).to be_truthy}
 
   # check for instance methods
   describe "instance methods" do
-    subject { ImportOpenvasVulnerabilitiesService.new(file: "") }
+    subject { ImportOpenVASVulnerabilitiesService.new(file: "") }
     it { expect(subject.respond_to? :call).to be_truthy}
     it { expect(subject.call.respond_to? :success?).to be_truthy }
     it { expect(subject.call.respond_to? :error_message).to be_truthy }
@@ -96,7 +96,7 @@ RSpec.describe ImportOpenvasVulnerabilitiesService do
   end
 
   context "with invalid import_attributes" do
-    subject { ImportOpenvasVulnerabilitiesService.new(file: "") }
+    subject { ImportOpenVASVulnerabilitiesService.new(file: "") }
 
     it "creates an Host" do
       expect {

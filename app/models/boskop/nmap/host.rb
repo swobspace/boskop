@@ -28,7 +28,7 @@ module Boskop
       end
 
       def valid?
-        nmaphost.kind_of? ::Nmap::Host
+        nmaphost.kind_of? ::Nmap::XML::Host
       end
 
       def attributes
@@ -97,21 +97,11 @@ module Boskop
     private
       attr_reader :nmaphost, :xmlstart
 
-      def script_data
+      def smb_os_discovery
         if nmaphost.nil? || nmaphost.host_script.nil?
           {}
         else
-          nmaphost.host_script.script_data
-        end
-      end
-
-      def smb_os_discovery
-        # smb-os-discovery is [] if an script error in case of
-        # ERROR: Script execution failed (use -d to debug)"
-        if script_data['smb-os-discovery'].nil? || script_data['smb-os-discovery'].empty?
-          {}
-        else
-          script_data['smb-os-discovery']
+          nmaphost.host_script.scripts["smb-os-discovery"].data
         end
       end
 

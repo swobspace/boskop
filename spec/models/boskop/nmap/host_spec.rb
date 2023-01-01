@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'nmap/xml'
   
 RSpec.describe Boskop::NMAP::Host do
-  let(:nmaphost) { ::Nmap::XML.new(nmapxml).host }
+  let(:nmaphost) { ::Nmap::XML.open(nmapxml).host }
 
   # check for class methods
   it { expect(Boskop::NMAP::Host.respond_to? :new).to be_truthy}
@@ -95,7 +95,7 @@ RSpec.describe Boskop::NMAP::Host do
 
   describe "with forced up state" do
     let(:nmapxml) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'force-hosts-up.xml') }
-    let(:nmaphosts) { ::Nmap::XML.new(nmapxml).hosts }
+    let(:nmaphosts) { ::Nmap::XML.open(nmapxml).hosts }
     let(:host1)     { Boskop::NMAP::Host.new(nmaphost: nmaphosts[0]) }
     let(:host2)     { Boskop::NMAP::Host.new(nmaphost: nmaphosts[1]) }
 

@@ -20,4 +20,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'Merkmalklasse', 'Merkmalklassen'
   inflect.uncountable %(software)
   inflect.uncountable %(installed_software)
+  inflect.acronym 'OpenVAS'
 end
