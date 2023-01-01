@@ -63,7 +63,7 @@ gem 'record_tag_helper', '~> 1.0'
 gem 'rails-controller-testing'
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem "ruby-nmap"
+gem "ruby-nmap", '< 1.0.0'
 gem 'immutable-struct'
 gem 'kaminari'
 gem 'tenable-ruby'
@@ -77,4 +77,7 @@ gem 'rubyzip', '>= 1.3.0'
 # for deployment
 gem "ed25519"
 gem "bcrypt_pbkdf"
+
+gem "mail", '< 2.8.0'
+
 
