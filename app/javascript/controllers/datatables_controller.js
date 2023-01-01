@@ -1,5 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 
+// import '../src/datatables-bs5'
 import '../src/datatables-bs4'
 import '../src/debounce'
 
@@ -10,10 +11,6 @@ export default class extends Controller {
   }
 
   initialize() {
-    var myTable = $.fn.dataTable;
-    $.extend( true, myTable.Buttons.defaults, {
-      "dom": { "button": { "className": 'btn btn-outline-secondary btn-sm' } }
-    })
   }
 
   connect() {
@@ -46,7 +43,7 @@ export default class extends Controller {
 
   // single search input field
   searchField(idx) {
-    return `<input type="text" placeholder="Suche" name="idx-${idx}" />`
+    return `<input type="text" placeholder="search" name="idx${idx}" />`
   }
 
   // datatables options
@@ -54,16 +51,10 @@ export default class extends Controller {
     // common options
     options.pagingType = "full_numbers"
     options.stateSave = false
-    options.lengthMenu = [ [10, 25, 100, 250], [10, 25, 100, 250] ]
+    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
                            { "targets": "notvisible", "visible": false },
-                           { "targets": 'center', "className": "center" },
-                           { "targets": 'nowrap', "className": "nowrap" },
-                           { "targets": 'center_td_link_from_a', "className": "center td_link_from_a" },
                            { "targets": "actions", "className": "actions" } ]
-    // language
-    this.languageOptions(options)
-
     // with or without buttons
     if (this.simpleValue) {
       this.simpleOptions(options)
@@ -75,6 +66,7 @@ export default class extends Controller {
     if (this.hasUrlValue) {
       this.remoteOptions(options)
     }
+    this.languageOptions(options)
   }
 
   simpleOptions(options) {
@@ -88,61 +80,81 @@ export default class extends Controller {
     options.dom = "<'row'<'col'l><'col'B><'col'f>>" +
                     "<'row'<'col-sm-12'tr>>" +
                     "<'row'<'col'i><'col'p>>"
-    options.buttons = [ { "extend": 'excel',
-	                  "exportOptions": { "search": ':applied',
-                                             "columns": ':not(.noexport)',
-                                             "stripNewLines": false } },
+    options.buttons = {
+      dom: {
+        button: {
+          tag: 'button',
+          className: 'btn btn-outline-secondary btn-sm'
+        }
+      },
+      buttons:[ { "extend": 'excel',
+	                  "exportOptions": { "search": ':applied' } },
                         { "extend": 'pdf',
 	                  "orientation": 'landscape',
 	                  "pageSize": 'A4',
 	                  "exportOptions": { "columns": ':visible',
 	                                     "search": ':applied' } },
-                        { "extend": 'print',
-                          "text": '<i class="fa fa-print fa-fw"></i>' },
-                        { "extend": 'colvis',
-                          "text": "Spalten ändern",
-                          "columns": ':gt(0)' } ]
+                        { "extend": 'print'},
+                        { "extend": 'colvis', "columns": ':gt(0)' } ]
+    }
   }
 
   remoteOptions(options) {
+    let token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
     options.searchDelay = 400
     options.processing = true
     options.serverSide = true
-    options.ajax = { "url": this.urlValue, "type": "POST" }
+    options.ajax = {
+      'url': this.urlValue,
+      'type': 'POST',
+      'beforeSend': function(request) {
+        request.setRequestHeader("X-CSRF-Token", token)
+      }
+    }
   }
 
   languageOptions(options) {
     options.language = {
-      "emptyTable": "Leere Tabelle",
-      "info": "_START_ bis _END_ von _TOTAL_ Einträgen",
-      "infoEmpty": "keine Einträge vorhanden",
-      "infoFiltered": "(gefiltert, insgesamt _MAX_ Einträge)",
-      "lengthMenu": "Einträge pro Seite _MENU_",
-      "search": "Suche",
-      "zeroRecords": "Nichts gefunden - sorry",
-      "paginate": { "first": "Anfang",
-                       "last": "Ende",
-                       "next": "Weiter",
-                       "previous": "Zurück" }
+      "emptyTable":      "Keine Daten in der Tabelle vorhanden",
+      "info":            "_START_ bis _END_ von _TOTAL_ Einträgen",
+      "infoEmpty":       "0 bis 0 von 0 Einträgen",
+      "infoFiltered":    "(gefiltert von _MAX_ Einträgen)",
+      "infoPostFix":     "",
+      "thousands":   ".",
+      "lengthMenu":      "_MENU_ Einträge anzeigen",
+      "loadingRecords":  "Wird geladen...",
+      "processing":      "Bitte warten...",
+      "search":          "Suchen",
+      "zeroRecords":     "Keine Einträge vorhanden.",
+      "paginate": {
+          "first":       "Erste",
+          "previous":    "Zurück",
+          "next":        "Nächste",
+          "last":        "Letzte"
+      },
+      "aria": {
+          "sortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
+          "sortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+      }
     }
   }
 
   // -- immediate search for local data
   columnSearchLocal(dtable) {
     dtable.columns().every((colIdx) => {
-      $('input[name=idx-'+colIdx+']').on( 'keyup change', function() {
+      $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
         dtable.column(colIdx).search(this.value).draw()
       })
     })
   }
-
+  
   // -- delay search on server side processing to reduce high frequent ajax calls
   columnSearchRemote(dtable) {
     dtable.columns().every((colIdx) => {
       let mysearch = $.debounce(400, function(val) {
         dtable.column(colIdx).search(val).draw()
       })
-      $('input[name=idx-'+colIdx+']').on( 'keyup change', function() {
+      $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
         if ((this.value.length >= 3) || (this.value.length == 0)) {
           mysearch(this.value)
         }
