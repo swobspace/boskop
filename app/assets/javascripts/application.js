@@ -1,9 +1,5 @@
 //
-//= require jquery3
-//= require rails-ujs
-//= require turbolinks
-//= require jquery-ui/widgets/datepicker
-//= require jquery-ui/i18n/datepicker-de
+//= require jquery
 //= require jszip/dist/jszip
 //= require pdfmake/build/pdfmake
 //= require pdfmake/build/vfs_fonts
