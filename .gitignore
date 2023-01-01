@@ -55,3 +55,6 @@ config/deploy-config.yml
 /vendor/assets/bower_components
 /node_modules
 /.licenses
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
