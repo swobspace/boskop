@@ -6,55 +6,62 @@
 
 <%= render partial: 'shared/filter' %>
 
-<%= content_tag :table, role: :remotetable,
-      id: 'vulnerabilities_table',
-      class: "table table-bordered",
-      data: {
-        url: polymorphic_path(
-               [@host, :vulnerabilities], 
-               (@filter_params || {}).merge(format: :json)
-             ),
-        order: [[0, 'desc']].to_json
-      } do %>
+<div id="vulnerabilities">
+  <div data-controller="datatables" 
+       data-datatables-url-value=<%=
+         polymorphic_path([@host, :vulnerabilities], 
+                          (@filter_params || {}).merge(format: :json))%>>
+    <%= content_tag :table,
+          id: 'vulnerabilities_table',
+          class: "table table-bordered",
+          data: {
+            url: polymorphic_path(
+                   [@host, :vulnerabilities], 
+                   (@filter_params || {}).merge(format: :json)
+                 ),
+            order: [[0, 'desc']].to_json
+          } do %>
 
-  <thead>
-    <tr>
-      <th><%= t('attributes.lid') %></th>
-      <th class="nosort"><%= t('attributes.ip') %></th>
-      <th><%= t('attributes.hostname') %></th>
-      <th><%= t('attributes.host_category') %></th>
-      <th><%= t('attributes.operating_system') %></th>
-      <th><%= t('attributes.vulnerability_detail') %></th>
-      <th class="notvisible"><%= t('attributes.nvt') %></th>
-      <th class="notvisible"><%= t('attributes.plugin_output') %></th>
-      <th><%= t('attributes.threat') %></th>
-      <th><%= t('attributes.severity') %></th>
-      <th><%= t('attributes.lastseen') %></th>
-      <th class="notvisible"><%= t('attributes.created_at') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
+      <thead>
+        <tr>
+          <th><%= t('attributes.lid') %></th>
+          <th class="nosort"><%= t('attributes.ip') %></th>
+          <th><%= t('attributes.hostname') %></th>
+          <th><%= t('attributes.host_category') %></th>
+          <th><%= t('attributes.operating_system') %></th>
+          <th><%= t('attributes.vulnerability_detail') %></th>
+          <th class="notvisible"><%= t('attributes.nvt') %></th>
+          <th class="notvisible"><%= t('attributes.plugin_output') %></th>
+          <th><%= t('attributes.threat') %></th>
+          <th><%= t('attributes.severity') %></th>
+          <th><%= t('attributes.lastseen') %></th>
+          <th class="notvisible"><%= t('attributes.created_at') %></th>
+          <th class="nosort"><%= t('boskop.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
 
-  <tbody>
-  </tbody>
-<% end %>
+      <tbody>
+      </tbody>
+    <% end %>
+  </div>
+</div>
 
 <br />
 

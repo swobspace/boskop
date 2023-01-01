@@ -4,41 +4,45 @@
 
 <h1><%= t('controller.network_interfaces') %></h1>
 
-<%= content_tag :table, role: :remotetable,
-      id: 'network_interfaces_table',
-      class: "table table-bordered",
-      data: {
-        url: polymorphic_path([@host, :network_interfaces], format: :json),
-        order: [[0, 'desc']].to_json
-      } do %>
+<div id="network_interfaces">
+<div data-controller="datatables" 
+       data-datatables-url-value=<%=polymorphic_path([@host, :network_interfaces], format: :json)%>>
+  <%= content_tag :table,
+        id: 'network_interfaces_table',
+        class: "table table-bordered",
+        data: {
+          url: polymorphic_path([@host, :network_interfaces], format: :json),
+          order: [[0, 'desc']].to_json
+        } do %>
 
-
-  <thead>
-    <tr>
-      <th><%= t('attributes.lid') %></th>
-      <th><%= t('attributes.name') %></th>
-      <th><%= t('attributes.ip') %></th>
-      <th><%= t('attributes.mac') %></th>
-      <th><%= t('attributes.if_description') %></th>
-      <th><%= t('attributes.lastseen') %></th>
-      <th><%= t('attributes.created_at') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-  </tbody>
-<%end%>
+    <thead>
+      <tr>
+        <th><%= t('attributes.lid') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.ip') %></th>
+        <th><%= t('attributes.mac') %></th>
+        <th><%= t('attributes.if_description') %></th>
+        <th><%= t('attributes.lastseen') %></th>
+        <th><%= t('attributes.created_at') %></th>
+        <th class="nosort"></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+    </tbody>
+  <%end%>
+</div>
+</div>
 
 <br />
 

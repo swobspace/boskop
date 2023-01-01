@@ -4,42 +4,46 @@
 
 <h1><%= t('controller.networks') %></h1>
 
-<%= content_tag :table, role: :remotetable,
-      id: 'networks',
-      class: "table table-bordered",
-      data: {
-        url: polymorphic_path(:networks, format: :json, filter: @filter),
-        order: [[0, 'desc']].to_json
-      } do %>
-
-  <thead>
-    <tr>
-      <th><%= t('attributes.netzwerk') %></th>
-      <th><%= t('attributes.description') %></th>
-      <th><%= t('attributes.lid') %></th>
-      <th><%= t('attributes.location') %></th>
-      <th><%= t('attributes.ort') %></th>
-      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-        <%= mklasse.to_s %>
-      <% end %>
-      <th></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-      <% end %>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-  </tbody>
-<% end %>
+<div id="networks">
+  <div data-controller="datatables"
+       data-datatables-url-value=<%=polymorphic_path(:networks, format: :json, filter: @filter)%>>
+    <%= content_tag :table,
+          id: 'networks_table',
+          class: "table table-bordered",
+          data: {
+            url: polymorphic_path(:networks, format: :json, filter: @filter),
+            order: [[0, 'desc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th><%= t('attributes.netzwerk') %></th>
+          <th><%= t('attributes.description') %></th>
+          <th><%= t('attributes.lid') %></th>
+          <th><%= t('attributes.location') %></th>
+          <th><%= t('attributes.ort') %></th>
+          <%= content_tag_for(:th, @merkmalklassen, class: "nosort") do |mklasse| %>
+            <%= mklasse.to_s %>
+          <% end %>
+          <th class="nosort"></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <%= content_tag_for(:th, @merkmalklassen, class: 'nosearch') do |mklasse| %>
+          <% end %>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+      </tbody>
+    <% end %>
+  </div>
+</div>
 
 <br />
 
