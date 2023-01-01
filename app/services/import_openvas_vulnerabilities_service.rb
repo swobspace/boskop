@@ -1,8 +1,8 @@
 # import nmap scan results in xml
-class ImportOpenvasVulnerabilitiesService
+class ImportOpenVASVulnerabilitiesService
   Result = ImmutableStruct.new( :success?, :error_message, :vulnerabilities, :vulnerability_details, :hosts )
 
-  # service = ImportOpenvasVulnerabilitiesService.new(file: 'xmlfile')
+  # service = ImportOpenVASVulnerabilitiesService.new(file: 'xmlfile')
   #
   # mandatory options:
   # * :file   - openvas xml file
