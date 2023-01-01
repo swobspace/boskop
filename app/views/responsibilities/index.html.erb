@@ -4,52 +4,54 @@
 
 <h1><%= t('controller.responsibilities') %></h1>
 
-<%= content_tag :table, role: :datatable,
-      id: "responsibilities_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        order: [[0, 'desc']].to_json
-      } do %>
-  <thead>
-    <tr>
-      <th><%= t('attributes.responsibility_for_type') %></th>
-      <th><%= t('attributes.responsibility_for') %></th>
-      <th><%= t('attributes.contact') %></th>
-      <th><%= t('attributes.role') %></th>
-      <th><%= t('attributes.title') %></th>
-      <th><%= t('attributes.position') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% @responsibilities.each do |responsibility| %>
-      <%= content_tag_for(:tr, responsibility) do %>
-        <td><%= t(responsibility.responsibility_for_type.underscore, scope: 'activerecord.models') %></td>
-        <td><%= responsibility.responsibility_for.to_str %></td>
-        <td><%= responsibility.contact&.to_str %></td>
-        <td><%= responsibility.role %></td>
-        <td><%= responsibility.title %></td>
-        <td><%= responsibility.position %></td>
-        <td class="text-nowrap">
-          <%= show_link responsibility %>
-          <%= edit_link responsibility %>
-          <%= delete_link responsibility %>
-        </td>
+<div data-controller="datatables">
+  <%= content_tag :table, 
+        id: "responsibilities_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.responsibility_for_type') %></th>
+        <th><%= t('attributes.responsibility_for') %></th>
+        <th><%= t('attributes.contact') %></th>
+        <th><%= t('attributes.role') %></th>
+        <th><%= t('attributes.title') %></th>
+        <th><%= t('attributes.position') %></th>
+        <th class="nosort"><%= t('boskop.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @responsibilities.each do |responsibility| %>
+        <%= content_tag_for(:tr, responsibility) do %>
+          <td><%= t(responsibility.responsibility_for_type.underscore, scope: 'activerecord.models') %></td>
+          <td><%= responsibility.responsibility_for.to_str %></td>
+          <td><%= responsibility.contact&.to_str %></td>
+          <td><%= responsibility.role %></td>
+          <td><%= responsibility.title %></td>
+          <td><%= responsibility.position %></td>
+          <td class="text-nowrap">
+            <%= show_link responsibility %>
+            <%= edit_link responsibility %>
+            <%= delete_link responsibility %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>
 
 <br />
 

@@ -2,31 +2,39 @@
   <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
+<div data-controller="hello"></div>
+
 <h1><%= t('controller.access_types') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
+<div data-controller="datatables">
+  <table id="access_types" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tfoot>
     <th></th>
-  </tr>
-</thead>
-<tbody>
+    <th></th>
+  </tfoot>
+  <tbody>
 
-<% @access_types.each do |access_type| %>
-  <%= content_tag_for(:tr, access_type) do %>
-    <td><%= access_type.name %></td>
-    <td><%= access_type.description %></td>
-    <td class="nowrap">
-      <%= show_link access_type %>
-      <%= edit_link access_type %>
-      <%= delete_link access_type %>
-    </td>
+  <% @access_types.each do |access_type| %>
+    <%= content_tag_for(:tr, access_type) do %>
+      <td><%= access_type.name %></td>
+      <td><%= access_type.description %></td>
+      <td class="nowrap">
+        <%= show_link access_type %>
+        <%= edit_link access_type %>
+        <%= delete_link access_type %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

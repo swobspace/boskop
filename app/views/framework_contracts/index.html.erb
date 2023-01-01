@@ -4,45 +4,62 @@
 
 <h1><%= t('controller.framework_contracts') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.contract_start') %></th>
-    <th><%= t('attributes.contract_end') %></th>
-    <th><%= t('attributes.contract_period') %></th>
-    <th><%= t('attributes.period_of_notice') %></th>
-    <th><%= t('attributes.period_of_notice_unit') %></th>
-    <th><%= t('attributes.renewal_period') %></th>
-    <th><%= t('attributes.renewal_unit') %></th>
-    <th><%= t('attributes.active') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<div data-controller="datatables">
+  <table id="framework_contracts" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.contract_start') %></th>
+      <th><%= t('attributes.contract_end') %></th>
+      <th><%= t('attributes.contract_period') %></th>
+      <th><%= t('attributes.period_of_notice') %></th>
+      <th><%= t('attributes.period_of_notice_unit') %></th>
+      <th><%= t('attributes.renewal_period') %></th>
+      <th><%= t('attributes.renewal_unit') %></th>
+      <th><%= t('attributes.active') %></th>
+      <th class="nosort"></th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% @framework_contracts.each do |framework_contract| %>
-  <%= content_tag_for(:tr, framework_contract) do %>
-    <td><%= link_to framework_contract.name, framework_contract %></td>
-    <td><%= framework_contract.description %></td>
-    <td><%= framework_contract.contract_start %></td>
-    <td><%= framework_contract.contract_end %></td>
-    <td><%= framework_contract.contract_period %></td>
-    <td><%= framework_contract.period_of_notice %></td>
-    <td><%= framework_contract.period_of_notice_unit %></td>
-    <td><%= framework_contract.renewal_period %></td>
-    <td><%= framework_contract.renewal_unit %></td>
-    <td><%= framework_contract.active %></td>
-    <td class="nowrap">
-      <%= show_link framework_contract %>
-      <%= edit_link framework_contract %>
-      <%= delete_link framework_contract %>
-    </td>
+  <% @framework_contracts.each do |framework_contract| %>
+    <%= content_tag_for(:tr, framework_contract) do %>
+      <td><%= link_to framework_contract.name, framework_contract %></td>
+      <td><%= framework_contract.description %></td>
+      <td><%= framework_contract.contract_start %></td>
+      <td><%= framework_contract.contract_end %></td>
+      <td><%= framework_contract.contract_period %></td>
+      <td><%= framework_contract.period_of_notice %></td>
+      <td><%= framework_contract.period_of_notice_unit %></td>
+      <td><%= framework_contract.renewal_period %></td>
+      <td><%= framework_contract.renewal_unit %></td>
+      <td><%= framework_contract.active %></td>
+      <td class="nowrap">
+        <%= show_link framework_contract %>
+        <%= edit_link framework_contract %>
+        <%= delete_link framework_contract %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

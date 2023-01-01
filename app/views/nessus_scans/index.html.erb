@@ -1,56 +1,58 @@
 <h1><%= t('controller.nessus_scans') %></h1>
 
-<%= content_tag :table, role: :datatable,
-      id: 'nessus_scans_table',
-      class: "table table-bordered table-striped",
-      data: {
-        order: [[0, 'desc']].to_json
-      } do %>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: 'nessus_scans_table',
+        class: "table table-bordered table-striped",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
 
-  <thead>
-    <tr>
-      <th><%= t('attributes.last_modification_date') %></th>
-      <th><%= t('attributes.name') %></th>
-      <th><%= t('attributes.status') %></th>
-      <th><%= t('attributes.uuid') %></th>
-      <th><%= t('attributes.import_state') %></th>
-      <th><%= t('attributes.import_mode') %></th>
-      <th class="notvisible"><%= t('attributes.nessus_id') %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% @nessus_scans.each do |nessus_scan| %>
-      <%= content_tag_for(:tr, nessus_scan) do %>
-        <td><%= nessus_scan.last_modification_date %></td>
-        <td><%= nessus_scan.name %></td>
-        <td><%= nessus_scan.status %></td>
-        <td><%= nessus_scan.uuid %></td>
-        <td><%= nessus_scan.import_state %></td>
-        <td><%= nessus_scan.import_mode %></td>
-        <td><%= nessus_scan.nessus_id %></td>
-        <td class="nowrap">
-          <%= show_link nessus_scan %>
-          <%= edit_link nessus_scan %>
-          <%= delete_link nessus_scan %>
-          <%= import_nessus_link nessus_scan %>
-        </td>
+    <thead>
+      <tr>
+        <th><%= t('attributes.last_modification_date') %></th>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.status') %></th>
+        <th><%= t('attributes.uuid') %></th>
+        <th><%= t('attributes.import_state') %></th>
+        <th><%= t('attributes.import_mode') %></th>
+        <th class="notvisible"><%= t('attributes.nessus_id') %></th>
+        <th class="nosort"></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @nessus_scans.each do |nessus_scan| %>
+        <%= content_tag_for(:tr, nessus_scan) do %>
+          <td><%= nessus_scan.last_modification_date %></td>
+          <td><%= nessus_scan.name %></td>
+          <td><%= nessus_scan.status %></td>
+          <td><%= nessus_scan.uuid %></td>
+          <td><%= nessus_scan.import_state %></td>
+          <td><%= nessus_scan.import_mode %></td>
+          <td><%= nessus_scan.nessus_id %></td>
+          <td class="nowrap">
+            <%= show_link nessus_scan %>
+            <%= edit_link nessus_scan %>
+            <%= delete_link nessus_scan %>
+            <%= import_nessus_link nessus_scan %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>
 
 <br />
 

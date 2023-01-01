@@ -1,31 +1,45 @@
-<table id="linesTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.notes') %></th>
-    <th><%= t('attributes.access_type') %></th>
-    <th><%= t('attributes.bandwith_primary') %> <%= Boskop.bandwith_base_unit %></th>
-    <th><%= t('attributes.bandwith_secondary') %> <%= Boskop.bandwith_base_unit %></th>
-    <th><%= t('attributes.line_state') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<div data-controller="datatables">
+  <table id="linesTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.notes') %></th>
+      <th><%= t('attributes.access_type') %></th>
+      <th><%= t('attributes.bandwith_primary') %> <%= Boskop.bandwith_base_unit %></th>
+      <th><%= t('attributes.bandwith_secondary') %> <%= Boskop.bandwith_base_unit %></th>
+      <th><%= t('attributes.line_state') %></th>
+      <th class="nosort"></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% lines.each do |line| %>
-  <%= content_tag_for(:tr, line) do %>
-    <td><%= line.name %></td>
-    <td><%= line.description %></td>
-    <td><%= line.notes %></td>
-    <td><%= line.access_type %></td>
-    <td><%= bandwith(line) %></td>
-    <td><%= bandwith2(line) %></td>
-    <td><%= line.line_state %></td>
-    <td class="nowrap">
-      <%= show_link line %>
-    </td>
+  <% lines.each do |line| %>
+    <%= content_tag_for(:tr, line) do %>
+      <td><%= line.name %></td>
+      <td><%= line.description %></td>
+      <td><%= line.notes %></td>
+      <td><%= line.access_type %></td>
+      <td><%= bandwith(line) %></td>
+      <td><%= bandwith2(line) %></td>
+      <td><%= line.line_state %></td>
+      <td class="nowrap">
+        <%= show_link line %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>

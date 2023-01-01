@@ -1,43 +1,56 @@
-<%= content_tag :table, role: :xdatatable,
-      id: 'vulnerabilities_table',
-      class: "table table-bordered",
-      data: {
-        order: [[0, 'desc']].to_json
-      } do %>
+<div data-controller="datatables" >
+  <%= content_tag :table,
+        id: 'vulnerabilities_table',
+        class: "table table-bordered",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.lid') %></th>
+        <th><%= t('attributes.host') %></th>
+        <th><%= t('attributes.operating_system') %></th>
+        <th><%= t('attributes.vulnerability_detail') %></th>
+        <th><%= t('attributes.threat') %></th>
+        <th><%= t('attributes.severity') %></th>
+        <th><%= t('attributes.lastseen') %></th>
+        <th class="nosort"><%= t('boskop.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </thead>
 
-  <thead>
-    <tr>
-      <th><%= t('attributes.lid') %></th>
-      <th><%= t('attributes.host') %></th>
-      <th><%= t('attributes.operating_system') %></th>
-      <th><%= t('attributes.vulnerability_detail') %></th>
-      <th><%= t('attributes.threat') %></th>
-      <th><%= t('attributes.severity') %></th>
-      <th><%= t('attributes.lastseen') %></th>
-      <th><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% vulnerabilities.each do |vulnerability| %>
-      <%= content_tag_for(:tr, vulnerability) do %>
-	<td><%= vulnerability.host.lid %></td>
-	<td><%= link_to vulnerability.host, host_path(vulnerability.host) %></td>
-	<td><%= vulnerability.host.operating_system %></td>
-	<td>
-          <%= link_to vulnerability.vulnerability_detail, 
-                      vulnerability_detail_path(vulnerability.vulnerability_detail)
-         %>
-        </td>
-	<td><%= vulnerability.vulnerability_detail.threat %></td>
-	<td><%= vulnerability.vulnerability_detail.severity %></td>
-	<td><%= vulnerability.lastseen %></td>
-	<td class="nowrap">
-	  <%= show_link vulnerability %>
-	  <%= edit_link vulnerability %>
-	  <%= delete_link vulnerability %>
-	</td>
+    <tbody>
+      <% vulnerabilities.each do |vulnerability| %>
+        <%= content_tag_for(:tr, vulnerability) do %>
+          <td><%= vulnerability.host.lid %></td>
+          <td><%= link_to vulnerability.host, host_path(vulnerability.host) %></td>
+          <td><%= vulnerability.host.operating_system %></td>
+          <td>
+            <%= link_to vulnerability.vulnerability_detail, 
+                        vulnerability_detail_path(vulnerability.vulnerability_detail)
+           %>
+          </td>
+          <td><%= vulnerability.vulnerability_detail.threat %></td>
+          <td><%= vulnerability.vulnerability_detail.severity %></td>
+          <td><%= vulnerability.lastseen %></td>
+          <td class="nowrap">
+            <%= show_link vulnerability %>
+            <%= edit_link vulnerability %>
+            <%= delete_link vulnerability %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>

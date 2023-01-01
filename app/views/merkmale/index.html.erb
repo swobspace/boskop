@@ -4,31 +4,40 @@
 
 <h1><%= t('controller.merkmale') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.merkmalfor') %></th>
-    <th><%= t('attributes.merkmalklasse') %></th>
-    <th><%= t('attributes.value') %></th>
-    <th><%= t('attributes.actions') %></th>
-  </tr>
-</thead>
-<tbody>
-
-<% @merkmale.each do |merkmal| %>
-  <%= content_tag_for(:tr, merkmal) do %>
-    <td><%= merkmal.merkmalfor %></td>
-    <td><%= merkmal.merkmalklasse %></td>
-    <td><%= merkmal.value %></td>
-    <td class="nowrap">
-      <%= show_link merkmal %>
-      <%= edit_link merkmal %>
-      <%= delete_link merkmal %>
-    </td>
+<div data-controller="datatables">
+  <table id="merkmale" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.merkmalfor') %></th>
+      <th><%= t('attributes.merkmalklasse') %></th>
+      <th><%= t('attributes.value') %></th>
+      <th class="nosort"><%= t('attributes.actions') %></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
+  <% @merkmale.each do |merkmal| %>
+    <%= content_tag_for(:tr, merkmal) do %>
+      <td><%= merkmal.merkmalfor %></td>
+      <td><%= merkmal.merkmalklasse %></td>
+      <td><%= merkmal.value %></td>
+      <td class="nowrap">
+        <%= show_link merkmal %>
+        <%= edit_link merkmal %>
+        <%= delete_link merkmal %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

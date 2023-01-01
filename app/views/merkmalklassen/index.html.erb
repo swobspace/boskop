@@ -4,64 +4,66 @@
 
 <h1><%= t('controller.merkmalklassen') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.tag') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.format') %></th>
-    <th><%= t('attributes.for_object') %></th>
-    <th><%= t('attributes.mandantory') %></th>
-    <th><%= t('attributes.unique') %></th>
-    <th><%= t('attributes.visible') %></th>
-    <th><%= t('attributes.position') %></th>
-    <th><%= t('attributes.possible_values') %></th>
-    <th><%= t('attributes.baselink') %></th>
-    <th><%= t('attributes.actions') %></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-</tfoot>
-<tbody>
+<div data-controller="datatables">
+  <table id="merkmalklassen" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.tag') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.format') %></th>
+      <th><%= t('attributes.for_object') %></th>
+      <th><%= t('attributes.mandantory') %></th>
+      <th><%= t('attributes.unique') %></th>
+      <th><%= t('attributes.visible') %></th>
+      <th><%= t('attributes.position') %></th>
+      <th><%= t('attributes.possible_values') %></th>
+      <th><%= t('attributes.baselink') %></th>
+      <th class="nosort"><%= t('attributes.actions') %></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="search"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% @merkmalklassen.each do |merkmalklasse| %>
-  <%= content_tag_for(:tr, merkmalklasse) do %>
-    <td><%= merkmalklasse.name %></td>
-    <td><%= merkmalklasse.tag %></td>
-    <td><%= merkmalklasse.description %></td>
-    <td><%= merkmalklasse.format %></td>
-    <td><%= merkmalklasse.for_object %></td>
-    <td><%= merkmalklasse.mandantory %></td>
-    <td><%= merkmalklasse.unique %></td>
-    <td><%= merkmalklasse.visible %></td>
-    <td><%= merkmalklasse.position %></td>
-    <td><%= merkmalklasse.possible_values %></td>
-    <td><%= merkmalklasse.baselink %></td>
-    <td class="nowrap">
-      <%= show_link merkmalklasse %>
-      <%= edit_link merkmalklasse %>
-      <%= delete_link merkmalklasse,
-            confirm: t('boskop.this_will_destroy_all_merkmale'),
-            verify: t('boskop.verify_destroy') %>
-    </td>
+  <% @merkmalklassen.each do |merkmalklasse| %>
+    <%= content_tag_for(:tr, merkmalklasse) do %>
+      <td><%= merkmalklasse.name %></td>
+      <td><%= merkmalklasse.tag %></td>
+      <td><%= merkmalklasse.description %></td>
+      <td><%= merkmalklasse.format %></td>
+      <td><%= merkmalklasse.for_object %></td>
+      <td><%= merkmalklasse.mandantory %></td>
+      <td><%= merkmalklasse.unique %></td>
+      <td><%= merkmalklasse.visible %></td>
+      <td><%= merkmalklasse.position %></td>
+      <td><%= merkmalklasse.possible_values %></td>
+      <td><%= merkmalklasse.baselink %></td>
+      <td class="nowrap">
+        <%= show_link merkmalklasse %>
+        <%= edit_link merkmalklasse %>
+        <%= delete_link merkmalklasse,
+              confirm: t('boskop.this_will_destroy_all_merkmale'),
+              verify: t('boskop.verify_destroy') %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

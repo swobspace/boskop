@@ -4,39 +4,53 @@
 
 <h1><%= t('controller.addresses') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.addressfor') %></th>
-    <th><%= t('attributes.streetaddress') %></th>
-    <th><%= t('attributes.plz') %></th>
-    <th><%= t('attributes.ort') %></th>
-    <th><%= t('attributes.care_of') %></th>
-    <th><%= t('attributes.postfach') %></th>
-    <th><%= t('attributes.postfachplz') %></th>
-    <th><%= t('attributes.actions') %></th>
-  </tr>
-</thead>
-<tbody>
+<div data-controller="datatables">
+  <table id="addresses" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.addressfor') %></th>
+      <th><%= t('attributes.streetaddress') %></th>
+      <th><%= t('attributes.plz') %></th>
+      <th><%= t('attributes.ort') %></th>
+      <th><%= t('attributes.care_of') %></th>
+      <th><%= t('attributes.postfach') %></th>
+      <th><%= t('attributes.postfachplz') %></th>
+      <th class="nosort"><%= t('attributes.actions') %></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% @addresses.each do |address| %>
-  <%= content_tag_for(:tr, address) do %>
-    <td><%= address.addressfor %></td>
-    <td><%= address.streetaddress %></td>
-    <td><%= address.plz %></td>
-    <td><%= address.ort %></td>
-    <td><%= address.care_of %></td>
-    <td><%= address.postfach %></td>
-    <td><%= address.postfachplz %></td>
-    <td class="nowrap">
-      <%= show_link address %>
-      <%= edit_link address %>
-      <%= delete_link address %>
-    </td>
+  <% @addresses.each do |address| %>
+    <%= content_tag_for(:tr, address) do %>
+      <td><%= address.addressfor %></td>
+      <td><%= address.streetaddress %></td>
+      <td><%= address.plz %></td>
+      <td><%= address.ort %></td>
+      <td><%= address.care_of %></td>
+      <td><%= address.postfach %></td>
+      <td><%= address.postfachplz %></td>
+      <td class="nowrap">
+        <%= show_link address %>
+        <%= edit_link address %>
+        <%= delete_link address %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

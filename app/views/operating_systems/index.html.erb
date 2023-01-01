@@ -1,30 +1,40 @@
 <h1><%= t('controller.operating_systems') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.eol') %></th>
-    <th><%= t('attributes.matching_pattern') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<div data-controller="datatables">
+  <table id="operating_systems" class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.eol') %></th>
+        <th><%= t('attributes.matching_pattern') %></th>
+        <th class="search"></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
 
-<% @operating_systems.each do |operating_system| %>
-  <%= content_tag_for(:tr, operating_system) do %>
-    <td><%= operating_system.name %></td>
-    <td><%= operating_system.eol.to_s %></td>
-    <%= simple_format(operating_system.matching_pattern&.chomp, {}, wrapper_tag: "td") %>
-    <td class="nowrap">
-      <%= show_link operating_system %>
-      <%= edit_link operating_system %>
-      <%= delete_link operating_system %>
-    </td>
-  <% end %>
-<% end %>
-</tbody>
-</table>
+    <% @operating_systems.each do |operating_system| %>
+      <%= content_tag_for(:tr, operating_system) do %>
+        <td><%= operating_system.name %></td>
+        <td><%= operating_system.eol.to_s %></td>
+        <%= simple_format(operating_system.matching_pattern&.chomp, {}, wrapper_tag: "td") %>
+        <td class="nowrap">
+          <%= show_link operating_system %>
+          <%= edit_link operating_system %>
+          <%= delete_link operating_system %>
+        </td>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br />
 
