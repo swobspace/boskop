@@ -9,14 +9,17 @@ gem 'jbuilder', '~> 2.0'
 gem 'font-awesome-sass', '~> 5.0'
 
 gem "sprockets-rails"
+gem 'coffee-rails'
 gem "turbo-rails"
 gem "jsbundling-rails"
 gem "stimulus-rails"
 
 gem 'simple_form'
-gem 'wobauth', '~> 5.1'
 gem 'wobaduser', '~> 1.0'
-gem 'wobapphelpers', '~> 4.1'
+# gem 'wobauth', '~> 5.1'
+# gem 'wobapphelpers', '~> 4.1'
+gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
