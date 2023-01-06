@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
-// import '../src/datatables-bs5'
-import '../src/datatables-bs4'
+import '../src/datatables-bs5'
+// import '../src/datatables-bs4'
 import '../src/debounce'
 
 export default class extends Controller {

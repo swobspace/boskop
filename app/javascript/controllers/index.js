@@ -9,3 +9,7 @@ application.register("hello", HelloController)
 
 import DatatablesController from "./datatables_controller"
 application.register("datatables", DatatablesController)
+
+import SelectController from "./ts/select_controller"
+application.register("select", SelectController)
+

@@ -1,13 +1,6 @@
 # --- GLOBALS
-$.fn.select2.defaults.set( "theme", "bootstrap" )
 
 ready = ->
-  $('form').dirtyForms
-    message: "Sie haben Änderungen noch nicht gespeichert. Wenn Sie jetzt weitermachen, verlieren Sie ungesicherte Änderungen."
-
-  $('.select2').select2
-    width: 'element'
-
   eol_pivot = ->
     sum = $.pivotUtilities.aggregatorTemplates.sum
     numberFormat = $.pivotUtilities.numberFormat
