@@ -2,71 +2,72 @@
   <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
-<h1><%= t('boskop.software_raw_data_searchresult') %></h1>
-<%= render partial: 'shared/filter' %>
+<%= turbo_frame_tag "search_software_raw_data" do %>
+  <h1><%= t('boskop.software_raw_data_searchresult') %></h1>
+  <%= render partial: 'shared/filter' %>
 
 
-<div data-controller="datatables">
-  <%= content_tag :table,
-        id: "software_raw_data_table",
-        class: "table table-bordered table-responsive-xl",
-        data: {
-          order: [[0, 'asc']].to_json
-        } do %>
-    <thead>
-      <tr>
-        <th><%= t('attributes.name') %></th>
-        <th><%= t('attributes.version') %></th>
-        <th><%= t('attributes.vendor') %></th>
-        <th><%= t('attributes.count') %></th>
-        <th><%= t('attributes.operating_system') %></th>
-        <th><%= t('attributes.lastseen') %></th>
-        <th><%= t('attributes.source') %></th>
-        <th><%= t('attributes.software') %></th>
-        <th class="nosort"><%= t('boskop.action') %></th>
-      </tr>
-    </thead>
-    <tfoot class="search">
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th class="nosearch"></th>
-      </tr>
-    </tfoot>
-    <tbody>
-      <% @software_raw_data.each do |software_raw_datum| %>
-        <%= content_tag_for(:tr, software_raw_datum) do %>
-          <td><%= software_raw_datum.name %></td>
-          <td><%= software_raw_datum.version %></td>
-          <td><%= software_raw_datum.vendor %></td>
-          <td><%= software_raw_datum.hosts.count %></td>
-          <td><%= software_raw_datum.operating_system %></td>
-          <td><%= software_raw_datum.lastseen %></td>
-          <td><%= software_raw_datum.source %></td>
-          <td><%= swr_software_link(software_raw_datum) %></td>
-          <td class="text-nowrap">
-            <%= show_link software_raw_datum %>
-            <%= edit_link software_raw_datum %>
-            <%= add_software_from_raw_data(software_raw_datum) %>
-            <%= remove_software_link(@software, software_raw_datum) %>
-          </td>
+  <div data-controller="datatables">
+    <%= content_tag :table,
+          id: "software_raw_data_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th><%= t('attributes.name') %></th>
+          <th><%= t('attributes.version') %></th>
+          <th><%= t('attributes.vendor') %></th>
+          <th><%= t('attributes.count') %></th>
+          <th><%= t('attributes.operating_system') %></th>
+          <th><%= t('attributes.lastseen') %></th>
+          <th><%= t('attributes.source') %></th>
+          <th><%= t('attributes.software') %></th>
+          <th class="nosort"><%= t('boskop.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <% @software_raw_data.each do |software_raw_datum| %>
+          <%= content_tag_for(:tr, software_raw_datum) do %>
+            <td><%= software_raw_datum.name %></td>
+            <td><%= software_raw_datum.version %></td>
+            <td><%= software_raw_datum.vendor %></td>
+            <td><%= software_raw_datum.hosts.count %></td>
+            <td><%= software_raw_datum.operating_system %></td>
+            <td><%= software_raw_datum.lastseen %></td>
+            <td><%= software_raw_datum.source %></td>
+            <td><%= swr_software_link(software_raw_datum) %></td>
+            <td class="text-nowrap">
+              <%= show_link software_raw_datum %>
+              <%= edit_link software_raw_datum %>
+              <%= add_software_from_raw_data(software_raw_datum) %>
+              <%= remove_software_link(@software, software_raw_datum) %>
+            </td>
+          <% end %>
         <% end %>
-      <% end %>
-    </tbody>
+      </tbody>
+    <% end %>
+  </div>
+
+  <br />
+
+  <%= back_link %>
+  <%= new_link SoftwareRawDatum %>
+  <% if !!@filter_info[:use_pattern] == true %>
+    <%= assign_raw_software_link(@filter_info[:software_id]) %>
   <% end %>
-</div>
-
-<br />
-
-<%= back_link %>
-<%= new_link SoftwareRawDatum %>
-<% if !!@filter_info[:use_pattern] == true %>
-  <%= assign_raw_software_link(@filter_info[:software_id]) %>
 <% end %>
-
