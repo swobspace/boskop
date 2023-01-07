@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="name" class="col-sm-2 col-form-label">
           <%=t('attributes.name')%>
         </label>
@@ -16,7 +16,7 @@
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="vendor" class="col-sm-2 col-form-label">
           <%=t('attributes.vendor')%>
         </label>
@@ -26,7 +26,7 @@
       </div>
 
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="operating_system" class="col-sm-2 col-form-label">
           <%=t('attributes.operating_system')%>
         </label>
@@ -36,47 +36,47 @@
 	</div>
       </div>
 
-      <div class="form-group form-row">
+      <div class="row mb-3">
 	<label for="lastseen" class="col-sm-2 col-form-label"><%=t('attributes.lastseen')%></label>
-	<div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+	<div class="col-sm-3">
+	  <div class="input-group">
             <div class="input-group-text">&geq;</div>
+	    <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
           </div>
-	  <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
         </div>
-	<div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+	<div class="col-sm-3">
+	  <div class="input-group">
             <div class="input-group-text">&leq;</div>
+	    <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
           </div>
-	  <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
 	</div>
       </div>
 
       <% if false %>
-      <div class="form-group form-row">
+      <div class="row mb-3">
         <label for="created_at" class="col-sm-2 col-form-label">
           <%=t('attributes.created_at')%>
         </label>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+        <div class="col-sm-3">
+          <div class="input-group">
             <div class="input-group-text">&geq;</div>
-          </div>
-          <input class="form-control datepicker" name="created_newer" 
+            <input class="form-control datepicker" name="created_newer" 
                  id="created_newer" autocomplete="off" 
                  placeholder="<%= t('attributes.created_newer')%>">
-        </div>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&leq;</div>
           </div>
-          <input class="form-control datepicker" name="created_older" 
+        </div>
+        <div class="col-sm-3">
+          <div class="input-group">
+            <div class="input-group-text">&leq;</div>
+            <input class="form-control datepicker" name="created_older" 
                  id="created_older" autocomplete="off" 
                  placeholder="<%= t('attributes.created_older')%>">
+          </div>
         </div>
       </div>
       <%end%>
 
-      <div class="form-group row">
+      <div class="row mb-3">
         <label for="software_id" class="col-sm-2 col-form-label"><%=t('attributes.software')%></label>
         <div class="col-sm-10">
           <%= select_tag "software_id",
@@ -88,7 +88,7 @@
       </div>
 
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<div class="offset-sm-2 col-sm-10">
 	  <div class="form-check form-check-inline">
 	    <input class="form-check-input" type="checkbox" 
@@ -107,14 +107,14 @@
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<div class="col-sm-10 offset-sm-2">
 	  <%= submit_tag(t('boskop.search_software_raw_data'),
                 class: 'btn btn-primary') %>

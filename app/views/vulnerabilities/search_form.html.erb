@@ -7,21 +7,21 @@
     </div>
 
     <div class="card-body">
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="name" class="col-sm-2 col-form-label"><%=t('attributes.name')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="name" id="name" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="nvt" class="col-sm-2 col-form-label"><%=t('attributes.nvt')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="nvt" id="nvt" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
         <label for="threats" class="col-sm-2 col-form-label">
           <%=t('attributes.threats')%>
         </label>
@@ -35,7 +35,7 @@
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
 	<div class="input-group col-sm-3">
           <div class="input-group-prepend">
@@ -48,35 +48,35 @@
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="ip" class="col-sm-2 col-form-label"><%=t('attributes.ip')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" id="ip" name="ip" placeholder="IP address or CIDR network">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="hostname" class="col-sm-2 col-form-label"><%=t('attributes.hostname')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="hostname" id="hostname" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="host_category" class="col-sm-2 col-form-label"><%=t('attributes.host_category')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="host_category" id="host_category" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="operating_system" class="col-sm-2 col-form-label"><%=t('attributes.operating_system')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="operating_system" id="operating_system" placeholder="">
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="plugin_output" class="col-sm-2 col-form-label"><%=t('attributes.plugin_output')%></label>
 	<div class="col-sm-10">
 	  <input class="form-control" name="plugin_output" id="plugin_output" placeholder="">
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="lid" class="col-sm-2 col-form-label"><%=t('attributes.lid')%></label>
 	<div class="col-sm-10">
           <%= select_tag "lid",
@@ -127,7 +127,7 @@
 	</div>
       </div>
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
 	<div class="col-sm-3">
 	  <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
@@ -136,7 +136,7 @@
 
   <hr />
 
-      <div class="form-group row">
+      <div class="row mb-3">
         <div class="col-sm-2">
           Shortcuts
         </div>
@@ -158,7 +158,7 @@
 
       <hr />
 
-      <div class="form-group row">
+      <div class="row mb-3">
 	<div class="col-sm-10 offset-sm-2">
 	  <%= submit_tag(t('boskop.search_vulnerabilities'), class: 'btn btn-primary') %>
           <% if can? :csv, Vulnerability %>
