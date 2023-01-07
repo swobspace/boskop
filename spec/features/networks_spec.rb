@@ -15,7 +15,7 @@ RSpec.describe "Networks", :type => :feature do
     it "search for subsets of '192.168.1.0/24' get '192.168.1.64/27'" do
       login_user
       visit search_form_networks_path
-      within 'form' do
+      within 'form.card' do
         fill_in 'netzwerk', with: '192.168.1.0/24'
         check 'is_subset'
         uncheck 'is_superset'
@@ -29,7 +29,7 @@ RSpec.describe "Networks", :type => :feature do
     it "search for supersets of '192.168.1.0/24' get '192.168.0.0/23'" do
       login_user
       visit search_form_networks_path
-      within 'form' do
+      within 'form.card' do
         fill_in 'netzwerk', with: '192.168.1.0/24'
         check 'is_superset'
         uncheck 'is_subset'
@@ -43,7 +43,7 @@ RSpec.describe "Networks", :type => :feature do
     it "search for subset AND superset of '192.168.1.0/24' get '192.168.0.0/23' and '192.168.1.64/27'" do
       login_user
       visit search_form_networks_path
-      within 'form' do
+      within 'form.card' do
         fill_in 'netzwerk', with: '192.168.1.0/24'
         check 'is_subset'
         check 'is_superset'
@@ -57,7 +57,7 @@ RSpec.describe "Networks", :type => :feature do
     it "search for '192.168.7.0/24'" do
       login_user
       visit search_form_networks_path
-      within 'form' do
+      within 'form.card' do
         fill_in 'netzwerk', with: '192.168.7.0/24'
         click_button 'Suche'
       end
