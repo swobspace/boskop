@@ -1,8 +1,8 @@
-<div class="card col-sm-4 bg-light">
-<div class="card-body p-1 m-1">
-<%= form_tag( url_for(:action => 'index'),
-              :class => "") do -%>
-    <div class="form-group">
+<div class="card bg-light mb-3">
+  <div class="card-body p-2 m-1">
+    <%= form_tag( url_for(:action => 'index'),
+                  :class => "") do -%>
+    <div class="mb-3">
       <label>Name, Vorname oder E-Mail-Adresse:</label>
       <%= text_field_tag :query, '', class: 'form-control'-%>
     </div>
