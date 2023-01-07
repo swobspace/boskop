@@ -29,22 +29,23 @@
           <%= select_tag "threats",
                 options_for_select(VulnerabilityDetail::THREATS),
                 multiple: true,
-                include_blank: true, 
-                class: 'form-control select2' 
+                include_blank: true,
+                class: 'form-control',
+                "data-controller": "select"
            %>
 	</div>
       </div>
 
       <div class="row mb-3">
 	<label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
-	<div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+	<div class="col-sm-3">
+	  <div class="input-group">
             <div class="input-group-text">&geq;</div>
+	    <input type="number" class="form-control"
+                   name="severity" id="severity"
+                   placeholder="0..10"
+            >
           </div>
-	  <input type="number" class="form-control" 
-                 name="severity" id="severity" 
-                 placeholder="0..10"
-          >
 	</div>
       </div>
 
@@ -83,35 +84,35 @@
 	</div>
       </div>
 
-     <div class="form-group form-row">
+     <div class="row mb-3">
         <label for="lastseen" class="col-sm-2 col-form-label"><%=t('attributes.lastseen')%></label>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+        <div class="col-sm-3">
+          <div class="input-group">
             <div class="input-group-text">&geq;</div>
+            <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
           </div>
-          <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
         </div>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+        <div class="col-sm-3">
+          <div class="input-group">
             <div class="input-group-text">&leq;</div>
+            <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
           </div>
-          <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
         </div>
       </div>
 
-     <div class="form-group form-row">
+     <div class="row mb-3">
         <label for="created_at" class="col-sm-2 col-form-label"><%=t('attributes.created_at')%></label>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+        <div class="col-sm-3">
+          <div class="input-group">
             <div class="input-group-text">&geq;</div>
+            <input class="form-control datepicker" name="created_newer" id="created_newer" autocomplete="off" placeholder="<%= t('attributes.created_newer')%>">
           </div>
-          <input class="form-control datepicker" name="created_newer" id="created_newer" autocomplete="off" placeholder="<%= t('attributes.created_newer')%>">
         </div>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
+        <div class="col-sm-3">
+          <div class="input-group">
             <div class="input-group-text">&leq;</div>
+            <input class="form-control datepicker" name="created_older" id="created_older" autocomplete="off" placeholder="<%= t('attributes.created_older')%>">
           </div>
-          <input class="form-control datepicker" name="created_older" id="created_older" autocomplete="off" placeholder="<%= t('attributes.created_older')%>">
         </div>
       </div>
 
@@ -121,8 +122,9 @@
           <%= select_tag "lid",
                 options_from_collection_for_select(Location.current, 'lid', 'to_str'),
                 multiple: true,
-                include_blank: true, 
-                class: 'form-control select2' 
+                include_blank: true,
+                class: 'form-control',
+                "data-controller": "select"
            %>
 	</div>
       </div>
