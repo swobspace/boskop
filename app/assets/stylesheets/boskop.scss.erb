@@ -1,16 +1,33 @@
+// ------------------------------------------------------------------------
+// bootstrap
+// ------------------------------------------------------------------------
+$font-family-sans-serif:
+  // Android
+  Roboto,
+  // Cross-platform generic font family (default user interface font)
+  system-ui,
+  // Safari for macOS and iOS (San Francisco)
+  -apple-system,
+  // Chrome < 56 for macOS (San Francisco)
+  BlinkMacSystemFont,
+  // Windows
+  "Segoe UI",
+  // Basic web fallback
+  "Helvetica Neue", Arial,
+  // Linux
+  "Noto Sans",
+  "Liberation Sans",
+  // Sans serif fallback
+  sans-serif,
+  // Emoji fonts
+  "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+@import "custom-colors";
+@import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "v4-shims.min";
 
-$custom: #111;
-$theme-colors: (
-  "custom": $custom
-);
-// allow overwrite with custom color
-// default: symlink to _colors-wobteal.scss
-@import "custom-colors";
-
-@import "bootstrap/scss/bootstrap";
 @import "wobapphelpers/breadcrumbs";
 @import "common";
 
