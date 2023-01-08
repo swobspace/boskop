@@ -52,7 +52,8 @@ group :test do
   gem 'factory_bot_rails'
   gem 'database_rewinder'
   gem "capybara"
-  gem "poltergeist"
+  gem 'selenium-webdriver'
+  gem 'webdriver'
   gem 'launchy'
 end
 
@@ -70,7 +71,8 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
-gem 'responders', git: 'https://github.com/heartcombo/responders.git', branch: 'main'
+gem 'responders'
+# gem 'responders', git: 'https://github.com/heartcombo/responders.git', branch: 'main'
 
 # for deployment
 gem "ed25519"

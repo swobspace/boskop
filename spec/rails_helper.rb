@@ -8,10 +8,27 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'shoulda/matchers'
 require 'factory_bot_rails'
+# require 'view_component/test_helpers'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
 
-Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :mychrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+
+  options.add_argument("headless")
+  options.add_argument("window-size=1280x1280")
+  # options.add_argument("disable-gpu")
+
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :chrome,
+    capabilities: [options]
+  )
+end
+
+# Capybara.javascript_driver = :selenium_chrome
+# Capybara.javascript_driver = :selenium_chrome_headless
+Capybara.javascript_driver = :mychrome
+Capybara.disable_animation = true
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
