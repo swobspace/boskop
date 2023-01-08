@@ -15,7 +15,7 @@ RSpec.describe "Hosts", type: :feature do
       login_admin
       visit hosts_path
       click_link "Hosts aus Datei importieren"
-      within "form" do
+      within "form.card" do
         select 'XML', :from => 'type'
         select 'Newer', :from => 'update'
         attach_file('file', nmapfile)

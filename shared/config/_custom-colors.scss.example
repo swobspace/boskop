@@ -1,0 +1,20 @@
+//
+// custom color scheme: wobteal
+// 
+$cblue: #176775;
+$custom: #145A66;
+$cgrey: #77999E;
+$cgreen: #60A360;
+$cred: #BF2B2B;
+$cyellow: #F7D020;
+$ccyan: #489BA8;
+
+// overwrite bs5 variables
+
+$primary: $cblue;
+// $secondary: $cgrey;
+$success: $cgreen;
+$danger: $cred;
+$info: $ccyan;
+$warning: $cyellow;
+

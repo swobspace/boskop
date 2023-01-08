@@ -1,30 +1,42 @@
-<table id="networksTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.netzwerk') %></th>
-    <th><%= t('attributes.description') %></th>
-    <%= content_tag_for(:th, @networkmerkmalklassen) do |mklasse| %>
-      <%= mklasse.to_s %>
-    <% end %>
-    <th></th>
-  </tr>
-</thead>
+<div data-controller="datatables">
+  <table id="networksTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.netzwerk') %></th>
+      <th><%= t('attributes.description') %></th>
+      <%= content_tag_for(:th, @networkmerkmalklassen) do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
+      <th class="nosort"></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <% @networkmerkmalklassen.each do |mklasse| %>
+        <th></th>
+      <% end %>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
 
-<tbody>
-<% networks.each do |network| %>
-  <%= content_tag_for(:tr, network) do %>
-    <td><%= network.netzwerk.try(:to_cidr_s) %></td>
-    <td><%= network.description %></td>
-    <%= content_tag_for(:td, @networkmerkmalklassen) do |mklasse| %>
-      <%= get_location_merkmal(network, mklasse) %>
-    <% end %>
+  <tbody>
+  <% networks.each do |network| %>
+    <%= content_tag_for(:tr, network) do %>
+      <td><%= network.netzwerk.try(:to_cidr_s) %></td>
+      <td><%= network.description %></td>
+      <%= content_tag_for(:td, @networkmerkmalklassen) do |mklasse| %>
+        <%= get_location_merkmal(network, mklasse) %>
+      <% end %>
 
-    <td class="nowrap">
-      <%= show_link network %>
-      <%= edit_link network %>
-      <%= delete_link network %>
-    </td>
+      <td class="nowrap">
+        <%= show_link network %>
+        <%= edit_link network %>
+        <%= delete_link network %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>

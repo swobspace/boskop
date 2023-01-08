@@ -15,7 +15,7 @@ RSpec.describe "Vulnerabilities", type: :feature do
       login_admin
       visit vulnerabilities_path
       click_link "Schwachstellenscan importieren"
-      within "form" do
+      within "form.card" do
         select 'Nessus', :from => 'type'
         attach_file('file', nessusfile)
         click_button "Upload"

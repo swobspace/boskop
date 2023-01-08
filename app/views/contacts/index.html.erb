@@ -1,88 +1,90 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
 <h1><%= t('controller.contacts') %></h1>
 
-<%= content_tag :table, role: :datatable,
-      id: "contacts_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        order: [[0, 'desc']].to_json
-      } do %>
-  <thead>
-    <tr>
-        <th><%= t('attributes.sn') %></th>
-        <th><%= t('attributes.givenname') %></th>
-        <th class="notvisible"><%= t('attributes.displayname') %></th>
-        <th><%= t('attributes.title') %></th>
-        <th class="notvisible"><%= t('attributes.anrede') %></th>
-        <th><%= t('attributes.position') %></th>
-        <th class="notvisible"><%= t('attributes.streetaddress') %></th>
-        <th><%= t('attributes.plz') %></th>
-        <th><%= t('attributes.ort') %></th>
-        <th class="notvisible"><%= t('attributes.postfach') %></th>
-        <th class="notvisible"><%= t('attributes.postfachplz') %></th>
-        <th class="notvisible"><%= t('attributes.care_of') %></th>
-        <th><%= t('attributes.telephone') %></th>
-        <th class="notvisible"><%= t('attributes.telefax') %></th>
-        <th class="notvisible"><%= t('attributes.mobile') %></th>
-        <th><%= t('attributes.mail') %></th>
-        <th class="notvisible"><%= t('attributes.internet') %></th>
-        <th class="nosort"><%= t('boskop.action')%></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <%= content_tag_for(:tr, contact) do %>
-            <td><%= contact.sn %></td>
-            <td><%= contact.givenname %></td>
-            <td><%= contact.displayname %></td>
-            <td><%= contact.title %></td>
-            <td><%= contact.anrede %></td>
-            <td><%= contact.position %></td>
-            <td><%= contact.streetaddress %></td>
-            <td><%= contact.plz %></td>
-            <td><%= contact.ort %></td>
-            <td><%= contact.postfach %></td>
-            <td><%= contact.postfachplz %></td>
-            <td><%= contact.care_of %></td>
-            <td><%= contact.telephone %></td>
-            <td><%= contact.telefax %></td>
-            <td><%= contact.mobile %></td>
-            <td><%= contact.mail %></td>
-            <td><%= contact.internet %></td>
-            <td class="text-nowrap">
-          <%= show_link contact %>
-          <%= edit_link contact %>
-          <%= delete_link contact %>
-        </td>
+<div data-controller="datatables">
+  <%= content_tag :table, 
+        id: "contacts_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
+    <thead>
+      <tr>
+          <th><%= t('attributes.sn') %></th>
+          <th><%= t('attributes.givenname') %></th>
+          <th class="notvisible"><%= t('attributes.displayname') %></th>
+          <th><%= t('attributes.title') %></th>
+          <th class="notvisible"><%= t('attributes.anrede') %></th>
+          <th><%= t('attributes.position') %></th>
+          <th class="notvisible"><%= t('attributes.streetaddress') %></th>
+          <th><%= t('attributes.plz') %></th>
+          <th><%= t('attributes.ort') %></th>
+          <th class="notvisible"><%= t('attributes.postfach') %></th>
+          <th class="notvisible"><%= t('attributes.postfachplz') %></th>
+          <th class="notvisible"><%= t('attributes.care_of') %></th>
+          <th><%= t('attributes.telephone') %></th>
+          <th class="notvisible"><%= t('attributes.telefax') %></th>
+          <th class="notvisible"><%= t('attributes.mobile') %></th>
+          <th><%= t('attributes.mail') %></th>
+          <th class="notvisible"><%= t('attributes.internet') %></th>
+          <th class="nosort"><%= t('boskop.action')%></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <%= content_tag_for(:tr, contact) do %>
+              <td><%= contact.sn %></td>
+              <td><%= contact.givenname %></td>
+              <td><%= contact.displayname %></td>
+              <td><%= contact.title %></td>
+              <td><%= contact.anrede %></td>
+              <td><%= contact.position %></td>
+              <td><%= contact.streetaddress %></td>
+              <td><%= contact.plz %></td>
+              <td><%= contact.ort %></td>
+              <td><%= contact.postfach %></td>
+              <td><%= contact.postfachplz %></td>
+              <td><%= contact.care_of %></td>
+              <td><%= contact.telephone %></td>
+              <td><%= contact.telefax %></td>
+              <td><%= contact.mobile %></td>
+              <td><%= contact.mail %></td>
+              <td><%= contact.internet %></td>
+              <td class="text-nowrap">
+            <%= show_link contact %>
+            <%= edit_link contact %>
+            <%= delete_link contact %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>
 
 <br />
 

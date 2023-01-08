@@ -1,56 +1,58 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
 <h1><%= t('controller.locations') %></h1>
 
-<table id="locationsTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.lid') %></th>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.plz') %></th>
-    <th><%= t('attributes.ort') %></th>
-    <th><%= t('attributes.streetaddress') %></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-      <%= mklasse.to_s %>
-    <% end %>
-    <th><%= t('attributes.actions') %></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-    <% end %>
-    <th></th>
-  </tr>
-</tfoot>
-<tbody>
+<div data-controller="datatables">
+  <table id="locationsTable" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.lid') %></th>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.plz') %></th>
+      <th><%= t('attributes.ort') %></th>
+      <th><%= t('attributes.streetaddress') %></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <%= mklasse.to_s %>
+      <% end %>
+      <th class="nosort"><%= t('attributes.actions') %></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+      <% end %>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% @locations.each do |location| %>
-  <%= content_tag_for(:tr, location) do %>
-    <td><%= location.lid %></td>
-    <td><%= link_to location.name, location_path(location) %></td>
-    <td><%= location.addresses.first.try(:plz) %></td>
-    <td><%= location.addresses.first.try(:ort) %></td>
-    <td><%= location.addresses.first.try(:streetaddress) %></td>
-    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
-      <%= get_location_merkmal(location, mklasse) %>
+  <% @locations.each do |location| %>
+    <%= content_tag_for(:tr, location) do %>
+      <td><%= location.lid %></td>
+      <td><%= link_to location.name, location_path(location) %></td>
+      <td><%= location.addresses.first.try(:plz) %></td>
+      <td><%= location.addresses.first.try(:ort) %></td>
+      <td><%= location.addresses.first.try(:streetaddress) %></td>
+      <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+        <%= get_location_merkmal(location, mklasse) %>
+      <% end %>
+      <td class="nowrap">
+        <%= show_link location %>
+        <%= edit_link location %>
+        <%= delete_link location %>
+      </td>
     <% end %>
-    <td class="nowrap">
-      <%= show_link location %>
-      <%= edit_link location %>
-      <%= delete_link location %>
-    </td>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 

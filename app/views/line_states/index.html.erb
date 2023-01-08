@@ -1,34 +1,44 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
-<h1><%= t('controller.line_states') %></h1>
+<div data-controller="datatables">
+  <h1><%= t('controller.line_states') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
-    <th><%= t('attributes.active') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+  <table id="line_states" class="table table-bordered">
+  <thead>
+    <tr>
+      <th><%= t('attributes.name') %></th>
+      <th><%= t('attributes.description') %></th>
+      <th><%= t('attributes.active') %></th>
+      <th class="nosort"></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% @line_states.each do |line_state| %>
-  <%= content_tag_for(:tr, line_state) do %>
-    <td><%= line_state.name %></td>
-    <td><%= line_state.description %></td>
-    <td><%= line_state.active %></td>
-    <td class="nowrap">
-      <%= show_link line_state %>
-      <%= edit_link line_state %>
-      <%= delete_link line_state %>
-    </td>
+  <% @line_states.each do |line_state| %>
+    <%= content_tag_for(:tr, line_state) do %>
+      <td><%= line_state.name %></td>
+      <td><%= line_state.description %></td>
+      <td><%= line_state.active %></td>
+      <td class="nowrap">
+        <%= show_link line_state %>
+        <%= edit_link line_state %>
+        <%= delete_link line_state %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-</table>
+  </tbody>
+  </table>
+</div>
 
 <br />
 
