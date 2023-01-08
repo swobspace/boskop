@@ -18,9 +18,9 @@
         <tr>
           <th><%= t('attributes.netzwerk') %></th>
           <th><%= t('attributes.description') %></th>
-          <th><%= t('attributes.lid') %></th>
-          <th><%= t('attributes.location') %></th>
-          <th><%= t('attributes.ort') %></th>
+          <th class="nosort"><%= t('attributes.lid') %></th>
+          <th class="nosort"><%= t('attributes.location') %></th>
+          <th class="nosort"><%= t('attributes.ort') %></th>
           <%= content_tag_for(:th, @merkmalklassen, class: "nosort") do |mklasse| %>
             <%= mklasse.to_s %>
           <% end %>
