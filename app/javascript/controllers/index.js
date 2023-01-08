@@ -4,12 +4,14 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import DatatablesController from "./datatables_controller"
 application.register("datatables", DatatablesController)
 
-import SelectController from "./ts/select_controller"
-application.register("select", SelectController)
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
 
+import PivottableController from "./pivottable_controller"
+application.register("pivottable", PivottableController)
+
+import Ts__SelectController from "./ts/select_controller"
+application.register("ts--select", Ts__SelectController)
