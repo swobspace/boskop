@@ -2,10 +2,13 @@
   <%= m.hidden_field(:merkmalklasse_id) %>
   <% if m.object.merkmalklasse.format == 'dropdown' %>
     <%= m.input :value, label: m.object.merkmalklasse.to_s,
-		     collection: m.object.merkmalklasse.possible_values
+		        collection: m.object.merkmalklasse.possible_values,
+                        required: m.object.merkmalklasse.mandantory
     %>
   <% else %>
-    <%= m.input :value, label: m.object.merkmalklasse.to_s %>
+    <%= m.input :value, label: m.object.merkmalklasse.to_s,
+                        required: m.object.merkmalklasse.mandantory
+      %>
   <% end %>
 <% end %>
 
