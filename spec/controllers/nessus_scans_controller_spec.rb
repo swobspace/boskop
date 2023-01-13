@@ -90,7 +90,7 @@ RSpec.describe NessusScansController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {nessus_scan: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -120,7 +120,7 @@ RSpec.describe NessusScansController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         nessus_scan = NessusScan.create! valid_attributes
         put :update, params: {id: nessus_scan.to_param, nessus_scan: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end

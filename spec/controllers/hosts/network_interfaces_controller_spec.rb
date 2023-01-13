@@ -64,7 +64,7 @@ RSpec.describe Hosts::NetworkInterfacesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {host_id: host.id, network_interface: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -95,7 +95,7 @@ RSpec.describe Hosts::NetworkInterfacesController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         network_interface = NetworkInterface.create! valid_attributes
         put :update, params: {host_id: host.id, id: network_interface.to_param, network_interface: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end

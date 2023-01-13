@@ -62,7 +62,7 @@ RSpec.describe SoftwareCategoriesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {software_category: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -94,7 +94,7 @@ RSpec.describe SoftwareCategoriesController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         software_category = SoftwareCategory.create! valid_attributes
         put :update, params: {id: software_category.to_param, software_category: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
