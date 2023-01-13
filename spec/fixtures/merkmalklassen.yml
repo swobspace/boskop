@@ -1,0 +1,10 @@
+location_phone:
+  name: location phone
+  description: central calling number for location
+  format: string
+  mandantory: true
+  unique: false
+  position: 1
+  for_object: Location
+  visible: ["", "index"]
+  tag: locphone
