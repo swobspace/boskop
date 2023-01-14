@@ -25,4 +25,46 @@ RSpec.describe "Hosts", type: :feature do
       expect(page).to have_content("Import successful")
     end
   end
+
+
+  describe "Create a host" do
+    it "visits hosts#new" do
+      login_admin
+      visit new_host_path
+      fill_in "Name", with: "ABC-SRV-003"
+      fill_in "zuletzt gesehen", with: '2023-01-01'
+      click_button "Host erstellen"
+      expect(page).to have_content("Host erfolgreich erstellt")
+      expect(page).to have_content("Host: (ABC-SRV-003)")
+      expect(page).to have_content("2023-01-01")
+      expect(page).to have_content("Netzwerk-Interfaces")
+    end
+  end
+
+  describe "Show and delete host" do
+    let!(:host) { FactoryBot.create(:host, name: "ABC-SRV-003", lastseen: Date.current) }
+
+    it "visits hosts#show" do
+      login_admin
+      visit host_path(host)
+      expect(page).to have_content("Host: (ABC-SRV-003)")
+      expect(page).to have_content("zuletzt gesehen")
+      expect(page).to have_content(Date.current.to_s)
+      expect(page).to have_content("Netzwerk-Interfaces")
+      expect(page).to have_content("Schwachstellen (Kritisch)")
+      expect(page).to have_content("Software")
+    end
+
+    it "delete an existing host", js: true do
+      login_admin
+      visit host_path(host)
+      expect(page).to have_content("Host: (ABC-SRV-003)")
+      expect(page).to have_content(Date.current.to_s)
+      accept_confirm do
+        find('a[title="Host löschen"]').click
+      end
+      expect(page).to have_content("Host erfolgreich gelöscht")
+    end
+  end
+
 end
