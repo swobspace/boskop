@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
 <div class="card bg-light mb-3">
   <div class="card-body p-2 m-1">
     <%= form_tag( url_for(:action => 'index'),
