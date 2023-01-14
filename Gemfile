@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 
-gem 'rails', '~> 6.1.0'
-gem 'rails-i18n', '~> 6.0'
+gem 'rails', '~> 7.0.0'
+gem 'rails-i18n', '~> 7.0'
 gem 'pg'
 
 gem 'jbuilder', '~> 2.0'
@@ -16,8 +16,6 @@ gem "stimulus-rails"
 
 gem 'simple_form'
 gem 'wobaduser', '~> 1.0'
-# gem 'wobauth', '~> 5.1'
-# gem 'wobapphelpers', '~> 4.1'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
 gem 'cancancan'
@@ -37,7 +35,6 @@ group :development do
   gem 'capistrano-yarn'
   gem "better_errors"
   gem "binding_of_caller"
-  gem "meta_request"
   gem 'licensed'
 end
 
@@ -78,9 +75,7 @@ gem 'responders', git: 'https://github.com/heartcombo/responders.git', branch: '
 gem "ed25519"
 gem "bcrypt_pbkdf"
 
-gem "mail", '< 2.8.0'
-
-
+gem "mail"
 
 # Use Redis for Action Cable
-gem 'redis', '~> 4.0'
+gem 'redis'

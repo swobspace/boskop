@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_01_100613) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_01_14_100748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_types", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "addresses", id: :serial, force: :cascade do |t|
@@ -31,8 +30,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "care_of", limit: 255, default: ""
     t.string "postfach", limit: 255, default: ""
     t.string "postfachplz", limit: 255, default: ""
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["addressfor_id", "addressfor_type"], name: "index_addresses_on_addressfor_id_and_addressfor_type"
   end
 
@@ -54,8 +53,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "mobile", default: ""
     t.string "mail", default: ""
     t.string "internet", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -63,13 +62,13 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
     t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
+    t.datetime "run_at", precision: nil
+    t.datetime "locked_at", precision: nil
+    t.datetime "failed_at", precision: nil
     t.string "locked_by"
     t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
@@ -84,15 +83,15 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.integer "renewal_period"
     t.string "renewal_unit"
     t.boolean "active", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "host_categories", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "tag", default: ""
   end
 
@@ -105,8 +104,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.date "lastseen"
     t.bigint "host_category_id"
     t.bigint "location_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "fqdn", default: ""
     t.string "workgroup", default: ""
     t.string "domain_dns", default: ""
@@ -132,8 +131,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.bigint "software_raw_datum_id", null: false
     t.bigint "host_id", null: false
     t.date "lastseen"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["host_id"], name: "index_installed_software_on_host_id"
     t.index ["software_raw_datum_id"], name: "index_installed_software_on_software_raw_datum_id"
   end
@@ -142,8 +141,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "name", null: false
     t.text "description", default: ""
     t.boolean "active", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "lines", id: :serial, force: :cascade do |t|
@@ -164,8 +163,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.integer "renewal_period"
     t.string "renewal_unit"
     t.integer "line_state_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.decimal "bw2_upstream", precision: 10, scale: 1
     t.decimal "bw2_downstream", precision: 10, scale: 1
     t.text "notes", default: ""
@@ -182,8 +181,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "ancestry", limit: 255
     t.integer "ancestry_depth", default: 0, null: false
     t.integer "position", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "lid", limit: 255
     t.boolean "disabled", default: false
     t.index ["ancestry"], name: "index_locations_on_ancestry"
@@ -195,8 +194,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
   create_table "mac_prefixes", force: :cascade do |t|
     t.string "oui", limit: 6, null: false
     t.string "vendor", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["oui"], name: "index_mac_prefixes_on_oui"
   end
 
@@ -205,8 +204,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "merkmalfor_type", limit: 255
     t.integer "merkmalklasse_id"
     t.string "value", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["merkmalfor_id", "merkmalfor_type"], name: "index_merkmale_on_merkmalfor_id_and_merkmalfor_type"
     t.index ["merkmalklasse_id"], name: "index_merkmale_on_merkmalklasse_id"
   end
@@ -216,8 +215,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.text "description", default: ""
     t.string "format", limit: 255, default: "", null: false
     t.text "possible_values"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.boolean "mandantory", default: false
     t.boolean "unique", default: false
     t.integer "position", default: 0
@@ -236,8 +235,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "status", default: ""
     t.date "last_modification_date"
     t.string "import_state", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "import_mode", default: ""
     t.index ["nessus_id"], name: "index_nessus_scans_on_nessus_id"
     t.index ["uuid"], name: "index_nessus_scans_on_uuid"
@@ -250,8 +249,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.date "lastseen"
     t.string "mac", default: ""
     t.string "oui_vendor", default: ""
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["host_id"], name: "index_network_interfaces_on_host_id"
   end
 
@@ -259,8 +258,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.integer "location_id"
     t.cidr "netzwerk"
     t.text "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["location_id"], name: "index_networks_on_location_id"
   end
 
@@ -268,8 +267,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "field"
     t.string "value"
     t.bigint "operating_system_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["field"], name: "index_operating_system_mappings_on_field"
     t.index ["operating_system_id"], name: "index_operating_system_mappings_on_operating_system_id"
     t.index ["value"], name: "index_operating_system_mappings_on_value"
@@ -278,8 +277,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
   create_table "operating_systems", force: :cascade do |t|
     t.string "name"
     t.text "matching_pattern"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.date "eol"
   end
 
@@ -289,8 +288,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "ancestry", limit: 255
     t.integer "ancestry_depth", default: 0, null: false
     t.integer "position", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["ancestry"], name: "index_org_units_on_ancestry"
     t.index ["name"], name: "index_org_units_on_name"
   end
@@ -302,8 +301,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "role", default: ""
     t.string "title", default: ""
     t.integer "position", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["contact_id"], name: "index_responsibilities_on_contact_id"
     t.index ["responsibility_for_type", "responsibility_for_id"], name: "index_responsibility_for"
     t.index ["role"], name: "index_responsibilities_on_role"
@@ -320,8 +319,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.date "yellow"
     t.date "red"
     t.bigint "software_category_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["software_category_id"], name: "index_software_on_software_category_id"
     t.index ["vendor"], name: "index_software_on_vendor"
   end
@@ -330,8 +329,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "name", default: "", null: false
     t.text "description"
     t.text "main_business_process"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "software_group_id"
     t.index ["software_group_id"], name: "index_software_categories_on_software_group_id"
   end
@@ -339,8 +338,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
   create_table "software_groups", force: :cascade do |t|
     t.string "name", default: ""
     t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_software_groups_on_name"
   end
 
@@ -353,8 +352,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "operating_system", default: ""
     t.date "lastseen"
     t.string "source", default: ""
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name"], name: "index_software_raw_data_on_name"
     t.index ["operating_system"], name: "index_software_raw_data_on_operating_system"
     t.index ["software_id"], name: "index_software_raw_data_on_software_id"
@@ -365,8 +364,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.bigint "host_id"
     t.bigint "vulnerability_detail_id"
     t.date "lastseen"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "plugin_output"
     t.index ["host_id"], name: "index_vulnerabilities_on_host_id"
     t.index ["vulnerability_detail_id"], name: "index_vulnerabilities_on_vulnerability_detail_id"
@@ -383,8 +382,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "xrefs", default: [], array: true
     t.jsonb "notes", default: {}
     t.jsonb "certs", default: {}
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["family"], name: "index_vulnerability_details_on_family"
     t.index ["nvt"], name: "index_vulnerability_details_on_nvt"
     t.index ["threat"], name: "index_vulnerability_details_on_threat"
@@ -398,8 +397,8 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "authorized_for_type", limit: 255
     t.date "valid_from"
     t.date "valid_until"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["authorizable_id"], name: "index_wobauth_authorities_on_authorizable_id"
     t.index ["authorized_for_id"], name: "index_wobauth_authorities_on_authorized_for_id"
     t.index ["role_id"], name: "index_wobauth_authorities_on_role_id"
@@ -408,24 +407,24 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
   create_table "wobauth_groups", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
     t.string "description", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "wobauth_memberships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
     t.boolean "auto", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.index ["group_id"], name: "index_wobauth_memberships_on_group_id"
     t.index ["user_id"], name: "index_wobauth_memberships_on_user_id"
   end
 
   create_table "wobauth_roles", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
   end
 
   create_table "wobauth_users", id: :serial, force: :cascade do |t|
@@ -440,15 +439,15 @@ ActiveRecord::Schema.define(version: 2022_11_01_100613) do
     t.string "email", limit: 255, default: "", null: false
     t.string "encrypted_password", limit: 255, default: "", null: false
     t.string "reset_password_token", limit: 255
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip", limit: 255
     t.string "last_sign_in_ip", limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.string "title", default: ""
     t.string "position", default: ""
     t.string "department", default: ""
