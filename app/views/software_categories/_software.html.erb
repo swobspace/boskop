@@ -1,62 +1,64 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
-<%= content_tag :table, role: :datatable,
-      id: "software_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        order: [[0, 'asc']].to_json
-      } do %>
-  <thead>
-    <tr>
-      <th><%= t('attributes.name') %></th>
-      <th class="notvisible"><%= t('attributes.pattern') %></th>
-      <th><%= t('attributes.vendor') %></th>
-      <th><%= t('attributes.description') %></th>
-      <th class="notvisible"><%= t('attributes.minimum_allowed_version') %></th>
-      <th class="notvisible"><%= t('attributes.maximum_allowed_version') %></th>
-      <th class="notvisible"><%= t('attributes.green') %></th>
-      <th class="notvisible"><%= t('attributes.yellow') %></th>
-      <th class="notvisible"><%= t('attributes.red') %></th>
-      <th><%= t('attributes.status') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% software.each do |sw| %>
-      <%= content_tag_for(:tr, sw, class: "#{sw.status(:color)}") do %>
-        <td><%= sw.name %></td>
-        <td><%= sw.pattern %></td>
-        <td><%= sw.vendor %></td>
-        <td><%= sw.description %></td>
-        <td><%= sw.minimum_allowed_version %></td>
-        <td><%= sw.maximum_allowed_version %></td>
-        <td><%= sw.green %></td>
-        <td><%= sw.yellow %></td>
-        <td><%= sw.red %></td>
-        <td><%= sw.status %></td>
-        <td class="text-nowrap">
-          <%= show_link sw %>
-          <%= edit_link sw %>
-          <%= delete_link sw %>
-        </td>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: "software_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th class="notvisible"><%= t('attributes.pattern') %></th>
+        <th><%= t('attributes.vendor') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th class="notvisible"><%= t('attributes.minimum_allowed_version') %></th>
+        <th class="notvisible"><%= t('attributes.maximum_allowed_version') %></th>
+        <th class="notvisible"><%= t('attributes.green') %></th>
+        <th class="notvisible"><%= t('attributes.yellow') %></th>
+        <th class="notvisible"><%= t('attributes.red') %></th>
+        <th><%= t('attributes.status') %></th>
+        <th class="nosort"><%= t('boskop.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="search"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% software.each do |sw| %>
+        <%= content_tag_for(:tr, sw, class: "#{sw.status(:color)}") do %>
+          <td><%= sw.name %></td>
+          <td><%= sw.pattern %></td>
+          <td><%= sw.vendor %></td>
+          <td><%= sw.description %></td>
+          <td><%= sw.minimum_allowed_version %></td>
+          <td><%= sw.maximum_allowed_version %></td>
+          <td><%= sw.green %></td>
+          <td><%= sw.yellow %></td>
+          <td><%= sw.red %></td>
+          <td><%= sw.status %></td>
+          <td class="text-nowrap">
+            <%= show_link sw %>
+            <%= edit_link sw %>
+            <%= delete_link sw %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>

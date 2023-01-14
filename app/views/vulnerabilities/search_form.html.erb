@@ -1,174 +1,178 @@
-<div class="container">
-  <%= form_tag(search_vulnerabilities_path, role: "form",
-        class: 'form-horizontal card') do |f| %>
+<%= turbo_frame_tag "search_vulnerabilities" do %>
+  <div class="container">
+    <%= form_tag(search_vulnerabilities_path, role: "form",
+          class: 'form-horizontal card') do |f| %>
 
-    <div class="card-header">
-      <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_vulnerabilities') %></legend>
-    </div>
-
-    <div class="card-body">
-      <div class="form-group row">
-	<label for="name" class="col-sm-2 col-form-label"><%=t('attributes.name')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="name" id="name" placeholder="">
-	</div>
+      <div class="card-header">
+        <legend class="offset-sm-2 col-sm-10"><%= t('boskop.search_vulnerabilities') %></legend>
       </div>
 
-      <div class="form-group row">
-	<label for="nvt" class="col-sm-2 col-form-label"><%=t('attributes.nvt')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="nvt" id="nvt" placeholder="">
-	</div>
-      </div>
-
-      <div class="form-group row">
-        <label for="threats" class="col-sm-2 col-form-label">
-          <%=t('attributes.threats')%>
-        </label>
-	<div class="col-sm">
-          <%= select_tag "threats",
-                options_for_select(VulnerabilityDetail::THREATS),
-                multiple: true,
-                include_blank: true, 
-                class: 'form-control select2' 
-           %>
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
-	<div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&geq;</div>
+      <div class="card-body">
+        <div class="row mb-3">
+          <label for="name" class="col-sm-2 col-form-label"><%=t('attributes.name')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="name" id="name" placeholder="">
           </div>
-	  <input type="number" class="form-control" 
-                 name="severity" id="severity" 
-                 placeholder="0..10"
-          >
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="ip" class="col-sm-2 col-form-label"><%=t('attributes.ip')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" id="ip" name="ip" placeholder="IP address or CIDR network">
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="hostname" class="col-sm-2 col-form-label"><%=t('attributes.hostname')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="hostname" id="hostname" placeholder="">
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="host_category" class="col-sm-2 col-form-label"><%=t('attributes.host_category')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="host_category" id="host_category" placeholder="">
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="operating_system" class="col-sm-2 col-form-label"><%=t('attributes.operating_system')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="operating_system" id="operating_system" placeholder="">
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="plugin_output" class="col-sm-2 col-form-label"><%=t('attributes.plugin_output')%></label>
-	<div class="col-sm-10">
-	  <input class="form-control" name="plugin_output" id="plugin_output" placeholder="">
-	</div>
-      </div>
-
-     <div class="form-group form-row">
-        <label for="lastseen" class="col-sm-2 col-form-label"><%=t('attributes.lastseen')%></label>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&geq;</div>
-          </div>
-          <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
         </div>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&leq;</div>
+
+        <div class="row mb-3">
+          <label for="nvt" class="col-sm-2 col-form-label"><%=t('attributes.nvt')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="nvt" id="nvt" placeholder="">
           </div>
-          <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
+        </div>
+
+        <div class="row mb-3">
+          <label for="threats" class="col-sm-2 col-form-label">
+            <%=t('attributes.threats')%>
+          </label>
+          <div class="col-sm">
+            <%= select_tag "threats",
+                  options_for_select(VulnerabilityDetail::THREATS),
+                  multiple: true,
+                  include_blank: true,
+                  class: 'form-control',
+                  "data-controller": "select"
+             %>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="severity" class="col-sm-2 col-form-label"><%=t('attributes.severity')%></label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <div class="input-group-text">&geq;</div>
+              <input type="number" class="form-control"
+                     name="severity" id="severity"
+                     placeholder="0..10"
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="ip" class="col-sm-2 col-form-label"><%=t('attributes.ip')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" id="ip" name="ip" placeholder="IP address or CIDR network">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="hostname" class="col-sm-2 col-form-label"><%=t('attributes.hostname')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="hostname" id="hostname" placeholder="">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="host_category" class="col-sm-2 col-form-label"><%=t('attributes.host_category')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="host_category" id="host_category" placeholder="">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="operating_system" class="col-sm-2 col-form-label"><%=t('attributes.operating_system')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="operating_system" id="operating_system" placeholder="">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="plugin_output" class="col-sm-2 col-form-label"><%=t('attributes.plugin_output')%></label>
+          <div class="col-sm-10">
+            <input class="form-control" name="plugin_output" id="plugin_output" placeholder="">
+          </div>
+        </div>
+
+       <div class="row mb-3">
+          <label for="lastseen" class="col-sm-2 col-form-label"><%=t('attributes.lastseen')%></label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <div class="input-group-text">&geq;</div>
+              <input class="form-control datepicker" name="newer" id="newer" autocomplete="off" placeholder="<%= t('attributes.newer')%>">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <div class="input-group-text">&leq;</div>
+              <input class="form-control datepicker" name="older" id="older" autocomplete="off" placeholder="<%= t('attributes.older')%>">
+            </div>
+          </div>
+        </div>
+
+       <div class="row mb-3">
+          <label for="created_at" class="col-sm-2 col-form-label"><%=t('attributes.created_at')%></label>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <div class="input-group-text">&geq;</div>
+              <input class="form-control datepicker" name="created_newer" id="created_newer" autocomplete="off" placeholder="<%= t('attributes.created_newer')%>">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="input-group">
+              <div class="input-group-text">&leq;</div>
+              <input class="form-control datepicker" name="created_older" id="created_older" autocomplete="off" placeholder="<%= t('attributes.created_older')%>">
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="lid" class="col-sm-2 col-form-label"><%=t('attributes.lid')%></label>
+          <div class="col-sm-10">
+            <%= select_tag "lid",
+                  options_from_collection_for_select(Location.current, 'lid', 'to_str'),
+                  multiple: true,
+                  include_blank: true,
+                  class: 'form-control',
+                  "data-controller": "select"
+             %>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
+          <div class="col-sm-3">
+            <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
+          </div>
+        </div>
+
+    <hr />
+
+        <div class="row mb-3">
+          <div class="col-sm-2">
+            Shortcuts
+          </div>
+          <div class="col-sm-10">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="current" name="current" checked>
+              <label class="form-check-label" for="current">
+                <%=t('attributes.current')%>
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="critical" name="critical" checked>
+              <label class="form-check-label" for="critical">
+                <%=t('attributes.critical')%>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+
+        <div class="row mb-3">
+          <div class="col-sm-10 offset-sm-2">
+            <%= submit_tag(t('boskop.search_vulnerabilities'), class: 'btn btn-primary') %>
+            <% if can? :csv, Vulnerability %>
+              <%= submit_tag(t('boskop.csv_export'),
+                    name: 'commit', class: 'btn btn-primary',
+                    formaction: search_vulnerabilities_path(format: :csv)) %>
+            <% end %>
+            <%= cancel_button %>
+          </div>
         </div>
       </div>
-
-     <div class="form-group form-row">
-        <label for="created_at" class="col-sm-2 col-form-label"><%=t('attributes.created_at')%></label>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&geq;</div>
-          </div>
-          <input class="form-control datepicker" name="created_newer" id="created_newer" autocomplete="off" placeholder="<%= t('attributes.created_newer')%>">
-        </div>
-        <div class="input-group col-sm-3">
-          <div class="input-group-prepend">
-            <div class="input-group-text">&leq;</div>
-          </div>
-          <input class="form-control datepicker" name="created_older" id="created_older" autocomplete="off" placeholder="<%= t('attributes.created_older')%>">
-        </div>
-      </div>
-
-      <div class="form-group row">
-	<label for="lid" class="col-sm-2 col-form-label"><%=t('attributes.lid')%></label>
-	<div class="col-sm-10">
-          <%= select_tag "lid",
-                options_from_collection_for_select(Location.current, 'lid', 'to_str'),
-                multiple: true,
-                include_blank: true, 
-                class: 'form-control select2' 
-           %>
-	</div>
-      </div>
-
-      <div class="form-group row">
-	<label for="limit" class="col-sm-2 col-form-label"><%=t('attributes.limit')%></label>
-	<div class="col-sm-3">
-	  <input class="form-control" name="limit" id="limit" value="1000" placeholder="">
-	</div>
-      </div>
-
-  <hr />
-
-      <div class="form-group row">
-        <div class="col-sm-2">
-          Shortcuts
-        </div>
-	<div class="col-sm-10">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="current" name="current" checked>
-            <label class="form-check-label" for="current">
-              <%=t('attributes.current')%>
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="critical" name="critical" checked>
-            <label class="form-check-label" for="critical">
-              <%=t('attributes.critical')%>
-            </label>
-	  </div>
-	</div>
-      </div>
-
-      <hr />
-
-      <div class="form-group row">
-	<div class="col-sm-10 offset-sm-2">
-	  <%= submit_tag(t('boskop.search_vulnerabilities'), class: 'btn btn-primary') %>
-          <% if can? :csv, Vulnerability %>
-            <%= submit_tag(t('boskop.csv_export'),
-                  name: 'commit', class: 'btn btn-primary',
-                  formaction: search_vulnerabilities_path(format: :csv)) %>
-          <% end %>
-	  <%= cancel_button %>
-	</div>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

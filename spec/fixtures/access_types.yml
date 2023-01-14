@@ -1,0 +1,11 @@
+mpls:
+  name: MPLS
+
+adsl:
+  name: ADSL
+
+vdsl:
+  name: VDSL
+
+ethernet:
+  name: Ethernet

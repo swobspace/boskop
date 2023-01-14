@@ -87,7 +87,7 @@ RSpec.describe ContactsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {contact: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -131,7 +131,7 @@ RSpec.describe ContactsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         contact = Contact.create! valid_attributes
         put :update, params: {id: contact.to_param, contact: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end

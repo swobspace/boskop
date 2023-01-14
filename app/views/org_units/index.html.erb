@@ -1,48 +1,50 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
 <h1><%= t('controller.org_units') %></h1>
 
-<table id="dataTable" class="table table-bordered" role="datatable">
-<thead>
-  <tr>
-    <th><%= t('attributes.name') %></th>
-    <th><%= t('attributes.description') %></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-      <%= mklasse.to_s %>
-    <% end %>
-    <th><%= t('attributes.actions') %></th>
-  </tr>
-</thead>
-<tfoot>
-  <tr>
-    <th></th>
-    <th></th>
-    <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-    <% end %>
-    <th></th>
-  </tr>
-</tfoot>
+<div data-controller="datatables">
+  <table id="org_units" class="table table-bordered">
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.description') %></th>
+        <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+          <%= mklasse.to_s %>
+        <% end %>
+        <th class="nosort"><%= t('attributes.actions') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <% end %>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
 
-<tbody>
+    <tbody>
 
-<% @org_units.each do |org_unit| %>
-  <%= content_tag_for(:tr, org_unit) do %>
-    <td><%= org_unit.name %></td>
-    <td><%= org_unit.description %></td>
-    <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
-      <%= get_orgunit_merkmal(org_unit, mklasse) %>
+    <% @org_units.each do |org_unit| %>
+      <%= content_tag_for(:tr, org_unit) do %>
+        <td><%= org_unit.name %></td>
+        <td><%= org_unit.description %></td>
+        <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+          <%= get_orgunit_merkmal(org_unit, mklasse) %>
+        <% end %>
+        <td class="nowrap">
+          <%= show_link org_unit %>
+          <%= edit_link org_unit %>
+          <%= delete_link org_unit %>
+        </td>
+      <% end %>
     <% end %>
-    <td class="nowrap">
-      <%= show_link org_unit %>
-      <%= edit_link org_unit %>
-      <%= delete_link org_unit %>
-    </td>
-  <% end %>
-<% end %>
-</tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
 <br />
 

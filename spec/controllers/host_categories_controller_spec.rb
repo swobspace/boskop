@@ -90,7 +90,7 @@ RSpec.describe HostCategoriesController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {host_category: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -119,7 +119,7 @@ RSpec.describe HostCategoriesController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         host_category = HostCategory.create! valid_attributes
         put :update, params: {id: host_category.to_param, host_category: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end

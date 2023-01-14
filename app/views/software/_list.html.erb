@@ -1,65 +1,67 @@
-<%= content_tag :table, role: :datatable,
-      id: "software_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        order: [[0, 'asc']].to_json
-      } do %>
-  <thead>
-    <tr>
-      <th><%= t('attributes.name') %></th>
-      <th class="notvisible"><%= t('attributes.pattern') %></th>
-      <th><%= t('attributes.vendor') %></th>
-      <th><%= t('attributes.description') %></th>
-      <th class="notvisible"><%= t('attributes.minimum_allowed_version') %></th>
-      <th class="notvisible"><%= t('attributes.maximum_allowed_version') %></th>
-      <th class="notvisible"><%= t('attributes.green') %></th>
-      <th class="notvisible"><%= t('attributes.yellow') %></th>
-      <th class="notvisible"><%= t('attributes.red') %></th>
-      <th><%= t('attributes.status') %></th>
-      <th><%= t('attributes.software_category') %></th>
-      <th><%= t('attributes.software_group') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% host_software.each do |software| %>
-      <%= content_tag_for(:tr, software, class: "#{software.status(:color)}") do %>
-        <td><%= software.name %></td>
-        <td><%= software.pattern %></td>
-        <td><%= software.vendor %></td>
-        <td><%= software.description %></td>
-        <td><%= software.minimum_allowed_version %></td>
-        <td><%= software.maximum_allowed_version %></td>
-        <td><%= software.green %></td>
-        <td><%= software.yellow %></td>
-        <td><%= software.red %></td>
-        <td><%= software.status %></td>
-        <td><%= software_category_link(software.software_category) %></td>
-        <td><%= software.software_category&.software_group %></td>
-        <td class="text-nowrap">
-          <%= show_link software %>
-        </td>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: "software_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th class="notvisible"><%= t('attributes.pattern') %></th>
+        <th><%= t('attributes.vendor') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th class="notvisible"><%= t('attributes.minimum_allowed_version') %></th>
+        <th class="notvisible"><%= t('attributes.maximum_allowed_version') %></th>
+        <th class="notvisible"><%= t('attributes.green') %></th>
+        <th class="notvisible"><%= t('attributes.yellow') %></th>
+        <th class="notvisible"><%= t('attributes.red') %></th>
+        <th><%= t('attributes.status') %></th>
+        <th><%= t('attributes.software_category') %></th>
+        <th><%= t('attributes.software_group') %></th>
+        <th class="nosort"><%= t('boskop.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% host_software.each do |software| %>
+        <%= content_tag_for(:tr, software, class: "#{software.status(:color)}") do %>
+          <td><%= software.name %></td>
+          <td><%= software.pattern %></td>
+          <td><%= software.vendor %></td>
+          <td><%= software.description %></td>
+          <td><%= software.minimum_allowed_version %></td>
+          <td><%= software.maximum_allowed_version %></td>
+          <td><%= software.green %></td>
+          <td><%= software.yellow %></td>
+          <td><%= software.red %></td>
+          <td><%= software.status %></td>
+          <td><%= software_category_link(software.software_category) %></td>
+          <td><%= software.software_category&.software_group %></td>
+          <td class="text-nowrap">
+            <%= show_link software %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>
 
 <br />
 

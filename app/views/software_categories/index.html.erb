@@ -1,49 +1,51 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
 <h1><%= t('controller.software_categories') %></h1>
 
-<%= content_tag :table, role: :datatable,
-      id: "software_categories_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        order: [[0, 'asc']].to_json
-      } do %>
-  <thead>
-    <tr>
-      <th><%= t('attributes.name') %></th>
-      <th><%= t('attributes.description') %></th>
-      <th><%= t('attributes.main_business_process') %></th>
-      <th><%= t('attributes.software_group') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-    <% @software_categories.each do |software_category| %>
-      <%= content_tag_for(:tr, software_category) do %>
-        <td><%= software_category.name %></td>
-        <td><%= software_category.description %></td>
-        <td><%= software_category.main_business_process %></td>
-        <td><%= software_category.software_group %></td>
-        <td class="text-nowrap">
-          <%= show_link software_category %>
-          <%= edit_link software_category %>
-          <%= delete_link software_category %>
-        </td>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: "software_categories_table",
+        class: "table table-bordered table-responsive-xl",
+        data: {
+          order: [[0, 'asc']].to_json
+        } do %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th><%= t('attributes.main_business_process') %></th>
+        <th><%= t('attributes.software_group') %></th>
+        <th class="nosort"><%= t('boskop.action') %></th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <% @software_categories.each do |software_category| %>
+        <%= content_tag_for(:tr, software_category) do %>
+          <td><%= software_category.name %></td>
+          <td><%= software_category.description %></td>
+          <td><%= software_category.main_business_process %></td>
+          <td><%= software_category.software_group %></td>
+          <td class="text-nowrap">
+            <%= show_link software_category %>
+            <%= edit_link software_category %>
+            <%= delete_link software_category %>
+          </td>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-<% end %>
+    </tbody>
+  <% end %>
+</div>
 
 <br />
 

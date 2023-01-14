@@ -1,34 +1,46 @@
-<%= content_tag :table, role: :xdatatable,
-      id: 'network_interfaces_table',
-      class: "table table-bordered",
-      data: {
-        order: [[0, 'desc']].to_json
-      } do %>
-<thead>
-  <tr>
-    <th><%= t('attributes.lastseen') %></th>
-    <th><%= t('attributes.ip') %></th>
-    <th><%= t('attributes.mac') %></th>
-    <th><%= t('attributes.oui_vendor') %></th>
-    <th><%= t('attributes.if_description') %></th>
-    <th></th>
-  </tr>
-</thead>
-<tbody>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: 'network_interfaces_table',
+        class: "table table-bordered",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
+  <thead>
+    <tr>
+      <th><%= t('attributes.lastseen') %></th>
+      <th><%= t('attributes.ip') %></th>
+      <th><%= t('attributes.mac') %></th>
+      <th><%= t('attributes.oui_vendor') %></th>
+      <th><%= t('attributes.if_description') %></th>
+      <th class="nosort"></th>
+    </tr>
+  </thead>
+  <tfoot class="search">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="nosearch"></th>
+    </tr>
+  </tfoot>
+  <tbody>
 
-<% network_interfaces.each do |network_interface| %>
-  <%= content_tag_for(:tr, network_interface) do %>
-    <td><%= network_interface.lastseen %></td>
-    <td><%= network_interface.ip %></td>
-    <td><%= network_interface.mac %></td>
-    <td><%= network_interface.oui_vendor %></td>
-    <td><%= network_interface.if_description %></td>
-    <td class="nowrap">
-      <%= show_link [network_interface.host, network_interface] %>
-      <%= edit_link [network_interface.host, network_interface] %>
-      <%= delete_link [network_interface.host, network_interface] %>
-    </td>
+  <% network_interfaces.each do |network_interface| %>
+    <%= content_tag_for(:tr, network_interface) do %>
+      <td><%= network_interface.lastseen %></td>
+      <td><%= network_interface.ip %></td>
+      <td><%= network_interface.mac %></td>
+      <td><%= network_interface.oui_vendor %></td>
+      <td><%= network_interface.if_description %></td>
+      <td class="nowrap">
+        <%= show_link [network_interface.host, network_interface] %>
+        <%= edit_link [network_interface.host, network_interface] %>
+        <%= delete_link [network_interface.host, network_interface] %>
+      </td>
+    <% end %>
   <% end %>
-<% end %>
-</tbody>
-<% end %>
+  </tbody>
+  <% end %>
+</div>

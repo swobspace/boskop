@@ -1,51 +1,57 @@
 <% content_for :head do %>
-  <meta name="turbolinks-cache-control" content="no-cache">
+  <meta name="turbos-cache-control" content="no-cache">
 <% end %>
 
 <h1><%= t('controller.software_raw_data') %></h1>
 
 <%= render partial: 'shared/filter' %>
 
-<%= content_tag :table, role: :remotetable,
-      id: "software_raw_data_table",
-      class: "table table-bordered table-responsive-xl",
-      data: {
-        url: software_raw_data_path(
-               (@filter_params || {}).merge(format: :json)
-             ),
-        order: [[0, 'asc']].to_json
-      } do %>
-  <thead>
-    <tr>
-      <th><%= t('attributes.name') %></th>
-      <th><%= t('attributes.version') %></th>
-      <th><%= t('attributes.vendor') %></th>
-      <th><%= t('attributes.count') %></th>
-      <th><%= t('attributes.operating_system') %></th>
-      <th><%= t('attributes.lastseen') %></th>
-      <th><%= t('attributes.source') %></th>
-      <th><%= t('attributes.software') %></th>
-      <th class="nosort"><%= t('boskop.action') %></th>
-    </tr>
-  </thead>
-  <tfoot>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </tfoot>
-  <tbody>
-  </tbody>
-<% end %>
+<div id="software_raw_data">
+  <div data-controller="datatables" 
+       data-datatables-url-value=<%=software_raw_data_path(
+                   (@filter_params || {}).merge(format: :json))%>>
+    <%= content_tag :table,
+          id: "software_raw_data_table",
+          class: "table table-bordered table-responsive-xl",
+          data: {
+            url: software_raw_data_path(
+                   (@filter_params || {}).merge(format: :json)
+                 ),
+            order: [[0, 'asc']].to_json
+          } do %>
+      <thead>
+        <tr>
+          <th><%= t('attributes.name') %></th>
+          <th><%= t('attributes.version') %></th>
+          <th><%= t('attributes.vendor') %></th>
+          <th><%= t('attributes.count') %></th>
+          <th><%= t('attributes.operating_system') %></th>
+          <th><%= t('attributes.lastseen') %></th>
+          <th><%= t('attributes.source') %></th>
+          <th><%= t('attributes.software') %></th>
+          <th class="nosort"><%= t('boskop.action') %></th>
+        </tr>
+      </thead>
+      <tfoot class="search">
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th class="nosearch"></th>
+        </tr>
+      </tfoot>
+      <tbody>
+      </tbody>
+    <% end %>
+  </div>
+</div>
 
-<br />
+    <br />
 
-<%= back_link %>
-<%= new_link SoftwareRawDatum %>
+    <%= back_link %>
+    <%= new_link SoftwareRawDatum %>

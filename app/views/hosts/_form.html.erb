@@ -14,8 +14,7 @@
        %>
       <%= f.input :raw_os
        %>
-      <%= f.association :operating_system,
-            input_html: { class: 'select2' }
+      <%= f.association :operating_system
        %>
       <%= f.input :fqdn
        %>
@@ -23,7 +22,7 @@
        %>
       <%= f.input :workgroup
        %>
-      <%= f.input :lastseen, as: :string
+      <%= f.input :lastseen, as: :string, wrapper: :horizontal_date
        %>
       <%= f.input :serial
        %>
@@ -39,12 +38,9 @@
        %>
       <%= f.input :warranty_end, as: :string, wrapper: :horizontal_date
        %>
-      <%= f.association :host_category,
-            input_html: { class: 'select2' }
+      <%= f.association :host_category
        %>
-      <%= f.association :location,
-            label_method: :to_str,
-            input_html: { class: 'select2' }
+      <%= f.association :location, label_method: :to_str
        %>
       </div>
 

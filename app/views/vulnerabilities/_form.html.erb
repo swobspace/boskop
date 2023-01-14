@@ -7,11 +7,9 @@
     </div>  
     <div class="card-body">
 
-      <%= f.association :host,
-            input_html: { class: 'select2'}
+      <%= f.association :host
        %>
-      <%= f.association :vulnerability_detail,
-            input_html: { class: 'select2'}
+      <%= f.association :vulnerability_detail
        %>
       <%= f.input :plugin_output
        %>

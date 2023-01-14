@@ -84,7 +84,7 @@ RSpec.describe OperatingSystemsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
         post :create, params: {operating_system: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
@@ -113,7 +113,7 @@ RSpec.describe OperatingSystemsController, type: :controller do
       it "returns a success response (i.e. to display the 'edit' template)" do
         operating_system = OperatingSystem.create! valid_attributes
         put :update, params: {id: operating_system.to_param, operating_system: invalid_attributes}, session: valid_session
-        expect(response).to be_successful
+        expect(response.status).to eq(422)
       end
     end
   end
