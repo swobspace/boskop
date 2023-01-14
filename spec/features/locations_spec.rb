@@ -38,9 +38,9 @@ RSpec.describe "Locations", :type => :feature do
     end
   end
 
-  describe "Show location" do
+  describe "Show and delete location" do
     let!(:location) { FactoryBot.create(:location, name: "Stromboli", lid: "STR") }
-    it "visits locations#new" do
+    it "visits locations#show" do
       login_admin
       visit location_path(locations(:nimmerland))
       expect(page).to have_content("Standort: Nimmerland")

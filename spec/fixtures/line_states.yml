@@ -1,0 +1,19 @@
+active:
+  name: active
+  description: productive line
+  active: true
+
+disabled:
+  name: disabled
+  description: productive line
+  active: false
+
+canceled:
+  name: terminated
+  description: end of contract
+  active: false
+
+planned:
+  name: planned
+  description: not ready for production
+  active: false
