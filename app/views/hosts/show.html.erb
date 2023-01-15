@@ -1,3 +1,5 @@
+<%= render 'shared/turbo-cache-control' %>
+
 <div class="card">
   <div class="card-header">
     <h2>
@@ -8,7 +10,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-sm-9">
-	<table class="table table-bordered table-hover">
+	<table id="host_table" class="table table-bordered table-hover">
 	  <caption> <%= t('activerecord.models.host') %> </caption>
 	  <tr>
 	    <th class="w-25"><%= t('attributes.description')%>:</th>
@@ -85,7 +87,7 @@
 	</table>
       </div>
       <div class="col-sm-3">
-	<table class="table table-bordered table-hover">
+	<table id="threat_table" class="table table-bordered table-hover">
 	  <caption> <%= t('controller.vulnerabilities') %> </caption>
 	  <tr>
 	    <th><%= t('boskop.threats.critical')%>:</th>
