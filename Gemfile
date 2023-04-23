@@ -31,7 +31,6 @@ group :development do
   gem "capistrano", '~> 3.17'
   gem "capistrano-rails", '~> 1.1'
   gem 'capistrano-passenger'
-  gem 'capistrano3-delayed-job', '~> 1.0'
   gem 'capistrano-yarn'
   gem "better_errors"
   gem "binding_of_caller"
@@ -56,7 +55,6 @@ end
 
 gem 'record_tag_helper', '~> 1.0'
 gem 'rails-controller-testing'
-gem 'delayed_job_active_record'
 gem 'daemons'
 gem "ruby-nmap", '>= 1.0.1'
 gem 'immutable-struct'
@@ -68,8 +66,8 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
-# gem 'responders'
-gem 'responders', git: 'https://github.com/heartcombo/responders.git', branch: 'main'
+gem 'responders'
+gem 'responders'
 
 # for deployment
 gem "ed25519"
@@ -79,3 +77,5 @@ gem "mail"
 
 # Use Redis for Action Cable
 gem 'redis'
+
+gem "good_job", "~> 3.15"
