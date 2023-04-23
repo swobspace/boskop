@@ -116,4 +116,8 @@ Rails.application.routes.draw do
 
   mount Wobauth::Engine, at: '/auth'
 
+  authenticate :user, ->(user) { user.is_admin? } do
+    mount GoodJob::Engine => "good_job"
+  end
+
 end

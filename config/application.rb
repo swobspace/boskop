@@ -18,5 +18,12 @@ module Boskop
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    unless Rails.env.test?
+      config.active_job.queue_adapter = :good_job
+      config.active_job.queue_name_prefix = "boskop_#{Rails.env}"
+    end
+    config.responders.error_status = :unprocessable_entity
+    config.responders.redirect_status = :see_other
   end
 end
