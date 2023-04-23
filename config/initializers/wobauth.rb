@@ -13,4 +13,6 @@ Wobauth.setup do |config|
   # config.authorized_for_types = [ "MyClass", ...]
   #
   config.ldap_config = File.join( Rails.root, 'config', 'boskop.yml')
+  #
+  config.custom_stream_actions = true
 end

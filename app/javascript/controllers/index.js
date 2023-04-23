@@ -16,3 +16,5 @@ application.register("pivottable", PivottableController)
 import SelectController from "./ts/select_controller"
 application.register("select", SelectController)
 
+import PolymorphicSelectController from "@swobspace/stimulus-polymorphic-select"
+application.register("polymorphic-select", PolymorphicSelectController)
