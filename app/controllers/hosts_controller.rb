@@ -34,6 +34,8 @@ class HostsController < ApplicationController
     query = HostQuery.new(@hosts, search_params)
     @filter_info = query.search_options
     @hosts = query.all
+    add_breadcrumb(t('boskop.search_hosts'),
+                   search_hosts_path(search_params))
     respond_with(@hosts) do |format|
       format.csv {
         authorize! :csv, Host
@@ -106,7 +108,7 @@ class HostsController < ApplicationController
 
   def eol_summary
     eol_ids = OperatingSystem.where("eol < ?", Date.today).pluck(:id)
-    hosts = Host.where("lastseen > ? AND operating_system_id IN (?)", 
+    hosts = Host.where("lastseen > ? AND operating_system_id IN (?)",
                         1.month.before(Date.today), eol_ids)
     @hosts = hosts.
       joins(:operating_system, :location).
@@ -145,12 +147,12 @@ class HostsController < ApplicationController
         # see class HostQuery for possible options
         searchparms = params.permit(*submit_parms,
           :name, :description, :ip, :operating_system, :cpe, :raw_os, :serial,
-          :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current, 
+          :fqdn, :domain_dns, :workgroup, :lastseen, :newer, :older, :current,
           :uuid, :product, :warranty_start_from, :warranty_start_until, :created_at,
           :mac, :vendor, :host_category, :lid, :eol, :vuln_risk, :limit,
           lid: [],
         ).to_hash
-      {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
+      {"limit" => 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
     def submit_parms
