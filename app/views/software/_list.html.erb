@@ -1,7 +1,7 @@
 <div data-controller="datatables">
   <%= content_tag :table,
         id: "software_table",
-        class: "table table-bordered table-responsive-xl",
+        class: "table table-sm table-responsive-xl",
         data: {
           order: [[0, 'asc']].to_json
         } do %>
@@ -55,7 +55,8 @@
           <td><%= software_category_link(software.software_category) %></td>
           <td><%= software.software_category&.software_group %></td>
           <td class="text-nowrap">
-            <%= show_link software %>
+            <%= show_link software,
+                  class: 'btn btn-outline-secondary btn-sm' %>
           </td>
         <% end %>
       <% end %>

@@ -1,5 +1,5 @@
 <div data-controller="datatables">
-  <table id="networksTable" class="table table-bordered">
+  <table id="networksTable" class="table table-sm">
   <thead>
     <tr>
       <th><%= t('attributes.netzwerk') %></th>
@@ -31,9 +31,9 @@
       <% end %>
 
       <td class="nowrap">
-        <%= show_link network %>
-        <%= edit_link network %>
-        <%= delete_link network %>
+        <%= show_link(network, class: "btn btn-outline-secondary btn-sm") %>
+        <%= edit_link(network, class: "btn btn-outline-secondary btn-sm") %>
+        <%= delete_link(network, class: "btn btn-danger btn-sm") %>
       </td>
     <% end %>
   <% end %>
