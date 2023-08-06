@@ -11,9 +11,11 @@ class NetworksController < ApplicationController
 
   def search
     @networks = @networks.left_outer_joins(:merkmale, :location).distinct
-    query = NetworkQuery.new(@networks, search_params) 
+    query = NetworkQuery.new(@networks, search_params)
     @filter_info = query.search_options
     @networks = query.all
+    add_breadcrumb(t('boskop.search_networks'),
+                   search_networks_path(search_params))
     @merkmalklassen = Merkmalklasse.includes(:merkmale).visibles(:network, 'index')
   end
 
@@ -89,7 +91,7 @@ class NetworksController < ApplicationController
                                   *merkmal_parms,
                                   :netzwerk, :ort, :limit, :lid, :description,
                                   :is_subset, :is_superset).to_hash
-      {limit: 100}
+      {"limit" => 100}
         .merge(searchparms)
         .reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end

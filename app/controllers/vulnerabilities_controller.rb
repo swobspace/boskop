@@ -23,6 +23,8 @@ class VulnerabilitiesController < ApplicationController
     query = VulnerabilityQuery.new(@vulnerabilities, search_params)
     @filter_info = query.search_options
     @vulnerabilities = query.all
+    add_breadcrumb(t('boskop.search_vulnerabilities'),
+                   search_vulnerabilities_path(search_params))
     respond_with(@vulnerabilities) do |format|
       format.csv {
         authorize! :csv, Vulnerability
@@ -98,7 +100,7 @@ class VulnerabilitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def vulnerability_params
-      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id, 
+      params.require(:vulnerability).permit(:host_id, :vulnerability_detail_id,
                                             :plugin_output, :lastseen)
     end
 
@@ -110,14 +112,14 @@ class VulnerabilitiesController < ApplicationController
         # see VulnerabilityQuery for possible options
         searchparms = params.permit(*submit_parms,
           :name, :severity, :ip, :operating_system, :plugin_output, :nvt,
-          :hostname, :host_category, :critical, :current, 
+          :hostname, :host_category, :critical, :current,
           :created_at, :created_newer, :created_older,
           :lastseen, :newer, :older, :current, :lid, :limit,
           :threat,
           threats: [],
           lid: [],
         ).to_hash
-      {limit: 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
+      {"limit" => 100}.merge(searchparms).reject{|k, v| (v.blank? || submit_parms.include?(k))}
     end
 
     def submit_parms
