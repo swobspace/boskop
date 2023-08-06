@@ -2,124 +2,122 @@
   <meta name="turbo-cache-control" content="no-cache">
 <% end %>
 
-<%= turbo_frame_tag "search_hosts" do %>
-  <h1><%= t('boskop.hosts_searchresult') %></h1>
+<h1><%= t('boskop.hosts_searchresult') %></h1>
 
-  <%= render partial: 'shared/filter' %>
+<%= render partial: 'shared/filter' %>
 
-  <div data-controller="datatables">
-    <%= content_tag :table,
-          id: 'hosts_table',
-          class: "table table-bordered",
-          data: {
-            order: [[0, 'desc']].to_json
-          } do %>
+<div data-controller="datatables">
+  <%= content_tag :table,
+        id: 'hosts_table',
+        class: "table table-bordered",
+        data: {
+          order: [[0, 'desc']].to_json
+        } do %>
 
-      <thead>
-        <tr>
-          <th><%= t('attributes.name') %></th>
-          <th><%= t('attributes.description') %></th>
-          <th><%= t('attributes.ip') %></th>
-          <th><%= t('attributes.operating_system') %></th>
-          <th class="notvisible"><%= t('attributes.cpe') %></th>
-          <th class="notvisible"><%= t('attributes.raw_os') %></th>
-          <th><%= t('attributes.fqdn') %></th>
-          <th class="notvisible"><%= t('attributes.domain_dns') %></th>
-          <th><%= t('attributes.workgroup') %></th>
-          <th><%= t('attributes.lastseen') %></th>
-          <th class="notvisible"><%= t('attributes.created_at') %></th>
-          <th><%= t('attributes.vuln_risk') %></th>
-          <th class="notvisible"><%= t('attributes.mac') %></th>
-          <th class="notvisible"><%= t('attributes.oui_vendor') %></th>
-          <th class="notvisible"><%= t('attributes.serial') %></th>
-          <th class="notvisible"><%= t('attributes.uuid') %></th>
-          <th class="notvisible"><%= t('attributes.vendor') %></th>
-          <th class="notvisible"><%= t('attributes.product') %></th>
-          <th class="notvisible"><%= t('attributes.warranty_sla') %></th>
-          <th class="notvisible"><%= t('attributes.warranty_start') %></th>
-          <th class="notvisible"><%= t('attributes.warranty_end') %></th>
-          <th><%= t('attributes.host_category') %></th>
-          <th><%= t('attributes.location') %></th>
-          <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-            <%= mklasse.to_s %>
-          <% end %>
-          <th class="nosort">Aktion</th>
-        </tr>
-      </thead>
-      <tfoot class="search">
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <th></th>
-          <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
-          <% end %>
-          <th class="nosearch"></th>
-        </tr>
-      </tfoot>
-      <tbody>
-    <% @hosts.each do |host| %>
-      <%= content_tag_for(:tr, host) do %>
-        <td><%= host.name %></td>
-        <td><%= host.description %></td>
-        <td><%= host.ip.to_s %></td>
-        <td><%= host.operating_system.to_s %></td>
-        <td><%= host.cpe %></td>
-        <td><%= host.raw_os %></td>
-        <td><%= host.fqdn %></td>
-        <td><%= host.domain_dns %></td>
-        <td><%= host.workgroup %></td>
-        <td><%= host.lastseen %></td>
-        <td><%= host.created_at.to_date.to_s %></td>
-        <td><%= host.vuln_risk %></td>
-        <td><%= host.mac %></td>
-        <td><%= host.oui_vendor %></td>
-        <td><%= host.serial %></td>
-        <td><%= host.uuid %></td>
-        <td><%= host.vendor %></td>
-        <td><%= host.product %></td>
-        <td><%= host.warranty_sla %></td>
-        <td><%= host.warranty_start %></td>
-        <td><%= host.warranty_end %></td>
-        <td><%= host.host_category.to_s %></td>
-        <td><%= host.location&.lid %></td>
-        <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
-          <%= get_merkmal(host, mklasse) %>
+    <thead>
+      <tr>
+        <th><%= t('attributes.name') %></th>
+        <th><%= t('attributes.description') %></th>
+        <th><%= t('attributes.ip') %></th>
+        <th><%= t('attributes.operating_system') %></th>
+        <th class="notvisible"><%= t('attributes.cpe') %></th>
+        <th class="notvisible"><%= t('attributes.raw_os') %></th>
+        <th><%= t('attributes.fqdn') %></th>
+        <th class="notvisible"><%= t('attributes.domain_dns') %></th>
+        <th><%= t('attributes.workgroup') %></th>
+        <th><%= t('attributes.lastseen') %></th>
+        <th class="notvisible"><%= t('attributes.created_at') %></th>
+        <th><%= t('attributes.vuln_risk') %></th>
+        <th class="notvisible"><%= t('attributes.mac') %></th>
+        <th class="notvisible"><%= t('attributes.oui_vendor') %></th>
+        <th class="notvisible"><%= t('attributes.serial') %></th>
+        <th class="notvisible"><%= t('attributes.uuid') %></th>
+        <th class="notvisible"><%= t('attributes.vendor') %></th>
+        <th class="notvisible"><%= t('attributes.product') %></th>
+        <th class="notvisible"><%= t('attributes.warranty_sla') %></th>
+        <th class="notvisible"><%= t('attributes.warranty_start') %></th>
+        <th class="notvisible"><%= t('attributes.warranty_end') %></th>
+        <th><%= t('attributes.host_category') %></th>
+        <th><%= t('attributes.location') %></th>
+        <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+          <%= mklasse.to_s %>
         <% end %>
-        <td class="nowrap">
-          <%= show_link host %>
-          <%= edit_link host %>
-          <%= delete_link host %>
-        </td>
+        <th class="nosort">Aktion</th>
+      </tr>
+    </thead>
+    <tfoot class="search">
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <%= content_tag_for(:th, @merkmalklassen) do |mklasse| %>
+        <% end %>
+        <th class="nosearch"></th>
+      </tr>
+    </tfoot>
+    <tbody>
+  <% @hosts.each do |host| %>
+    <%= content_tag_for(:tr, host) do %>
+      <td><%= host.name %></td>
+      <td><%= host.description %></td>
+      <td><%= host.ip.to_s %></td>
+      <td><%= host.operating_system.to_s %></td>
+      <td><%= host.cpe %></td>
+      <td><%= host.raw_os %></td>
+      <td><%= host.fqdn %></td>
+      <td><%= host.domain_dns %></td>
+      <td><%= host.workgroup %></td>
+      <td><%= host.lastseen %></td>
+      <td><%= host.created_at.to_date.to_s %></td>
+      <td><%= host.vuln_risk %></td>
+      <td><%= host.mac %></td>
+      <td><%= host.oui_vendor %></td>
+      <td><%= host.serial %></td>
+      <td><%= host.uuid %></td>
+      <td><%= host.vendor %></td>
+      <td><%= host.product %></td>
+      <td><%= host.warranty_sla %></td>
+      <td><%= host.warranty_start %></td>
+      <td><%= host.warranty_end %></td>
+      <td><%= host.host_category.to_s %></td>
+      <td><%= host.location&.lid %></td>
+      <%= content_tag_for(:td, @merkmalklassen) do |mklasse| %>
+        <%= get_merkmal(host, mklasse) %>
       <% end %>
+      <td class="nowrap">
+        <%= show_link host %>
+        <%= edit_link host %>
+        <%= delete_link host %>
+      </td>
     <% end %>
+  <% end %>
 
-      </tbody>
-    <% end %>
-  </div>
+    </tbody>
+  <% end %>
+</div>
 
-  <br />
+<br />
 
-  <%= back_link %>
-  <%= new_link Host %>
-  <%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>
-<% end %>
+<%= back_link %>
+<%= new_link Host %>
+<%= link_to t('actions.reset_table'), "#", id: "reset_table", class: "btn btn-secondary" %>
