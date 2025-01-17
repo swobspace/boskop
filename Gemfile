@@ -12,6 +12,7 @@ gem "sprockets-rails"
 gem 'coffee-rails'
 gem "turbo-rails"
 gem "jsbundling-rails"
+gem "cssbundling-rails"
 gem "stimulus-rails"
 
 gem 'simple_form'

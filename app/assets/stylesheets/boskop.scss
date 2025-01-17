@@ -24,11 +24,11 @@ $font-family-sans-serif:
 
 @import "custom-colors";
 @import "bootstrap/scss/bootstrap";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "v4-shims.min";
+// @import "font-awesome-sprockets";
+// @import "font-awesome";
+// @import "v4-shims.min";
 
-@import "wobapphelpers/breadcrumbs";
+// @import "wobapphelpers/breadcrumbs";
 @import "common";
 
 body {
@@ -93,18 +93,18 @@ tr, td {
   background-image: none;
 }
 
-.bs-merkmale:before {
-  content: "<%= I18n.t('controller.merkmale') %>" ;
-}
-.bs-addresses:before {
-  content: "<%= I18n.t('controller.addresses') %>" ;
-}
-.bs-optional:before {
-  content: "<%= I18n.t('actions.optional') %>" ;
-}
-.bs-mandantory:before {
-  content: "<%= I18n.t('actions.mandantory') %>" ;
-}
+// .bs-merkmale:before {
+//   content: "<%= I18n.t('controller.merkmale') %>" ;
+// }
+// .bs-addresses:before {
+//   content: "<%= I18n.t('controller.addresses') %>" ;
+// }
+// .bs-optional:before {
+//   content: "<%= I18n.t('actions.optional') %>" ;
+// }
+// .bs-mandantory:before {
+//   content: "<%= I18n.t('actions.mandantory') %>" ;
+// }
 
 dl {  
   dt {
