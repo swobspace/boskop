@@ -3,7 +3,7 @@
 <div data-controller="datatables">
   <%= content_tag :table,
         id: 'hosts_table',
-        class: "table table-bordered",
+        class: "table table-sm",
         data: {
           order: [[0, 'desc']].to_json
         } do %>
@@ -72,9 +72,9 @@
             <%= get_merkmal(host, mklasse) %>
           <% end %>
           <td class="nowrap">
-            <%= show_link host %>
-            <%= edit_link host %>
-            <%= delete_link host %>
+            <%= show_link(host, class: "btn btn-outline-secondary btn-sm") %>
+            <%= edit_link(host, class: "btn btn-outline-secondary btn-sm") %>
+            <%= delete_link(host, class: "btn btn-danger btn-sm") %>
           </td>
         <% end %>
       <% end %>

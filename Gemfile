@@ -17,7 +17,7 @@ gem "stimulus-rails"
 gem 'simple_form'
 gem 'wobaduser', '~> 1.0'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
-gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'master'
+gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: '7-0-stable'
 gem 'cancancan'
 gem 'acts_as_list'
 gem 'ancestry'
@@ -66,7 +66,6 @@ gem 'gelf'
 gem 'bootsnap', require: false
 gem 'exception_notification'
 gem 'rubyzip', '>= 1.3.0'
-gem 'responders'
 gem 'responders'
 
 # for deployment
