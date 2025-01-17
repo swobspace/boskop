@@ -1,5 +1,7 @@
 require_relative "boot"
 
+# workaround for rails 7.0
+require "logger"
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
