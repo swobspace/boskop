@@ -1,1 +1,21 @@
-../shared/config/database.yml
+# boskop config/database.yml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + ENV.fetch("GOOD_JOB_MAX_THREADS", 0).to_i %>
+
+development: &development
+  <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB') { "boskop_development" } %>
+
+test:
+  <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB') { "boskop_test" } %>
+
+production:
+  <<: *default
+  database: <%= ENV.fetch('POSTGRES_DB') { "boskop_production" } %>
