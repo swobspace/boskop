@@ -18,7 +18,9 @@ EOSTRING
 
   describe "with invalid logline" do
     subject { Boskop::Iptables::Entry.new(Hash.new) }
-    it { expect(subject).not_to be_valid }
+    it "raise error" do
+      expect { subject.valid? }.to raise_error(NoMethodError)
+    end
   end
 
   describe "with valid nmaphost and script data" do
