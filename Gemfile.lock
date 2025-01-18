@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/amatsuda/database_rewinder
+  revision: 13943a3084262c8d7b9f060877438a4f01342eae
+  branch: master
+  specs:
+    database_rewinder (1.0.1)
+
+GIT
   remote: https://github.com/swobspace/wobapphelpers
   revision: f818c595edabe82724c2a64c54a91323971b1e59
   branch: master
@@ -156,7 +163,6 @@ GEM
     cssbundling-rails (1.4.1)
       railties (>= 6.0.0)
     daemons (1.4.1)
-    database_rewinder (1.0.1)
     date (3.4.1)
     debug_inspector (1.2.0)
     devise (4.9.4)
@@ -508,7 +514,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   daemons
-  database_rewinder
+  database_rewinder!
   devise-remote-user
   dotenv
   ed25519
