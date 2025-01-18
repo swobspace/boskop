@@ -6,7 +6,7 @@ RSpec.shared_examples "a Reader" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
@@ -20,7 +20,7 @@ RSpec.shared_examples "a Reader" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.not_to be_able_to(:create, model.new) }
     it { is_expected.not_to be_able_to(:update, model.new) }
@@ -34,7 +34,7 @@ RSpec.shared_examples "a NetworkManager" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
@@ -61,7 +61,7 @@ RSpec.shared_examples "a NetworkManager" do
   # -- not writeable
   [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract, NetworkInterface,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.not_to be_able_to(:create, model.new) }
     it { is_expected.not_to be_able_to(:update, model.new) }
@@ -75,7 +75,7 @@ RSpec.shared_examples "a HostReader" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
@@ -95,7 +95,7 @@ RSpec.shared_examples "a HostReader" do
   # -- not writeable
   [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract, Host, HostCategory, NetworkInterface,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.not_to be_able_to(:create, model.new) }
     it { is_expected.not_to be_able_to(:update, model.new) }
@@ -109,7 +109,7 @@ RSpec.shared_examples "a HostManager" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
@@ -133,7 +133,7 @@ RSpec.shared_examples "a HostManager" do
   # -- not writeable
   [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract, HostCategory,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.not_to be_able_to(:create, model.new) }
     it { is_expected.not_to be_able_to(:update, model.new) }
@@ -149,7 +149,7 @@ RSpec.shared_examples "a HostAdmin" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Vulnerability, VulnerabilityDetail, Software, SoftwareRawDatum, SoftwareCategory,
+    Vulnerability, VulnerabilityDetail,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:read, model.new) }
   end
@@ -168,7 +168,6 @@ RSpec.shared_examples "a HostAdmin" do
 
   # -- not writeable
   [ Network, Line, Merkmal, Merkmalklasse, Address, LineState, AccessType, 
-    Software, SoftwareRawDatum, SoftwareCategory,
     Location, OrgUnit, FrameworkContract ].each do |model|
     it { is_expected.not_to be_able_to(:create, model.new) }
     it { is_expected.not_to be_able_to(:update, model.new) }
@@ -181,7 +180,6 @@ RSpec.shared_examples "an Admin" do
   [ Network, Line, Host, HostCategory, NetworkInterface,
     Merkmal, Merkmalklasse, Address, LineState, AccessType,
     Location, OrgUnit, FrameworkContract,
-    Software, SoftwareRawDatum, SoftwareCategory,
     Vulnerability, VulnerabilityDetail, NessusScan,
     OperatingSystem, OperatingSystemMapping ].each do |model|
     it { is_expected.to be_able_to(:manage, model.new) }
@@ -213,7 +211,6 @@ RSpec.describe "User", :type => :model do
     [ Network, Merkmal, Merkmalklasse, Address, LineState, AccessType,
       FrameworkContract, Line, Host, HostCategory,
       Vulnerability, VulnerabilityDetail,
-      Software, SoftwareRawDatum, SoftwareCategory,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }
@@ -244,7 +241,6 @@ RSpec.describe "User", :type => :model do
     [ Merkmal, Merkmalklasse, Address, LineState, AccessType,
       FrameworkContract, Line, Host, HostCategory,
       Vulnerability, VulnerabilityDetail,
-      Software, SoftwareRawDatum, SoftwareCategory,
       OperatingSystem, OperatingSystemMapping ].each do |model|
       it { is_expected.not_to be_able_to(:read, model.new) }
       it { is_expected.not_to be_able_to(:create, model.new) }

@@ -52,7 +52,6 @@ RSpec.describe "Hosts", type: :feature do
       expect(page).to have_content(Date.current.to_s)
       expect(page).to have_content("Netzwerk-Interfaces")
       expect(page).to have_content("Schwachstellen (Kritisch)")
-      expect(page).to have_content("Software")
     end
 
     it "delete an existing host", js: true do
