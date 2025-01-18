@@ -42,7 +42,7 @@ RSpec.describe Boskop::OpenVAS::XML do
     it { expect(subject.respond_to? :error_message).to be_truthy}
     it { expect(subject).to be_a_kind_of Boskop::OpenVAS::XML }
     it { expect(subject).to be_valid }
-    it { expect(subject.starttime.to_s).to match(/\A2017-09-26 17:43:04/) }
+    it { expect(subject.starttime.localtime.to_s).to match(/\A2017-09-26 17:43:04/) }
     it { expect(subject.all? {|o| o.kind_of? Boskop::OpenVAS::Result}).to be_truthy }
     it { expect(subject.omp_version).to eq("7.0")  }
     it { expect(subject.report_format).to eq("Anonymous XML")  }
