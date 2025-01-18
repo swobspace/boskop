@@ -1,0 +1,33 @@
+= Cleanup old data
+
+== Cleanup database
+
+----
+bin/rails console -e production
+----
+
+.Hosts
+[source,ruby]
+----
+Host.where("lastseen < ?", 4.month.before(Time.current)).current
+Host.where("lastseen < ?", 4.month.before(Time.current)).destroy_all
+----
+
+.Vulnerabilities
+[source,ruby]
+----
+Vulnerability.where("lastseen < ?", 3.month.before(Time.current)).count
+Vulnerability.where("lastseen < ?", 3.month.before(Time.current)).destroy_all
+----
+
+
+== Cleanup Filesystem
+
+.Remove imported nessus files
+[source,sh]
+----
+cd releases
+rm -f */tmp/*.nessus
+----
+
+

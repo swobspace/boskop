@@ -12,8 +12,8 @@ class Merkmalklasse < ApplicationRecord
   OBJECTS = ['OrgUnit', 'Location', 'Network', 'Host']
   VISIBLES = ['index']
 
-  serialize :visible, Array
-  serialize :possible_values, Array
+  serialize :visible, type: Array, coder: YAML
+  serialize :possible_values, type: Array, coder: YAML
 
   # -- validations and callbacks
   after_commit :flush_cache
