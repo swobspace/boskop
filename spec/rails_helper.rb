@@ -82,9 +82,9 @@ RSpec.configure do |config|
     DatabaseRewinder.clean
   end
 
-  config.after(:suite) do
-    ActiveStorage::Blob.unattached.each(&:purge)
-  end
+  # config.after(:suite) do
+  #   ActiveStorage::Blob.unattached.each(&:purge)
+  # end
 
 end
 
