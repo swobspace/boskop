@@ -10,7 +10,7 @@ class Merkmalklasse < ApplicationRecord
   # -- configuration
   FORMATE = ['string', 'date', 'number', 'telephone', 'dropdown', 'linkindex' ]
   OBJECTS = ['OrgUnit', 'Location', 'Network', 'Host']
-  VISIBLES = ['index']
+  VISIBLES = ['', 'index']
 
   serialize :visible, type: Array, coder: YAML
   serialize :possible_values, type: Array, coder: YAML
@@ -23,7 +23,7 @@ class Merkmalklasse < ApplicationRecord
   validates :position, presence: true
   validates :format, presence: true, inclusion: { in: FORMATE }
   validates :for_object, presence: true, inclusion: { in: OBJECTS }
-  validates :visible, presence: true # , inclusion: { in: VISIBLES }
+  validates :visible, presence: true , inclusion: { in: VISIBLES }
   validates :tag, presence: true, uniqueness: { scope: :for_object },
               format: { 
                 with: /\A[a-z_]+\z/,
