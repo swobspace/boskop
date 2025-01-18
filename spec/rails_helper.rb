@@ -1,11 +1,12 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+
 require 'shoulda/matchers'
 require 'factory_bot_rails'
 # require 'view_component/test_helpers'
@@ -15,8 +16,9 @@ Capybara.register_driver :mychrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new
 
   options.add_argument("headless")
+  options.add_argument("--no-sandbox")
+  options.add_argument("--disable-dev-shm-usage")
   options.add_argument("window-size=1280x1280")
-  # options.add_argument("disable-gpu")
 
   Capybara::Selenium::Driver.new(
     app,
@@ -52,22 +54,36 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include Capybara::DSL
 
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  config.fixture_paths = [
+    Rails.root.join('spec/fixtures')
+  ]
+
   config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
-
-  # config.filter_run_excluding :broken => true
+  # config.filter_rails_from_backtrace
+  # arbitrary gems may also be filtered via:
+  # config.filter_gems_from_backtrace("gem name")
 
   # -- devise stuff
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.extend ControllerMacros, type: :controller
+  config.extend ControllerMacros, type: :view
+  config.include RequestMacros, type: :request
   config.include RequestMacros, type: :feature
+  # config.include ViewComponent::TestHelpers, type: :component
+  # config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:suite) do
     DatabaseRewinder.clean_all
   end
   config.after(:each) do
     DatabaseRewinder.clean
+  end
+
+  config.after(:suite) do
+    ActiveStorage::Blob.unattached.each(&:purge)
   end
 
 end
