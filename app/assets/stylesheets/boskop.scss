@@ -22,14 +22,44 @@ $font-family-sans-serif:
   // Emoji fonts
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
-@import "custom-colors";
-@import "bootstrap/scss/bootstrap";
-// @import "font-awesome-sprockets";
-// @import "font-awesome";
-// @import "v4-shims.min";
+$primary: #166E7D;
+$toast-max-width: 500px;
 
-// @import "wobapphelpers/breadcrumbs";
+@import "bootstrap/scss/bootstrap";
 @import "common";
+
+// ------------------------------------------------------------------------
+// FONTS
+// ------------------------------------------------------------------------
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-style: normal;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Italic.ttf') format('truetype');
+        font-weight: 400;
+        font-style: italic;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-style: normal;
+}
+@font-face {
+        font-family: 'Roboto';
+        src: font-url('Roboto-BoldItalic.ttf') format('truetype');
+        font-weight: 700;
+        font-style: italic;
+}
+
+// ------------------------------------------------------------------------
+// main
+// ------------------------------------------------------------------------
+
 
 body {
   padding-top: 60px;
