@@ -40,13 +40,10 @@ config/secrets.yml
 config/deploy-config.yml
 
 
-## Environment normalisation:
-# these should all be checked in to normalise the environment:
-# Gemfile.lock, .ruby-version, .ruby-gemset
-
-# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
-.rvmrc
-.localenv
+# Ignore all environment files (except templates).
+/.env*
+!/.env*.erb
+!/.env*.example
 
 # Ignore application configuration
 /shared/config/application.yml
