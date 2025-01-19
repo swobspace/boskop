@@ -6,6 +6,7 @@ RSpec.describe ImportNessusVulnerabilitiesService do
 
   before(:each) do
     allow(Boskop).to receive(:graylog_host).and_return(nil)
+    allow(File).to receive(:unlink).with(any_args).and_return(true)
   end
 
   # check for class methods

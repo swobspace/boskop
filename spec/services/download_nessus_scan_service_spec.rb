@@ -12,6 +12,11 @@ RSpec.describe DownloadNessusScanService do
 
   let(:xmlfile) { File.join(Rails.root, 'tmp', "#{nessus_scan.uuid}.nessus") }
   let(:nessusid) { nessus_scan.nessus_id }
+
+  before(:each) do
+    allow(File).to receive(:unlink).with(any_args).and_return(true)
+  end
+
   subject { DownloadNessusScanService.new(nessus_id: nessusid) }
 
   # check for class methods

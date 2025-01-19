@@ -22,6 +22,10 @@ RSpec.describe VulnerabilitiesController, type: :controller do
   # VulnerabilitiesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
+  before(:each) do
+    allow(File).to receive(:unlink).with(any_args).and_return(true)
+  end
+
   describe "GET #index" do
     it "returns a success response" do
       vulnerability = Vulnerability.create! valid_attributes
