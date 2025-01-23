@@ -30,7 +30,7 @@ set :deploy_to, config['deploy_to']
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/boskop.yml", "config/secrets.yml", "config/ldap.yml", "config/schedule.rb"
+append :linked_files, "config/database.yml", "config/boskop.yml", "config/ldap.yml", "config/schedule.rb"
 
 # Default value for linked_dirs is []
 # set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
@@ -41,7 +41,8 @@ append :linked_dirs, "log", "files", "tmp/pids", "tmp/cache", "tmp/sockets", "ve
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 set :default_env, {
   rails_relative_url_root: fetch(:relative_url_root) ,
-  path: fetch(:ruby_path) { "$PATH" }
+  path: fetch(:ruby_path) { "$PATH" },
+  secret_key_base_dummy: 1
 }
 
 set :shell, "bash -l"
