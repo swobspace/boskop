@@ -1,4 +1,4 @@
-class String
+String.class_eval do
   def integer?
     return true if self =~ /\A\d+\Z/
   end

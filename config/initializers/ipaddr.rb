@@ -1,5 +1,4 @@
-class IPAddr
-
+IPAddr.class_eval do
   def to_cidr_s
     if @addr
       "#{to_s}/#{to_cidr_mask}"
@@ -15,5 +14,4 @@ class IPAddr
       nil
     end
   end
-
 end
