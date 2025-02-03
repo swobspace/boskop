@@ -78,3 +78,4 @@ gem "mail"
 gem 'redis'
 
 gem "good_job", "~> 4.7.0"
+gem 'rack', '<= 2.99'
