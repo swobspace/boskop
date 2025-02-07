@@ -71,7 +71,7 @@ export default class extends Controller {
   compileOptions(options) {
     // common options
     options.pagingType = "full_numbers"
-    options.responsive = true
+    options.responsive = false
     options.stateSave = true
     options.stateDuration = 60 * 60 * 24
     options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
