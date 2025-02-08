@@ -18,7 +18,7 @@ database yet.
 Requirements
 ------------
 
-* ruby >= 2.3
+* ruby >= 3.2
 * postgresql database
 * postgresql development files (i.e. fedora: package postgresql-devel) for 
 compiling ruby pg gem

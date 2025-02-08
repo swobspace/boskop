@@ -40,14 +40,6 @@ FactoryBot.define do
     # initialize_with { new(**attributes) }
   end
 
-  factory :contact do
-    sn { generate(:aname) }
-    givenname { generate(:aname) }
-    trait :with_mail do
-      mail { generate(:amail) }
-    end
-  end
-
   factory :framework_contract do
     name { generate(:aname) }
   end
@@ -139,35 +131,6 @@ FactoryBot.define do
     name { generate(:aname) }
     position { 0 }
   end
-
-  factory :responsibility do
-    association :responsibility_for, factory: :host
-    contact
-    role { Boskop.responsibility_role.first }
-  end
-
-  factory :software do
-    name { generate(:aname) }
-  end
-
-  factory :software_category do
-    name { generate(:aname) }
-  end
-
-  factory :software_group do
-    name { generate(:aname) }
-  end
-
-  factory :software_raw_datum do
-    name { generate(:aname) }
-  end
-
-  factory :installed_software do
-    software_raw_datum
-    host
-    lastseen { Date.today }
-  end
-
 
   factory :vulnerability do
     host

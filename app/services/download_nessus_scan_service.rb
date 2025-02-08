@@ -58,8 +58,8 @@ private
   def nessus
     nessi = TenableRuby::MyClient.new(
               credentials: {
-                access_key: Rails.application.secrets.nessus_access_key,
-                secret_key: Rails.application.secrets.nessus_secret_key
+                access_key: ENV['NESSUS_ACCESS_KEY'],
+                secret_key: ENV['NESSUS_SECRET_KEY']
               },
               url: Boskop.nessus_url
             )

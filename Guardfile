@@ -46,3 +46,6 @@ guard :rspec, cmd: "bin/rspec" do
     Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
   end
 end
+
+notification :off
+interactor :off

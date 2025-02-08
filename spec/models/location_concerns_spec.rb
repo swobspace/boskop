@@ -74,21 +74,4 @@ RSpec.describe LocationConcerns, type: :model do
     it { expect(Location.with_new_vulns(at: 5.days.before(Date.today))).to contain_exactly() }
   end
 
-  describe "#vuln_responsible_mail" do
-    let(:contact1) { FactoryBot.create(:contact, mail: "vuln_responsible@example.org") }
-    let(:contact2) { FactoryBot.create(:contact, mail: "not_responsible@example.org") }
-    let!(:responsible1) { FactoryBot.create(:responsibility, 
-      responsibility_for: loc1,
-      role: 'Vulnerabilities',
-      contact: contact1
-    )}
-    let!(:responsible2) { FactoryBot.create(:responsibility, 
-      responsibility_for: loc1,
-      role: "",
-      contact: contact2
-    )}
-
-    it { expect(loc1.vuln_responsible_mail).to contain_exactly("vuln_responsible@example.org") }
-      
-  end
 end

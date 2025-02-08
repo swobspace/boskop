@@ -48,7 +48,11 @@ class NetworksDatatable < ApplicationDatatable
   end
 
   def fetch_networks
-    networks = relation.order("#{sort_column} #{sort_direction}")
+    if params[:order] 
+      networks = relation.order("#{sort_column} #{sort_direction}")
+    else
+      networks = relation
+    end
     unless params[:length] == "-1"
       networks = networks.page(page).per(per_page)
     end

@@ -142,10 +142,3 @@
  %>
 
 <div class="mb-3"></div>
-
-<h3 id="host_software" class="mb-3"><%= t('controller.software') %></h3>
-
-<%= render partial: 'software/list', 
-	   locals: {host_software: @host.software.distinct}
- %>
-

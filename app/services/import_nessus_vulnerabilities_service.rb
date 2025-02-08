@@ -82,6 +82,9 @@ class ImportNessusVulnerabilitiesService
         end
       end
     end
+    if success
+      File.unlink(xmlfile)
+    end
     return_result =  Result.new(
                        success: success, 
                        error_message: errors,
