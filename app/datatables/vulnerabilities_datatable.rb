@@ -55,7 +55,11 @@ class VulnerabilitiesDatatable < ApplicationDatatable
   end
 
   def fetch_vulnerabilities
-    vulnerabilities = relation.order(Arel.sql("#{sort_column} #{sort_direction}"))
+    if params[:order]
+      vulnerabilities = relation.order(Arel.sql("#{sort_column} #{sort_direction}"))
+    else
+      vulnerabilities = relation
+    end
     unless params[:length] == "-1"
       vulnerabilities = vulnerabilities.page(page).per(per_page)
     end

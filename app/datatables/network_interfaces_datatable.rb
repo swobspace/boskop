@@ -47,7 +47,11 @@ class NetworkInterfacesDatatable < ApplicationDatatable
   end
 
   def fetch_network_interfaces
-    network_interfaces = relation.order(Arel.sql("#{sort_column} #{sort_direction}"))
+    if params[:order]
+      network_interfaces = relation.order(Arel.sql("#{sort_column} #{sort_direction}"))
+    else
+      network_interfaces = relation
+    end
     unless params[:length] == "-1"
       network_interfaces = network_interfaces.page(page).per(per_page)
     end

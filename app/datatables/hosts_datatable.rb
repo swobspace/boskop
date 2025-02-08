@@ -66,7 +66,11 @@ class HostsDatatable < ApplicationDatatable
   end
 
   def fetch_hosts
-    hosts = relation.order("#{sort_column} #{sort_direction}")
+    if params[:order]
+      hosts = relation.order("#{sort_column} #{sort_direction}")
+    else
+      hosts = relation
+    end
     unless params[:length] == "-1"
       hosts = hosts.page(page).per(per_page)
     end
