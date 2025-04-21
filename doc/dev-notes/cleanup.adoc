@@ -10,14 +10,14 @@ bin/rails console -e production
 [source,ruby]
 ----
 Host.where("lastseen < ?", 4.month.before(Time.current)).current
-Host.where("lastseen < ?", 4.month.before(Time.current)).destroy_all
+Host.where("lastseen < ?", 4.month.before(Time.current)).delete_all
 ----
 
 .Vulnerabilities
 [source,ruby]
 ----
 Vulnerability.where("lastseen < ?", 3.month.before(Time.current)).count
-Vulnerability.where("lastseen < ?", 3.month.before(Time.current)).destroy_all
+Vulnerability.where("lastseen < ?", 3.month.before(Time.current)).delete_all
 ----
 
 

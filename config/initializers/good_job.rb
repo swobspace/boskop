@@ -23,10 +23,15 @@ Rails.application.configure do
         class: "Nessus::ImportScansJob",
         description: "Import Nessus Scans"
       },
-      notify_vulnerabilities: {
-        cron: '0 8 * * *',
-        class: "SendVulnerabilitiesMailJob",
-        description: "Notify Vulnerabilities via Mail"
+      cleanup_hosts: {
+        cron: '0 23 * * 6',
+        class: "Cleanup::HostsJob",
+        description: "Cleanup outdated hosts"
+      },
+      cleanup_vulnerabilities: {
+        cron: '10 23 * * 6',
+        class: "Cleanup::VulnerabilitiesJob",
+        description: "Cleanup outdated vulnerabilities"
       }
     }
   }
