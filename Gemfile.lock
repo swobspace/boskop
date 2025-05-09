@@ -6,6 +6,16 @@ GIT
     database_rewinder (1.1.0)
 
 GIT
+  remote: https://github.com/swobspace/wobaduser
+  revision: bbc5042dd54539a165e90a8204a86154247ca7ff
+  branch: master
+  specs:
+    wobaduser (1.0.0)
+      activesupport
+      immutable-struct
+      net-ldap
+
+GIT
   remote: https://github.com/swobspace/wobapphelpers
   revision: f818c595edabe82724c2a64c54a91323971b1e59
   branch: master
@@ -16,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 4b4aee4468c48bb2e51e5e043ae6ebbe70386b47
+  revision: 1c54ddbbf12724d41327114d9339b46f68b12066
   branch: main
   specs:
     wobauth (7.1.0)
@@ -28,7 +38,7 @@ GIT
       simple_form
       stimulus-rails
       view_component
-      wobaduser (~> 1.0)
+      wobaduser
       wobapphelpers (>= 6.00)
 
 GEM
@@ -495,10 +505,6 @@ GEM
     websocket-extensions (0.1.5)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    wobaduser (1.0.0)
-      activesupport
-      immutable-struct
-      net-ldap
     xpath (3.2.0)
       nokogiri (~> 1.8)
     yaml_db (0.7.0)
@@ -563,7 +569,7 @@ DEPENDENCIES
   turbo-rails
   webdriver
   whenever
-  wobaduser (~> 1.0)
+  wobaduser!
   wobapphelpers!
   wobauth!
   yaml_db

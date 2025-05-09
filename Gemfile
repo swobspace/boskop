@@ -16,8 +16,8 @@ gem "cssbundling-rails"
 gem "stimulus-rails"
 
 gem 'simple_form'
-gem 'wobaduser', '~> 1.0'
 gem 'wobapphelpers', git: 'https://github.com/swobspace/wobapphelpers', branch: 'master'
+gem 'wobaduser', git: 'https://github.com/swobspace/wobaduser', branch: 'master'
 gem 'wobauth', git: 'https://github.com/swobspace/wobauth.git', branch: 'main'
 gem 'cancancan'
 gem 'acts_as_list'
