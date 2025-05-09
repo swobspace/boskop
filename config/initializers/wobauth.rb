@@ -15,4 +15,6 @@ Wobauth.setup do |config|
   config.ldap_config = File.join( Rails.root, 'config', 'boskop.yml')
   #
   config.custom_stream_actions = true
+
+  config.enable_ldap_authenticatable = Boskop.enable_ldap_authentication
 end
