@@ -59,7 +59,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   describe "without search params, start:0, length:10" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
-      order: {"0"=>{column: "1", dir: "desc"}, "1"=>{column: "5", dir: "desc"}},
+      order: {"0"=>{column: "1", dir: "desc"}, "1"=>{column: "6", dir: "desc"}},
       start: "0",
       length: "10",
       search: {value: "", regex: "false"}
@@ -75,7 +75,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
   describe "without search params, start:2, length:2" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
       columns: {"0"=> {search: {value: ""}}},
-      order: {"0"=>{column: "1", dir: "asc"}, "1"=>{column: "9", dir: "asc"}},
+      order: {"0"=>{column: "1", dir: "asc"}, "1"=>{column: "6", dir: "asc"}},
       start: "2",
       length: "2",
       search: {value: "", regex: "false"}

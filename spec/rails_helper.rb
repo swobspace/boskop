@@ -58,7 +58,7 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
@@ -76,10 +76,10 @@ RSpec.configure do |config|
   # config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:suite) do
-    # DatabaseRewinder.clean_all
+    DatabaseRewinder.clean_all
   end
   config.after(:each) do
-    # DatabaseRewinder.clean
+    DatabaseRewinder.clean
   end
 
   # config.after(:suite) do
