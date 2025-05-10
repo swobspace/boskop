@@ -26,7 +26,7 @@ GIT
 
 GIT
   remote: https://github.com/swobspace/wobauth.git
-  revision: 1c54ddbbf12724d41327114d9339b46f68b12066
+  revision: 495c621f8c90a5521b63165ea60925685d1fe6bf
   branch: main
   specs:
     wobauth (7.1.0)
@@ -344,7 +344,7 @@ GEM
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
-    psych (5.2.4)
+    psych (5.2.5)
       date
       stringio
     public_suffix (6.0.2)
