@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Locations", :type => :feature do
+RSpec.describe "Locations", :type => :feature, js: true do
   fixtures :merkmalklassen, :locations
   describe "GET /locations" do
     it "visits locations#index" do
@@ -28,7 +28,7 @@ RSpec.describe "Locations", :type => :feature do
   end
 
   describe "Show location" do
-    it "visits locations#new" do
+    it "visits locations#standort" do
       login_admin
       visit location_path(locations(:nimmerland))
       expect(page).to have_content("Standort: Nimmerland")

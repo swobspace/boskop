@@ -12,13 +12,13 @@ require 'factory_bot_rails'
 # require 'view_component/test_helpers'
 require 'capybara/rspec'
 
-Capybara.register_driver :mychrome do |app|
+Capybara.register_driver :chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
 
-  options.add_argument("headless")
+  options.add_argument("--headless")
   options.add_argument("--no-sandbox")
   options.add_argument("--disable-dev-shm-usage")
-  options.add_argument("window-size=1280x1280")
+  options.add_argument("--window-size=1280,1280")
 
   Capybara::Selenium::Driver.new(
     app,
@@ -29,7 +29,7 @@ end
 
 # Capybara.javascript_driver = :selenium_chrome
 # Capybara.javascript_driver = :selenium_chrome_headless
-Capybara.javascript_driver = :mychrome
+Capybara.javascript_driver = :chrome_headless
 Capybara.disable_animation = true
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -49,7 +49,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+# ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   config.include Capybara::DSL
@@ -58,9 +58,9 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
-  # config.filter_rails_from_backtrace
+  config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
@@ -76,10 +76,10 @@ RSpec.configure do |config|
   # config.include Capybara::RSpecMatchers, type: :component
 
   config.before(:suite) do
-    DatabaseRewinder.clean_all
+    # DatabaseRewinder.clean_all
   end
   config.after(:each) do
-    DatabaseRewinder.clean
+    # DatabaseRewinder.clean
   end
 
   # config.after(:suite) do

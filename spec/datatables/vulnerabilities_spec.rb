@@ -102,7 +102,7 @@ RSpec.describe VulnerabilitiesDatatable, type: :model do
 
   describe "with search:198.51.100.7" do
     let(:myparams) { ActiveSupport::HashWithIndifferentAccess.new(
-      order: {"0"=>{column: "7", dir: "desc"}},
+      order: {"0"=>{column: "6", dir: "desc"}},
       start: "0",
       length: "10",
       "search" => {"value" => "198.51.100.7", regex: "false"}
