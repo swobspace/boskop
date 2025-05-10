@@ -157,7 +157,6 @@ de:
     cpe: CPE
     cves: CVEs
     description: Beschreibung
-    if_description: Interface-Beschreibung
     department: Abteilung
     disabled: deaktiviert
     displayname: Anzeigename
