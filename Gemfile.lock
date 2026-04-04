@@ -353,6 +353,10 @@ GEM
       prettyprint
     prettyprint (0.2.0)
     prism (1.9.0)
+    propshaft (1.3.1)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
     pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -478,14 +482,6 @@ GEM
     simple_form (5.4.1)
       actionpack (>= 7.0)
       activemodel (>= 7.0)
-    sprockets (4.2.2)
-      concurrent-ruby (~> 1.0)
-      logger
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sshkit (1.25.0)
       base64
       logger
@@ -567,6 +563,7 @@ DEPENDENCIES
   licensed
   mail
   pg
+  propshaft
   puma
   rack (<= 2.99)
   rails (~> 7.2.0)
@@ -581,7 +578,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple_form
-  sprockets-rails
   stimulus-rails
   tenable-ruby
   turbo-rails
