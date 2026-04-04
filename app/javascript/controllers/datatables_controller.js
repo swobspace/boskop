@@ -1,6 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 import '../src/datatables-bs5'
+import DataTable from 'datatables.net';
+
 
 export default class extends Controller {
   static values = {
@@ -12,18 +14,24 @@ export default class extends Controller {
   }
 
   connect() {
-    // overcome morph problems
-    this.element.setAttribute("data-action",
-                              "turbo:morph-element->datatables#reconnect"
-                             )
+    // datatables doesn't really work with morph
+    // set turbo-refresh-method to replace on each page with datatables
+    // otherwise leave turbo-refresh-method untouched
+    const turborefresh = document.querySelector('head meta[name="turbo-refresh-method"]')
+    if (turborefresh) {
+      turborefresh.setAttribute("content", "replace")
+    }
+
     let _this = this
     let dtOptions = {}
     this.compileOptions(dtOptions)
 
-    const table = $(this.element.querySelector('table'))
-    console.log(table[0].id)
-    // prepare options
-    let dtable = $(table).DataTable(dtOptions)
+    const table = this.element.querySelector('table')
+    // console.log(table)
+
+    // initialize datatable
+    let dtable = new DataTable(table, dtOptions)
+    // console.log(dtable.page.info().serverSide)
 
     // catch column visibility change
     this.colvis_change_listener(dtable)
@@ -49,8 +57,9 @@ export default class extends Controller {
 
   // search fields for each column
   setInputFields(dtable) {
-    // console.log(dtable.tables(0).columns)
-    this.element.querySelectorAll("table tfoot th:not([class='nosearch'])")
+    this.element.querySelectorAll('table tfoot th:not(.nosearch) input')
+        .forEach(f => {f.remove()})
+    this.element.querySelectorAll("table tfoot th:not(.nosearch)")
         .forEach((th, idx) => {
           let col = th.getAttribute("data-dt-column")
           let text = ''
@@ -64,17 +73,18 @@ export default class extends Controller {
 
   // single search input field
   searchField(idx, text) {
-    return `<input type="text" placeholder="search" name="idx${idx}" value="${text}"/>`
+    return `<input type="text" placeholder="Suche" name="idx${idx}" value="${text}"/>`
   }
 
   // datatables options
   compileOptions(options) {
     // common options
     options.pagingType = "full_numbers"
-    options.responsive = false
+    options.responsive = true
+    options.retrieve = true
     options.stateSave = true
     options.stateDuration = 60 * 60 * 24
-    options.lengthMenu = [ [10, 25, 100, 250, 1000], [10, 25, 100, 250, 1000] ]
+    options.lengthMenu = [10, 25, 100, 250, 1000, { label: 'Alle', value: -1}]
     options.columnDefs = [ { "targets": "nosort", "orderable": false },
                            { "targets": "notvisible", "visible": false },
                            { "targets": "actions", "className": "actions" } ]
@@ -89,19 +99,21 @@ export default class extends Controller {
     if (this.hasUrlValue) {
       this.remoteOptions(options)
     }
+    this.languageOptions(options)
   }
 
   simpleOptions(options) {
-    options.dom =  "<'row '<'col-sm-12'tr>>" +
-                   "<'row mt-2 justify-content-between'<'col-md-auto me-auto mt-1'l><'col-md-auto me-auto mt-2'i><'col-md-auto ms-auto'p>>"
+    options.layout = {
+      topEnd: 'null'
+    }
     options.pagingType = "numbers"
   }
 
 
   buttonOptions(options) {
-    options.dom = "<'row mt-2 justify-content-between'<'col-md-auto me-auto'l><'col-md-auto'B>>" +
-                    "<'row mt-2 justify-content-md-center'<'col-sm-12'tr>>" +
-                    "<'row mt-2 justify-content-between'<'col-md-auto me-auto'i><'col-md-auto ms-auto'p>>"
+    options.layout = {
+      topEnd: 'buttons'
+    }
     options.buttons = {
       dom: {
         button: {
@@ -116,8 +128,7 @@ export default class extends Controller {
                                 window.location.reload();
                               }},
                  { "extend": 'csv',
-	           "exportOptions": { "columns": ':visible',
-                                      "search": ':applied' } },
+	           "exportOptions": { "search": ':applied' } },
                  { "extend": 'excel',
 	           "exportOptions": { "columns": ':visible',
                                       "search": ':applied' } },
@@ -127,7 +138,8 @@ export default class extends Controller {
 	           "exportOptions": { "columns": ':visible',
 	                              "search": ':applied' } },
                  { "extend": 'print'},
-                 { "extend": 'colvis', "columns": ':gt(0)' }
+                 { "extend": 'colvis', "columns": ':gt(0)',
+                   "text": "Sichbare Spalten" }
                ]
     }
   }
@@ -151,34 +163,78 @@ export default class extends Controller {
     }
   }
 
-  // fix morph problems
-  reconnect() {
-    this.disconnect()
-    this.connect()
-  }
-
   colvis_change_listener(dtable) {
+    const search = this.createSearchWithDebounce(dtable)
     let _this = this
     dtable.on('column-visibility.dt', function (e, settings, column, state) {
       if (state) {
-        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]')
-        let sf = th.querySelector('input')
-        if (!sf) {
-          th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
+        let th = e.target.querySelector('tfoot th[data-dt-column="' + column + '"]:not(.nosearch)')
+        if (th) {
+	  let sf = th.querySelector('input')
+	  if (!sf) {
+	    th.insertAdjacentHTML('afterbegin', _this.searchField(column, ''))
+	  }
         }
-        $('input[name=idx'+column+']').on( 'keyup change', function() {
-          dtable.column(column).search(this.value).draw()
+        // console.log(dtable.table().node().id)
+        // use node id of table explicit
+        $('table#'+dtable.table().node().id+' input[name=idx'+column+']').on('keyup change', function() {
+          search(column, this.value)
         })
       }
     })
   }
 
   process_search_input(dtable) {
-    // process search input
+    const search = this.createSearchWithDebounce(dtable)
     dtable.columns().eq(0).each((colIdx) => {
-      $('input[name=idx'+colIdx+']').on( 'keyup change', function() {
-	dtable.column(colIdx).search(this.value).draw()
+      $('table#'+dtable.table().node().id+' input[name=idx'+colIdx+']').on('keyup change', function() {
+	search(colIdx, this.value)
       })
     })
   }
+
+  createSearchWithDebounce(dtable, delay = 400) {
+    if (!dtable || !dtable.column || !dtable.column().search || !dtable.draw || !DataTable.util.debounce) {
+      console.error("Invalid DataTable instance or missing debounce utility.");
+      return null
+    }
+    let search;
+    if (dtable.page.info().serverSide) {
+      search = DataTable.util.debounce(function (col, val) {
+	               dtable.column(col).search(val).draw()
+                     }, delay)
+    } else {
+      search = function (col, val) {
+	               dtable.column(col).search(val).draw()
+                     }
+    }
+    return search
+  }
+
+  languageOptions(options) {
+    options.language = {
+      "emptyTable":      "Keine Daten in der Tabelle vorhanden",
+      "info":            "_START_ bis _END_ von _TOTAL_ Einträgen",
+      "infoEmpty":       "0 bis 0 von 0 Einträgen",
+      "infoFiltered":    "(gefiltert von _MAX_ Einträgen)",
+      "infoPostFix":     "",
+      "thousands":   ".",
+      "lengthMenu":      "_MENU_ Einträge anzeigen",
+      "loadingRecords":  "Wird geladen...",
+      "processing":      "Bitte warten...",
+      "search":          "Suchen",
+      "zeroRecords":     "Keine Einträge vorhanden.",
+      "paginate": {
+          "first":       "Erste",
+          "previous":    "Zurück",
+          "next":        "Nächste",
+          "last":        "Letzte"
+      },
+      "aria": {
+          "sortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
+          "sortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+      }
+    }
+  }
+
 } // Controller
