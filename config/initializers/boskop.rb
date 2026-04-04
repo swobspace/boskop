@@ -7,6 +7,10 @@ module Boskop
   }.freeze
   PERIOD_UNITS = [ 'day', 'week', 'month', 'quarter', 'year' ].freeze
   CONFIG = YAML.load_file(File.join(Rails.root, 'config', 'boskop.yml'))
+
+  def self.fetch_config(attribute, default_value)
+    CONFIG[attribute.to_s].presence || default_value
+  end
   
   def self.devise_modules
     if CONFIG['devise_modules'].blank?
@@ -135,6 +139,11 @@ module Boskop
     else
       nil
     end
+  end
+
+  def self.enable_ldap_authentication
+    return false unless self.ldap_options.present?
+    fetch_config('enable_ldap_authentication', false)
   end
 
  ActionMailer::Base.default_url_options = {

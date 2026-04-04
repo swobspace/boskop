@@ -79,6 +79,7 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').and_return(nil)
       end
       it { expect(Boskop.ldap_options).to be_nil}
+      it { expect(Boskop.enable_ldap_authentication).to be_falsey }
     end
 
     context" with existing Settings" do
@@ -121,6 +122,22 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('ldap_options').
           and_return(ldap_options_ary)
         expect(Boskop.ldap_options).to eq(ldap_options_sym)
+      end
+
+      it "set enable ldap auth to false" do
+        allow(Boskop::CONFIG).to receive(:[]).with('enable_ldap_authentication')
+                                            .and_return(false)
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options')
+                                            .and_return(ldap_options)
+        expect(Boskop.enable_ldap_authentication).to be_falsey
+      end 
+
+      it "set enable ldap auth to true" do
+        allow(Boskop::CONFIG).to receive(:[]).with('enable_ldap_authentication')
+                                            .and_return(true)
+        allow(Boskop::CONFIG).to receive(:[]).with('ldap_options')
+                                            .and_return(ldap_options)
+        expect(Boskop.enable_ldap_authentication).to be_truthy
       end
     end
   end
