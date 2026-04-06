@@ -1,4 +1,4 @@
 module Boskop
-  VERSION     = "6.1.1-dev".freeze
+  VERSION     = "6.1.1".freeze
   RELEASEDATE = "2026-04-06".freeze
 end
