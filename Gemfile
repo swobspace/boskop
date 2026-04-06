@@ -78,3 +78,6 @@ gem 'redis'
 
 gem "good_job", "~> 4.14.0"
 gem 'rack', '<= 2.99'
+
+# Ruby >= 3.4
+gem 'csv'

@@ -543,6 +543,7 @@ DEPENDENCIES
   capistrano-yarn
   capybara
   cssbundling-rails
+  csv
   daemons
   database_rewinder!
   devise-remote-user
