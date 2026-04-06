@@ -32,6 +32,7 @@ rerun.txt
 pickle-email-*.html
 *.swp
 .~lock*
+/public/webfonts
 
 # ignore sensible information
 shared/config/*.yml
