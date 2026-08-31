@@ -1,4 +1,4 @@
-<% if can? :read, :vulnerabilities %>
+<% if can? :read, :vulnerabilities and Boskop.enable_vulnerabilities %>
   <li class="nav-item dropdown <%= active_class('vulnerabilities') %>">
     <a class="nav-link dropdown-toggle" href="#" id="navbarVulnsLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= t('controller.vulnerabilities') %>

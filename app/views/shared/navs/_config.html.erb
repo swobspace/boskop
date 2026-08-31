@@ -5,6 +5,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarConfigurationLink">
       <% Boskop::CONFIGURATION_CONTROLLER.each_pair do |cat,items| %>
+        <% next if cat == :hosts %>
         <div class="dropdown-divider"></div>
         <div class="dropdown-header"><%= t('attributes.' + cat.to_s)%></div>
         <% items.each do |ctrlr| %>

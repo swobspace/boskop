@@ -146,6 +146,18 @@ module Boskop
     fetch_config('enable_ldap_authentication', false)
   end
 
+  def self.enable_hosts
+    fetch_config('enable_hosts', false)
+  end
+
+  def self.enable_nessus
+    fetch_config('enable_nessus', false)
+  end
+
+  def self.enable_vulnerabilities
+    fetch_config('enable_vulnerabilities', false)
+  end
+
  ActionMailer::Base.default_url_options = {
    host: self.host,
    script_name: self.script_name

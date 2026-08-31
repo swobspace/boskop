@@ -1,4 +1,4 @@
-<% if can? :read, :hosts %>
+<% if can? :read, :hosts and Boskop.enable_hosts %>
   <li class="nav-item dropdown <%= active_class('hosts') %>">
     <a class="nav-link dropdown-toggle" href="#" id="navbarHostsLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= t('controller.hosts') %>
