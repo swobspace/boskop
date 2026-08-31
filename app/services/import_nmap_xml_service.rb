@@ -1,6 +1,6 @@
 # import nmap scan results in xml
 class ImportNmapXmlService
-  Result = ImmutableStruct.new( :success?, :error_message, :hosts )
+  Result = Data.define( :success?, :error_message, :hosts )
 
   # service = ImportNmapXmlService.new(file: 'xmlfile', update: :none)
   #
@@ -31,7 +31,7 @@ class ImportNmapXmlService
 
     nmap_xml = Boskop::NMAP::XML.new(file: xmlfile)
     unless nmap_xml.valid?
-      return Result.new(success: false, 
+      return Result.new(success?: false, 
                         error_message: nmap_xml.error_message, 
                         hosts: hosts)
     end
@@ -45,7 +45,7 @@ class ImportNmapXmlService
         success = false
       end
     end
-    return_result =  Result.new(success: success, error_message: errors, hosts: hosts)
+    return_result =  Result.new(success?: success, error_message: errors, hosts: hosts)
   end
 
 private

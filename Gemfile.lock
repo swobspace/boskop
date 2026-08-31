@@ -557,7 +557,6 @@ DEPENDENCIES
   good_job (~> 4.14.0)
   guard
   guard-rspec
-  immutable-struct
   jbuilder (~> 2.0)
   jsbundling-rails
   json_spec

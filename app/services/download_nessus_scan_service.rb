@@ -12,7 +12,7 @@ end
 
 # import nmap scan results in xml
 class DownloadNessusScanService
-  Result = ImmutableStruct.new( :success?, :error_message, :xmlfile )
+  Result = Data.define( :success?, :error_message, :xmlfile )
 
   # service = DownloadNessusScanService.new(nessus_id: <number>)
   #
@@ -28,7 +28,7 @@ class DownloadNessusScanService
   # 
   def call
     if scan.blank?
-      return Result.new( success: false, error_message: "no matching scan found",
+      return Result.new( success?: false, error_message: "no matching scan found",
                          xmlfile: nil )
     end
     xmlfile = File.join(Rails.root, 'tmp', "#{scan.uuid}.nessus")
@@ -43,11 +43,11 @@ class DownloadNessusScanService
           raise RuntimeError, "can't parse #{xmlfile}, may be wrong version or not an nessus xml v2 file"
         end
       end
-      return Result.new( success: true, error_message: nil, xmlfile: xmlfile )
+      return Result.new( success?: true, error_message: nil, xmlfile: xmlfile )
 
     rescue StandardError => e
       File.unlink xmlfile if File.exist?(xmlfile)
-      return Result.new( success: false, xmlfile: nil,
+      return Result.new( success?: false, xmlfile: nil,
                          error_message: e.message)
     end
   end

@@ -13,7 +13,7 @@
 #
 require 'csv'
 class ImportCsvHostsService
-  Result = ImmutableStruct.new( :success?, :error_message, :hosts )
+  Result = Data.define( :success?, :error_message, :hosts )
 
   # service = ImportCsvHostsService.new(file: 'csvfile', update: :none)
   #
@@ -45,7 +45,7 @@ class ImportCsvHostsService
     success = true
     unless File.readable?(csvfile)
       message = "File #{csvfile} is not readable or does not exist"
-      return Result.new(success: false, error_message: message, hosts: hosts)
+      return Result.new(success?: false, error_message: message, hosts: hosts)
     end
     CSV.foreach(csvfile, headers: true, col_sep: ';',
                          header_converters: :german,
@@ -60,7 +60,7 @@ class ImportCsvHostsService
          success = false
       end
     end
-    return_result =  Result.new(success: success, error_message: errors, hosts: hosts)
+    return_result =  Result.new(success?: success, error_message: errors, hosts: hosts)
   end
 
 private
