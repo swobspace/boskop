@@ -16,6 +16,9 @@ describe Boskop do
         allow(Boskop::CONFIG).to receive(:[]).with('graylog_host').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('uuid_blacklist').and_return(nil)
         allow(Boskop::CONFIG).to receive(:[]).with('serial_blacklist').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('enable_hosts').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('enable_nessus').and_return(nil)
+        allow(Boskop::CONFIG).to receive(:[]).with('enable_vulnerabilities').and_return(nil)
       end
       it { expect(Boskop.proxy).to be_nil}
       it { expect(Boskop.host).to eq("localhost")}
@@ -30,6 +33,9 @@ describe Boskop do
       it { expect(Boskop.graylog_host).to eq(nil) }
       it { expect(Boskop.uuid_blacklist).to eq([]) }
       it { expect(Boskop.serial_blacklist).to eq([]) }
+      it { expect(Boskop.enable_hosts).to be_falsey }
+      it { expect(Boskop.enable_nessus).to be_falsey }
+      it { expect(Boskop.enable_vulnerabilities).to be_falsey }
     end
 
     context" with existing Settings" do

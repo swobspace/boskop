@@ -1,6 +1,6 @@
 # import nmap scan results in xml
 class ImportNessusVulnerabilitiesService
-  Result = ImmutableStruct.new( :success?, :error_message, :vulnerabilities, :vulnerability_details, :hosts )
+  Result = Data.define( :success?, :error_message, :vulnerabilities, :vulnerability_details, :hosts )
 
   # service = ImportNessusVulnerabilitiesService.new(file: 'xmlfile')
   #
@@ -35,7 +35,7 @@ class ImportNessusVulnerabilitiesService
     xml = Boskop::Nessus::XML.new(file: xmlfile)
     unless xml.valid?
       return Result.new( 
-               success: false, 
+               success?: false, 
                error_message: xml.error_message, 
                vulnerabilities: [], 
                vulnerability_details: [],
@@ -86,7 +86,7 @@ class ImportNessusVulnerabilitiesService
       File.unlink(xmlfile)
     end
     return_result =  Result.new(
-                       success: success, 
+                       success?: success, 
                        error_message: errors,
                        vulnerabilities: vulnerabilities,
                        vulnerability_details: vulnerability_details.uniq,

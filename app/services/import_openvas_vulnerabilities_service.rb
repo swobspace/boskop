@@ -1,6 +1,6 @@
 # import nmap scan results in xml
 class ImportOpenVASVulnerabilitiesService
-  Result = ImmutableStruct.new( :success?, :error_message, :vulnerabilities, :vulnerability_details, :hosts )
+  Result = Data.define( :success?, :error_message, :vulnerabilities, :vulnerability_details, :hosts )
 
   # service = ImportOpenVASVulnerabilitiesService.new(file: 'xmlfile')
   #
@@ -24,7 +24,7 @@ class ImportOpenVASVulnerabilitiesService
     xml = Boskop::OpenVAS::XML.new(file: xmlfile)
     unless xml.valid?
       return Result.new( 
-               success: false, 
+               success?: false, 
                error_message: xml.error_message, 
                vulnerabilities: [], 
                vulnerability_details: [],
@@ -57,7 +57,7 @@ class ImportOpenVASVulnerabilitiesService
       vulnerabilities << vuln
     end
     return_result =  Result.new(
-                       success: success, 
+                       success?: success, 
                        error_message: errors,
                        vulnerabilities: vulnerabilities,
                        vulnerability_details: vulnerability_details.uniq,

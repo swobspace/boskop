@@ -11,6 +11,7 @@ RSpec.describe "Hosts", type: :feature do
 
   describe "with import nmap xml file", js: false do
     let(:nmapfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'nmap-42.xml')}
+    before(:each) { allow(Boskop).to receive(:enable_hosts).and_return(true) }
     it "uploads hosts" do
       login_admin
       visit hosts_path

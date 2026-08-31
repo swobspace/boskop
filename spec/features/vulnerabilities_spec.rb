@@ -11,6 +11,7 @@ RSpec.describe "Vulnerabilities", type: :feature do
 
   describe "with import nessus xml file", js: false do
     let(:nessusfile) { File.join(Rails.root, 'spec', 'fixtures', 'files', 'cry-nessus.xml')}
+    before(:each) { allow(Boskop).to receive(:enable_vulnerabilities).and_return(true) }
     it "uploads vulnerabilities" do
       login_admin
       visit vulnerabilities_path

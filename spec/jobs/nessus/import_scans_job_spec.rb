@@ -47,15 +47,14 @@ RSpec.shared_examples "a non-importable scan" do
 end
 
 RSpec.describe Nessus::ImportScansJob, type: :job do
-  DLresult = ImmutableStruct.new( :success?, :error_message, :xmlfile )
+  DLresult = Data.define( :success?, :error_message, :xmlfile )
   subject { Nessus::ImportScansJob.perform_now }
 
-  # let(:DLresult) { ImmutableStruct.new( :success?, :error_message, :xmlfile ) }
   let(:dlresult) {
     FileUtils.cp(
       File.join(Rails.root, 'spec', 'fixtures', 'files', 'netxp-nessus.xml'),
       xmlfile)
-    DLresult.new(success: true, error_message: nil, xmlfile: xmlfile)
+    DLresult.new(success?: true, error_message: nil, xmlfile: xmlfile)
    }
 
   let(:nessus_scan) { FactoryBot.create(:nessus_scan,
