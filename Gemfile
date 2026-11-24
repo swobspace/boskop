@@ -75,7 +75,7 @@ gem "mail"
 # Use Redis for Action Cable
 gem 'redis'
 
-gem "good_job", "~> 4.14.0"
+gem "good_job", "~> 4.24.1"
 # gem 'rack', '<= 2.99'
 
 # Ruby >= 3.4
